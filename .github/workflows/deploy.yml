@@ -32,7 +32,8 @@ jobs:
           missing=0
           for page in dist/*.html; do
             for ref in $(grep -oE '(href|src)="assets/[^"]+"' "$page" | sed -E 's/^(href|src)="//; s/"$//' | sed -E 's/[?#].*$//' | sort -u); do
-              case "$ref" in *"/case-N-"*|*"/logo-portal-") continue;; esac
+              # шаблоны путей из JS и видео (в git до конвертации не входят) — не считаем
+              case "$ref" in *"/case-N-"*|*"/logo-portal-"|assets/video/*) continue;; esac
               if [ ! -e "dist/$ref" ]; then echo "::error file=$page::нет файла $ref"; missing=$((missing+1)); fi
             done
           done
