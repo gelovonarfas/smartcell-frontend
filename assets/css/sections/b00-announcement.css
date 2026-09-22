@@ -13,6 +13,13 @@
 }
 
 .sc-announce__text {
+  /* Всегда одна строка: высота полосы = поля + line-height при любом шрифте.
+     От неё считается высота хиро (--announce-h), и пока подменный шрифт
+     переносил текст на две строки, а Onest — на одну, хиро прыгал при
+     загрузке шрифта (Lighthouse CLS 0.18, правка 2026-09-22). */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 0;
 }
 

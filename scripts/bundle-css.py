@@ -34,7 +34,19 @@ for page in sorted(dist.glob('*.html')):
         css = re.sub(r'\n[ \t]*\n+', '\n', css).strip()
         parts.append(f'/* {href} */\n{css}')
     name = f'bundle-{page.stem}.css'
-    (dist / 'assets' / 'css' / name).write_text('\n'.join(parts) + '\n', encoding='utf-8')
+    bundle = '\n'.join(parts) + '\n'
+    # @import шрифта из tokens.css вырезаем: внутри CSS он блокирует отрисовку
+    # цепочкой html → бандл → CSS шрифта → файлы. На странице уже стоит
+    # <link rel="preload"> на тот же адрес — ниже он становится неблокирующей
+    # загрузкой стиля (display=swap: текст рисуется сразу подменным шрифтом).
+    imports = re.findall(r'@import\s+url\("([^"]+)"\);', bundle)
+    bundle = re.sub(r'@import\s+url\("[^"]+"\);\s*', '', bundle)
+    (dist / 'assets' / 'css' / name).write_text(bundle, encoding='utf-8')
+    for font_url in imports:
+        html = html.replace(
+            f'<link rel="preload" as="style" href="{font_url}">',
+            f'<link rel="preload" as="style" href="{font_url}" onload="this.onload=null;this.rel=\'stylesheet\'">\n'
+            f'  <noscript><link rel="stylesheet" href="{font_url}"></noscript>')
     first = True
     def swap(m):
         global first
