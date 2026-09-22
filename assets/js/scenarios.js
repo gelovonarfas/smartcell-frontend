@@ -47,7 +47,24 @@
       media.appendChild(frame);
     });
 
-    window.SC.media.preload(SCENARIOS.map(function (i) { return i.image; }));
+    /* Соседние кадры не тянем на старте: на телефоне это 950 КБ поверх
+       первого экрана (PSI 2026-09-22). Десктоп подгружает их в простое после
+       load, телефон — при первом касании переключателя. */
+    var warmed = false;
+    var warm = function () {
+      if (warmed) return;
+      warmed = true;
+      window.SC.media.preload(SCENARIOS.map(function (i) { return i.image; }));
+    };
+    var wide = window.matchMedia && window.matchMedia('(min-width: 641px)').matches;
+    if (wide) {
+      window.addEventListener('load', function () {
+        (window.requestIdleCallback || function (fn) { setTimeout(fn, 1500); })(warm);
+      }, { once: true });
+    }
+    ['pointerdown', 'focusin', 'touchstart'].forEach(function (ev) {
+      section.addEventListener(ev, warm, { once: true, passive: true });
+    });
   }
 
   function setup(section) {
