@@ -1,0 +1,72 @@
+/* ============================================================
+   VM/Category · шапка сторінки рубрики
+   figma: node-id=51:6 (рубрикатор), 49:25 (полоса крошек)
+
+   Обложки в шапке нет: страница рубрики — вход в список, а не материал.
+   Полоса под шапкой держит ту же высоту 70, что и на главной блога,
+   поэтому переход «лента → рубрика» не дёргает вёрстку.
+   ============================================================ */
+
+/* Порядок как на главной блога и в статье: сначала верхний блок, под ним
+   полоса с крошками, рубрикатором и поиском, дальше список.
+   Шапка фиксированная — верхний блок отступает на её высоту
+   (--header-h ставит assets/js/header.js, 80 — запасное значение). */
+.vm-category {
+  --vm-cat-lede-w: 720px;   /* мера описания шире прозы: это лид рубрики */
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Верх начинается там же, где копия в шапке статьи: разрядка секции
+     от края полосы. Фиксированная шапка ложится поверх этого запаса —
+     ровно как в A/Hero, поэтому --header-h тут не нужен. */
+  padding: var(--section-padding-y) var(--sc-pad-x) var(--section-padding-y-tight);
+  /* Полоса warm, как шапка статьи: верх страницы отделён от списка не только
+     линией крошек, но и тоном (решение 2026-09-08) */
+  background: var(--warm);
+  color: var(--foreground);
+}
+
+.vm-category *,
+.vm-category *::before,
+.vm-category *::after { box-sizing: border-box; }
+
+.vm-category__kicker {
+  margin: 0;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.vm-category__title {
+  margin: var(--stack-gap-md) 0 0;
+}
+
+/* Описание рубрики — оно же meta description: держим его цельным блоком
+   и не даём растекаться на всю полосу */
+.vm-category__lede {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  margin-block-start: var(--section-gap);
+  max-inline-size: var(--vm-cat-lede-w);
+}
+
+.vm-category__text { margin: 0; }
+
+.vm-category__text.sc-t-body { color: var(--muted-foreground); }
+
+.vm-category__count {
+  margin: var(--section-gap) 0 0;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .vm-category {
+    padding-block: var(--section-padding-y) var(--section-padding-y-tight);
+  }
+
+  .vm-category__lede { max-inline-size: none; }
+}

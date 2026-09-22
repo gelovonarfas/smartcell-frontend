@@ -1,0 +1,492 @@
+/* ============================================================
+   Footer
+   figma: node-id=4:300
+   Порядок по макету: портал → колонки → крупный знак → копирайт,
+   между блоками --section-gap.
+   ============================================================ */
+
+.sc-footer {
+  --footer-portal-action-w: 130px; /* Button/Control ghost в макете */
+
+  /* Финальный CTA: высота блока, отбивка снизу и геометрия дуги из макета */
+  --footer-final-h: 866px;
+  --footer-final-pb: 240px;
+  --footer-final-copy-w: 720px;
+  --footer-arc-size: 2600px;
+  --footer-arc-top: -1960px;
+  /* Центр дуги сдвинут влево: в макете 403 из 1440 (обновление 2026-09-08) */
+  --footer-arc-cx: 28%;
+  --footer-arc-stroke: 48px;
+  --footer-arc-blur: 120px;
+  --footer-arc-edge: 1px;
+  --footer-arc-run: 4s;    /* проход блика по видимой дуге слева направо */
+  --footer-arc-color: color-mix(in srgb, var(--sc-blue-500) 55%, transparent);
+
+  box-sizing: border-box;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-footer *,
+.sc-footer *::before,
+.sc-footer *::after { box-sizing: border-box; }
+
+/* ---------- Финальный CTA с дугой ---------- */
+
+.sc-footer__final {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-block-size: var(--footer-final-h);
+  padding-block-end: var(--footer-final-pb);
+  padding-inline: var(--sc-pad-x);
+  display: flex;
+  /* Копия по левому полю полосы, по вертикали — в центре (макет 2026-09-08) */
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Окружность 2600 в цвет фона; свечение — ореол по её краю наружу.
+   В макете это обводка 48 с размытием 120, но размытая обводка теряет
+   почти всю плотность: 48 растянутые на 240 дают меньше десятой доли
+   исходной непрозрачности. box-shadow держит край плотным и рисуется
+   ПОД фоном круга, поэтому внутрь свечение не попадает — как и в макете. */
+.sc-footer__arc {
+  position: absolute;
+  inset-block-start: var(--footer-arc-top);
+  inset-inline-start: var(--footer-arc-cx);
+  inline-size: var(--footer-arc-size);
+  block-size: var(--footer-arc-size);
+  transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.sc-footer__arc-disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--background);
+  /* Растяжки нет: ореол обнимает край и гаснет на ~120, а не заливает низ */
+  box-shadow: 0 0 var(--footer-arc-blur) 0 var(--footer-arc-color);
+}
+
+/* Кромка дуги. Отдельным слоем, а не outline: тому нельзя задать градиент.
+   Круг на --footer-arc-edge больше диска, маской из него вырезано всё,
+   кроме внешнего кольца, — кромка ложится ровно снаружи, как обводка
+   OUTSIDE в макете.
+
+   Два слоя в одном элементе: ровная линия цветом ring как основа и
+   поверх — конический градиент с ярким сегментом, который крутится
+   вокруг центра круга. По видимой нижней дуге блик бежит слева направо
+   и уходит, как заливка рельса в B04a. */
+.sc-footer__arc-edge {
+  position: absolute;
+  inset: calc(-1 * var(--footer-arc-edge));
+  border-radius: 50%;
+  background: var(--ring);
+  -webkit-mask: radial-gradient(farthest-side,
+    transparent calc(100% - var(--footer-arc-edge)), #000 calc(100% - var(--footer-arc-edge)));
+  mask: radial-gradient(farthest-side,
+    transparent calc(100% - var(--footer-arc-edge)), #000 calc(100% - var(--footer-arc-edge)));
+}
+
+.sc-footer__arc-edge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /* сегмент ~40° из светлой ступени к белому и обратно; остальное прозрачно */
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 150deg,
+    var(--sc-blue-300) 165deg,
+    var(--foreground) 180deg,
+    var(--sc-blue-300) 195deg,
+    transparent 210deg 360deg
+  );
+  animation: sc-footer-arc-run var(--footer-arc-run) ease-in-out infinite;
+}
+
+/* Видимая часть дуги — примерно ±34° от нижней точки круга. Полный оборот
+   показывал бы блик пару секунд из девяти, поэтому ход только по этому
+   сектору: от левого края дуги к правому, затем снова слева. */
+@keyframes sc-footer-arc-run {
+  from { transform: rotate(48deg); }
+  to   { transform: rotate(-48deg); }
+}
+
+.sc-footer__final-copy {
+  inline-size: 100%;
+  max-inline-size: var(--footer-final-copy-w);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sc-space-12); /* 48 в макете */
+}
+
+/* Заголовок финального блока набран H1, а не Display: решение 2026-09-08.
+   В макете здесь стоял Display/64, но на пустой тёмной полосе он забирал
+   весь экран и спорил с хиро. H1 держит ту же роль тише. */
+.sc-footer__final-title { margin: 0; }
+
+/* Button/Control · outline: текст по центру, без стрелки */
+.sc-footer__final-cta {
+  block-size: var(--control-square);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
+}
+
+/* ---------- Подвал ---------- */
+
+.sc-footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--section-gap);
+  padding: 0 var(--sc-pad-x) var(--section-padding-y-tight);
+}
+
+/* ---------- Портал ---------- */
+
+.sc-footer__portal {
+  display: flex;
+  align-items: center;
+  gap: var(--grid-gap);
+  padding: var(--card-padding);
+  border: var(--sc-line) solid var(--border);
+  color: inherit;
+  text-decoration: none;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-footer__portal-copy {
+  flex: 1 0 0;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm); /* 8 в макете */
+}
+
+.sc-footer__portal-kicker { color: var(--accent-foreground); text-transform: uppercase; }
+.sc-footer__portal-title  { max-inline-size: var(--sc-measure); }
+/* Перечень отделений — одна строка: мера здесь не нужна, строка короткая
+   и ломалась ровно на последнем слове (правка 2026-09-13) */
+.sc-footer__portal-note   { color: var(--muted-foreground); }
+
+/* Button/Control · ghost: текст по центру, без стрелки */
+.sc-footer__portal-action {
+  flex: none;
+  min-inline-size: var(--footer-portal-action-w);
+  block-size: var(--control-square);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--control-padding-x);
+  color: var(--foreground);
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+/* ---------- Колонки ---------- */
+
+.sc-footer__cols {
+  display: grid;
+  /* 4 × 229 + 300 на 1440, гаттер 16 — доли, не пиксели */
+  grid-template-columns: repeat(4, 229fr) 300fr;
+  gap: var(--grid-gap);
+  align-items: start;
+}
+
+/* Колонка — <details>: на десктопе всегда раскрыта и выглядит как заголовок
+   со списком, на планшете и телефоне сворачивается в строку-аккордеон. */
+.sc-footer__col {
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md); /* 14 в макете */
+}
+
+.sc-footer__col-head {
+  margin: 0;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  list-style: none;          /* убираем стандартный треугольник */
+  cursor: default;
+  pointer-events: none;      /* на десктопе колонка не сворачивается по клику */
+}
+
+.sc-footer__col-head::-webkit-details-marker { display: none; }
+
+/* Плюс-минус: две линии той же толщины, что и все кромки */
+.sc-footer__col-sign {
+  display: none;
+  position: relative;
+  flex: none;
+  inline-size: var(--sc-space-3);
+  block-size: var(--sc-space-3);
+  color: var(--foreground);
+}
+
+.sc-footer__col-sign::before,
+.sc-footer__col-sign::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  block-size: 1px; /* иконка — 1px, как стрелки */
+  background: currentColor;
+  transition: transform var(--sc-dur) var(--sc-ease), opacity var(--sc-dur) var(--sc-ease);
+}
+
+.sc-footer__col-sign::after { transform: rotate(90deg); }
+
+.sc-footer__col[open] .sc-footer__col-sign::after {
+  transform: rotate(0deg);
+  opacity: 0;
+}
+
+.sc-footer__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+}
+
+.sc-footer__link {
+  display: block; /* иначе строку <li> тянет распорка body-шрифта: 26 вместо 22 */
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color var(--sc-dur) var(--sc-ease);
+}
+
+/* ---------- Подписка ---------- */
+
+.sc-footer__newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  min-inline-size: 0;
+}
+
+.sc-footer__newsletter-note { margin: 0; }
+
+/* Поле + квадратная кнопка в одну линию; кнопка по низу поля */
+.sc-footer__newsletter-row {
+  display: flex;
+  align-items: flex-end;
+}
+
+.sc-footer__field {
+  flex: 1 0 0;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1_5); /* 6 в макете */
+}
+
+.sc-footer__label { color: var(--field-label); text-transform: uppercase; }
+
+.sc-footer__input {
+  inline-size: 100%;
+  block-size: var(--field-height);
+  padding: 0 var(--field-padding-x);
+  border: var(--sc-line) solid var(--field-border);
+  border-radius: 0;
+  background: var(--field-bg);
+  color: var(--field-text);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+  appearance: none;
+}
+
+.sc-footer__input::placeholder { color: var(--field-placeholder); }
+
+/* Кнопка-квадрат 48: рамка сливается с рамкой поля (в макете input с mr −1) */
+.sc-footer__submit {
+  flex: none;
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  margin-inline-start: -1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: var(--sc-line) solid var(--field-border);
+  border-radius: 0;
+  background: var(--field-bg);
+  color: var(--field-text);
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-footer__submit svg {
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* Строка ошибки держит место, чтобы колонка не росла при валидации */
+.sc-footer__error {
+  margin: 0;
+  color: var(--field-text-error);
+}
+
+.sc-footer__error[hidden] {
+  display: block;
+  visibility: hidden;
+}
+
+/* На телефоне подписка идёт колонкой: резерв под ошибку стал бы дырой */
+@media (max-width: 640px) {
+  .sc-footer__error[hidden] { display: none; }
+}
+
+/* ---------- Крупный знак и копирайт ---------- */
+
+.sc-footer__wordmark {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.sc-footer__copy { margin: 0; color: var(--muted-foreground); }
+
+/* ---------- Состояния: в Figma их нет, обязательны по CLAUDE.md ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-footer__portal:hover { background: var(--sc-white-alpha-10); }
+  .sc-footer__final-cta:hover { background: var(--primary); color: var(--primary-foreground); }
+  .sc-footer__link:hover   { color: var(--muted-foreground); }
+  .sc-footer__submit:hover { background: var(--sc-white-alpha-10); }
+  .sc-footer__submit:hover svg { transform: translateX(2px); }
+}
+
+.sc-footer__final-cta:focus-visible,
+.sc-footer__portal:focus-visible,
+.sc-footer__link:focus-visible,
+.sc-footer__submit:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-footer__input:focus-visible {
+  outline: none;
+  border-color: var(--field-border-focus);
+  box-shadow: 0 0 0 var(--sc-field-ring-w) var(--field-focus-ring);
+}
+
+.sc-footer__input[aria-invalid="true"] { border-color: var(--field-border-error); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-footer__arc-edge::after { animation: none; }
+  .sc-footer__final-cta,
+  .sc-footer__portal,
+  .sc-footer__link,
+  .sc-footer__submit,
+  .sc-footer__submit svg { transition: none; }
+}
+
+
+/* ---------- Планшет и телефон: колонки — аккордеоны ----------
+   Второй брейкпоинт в проекте: на 1024 пять колонок подвала уже не держат
+   строку, а список ссылок съедает экран. Раскладка меняется принципиально,
+   поэтому исключение из правила «один брейкпоинт 640». */
+
+@media (max-width: 1024px) {
+  .sc-footer__cols {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .sc-footer__col {
+    gap: 0;
+    border-block-start: var(--hairline) solid var(--border);
+  }
+
+  .sc-footer__col-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--grid-gap);
+    min-block-size: var(--control-square); /* палец: 48 */
+    padding-block: var(--stack-gap-md);
+    color: var(--foreground);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  .sc-footer__col-sign { display: block; }
+
+  .sc-footer__list {
+    padding-block: var(--stack-gap-sm) var(--sc-space-6);
+  }
+
+  /* Подписка — отдельным блоком под аккордеонами */
+  .sc-footer__newsletter {
+    border-block-start: var(--hairline) solid var(--border);
+    padding-block-start: var(--sc-space-6);
+  }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  /* Дуга на узком экране была бы вдвое шире окна — ужимаем блок */
+  /* Дуга: на узком экране круг 1600 давал почти прямую линию и жался
+     к кнопке. Радиус подобран так, чтобы прогиб к краям экрана держал ту же
+     долю ширины, что и на десктопе (~15%), а под дугой оставалось поле. */
+  .sc-footer {
+    /* Компактнее (2026-09-13): было 680 / отступ 80 / дуга -160 — между
+       кнопкой и дугой висело 320 пустого экрана. Круг тот же, поэтому
+       кривизна не изменилась: он просто поднят выше. */
+    --footer-final-h: 520px;
+    --footer-final-pb: var(--section-padding-y-tight);
+    --footer-arc-size: 720px;
+    --footer-arc-top: -320px;
+    --footer-arc-blur: 80px;
+    /* На узком экране дуга по центру: сдвиг влево, как на десктопе,
+       увёл бы прогиб за край окна (правка 2026-09-08) */
+    --footer-arc-cx: 50%;
+  }
+
+  /* Копия прижата к верху блока: по центру над заголовком висел пустой
+     экран, а дуга и так занимает низ (правка 2026-09-08) */
+  /* Верхнее поле равно нижнему полю секции над футером (--section-padding-y):
+     на стыке светлого и тёмного блоков расстояния читаются как одно.
+     Копия по центру (макет мобильного футера): на узкой колонке
+     заголовок в три строки и кнопка во всю ширину держатся осью,
+     а не левым полем, как на десктопе */
+  .sc-footer__final {
+    align-items: flex-start;
+    justify-content: center;
+    padding-block: var(--section-padding-y) var(--footer-final-pb);
+  }
+
+  .sc-footer__final-copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Заголовок и кнопка держатся вместе: 32 разводили их в отдельные блоки */
+  .sc-footer__final-copy { gap: var(--sc-space-6); }
+
+  .sc-footer__final-cta { inline-size: 100%; }
+
+  .sc-footer__portal { flex-direction: column; align-items: flex-start; }
+  .sc-footer__portal-action { padding-inline: 0; min-inline-size: 0; }
+
+
+}

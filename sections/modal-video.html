@@ -1,0 +1,28 @@
+<!-- ============================================================
+     Modal/Video — історія амбасадора
+     Открывает: [data-modal-open="video"] — кнопка «Дивитись історію» в B05.
+     Закрытие: кнопка со стрелкой, Esc, клик по затемнению — как в модалке записи.
+     Ролик подключается лениво: адрес лежит в data-src, modal.js
+     переносит его в src при открытии и стирает при закрытии.
+     ACF: amb_video_url (oEmbed/Vimeo)
+     ============================================================ -->
+<div class="sc-modal sc-modal--video" data-modal="video" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+
+  <div class="sc-modal__dialog sc-modal__dialog--video" role="dialog" aria-modal="true" data-theme="inverse"
+       aria-label="Історія амбасадора Катерини Катеринчик">
+
+    <button class="sc-modal__close sc-modal__close--outside" type="button" data-modal-close aria-label="Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg>
+    </button>
+
+    <div class="sc-modal__frame">
+      <iframe class="sc-modal__video"
+              data-src="https://player.vimeo.com/video/76979871?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
+              title="Історія амбасадора програми Face Control 365"
+              allow="autoplay; fullscreen; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+</div>

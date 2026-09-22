@@ -1,0 +1,194 @@
+/* ============================================================
+   B11 · CTA2 Консультація професора
+   figma: node-id=4:299
+   ============================================================ */
+
+.sc-consult {
+  /* Строка ошибки под полем: gap колонки + собственный отступ + высота строки */
+  --consult-error-h: calc(var(--sc-space-1_5) + var(--sc-space-1) + var(--p-mini-lh));
+  --consult-parallax: var(--sc-space-20); /* 80: запас кадра сверху и снизу под медленный скролл */
+
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-consult *,
+.sc-consult *::before,
+.sc-consult *::after { box-sizing: border-box; }
+
+/* Фон-кадр из макета (897:344) под скримом black 20 % — текст и форма
+   остаются на своём контрасте, кадр читается краем (2026-09-13) */
+.sc-consult__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--background);
+}
+
+/* Кадр выше полосы на --consult-parallax сверху и снизу: этот запас и
+   проезжает при скролле (assets/js/gsap-animations.js). Без JS кадр стоит
+   по центру — вёрстка не меняется. */
+.sc-consult__image {
+  display: block;
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: calc(100% + var(--consult-parallax) * 2);
+  object-fit: cover;
+  object-position: left center; /* планета в макете сидит у левого края */
+  translate: 0 -50%;
+  will-change: translate;
+}
+
+.sc-consult__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--sc-black-alpha-20);
+}
+
+.sc-consult__inner {
+  display: grid;
+  grid-template-columns: 473fr 743fr;
+  gap: var(--sc-space-16);
+  align-items: center;
+}
+
+.sc-consult__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  min-inline-size: 0;
+}
+
+.sc-consult__kicker {
+  margin: 0;
+  color: var(--accent-foreground);
+}
+
+.sc-consult__title {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+/* ---------- Форма ---------- */
+
+.sc-consult__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: var(--control-gap);
+  align-items: end;
+}
+
+.sc-consult__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1_5); /* 6 в макете */
+  min-inline-size: 0;
+}
+
+.sc-consult__label {
+  color: var(--field-label);
+}
+
+.sc-consult__input {
+  block-size: var(--field-height);
+  inline-size: 100%;
+  padding-inline: var(--field-padding-x);
+  border: var(--sc-line) solid var(--field-border);
+  border-radius: var(--radius);
+  background: var(--field-bg);
+  color: var(--field-text);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+  transition: border-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-consult__input::placeholder { color: var(--field-placeholder); }
+
+/* Рамку не утолщаем — по описанию компонента layout поедет; берём кольцо */
+.sc-consult__input:focus-visible {
+  outline: var(--sc-field-ring-w) solid var(--field-focus-ring);
+  outline-offset: 0;
+  border-color: var(--field-border-focus);
+}
+
+.sc-consult__input[aria-invalid="true"] { border-color: var(--field-border-error); }
+
+.sc-consult__error {
+  margin: var(--sc-space-1) 0 0;
+  color: var(--field-text-error);
+  font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
+}
+
+/* Строка ошибки занимает место всегда — иначе её появление удлиняет колонку
+   и роняет кнопку на строку ниже. Скрываем видимостью, не display:
+   атрибут hidden всё так же прячет её от скринридера. */
+.sc-consult__error[hidden] {
+  display: block;
+  visibility: hidden;
+}
+
+/* Конверсионная кнопка синяя, как в макете (#2E6EBF). Роли под этот синий
+   в выгрузке нет — цвет живёт в base.css как --sc-action до появления токена. */
+.sc-consult__submit {
+  /* Поднимаем на высоту строки ошибки: с align-items: end кнопка иначе
+     встала бы по низу колонки, ниже поля. */
+  margin-block-end: var(--consult-error-h);
+  block-size: var(--field-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid transparent;
+  border-radius: var(--radius);
+  background: var(--primary); /* заливка кнопок — токен, не локальный синий (2026-09-13) */
+  color: var(--primary-foreground);
+  cursor: pointer;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+.sc-consult__submit:hover { opacity: 0.85; }
+
+.sc-consult__submit:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* Состояние загрузки — в Figma его нет, обязательно по CLAUDE.md */
+.sc-consult__form[data-state="loading"] .sc-consult__submit,
+.sc-consult__submit:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-consult__image { will-change: auto; }
+  .sc-consult__input,
+  .sc-consult__submit { transition: none; }
+}
+
+@media (max-width: 640px) {
+  .sc-consult__inner { grid-template-columns: minmax(0, 1fr); }
+  .sc-consult__form { grid-template-columns: minmax(0, 1fr); }
+  /* Та же отбивка перед кнопкой, что и в остальных блоках: на телефоне
+     кнопка встаёт под полями, значит правило работает и здесь */
+  .sc-consult__submit {
+    inline-size: 100%;
+    margin-block-end: 0;
+    margin-block-start: calc(var(--sc-form-cta-gap) - var(--control-gap));
+  }
+
+  /* Поля идут колонкой, и резерв под строку ошибки превращается в дыру:
+     на телефоне строка занимает место только когда её показывают.
+     Ряд не съедет — кнопка под полями, а не рядом с ними. */
+  .sc-consult__error[hidden] { display: none; }
+}

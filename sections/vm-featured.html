@@ -1,0 +1,106 @@
+<!-- ============================================================
+     VM/Featured · головний матеріал блога
+     figma: node-id=343:145
+     ACF: vm_featured (repeater: chips[label], title, link, image)
+          Чип «Топ» не из репитера: каждый закреплённый в шапке материал
+          помечается им автоматически, первым в ряду (решение 2026-09-08)
+     Слайдер головних матеріалів: стрілки, лічильник, полоса відліку
+     і квадратна кнопка-стрілка «читати». Заголовок і фото — посилання
+     на матеріал. Фон полосы — secondary.
+     Клікабельний лише перший слайд — під нього є готовий матеріал.
+     Слайди 2–5 показують перемикання: заголовок і фото без посилання,
+     стрілка «читати» на них ховається (assets/js/vm-featured.js).
+     Кодер виводить реальні матеріали з репітера, і посилання буде в кожного.
+     Файли: oblik-cover.jpg (той самий кадр, що обкладинка статті Oblik —
+     перехід садить його в рамку статті), hero-2…5.jpg (квадратний кроп 1200)
+     ============================================================ -->
+<section class="vm-featured" data-vm-featured>
+  <div class="vm-featured__copy">
+
+    <div class="vm-featured__top">
+      <!-- Шапка журнала — h1 главной блога; название не из ACF -->
+      <h1 class="vm-featured__masthead sc-t-display">Smart Age <span class="vm-featured__masthead-thin">Journal</span></h1>
+      <article class="vm-featured__slide" data-vm-featured-slide>
+        <ul class="vm-featured__chips">
+          <li class="vm-featured__chip sc-t-mini">Топ</li>
+          <li class="vm-featured__chip sc-t-mini">Science</li>
+          <li class="vm-featured__chip sc-t-mini">9 хв читання</li>
+        </ul>
+        <p class="vm-featured__title sc-t-h1"><a class="vm-featured__title-link" href="vm-article-oblik.html">Регенераторний потенціал шкіри: як його вимірюють і навіщо це косметологу</a></p>
+      </article>
+      <article class="vm-featured__slide" data-vm-featured-slide hidden>
+        <ul class="vm-featured__chips">
+          <li class="vm-featured__chip sc-t-mini">Топ</li>
+          <li class="vm-featured__chip sc-t-mini">Їжа</li>
+          <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
+        </ul>
+        <p class="vm-featured__title sc-t-h1">Рослинні сполуки, що стоять за раціоном кожного довгожителя</p>
+      </article>
+      <article class="vm-featured__slide" data-vm-featured-slide hidden>
+        <ul class="vm-featured__chips">
+          <li class="vm-featured__chip sc-t-mini">Топ</li>
+          <li class="vm-featured__chip sc-t-mini">Наука</li>
+          <li class="vm-featured__chip sc-t-mini">7 хв читання</li>
+        </ul>
+        <p class="vm-featured__title sc-t-h1">24-годинна модель сну: чому кращий сон починається напередодні зранку</p>
+      </article>
+      <article class="vm-featured__slide" data-vm-featured-slide hidden>
+        <ul class="vm-featured__chips">
+          <li class="vm-featured__chip sc-t-mini">Топ</li>
+          <li class="vm-featured__chip sc-t-mini">Практика</li>
+          <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
+        </ul>
+        <p class="vm-featured__title sc-t-h1">Звички для здоров’я мозку, які найважливіші у 30–40 років</p>
+      </article>
+      <article class="vm-featured__slide" data-vm-featured-slide hidden>
+        <ul class="vm-featured__chips">
+          <li class="vm-featured__chip sc-t-mini">Топ</li>
+          <li class="vm-featured__chip sc-t-mini">Наука</li>
+          <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
+        </ul>
+        <p class="vm-featured__title sc-t-h1">Гіпербарична оксигенація і довголіття: що насправді показує наука</p>
+      </article>
+    </div>
+
+    <div class="vm-featured__bottom">
+      <div class="vm-featured__nav">
+        <button class="vm-featured__nav-btn" type="button" data-vm-featured-prev aria-label="Попередній матеріал"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M32 24H16M22 30L16 24L22 18" stroke="currentColor"/></svg></button>
+        <button class="vm-featured__nav-btn" type="button" data-vm-featured-next aria-label="Наступний матеріал"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32M26 30L32 24L26 18" stroke="currentColor"/></svg></button>
+      </div>
+
+      <p class="vm-featured__counter sc-t-mini" data-vm-featured-counter>01 / 05</p>
+
+      <div class="vm-featured__progress" aria-hidden="true">
+        <span class="vm-featured__progress-bar" data-vm-featured-progress></span>
+      </div>
+
+      <a class="vm-featured__read" href="vm-article.html" aria-label="Читати матеріал" data-vm-featured-read>
+        <span class="vm-featured__read-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="vm-featured__media">
+    <a class="vm-featured__media-link" href="vm-article-oblik.html" data-vm-featured-media>
+      <img src="assets/img/vm/oblik-cover.jpg" alt="Фібробласти у культуральному середовищі"
+           width="1120" height="1120" decoding="async">
+    </a>
+    <div class="vm-featured__media-link" data-vm-featured-media hidden>
+      <img src="assets/img/vm/hero-2.jpg" alt="Стіл із різноманітними овочевими стравами, вигляд згори"
+           width="1200" height="1200" loading="lazy" decoding="async">
+    </div>
+    <div class="vm-featured__media-link" data-vm-featured-media hidden>
+      <img src="assets/img/vm/hero-3.jpg" alt="Жінка спить у світлому ліжку"
+           width="1200" height="1200" loading="lazy" decoding="async">
+    </div>
+    <div class="vm-featured__media-link" data-vm-featured-media hidden>
+      <img src="assets/img/vm/hero-4.jpg" alt="Робочий стіл із ноутбуком і нотатками"
+           width="1200" height="1200" loading="lazy" decoding="async">
+    </div>
+    <div class="vm-featured__media-link" data-vm-featured-media hidden>
+      <img src="assets/img/vm/hero-5.jpg" alt="Чоловік із заплющеними очима робить дихальну вправу"
+           width="1200" height="1200" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>

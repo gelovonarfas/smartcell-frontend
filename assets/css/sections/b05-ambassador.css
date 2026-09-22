@@ -1,0 +1,149 @@
+/* ============================================================
+   B05 · Амбасадор
+   figma: node-id=14:80 · раскладка по DECISIONS-2026-09-04 §2
+   Зависит от assets/css/tokens.css и base.css
+   ============================================================ */
+
+.sc-ambassador {
+  --sc-cta-gap: var(--stack-gap-lg); /* шаг колонки: остальное добавит правило в base.css */
+  --ambassador-min-h: 720px;   /* высота секции в макете */
+  --ambassador-quote-w: 800px; /* мера цитаты задана в макете */
+
+  box-sizing: border-box;
+  /* Секция — поля полосы плюс общий межблочник: блок не во всю ширину окна */
+  padding-block: var(--section-padding-y-tight);
+  padding-inline: var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Плита 1280×720 в контентной полосе */
+.sc-ambassador__frame {
+  position: relative;
+  min-block-size: var(--ambassador-min-h);
+  display: flex;
+  overflow: hidden;
+}
+
+.sc-ambassador *,
+.sc-ambassador *::before,
+.sc-ambassador *::after { box-sizing: border-box; }
+
+/* Фото — фон всей секции */
+.sc-ambassador__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--muted);
+  z-index: 0;
+}
+
+.sc-ambassador__image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Скрим плоский, без градиента. В макете 20%, но на светлом кадре это
+   даёт тексту 2.3:1; CLAUDE.md требует не полагаться на удачный кадр.
+   50% — минимум, при котором проходит и кикер 12px (4.7:1). */
+.sc-ambassador__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--sc-black-alpha-50);
+}
+
+.sc-ambassador__copy {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--section-gap);
+  padding: var(--page-margin-x); /* 80 со всех сторон внутри плиты */
+  min-inline-size: 0;
+}
+
+.sc-ambassador__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-ambassador__caption {
+  margin: 0;
+  color: var(--accent-foreground);
+}
+
+.sc-ambassador__name {
+  margin: 0;
+  color: var(--foreground);
+}
+
+.sc-ambassador__quote {
+  margin: 0;
+  max-inline-size: var(--ambassador-quote-w);
+  color: var(--foreground);
+}
+
+/* Button/Control · outline — «контрол 48» по описанию компонента */
+.sc-ambassador__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--control-square); /* контрол 48 */
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .sc-ambassador__cta:hover {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+.sc-ambassador__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-ambassador__cta:active { opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-ambassador__cta { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  /* Вертикальный кадр 432×768: держим его пропорцию и кладём копию к низу —
+     сверху остаётся лицо, снизу читается текст поверх скрима */
+  .sc-ambassador__frame {
+    min-block-size: 0;
+    aspect-ratio: 432 / 768;
+  }
+
+  .sc-ambassador__copy {
+    justify-content: flex-end;
+    gap: var(--section-gap);
+    padding: var(--section-padding-y-tight) var(--page-margin-x);
+  }
+
+  .sc-ambassador__head { order: 2; }
+  .sc-ambassador__quote { order: 1; }
+}

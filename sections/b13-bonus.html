@@ -1,0 +1,31 @@
+<!-- ============================================================
+     B13 · CTA3 Меню на рік
+     figma: node-id=15:138
+     ACF: b13_kicker (text), b13_title (text), b13_cta_label (text),
+          b13_cta_link (link), b13_bg (image)
+     Файлы: assets/img/b13-bonus.jpg (десктоп),
+            assets/img/mob-b13-bonus.jpg (телефон, вертикальный кадр)
+     ⚠ Имя слоя в макете: «ФОН: замінити на клітинний / УЗД-візуал (не їжа)».
+        Текущая подложка временная — нужен клеточный или УЗД-визуал.
+     ============================================================ -->
+<section class="sc-bonus" data-theme="inverse">
+  <!-- Плита 1280×600 в контентной полосе, фото только внутри плиты; поля по бокам — тёмный фон секции -->
+  <div class="sc-bonus__frame">
+    <div class="sc-bonus__bg" aria-hidden="true">
+      <picture>
+        <!-- На телефоне — вертикальный кадр -->
+        <source media="(max-width: 640px)" srcset="assets/img/mob-b13-bonus.jpg" width="432" height="768">
+        <img src="assets/img/b13-bonus.jpg" alt="" loading="lazy" decoding="async">
+      </picture>
+    </div>
+
+    <div class="sc-bonus__inner">
+      <div class="sc-bonus__copy">
+        <p class="sc-bonus__kicker sc-t-caption">БОНУС ПІСЛЯ ДІАГНОСТИКИ</p>
+        <h2 class="sc-bonus__title sc-t-h3">Меню на рік від лікаря-ендокринолога Моршнєвої</h2>
+      </div>
+
+      <a class="sc-bonus__cta" href="#consultation">Отримати меню</a>
+    </div>
+  </div>
+</section>

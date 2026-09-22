@@ -1,0 +1,265 @@
+/* ============================================================
+   B08c · Динаміка за даними УЗД
+   figma: 496:575 · состояния 508:122 / 509:122 / 509:202
+   ============================================================ */
+
+.sc-usg {
+  --usg-sample-w: 40px;
+  --usg-draw-dur: 900ms;  /* в такт со счётчиками B12 и B04c */
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-16);
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-usg *,
+.sc-usg *::before,
+.sc-usg *::after { box-sizing: border-box; }
+
+.sc-usg__title {
+  margin: 0;
+  text-align: center;
+}
+
+/* Ряд занимает контентную полосу целиком, от поля до поля.
+   Левая колонка забирает место, которое в B04b и B06 держит лента
+   миниатюр (112 + гаттер), — тогда квадрат выходит того же размера,
+   что и медиа в тех блоках: 520+112+24 : 680. */
+.sc-usg__row {
+  display: grid;
+  grid-template-columns: 656fr 680fr;
+  gap: var(--sc-gutter);
+  align-items: start;
+}
+
+/* Ритм колонки снят с макета: базовый шаг 24, плюс разрядки 64 и 40 */
+.sc-usg__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6);
+  min-inline-size: 0;
+}
+
+.sc-usg__panels { margin-block-start: var(--sc-space-16); }
+
+/* ---------- Переключатель ---------- */
+
+.sc-usg__switcher {
+  overflow: hidden; /* стрелки клипаются по внутреннему краю: фон ховера не ложится на рамку */
+  display: grid;
+  grid-template-columns: var(--control-square) minmax(0, 1fr) var(--control-square);
+  align-items: center;
+  block-size: var(--control-square);
+  border: var(--sc-line) solid var(--border); /* рамка контрола */
+}
+
+.sc-usg__nav {
+  inline-size: var(--control-square);
+  block-size: 100%; /* по внутренней высоте контейнера: 48 вылезал за рамку и на ховере закрывал нижнюю линию */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-usg__nav:first-child { border-inline-end: var(--hairline) solid var(--border); }
+.sc-usg__nav:last-child { border-inline-start: var(--hairline) solid var(--border); }
+.sc-usg__nav:hover { background: var(--muted); }
+.sc-usg__nav svg { inline-size: 100%; block-size: 100%; }
+
+/* Подпись переключателя (макет v2, 897:2): слева счётчик «1 / 3» лёгким
+   приглушённым, справа название жирным; поля 16. Один рисунок на все три
+   переключалки — B04b, B06, B08c (решение 2026-09-11).
+
+   Правило: заголовок внутри переключателя предельно короткий. Полоса узкая,
+   на телефоне между стрелками остаётся ~180 — длинная подпись режется
+   многоточием. Уточнения (единицы, «основний», «місяців») живут в заголовке
+   панели, на оси графика или в сокращении. */
+.sc-usg__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--stack-gap-sm);
+  margin: 0;
+  padding-inline: var(--sc-space-4);
+  min-inline-size: 0;
+}
+
+.sc-usg__count {
+  flex: none;
+  font-weight: var(--sc-weight-light);
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-usg__label {
+  flex: 1 1 auto;
+  text-align: end;
+  font-weight: var(--sc-weight-bold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sc-usg__panel[hidden] { display: none; }
+.sc-usg__subtitle { margin: 0 0 var(--sc-space-6); }
+
+.sc-usg__note,
+.sc-usg__source {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Легенда — hairline-таблица с образцом линии ---------- */
+
+.sc-usg__legend {
+  margin: var(--sc-space-10) 0 0;  /* разрядка 40 к базовому шагу 24 = 64 по макету */
+  padding: 0;
+  list-style: none;
+}
+
+.sc-usg__legend-row {
+  display: grid;
+  grid-template-columns: var(--usg-sample-w) minmax(0, 1fr) auto;
+  gap: var(--grid-gap);
+  align-items: center;
+  padding-block: var(--stack-gap-md);
+  border-block-start: var(--hairline) solid var(--border);
+}
+
+.sc-usg__legend-row:last-child { border-block-end: var(--hairline) solid var(--border); }
+
+.sc-usg__legend-sample {
+  display: flex;
+  align-items: center;
+  color: var(--foreground);
+}
+
+.sc-usg__legend-sample--base { color: var(--muted-foreground); }
+
+.sc-usg__legend-value { text-align: end; }
+
+/* ---------- График ---------- */
+
+.sc-usg__chart {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--secondary);
+}
+
+/* Единица измерения — отдельная подпись в углу полотна, как в макете:
+   в SVG её класть некуда, верхняя линия сетки начинается сразу под ней. */
+.sc-usg__unit {
+  position: absolute;
+  inset-block-start: var(--sc-space-6);
+  inset-inline-start: var(--sc-space-4);
+  margin: 0;
+  color: var(--muted-foreground);
+  font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
+}
+
+.sc-usg__svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sc-usg__gridline {
+  stroke: var(--muted-foreground);
+  stroke-width: 0.5;
+  opacity: 0.5;
+}
+
+.sc-usg__baseline {
+  stroke: var(--muted-foreground);
+  stroke-width: 1;
+}
+
+.sc-usg__tickline { stroke: var(--foreground); stroke-width: 1; }
+
+.sc-usg__tick {
+  fill: var(--muted-foreground);
+  font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
+}
+
+/* Ряды монохромные: различаются только пунктиром, как в макете */
+.sc-usg__line {
+  fill: none;
+  stroke: var(--foreground);
+  stroke-width: 1.5;
+}
+
+.sc-usg__dot { fill: var(--foreground); }
+
+/* ---------- Отрисовка при появлении ----------
+   Линии проявляются слева направо. Обрезаем группу через clip-path, а не
+   через stroke-dasharray: пунктир уже занят под различение рядов.
+   Класс ставит скрипт, когда секция попала во вьюпорт. */
+
+.sc-usg__series {
+  clip-path: inset(0 100% 0 0);
+}
+
+.sc-usg[data-usg-drawn] .sc-usg__series {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path var(--usg-draw-dur) var(--sc-ease);
+}
+
+/* Переключение показателя не анимируем: сравнение важнее эффекта */
+.sc-usg[data-usg-drawn="instant"] .sc-usg__series { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-usg__series { clip-path: none; }
+  .sc-usg[data-usg-drawn] .sc-usg__series { transition: none; }
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+.sc-usg__nav:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-usg__nav { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+
+  /* Порядок на телефоне: переключатель → график → описание и легенда */
+  .sc-usg__row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--page-margin-x); /* содержимое идёт с шагом полей страницы */
+  }
+
+  .sc-usg__col { display: contents; }
+
+
+  .sc-usg__switcher { order: 1; }
+  .sc-usg__chart    { order: 2; }
+  .sc-usg__panels   { order: 3; }
+  .sc-usg__legend   { order: 4; }
+  .sc-usg__source   { order: 5; }
+
+  /* На телефоне вертикальный ритм держит шаг колонки: свои разрядки
+     десктопа (64 у панелей, 40 у легенды) здесь только рвут блок */
+  .sc-usg__panels { margin-block-start: 0; }
+  .sc-usg__legend { margin-block-start: 0; }
+
+  .sc-usg__legend-row { grid-template-columns: var(--usg-sample-w) minmax(0, 1fr); }
+  .sc-usg__legend-value { grid-column: 2; text-align: start; }
+}

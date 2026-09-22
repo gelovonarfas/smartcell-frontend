@@ -1,0 +1,35 @@
+<!-- ============================================================
+     B05 · Амбасадор
+     figma: node-id=14:80 (внутри обёртки 567:163 с полями 80)
+     ACF: amb_caption (text), amb_name (text), amb_cta_label (text),
+          amb_cta_link (link), amb_quote (textarea), amb_image (image)
+     Блок больше не во всю ширину: плита 1280 стоит в контентной полосе,
+     фон — фото (в макете сменило видео), поверх скрим.
+     Файлы: assets/img/ambassador.jpg (десктоп),
+            assets/img/mob-ambassador.jpg (телефон, вертикальный кадр)
+     ============================================================ -->
+<section class="sc-ambassador">
+  <!-- Тема на плите, а не на секции: поля вокруг остаются в цвете страницы -->
+  <div class="sc-ambassador__frame" data-theme="inverse">
+    <div class="sc-ambassador__bg" aria-hidden="true">
+      <!-- PLACEHOLDER -->
+      <picture>
+        <!-- На телефоне — вертикальный кадр: горизонтальный обрезался бы до полосы -->
+        <source media="(max-width: 640px)" srcset="assets/img/mob-ambassador.jpg" width="432" height="768">
+        <img class="sc-ambassador__image" src="assets/img/ambassador.jpg" alt=""
+             width="1280" height="720" loading="lazy" decoding="async">
+      </picture>
+      <span class="sc-ambassador__scrim"></span>
+    </div>
+
+    <div class="sc-ambassador__copy">
+      <div class="sc-ambassador__head">
+        <p class="sc-ambassador__caption sc-t-caption">АМБАСАДОР ПРОГРАМИ</p>
+        <p class="sc-ambassador__name sc-t-h3">Катерина Катеринчик</p>
+        <button class="sc-ambassador__cta" type="button" data-modal-open="video">Дивитись історію</button>
+      </div>
+
+      <blockquote class="sc-ambassador__quote sc-t-h2">«Я звикла вирішувати все сама і не маю часу на експерименти. Face Control 365 — це рік, коли моєю шкірою займаються ті, хто знає, що робить.»</blockquote>
+    </div>
+  </div>
+</section>

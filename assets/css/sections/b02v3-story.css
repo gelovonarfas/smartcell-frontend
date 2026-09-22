@@ -1,0 +1,519 @@
+/* ============================================================
+   B02 · v3 · стаття (sticky зачіпка зліва · колонка справа)
+   figma: node-id=999:1116
+   ============================================================ */
+
+.sc-story {
+  --story-aside-w: 554px;      /* левая колонка в макете */
+  --story-hook-w: 480px;       /* мера строки зачіпки: короче колонки, чтобы фраза не доходила до линии */
+  --sc-media-own-gap: var(--sc-space-8); /* шаг колонки статьи — см. правило о воздухе вокруг фото в base.css */
+  --story-article-w: 680px;    /* правая колонка в макете */
+  --story-sticky-top: var(--sc-sticky-top); /* общий отступ липких колонок — см. base.css */
+  --story-part-pb: var(--sc-space-24);  /* 96: разрядка между частями статьи */
+  --story-solution-gap: var(--sc-space-28); /* 112: воздух перед первой частью «рішення» */
+  /* Инверсия — быстрый переход (проба 1.2 с отменена 2026-09-12: тягуче) */
+  --story-invert-dur: var(--sc-dur);
+
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+  transition:
+    background-color var(--story-invert-dur) var(--sc-ease),
+    color var(--story-invert-dur) var(--sc-ease);
+}
+
+.sc-story *,
+.sc-story *::before,
+.sc-story *::after { box-sizing: border-box; }
+
+/* Все цвета внутри (подписи, линии, фоны таблицы, кнопка) перетекают
+   вместе с секцией. :where — нулевая специфичность: правила ниже со своими
+   transition (зачіпка, кнопки, прогресс) его перекрывают */
+.sc-story :where(*),
+.sc-story :where(*)::before,
+.sc-story :where(*)::after {
+  transition:
+    color var(--story-invert-dur) var(--sc-ease),
+    background-color var(--story-invert-dur) var(--sc-ease),
+    border-color var(--story-invert-dur) var(--sc-ease),
+    outline-color var(--story-invert-dur) var(--sc-ease);
+}
+
+/* Колонки пополам, как у B02 над блоком: левая кромка статьи встаёт
+   ровно на вертикальную линию B02 (середина полосы), а не на 554 из макета.
+   Ширина зачіпки ограничена гаттером справа, чтобы не липнуть к оси */
+.sc-story__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  /* Колонки тянутся на всю высоту ряда: sticky-зачіпке нужна
+     высота колонки, чтобы ехать вдоль статьи (align-items: start ломает sticky) */
+  align-items: stretch;
+}
+
+/* ---------- Зачіпка ---------- */
+
+.sc-story__aside {
+  min-inline-size: 0;
+  align-self: stretch;
+  padding-inline-end: var(--difference-gutter, var(--sc-space-14)); /* 56, как у B02 */
+}
+
+/* Четыре фразы лежат стопкой в одной ячейке сетки: бокс держит высоту
+   самой длинной, поэтому колонка справа не дёргается при смене */
+.sc-story__sticky {
+  position: sticky;
+  inset-block-start: var(--story-sticky-top);
+  display: grid;
+}
+
+.sc-story__hook {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap); /* 16 в макете */
+  opacity: 0;
+  pointer-events: none;
+  /* без GSAP смена идёт CSS-переходом (см. story.js) */
+  transition:
+    opacity var(--sc-dur-slow) var(--sc-ease-out),
+    filter var(--sc-dur-slow) var(--sc-ease-out);
+  filter: blur(12px);
+}
+
+.sc-story__hook[hidden] { display: none; }
+
+.sc-story__hook[data-current] {
+  opacity: 1;
+  filter: none;
+  pointer-events: auto;
+}
+
+.sc-story__phase {
+  margin: 0;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.sc-story__hook-text {
+  margin: 0;
+  /* --sc-measure в ch на кегле h2 даёт почти всю колонку: держим уже */
+  max-inline-size: var(--story-hook-w);
+}
+
+/* ---------- Статья ---------- */
+
+.sc-story__article {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.sc-story__part {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-8); /* 32 в макете */
+  padding-block-end: var(--story-part-pb);
+}
+
+.sc-story__part:last-child { padding-block-end: 0; }
+
+/* Порог «рішення»: перед первой тёмной частью — дополнительный воздух.
+   Триггер инверсии стоит на верхней кромке этой части (story.js), то есть
+   фон начинает темнеть, когда к линии зачіпки подходит именно этот
+   отступ, и к заголовку уже перетёк */
+.sc-story__part[data-story-solution] {
+  padding-block-start: var(--story-solution-gap);
+}
+
+.sc-story__p,
+.sc-story__lead,
+.sc-story__h2,
+.sc-story__h1 {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-story__photo { inline-size: 100%; }
+
+/* Цитата из кабинета: линия слева, поля 20, как в макете */
+.sc-story__quote {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-8);
+  padding-inline: var(--sc-space-5);
+  border-inline-start: var(--sc-line) solid var(--border);
+}
+
+.sc-story__quote-text {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+  font-weight: var(--h3-weight);
+}
+
+.sc-story__quote-text p { margin: 0; }
+
+.sc-story__quote-cite { color: var(--muted-foreground); }
+
+/* Факты и преимущества — строки с волосяной линией: термин слева, суть справа */
+.sc-story__facts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-story__facts__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--grid-gap);
+  padding-block: var(--sc-space-4);
+  border-block-start: var(--hairline) solid var(--border);
+}
+
+.sc-story__facts__row:last-child { border-block-end: var(--hairline) solid var(--border); }
+
+.sc-story__facts__desc { color: var(--muted-foreground); }
+
+/* ---------- Самоперевірка: один симптом у кадрі ---------- */
+
+.sc-story__check {
+  --story-check-interval: 3000ms; /* вдвое быстрее исходных 6000 (2026-09-12) */
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6); /* 24: управление держится ближе к симптому (2026-09-12, было 40) */
+}
+
+.sc-story__check-title { margin: 0; max-inline-size: var(--sc-measure); }
+
+.sc-story__symptoms {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  min-block-size: calc(var(--h3-lh) * 2); /* две строки — максимум у текущих симптомов: кадр не прыгает и не оставляет пустую строку */
+}
+
+.sc-story__symptom {
+  grid-area: 1 / 1;
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  opacity: 0;
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+.sc-story__symptom[hidden] { display: none; }
+.sc-story__symptom[data-current] { opacity: 1; }
+
+/* Управление: стрелки и счётчик в строке, полоса отсчёта — второй строкой
+   под кнопками, короткая (не тянется до правого края колонки) */
+.sc-story__controls {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
+  align-items: center;
+  column-gap: var(--sc-space-6);
+  row-gap: var(--sc-space-4);
+}
+
+.sc-story__nav { display: flex; gap: var(--stack-gap-sm); }
+
+.sc-story__nav-btn {
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-story__nav-btn svg { display: block; inline-size: 100%; block-size: 100%; }
+
+.sc-story__counter {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-story__progress {
+  /* вторая строка, под кнопками: ширина — ровно пара кнопок с зазором */
+  grid-row: 2;
+  grid-column: 1;
+  inline-size: calc(var(--control-square) * 2 + var(--stack-gap-sm));
+  max-inline-size: 100%;
+  position: relative;
+  block-size: var(--sc-progress-h);
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.sc-story__progress-bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  background: var(--foreground);
+  transform: scaleX(var(--story-check-fill, 0));
+  transform-origin: left center;
+}
+
+.sc-story__check.sc-is-running .sc-story__progress-bar {
+  transition: transform var(--story-check-interval) linear;
+}
+
+.sc-story__check-note { margin: 0; max-inline-size: var(--sc-measure); }
+
+/* ---------- Картка «Що ви бачите в дзеркалі» ----------
+   Аккордеон на <details>: раскрытие работает без JS, как в B16.
+   Карта в кромке, поля 48 — как в макете (node 1025:1308). */
+
+.sc-story__mirror {
+  --story-chevron: var(--sc-space-3);   /* знак «открыть» в полочках */
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6);            /* 24 в макете */
+  padding: var(--sc-space-12);       /* 48 */
+  border: var(--sc-line) solid var(--border);
+}
+
+.sc-story__mirror-title,
+.sc-story__mirror-lead {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-story__mirror-lead { color: var(--muted-foreground); }
+
+/* Полочки: пункты разделены волосяной линией, знака +/− нет —
+   раскрытый пункт сам показывает причину (решение 2026-09-13).
+   Линии только между пунктами: верхняя отделяла список от лида и
+   спорила с кромкой карточки (правка 2026-09-13) */
+.sc-story__mirror-list {
+  display: flex;
+  flex-direction: column;
+  padding-block-start: var(--grid-gap);
+}
+
+.sc-story__mirror-item + .sc-story__mirror-item {
+  border-block-start: var(--sc-line) solid var(--border);
+}
+
+/* Раскрытие с торможением к концу. Анимируем высоту содержимого <details>:
+   без interpolate-size высота auto не интерполируется, поэтому вся конструкция
+   под @supports — в старом браузере пункт просто открывается сразу. */
+@supports (interpolate-size: allow-keywords) and (selector(::details-content)) {
+  .sc-story__mirror-list { interpolate-size: allow-keywords; }
+
+  .sc-story__mirror-item::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size var(--sc-dur) var(--sc-ease-out),
+      content-visibility var(--sc-dur) allow-discrete;
+  }
+
+  .sc-story__mirror-item[open]::details-content { block-size: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-story__mirror-item::details-content { transition: none; }
+}
+
+/* Строка-полочка: клик по всей ширине раскрывает пункт */
+.sc-story__mirror-q {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sc-space-6);
+  /* поля наружу и обратно внутрь: подсветка при наведении шире текста */
+  margin-inline: calc(-1 * var(--sc-space-4));
+  padding: var(--sc-space-5) var(--sc-space-4);
+  cursor: pointer;
+  list-style: none;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+/* Стрелка-маркер <details> не нужна: знак рисуем сами */
+.sc-story__mirror-q::-webkit-details-marker { display: none; }
+.sc-story__mirror-q::marker { content: ""; }
+
+.sc-story__mirror-label { max-inline-size: var(--sc-measure); }
+
+/* Знак «можно открыть»: шеврон у правого края, вниз — закрыто, вверх —
+   открыто. Плюс и минус отсюда убирали как тяжёлые (2026-09-13), но без
+   знака вовсе полочка не читалась как кнопка (правка 2026-09-14). Рисуем
+   его двумя кромками той же толщины, что линии кита, — отдельный ассет
+   ради галочки в 12px не нужен. */
+.sc-story__mirror-q::after {
+  content: "";
+  flex: none;
+  /* поле у знака своё: он стоит в правом краю строки */
+  margin-inline-start: auto;
+  align-self: center;
+  inline-size: var(--story-chevron);
+  block-size: var(--story-chevron);
+  /* 1px, как у стрелок кита: 0.7 линии вёрстки для знака тонковато */
+  border-inline-end: 1px solid var(--muted-foreground);
+  border-block-end: 1px solid var(--muted-foreground);
+  transform: rotate(45deg) translate(-25%, -25%);
+  transition:
+    transform var(--sc-dur) var(--sc-ease-out),
+    border-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+/* На наведении и в раскрытом пункте знак в полную силу */
+.sc-story__mirror-q:hover::after,
+.sc-story__mirror-item[open] .sc-story__mirror-q::after {
+  border-color: var(--foreground);
+}
+
+.sc-story__mirror-item[open] .sc-story__mirror-q::after {
+  transform: rotate(-135deg) translate(-25%, -25%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-story__mirror-q::after { transition: none; }
+}
+
+.sc-story__mirror-cause {
+  margin: 0 0 var(--sc-space-5);
+  padding-inline-end: var(--sc-space-14); /* 56: причина не тянется на всю полку */
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* Состояний в макете нет — добавлены по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .sc-story__mirror-q:hover { background: var(--muted); }
+}
+
+.sc-story__mirror-q:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* ---------- Порівняння підходів ---------- */
+
+.sc-story__table-wrap { inline-size: 100%; overflow-x: auto; }
+
+.sc-story__table {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.sc-story__th,
+.sc-story__td {
+  padding: var(--sc-space-4) var(--grid-gap) var(--sc-space-4) 0;
+  vertical-align: top;
+  text-align: start;
+  font-weight: inherit;
+}
+
+.sc-story__th:last-child,
+.sc-story__td:last-child { padding-inline-end: 0; }
+
+.sc-story__tr--head .sc-story__th {
+  padding-block: 0 var(--sc-space-3);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.sc-story__tr:not(.sc-story__tr--head) > * { border-block-start: var(--hairline) solid var(--border); }
+.sc-story__tr:last-child > * { border-block-end: var(--hairline) solid var(--border); }
+
+.sc-story__th[scope="row"] { color: var(--muted-foreground); }
+.sc-story__td--usual { color: var(--muted-foreground); }
+.sc-story__td--fc { color: var(--foreground); }
+
+/* ---------- CTA · Button/Block ---------- */
+
+.sc-story__cta {
+  --story-cta-w: 320px;   /* Button/Block в макете */
+
+  align-self: flex-start;
+  inline-size: var(--story-cta-w);
+  max-inline-size: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-2);
+  padding: var(--sc-space-4);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-story__cta-arrow {
+  display: block;
+  align-self: flex-end;
+  inline-size: var(--sc-space-6);
+  block-size: var(--sc-space-6);
+}
+
+.sc-story__cta-arrow svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .sc-story__nav-btn:hover { background: var(--muted); }
+  .sc-story__cta:hover { background: var(--sc-primary-hover); }
+  .sc-story__cta:hover .sc-story__cta-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.sc-story__nav-btn:focus-visible,
+.sc-story__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-story,
+  .sc-story__hook,
+  .sc-story__symptom,
+  .sc-story__cta-arrow svg { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .sc-story { padding-inline: var(--page-margin-x); }
+
+  .sc-story__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
+  }
+
+  /* Зачіпку на узком экране прячем целиком (решение 2026-09-14): липкая
+     боковина в одну колонку ложится полосой поверх статьи и мешает читать.
+     Фразы остаются приёмом широкого экрана, где у них своя колонка. */
+  .sc-story__aside { display: none; }
+
+  .sc-story__part { padding-block-end: var(--section-padding-y-tight); }
+  .sc-story__part[data-story-solution] { padding-block-start: var(--sc-space-16); }
+
+  /* Карточка сжимается: поля 48 на узком экране съедают колонку */
+  .sc-story__mirror { padding: var(--sc-space-6); }
+  .sc-story__mirror-cause { padding-inline-end: 0; }
+
+  .sc-story__facts__row { grid-template-columns: minmax(0, 1fr); gap: var(--sc-space-1); }
+
+  .sc-story__cta { inline-size: 100%; }
+}

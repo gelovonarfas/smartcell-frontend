@@ -1,0 +1,254 @@
+/* ============================================================
+   VM/Breadcrumbs + Rubrics
+   figma: node-id=49:25
+   ============================================================ */
+
+.vm-rubrics {
+  --vm-rubrics-h: 70px; /* высота полосы в макете */
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--section-gap);
+  min-block-size: var(--vm-rubrics-h);
+  padding-inline: var(--sc-pad-x);
+  /* Полоса прочерчена сверху и снизу: верхняя линия отделяет хиро */
+  border-block: var(--hairline) solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.vm-rubrics *,
+.vm-rubrics *::before,
+.vm-rubrics *::after { box-sizing: border-box; }
+
+.vm-rubrics__crumbs {
+  flex: none;
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.vm-rubrics__crumbs a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--sc-dur) var(--sc-ease);
+}
+
+/* Вкладки прижаты к правому краю до поиска, как в макете */
+/* Группа фильтра: подпись и чипсы стоят вместе и жмутся к поиску */
+.vm-rubrics__filters {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--stack-gap-sm);
+  min-inline-size: 0;
+}
+
+.vm-rubrics__filters-label {
+  flex: none;
+  margin: 0;
+  color: var(--muted-foreground);
+  /* исчезает вместе с чипсами, когда разъезжается поиск */
+  transition:
+    opacity var(--sc-dur) var(--sc-ease-out),
+    max-inline-size var(--sc-dur) var(--sc-ease-out);
+}
+
+.vm-rubrics__tabs {
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--stack-gap-sm);
+  min-inline-size: 0;
+}
+
+/* Chip/Filter: плашка 38, поля 12, капс. У авторской вкладки — аватар,
+   у возрастных — кружок-метка.
+   Синим залита только выбранная вкладка (aria-current) — по правилу
+   «traces of blue» синий держится на одном объекте в кадре. Остальные —
+   контур на кромке (2026-09-13; была лесенка blue 500/600/700 на всех трёх).
+   Светлые чернила на заливке: тёмный текст на blue/500 даёт 3.5:1. */
+.vm-rubrics__tab {
+  display: inline-flex;
+  align-items: center;
+  --vm-rubrics-tab-h: 38px;   /* высота чипа-фильтра в макете */
+  gap: var(--stack-gap-sm);
+  block-size: var(--vm-rubrics-tab-h);
+  padding-inline: var(--sc-space-3);
+  border: var(--sc-line) solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease),
+    border-color var(--sc-dur) var(--sc-ease);
+}
+
+/* Выбранный фильтр — кромка и чернила в полную силу, без заливки
+   (2026-09-14: синюю плашку сняли, чипсы держатся одним приёмом) */
+.vm-rubrics__tab[aria-current] {
+  border-color: var(--foreground);
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+/* Аватар квадратный, как все медиа проекта — радиусов нет */
+.vm-rubrics__avatar {
+  inline-size: var(--sc-space-6);
+  block-size: var(--sc-space-6);
+  object-fit: cover;
+  object-position: top;
+}
+
+.vm-rubrics__tab--age::before {
+  content: "";
+  inline-size: var(--sc-space-3);
+  block-size: var(--sc-space-3);
+  border: var(--sc-line) solid currentColor;
+  border-radius: var(--sc-round-full);
+}
+
+/* Активность цветом не выделяется: лесенка сама задаёт тон каждой вкладке,
+   aria-current остаётся в разметке для скринридера */
+
+/* Поиск — белый бокс с рамкой, поля 8/14.
+   В покое это плашка со словом «Пошук»; по клику она разъезжается влево
+   на всю свободную ширину полосы (решение 2026-09-08). Ширину ведёт
+   max-inline-size: поле растёт как последний flex-элемент, поэтому
+   правый край стоит на месте, а левый уходит к крошкам.
+   Класс состояния ставит assets/js/vm-search.js. */
+.vm-rubrics__search {
+  /* Свёрнутая плашка: иконка 24 + подпись «Пошук» + поля 14 и запас
+     под курсор. В макете 105 — там подпись стоит впритык. */
+  --vm-search-w: 120px;
+
+  flex: 1 1 auto;
+  max-inline-size: var(--vm-search-w);
+  display: flex;
+  align-items: center;
+  gap: var(--stack-gap-sm);
+  padding: var(--stack-gap-sm) var(--sc-space-3_5);
+  border: var(--sc-line) solid var(--border);
+  background: var(--card);
+  transition: max-inline-size var(--sc-dur) var(--sc-ease-out);
+}
+
+.vm-rubrics__search.sc-is-open { --vm-search-w: 100%; }
+
+/* Раскрытому полю уступают вкладки: сжимаются к нулю и гаснут.
+   Ширину ведём через max-inline-size, а не flex-basis: auto → 0
+   не интерполируется и вкладки схлопывались бы скачком. */
+.vm-rubrics__tabs {
+  max-inline-size: 100%;
+  overflow: hidden;
+  transition:
+    opacity var(--sc-dur) var(--sc-ease-out),
+    max-inline-size var(--sc-dur) var(--sc-ease-out);
+}
+
+.vm-rubrics.sc-is-searching .vm-rubrics__tabs,
+.vm-rubrics.sc-is-searching .vm-rubrics__filters-label {
+  max-inline-size: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* В раскрытом поле остаётся только мигающий курсор — подсказка уходит */
+.vm-rubrics__search.sc-is-open .vm-rubrics__search-input::placeholder {
+  color: transparent;
+}
+
+/* Иконка из макета — квадрат 24, кромка 1px, цвет наследуется от плашки */
+.vm-rubrics__search-icon {
+  flex: none;
+  display: block;
+  inline-size: var(--sc-space-6);
+  block-size: var(--sc-space-6);
+  color: var(--muted-foreground);
+}
+
+.vm-rubrics__search-input {
+  inline-size: 100%;
+  min-inline-size: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--foreground);
+}
+
+/* Поле раскрывается по клику — рамку фокуса здесь заменяет само раскрытие,
+   но с клавиатуры она нужна: возвращаем её на плашку целиком */
+.vm-rubrics__search-input:focus { outline: none; }
+
+.vm-rubrics__search:focus-within {
+  border-color: var(--foreground);
+}
+
+.vm-rubrics__search-input::placeholder { color: var(--muted-foreground); }
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .vm-rubrics__crumbs a:hover { color: var(--foreground); }
+  /* Наведение — мягкая подложка, синий не появляется */
+  .vm-rubrics__tab:hover { background: var(--muted); }
+}
+
+.vm-rubrics__tab:focus-visible,
+.vm-rubrics__crumbs a:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-rubrics__tab,
+  .vm-rubrics__crumbs a,
+  .vm-rubrics__tabs,
+  .vm-rubrics__search { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  /* Полоса становится колонкой: крошки, лента вкладок с прокруткой, поиск */
+  .vm-rubrics {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--stack-gap-md);
+    padding-block: var(--section-padding-y-tight);
+  }
+
+  /* На узком экране подпись встаёт строкой над лентой чипсов */
+  .vm-rubrics__filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--stack-gap-sm);
+  }
+
+  .vm-rubrics__tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * var(--page-margin-x));
+    padding-inline: var(--page-margin-x);
+  }
+
+  .vm-rubrics__tabs::-webkit-scrollbar { display: none; }
+  .vm-rubrics__tab { flex: none; }
+
+  /* На узком экране поиск и так во всю ширину — раскрывать нечего */
+  .vm-rubrics__search { max-inline-size: none; }
+
+  .vm-rubrics.sc-is-searching .vm-rubrics__tabs,
+  .vm-rubrics.sc-is-searching .vm-rubrics__filters-label {
+    max-inline-size: none;
+    opacity: 1;
+    visibility: visible;
+  }
+}

@@ -1,0 +1,117 @@
+/* ============================================================
+   B03 · v2 · Що включає програма (6 карток з іконками + місток)
+   figma: node-id=980:1110
+   Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-includes {
+  --includes-card-pt: var(--sc-space-8);   /* 32 в макете */
+  --includes-card-px: var(--sc-space-8);   /* 32 */
+  --includes-card-pb: var(--sc-space-10);  /* 40 */
+  --includes-icon-gap: var(--sc-space-10); /* 40: иконка → заголовок (16 + 8 + 16 в макете) */
+
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-includes *,
+.sc-includes *::before,
+.sc-includes *::after { box-sizing: border-box; }
+
+.sc-includes__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-16); /* 64 в макете */
+}
+
+/* ---------- Шапка ---------- */
+
+.sc-includes__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap); /* 16 */
+}
+
+.sc-includes__title {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-includes__lead {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Сетка карточек ----------
+   Таблица 3×2 на линиях: у каждой ячейки верхняя кромка, правая — кроме
+   последней в ряду, нижняя — только у последнего ряда. Первая колонка
+   без левого поля, чтобы текст стоял по полю полосы, как в макете. */
+
+.sc-includes__grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sc-includes__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap); /* 16: заголовок → текст */
+  padding: var(--includes-card-pt) var(--includes-card-px) var(--includes-card-pb);
+  border-block-start: var(--sc-line) solid var(--border);
+  min-inline-size: 0;
+}
+
+.sc-includes__card:nth-child(3n + 1) { padding-inline-start: 0; }
+.sc-includes__card:not(:nth-child(3n)) { border-inline-end: var(--sc-line) solid var(--border); }
+.sc-includes__card:nth-child(n + 4) { border-block-end: var(--sc-line) solid var(--border); }
+
+.sc-includes__icon {
+  display: block;
+  inline-size: var(--sc-space-8);
+  block-size: var(--sc-space-8);
+  margin-block-end: calc(var(--includes-icon-gap) - var(--grid-gap));
+  color: var(--foreground);
+}
+
+.sc-includes__icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible; /* у иконки диагностики лупа выходит за 32×32 */
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.sc-includes__card-title { margin: 0; }
+
+.sc-includes__card-text {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Мобильный ----------
+   Одна колонка: линии только горизонтальные, полей по бокам нет. */
+
+@media (max-width: 640px) {
+  .sc-includes { padding-inline: var(--page-margin-x); }
+
+  .sc-includes__inner { gap: var(--section-gap); }
+
+  .sc-includes__grid { grid-template-columns: minmax(0, 1fr); }
+
+  .sc-includes__card {
+    padding-inline: 0;
+    border-inline-end: 0;
+    border-block-end: 0;
+  }
+
+  .sc-includes__card:not(:nth-child(3n)) { border-inline-end: 0; }
+  .sc-includes__card:last-child { border-block-end: var(--sc-line) solid var(--border); }
+}

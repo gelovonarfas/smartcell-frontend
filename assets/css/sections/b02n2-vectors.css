@@ -1,0 +1,70 @@
+/* ============================================================
+   B02n2 · Три вектори відновлення
+   figma: node-id=900:2
+   Зависит от assets/css/tokens.css и base.css
+   ============================================================ */
+
+.sc-vectors {
+  box-sizing: border-box;
+  /* Снизу поля нет: плита с цифрами — продолжение этой же мысли,
+     расстояние между ними задаёт она сама (правка 2026-09-13) */
+  padding: var(--section-padding-y) var(--sc-pad-x) 0;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-vectors *,
+.sc-vectors *::before,
+.sc-vectors *::after { box-sizing: border-box; }
+
+.sc-vectors__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-14); /* rhythm/56 в макете */
+}
+
+.sc-vectors__title {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+/* Три колонки под линиями: линия — верхняя кромка ячейки, как в макете */
+.sc-vectors__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sc-gutter);
+}
+
+.sc-vectors__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-3);            /* 12 в макете */
+  padding-block-start: var(--sc-space-7); /* 28 */
+  border-block-start: var(--sc-line) solid var(--border);
+  min-inline-size: 0;
+}
+
+.sc-vectors__num {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-vectors__name { margin: 0; }
+
+.sc-vectors__text {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .sc-vectors { padding-inline: var(--page-margin-x); }
+  .sc-vectors__inner { gap: var(--section-gap); }
+  .sc-vectors__list { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
+}

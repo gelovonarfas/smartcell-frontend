@@ -1,0 +1,174 @@
+/* ============================================================
+   VM/Fresh и VM/Feed · лента журнала
+   figma: node-id=51:6 (Свіже + рубрикатор), 744:110 и 755:614 (продовження)
+
+   Карточка — общая с B17: разметка и стили лежат в
+   assets/css/sections/b17-magazine.css (.sc-mag__card). Здесь только
+   заголовок ленты, рубрикатор-чипы, сетка рядов и пагинация.
+   ============================================================ */
+
+.vm-feed {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.vm-feed *,
+.vm-feed *::before,
+.vm-feed *::after { box-sizing: border-box; }
+
+.vm-feed__title { margin: 0; }
+
+/* ---------- Тематики ----------
+   Заголовок и чипы стоят одной группой над лентой (решение 2026-09-07). */
+
+.vm-feed__rubrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6);
+}
+
+/* Chip 28: поля 10/6, капс. Раскрывается из «Усі рубрики». */
+
+.vm-feed__rubricator {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--stack-gap-sm);
+}
+
+.vm-feed__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sc-chip-pad);
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
+}
+
+.vm-feed__chip[aria-current="true"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* ---------- Ряды карточек ---------- */
+
+.vm-feed__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.vm-feed__row {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: stretch;
+}
+
+/* ---------- Пагинация ----------
+   Control/Nav по краям, номера страниц — квадраты 48. */
+
+.vm-feed__pager {
+  display: flex;
+  align-items: center;
+  gap: var(--stack-gap-sm);
+  padding-block: var(--sc-space-6); /* блок пагинации 100 в макете: 48 + поля */
+}
+
+.vm-feed__page,
+.vm-feed__pager-nav {
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--sc-dur-fast) var(--sc-ease),
+    color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.vm-feed__pager-nav svg { display: block; inline-size: 100%; block-size: 100%; }
+
+.vm-feed__page[aria-current="page"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* многоточие — не кнопка */
+.vm-feed__gap {
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .vm-feed__chip:hover,
+  .vm-feed__page:hover,
+  .vm-feed__pager-nav:hover { background: var(--muted); }
+
+  .vm-feed__page[aria-current="page"]:hover { background: var(--foreground); }
+}
+
+.vm-feed__chip:focus-visible,
+.vm-feed__page:focus-visible,
+.vm-feed__pager-nav:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-feed__chip,
+  .vm-feed__page,
+  .vm-feed__pager-nav { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  /* Карточки в колонку; между ними разрядка, иначе дата предыдущей
+     читается подписью к следующему фото */
+  .vm-feed__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
+  }
+
+  /* Рубрикатор лентой с прокруткой: списком он съедает экран */
+  .vm-feed__rubricator {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * var(--page-margin-x));
+    padding-inline: var(--page-margin-x);
+  }
+
+  .vm-feed__rubricator::-webkit-scrollbar { display: none; }
+  .vm-feed__chip { flex: none; }
+
+  .vm-feed__pager { justify-content: space-between; }
+}

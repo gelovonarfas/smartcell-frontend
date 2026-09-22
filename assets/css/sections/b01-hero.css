@@ -1,0 +1,221 @@
+/* ============================================================
+   B01 · Хиро
+   figma: node-id=4:289
+   Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-hero {
+  /* --- Геометрия из макета, которой нет в ролях токенов --- */
+  --hero-scrim-top-stop: 38%;  /* градиент сверху гаснет на 38% высоты */
+
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  /* Первый экран целиком — ровно окно: анонс-бар в потоке, хиро добирает
+     остаток. Высоту бара меряет header.js; без него хиро займёт всё окно. */
+  min-height: calc(100vh - var(--announce-h, 0px));
+  min-height: calc(100svh - var(--announce-h, 0px));
+  padding: var(--sc-space-20) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+  overflow: hidden;
+}
+
+.sc-hero *,
+.sc-hero *::before,
+.sc-hero *::after { box-sizing: border-box; }
+
+/* ---------- Фон: видео + скримы ---------- */
+
+.sc-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.sc-hero__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sc-hero__scrim { position: absolute; inset-inline: 0; }
+
+/* DESIGN.md: тексты на фото — всегда со скримом (--sc-black-alpha-40 сверху, 60 снизу) */
+.sc-hero__scrim--top {
+  inset-block-start: 0;
+  height: var(--hero-scrim-top-stop);
+  background: linear-gradient(to bottom, var(--sc-black-alpha-40), var(--sc-black-alpha-0));
+}
+
+.sc-hero__scrim--bottom {
+  inset-block-end: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, var(--sc-black-alpha-0), var(--sc-black-alpha-60));
+}
+
+/* ---------- Сетка: копия 7 колонок слева, правая колонка 3 ---------- */
+
+.sc-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--sc-grid-columns), 1fr);
+  column-gap: var(--grid-gap);
+}
+
+.sc-hero__copy {
+  grid-column: 1 / span 7;
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  min-width: 0;
+}
+
+/* Надзаголовок: caption/caps на secondary-foreground (макет 2026-09-08) */
+.sc-hero__eyebrow {
+  margin: 0;
+  color: var(--secondary-foreground);
+  text-transform: uppercase;
+}
+
+.sc-hero__title { margin: 0; }
+
+.sc-hero__lead {
+  margin: 0;
+  max-width: var(--sc-measure-narrow); /* в макете строка идёт на 740px — держим уже, 55ch */
+  color: var(--sc-white-alpha-80);
+}
+
+.sc-hero__aside {
+  grid-column: 10 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--section-gap);
+  min-width: 0;
+}
+
+/* ---------- Факты ---------- */
+
+.sc-hero__facts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-hero__fact {
+  padding-block-start: var(--sc-space-1_5);
+  border-block-start: var(--hairline) solid var(--border);
+}
+
+.sc-hero__fact-label {
+  margin: 0;
+  color: var(--foreground);
+}
+
+.sc-hero__fact-value {
+  margin-block: var(--sc-space-0_5) 0;
+  margin-inline: 0;
+  color: var(--foreground);
+}
+
+/* ---------- CTA: Button/Block на светлом стекле ----------
+   Плита 320×76: лейбл сверху слева, стрелка 24 снизу справа под 45°,
+   на ховере мягко тычется в угол (Icon/ArrowTurn, 320ms ease-out).
+   Стекло — светлые значения glass, хотя секция inverse: плита должна
+   читаться светлым пятном на тёмном видео. */
+
+.sc-hero__cta {
+  --hero-block-w: 320px;
+  --hero-block-h: 76px;
+  /* Светлое стекло поверх видео. Плотность считана по крайним кадрам:
+     на чёрном кадре 40% белого дают тёмному тексту 3.3:1, 60% — 6.6;
+     на белом кадре 60% с тёмным текстом — 12. Белый текст на лёгком
+     стекле, наоборот, проваливается на светлых кадрах. */
+  --glass-surface: var(--sc-white-alpha-60);
+  --glass-edge: var(--sc-white-alpha-80);
+
+  /* Колонка хиро 308 — уже плиты 320: держим ширину колонки, чтобы
+     не выйти за край полосы, а 320 остаётся потолком */
+  inline-size: 100%;
+  max-inline-size: var(--hero-block-w);
+  block-size: var(--hero-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--grid-gap);
+  color: var(--primary-foreground); /* тёмный на светлой плите — цвета primary в inverse */
+  text-decoration: none;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-hero__cta-label {
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+.sc-hero__cta-arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sc-hero__cta-arrow svg {
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .sc-hero__cta:hover { background: var(--sc-white-alpha-80); }
+  .sc-hero__cta:hover .sc-hero__cta-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.sc-hero__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-hero__cta:active { opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-hero__cta,
+  .sc-hero__cta-arrow svg { transition: none; }
+}
+
+/* ---------- Мобильный ----------
+   Структура меняется принципиально: две зоны становятся одной колонкой,
+   заголовок уходит вперёд фактов. */
+
+@media (max-width: 640px) {
+  .sc-hero {
+    padding-block-end: var(--sc-space-8);
+  }
+
+  .sc-hero__inner {
+    grid-template-columns: 1fr;
+    row-gap: var(--section-gap);
+    align-content: end;
+  }
+
+  .sc-hero__copy {
+    grid-column: 1 / -1;
+    order: 1;
+    align-self: start;
+  }
+
+  /* На телефоне остаются только заголовок и описание во всю ширину:
+     полоса фактов и кнопка скрыты целиком, а не визуально — иначе
+     скринридер читал бы то, чего на экране нет. Запись — через меню. */
+  .sc-hero__aside { display: none; }
+}

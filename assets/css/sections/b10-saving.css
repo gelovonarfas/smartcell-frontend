@@ -1,0 +1,108 @@
+/* ============================================================
+   B10 · Економія
+   figma: node-id=15:91
+   ============================================================ */
+
+.sc-saving {
+
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-saving *,
+.sc-saving *::before,
+.sc-saving *::after { box-sizing: border-box; }
+
+.sc-saving__inner {
+  display: grid;
+  /* Те же колонки, что у формы B11 ниже: левый край таблицы встаёт на одну
+     линию с полями формы (правка 2026-09-13; было 420fr 804fr) */
+  grid-template-columns: 473fr 743fr;
+  gap: var(--sc-space-16);
+  align-items: start;
+}
+
+.sc-saving__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-saving__kicker {
+  margin: 0;
+  color: var(--accent-foreground);
+}
+
+.sc-saving__title { margin: 0; }
+
+.sc-saving__note {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* Таблица и строка программы — два отдельных блока в одной колонке */
+.sc-saving__table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6); /* 24: строка программы оторвана от списка */
+}
+
+/* Строки идут таблицей: рамки соседей схлопнуты, линия между ними одинарная */
+.sc-saving__rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: var(--sc-line) solid var(--border); /* рамка таблицы — 1px, линии строк волосяные */
+  background: var(--card);
+}
+
+.sc-saving__row {
+  display: flex;
+  align-items: center;
+  gap: var(--grid-gap);
+  padding: var(--control-padding-y) var(--card-padding);
+  border-block-end: var(--hairline) solid var(--border);
+  color: var(--card-foreground);
+}
+
+.sc-saving__row:last-child { border-block-end: 0; }
+
+/* Ответ на список: та же строка, но сама по себе — без рамки таблицы.
+   Плита чернильная, не синяя: правило «traces of blue» — синий остаётся
+   акцентом на одном объекте, а не заливкой блока (2026-09-13). */
+.sc-saving__total {
+  display: flex;
+  align-items: center;
+  gap: var(--grid-gap);
+  padding: var(--control-padding-y) var(--card-padding);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-saving__label {
+  flex: 1 0 0;
+  min-inline-size: 0;
+  margin: 0;
+}
+
+.sc-saving__value {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ---------- Мобильный ----------
+   Строка складывается: подпись сверху, сумма под ней. */
+
+@media (max-width: 640px) {
+  .sc-saving__inner { grid-template-columns: minmax(0, 1fr); }
+
+  .sc-saving__row,
+  .sc-saving__total {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--stack-gap-sm);
+  }
+}

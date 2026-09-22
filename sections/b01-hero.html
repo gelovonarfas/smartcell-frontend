@@ -1,0 +1,53 @@
+<!-- ============================================================
+     B01 · Хиро
+     figma: node-id=4:289
+     Формулировки обновлены 2026-09-08. Прежний вариант («Face Control.
+     Це я. Це моє.» / «Почати з діагностики») сохранён в имени слоя
+     hero-copy в макете — на случай отката.
+     ACF: hero_video (file), hero_poster (image), hero_title (text),
+          hero_subtitle (textarea), hero_cta_label (text), hero_cta_link (link),
+          hero_facts (repeater: label, value)
+     Цифры (10+, 3000+) согласованы клиникой 2026-09-04. Факт про 13 стран
+     из хиро убран 2026-09-14: в шапке он читался без опоры на контекст.
+     Он остался в блоке B08 «Наука не хайп», где стоит рядом с пояснением.
+     Хедер (B00b) лежит поверх отдельной секцией, здесь не дублируется.
+     ============================================================ -->
+<section class="sc-hero" data-theme="inverse" data-hero>
+
+  <div class="sc-hero__bg" aria-hidden="true">
+    <video class="sc-hero__video" autoplay muted loop playsinline preload="metadata"
+           poster="assets/img/hero-poster.jpg" tabindex="-1">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+    <span class="sc-hero__scrim sc-hero__scrim--top"></span>
+    <span class="sc-hero__scrim sc-hero__scrim--bottom"></span>
+  </div>
+
+  <div class="sc-hero__inner">
+
+    <div class="sc-hero__copy">
+      <p class="sc-hero__eyebrow sc-t-caption">РЕГЕНЕРАТИВНА ЕСТЕТИЧНА МЕДИЦИНА · VIRTUS</p>
+      <h1 class="sc-hero__title sc-t-display">Face Control 365. <br>Це я. Це моє.</h1>
+      <p class="sc-hero__lead sc-t-body">Персональний протокол процедур для здорової <br>та доглянутої шкіри обличчя.</p>
+    </div>
+
+    <div class="sc-hero__aside">
+      <ul class="sc-hero__facts">
+        <li class="sc-hero__fact">
+          <p class="sc-hero__fact-label sc-t-caption">РОКІВ ДОСЛІДЖЕНЬ</p>
+          <p class="sc-hero__fact-value sc-t-stat">10+</p>
+        </li>
+        <li class="sc-hero__fact">
+          <p class="sc-hero__fact-label sc-t-caption">ПАЦІЄНТІВ ПРОЙШЛИ ЛІКУВАННЯ</p>
+          <p class="sc-hero__fact-value sc-t-stat">3000+</p>
+        </li>
+      </ul>
+
+      <a class="sc-hero__cta is-glass" href="#journey">
+        <span class="sc-hero__cta-label">Почати свою програму</span>
+        <span class="sc-hero__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+      </a>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,74 @@
+<!-- ============================================================
+     B09 · Відгуки
+     figma: node-id=15:76
+     ACF: b09_kicker (text), b09_title (textarea),
+          b09_reviews (repeater: quote, author, rating),
+          b09_all_label (text), b09_all_link (link)
+     Лента листается стрелками и сама по таймеру: шаг — один отзыв,
+     видно три на десктопе и один на телефоне. Полоса под стрелками
+     отсчитывает интервал, по концу лента шагает дальше.
+
+     Формат — флеш-отзыв (впервые в проекте): не весь отзыв, а цитата
+     из большого отзыва, выбранная вручную редактором. В админке нужно
+     отдельное поле под эту цитату рядом с полным текстом отзыва,
+     на лендинг выводится только цитата, полный текст — на /reviews.
+     ============================================================ -->
+<section class="sc-reviews" data-reviews>
+  <div class="sc-reviews__inner">
+    <div class="sc-reviews__head">
+      <p class="sc-reviews__kicker sc-t-small">Попри те, як далеко це зараз здається</p>
+      <h2 class="sc-reviews__title sc-t-h1">Ви на крок ближче до шкіри, <br>на яку заслуговуєте</h2>
+    </div>
+
+    <div class="sc-reviews__viewport">
+      <ul class="sc-reviews__list" data-reviews-track>
+        <li class="sc-reviews__item">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <blockquote class="sc-reviews__quote sc-t-body">«Через пів року на УЗД мені показали мою ж шкіру товщою. Це інше відчуття, ніж просто “добре виглядаєш”.»</blockquote>
+          <p class="sc-reviews__author sc-t-mini">Олена, 42</p>
+        </li>
+        <li class="sc-reviews__item">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <blockquote class="sc-reviews__quote sc-t-body">«Жодних здогадок: кожен крок пояснюють, кожен результат вимірюють. Для мене це головне.»</blockquote>
+          <p class="sc-reviews__author sc-t-mini">Ірина, 38</p>
+        </li>
+        <li class="sc-reviews__item">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <blockquote class="sc-reviews__quote sc-t-body">«Рік без метушні з кремами й процедурами навмання. Один протокол — і видимий результат.»</blockquote>
+          <p class="sc-reviews__author sc-t-mini">Марина, 45</p>
+        </li>
+        <!-- [TEST] Три умовні відгуки для перевірки листання й автоперемикання — прибрати перед передачею -->
+        <li class="sc-reviews__item">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <blockquote class="sc-reviews__quote sc-t-body">«Умовний відгук для перевірки стрічки: четверта картка, текст на два-три рядки, щоб висота була як у справжніх.»</blockquote>
+          <p class="sc-reviews__author sc-t-mini">Тестовий відгук 4</p>
+        </li>
+        <li class="sc-reviews__item">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <blockquote class="sc-reviews__quote sc-t-body">«Умовний відгук для перевірки стрічки: п’ята картка. Прибрати перед передачею кодеру.»</blockquote>
+          <p class="sc-reviews__author sc-t-mini">Тестовий відгук 5</p>
+        </li>
+        <li class="sc-reviews__item">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <blockquote class="sc-reviews__quote sc-t-body">«Умовний відгук для перевірки стрічки: шоста картка, остання в переліку — лічильник має показати 06.»</blockquote>
+          <p class="sc-reviews__author sc-t-mini">Тестовий відгук 6</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sc-reviews__controls">
+      <div class="sc-reviews__nav">
+        <button class="sc-reviews__nav-btn" type="button" data-reviews-prev aria-label="Попередній відгук"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M32 24H16M22 30L16 24L22 18" stroke="currentColor"/></svg></button>
+        <button class="sc-reviews__nav-btn" type="button" data-reviews-next aria-label="Наступний відгук"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32M26 30L32 24L26 18" stroke="currentColor"/></svg></button>
+      </div>
+
+      <p class="sc-reviews__counter sc-t-mini" data-reviews-counter>01 / 06</p>
+
+      <div class="sc-reviews__progress" aria-hidden="true">
+        <span class="sc-reviews__progress-bar" data-reviews-progress></span>
+      </div>
+
+      <a class="sc-reviews__all" href="/reviews">Всі відгуки</a>
+    </div>
+  </div>
+</section>

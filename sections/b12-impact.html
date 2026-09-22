@@ -1,0 +1,67 @@
+<!-- ============================================================
+     B12 · На що впливаємо (полосы показателей)
+     figma: node-id=15:112
+     ACF: impact_title (text), impact_rows (repeater: label, term, value, percent),
+          impact_note (textarea), impact_image (image)
+     Процент строки приходит в инлайн-переменную: style="--impact-fill: <percent/100>"
+     Цифры (100/100/100/100/+80/37) согласованы клиникой 2026-09-04.
+     ============================================================ -->
+<section class="sc-impact" data-impact data-counters>
+  <div class="sc-impact__inner">
+
+    <figure class="sc-impact__media">
+      <img class="sc-impact__photo"
+           src="assets/img/b12-impact.jpg"
+           srcset="assets/img/b12-impact.jpg 460w, assets/img/b12-impact@2x.jpg 920w"
+           sizes="(max-width: 640px) 100vw, 460px"
+           alt="Пацієнтка після року програми Face Control 365"
+           width="460" height="460" loading="lazy" decoding="async">
+    </figure>
+
+    <div class="sc-impact__data">
+      <h2 class="sc-impact__title sc-t-h2">Відновлення молодої структури і функції шкіри</h2>
+
+      <ul class="sc-impact__rows">
+        <li class="sc-impact__row" style="--impact-fill: 1">
+          <span class="sc-impact__label sc-t-body">Товщина і пружність</span>
+          <span class="sc-impact__term sc-t-mini">6 міс</span>
+          <span class="sc-impact__track" aria-hidden="true"><span class="sc-impact__fill"></span></span>
+          <span class="sc-impact__value sc-t-h3" data-count>100%</span>
+        </li>
+        <li class="sc-impact__row" style="--impact-fill: 1">
+          <span class="sc-impact__label sc-t-body">Шкірний імунітет</span>
+          <span class="sc-impact__term sc-t-mini">6 міс</span>
+          <span class="sc-impact__track" aria-hidden="true"><span class="sc-impact__fill"></span></span>
+          <span class="sc-impact__value sc-t-h3" data-count>100%</span>
+        </li>
+        <li class="sc-impact__row" style="--impact-fill: 1">
+          <span class="sc-impact__label sc-t-body">Еластичність, овал, зморшки</span>
+          <span class="sc-impact__term sc-t-mini">6 міс</span>
+          <span class="sc-impact__track" aria-hidden="true"><span class="sc-impact__fill"></span></span>
+          <span class="sc-impact__value sc-t-h3" data-count>100%</span>
+        </li>
+        <li class="sc-impact__row" style="--impact-fill: 1">
+          <span class="sc-impact__label sc-t-body">Колір шкіри та сяйво</span>
+          <span class="sc-impact__term sc-t-mini">12 міс</span>
+          <span class="sc-impact__track" aria-hidden="true"><span class="sc-impact__fill"></span></span>
+          <span class="sc-impact__value sc-t-h3" data-count>100%</span>
+        </li>
+        <li class="sc-impact__row" style="--impact-fill: .8">
+          <span class="sc-impact__label sc-t-body">Об'ємна швидкість кровотоку</span>
+          <span class="sc-impact__term sc-t-mini">6 міс</span>
+          <span class="sc-impact__track" aria-hidden="true"><span class="sc-impact__fill"></span></span>
+          <span class="sc-impact__value sc-t-h3" data-count>+80%</span>
+        </li>
+        <li class="sc-impact__row" style="--impact-fill: .37">
+          <span class="sc-impact__label sc-t-body">Утримання вологи</span>
+          <span class="sc-impact__term sc-t-mini">1 тиждень</span>
+          <span class="sc-impact__track" aria-hidden="true"><span class="sc-impact__fill"></span></span>
+          <span class="sc-impact__value sc-t-h3" data-count>37%</span>
+        </li>
+      </ul>
+
+      <p class="sc-impact__note sc-t-mini">Дані ультразвукової діагностики та морфологічного контролю Інституту VIRTUS. Показники — нормалізація відносно значень «до терапії».</p>
+    </div>
+
+  </div>
+</section>

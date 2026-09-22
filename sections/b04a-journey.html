@@ -1,0 +1,122 @@
+<!-- ============================================================
+     B04a · Journey (скролл-таймлайн программы)
+     figma: node-id=4:295
+     ACF: journey_title (text), journey_subtitle (text),
+          journey_cta_label (text), journey_cta_link (link),
+          journey_video (file), journey_poster (image),
+          journey_steps (repeater: when, title, note, items[])
+     Фон: в макете заглушка «хвиля з точок» — в коде видео + затемнение.
+     ============================================================ -->
+<section class="sc-journey" id="journey" data-theme="inverse" data-journey>
+
+  <div class="sc-journey__bg" aria-hidden="true">
+    <video class="sc-journey__video" autoplay muted loop playsinline preload="metadata"
+           poster="assets/img/journey-poster.jpg" tabindex="-1">
+      <source src="assets/video/journey-waves.mp4" type="video/mp4">
+    </video>
+    <span class="sc-journey__scrim"></span>
+  </div>
+
+  <div class="sc-journey__inner">
+
+    <div class="sc-journey__intro">
+      <h2 class="sc-journey__title sc-t-h2">Ваша регенеративна подорож</h2>
+      <p class="sc-journey__subtitle sc-t-body">Повністю персоналізований медичний маршрут на 12 місяців в Інституті VIRTUS.</p>
+      <a class="sc-journey__cta" href="#consultation">Почати подорож</a>
+    </div>
+
+    <div class="sc-journey__timeline">
+      <ol class="sc-journey__steps">
+
+        <li class="sc-journey__step" data-journey-step>
+          <div class="sc-journey__label-col">
+            <span class="sc-journey__label sc-t-caption">КРОК 1 · СТАРТ</span>
+          </div>
+          <span class="sc-journey__connector" aria-hidden="true"></span>
+          <span class="sc-journey__marker" aria-hidden="true"></span>
+          <div class="sc-journey__body">
+            <h3 class="sc-journey__step-title sc-t-h2">Глибока діагностика</h3>
+            <p class="sc-journey__note sc-t-small">1 година в клініці</p>
+            <ul class="sc-journey__items">
+              <li class="sc-journey__item sc-t-body">Консультація дерматолога-косметолога</li>
+              <li class="sc-journey__item sc-t-body">Анамнез та анкета загального стану здоровʼя</li>
+              <li class="sc-journey__item sc-t-body">УЗД шкіри, доплер шкіри, дерматоскопія</li>
+              <li class="sc-journey__item sc-t-body">Пункція зразка шкіри — оцінка фібробластів</li>
+              <li class="sc-journey__item sc-t-body">Забір крові для кріолізату тромбоцитів</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="sc-journey__step" data-journey-step>
+          <div class="sc-journey__label-col">
+            <span class="sc-journey__label sc-t-caption">КРОК 2 · +2 ТИЖНІ</span>
+          </div>
+          <span class="sc-journey__connector" aria-hidden="true"></span>
+          <span class="sc-journey__marker" aria-hidden="true"></span>
+          <div class="sc-journey__body">
+            <h3 class="sc-journey__step-title sc-t-h2">Точний діагноз і протокол</h3>
+            <p class="sc-journey__note sc-t-small">Регенераторний потенціал — у цифрах</p>
+            <ul class="sc-journey__items">
+              <li class="sc-journey__item sc-t-body">Повторна консультація з результатами обстежень</li>
+              <li class="sc-journey__item sc-t-body">Презентація: кількість і якість фібробластів</li>
+              <li class="sc-journey__item sc-t-body">Мікроциркуляція, товщина та структура шкіри</li>
+              <li class="sc-journey__item sc-t-body">Індивідуальний протокол за результатами</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="sc-journey__step" data-journey-step>
+          <div class="sc-journey__label-col">
+            <span class="sc-journey__label sc-t-caption">КРОК 3</span>
+          </div>
+          <span class="sc-journey__connector" aria-hidden="true"></span>
+          <span class="sc-journey__marker" aria-hidden="true"></span>
+          <div class="sc-journey__body">
+            <h3 class="sc-journey__step-title sc-t-h2">Реалізація протоколу</h3>
+            <p class="sc-journey__note sc-t-small">Три сценарії — за показаннями</p>
+            <ul class="sc-journey__items">
+              <li class="sc-journey__item sc-t-body">Сценарій 1: кріолізат тромбоцитів + фракційний лазер</li>
+              <li class="sc-journey__item sc-t-body">Сценарій 2: кріолізат + введення фібробластів (1 доза)</li>
+              <li class="sc-journey__item sc-t-body">Сценарій 3: кріолізат + фібробласти, повтор через місяць</li>
+              <li class="sc-journey__item sc-t-body">+3 міс: лазер / шліфовка / ультразвуковий ліфтинг</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="sc-journey__step" data-journey-step>
+          <div class="sc-journey__label-col">
+            <span class="sc-journey__label sc-t-caption">КРОК 4 · +1 МІСЯЦЬ</span>
+          </div>
+          <span class="sc-journey__connector" aria-hidden="true"></span>
+          <span class="sc-journey__marker" aria-hidden="true"></span>
+          <div class="sc-journey__body">
+            <h3 class="sc-journey__step-title sc-t-h2">Контроль результату</h3>
+            <p class="sc-journey__note sc-t-small">Обʼєктивна перевірка</p>
+            <ul class="sc-journey__items">
+              <li class="sc-journey__item sc-t-body">Повторне УЗД шкіри</li>
+              <li class="sc-journey__item sc-t-body">Доглядова процедура</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="sc-journey__step" data-journey-step>
+          <div class="sc-journey__label-col">
+            <span class="sc-journey__label sc-t-caption">КРОК 5 · +11 МІСЯЦІВ</span>
+          </div>
+          <span class="sc-journey__connector" aria-hidden="true"></span>
+          <span class="sc-journey__marker" aria-hidden="true"></span>
+          <div class="sc-journey__body">
+            <h3 class="sc-journey__step-title sc-t-h2">Новий цикл</h3>
+            <p class="sc-journey__note sc-t-small">Протокол оновлюється разом зі шкірою</p>
+            <ul class="sc-journey__items">
+              <li class="sc-journey__item sc-t-body">Повернення до Кроку 1</li>
+              <li class="sc-journey__item sc-t-body">Програма триває рік</li>
+            </ul>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+
+  </div>
+</section>

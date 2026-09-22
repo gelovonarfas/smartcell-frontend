@@ -1,0 +1,251 @@
+<!-- ============================================================
+     B02 · v3 · стаття (sticky зачіпка зліва · колонка справа)
+     figma: node-id=999:1116
+     ACF: story_hooks (repeater: phase, text) — 4 фрази; story_parts —
+          довільний контент (WYSIWYG), картки/таблиці/чекліст як шорткоди
+          або блоки; story_cta (link). Тексти — з ТЗ Лени від 09.09.2026,
+          перший екран Блоку 2 (проблема) і другий (рішення).
+
+     Механіка: зліва «зачіпка» — sticky-колонка з фразою, яка міняється
+     по скролу правої колонки. Кожна частина статті знає свою фразу
+     (data-story-hook на частині). Поки читач у «проблемі», фраза
+     міняється двічі; у «рішенні» — ще двічі. Коли починається рішення,
+     блок інвертується (data-theme="inverse" ставить assets/js/story.js).
+
+     Чотири фрази лежать у розмітці цілими вузлами (під qTranslate),
+     скрипт лише перемикає data-current. Без JS видно першу фразу,
+     стаття читається як звичайний текст, інверсії немає.
+
+     Фото тимчасові — як у макеті: welcome kit, сценарій, УЗД-кадр із B06.
+     Четверта фраза «Не гадаємо. Знаємо.» — слоган під CTA з ТЗ на перший
+     екран; підтвердити з клінікою.
+     ============================================================ -->
+<section class="sc-story" id="story" data-story>
+  <div class="sc-story__row">
+
+    <aside class="sc-story__aside" aria-label="Ключова думка розділу">
+      <div class="sc-story__sticky" aria-live="polite">
+        <div class="sc-story__hook" data-story-hook="0" data-current>
+          <p class="sc-story__phase sc-t-caption">Проблема</p>
+          <p class="sc-story__hook-text sc-t-h2">«Скажіть, вони хороші?» — запитують деякі пацієнтки.</p>
+        </div>
+        <div class="sc-story__hook" data-story-hook="1" hidden>
+          <p class="sc-story__phase sc-t-caption">Проблема</p>
+          <p class="sc-story__hook-text sc-t-h2">Чому процедури, які раніше працювали, більше не дають результату?</p>
+        </div>
+        <div class="sc-story__hook" data-story-hook="2" hidden>
+          <p class="sc-story__phase sc-t-caption">Рішення</p>
+          <p class="sc-story__hook-text sc-t-h2">Face Control 365 — програма, яка починається з розуміння біології вашої шкіри</p>
+        </div>
+        <div class="sc-story__hook" data-story-hook="3" hidden>
+          <p class="sc-story__phase sc-t-caption">Рішення</p>
+          <p class="sc-story__hook-text sc-t-h2">Не гадаємо. Знаємо.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sc-story__article">
+
+      <!-- § 01 · історія з кабінету -->
+      <section class="sc-story__part" data-story-part="1" data-story-hook-index="0">
+        <figure class="sc-story__quote">
+          <blockquote class="sc-story__quote-text sc-t-h3">
+            <p>«До нас приходять жінки з великими сумками. Всередині — дорогі креми, сироватки, ампули з активними компонентами. „Скажіть, вони хороші?“ — запитують вони.</p>
+            <p>Так. Склад якісний. Але чи вирішують вони вашу конкретну проблему — ніхто не знає. Бо ніхто не питав, яка у вас проблема насправді.»</p>
+          </blockquote>
+          <figcaption class="sc-story__quote-cite sc-t-small">— лікар Інституту VIRTUS</figcaption>
+        </figure>
+        <p class="sc-story__p sc-t-body">Саме так і працює індустрія краси. Вона продає обіцянки та надію на результат — а не результат. Красива упаковка, модний інгредієнт, порада подруги або реклама в Instagram замінюють реальну діагностику. Ви купуєте, пробуєте, сподіваєтесь. Потім купуєте знову, потрапляючи в замкнене коло «б’юті-фастфуду».</p>
+        <div class="sc-story__photo sc-media--square">
+          <img src="assets/img/story/cosmetics.jpg"
+               srcset="assets/img/story/cosmetics.jpg 680w, assets/img/story/cosmetics@2x.jpg 1360w"
+               sizes="(max-width: 640px) 100vw, 680px"
+               alt="Ряд однакових тюбиків косметики" width="680" height="680" loading="lazy" decoding="async">
+        </div>
+      </section>
+
+      <!-- § 02 · те, що підходить подрузі -->
+      <section class="sc-story__part" data-story-part="2" data-story-hook-index="1">
+        <p class="sc-story__p sc-t-body">Кожна шкіра — унікальна. Те, що дало «вау-результат» подрузі, може спровокувати у вас алергічну реакцію, набряк або прискорити фіброз. Синтетичні філери, які «всі роблять», з часом змінюють риси обличчя, порушують міміку, накопичуються в тканинах і ведуть до хронічного запалення. А агресивна стимуляція виснаженої шкіри не відновлює її — вона поглиблює проблему.</p>
+        <ul class="sc-story__facts">
+        <li class="sc-story__facts__row">
+          <span class="sc-story__facts__term sc-t-small">Синтетичні філери</span>
+          <span class="sc-story__facts__desc sc-t-small">змінюють риси, порушують міміку, накопичуються в тканинах</span>
+        </li>
+        <li class="sc-story__facts__row">
+          <span class="sc-story__facts__term sc-t-small">Агресивна стимуляція</span>
+          <span class="sc-story__facts__desc sc-t-small">виснаженої шкіри поглиблює проблему, а не відновлює</span>
+        </li>
+        <li class="sc-story__facts__row">
+          <span class="sc-story__facts__term sc-t-small">Порада подруги</span>
+          <span class="sc-story__facts__desc sc-t-small">замінює діагностику — і працює лише випадково</span>
+        </li>
+        </ul>
+        <div class="sc-story__photo sc-media--square">
+          <img src="assets/img/story/ages.jpg"
+               srcset="assets/img/story/ages.jpg 680w, assets/img/story/ages@2x.jpg 1360w"
+               sizes="(max-width: 640px) 100vw, 680px"
+               alt="Профілі трьох жінок різного віку" width="680" height="680" loading="lazy" decoding="async">
+        </div>
+      </section>
+
+      <!-- § 03 · це не вік -->
+      <section class="sc-story__part" data-story-part="3" data-story-hook-index="1">
+        <p class="sc-story__lead sc-t-lead">Якщо вам 35+ і ви відчули «б’юті-вигорання» — процедури стали менш ефективними, набряки після уколів тримаються тижнями, а догляд «не працює» — це не вік.</p>
+        <p class="sc-story__p sc-t-body">Це сигнал: шкіра перебуває в стані клітинної гіпоксії та втратила свій регенеративний потенціал. Знизилась мікроциркуляція, виснажився запас фібробластів, зламалася міжклітинна комунікація. І будь-яка агресивна стимуляція в цей момент — це не допомога, а додаткове навантаження на орган, який потребує ресурсу.</p>
+
+        <!-- Самоперевірка: один симптом у кадрі, автоперемикання з відліком, як факти в B08 -->
+        <div class="sc-story__check" data-story-check>
+          <h3 class="sc-story__check-title sc-t-h2">Чи знайомі вам такі стани?</h3>
+          <ul class="sc-story__symptoms">
+          <li class="sc-story__symptom sc-t-h3" data-story-symptom data-current>Ви витрачаєте більше — а якість шкіри та результат стають гіршими.</li>
+          <li class="sc-story__symptom sc-t-h3" data-story-symptom hidden>Процедури доводиться робити частіше, ніж рік тому, а ефект тримається менше.</li>
+          <li class="sc-story__symptom sc-t-h3" data-story-symptom hidden>Ви більше не пам’ятаєте, коли востаннє обличчя виглядало свіжим і природним без ін’єкцій.</li>
+          <li class="sc-story__symptom sc-t-h3" data-story-symptom hidden>Ви боїтесь виглядати «зробленою» чи набряклою — але й залишати шкіру без допомоги страшно.</li>
+          <li class="sc-story__symptom sc-t-h3" data-story-symptom hidden>Ви виснажені пошуком і більше не хочете ставити експерименти над власним обличчям.</li>
+          </ul>
+          <div class="sc-story__controls">
+            <div class="sc-story__nav">
+              <button class="sc-story__nav-btn" type="button" data-story-prev aria-label="Попередній стан"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M26.5 19L21.5 24L26.5 29" stroke="currentColor"/></svg></button>
+              <button class="sc-story__nav-btn" type="button" data-story-next aria-label="Наступний стан"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M21.5 19L26.5 24L21.5 29" stroke="currentColor"/></svg></button>
+            </div>
+            <p class="sc-story__counter sc-t-mini" data-story-counter>01 / 05</p>
+            <div class="sc-story__progress" aria-hidden="true"><span class="sc-story__progress-bar" data-story-progress></span></div>
+          </div>
+          <p class="sc-story__check-note sc-t-lead">Якщо хоча б один пункт про вас — ви прийшли в правильне місце.</p>
+        </div>
+
+        <div class="sc-story__photo sc-media--square">
+          <img src="assets/img/story/mirror.jpg"
+               srcset="assets/img/story/mirror.jpg 680w, assets/img/story/mirror@2x.jpg 1360w"
+               sizes="(max-width: 640px) 100vw, 680px"
+               alt="Жінка роздивляється шкіру обличчя в дзеркалі" width="680" height="680" loading="lazy" decoding="async">
+        </div>
+
+        <!-- Картка «Для яких станів шкіри»: аккордеон на <details> — раскрывается без JS.
+             ACF: mirror_title, mirror_lead, mirror_items (repeater: label, cause) -->
+        <div class="sc-story__mirror">
+          <h2 class="sc-story__mirror-title sc-t-h2">Що ви бачите в дзеркалі — і що ховається за цим</h2>
+          <p class="sc-story__mirror-lead sc-t-body">Більшість естетичних клінік маскують наслідки в дзеркалі. Ми знаходимо біологічну причину — і усуваємо її.</p>
+
+          <div class="sc-story__mirror-list">
+          <details class="sc-story__mirror-item" name="story-mirror" open>
+            <summary class="sc-story__mirror-q">
+              <span class="sc-story__mirror-label sc-t-lead">Втрата чіткого овалу, зморшки, носогубні складки</span>
+            </summary>
+            <p class="sc-story__mirror-cause sc-t-body">Причина: дефіцит фібробластів та виснаження дермального матриксу — шкіра втратила внутрішній каркас і більше не утримує форму.</p>
+          </details>
+          <details class="sc-story__mirror-item" name="story-mirror">
+            <summary class="sc-story__mirror-q">
+              <span class="sc-story__mirror-label sc-t-lead">Тьмяний, нерівний колір обличчя, пігментація</span>
+            </summary>
+            <p class="sc-story__mirror-cause sc-t-body">Причина: стійке порушення мікроциркуляції та приховане вікове запалення (inflammaging) — тканини недоотримують кисень і втрачають здатність до природного оновлення.</p>
+          </details>
+          <details class="sc-story__mirror-item" name="story-mirror">
+            <summary class="sc-story__mirror-q">
+              <span class="sc-story__mirror-label sc-t-lead">Хронічна сухість та втрата пружності</span>
+            </summary>
+            <p class="sc-story__mirror-cause sc-t-body">Причина: зниження кількості активних фібробластів — клітини припиняють виробляти достатній об'єм власного колагену, еластину та гіалуронової кислоти.</p>
+          </details>
+          <details class="sc-story__mirror-item" name="story-mirror">
+            <summary class="sc-story__mirror-q">
+              <span class="sc-story__mirror-label sc-t-lead">Шкіра «не тримає» ефект від процедур</span>
+            </summary>
+            <p class="sc-story__mirror-cause sc-t-body">Причина: виснажений клітинний резерв — тканини більше не мають ресурсу відповідати на зовнішню стимуляцію та закріплювати результат.</p>
+          </details>
+          <details class="sc-story__mirror-item" name="story-mirror">
+            <summary class="sc-story__mirror-q">
+              <span class="sc-story__mirror-label sc-t-lead">Відчуття, що обличчя «постаріло раптово»</span>
+            </summary>
+            <p class="sc-story__mirror-cause sc-t-body">Причина: inflammaging — прихований процес деградації тканин, який непомітно прискорює біологічний вік шкіри.</p>
+          </details>
+          <details class="sc-story__mirror-item" name="story-mirror">
+            <summary class="sc-story__mirror-q">
+              <span class="sc-story__mirror-label sc-t-lead">Підготовка до естетичних процедур або пластичної хірургії</span>
+            </summary>
+            <p class="sc-story__mirror-cause sc-t-body">Відновлена шкіра з активним кровопостачанням — це ідеальний фундамент. Вона загоюється у 2 рази швидше, дає прогнозований результат і суттєво продовжує ефект будь-якої операції.</p>
+          </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- § 04 · рішення — з цього місця блок інвертується -->
+      <section class="sc-story__part sc-story__part--solution" data-story-part="4" data-story-hook-index="2" data-story-solution>
+        <h2 class="sc-story__h2 sc-t-h2">Face Control 365 — програма, яка починається з розуміння біології вашої шкіри</h2>
+        <p class="sc-story__p sc-t-body">Спочатку — УЗД м’яких тканин, доплерографія судин та лабораторна оцінка кількості й якості ваших фібробластів. Ми вимірюємо регенеративний потенціал шкіри у точних цифрах. І тільки після цього розробляємо персональний протокол. Не за вашим віком. Не за модним трендом. За реальними даними вашого організму.</p>
+        <div class="sc-story__photo sc-media--square">
+          <img src="assets/img/story/cells.jpg"
+               srcset="assets/img/story/cells.jpg 680w, assets/img/story/cells@2x.jpg 1360w"
+               sizes="(max-width: 640px) 100vw, 680px"
+               alt="Клітини під мікроскопом" width="680" height="680" loading="lazy" decoding="async">
+        </div>
+        <div class="sc-story__table-wrap">
+      <table class="sc-story__table">
+        <caption class="sc-visually-hidden">Порівняння підходів: індустрія краси та Face Control 365</caption>
+        <thead>
+          <tr class="sc-story__tr sc-story__tr--head">
+            <th class="sc-story__th sc-t-caption" scope="col"><span class="sc-visually-hidden">Критерій</span></th>
+            <th class="sc-story__th sc-t-caption" scope="col">Як зазвичай</th>
+            <th class="sc-story__th sc-story__th--fc sc-t-caption" scope="col">Face Control 365</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr class="sc-story__tr">
+          <th class="sc-story__th sc-t-small" scope="row">Основа рішення</th>
+          <td class="sc-story__td sc-story__td--usual sc-t-small">Обіцянка і надія на результат</td>
+          <td class="sc-story__td sc-story__td--fc sc-t-small">Точна діагностика і протокол під вас</td>
+        </tr>
+        <tr class="sc-story__tr">
+          <th class="sc-story__th sc-t-small" scope="row">Вибір методу</th>
+          <td class="sc-story__td sc-story__td--usual sc-t-small">За порадою подруги чи тренду</td>
+          <td class="sc-story__td sc-story__td--fc sc-t-small">Те, що потрібно саме вашій шкірі</td>
+        </tr>
+        <tr class="sc-story__tr">
+          <th class="sc-story__th sc-t-small" scope="row">Безпека</th>
+          <td class="sc-story__td sc-story__td--usual sc-t-small">Синтетика, яка змінює обличчя</td>
+          <td class="sc-story__td sc-story__td--fc sc-t-small">Ваші клітини — ваша індивідуальність</td>
+        </tr>
+        <tr class="sc-story__tr">
+          <th class="sc-story__th sc-t-small" scope="row">Системність</th>
+          <td class="sc-story__td sc-story__td--usual sc-t-small">Хаотичні процедури без зв’язку</td>
+          <td class="sc-story__td sc-story__td--fc sc-t-small">Прозорий річний протокол під супроводом лікаря</td>
+        </tr>
+        </tbody>
+      </table>
+        </div>
+        <div class="sc-story__photo sc-media--square">
+          <img src="assets/img/story/vial.jpg"
+               srcset="assets/img/story/vial.jpg 680w, assets/img/story/vial@2x.jpg 1360w"
+               sizes="(max-width: 640px) 100vw, 680px"
+               alt="Флакон з препаратом у руках лікаря" width="680" height="680" loading="lazy" decoding="async">
+        </div>
+      </section>
+
+      <!-- § 05 · це я. це моє. — друга фраза рішення -->
+      <section class="sc-story__part sc-story__part--solution" data-story-part="5" data-story-hook-index="3">
+        <h2 class="sc-story__h1 sc-t-h1">Це я. Це моє.</h2>
+        <p class="sc-story__p sc-t-body">Кріолізат тромбоцитів і фібробласти — це не препарат із флакона. Це ваш власний біологічний матеріал, створений індивідуально під вас. Організм отримує рідні сигнали — і відповідає справжнім відновленням.</p>
+        <ul class="sc-story__facts">
+        <li class="sc-story__facts__row">
+          <span class="sc-story__facts__term sc-t-small">Передбачуваний результат</span>
+          <span class="sc-story__facts__desc sc-t-small">здорова, ущільнена шкіра, що зберігає природну міміку та рідні риси</span>
+        </li>
+        <li class="sc-story__facts__row">
+          <span class="sc-story__facts__term sc-t-small">Фінансова прозорість</span>
+          <span class="sc-story__facts__desc sc-t-small">зафіксований річний бюджет без прихованих платежів і нав’язаних процедур</span>
+        </li>
+        <li class="sc-story__facts__row">
+          <span class="sc-story__facts__term sc-t-small">Фундамент</span>
+          <span class="sc-story__facts__desc sc-t-small">відновлена на клітинному рівні шкіра — база для будь-яких подальших процедур</span>
+        </li>
+        </ul>
+        <p class="sc-story__lead sc-t-lead">ВАШІ клітини. ВАШ протокол. ВАШ результат — вимірюваний і передбачуваний.</p>
+        <a class="sc-story__cta" href="#journey">
+          <span class="sc-story__cta-label">Етапи річної подорожі</span>
+          <span class="sc-story__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+        </a>
+      </section>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+<!-- ============================================================
+     Modal/Booking — модалка записи
+     figma: node-id=437:21
+     Описание компонента: «Два квадрата 520: фото и панель. Оверлей — фон #000 40%,
+     модалка по центру вьюпорта. Закрытие: крестик, Esc, клик по оверлею.»
+     ACF: booking_kicker, booking_title, booking_note, booking_submit_label,
+          booking_dismiss_label, booking_legal, booking_image
+     Открывают: любой элемент с data-modal-open="booking",
+                а также ссылки href="#consultation" (текущие CTA секций).
+     Отправка формы не подключена — кодер подставляет action / AJAX.
+     ============================================================ -->
+<div class="sc-modal" data-modal="booking" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+
+  <div class="sc-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+
+    <div class="sc-modal__photo">
+      <img src="assets/img/booking.jpg"
+           srcset="assets/img/booking.jpg 520w, assets/img/booking@2x.jpg 1040w"
+           sizes="(max-width: 640px) 100vw, 520px"
+           alt="Клітинна структура під мікроскопом"
+           width="520" height="520" decoding="async">
+    </div>
+
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+
+      <p class="sc-modal__kicker sc-t-caption">ЗАПИС НА ДІАГНОСТИКУ</p>
+      <h2 class="sc-modal__title sc-t-h3" id="booking-title">Дізнайтесь свій регенеративний потенціал</h2>
+      <p class="sc-modal__note sc-t-small">Комплексна діагностика Face Control 365</p>
+
+      <form class="sc-modal__form" novalidate>
+        <div class="sc-modal__fields">
+
+          <div class="sc-modal__field">
+            <label class="sc-modal__label" for="booking-name">Ваше ім'я</label>
+            <input class="sc-modal__input" id="booking-name" name="name" type="text"
+                   placeholder="Ваше ім'я" autocomplete="name" required>
+            <p class="sc-modal__error" id="booking-name-error" hidden>Вкажіть імʼя</p>
+          </div>
+
+          <div class="sc-modal__field">
+            <label class="sc-modal__label" for="booking-phone">Номер телефону</label>
+            <input class="sc-modal__input" id="booking-phone" name="phone" type="tel"
+                   placeholder="+380" autocomplete="tel" inputmode="tel" required>
+            <p class="sc-modal__error" id="booking-phone-error" hidden>Вкажіть номер телефону</p>
+          </div>
+
+        </div>
+
+        <div class="sc-modal__actions">
+          <button class="sc-modal__submit" type="submit">ЗАПИСАТИСЬ</button>
+          <button class="sc-modal__later" type="button" data-modal-close>ПІЗНІШЕ</button>
+        </div>
+
+        <p class="sc-modal__legal">Натискаючи, ви погоджуєтесь з політикою обробки даних</p>
+      </form>
+    </div>
+
+  </div>
+</div>

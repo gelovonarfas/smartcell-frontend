@@ -1,0 +1,30 @@
+<!-- ============================================================
+     VM/Breadcrumbs + Rubrics · полоса под хиро блога
+     figma: node-id=49:25
+     ACF: хлебные крошки и поиск — из темы; вкладки берутся из таксономии
+          (сквозные теги #40+, #50+ и авторская рубрика Tsepkolenko).
+     Полоса 70 в макете: крошки слева, вкладки по центру, поиск справа.
+     ============================================================ -->
+<nav class="vm-rubrics" aria-label="Рубрики журналу">
+  <p class="vm-rubrics__crumbs sc-t-mini">
+    <a href="https://virtus.ua">virtus.ua</a> → <a href="index.html">SmartCell</a> → <span aria-current="page">Smart Age</span>
+  </p>
+
+  <div class="vm-rubrics__filters">
+    <p class="vm-rubrics__filters-label sc-t-mini" id="vm-rubrics-filters">Фільтрувати:</p>
+
+    <ul class="vm-rubrics__tabs" aria-labelledby="vm-rubrics-filters">
+      <li><a class="vm-rubrics__tab vm-rubrics__tab--author sc-t-caption" href="#tsepkolenko"><img class="vm-rubrics__avatar" src="assets/img/vm/tsepkolenko.png" alt="" width="24" height="24">TSEPKOLENKO</a></li>
+      <li><a class="vm-rubrics__tab vm-rubrics__tab--age sc-t-caption" href="#age-40">#40+</a></li>
+      <li><a class="vm-rubrics__tab vm-rubrics__tab--age sc-t-caption" href="#age-50" aria-current="true">#50+</a></li>
+    </ul>
+  </div>
+
+  <!-- Свёрнутое поле: по клику разъезжается на всю свободную ширину (assets/js/vm-search.js) -->
+  <form class="vm-rubrics__search" role="search" action="#" method="get" data-vm-search>
+    <label class="sc-visually-hidden" for="vm-search">Пошук по журналу</label>
+    <!-- akar-icons:search из макета (node-id=793:653), кромка 1px как у всех линий -->
+    <svg class="vm-rubrics__search-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16.8438 16.8438L14.3204 14.3159M15.7188 10.9375C15.7188 12.2056 15.215 13.4217 14.3184 14.3184C13.4217 15.215 12.2056 15.7188 10.9375 15.7188C9.66943 15.7188 8.4533 15.215 7.55665 14.3184C6.65999 13.4217 6.15625 12.2056 6.15625 10.9375C6.15625 9.66943 6.65999 8.4533 7.55665 7.55665C8.4533 6.65999 9.66943 6.15625 10.9375 6.15625C12.2056 6.15625 13.4217 6.65999 14.3184 7.55665C15.215 8.4533 15.7188 9.66943 15.7188 10.9375Z" stroke="currentColor" stroke-linecap="round"/></svg>
+    <input class="vm-rubrics__search-input sc-t-small" id="vm-search" name="s" type="search" placeholder="Пошук" data-vm-search-input>
+  </form>
+</nav>

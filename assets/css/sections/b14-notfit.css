@@ -1,0 +1,77 @@
+/* ============================================================
+   B14 · Для кого не підходить
+   figma: node-id=15:144
+   ============================================================ */
+
+.sc-notfit {
+
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-notfit *,
+.sc-notfit *::before,
+.sc-notfit *::after { box-sizing: border-box; }
+
+.sc-notfit__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.sc-notfit__title { margin: 0; }
+
+.sc-notfit__body {
+  display: grid;
+  grid-template-columns: 584fr 640fr;
+  gap: var(--sc-space-10); /* 40 в макете */
+  align-items: start;
+}
+
+.sc-notfit__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+}
+
+.sc-notfit__note {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* Ячейки таблицей: фон контейнера проступает в зазорах по 1px */
+.sc-notfit__grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hairline);
+  border: var(--sc-line) solid var(--border); /* рамка — 1px, волосяная только в зазорах */
+  background: var(--border);
+}
+
+.sc-notfit__cell {
+  display: flex;
+  align-items: center;
+  gap: var(--card-gap);
+  padding: var(--card-padding);
+  background: var(--card);
+  color: var(--card-foreground);
+}
+
+/* Крестик — единственное место, где в блоке появляется цвет предупреждения */
+.sc-notfit__icon {
+  flex: none;
+  color: var(--destructive);
+}
+
+.sc-notfit__text { margin: 0; }
+
+@media (max-width: 640px) {
+  .sc-notfit__body { grid-template-columns: minmax(0, 1fr); }
+  .sc-notfit__grid { grid-template-columns: minmax(0, 1fr); }
+}

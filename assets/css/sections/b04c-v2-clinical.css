@@ -1,0 +1,139 @@
+/* ============================================================
+   B04c · v2 · Клінічні дані
+   figma: node-id=1025:1398
+   Зависит от assets/css/tokens.css и base.css
+   ============================================================ */
+
+.sc-cdata {
+  --cdata-card-pad: var(--sc-space-16);  /* 64 по вертикали в макете */
+  --cdata-label-w: 200px;                /* мера подписи под числом */
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6);
+  /* Сверху — половина межблочника: плита читается в паре с «Трьома векторами»,
+     а не как отдельная секция через весь экран (правка 2026-09-13) */
+  padding: var(--sc-space-20) var(--sc-pad-x) var(--section-padding-y);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-cdata *,
+.sc-cdata *::before,
+.sc-cdata *::after { box-sizing: border-box; }
+
+/* Плита в контентной полосе: тёплый фон отделяет цифры от страницы */
+.sc-cdata__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sc-space-14); /* 56 */
+  padding: var(--cdata-card-pad) var(--sc-space-20);
+  background: var(--warm);
+}
+
+.sc-cdata__caption {
+  margin: 0;
+  align-self: flex-start;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Цифры ---------- */
+
+.sc-cdata__stats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  inline-size: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+/* Выключка — сквозное правило о числовых выносках (base.css) */
+.sc-cdata__stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+  min-inline-size: 0;
+}
+
+.sc-cdata__value {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-cdata__label {
+  margin: 0;
+  max-inline-size: var(--cdata-label-w);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Качественные итоги ---------- */
+
+.sc-cdata__quals {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  inline-size: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sc-space-6);
+}
+
+.sc-cdata__qual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-3);
+  padding-block-start: var(--sc-space-6); /* 24 в макете */
+  border-block-start: var(--sc-line) solid var(--border);
+  min-inline-size: 0;
+}
+
+.sc-cdata__icon {
+  display: block;
+  inline-size: var(--sc-space-8);
+  block-size: var(--sc-space-8);
+  color: var(--foreground);
+}
+
+.sc-cdata__icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  stroke-width: 1;
+}
+
+.sc-cdata__qual-title { margin: 0; }
+
+.sc-cdata__qual-text {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* ⚠ [VERIFY]: пояснение к процентам — цифры клиника ещё уточняет */
+.sc-cdata__source {
+  margin: 0;
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .sc-cdata {
+    padding-inline: var(--page-margin-x);
+    padding-block-start: var(--section-padding-y-tight);
+  }
+
+  .sc-cdata__card {
+    gap: var(--section-gap);
+    padding: var(--section-padding-y-tight) var(--page-margin-x);
+  }
+
+  .sc-cdata__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--section-gap) var(--grid-gap); }
+  .sc-cdata__quals { grid-template-columns: minmax(0, 1fr); }
+  .sc-cdata__source { text-align: start; }
+}

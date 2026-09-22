@@ -1,0 +1,103 @@
+<!-- ============================================================
+     B04b · Сценарії
+     figma: node-id=469:216 (в лендинге state 2) · состояния 476:170 / 476:206 / 476:242
+     ACF: scen_title (textarea), scen_items (repeater: label, title, note,
+          rows[key,value], image), scen_cta_label (text), scen_cta_link (link)
+     Раскладка по DECISIONS §2: колонка 520 + лента 112 + медиа 680 в навылет.
+     Переключение: стрелки и миниатюры. Автопрокрутки нет.
+     Описания и таблички состава сняты из макета 2026-09-14 (996:1390,
+     1052:1126, 1052:1161). Фото и подписи в ленте не менялись: имена
+     сценариев по возрасту живут в assets/js/scenarios.js.
+     ============================================================ -->
+<section class="sc-scenarios" data-scenarios>
+  <div class="sc-scenarios__head">
+    <h2 class="sc-scenarios__title sc-t-h2">Три сценарії програми. <br>Один курс, різна глибина втручання</h2>
+  </div>
+
+  <div class="sc-scenarios__row">
+    <div class="sc-scenarios__col">
+
+      <div class="sc-scenarios__switcher">
+        <button class="sc-scenarios__nav" type="button" data-scenario-prev aria-label="Попередній сценарій"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M26.5 19L21.5 24L26.5 29" stroke="currentColor"/></svg></button>
+        <p class="sc-scenarios__meta sc-t-small">
+          <span class="sc-scenarios__count" data-scenario-count>2 / 3</span>
+          <b class="sc-scenarios__label" data-scenario-label>Сценарій 2 (36–45)</b>
+        </p>
+        <button class="sc-scenarios__nav" type="button" data-scenario-next aria-label="Наступний сценарій"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M21.5 19L26.5 24L21.5 29" stroke="currentColor"/></svg></button>
+      </div>
+
+      <div class="sc-scenarios__panels">
+        <div class="sc-scenarios__panel" id="sc-scenario-panel-1"
+             data-scenario="1" hidden>
+          <h3 class="sc-scenarios__subtitle sc-t-h3">Відновлення без клітинної терапії</h3>
+          <p class="sc-scenarios__note sc-t-body">Протокол без введення клітин. Підходить, коли діагностика показує достатній власний ресурс дерми, і завдання зводиться до стимуляції мікроциркуляції та вирівнювання рельєфу.</p>
+
+          <dl class="sc-scenarios__stages">
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">Старт</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Кріолізат тромбоцитів — стимуляція мікроциркуляції та оксигенації дерми</dd>
+            </div>
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">+1 місяць</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Повтор кріолізату — закріплення судинної відповіді</dd>
+            </div>
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">+3 місяці</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Лазер, шліфовка або ультразвуковий ліфтинг на вибір — вирівнювання рельєфу</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="sc-scenarios__panel" id="sc-scenario-panel-2"
+             data-scenario="2">
+          <h3 class="sc-scenarios__subtitle sc-t-h3">Клітинне відновлення</h3>
+          <p class="sc-scenarios__note sc-t-body">Базовий протокол програми. Одна доза власних фібробластів на старті, далі підтримка кріолізатом і апаратне закріплення результату.</p>
+          <dl class="sc-scenarios__stages">
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">Старт</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Кріолізат + введення фібробластів, 1 доза</dd>
+            </div>
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">+1 місяць</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Повтор кріолізату</dd>
+            </div>
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">+3 місяці</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Лазер, шліфовка або ультразвуковий ліфтинг на вибір</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="sc-scenarios__panel" id="sc-scenario-panel-3"
+             data-scenario="3" hidden>
+          <h3 class="sc-scenarios__subtitle sc-t-h3">Подвійний курс фібробластів</h3>
+          <p class="sc-scenarios__note sc-t-body">Протокол для випадків, коли діагностика показує знижений регенеративний ресурс. Фібробласти вводяться двічі, з інтервалом у місяць.</p>
+          <dl class="sc-scenarios__stages">
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">Старт</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Кріолізат + фібробласти</dd>
+            </div>
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">+1 місяць</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Повтор кріолізату + повторне введення фібробластів</dd>
+            </div>
+            <div class="sc-scenarios__stage">
+              <dt class="sc-scenarios__stage-term sc-t-small">+3 місяці</dt>
+              <dd class="sc-scenarios__stage-value sc-t-small">Лазер, шліфовка або ультразвуковий ліфтинг на вибір</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <a class="sc-scenarios__cta" href="#consultation">
+        <span class="sc-scenarios__cta-label">Обрати сценарій</span>
+        <span class="sc-scenarios__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+      </a>
+
+    </div>
+
+    <!-- Кадры наполняет assets/js/scenarios.js: пути к картинкам живут
+         в объекте данных там, а не в разметке. Ленты миниатюр нет —
+         сценарии листаются стрелками (макет v2, 897:2). -->
+
+    <div class="sc-scenarios__media" data-scenario-media></div>
+  </div>
+</section>

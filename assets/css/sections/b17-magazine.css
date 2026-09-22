@@ -1,0 +1,135 @@
+/* ============================================================
+   B17 · Smart Age Journal
+   figma: node-id=4:297
+   ============================================================ */
+
+.sc-mag {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-mag *,
+.sc-mag *::before,
+.sc-mag *::after { box-sizing: border-box; }
+
+.sc-mag__title-main { margin: 0; }
+
+/* Ряд одинаковой высоты: дата прижимается к низу карточки (описание Card/Article) */
+.sc-mag__row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: stretch;
+}
+
+/* Карточка — не одна ссылка: чип рубрики ведёт в свою рубрику, поэтому
+   вложить его в ссылку статьи нельзя. Ссылок три — фото, заголовок и чип
+   (решение 2026-09-08). Ховер фото и заголовка связан через :has(),
+   без него просто нет подсветки. */
+.sc-mag__card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-inline-size: 0;
+  color: inherit;
+}
+
+.sc-mag__photo,
+.sc-mag__tag,
+.sc-mag__title {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Медиа — квадрат по правилу квадрата */
+.sc-mag__photo {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.sc-mag__photo img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--sc-dur-slow) var(--sc-ease);
+}
+
+/* Мета-строка: чип рубрики слева, время чтения справа, линия снизу */
+.sc-mag__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--grid-gap);
+  padding-block: var(--sc-space-4); /* 16 в макете */
+  border-block-end: var(--hairline) solid var(--border);
+}
+
+.sc-mag__tag {
+  padding: var(--sc-chip-pad); /* chip · category в макете */
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+  text-transform: uppercase;
+}
+
+.sc-mag__time,
+.sc-mag__date { color: var(--muted-foreground); }
+
+/* Тело: заголовок сверху, дата у нижнего края карточки */
+.sc-mag__body {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sc-space-3); /* 12 в макете */
+  padding-block-start: var(--sc-space-4);
+}
+
+.sc-mag__title {
+  display: block;
+  max-inline-size: var(--sc-measure);
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md.
+   Ховер только для мыши, иначе на тач-устройствах залипает. */
+@media (hover: hover) and (pointer: fine) {
+  .sc-mag__card:has(.sc-mag__photo:hover) .sc-mag__photo img,
+  .sc-mag__card:has(.sc-mag__title:hover) .sc-mag__photo img { transform: scale(1.03); }
+
+  .sc-mag__card:has(.sc-mag__photo:hover) .sc-mag__title,
+  .sc-mag__card:has(.sc-mag__title:hover) .sc-mag__title { opacity: 0.7; }
+
+  /* Чип рубрики отклика не даёт: он уводит в другое место, и подсветка
+     спорила бы с ховером самой карточки (решение 2026-09-08) */
+}
+
+.sc-mag__photo:focus-visible,
+.sc-mag__tag:focus-visible,
+.sc-mag__title:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-mag__photo img,
+  .sc-mag__title { transition: none; }
+  .sc-mag__card:has(.sc-mag__photo:hover) .sc-mag__photo img,
+  .sc-mag__card:has(.sc-mag__title:hover) .sc-mag__photo img { transform: none; }
+}
+
+@media (max-width: 640px) {
+  /* Колонкой карточки смыкаются встык, и дата предыдущей статьи читается
+     как подпись к следующему фото: разводим их разрядкой секции */
+  .sc-mag__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
+  }
+}

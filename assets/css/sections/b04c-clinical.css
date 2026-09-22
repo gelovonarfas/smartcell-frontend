@@ -1,0 +1,68 @@
+/* ============================================================
+   B04c · Clinical data
+   figma: node-id=14:65
+   Зависит от assets/css/tokens.css и base.css
+   ============================================================ */
+
+.sc-clinical {
+  --clinical-label-w: 200px; /* ширина подписи под числом в макете */
+
+  box-sizing: border-box;
+  /* Сверху — общий межблочник 160, снизу компактно: полоса примыкает
+     к следующему блоку (решение 2026-09-06) */
+  padding: var(--section-padding-y) var(--sc-pad-x) var(--section-padding-y-tight);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-clinical *,
+.sc-clinical *::before,
+.sc-clinical *::after { box-sizing: border-box; }
+
+.sc-clinical__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--section-gap);
+}
+
+.sc-clinical__caption {
+  margin: 0;
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+.sc-clinical__stats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  inline-size: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+/* Выключка — сквозное правило о числовых выносках (base.css) */
+.sc-clinical__stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+}
+
+.sc-clinical__value {
+  margin: 0;
+  color: var(--foreground);
+}
+
+.sc-clinical__label {
+  margin: 0;
+  max-inline-size: var(--clinical-label-w);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Мобильный ----------
+   Четыре числа по 44px в 408px не живут: ставим 2×2. */
+
+@media (max-width: 640px) {
+  .sc-clinical__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

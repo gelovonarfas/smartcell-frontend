@@ -1,0 +1,216 @@
+/* SmartCell — tokens.css
+   Сгенерировано из Figma t3K32ifBrrW1kD2BBbp1tA · 2026-09-04
+   Источник истины — переменные Figma. Файл не править руками.
+   Шрифт: Onest (Google Fonts, 9 весов, кириллица родная). Fixel и Geist из проекта убраны. */
+
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700&display=swap");
+
+:root {
+  /* ---------- semantic colors · normal ---------- */
+  --background: #FAF8F6;
+  --foreground: #100E0C;
+  --primary: var(--foreground);             /* заливка кнопок — цвет текста.
+                                               Фирменный синий blue/700 пробовали 2026-09-08,
+                                               откатили 2026-09-13. В inverse кнопка светлая — см. base.css */
+  --primary-foreground: var(--background);
+  --secondary: #F2EEEA;
+  --secondary-foreground: #1A1815;
+  --accent: #E0EDF9;                        /* единственный синий на светлом */
+  --accent-foreground: #1A1815;
+  --muted: #F2EEEA;
+  --muted-foreground: #6E675F;
+  --warm: #F2EEEA;
+  --card: #FFFFFF;
+  --card-foreground: #100E0C;
+  --destructive: #C4483E;
+  --border: var(--foreground);               /* кромка в полную силу, решение 2026-09-06 */
+  --input: var(--foreground);
+  --ring: #2E6EBF;
+
+  /* Линия-разделитель. ПРОБА 2026-09-11: разделители на 0.5 — смотрим,
+     не рассыпаются ли плотные списки. Решение 2026-09-06 было «все линии
+     1px»; откат — вернуть 1px в эту строку, больше ничего не трогая.
+     Рамки контейнеров не участвуют: они пишутся 1px литералом. */
+  --hairline: 0.5px;
+
+  /* ---------- field ---------- */
+  --field-bg: #FFFFFF;
+  --field-border: var(--foreground);
+  --field-border-focus: #111111;
+  --field-text: #111111;
+  --field-placeholder: rgba(0,0,0,0.42);
+  --field-label: rgba(0,0,0,0.55);
+  --field-border-error: #A32D2D;
+  --field-text-error: #A32D2D;
+  --field-focus-ring: rgba(0,0,0,0.10);
+  --field-height: 48px;
+  --field-padding-x: 16px;
+
+  /* ---------- glass · light ---------- */
+  --glass-surface: rgba(255,255,255,0.40);
+  --glass-edge: rgba(255,255,255,0.40);
+  --glass-blur: 28px;                        /* в Figma сейчас 28; на демо лучше читалось 60 — решить */
+  --glass-edge-width: 0.5px;                /* Исключение из правила «все линии 1px»:
+                                               у стекла кромка половинная (решение 2026-09-08) */
+
+  /* ---------- layout · desktop ---------- */
+  --page-max-width: 1280px;
+  --page-margin-x: 80px;
+  --bar-padding-y: 16px;
+  --section-padding-y: 160px;
+  --section-padding-y-tight: 64px;
+  --section-gap: 56px;
+  --stack-gap-lg: 20px;
+  --stack-gap-md: 14px;
+  --stack-gap-sm: 8px;
+  --grid-gap: 16px;
+  --card-padding: 28px;
+  --card-gap: 10px;
+  --control-padding-x: 28px;
+  --control-padding-y: 14px;
+  --control-gap: 12px;
+
+  /* ---------- square rule · константы геометрии ---------- */
+  --sq-hero: 708px;      /* квадрат хиро (блог и статья), левая грань на старте 7-й колонки */
+  --sq-half: 720px;      /* половина полосы: B05 амбассадор, 2×720 */
+  --sq-media: 680px;     /* медиа в блоках с колонкой 520: B04b, B06, B08c */
+  --sq-modal: 520px;     /* модалка 1040×520 = 2×520; 520 = 5 колонок */
+  --col-5: 520px;        /* 5 колонок сетки 12/80/24 */
+  --thumb: 112px;        /* миниатюры в лентах, квадрат */
+  --control-square: 48px;/* стрелки, тогглы 40/48 */
+
+  /* ---------- typography · desktop ---------- */
+  --font-sans: "Onest", system-ui, sans-serif;
+  --font-headings: "Onest", system-ui, sans-serif;
+
+  --display-size: 64px;   --display-lh: 68px;   --display-ls: -1.2px;  --display-weight: 400;
+  --stat-size: 72px;      --stat-lh: 76px;      --stat-ls: -1.6px;     --stat-weight: 500;
+  --h1-size: 44px;        --h1-lh: 50px;        --h1-ls: -0.8px;       --h1-weight: 400;
+  --h2-size: 32px;        --h2-lh: 38px;        --h2-ls: -0.4px;       --h2-weight: 400;
+  --h3-size: 22px;        --h3-lh: 30px;        --h3-ls: -0.2px;       --h3-weight: 500;
+  --caption-size: 12px;   --caption-lh: 16px;   --caption-ls: 0.6px;   --caption-weight: 500; /* uppercase */
+  --p-large-size: 18px;   --p-large-lh: 28px;
+  --p-size: 16px;         --p-lh: 26px;
+  --p-small-size: 14px;   --p-small-lh: 22px;
+  --p-mini-size: 12px;    --p-mini-lh: 18px;
+  --button-size: 13px;    --button-lh: 20px;    --button-ls: 0.8px;    --button-weight: 500; /* uppercase */
+
+  /* ---------- shadows ---------- */
+  --shadow-sm: 0 1px 3px 0 rgba(16,14,12,0.05);
+  --shadow-md: 0 2px 8px -2px rgba(16,14,12,0.10);
+  --shadow-lg: 0 10px 20px -3px rgba(16,14,12,0.10);
+  --shadow-xl: 0 20px 32px -5px rgba(16,14,12,0.15);
+
+  /* ---------- radius ---------- */
+  --radius: 0;                               /* системно. Пилюль и скруглений нет нигде */
+}
+
+/* ---------- normal · явный сброс внутри inverse ----------
+   Режим normal коллекции semantic colors как селектор: нужен, когда светлый
+   элемент лежит внутри тёмной секции (панель портала в хедере). Значения
+   те же, что в :root, — переменные наследуются и без повтора не сбросятся. */
+[data-theme="normal"] {
+  --background: #FAF8F6;
+  --foreground: #100E0C;
+  --secondary: #F2EEEA;
+  --secondary-foreground: #1A1815;
+  --accent: #E0EDF9;
+  --accent-foreground: #1A1815;
+  --muted: #F2EEEA;
+  --muted-foreground: #6E675F;
+  --warm: #F2EEEA;
+  --card: #FFFFFF;
+  --card-foreground: #100E0C;
+  --border: var(--foreground);
+  --input: var(--foreground);
+
+  --field-bg: #FFFFFF;
+  --field-border: var(--foreground);
+  --field-border-focus: #111111;
+  --field-text: #111111;
+  --field-placeholder: rgba(0,0,0,0.42);
+  --field-label: rgba(0,0,0,0.55);
+  --field-border-error: #A32D2D;
+  --field-text-error: #A32D2D;
+  --field-focus-ring: rgba(0,0,0,0.10);
+
+  --glass-surface: rgba(255,255,255,0.40);
+  --glass-edge: rgba(255,255,255,0.40);
+}
+
+/* ---------- inverse ---------- */
+[data-theme="inverse"] {
+  --background: #100E0C;
+  --foreground: #FAF8F6;
+  --secondary: #2A2622;
+  --secondary-foreground: #F2EEEA;
+  --accent: #083868;                        /* blue/800 — решение 2026-09-08, было blue/900 */
+  --accent-foreground: #F2EEEA;
+  --muted: #2A2622;
+  --muted-foreground: #A5A09A;
+  --warm: #2A2622;
+  --card: #1A1815;
+  --card-foreground: #FAF8F6;
+  /* Кромка = цвет текста и в inverse. Алиас объявлен ЗДЕСЬ повторно
+     не по ошибке: var() в :root вычисляется на :root, и без этой строки
+     в тёмной секции кромка осталась бы тёмной. Значений своих нет. */
+  --border: var(--foreground);
+  --input: var(--foreground);
+
+  --field-bg: rgba(255,255,255,0.04);        /* полупрозрачно, чтобы ложиться и на чёрный, и на фото */
+  --field-border: var(--foreground);
+  --field-border-focus: #FFFFFF;
+  --field-text: rgba(255,255,255,0.92);      /* не белый в полную силу — звенит */
+  --field-placeholder: rgba(255,255,255,0.45);
+  --field-label: rgba(255,255,255,0.55);
+  --field-border-error: #F09595;             /* светлый стоп той же шкалы */
+  --field-text-error: #F09595;
+  --field-focus-ring: rgba(255,255,255,0.16);
+
+  --glass-surface: rgba(16,14,12,0.55);
+  --glass-edge: rgba(250,248,246,0.18);
+}
+
+/* ---------- mobile · один брейкпоинт ---------- */
+@media (max-width: 640px) {
+  :root {
+    --page-max-width: 408px;
+    --page-margin-x: 20px;
+    --bar-padding-y: 8px;
+    --section-padding-y: 80px;
+    --section-padding-y-tight: 40px;
+    --section-gap: 32px;
+    --stack-gap-lg: 14px;
+    --stack-gap-md: 10px;
+    --stack-gap-sm: 6px;
+    --grid-gap: 12px;
+    --card-padding: 20px;
+    --card-gap: 8px;
+    --control-padding-x: 22px;
+    --control-padding-y: 12px;
+    --control-gap: 10px;
+
+    --display-size: 40px; --display-lh: 46px; --display-ls: -0.6px;
+    --stat-size: 44px;    --stat-lh: 48px;    --stat-ls: -0.8px;
+    --h1-size: 32px;      --h1-lh: 40px;      --h1-ls: -0.4px;
+    --h2-size: 26px;      --h2-lh: 34px;      --h2-ls: 0;
+    --h3-size: 19px;      --h3-lh: 26px;      --h3-ls: 0;
+    --p-large-size: 17px; --p-large-lh: 26px;
+    --p-lh: 25px;
+  }
+}
+
+/* ---------- glass · один модификатор на проект ---------- */
+.is-glass {
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  box-shadow: inset 0 0 0 var(--glass-edge-width) var(--glass-edge); /* кромка inset, чтобы не менять размер плиты */
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .is-glass { background: color-mix(in srgb, var(--background) 92%, transparent); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .is-glass { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--background); }
+}
+

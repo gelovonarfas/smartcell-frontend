@@ -1,0 +1,138 @@
+/* ============================================================
+   VM/Tsepkolenko Blog · авторська колонка
+   figma: node-id=104:45
+   ============================================================ */
+
+.vm-tsep {
+  --vm-tsep-h: 300px;      /* высота полосы в макете */
+  --vm-tsep-copy-w: 555px; /* мера колонки текста из макета */
+  --vm-tsep-photo-w: 249px;
+
+  box-sizing: border-box;
+  padding-inline: var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.vm-tsep *,
+.vm-tsep *::before,
+.vm-tsep *::after { box-sizing: border-box; }
+
+/* Полоса в контентной полосе: тёплый беж (решение 2026-09-12, было accent),
+   портрет обрезается низом */
+.vm-tsep__frame {
+  position: relative;
+  min-block-size: var(--vm-tsep-h);
+  display: flex;
+  align-items: center;
+  gap: var(--section-gap);
+  padding: var(--section-padding-y-tight) var(--page-margin-x);
+  background: var(--warm);
+  color: var(--foreground);
+  overflow: hidden;
+}
+
+.vm-tsep__copy {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-sm);
+  max-inline-size: var(--vm-tsep-copy-w);
+  min-inline-size: 0;
+}
+
+.vm-tsep__kicker {
+  margin: 0;
+  color: var(--foreground);
+  text-transform: uppercase;
+}
+
+.vm-tsep__title { margin: 0; }
+
+.vm-tsep__text {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.vm-tsep__note {
+  margin: 0;
+  color: var(--sc-neutral-600); /* на warm мелкий текст — по правилу контраста */
+}
+
+/* Портрет вынесен из потока: стоит на дне полосы на 684/1280 от левого
+   края, как в макете, и не растягивает полосу выше 300 */
+.vm-tsep__photo {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 53.4%;
+  inline-size: var(--vm-tsep-photo-w);
+  block-size: auto;
+}
+
+/* кнопка у правого края, по верху полосы — как копия */
+.vm-tsep__frame { justify-content: space-between; align-items: flex-start; }
+
+/* Button/Control · outline */
+.vm-tsep__cta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--control-square);
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .vm-tsep__cta:hover {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+.vm-tsep__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-tsep__cta { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  /* Колонкой: копия, портрет, кнопка во всю ширину */
+  .vm-tsep__frame {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--page-margin-x);
+    min-block-size: 0;
+    padding-block-end: 0;
+  }
+
+  .vm-tsep__copy { max-inline-size: none; }
+
+  .vm-tsep__cta {
+    order: 3;
+    inline-size: 100%;
+  }
+
+  .vm-tsep__photo {
+    position: static;
+    order: 4;
+    align-self: center;
+  }
+}

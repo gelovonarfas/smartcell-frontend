@@ -1,0 +1,208 @@
+/* ============================================================
+   VM/Subscribe · розсилка журналу
+   figma: node-id=51:39
+   ============================================================ */
+
+.vm-subscribe {
+  --vm-sub-title-w: 530px; /* мера заголовка из макета */
+  --vm-sub-field-w: 320px;
+
+  --vm-sub-h: 300px; /* высота плиты в макете */
+
+  box-sizing: border-box;
+  padding: var(--sc-space-20) var(--sc-pad-x); /* обёртка Frame 2: поля 80 со всех сторон */
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.vm-subscribe *,
+.vm-subscribe *::before,
+.vm-subscribe *::after { box-sizing: border-box; }
+
+.vm-subscribe__frame {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: var(--section-gap);
+  min-block-size: var(--vm-sub-h);
+  padding: var(--page-margin-x);
+  overflow: hidden;
+}
+
+/* Как в «Науці» (B08), сборка 2026-09-14: у кадра берём только светлоту,
+   слой цвета рампы лежит сверху в режиме наложения color.
+   Подробности в b08-science.css. */
+.vm-subscribe__bg {
+  --vm-sub-tone: color-mix(in srgb, var(--sc-blue-300) 78%, var(--sc-blue-400)); /* как в «Науці» */
+  --vm-sub-video-opacity: 0.34;   /* светлее «Науки»: полоса низкая, текст по кадру */
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--card);
+}
+
+.vm-subscribe__video {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  opacity: var(--vm-sub-video-opacity);
+}
+
+.vm-subscribe__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--vm-sub-tone);
+  mix-blend-mode: color;
+}
+
+/* Скрим accent 68% из макета: текст на видео всегда со скримом */
+.vm-subscribe__copy {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-md);
+  min-inline-size: 0;
+}
+
+.vm-subscribe__kicker {
+  margin: 0;
+  color: var(--accent-foreground);
+  text-transform: uppercase;
+}
+
+.vm-subscribe__title {
+  margin: 0;
+  max-inline-size: var(--vm-sub-title-w);
+}
+
+.vm-subscribe__form {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.vm-subscribe__row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--control-gap);
+}
+
+.vm-subscribe__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1_5); /* 6 в макете */
+  inline-size: var(--vm-sub-field-w);
+}
+
+.vm-subscribe__label {
+  color: var(--field-label);
+  text-transform: uppercase;
+}
+
+/* Form/Input: высота 48, поля 16, рамка 1px */
+.vm-subscribe__input {
+  block-size: var(--field-height);
+  padding-inline: var(--field-padding-x);
+  border: var(--sc-line) solid var(--field-border);
+  border-radius: var(--radius);
+  background: var(--field-bg);
+  color: var(--field-text);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+}
+
+.vm-subscribe__input::placeholder { color: var(--field-placeholder); }
+
+.vm-subscribe__input:focus-visible {
+  outline: none;
+  border-color: var(--field-border-focus);
+  box-shadow: 0 0 0 var(--sc-field-ring-w) var(--field-focus-ring);
+}
+
+.vm-subscribe__input[aria-invalid="true"] { border-color: var(--field-border-error); }
+
+.vm-subscribe__error {
+  margin: 0;
+  color: var(--field-text-error);
+}
+
+/* Подпись о согласии — под полем: она про отправку формы */
+.vm-subscribe__note {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  /* На синей полосе --muted-foreground даёт 3.3:1 — мелкий текст берёт
+     neutral-600 (правило из CLAUDE.md, замер 2026-09-14) */
+  color: var(--sc-neutral-600);
+}
+
+/* Button/Control · primary */
+.vm-subscribe__submit {
+  flex: none;
+  block-size: var(--field-height);
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid transparent;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+.vm-subscribe__submit:hover { opacity: 0.85; }
+
+.vm-subscribe__submit:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-subscribe__submit { transition: none; }
+  /* Вместо видео — его же постер прямо на подложке; слой цвета на ::after
+     тонирует его так же, как кадр */
+  .vm-subscribe__video { display: none; }
+  .vm-subscribe__bg {
+    background: url("../../img/science-poster.jpg") center / cover no-repeat, var(--card);
+  }
+
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .vm-subscribe__frame {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--section-gap);
+    padding: var(--section-padding-y-tight) var(--page-margin-x);
+  }
+
+  .vm-subscribe__title { max-inline-size: none; }
+
+  .vm-subscribe__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--control-gap);
+  }
+
+  .vm-subscribe__field { inline-size: 100%; }
+
+  /* колонка на мобильном — подхватываем сквозное правило (base.css) */
+  .vm-subscribe__submit {
+    inline-size: 100%;
+    margin-block-start: calc(var(--sc-form-cta-gap) - var(--control-gap));
+  }
+
+  .vm-subscribe__error[hidden] { display: none; }
+}

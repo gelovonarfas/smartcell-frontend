@@ -1,0 +1,13 @@
+{
+  // Статика Face Control / Smart Age Journal.
+  // Cloudflare перевёл Pages в Workers Static Assets — серверного кода нет,
+  // деплоится только содержимое dist/ (собирает scripts/build-dist.sh).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "smartcell-frontend",
+  "compatibility_date": "2026-09-13",
+  "assets": {
+    "directory": "./dist",
+    // 404.html в проекте нет: отдаём пустой 404 вместо подмены страницы
+    "not_found_handling": "none"
+  }
+}

@@ -1,0 +1,42 @@
+<!-- ============================================================
+     VM/Subscribe · розсилка журналу
+     figma: node-id=51:39
+     ACF: vm_sub_kicker (text), vm_sub_title (text), vm_sub_note (textarea),
+          vm_sub_label (text), vm_sub_cta (text)
+     Фраза о согласии стоит под полем, а не под заголовком: она
+     относится к отправке формы (решение 2026-09-07).
+     Фон плиты — как в B08: подложка accent, видео science_desat на 10 %, без скрима (2026-09-13).
+     ============================================================ -->
+<section class="vm-subscribe">
+  <div class="vm-subscribe__frame">
+    <!-- Фон плиты — то же видео, что в «Науці»: кадр, поверх синий скрим -->
+    <div class="vm-subscribe__bg" aria-hidden="true">
+      <video class="vm-subscribe__video" autoplay muted loop playsinline preload="metadata"
+             poster="assets/img/science-poster.jpg">
+        <source src="assets/video/science_desat-mp4_no_sound.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="vm-subscribe__copy">
+      <p class="vm-subscribe__kicker sc-t-caption">РОЗСИЛКА SMART AGE JOURNAL</p>
+      <h2 class="vm-subscribe__title sc-t-h2">Корисні поради для краси та здоров'я — раз на тиждень</h2>
+    </div>
+
+    <form class="vm-subscribe__form" data-form novalidate>
+      <div class="vm-subscribe__row">
+        <div class="vm-subscribe__field">
+          <label class="vm-subscribe__label sc-t-caption" for="vm-email">EMAIL</label>
+          <input class="vm-subscribe__input" id="vm-email" name="email" type="email"
+                 placeholder="Ваш e-mail" autocomplete="email" required>
+        </div>
+
+        <button class="vm-subscribe__submit" type="submit">Відправити</button>
+      </div>
+
+      <p class="vm-subscribe__error sc-t-mini" id="vm-email-error" hidden>Вкажіть коректний email</p>
+
+      <p class="vm-subscribe__note sc-t-mini">Надсилаючи форму, ви підтверджуєте згоду з політикою обробки персональних даних.</p>
+    </form>
+
+  </div>
+</section>

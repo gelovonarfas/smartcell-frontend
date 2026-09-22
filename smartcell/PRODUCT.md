@@ -21,7 +21,7 @@ Breakpoint model: desktop 1920 design frame (content max 1280) and mobile 440. O
 
 **Face Control** — the first product: a year-long, medically supervised skin-restoration program (diagnostics → personalized protocol → procedures → year-round monitoring → objective re-assessment). Sold as a whole-year program with on-page payment (LiqPay or monobank acquiring).
 
-**VIRTUS Magazine** — the science-populist blog feeding the space (rubrics: science, cells, cellness, biohacking; series-based articles up to 5000 chars; heavy internal linking to services).
+**Smart Age Journal** — the science-populist blog feeding the space (rubrics: science, cells, cellness, biohacking; series-based articles up to 5000 chars; heavy internal linking to services).
 
 ## Users
 
@@ -29,7 +29,7 @@ Primary: women 35–45 (scenario 2 — main revenue segment). Decide online, avo
 
 Secondary: 25–35 (prevention scenario) and 50+ (intensive scenario). The landing is tuned to scenario 2 with visible paths to 1 and 3.
 
-Reading mode (Impeccable vocabulary): landing = **Persuade**; magazine = **Read**; future patient cabinet = Operate.
+Reading mode (Impeccable vocabulary): landing = **Persuade**; journal = **Read**; future patient cabinet = Operate.
 
 ## Positioning
 
@@ -53,8 +53,8 @@ Tone of voice: Ukrainian, calm, precise, honest (there is a dedicated "who this 
 ### Site map (current scope)
 
 - `/kletochnye-tehnologii/` — SmartCell space; portal switcher VIRTUS ↔ SMARTCELL near logo (dropdown, same tab)
-- Face Control landing — 17 approved blocks (B01 hero … B17 magazine feed) per "Сторінка Продукту" doc; on-page payment CTA
-- `/kletochnye-tehnologii/blog/{category}/{slug}` — VIRTUS Magazine (home + article template built in Figma)
+- Face Control landing — 17 approved blocks (B01 hero … B17 journal feed) per "Сторінка Продукту" doc; on-page payment CTA
+- `/kletochnye-tehnologii/blog/{category}/{slug}` — Smart Age Journal (home + article template built in Figma)
 - Architecture reserve: Протоколи → Напрямки (6 medical directions) → Продукти; custom post types + taxonomy designed for ~10 future products
 
 ### SEO requirements (carried over from old blog — must not be lost)

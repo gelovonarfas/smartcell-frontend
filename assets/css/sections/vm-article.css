@@ -1,0 +1,1033 @@
+/* ============================================================
+   VM/Article · сторінка статті журналу
+   figma: node-id=64:11 (hero 64:12, crumbs 64:23, body 64:25)
+   ============================================================ */
+
+.vm-article {
+  --vm-a-hero-h: 800px;    /* высота шапки в макете */
+  --vm-a-copy-w: 584px;    /* мера копии в шапке */
+  --vm-a-side-w: 380px;    /* сайдбар в макете */
+  --vm-a-avatar: 120px;
+  /* Обкладинка в макете — квадрат 582 абсолютом: 145 от верха полосы,
+     74 от правого края. 74 — не поле 80; поставлено как в макете, согласовать. */
+  --vm-a-photo: 582px;
+  --vm-a-photo-top: 145px;
+  --vm-a-photo-right: 74px;
+
+  /* Вертикальный ритм колонки текста (решение 2026-09-08).
+     Три ступени вместо россыпи значений:
+       block-gap    — между самостоятельными блоками (схема, промо, FAQ,
+                      подписка, авторы). Равен полю страницы: блок читается
+                      как отдельная полоса, а не как продолжение прозы;
+       block-gap-sm — между блоком и его хвостом (оценка, источники);
+       заголовок H2 остаётся на 56 — он внутри прозы, а не рядом с ней. */
+  --vm-a-block-gap: var(--sc-space-20);
+  --vm-a-block-gap-sm: var(--sc-space-12);
+
+  box-sizing: border-box;
+  display: block;
+  /* Полоса шапки начинается под фиксированным навбаром, как в макете:
+     навбар лежит поверх неё, а верхнее поле копии (160) его перекрывает */
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.vm-article *,
+.vm-article *::before,
+.vm-article *::after { box-sizing: border-box; }
+
+/* ---------- Шапка ---------- */
+
+/* Полоса 800 на warm: копия во всю ширину с полями 160 / 56 / 40 / 80,
+   обкладинка лежит абсолютом поверх (в макете она вне потока копии) */
+.vm-article__hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-block-size: var(--vm-a-hero-h);
+  padding-block: var(--section-padding-y) var(--sc-space-10);
+  padding-inline: var(--sc-pad-x) calc(var(--sc-band) + var(--sc-space-14));
+  background: var(--warm);
+}
+
+.vm-article__hero-copy {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sc-space-6);
+  min-inline-size: 0;
+}
+
+/* ---------- Подсказка скролла ----------
+   Квадрат с точкой, катящейся вниз: в шапке статьи под текстом пусто,
+   и читателю нужен знак, что дальше есть материал. Скруглений в системе
+   нет (--radius: 0), поэтому знак именно квадратный; круглая здесь только
+   точка. Живёт в потоке между текстом и подписью, пока шапка на экране. */
+
+.vm-article__scroll {
+  --scroll-box: var(--sc-space-10);   /* 40 — квадрат */
+  --scroll-dot: var(--sc-space-1);    /* 4 — точка */
+  --scroll-inset: var(--sc-space-2);  /* 8 — ход точки от края */
+
+  display: block;
+  position: relative;
+  inline-size: var(--scroll-box);
+  block-size: var(--scroll-box);
+  border: var(--sc-line) solid var(--foreground);
+  flex: 0 0 auto;
+}
+
+.vm-article__scroll::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: var(--scroll-inset);
+  inline-size: var(--scroll-dot);
+  block-size: var(--scroll-dot);
+  margin-inline-start: calc(-1 * var(--scroll-dot) / 2);
+  border-radius: 50%;
+  background: var(--foreground);
+  animation: vm-article-scroll-dot 1800ms var(--sc-ease) infinite;
+}
+
+/* Точка скатывается вниз и гаснет у нижнего края, чтобы жест читался
+   как «дальше вниз», а не как маятник. Ход считается от высоты самого
+   квадрата (проценты), поэтому знак можно тянуть под чужую высоту —
+   на узком экране он равняется по чипсам. */
+@keyframes vm-article-scroll-dot {
+  0%   { inset-block-start: var(--scroll-inset); opacity: 0; }
+  20%  { opacity: 1; }
+  70%  { inset-block-start: calc(100% - var(--scroll-inset) - var(--scroll-dot)); opacity: 1; }
+  100% { inset-block-start: calc(100% - var(--scroll-inset) - var(--scroll-dot)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-article__scroll::before { animation: none; opacity: 1; }
+}
+
+/* ---------- Возврат ----------
+   Со статьи нужно уметь выйти: крошки лежат под шапкой статьи и до них
+   надо доскроллить, а «Почати» в углу — это призыв записаться, а не выход.
+   Поэтому строка возврата стоит первой в шапке, над плашками (2026-09-21). */
+
+.vm-article__back {
+  --back-arrow: var(--sc-space-3);
+
+  align-self: start;
+  justify-self: start;   /* в сетке шапки на мобильном иначе тянется на всю строку */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sc-space-2);
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.vm-article__back:hover { color: var(--foreground); }
+
+.vm-article__back:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* Стрелка влево — та же фигура, что знак «открыть» в полочках: две кромки
+   в 1px, повёрнутые на 45°, отдельный ассет ради неё не нужен */
+.vm-article__back-arrow {
+  inline-size: calc(var(--back-arrow) / 2);
+  block-size: calc(var(--back-arrow) / 2);
+  border-inline-start: 1px solid currentColor;
+  border-block-end: 1px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-fast) var(--sc-ease-out);
+}
+
+.vm-article__back:hover .vm-article__back-arrow { transform: rotate(45deg) translate(-15%, 15%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-article__back,
+  .vm-article__back-arrow { transition: none; }
+}
+
+/* Рубрика в плашке — ссылка на свою страницу: второй выход из статьи */
+.vm-article__chip a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.vm-article__chip:has(a):hover {
+  border-color: var(--foreground);
+}
+
+.vm-article__chip a:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.vm-article__hero-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+  max-inline-size: var(--vm-a-copy-w);
+}
+
+.vm-article__chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-gap);
+}
+
+/* Chip/Meta: рамка 1px, поля 10/6 */
+.vm-article__chip {
+  padding: var(--sc-chip-pad);
+  border: var(--sc-line) solid var(--border);
+}
+
+.vm-article__title { margin: 0; }
+
+.vm-article__dek {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* Байлайн: дата · автор · просмотры · время чтения.
+   Разделитель — точка на ::before, у элементов с иконкой её нет:
+   иконка сама отбивает пункт. Каждая подпись остаётся целым узлом
+   (qTranslate), иконка лежит рядом, а не внутри текста. */
+.vm-article__byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* Просветы плотные: пункты читаются одной строкой, а не четырьмя
+     обрывками (правка 2026-09-13; было --stack-gap-sm) */
+  column-gap: var(--sc-space-1_5);
+  row-gap: var(--sc-space-2);
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.vm-article__byline-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sc-space-1_5);
+}
+
+.vm-article__byline-item + .vm-article__byline-item::before {
+  content: "·";
+  margin-inline-end: var(--sc-space-1_5);
+  color: inherit;
+}
+
+/* Мобильный: две строки — дата с автором, под ними просмотры и время.
+   Сетка 2×2 разводит пункты попарно надёжнее, чем перенос флексом.
+   Третий пункт начинает строку, поэтому точка перед ним не нужна. */
+@media (max-width: 640px) {
+  /* Перенос ставим сами: нулевая полоса на всю ширину между вторым и третьим
+     пунктом. Сетка 2×2 не годится — колонка тянется по широкому пункту и
+     разводит дату с автором. Строка-разделитель съедает один row-gap,
+     поэтому здесь он вдвое меньше. */
+  .vm-article__byline { row-gap: var(--sc-space-1); }
+
+  .vm-article__byline-item:nth-child(1) { order: 1; }
+  .vm-article__byline-item:nth-child(2) { order: 2; }
+
+  .vm-article__byline::after {
+    content: "";
+    order: 3;
+    flex-basis: 100%;
+    block-size: 0;
+  }
+
+  .vm-article__byline-item:nth-child(3) { order: 4; }
+  .vm-article__byline-item:nth-child(4) { order: 5; }
+  .vm-article__byline-item:nth-child(3)::before { content: none; }
+}
+
+.vm-article__byline-icon {
+  display: block;
+  flex: none;
+  inline-size: var(--sc-space-4);
+  block-size: var(--sc-space-4);
+  /* оптическая посадка на строку мелкого кегля */
+  margin-block-start: -1px;
+  opacity: 0.85;
+}
+
+/* Обкладинка — квадрат 582 в правой части полосы, как в макете.
+   В ленте журнала это тот же кадр: переход из ленты сажает его ровно сюда. */
+.vm-article__hero-media {
+  position: absolute;
+  inset-block-start: var(--vm-a-photo-top);
+  inset-inline-end: calc(var(--sc-band) + var(--vm-a-photo-right));
+  inline-size: var(--vm-a-photo);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.vm-article__hero-media img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Подхват перехода из ленты ----------
+   Обкладинка приезжает из ленты уже в свою рамку (assets/js/article-intro.js):
+   снимок стоит в тех же координатах, куда его привёл слайдер, и растворяется
+   над своим фото. Пока он есть, своё фото скрыто — иначе кадр двоится. */
+
+.vm-article__flyer {
+  position: fixed;
+  z-index: 91;
+  inset-block-start: var(--flyer-y, 0px);
+  inset-inline-start: var(--flyer-x, 0px);
+  inline-size: var(--flyer-w, 0px);
+  block-size: var(--flyer-h, 0px);
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.vm-article__flyer.sc-is-landing {
+  transition:
+    inset-block-start var(--sc-dur-slow) var(--sc-ease-out),
+    inset-inline-start var(--sc-dur-slow) var(--sc-ease-out),
+    inline-size var(--sc-dur-slow) var(--sc-ease-out),
+    block-size var(--sc-dur-slow) var(--sc-ease-out),
+    /* снимок гаснет на последнем отрезке пути, уже стоя на месте обкладинки */
+    opacity var(--sc-dur-fast) linear calc(var(--sc-dur-slow) - var(--sc-dur-fast));
+}
+
+.vm-article__flyer.sc-is-landing { opacity: 0; }
+
+.vm-article__hero-media.sc-is-handoff img { visibility: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-article__flyer { transition: none; }
+}
+
+/* ---------- Хлебные крошки ---------- */
+
+/* Полоса крошек под шапкой: 50 в макете, линия снизу */
+/* Полоса прочерчена сверху и снизу: верхняя линия отделяет её от шапки статьи.
+   Высота 70 — та же, что у полосы крошек на главной блога (--vm-rubrics-h),
+   чтобы при переходе из ленты в статью полоса не прыгала (решение 2026-09-08). */
+.vm-article__crumbs {
+  display: flex;
+  --vm-a-crumbs-h: 70px;   /* = --vm-rubrics-h на главной блога */
+
+  align-items: center;
+  min-block-size: var(--vm-a-crumbs-h);
+  padding: var(--sc-space-2) var(--sc-pad-x);
+  border-block: var(--hairline) solid var(--border);
+}
+
+.vm-article__crumbs p {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.vm-article__crumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Полоса прочитанного ----------
+   Control/Progress: дорожка muted, индикатор foreground. Липнет под шапкой
+   и есть только на статье — по ней сразу понятно, что читаешь материал. */
+
+/* Полоса висит под навбаром вне потока: sticky занимала 2px в потоке
+   и сдвигала шапку относительно макета (обкладинка 145 → 147) */
+.vm-article__progress {
+  position: fixed;
+  inset-block-start: var(--header-h, 80px);
+  inset-inline: 0;
+  z-index: 2;
+  block-size: var(--sc-progress-h);
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.vm-article__progress-bar {
+  display: block;
+  block-size: 100%;
+  inline-size: 100%;
+  background: var(--primary); /* фирменный синий (2026-09-12, было чёрное) */
+  transform: scaleX(var(--article-progress, 0));
+  transform-origin: left center;
+}
+
+/* ---------- Тело: колонка 844 + сайдбар 380 ---------- */
+
+/* Гаттер между текстом и сайдбаром — в поле страницы (80), а не в разрядку
+   секции (56): колонки читаются как две отдельные полосы, а не как один блок
+   (решение 2026-09-08). Меру строки это не трогает — проза и так ограничена
+   65ch, ужимается только ширина широких врезок. */
+.vm-article__body {
+  display: grid;
+  grid-template-columns: minmax(0, 844fr) var(--vm-a-side-w);
+  gap: var(--sc-space-20);
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  align-items: start;
+}
+
+.vm-article__main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-inline-size: 0;
+}
+
+/* ---------- Шеринг ---------- */
+
+.vm-article__share {
+  display: flex;
+  align-items: center;
+  gap: var(--stack-gap-md);
+  color: var(--muted-foreground);
+}
+
+.vm-article__share-link {
+  padding: var(--sc-chip-pad);
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+/* ---------- «Коротко» ---------- */
+
+.vm-article__summary {
+  margin-block-start: var(--sc-space-10); /* rhythm/40 */
+  inline-size: 100%;
+}
+
+.vm-article__summary-title {
+  margin: 0 0 var(--sc-space-3);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.vm-article__summary-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-3);
+}
+
+/* Маркер — круг 6 по центру интерлиньяжа первой строки */
+.vm-article__summary-list li {
+  position: relative;
+  padding-inline-start: var(--sc-space-5);
+  max-inline-size: var(--sc-measure);
+}
+
+.vm-article__summary-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  --vm-a-dot: var(--sc-space-1_5);
+  inset-block-start: calc((var(--p-lh) - var(--vm-a-dot)) / 2);
+  inline-size: var(--vm-a-dot);
+  block-size: var(--vm-a-dot);
+  border-radius: var(--sc-round-full);
+  background: var(--foreground);
+}
+
+/* ---------- Текст статьи ---------- */
+
+.vm-article__h2 {
+  margin: var(--sc-space-14) 0 0; /* rhythm/56 */
+  max-inline-size: var(--sc-measure);
+}
+
+/* Первое предложение раздела — прямой ответ, набран лидом */
+/* Первая фраза раздела отвечает на вопрос заголовка напрямую — так материал
+   разбирают поисковые системы и языковые модели. Читателю такой «конспект»
+   посреди прозы мешает, поэтому обособляем его: синяя линия слева, отступ
+   в поле карточки и метка «Коротко» (решение 2026-09-08). Метка — цельный
+   текстовый узел в разметке, а не content в CSS: иначе её не перевести. */
+.vm-article__answer {
+  margin: var(--sc-space-6) 0 0;
+  max-inline-size: var(--sc-measure);
+  padding-inline-start: var(--card-padding);
+  border-inline-start: var(--hairline) solid var(--primary);
+}
+
+.vm-article__answer-label {
+  display: block;
+  margin-block-end: var(--stack-gap-sm);
+  color: var(--primary);
+}
+
+.vm-article__p {
+  margin: var(--stack-gap-md) 0 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.vm-article__checklist {
+  margin: var(--sc-space-5) 0 0; /* rhythm/20 */
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.vm-article__checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--card-gap);
+  max-inline-size: var(--sc-measure);
+}
+
+.vm-article__check {
+  --vm-a-check: var(--sc-space-3_5);
+  flex: none;
+  margin-block-start: calc((var(--p-lh) - var(--vm-a-check)) / 2);
+}
+
+/* ---------- Иллюстрация ----------
+   Схема шире меры строки: она читается как объект, а не как проза,
+   поэтому занимает всю колонку текста. Надписей на самом кадре нет —
+   виды колоний названы в тексте раздела. */
+
+/* Отступы сверху и снизу — сквозное правило о воздухе вокруг фото (base.css) */
+
+.vm-article__figure-media {
+  position: relative;
+  display: block;
+  background: var(--card);
+}
+
+.vm-article__figure-media img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.vm-article__figcaption {
+  margin-block-start: var(--stack-gap-sm);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Инлайн-промо ---------- */
+
+.vm-article__promo {
+  display: flex;
+  align-items: center;
+  gap: var(--section-gap);
+  inline-size: 100%;
+  margin-block-start: var(--vm-a-block-gap);
+  padding: var(--card-padding);
+  background: var(--secondary);
+}
+
+.vm-article__promo-copy {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+  min-inline-size: 0;
+}
+
+.vm-article__promo-kicker {
+  margin: 0;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.vm-article__promo-title { margin: 0; }
+
+/* Button/Control · primary */
+.vm-article__promo-cta,
+.vm-article__subscribe-cta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--control-square);
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid transparent;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+/* ---------- Навигация серии ---------- */
+
+.vm-article__series {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--grid-gap);
+  inline-size: 100%;
+  margin-block-start: var(--vm-a-block-gap); /* rhythm/48 */
+  padding-block: var(--stack-gap-md);
+  border-block: var(--hairline) solid var(--border);
+  color: var(--muted-foreground);
+}
+
+.vm-article__series-next {
+  color: var(--foreground);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ---------- FAQ ---------- */
+
+.vm-article__faq {
+  inline-size: 100%;
+  margin-block-start: var(--vm-a-block-gap);
+}
+
+.vm-article__faq h2 { margin: 0 0 var(--sc-space-6); }
+
+.vm-article__faq-item {
+  border-block-start: var(--hairline) solid var(--border);
+}
+
+.vm-article__faq-item:last-of-type {
+  border-block-end: var(--hairline) solid var(--border);
+}
+
+.vm-article__faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--grid-gap);
+  min-block-size: var(--control-square);
+  padding-block: var(--stack-gap-md);
+  list-style: none;
+  cursor: pointer;
+}
+
+.vm-article__faq-q::-webkit-details-marker { display: none; }
+
+/* Плюс-минус: линии в толщину кромок */
+.vm-article__faq-sign {
+  position: relative;
+  flex: none;
+  inline-size: var(--sc-space-3_5);
+  block-size: var(--sc-space-3_5);
+}
+
+.vm-article__faq-sign::before,
+.vm-article__faq-sign::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  block-size: 1px;
+  background: currentColor;
+  transition: transform var(--sc-dur) var(--sc-ease), opacity var(--sc-dur) var(--sc-ease);
+}
+
+.vm-article__faq-sign::after { transform: rotate(90deg); }
+
+.vm-article__faq-item[open] .vm-article__faq-sign::after {
+  transform: rotate(0deg);
+  opacity: 0;
+}
+
+.vm-article__faq-a {
+  margin: 0 0 var(--sc-space-6);
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+/* ---------- Инлайн-подписка ---------- */
+
+.vm-article__subscribe {
+  display: grid;
+  grid-template-columns: minmax(0, 504fr) 340fr;
+  inline-size: 100%;
+  margin-block-start: var(--vm-a-block-gap);
+  background: var(--secondary);
+}
+
+.vm-article__subscribe-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-md);
+  padding: var(--sc-space-10);
+}
+
+.vm-article__subscribe-kicker {
+  margin: 0;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.vm-article__subscribe-title { margin: 0; }
+
+.vm-article__subscribe-note {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+.vm-article__benefits {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.vm-article__benefits li {
+  position: relative;
+  padding-inline-start: var(--sc-space-6);
+}
+
+/* галочка — тот же знак, что в чеклисте */
+.vm-article__benefits li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  --vm-a-tick: var(--sc-space-3);
+  inset-block-start: calc((var(--p-small-lh) - var(--vm-a-tick)) / 2);
+  inline-size: var(--vm-a-tick);
+  block-size: var(--vm-a-tick);
+  background: currentColor;
+  clip-path: polygon(14% 52%, 8% 60%, 40% 92%, 96% 22%, 88% 14%, 39% 76%);
+}
+
+.vm-article__subscribe-form {
+  --sc-form-gap: var(--stack-gap-sm);   /* шаг колонки — см. правило в base.css */
+
+  /* Поле + кнопка читаются как одна группа: отбиваем её от текста шире,
+     чем расстояние внутри группы (28 между полем и кнопкой).
+     Колонка уже даёт свой шаг — добавляем недостающее до 40 */
+  margin-block-start: calc(var(--sc-space-10) - var(--stack-gap-md));
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+  --vm-a-form-w: 424px;   /* ширина формы подписки в макете */
+  inline-size: 100%;
+  max-inline-size: var(--vm-a-form-w);
+}
+
+.vm-article__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1_5);
+}
+
+.vm-article__label {
+  color: var(--field-label);
+  text-transform: uppercase;
+}
+
+/* Form/Input: высота 48, поля 16, рамка 1px */
+.vm-article__input {
+  block-size: var(--field-height);
+  padding-inline: var(--field-padding-x);
+  border: var(--sc-line) solid var(--field-border);
+  border-radius: var(--radius);
+  background: var(--field-bg);
+  color: var(--field-text);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+}
+
+.vm-article__input::placeholder { color: var(--field-placeholder); }
+
+.vm-article__input:focus-visible {
+  outline: none;
+  border-color: var(--field-border-focus);
+  box-shadow: 0 0 0 var(--sc-field-ring-w) var(--field-focus-ring);
+}
+
+.vm-article__input[aria-invalid="true"] { border-color: var(--field-border-error); }
+
+.vm-article__error {
+  margin: 0;
+  color: var(--field-text-error);
+}
+
+/* кнопка отбита от поля общим правилом --card-padding */
+.vm-article__subscribe-cta { align-self: flex-start; }
+
+.vm-article__subscribe-foot {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.vm-article__subscribe-visual {
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.vm-article__subscribe-visual img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Автор ---------- */
+
+.vm-article__author {
+  display: flex;
+  gap: var(--section-gap);
+  inline-size: 100%;
+  margin-block-start: var(--vm-a-block-gap);
+  padding-block-start: var(--sc-space-8);
+  border-block-start: var(--hairline) solid var(--border);
+}
+
+.vm-article__avatar {
+  flex: none;
+  inline-size: var(--vm-a-avatar);
+  block-size: var(--vm-a-avatar);
+  object-fit: cover;
+}
+
+.vm-article__bio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+  min-inline-size: 0;
+}
+
+.vm-article__bio p { margin: 0; }
+
+.vm-article__author-kicker {
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.vm-article__author-name a,
+.vm-article__author-link {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.vm-article__author-role,
+.vm-article__author-bio {
+  color: var(--muted-foreground);
+  max-inline-size: var(--sc-measure);
+}
+
+/* ---------- Рейтинг и источники ---------- */
+
+.vm-article__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--stack-gap-md);
+  margin-block-start: var(--vm-a-block-gap-sm);
+}
+
+.vm-article__rating-note { color: var(--muted-foreground); }
+
+/* Мелкие подписи меру строки не держат: --sc-measure задан для прозы,
+   а перечень источников и подпись к схеме набраны мини-кеглем — на нём
+   65ch уже уводит строку в столбик посреди пустой колонки.
+   Решение 2026-09-08: обе подписи идут на всю ширину колонки. */
+.vm-article__sources {
+  margin: var(--vm-a-block-gap-sm) 0 0;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Сайдбар ---------- */
+
+.vm-article__sidebar {
+  position: sticky;
+  inset-block-start: calc(var(--sc-anchor-offset) + var(--stack-gap-md));
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-10);
+}
+
+.vm-article__toc-title,
+.vm-article__services-title {
+  margin: 0 0 var(--sc-space-3);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.vm-article__toc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vm-article__toc-list li {
+  display: flex;
+  gap: var(--sc-space-4);
+  padding-block: var(--stack-gap-md);
+  border-block-start: var(--hairline) solid var(--border);
+}
+
+.vm-article__toc-list a {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.vm-article__toc-num { color: var(--muted-foreground); }
+
+.vm-article__services {
+  padding: var(--card-padding);
+  /* ПРОБА 2026-09-13: голубой 100 (--accent) вместо тёплого --secondary —
+     карточка услуг читается как действие, а не как ещё один текстовый блок.
+     Откат: background: var(--secondary). */
+  background: var(--accent);
+}
+
+.vm-article__services-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vm-article__services-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--grid-gap);
+  padding-block: var(--stack-gap-md);
+  /* прожилки внутри карточки тоньше кромки — см. --sc-hairline-fine */
+  border-block-start: var(--sc-hairline-fine) solid var(--border);
+}
+
+.vm-article__services-list li:first-child { border-block-start: 0; }
+
+.vm-article__price {
+  flex: none;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Состояния ----------
+   В Figma их нет — обязательны по CLAUDE.md */
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-article__share-link:hover { background: var(--muted); }
+  .vm-article__promo-cta:hover,
+  .vm-article__subscribe-cta:hover { background: var(--sc-primary-hover); }
+  .vm-article__crumbs a:hover,
+  .vm-article__toc-list a:hover,
+  .vm-article__series-next:hover,
+  .vm-article__author-link:hover { text-decoration: underline; }
+}
+
+.vm-article a:focus-visible,
+.vm-article button:focus-visible,
+.vm-article summary:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-article__share-link,
+  .vm-article__promo-cta,
+  .vm-article__subscribe-cta,
+  .vm-article__faq-sign::before,
+  .vm-article__faq-sign::after { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  /* На узком экране ритм на ступень ниже: 80 съедало бы экран */
+  .vm-article {
+    --vm-a-block-gap: var(--sc-space-14);
+    --vm-a-block-gap-sm: var(--sc-space-8);
+  }
+
+  /* Колонка: обкладинка первой, копия под ней. Фото не навылет, а в рамке
+     полей: слева, справа, сверху от шапки и снизу до копии — ровно
+     --page-margin-x (решение 2026-09-11). Шапка фиксированная, поэтому
+     верхний отступ складывается из её высоты и поля. */
+  .vm-article__hero {
+    min-block-size: 0;
+    padding-block: calc(var(--header-h, 80px) + var(--page-margin-x)) var(--section-padding-y-tight);
+    padding-inline: var(--sc-pad-x);
+    gap: var(--page-margin-x);
+  }
+
+  .vm-article__hero-media {
+    position: static;
+    order: 1;
+    inline-size: auto;
+  }
+
+  /* Подсказка скролла встаёт в строку с чипсами, справа: внизу колонки
+     на узком экране её никто не увидит — там уже подпись (2026-09-14).
+     Копию раскладываем сеткой, вводную распускаем, и знак занимает
+     вторую колонку первой строки, равняясь по высоте чипсов. */
+  .vm-article__hero-copy {
+    order: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: start;
+    gap: var(--section-gap) var(--sc-space-3);
+  }
+
+  .vm-article__hero-top { display: contents; }
+
+  /* Строка возврата и плашки делят первую строку с подсказкой скролла */
+  .vm-article__back { grid-area: 1 / 1; }
+  .vm-article__chips { grid-area: 2 / 1; }
+
+  .vm-article__scroll {
+    grid-area: 2 / 2;
+    align-self: start;
+    /* Ровно высота чипса: поля 6 сверху и снизу плюс строка мини-кегля.
+       Меняешь набор чипсов — проверь это число (замер 2026-09-14: 32) */
+    --scroll-box: var(--sc-space-8);
+    --scroll-inset: var(--sc-space-1_5);
+  }
+
+  .vm-article__title { grid-area: 3 / 1 / auto / -1; }
+  .vm-article__dek { grid-area: 4 / 1 / auto / -1; }
+  .vm-article__byline { grid-area: 5 / 1 / auto / -1; }
+
+  /* Якоря на узком экране прячем (решение 2026-09-14): перечень разделов
+     помогает, пока он липнет рядом с текстом, а в одну колонку он лишь
+     отодвигает материал — читатель и так скроллит подряд. */
+  .vm-article__toc { display: none; }
+
+  /* Поля карточки подписки на узком экране те же 24, что у других карточек:
+     40 съедали строку (правка 2026-09-14) */
+  .vm-article__subscribe-copy { padding: var(--sc-space-6); }
+
+  /* Сайдбар уходит под текст и перестаёт липнуть */
+  .vm-article__body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
+  }
+
+  .vm-article__sidebar { position: static; }
+
+  .vm-article__promo,
+  .vm-article__author {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--page-margin-x);
+  }
+
+  .vm-article__promo-cta,
+  .vm-article__subscribe-cta { inline-size: 100%; }
+
+  .vm-article__subscribe { grid-template-columns: minmax(0, 1fr); }
+  .vm-article__subscribe-visual { order: -1; aspect-ratio: 16 / 9; }
+
+  .vm-article__error[hidden] { display: none; }
+}

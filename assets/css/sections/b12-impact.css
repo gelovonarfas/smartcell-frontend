@@ -1,0 +1,151 @@
+/* ============================================================
+   B12 · На що впливаємо — полосы показателей
+   figma: node-id=15:112
+   Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-impact {
+  /* --- Геометрия строки из макета. В токенах таких ролей нет.
+         Понадобится системная роль — заводим переменную в Figma, не здесь. --- */
+  --impact-label-w: 250px;
+  --impact-term-w: 90px;
+  --impact-value-w: 80px;
+  --impact-track-h: 3px;
+
+  /* Заливка полосы — в макете переменная ring (#2E6EBF) */
+  /* Полоса чернильная — одна на все строки. Синий след пробовали ставить
+     на ключевую строку (2026-09-13), но ряд читался как сбой, а не акцент:
+     показатели однородны, выделять один нечем (правка 2026-09-14). */
+  /* Полосы синие, как в макете (возврат 2026-09-14). Один синий бар среди
+     чернильных читался как сбой, а весь ряд в фирменном синем — как акцент
+     блока: это единственные растущие величины на странице. */
+  --impact-fill-color: var(--sc-action);
+
+  /* 900ms задано ТЗ анимации; в шкале движения есть только 160/280/600. */
+  --impact-dur: 900ms;
+
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-impact *,
+.sc-impact *::before,
+.sc-impact *::after { box-sizing: border-box; }
+
+/* ---------- Раскладка: фото + данные ---------- */
+
+.sc-impact__inner {
+  display: grid;
+  /* Фото — 5 колонок сетки (5 × 92px = 460).
+     Данные — 7 колонок с гатерами (7 × 92 + 6 × 16 = 740).
+     Пропорцией, а не px, чтобы блок жил на любой ширине контейнера. */
+  grid-template-columns: 460fr 740fr;
+  gap: var(--section-gap);
+  align-items: start;
+}
+
+.sc-impact__media {
+  margin: 0;
+  min-width: 0;
+  /* Правило квадрата: пропорцию держит контейнер, кадр кроется */
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  align-self: start;
+  background: var(--muted); /* держит слот, пока кадр грузится */
+}
+
+.sc-impact__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sc-impact__data {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  min-width: 0;
+}
+
+.sc-impact__title { margin: 0; }
+
+/* ---------- Строки показателей ---------- */
+
+.sc-impact__rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-impact__row {
+  display: grid;
+  grid-template-columns:
+    var(--impact-label-w)
+    var(--impact-term-w)
+    minmax(0, 1fr)
+    var(--impact-value-w);
+  gap: var(--grid-gap);
+  align-items: center;
+  padding-block: var(--bar-padding-y);
+  border-bottom: var(--hairline) solid var(--border);
+}
+
+.sc-impact__label { color: var(--foreground); }
+
+/* --muted-foreground на сером бэнде даёт 4.31:1 — берём --muted-foreground (см. CLAUDE.md) */
+.sc-impact__term { color: var(--muted-foreground); }
+
+.sc-impact__track {
+  display: block;
+  block-size: var(--impact-track-h);
+  background: var(--muted); /* трек светлый: в макете muted */
+  overflow: hidden;
+}
+
+.sc-impact__fill {
+  display: block;
+  block-size: 100%;
+  background: var(--impact-fill-color);
+  transform: scaleX(var(--impact-fill, 1));
+  transform-origin: left center;
+  transition: transform var(--impact-dur) var(--sc-ease);
+}
+
+.sc-impact__value {
+  text-align: right;
+  font-variant-numeric: tabular-nums; /* цифры не дёргаются во время счёта */
+}
+
+.sc-impact__note {
+  margin: 0;
+  max-width: var(--sc-measure); /* в макете строка до 105 знаков — ограничиваем */
+  color: var(--muted-foreground);
+}
+
+/* ---------- Анимация ----------
+   Нулевое состояние ставит сам скрипт (data-impact-animate="pending").
+   Без JS и при prefers-reduced-motion полосы и цифры сразу финальные. */
+
+.sc-impact[data-impact-animate="pending"] .sc-impact__fill { transform: scaleX(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-impact__fill { transition: none; }
+}
+
+/* ---------- Мобильный ----------
+   Единственный случай class-правил в media query: раскладка меняется
+   принципиально (две колонки → одна, строка в три ячейки с подписью сверху). */
+
+@media (max-width: 640px) {
+  .sc-impact__inner { grid-template-columns: 1fr; }
+
+  .sc-impact__row {
+    grid-template-columns: auto minmax(0, 1fr) var(--impact-value-w);
+    row-gap: var(--stack-gap-sm);
+  }
+
+  .sc-impact__label { grid-column: 1 / -1; }
+}

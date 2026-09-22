@@ -1,0 +1,157 @@
+<!-- ============================================================
+     B06 · До-Після · 3 кейси
+     figma: node-id=925:1315 (огляд), стани — 931:1130 … 937:1383
+     ACF: cases_title (text), cases_legal (textarea),
+          cases_items (repeater: meta, views (repeater: type [photo|uzd|morph],
+          title, note, image_before, image_after))
+
+     Раскладка макета: медиа 680 + под ним свитчер ДО/ПІСЛЯ, колонка видов
+     контролю 112 (Фото / УЗД / Морфологія), колонка текста 440; гаттер 24.
+     Кейсы листаются стрелками, вид — миниатюрами, ДО/ПІСЛЯ — сегментами.
+     У кейса 2 морфологии нет: миниатюра прячется, вид падает на «Фото».
+
+     Кадры: assets/img/b06/case-N-<type>-<before|after>.jpg — экспорт из
+     Figma 330×330 @2x = 660. Слот на десктопе 680, так что на ретине кадр
+     чуть мягче нативного; при новом экспорте достаточно поднять до @3x.
+
+     Все тексты — цельные узлы в разметке (под qTranslate); JS только
+     переключает видимость. Без JS видно кейс 1 · Фото · ПІСЛЯ.
+     ============================================================ -->
+<section class="sc-cases" data-cases>
+  <div class="sc-cases__head">
+    <h2 class="sc-cases__title sc-t-h2">До — Після</h2>
+  </div>
+
+  <div class="sc-cases__row">
+
+    <div class="sc-cases__media">
+      <div class="sc-cases__frames">
+        <div class="sc-cases__frame" data-case-frame="1" data-case-type="photo" data-current>
+          <img class="sc-cases__shot" data-case-shot="before" src="assets/img/b06/case-1-photo-before.jpg" alt="Кейс 1 · фото · до" width="660" height="660" loading="lazy" decoding="async">
+          <img class="sc-cases__shot" data-case-shot="after" src="assets/img/b06/case-1-photo-after.jpg" alt="Кейс 1 · фото · після" width="660" height="660" loading="lazy" decoding="async" data-current>
+        </div>
+        <div class="sc-cases__frame" data-case-frame="1" data-case-type="uzd">
+          <img class="sc-cases__shot" data-case-shot="before" src="assets/img/b06/case-1-uzd-before.jpg" alt="Кейс 1 · УЗД дерми · до" width="660" height="660" loading="lazy" decoding="async">
+          <img class="sc-cases__shot" data-case-shot="after" src="assets/img/b06/case-1-uzd-after.jpg" alt="Кейс 1 · УЗД дерми · після" width="660" height="660" loading="lazy" decoding="async" data-current>
+        </div>
+        <div class="sc-cases__frame" data-case-frame="1" data-case-type="morph">
+          <img class="sc-cases__shot" data-case-shot="before" src="assets/img/b06/case-1-morph-before.jpg" alt="Кейс 1 · морфологія, гістологічний зріз · до" width="660" height="660" loading="lazy" decoding="async">
+          <img class="sc-cases__shot" data-case-shot="after" src="assets/img/b06/case-1-morph-after.jpg" alt="Кейс 1 · морфологія, гістологічний зріз · після" width="660" height="660" loading="lazy" decoding="async" data-current>
+        </div>
+        <div class="sc-cases__frame" data-case-frame="2" data-case-type="photo">
+          <img class="sc-cases__shot" data-case-shot="before" src="assets/img/b06/case-2-photo-before.jpg" alt="Кейс 2 · фото · до" width="660" height="660" loading="lazy" decoding="async">
+          <img class="sc-cases__shot" data-case-shot="after" src="assets/img/b06/case-2-photo-after.jpg" alt="Кейс 2 · фото · після" width="660" height="660" loading="lazy" decoding="async" data-current>
+        </div>
+        <div class="sc-cases__frame" data-case-frame="2" data-case-type="uzd">
+          <img class="sc-cases__shot" data-case-shot="before" src="assets/img/b06/case-2-uzd-before.jpg" alt="Кейс 2 · УЗД дерми · до" width="660" height="660" loading="lazy" decoding="async">
+          <img class="sc-cases__shot" data-case-shot="after" src="assets/img/b06/case-2-uzd-after.jpg" alt="Кейс 2 · УЗД дерми · після" width="660" height="660" loading="lazy" decoding="async" data-current>
+        </div>
+        <div class="sc-cases__frame" data-case-frame="3" data-case-type="photo">
+          <img class="sc-cases__shot" data-case-shot="before" src="assets/img/b06/case-3-photo-before.jpg" alt="Кейс 3 · фото · до" width="660" height="660" loading="lazy" decoding="async">
+          <img class="sc-cases__shot" data-case-shot="after" src="assets/img/b06/case-3-photo-after.jpg" alt="Кейс 3 · фото · після" width="660" height="660" loading="lazy" decoding="async" data-current>
+        </div>
+        <div class="sc-cases__frame" data-case-frame="3" data-case-type="uzd">
+          <img class="sc-cases__shot" data-case-shot="before" src="assets/img/b06/case-3-uzd-before.jpg" alt="Кейс 3 · УЗД дерми · до" width="660" height="660" loading="lazy" decoding="async">
+          <img class="sc-cases__shot" data-case-shot="after" src="assets/img/b06/case-3-uzd-after.jpg" alt="Кейс 3 · УЗД дерми · після" width="660" height="660" loading="lazy" decoding="async" data-current>
+        </div>
+        <div class="sc-cases__frame" data-case-frame="3" data-case-type="morph">
+          <img class="sc-cases__shot" data-case-shot="before" src="assets/img/b06/case-3-morph-before.jpg" alt="Кейс 3 · морфологія, гістологічний зріз · до" width="660" height="660" loading="lazy" decoding="async">
+          <img class="sc-cases__shot" data-case-shot="after" src="assets/img/b06/case-3-morph-after.jpg" alt="Кейс 3 · морфологія, гістологічний зріз · після" width="660" height="660" loading="lazy" decoding="async" data-current>
+        </div>
+      </div>
+
+      <div class="sc-cases__switch" role="radiogroup" aria-label="Кадр до або після">
+        <button class="sc-cases__seg" type="button" role="radio" aria-checked="false" data-case-shot-btn="before">ДО</button>
+        <button class="sc-cases__seg" type="button" role="radio" aria-checked="true" data-case-shot-btn="after">ПІСЛЯ</button>
+      </div>
+    </div>
+
+    <ul class="sc-cases__types" role="tablist" aria-label="Вид контролю">
+      <li role="presentation">
+        <button class="sc-cases__type" type="button" role="tab" aria-selected="true" data-case-type-btn="photo">
+          <span class="sc-cases__type-thumb">
+            <img class="sc-cases__type-img" data-case-thumb="1" src="assets/img/b06/case-1-photo-after.jpg" alt="" width="660" height="660" loading="lazy" decoding="async">
+            <img class="sc-cases__type-img" data-case-thumb="2" src="assets/img/b06/case-2-photo-after.jpg" alt="" width="660" height="660" loading="lazy" decoding="async" hidden>
+            <img class="sc-cases__type-img" data-case-thumb="3" src="assets/img/b06/case-3-photo-after.jpg" alt="" width="660" height="660" loading="lazy" decoding="async" hidden>
+          </span>
+          <span class="sc-cases__type-label sc-t-caption">Фото</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button class="sc-cases__type" type="button" role="tab" aria-selected="false" data-case-type-btn="uzd">
+          <span class="sc-cases__type-thumb">
+            <img class="sc-cases__type-img" data-case-thumb="1" src="assets/img/b06/case-1-uzd-after.jpg" alt="" width="660" height="660" loading="lazy" decoding="async">
+            <img class="sc-cases__type-img" data-case-thumb="2" src="assets/img/b06/case-2-uzd-after.jpg" alt="" width="660" height="660" loading="lazy" decoding="async" hidden>
+            <img class="sc-cases__type-img" data-case-thumb="3" src="assets/img/b06/case-3-uzd-after.jpg" alt="" width="660" height="660" loading="lazy" decoding="async" hidden>
+          </span>
+          <span class="sc-cases__type-label sc-t-caption">УЗД</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button class="sc-cases__type" type="button" role="tab" aria-selected="false" data-case-type-btn="morph">
+          <span class="sc-cases__type-thumb">
+            <img class="sc-cases__type-img" data-case-thumb="1" src="assets/img/b06/case-1-morph-after.jpg" alt="" width="660" height="660" loading="lazy" decoding="async">
+            <img class="sc-cases__type-img" data-case-thumb="3" src="assets/img/b06/case-3-morph-after.jpg" alt="" width="660" height="660" loading="lazy" decoding="async" hidden>
+          </span>
+          <span class="sc-cases__type-label sc-t-caption">Морфологія</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="sc-cases__col">
+      <div class="sc-cases__top">
+        <div class="sc-cases__switcher">
+          <button class="sc-cases__nav" type="button" data-case-prev aria-label="Попередній кейс"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M26.5 19L21.5 24L26.5 29" stroke="currentColor"/></svg></button>
+          <p class="sc-cases__metas sc-t-small" aria-live="polite">
+            <span class="sc-cases__meta" data-case-meta="1"><span class="sc-cases__count">1 / 3</span><b class="sc-cases__label">Пацієнтка 1</b></span>
+            <span class="sc-cases__meta" data-case-meta="2" hidden><span class="sc-cases__count">2 / 3</span><b class="sc-cases__label">Пацієнтка 2 · 6 міс</b></span>
+            <span class="sc-cases__meta" data-case-meta="3" hidden><span class="sc-cases__count">3 / 3</span><b class="sc-cases__label">Пацієнтка 3 · 6 міс</b></span>
+          </p>
+          <button class="sc-cases__nav" type="button" data-case-next aria-label="Наступний кейс"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M21.5 19L26.5 24L21.5 29" stroke="currentColor"/></svg></button>
+        </div>
+
+        <div class="sc-cases__panels">
+        <div class="sc-cases__panel" data-case-panel="1" data-case-type="photo">
+          <h3 class="sc-cases__subtitle sc-t-h3">Клінічний ефект</h3>
+          <p class="sc-cases__note sc-t-body">Фото до і після введення 60 млн аутофібробластів. Однакові умови освітлення і ракурсу; різницю підтверджено УЗД та морфологічним контролем, а не візуальною оцінкою.</p>
+        </div>
+        <div class="sc-cases__panel" data-case-panel="1" data-case-type="uzd" hidden>
+          <h3 class="sc-cases__subtitle sc-t-h3">Ультразвуковий динамічний контроль</h3>
+          <p class="sc-cases__note sc-t-body"><b>До.</b> Епідерміс неоднорідний за структурою і товщиною. Помірне збільшення кількості дезорганізованих колагенових волокон у дермі. Дилатація кровоносних судин.</p>
+          <p class="sc-cases__note sc-t-body"><b>Після.</b> Відновлення однорідності структури епідермісу. Значне покращення організації волокнистих структур дерми та функції мікроциркуляторного русла.</p>
+        </div>
+        <div class="sc-cases__panel" data-case-panel="1" data-case-type="morph" hidden>
+          <h3 class="sc-cases__subtitle sc-t-h3">Морфологічний динамічний контроль</h3>
+          <p class="sc-cases__note sc-t-body"><b>До.</b> Дерматопороз. Збільшена кількість розрізнених волокон дерми. Розширення кровоносних судин.</p>
+          <p class="sc-cases__note sc-t-body"><b>Після.</b> Значне покращення організації волокон дермальних структур і кровоносних судин шкіри. Покращення стану епідермісу.</p>
+        </div>
+        <div class="sc-cases__panel" data-case-panel="2" data-case-type="photo" hidden>
+          <h3 class="sc-cases__subtitle sc-t-h3">Відновлення тонусу шкіри, корекція носогубних складок</h3>
+          <p class="sc-cases__note sc-t-body">Результат через 6 місяців після введення 30 млн аутофібробластів. Морфологічний контроль у цьому кейсі не проводився.</p>
+        </div>
+        <div class="sc-cases__panel" data-case-panel="2" data-case-type="uzd" hidden>
+          <h3 class="sc-cases__subtitle sc-t-h3">Ультразвуковий динамічний контроль</h3>
+          <p class="sc-cases__note sc-t-body"><b>До лікування.</b> Епідермальний шар значно потовщений. Колагенові волокна дезорганізовані. Секреторні відділи сальних залоз суттєво зменшені.</p>
+          <p class="sc-cases__note sc-t-body"><b>Після лікування.</b> Зменшення товщини епідермісу, значне покращення стану волокнистих структур дерми.</p>
+        </div>
+        <div class="sc-cases__panel" data-case-panel="3" data-case-type="photo" hidden>
+          <h3 class="sc-cases__subtitle sc-t-h3">Клінічний ефект</h3>
+          <p class="sc-cases__note sc-t-body">Фото до і через 6 місяців після введення аутофібробластів. Різницю підтверджено УЗД та морфологічним контролем.</p>
+        </div>
+        <div class="sc-cases__panel" data-case-panel="3" data-case-type="uzd" hidden>
+          <h3 class="sc-cases__subtitle sc-t-h3">Ультразвуковий динамічний контроль</h3>
+          <p class="sc-cases__note sc-t-body"><b>До.</b> Порушення сітки дермальної структури, помірне зменшення кількості колагенових та еластичних волокон.</p>
+          <p class="sc-cases__note sc-t-body"><b>Після.</b> Вирівнювання епідермісу. Значне покращення волокнистої структури дерми.</p>
+        </div>
+        <div class="sc-cases__panel" data-case-panel="3" data-case-type="morph" hidden>
+          <h3 class="sc-cases__subtitle sc-t-h3">Морфологічний динамічний контроль</h3>
+          <p class="sc-cases__note sc-t-body"><b>До.</b> Пухке розташування пучків колагену, пошарова організація дерми нечітка, поява в товщі дерми лімфоцитарних скупчень.</p>
+          <p class="sc-cases__note sc-t-body"><b>Після.</b> Вирівнювання епідермісу. Значне покращення волокнистої структури дерми.</p>
+        </div>
+        </div>
+      </div>
+
+      <p class="sc-cases__legal sc-t-mini">Фото пацієнтів публікуються за письмовою згодою. Морфологічний і ультразвуковий контроль — стандарт кожного протоколу.</p>
+    </div>
+  </div>
+</section>

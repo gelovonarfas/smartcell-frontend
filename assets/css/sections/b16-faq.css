@@ -1,0 +1,165 @@
+/* ============================================================
+   B16 · FAQ
+   figma: node-id=496:550
+   Аккордеон на <details>: раскрытие работает без JS.
+   ============================================================ */
+
+.sc-faq {
+  --faq-gutter: var(--sc-space-14); /* 56 — внутренний отступ у стыка колонок */
+  --faq-block-w: 320px;
+  --faq-block-h: 76px;
+  --faq-toggle: 40px;
+
+  box-sizing: border-box;
+  display: grid;
+  /* 520 и 760 — доли контентной полосы: колонка макета 600 за вычетом
+     поля 80, которое теперь держит сама секция. */
+  grid-template-columns: 40.625% minmax(0, 1fr);
+  padding-inline: var(--sc-pad-x);
+  border-block: var(--hairline) solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-faq *,
+.sc-faq *::before,
+.sc-faq *::after { box-sizing: border-box; }
+
+.sc-faq__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-block: var(--section-padding-y);
+  padding-inline: 0 var(--faq-gutter);
+}
+
+.sc-faq__title { margin: 0; }
+
+/* Ритм из макета: 96 до подписи, 24 до кнопки */
+.sc-faq__note {
+  margin: var(--sc-space-24, 96px) 0 0;
+  color: var(--muted-foreground);
+}
+
+.sc-faq__cta {
+  inline-size: var(--faq-block-w);
+  block-size: var(--faq-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--grid-gap);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+.sc-faq__cta-label {
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+.sc-faq__cta-arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Icon/ArrowTurn: стрелка стоит под 45° в угол плиты и на ховере мягко
+   тычется в него — сдвиг на половину внутреннего поля, 320ms ease-out,
+   назад тем же путём. Угол не меняется. Движение на самой иконке. */
+.sc-faq__cta-arrow svg {
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* Ховер только для мыши: на тач-устройствах он залипает после тапа */
+@media (hover: hover) and (pointer: fine) {
+  .sc-faq__cta:hover { background: var(--sc-primary-hover); }
+
+  .sc-faq__cta:hover .sc-faq__cta-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.sc-faq__cta:focus-visible,
+.sc-faq__q:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* ---------- Список вопросов ---------- */
+
+.sc-faq__list {
+  padding-block: var(--section-padding-y);
+  padding-inline: var(--faq-gutter) 0;
+  min-inline-size: 0;
+}
+
+.sc-faq__item {
+  border-block-start: var(--hairline) solid var(--border);
+  padding-block: var(--card-padding);
+}
+
+.sc-faq__item:last-child { border-block-end: var(--hairline) solid var(--border); }
+
+.sc-faq__q {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-6);
+  cursor: pointer;
+  list-style: none; /* убираем нативный маркер */
+}
+
+.sc-faq__q::-webkit-details-marker { display: none; }
+
+.sc-faq__question { flex: 1 0 0; min-inline-size: 0; }
+
+.sc-faq__toggle {
+  flex: none;
+  inline-size: var(--faq-toggle);
+  block-size: var(--faq-toggle);
+  color: var(--foreground);
+}
+
+/* Плюс превращается в минус: вертикальную черту прячем на раскрытом */
+.sc-faq__toggle-v {
+  transform-origin: center;
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+.sc-faq__item[open] .sc-faq__toggle-v { opacity: 0; }
+
+.sc-faq__answer {
+  margin: var(--sc-space-3) 0 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-faq__cta-arrow svg { transition: none; }
+  .sc-faq__cta,
+  .sc-faq__toggle-v { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  /* Порядок на телефоне: заголовок → все вопросы → «Залишились питання?»
+     с кнопкой. Колонку раскрываем, чтобы её части встали вокруг списка. */
+  .sc-faq {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-block: var(--section-padding-y);
+  }
+
+  .sc-faq__col { display: contents; }
+
+  .sc-faq__title { order: 1; }
+  .sc-faq__list  { order: 2; padding-block: 0; margin-block-start: var(--section-gap); }
+  .sc-faq__note  { order: 3; margin-block-start: var(--section-gap); }
+  .sc-faq__cta   { order: 4; inline-size: 100%; }
+
+  .sc-faq__list { padding-inline: 0; }
+}

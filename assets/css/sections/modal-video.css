@@ -1,0 +1,58 @@
+/* ============================================================
+   Modal/Video — історія амбасадора
+   Оверлей, затемнение и поведение берутся из modal-booking.css:
+   базовые классы .sc-modal / .sc-modal__overlay / .sc-modal__close
+   общие. Здесь только окно с роликом.
+   Подключать ПОСЛЕ modal-booking.css.
+   ============================================================ */
+
+.sc-modal--video {
+  --modal-video-w: 1040px; /* та же полоса, что у модалки записи */
+}
+
+/* Окно ролика: фона нет, чтобы не было светлой рамки вокруг видео */
+.sc-modal__dialog--video {
+  display: block;
+  inline-size: min(var(--modal-video-w), 100%);
+  background: none;
+  box-shadow: none;
+  overflow: visible; /* кнопка стоит над углом окна */
+}
+
+.sc-modal__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--sc-black-alpha-80); /* подложка, пока ролик грузится */
+  box-shadow: var(--shadow-xl);
+}
+
+.sc-modal__video {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Кнопка закрытия стоит уголком к окну — над его правым верхним краем */
+.sc-modal__close--outside {
+  inset-block-start: auto;
+  inset-block-end: calc(100% + var(--grid-gap));
+  inset-inline-end: 0;
+  color: var(--foreground);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-modal__close--outside:hover {
+    background: var(--sc-white-alpha-10);
+    border-color: var(--foreground);
+    color: var(--foreground);
+  }
+}
+
+@media (max-width: 640px) {
+  /* На узком экране окно во всю ширину, кнопка — над ним */
+  .sc-modal__dialog--video { inline-size: 100%; }
+}

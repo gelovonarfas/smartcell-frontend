@@ -1,0 +1,112 @@
+/* ============================================================
+   B07 · CTA1 + Welcome kit
+   figma: node-id=15:68
+   ============================================================ */
+
+.sc-kit {
+  --sc-cta-gap: var(--stack-gap-lg); /* шаг колонки: остальное добавит правило в base.css */
+  --kit-plate-pad: var(--sc-space-20); /* 80 — поле внутри плиты (макет 897:248) */
+
+  box-sizing: border-box;
+  /* Пересборка 2026-09-13: блок стал островом. Раньше это была синяя полоса
+     во всю ширину; теперь тёмная плита 1280 в полосе, вокруг — цвет страницы. */
+  padding: var(--sc-space-20) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-kit *,
+.sc-kit *::before,
+.sc-kit *::after { box-sizing: border-box; }
+
+/* Плита: тёмный фон, поля 80, копия 544 + квадрат 520 через 56 (макет) */
+.sc-kit__inner {
+  display: grid;
+  grid-template-columns: 544fr 520fr;
+  gap: var(--section-gap);
+  align-items: start;
+  padding: var(--kit-plate-pad);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-kit__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+  min-inline-size: 0;
+}
+
+.sc-kit__kicker {
+  margin: 0;
+  color: var(--accent-foreground);
+}
+
+.sc-kit__title {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-kit__note {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  /* NB: на accent inverse (blue/800 с 2026-09-08) muted-foreground даёт 4.56:1 —
+     AA проходит впритык; если accent посветлеет, заметку переводить на accent-foreground. */
+  color: var(--muted-foreground);
+}
+
+/* Button · primary */
+.sc-kit__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--sc-line) solid transparent;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+.sc-kit__cta:hover { background: var(--sc-primary-hover); }
+
+.sc-kit__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-kit__cta:active { opacity: 0.7; }
+
+.sc-kit__media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.sc-kit__media img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-kit__cta { transition: none; }
+}
+
+@media (max-width: 640px) {
+  .sc-kit { padding: var(--section-padding-y-tight) var(--page-margin-x); }
+
+  .sc-kit__inner {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--page-margin-x);
+  }
+
+  .sc-kit__cta { inline-size: 100%; }
+}

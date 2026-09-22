@@ -1,0 +1,146 @@
+/* ============================================================
+   B15a · Неофіброліфтинг
+   figma: node-id=621:467 (обёртка 621:477)
+   Зависит от assets/css/tokens.css и base.css
+   ============================================================ */
+
+.sc-neo {
+  --sc-cta-gap: var(--stack-gap-md); /* шаг колонки: остальное добавит правило в base.css */
+  --neo-min-h: 720px;   /* высота плиты в макете */
+  --neo-copy-w: 584px;  /* мера колонки текста задана в макете */
+  --neo-parallax: var(--sc-space-20); /* 80: запас кадра сверху и снизу под медленный скролл */
+
+  box-sizing: border-box;
+  /* Межблочник — общий ритм; плита стоит в контентной полосе, не во всю ширину */
+  padding-block: var(--section-padding-y-tight);
+  padding-inline: var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-neo *,
+.sc-neo *::before,
+.sc-neo *::after { box-sizing: border-box; }
+
+/* Плита 1280×720 в контентной полосе */
+.sc-neo__frame {
+  position: relative;
+  min-block-size: var(--neo-min-h);
+  display: flex;
+  overflow: hidden;
+}
+
+/* Фото — фон плиты */
+.sc-neo__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--muted);
+  z-index: 0;
+}
+
+/* Кадр выше плиты на --neo-parallax: этот запас и ездит при скролле
+   (assets/js/gsap-animations.js). Без JS снимок просто стоит по центру. */
+.sc-neo__image {
+  display: block;
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: calc(100% + var(--neo-parallax) * 2);
+  object-fit: cover;
+  translate: 0 -50%;
+  will-change: translate;
+}
+
+/* Скрим из макета: синий 60%. По замеру худшего пикселя кадра
+   даёт тексту 4.51:1 — порог AA пройден, ослаблять нельзя. */
+.sc-neo__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--sc-navy-alpha-60);
+}
+
+.sc-neo__copy {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-md);
+  padding: var(--page-margin-x); /* 80 со всех сторон внутри плиты */
+  min-inline-size: 0;
+}
+
+.sc-neo__kicker {
+  margin: 0;
+  color: var(--accent-foreground);
+}
+
+.sc-neo__title {
+  margin: 0;
+  max-inline-size: var(--neo-copy-w);
+  color: var(--foreground);
+}
+
+/* Мера строки: в макете колонка 584, это ~73 знака.
+   CLAUDE.md ограничивает прозу 65ch — берём меньшее из двух. */
+.sc-neo__text {
+  margin: 0;
+  max-inline-size: min(var(--neo-copy-w), var(--sc-measure));
+  color: var(--foreground);
+}
+
+/* Button/Control · outline — «контрол 48» по описанию компонента */
+.sc-neo__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--control-square); /* контрол 48 */
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .sc-neo__cta:hover {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+.sc-neo__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-neo__cta:active { opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-neo__cta { transition: none; }
+  /* Кадр стоит: движение отключает и JS, здесь снимаем подготовку слоя */
+  .sc-neo__image { will-change: auto; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .sc-neo__frame { min-block-size: 0; }
+
+  .sc-neo__copy {
+    padding: var(--section-padding-y-tight) var(--page-margin-x);
+  }
+
+  .sc-neo__cta { inline-size: 100%; }
+}

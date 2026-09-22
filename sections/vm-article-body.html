@@ -1,0 +1,165 @@
+<!-- ============================================================
+     A/Body · тіло статті + сайдбар
+     figma: node-id=64:25 (main 844, sidebar 380, sticky)
+
+     Порядок блоков задан макетом и правилами GEO/SEO. Мета-строка
+     переехала в шапку под лид (решение 2026-09-07), здесь начинается
+     с шеринга:
+     шеринг → «Коротко» (ItemList) → H2 c прямым ответом
+     первым предложением → чеклист → инлайн-промо → H2 → навигация серии →
+     FAQ (FAQPage) → подписка → автор (E-E-A-T) → рейтинг → источники.
+
+     ACF: article_summary (repeater), article_checklist (repeater),
+          article_faq (repeater: q, a), article_series (title, next_label, next_link),
+          author_* (name, role, bio, photo, link), article_sources (textarea).
+     Разметку Schema.org (Article, FAQPage, ItemList, BreadcrumbList)
+     навешивает тема — здесь только контент и порядок.
+     ============================================================ -->
+  <div class="vm-article__body">
+
+    <div class="vm-article__main">
+
+      <div class="vm-article__share">
+        <span class="sc-t-mini">Поділіться цим матеріалом:</span>
+        <a class="vm-article__share-link sc-t-caption" href="#share-fb" aria-label="Поділитись у Facebook">FB</a>
+        <a class="vm-article__share-link sc-t-caption" href="#share-tw" aria-label="Поділитись у X">TW</a>
+        <a class="vm-article__share-link sc-t-caption" href="#share-tg" aria-label="Поділитись у Telegram">TG</a>
+      </div>
+
+      <section class="vm-article__summary">
+        <h2 class="vm-article__summary-title sc-t-caption">КОРОТКО</h2>
+        <ul class="vm-article__summary-list">
+          <li class="sc-t-body">Регенеративний потенціал — вимірювана характеристика шкіри, а не відчуття «добре виглядаю» ¹</li>
+          <li class="sc-t-body">Оцінюється УЗД і морфологією: товщина дерми, акустична щільність, мікроциркуляція ²</li>
+          <li class="sc-t-body">Власні фібробласти відновлюють структуру дерми; ефект підтверджується повторним УЗД через 6 і 12 місяців ²</li>
+        </ul>
+      </section>
+
+      <h2 class="vm-article__h2 sc-t-h2" id="section-1">Що таке регенеративний потенціал шкіри?</h2>
+      <p class="vm-article__answer sc-t-lead"><span class="vm-article__answer-label sc-t-caption">Коротко</span>Оцінка проводиться за медичними показаннями під час комплексної діагностики.</p>
+      <p class="vm-article__p sc-t-body">Ультразвукове дослідження показує товщину та акустичну щільність дерми, морфологія — стан волокон і мікроциркуляцію. Разом ці дані описують не «як шкіра виглядає», а як вона працює.</p>
+
+      <ul class="vm-article__checklist">
+        <li class="sc-t-body"><svg class="vm-article__check" viewBox="0 0 14 14" width="14" height="14" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-linecap="round"/></svg>Товщина епідермісу і дерми — УЗД</li>
+        <li class="sc-t-body"><svg class="vm-article__check" viewBox="0 0 14 14" width="14" height="14" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-linecap="round"/></svg>Акустична щільність — стан колагенових волокон</li>
+        <li class="sc-t-body"><svg class="vm-article__check" viewBox="0 0 14 14" width="14" height="14" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-linecap="round"/></svg>Об'ємна швидкість кровотоку</li>
+        <li class="sc-t-body"><svg class="vm-article__check" viewBox="0 0 14 14" width="14" height="14" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 7.5L5.5 11L12 3.5" stroke="currentColor" stroke-linecap="round"/></svg>Імунні маркери шкіри</li>
+      </ul>
+
+      <aside class="vm-article__promo">
+        <div class="vm-article__promo-copy">
+          <p class="vm-article__promo-kicker sc-t-caption">SMARTCELL</p>
+          <p class="vm-article__promo-title sc-t-h3">Дізнайтесь свій регенеративний потенціал — комплексна діагностика Face Control 365</p>
+        </div>
+        <a class="vm-article__promo-cta" href="index.html#consultation">Записатись</a>
+      </aside>
+
+      <h2 class="vm-article__h2 sc-t-h2" id="section-2">Як відновити регенеративний потенціал?</h2>
+      <p class="vm-article__answer sc-t-lead"><span class="vm-article__answer-label sc-t-caption">Коротко</span>Власні фібробласти пацієнта відновлюють структуру дерми і мікроциркуляцію.</p>
+      <p class="vm-article__p sc-t-body">Ефект підтверджується повторним УЗД через 6 і 12 місяців — це об'єктивний контроль, а не оцінка «на око».</p>
+
+      <nav class="vm-article__series" aria-label="Навігація серією">
+        <span class="sc-t-small">Серія: Регенеративна азбука · Частина 1 з 3</span>
+        <a class="vm-article__series-next sc-t-small" href="#next-part">Наступна: Фібробласти →</a>
+      </nav>
+
+      <section class="vm-article__faq">
+        <h2 class="sc-t-h2">Часті запитання</h2>
+
+        <details class="vm-article__faq-item" open>
+          <summary class="vm-article__faq-q sc-t-h3">Чи можна виміряти регенеративний потенціал без УЗД?<span class="vm-article__faq-sign" aria-hidden="true"></span></summary>
+          <p class="vm-article__faq-a sc-t-body">Ні. Візуальна оцінка не показує товщину дерми і мікроциркуляцію — саме їх фіксує ультразвук.</p>
+        </details>
+
+        <details class="vm-article__faq-item">
+          <summary class="vm-article__faq-q sc-t-h3">Через скільки видно результат після введення фібробластів?<span class="vm-article__faq-sign" aria-hidden="true"></span></summary>
+          <p class="vm-article__faq-a sc-t-body">Перші зміни фіксує УЗД на шостому місяці, стійкий результат — на дванадцятому.</p>
+        </details>
+
+        <details class="vm-article__faq-item">
+          <summary class="vm-article__faq-q sc-t-h3">Чи залежить регенеративний потенціал від віку?<span class="vm-article__faq-sign" aria-hidden="true"></span></summary>
+          <p class="vm-article__faq-a sc-t-body">Вік у паспорті задає діапазон, але не визначає ресурс: його показує діагностика.</p>
+        </details>
+      </section>
+
+      <aside class="vm-article__subscribe">
+        <div class="vm-article__subscribe-copy">
+          <p class="vm-article__subscribe-kicker sc-t-caption">SMART AGE JOURNAL · ЩОЧЕТВЕРГА</p>
+          <p class="vm-article__subscribe-title sc-t-h2">Лист про тіло, яке вміє відновлюватися</p>
+          <p class="vm-article__subscribe-note sc-t-body">Клітини, шкіра, сон, гормони, їжа — те, що реально впливає на біологічний вік.</p>
+
+          <ul class="vm-article__benefits">
+            <li class="sc-t-small">Наука простою мовою — без міфів і магічних сироваток</li>
+            <li class="sc-t-small">Що справді працює для шкіри, а що лише продається</li>
+            <li class="sc-t-small">Для тих, хто дбає про красу з розумом</li>
+          </ul>
+
+          <form class="vm-article__subscribe-form" data-form novalidate>
+            <div class="vm-article__field">
+              <label class="vm-article__label sc-t-caption" for="article-email">EMAIL</label>
+              <input class="vm-article__input" id="article-email" name="email" type="email"
+                     placeholder="Ваш e-mail" autocomplete="email" required>
+            </div>
+            <p class="vm-article__error sc-t-mini" id="article-email-error" hidden>Вкажіть коректний email</p>
+            <button class="vm-article__subscribe-cta" type="submit">Отримувати лист</button>
+          </form>
+
+          <p class="vm-article__subscribe-foot sc-t-mini">Один лист на тиждень. Відписка в один клік.</p>
+        </div>
+
+        <div class="vm-article__subscribe-visual">
+          <!-- PLACEHOLDER: превью листа рассылки -->
+          <img src="assets/img/vm/letter-preview.jpg"
+               srcset="assets/img/vm/letter-preview.jpg 301w, assets/img/vm/letter-preview@2x.jpg 602w"
+               sizes="(max-width: 640px) 100vw, 340px"
+               alt="" width="301" height="500" loading="lazy" decoding="async">
+        </div>
+      </aside>
+
+      <section class="vm-article__author">
+        <!-- PLACEHOLDER: фото автора -->
+        <img class="vm-article__avatar" src="assets/img/vm/author-tsepkolenko-anna.jpg"
+             srcset="assets/img/vm/author-tsepkolenko-anna.jpg 120w, assets/img/vm/author-tsepkolenko-anna@2x.jpg 240w"
+             sizes="120px" alt="Цепколенко Ганна Володимирівна"
+             width="120" height="120" loading="lazy" decoding="async">
+
+        <div class="vm-article__bio">
+          <p class="vm-article__author-kicker sc-t-caption">АВТОР СТАТТІ</p>
+          <p class="vm-article__author-name sc-t-h3"><a href="#author">Цепколенко Ганна Володимирівна</a></p>
+          <p class="vm-article__author-role sc-t-small">Завідуюча відділенням регенеративних, лазерних та фототехнологій · кандидат медичних наук</p>
+          <p class="vm-article__author-bio sc-t-small">Лікар-дерматовенеролог вищої категорії, спеціаліст з лазерних технологій. Закінчила Одеський національний медичний університет (2002), спеціалізація з дерматовенерології (2008). Аспірантка кафедри дерматовенерології НМАПО ім. П. Л. Шупика (2016—2019). Стажувалась у Єні (Німеччина) та Малазі (Іспанія). Член EADV та UIME, співавтор 3 медичних патентів.</p>
+          <p><a class="vm-article__author-link sc-t-small" href="https://virtus.ua/doctor/cepkolenko-anna-vladimirovna">Профіль лікаря →</a></p>
+        </div>
+      </section>
+
+      <div class="vm-article__rating">
+        <span class="sc-t-small">Рейтинг статті:</span>
+        <svg class="vm-article__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 4 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor" opacity="0.25"/></svg>
+        <span class="vm-article__rating-note sc-t-mini">4 з 5 на основі 4 оцінок</span>
+      </div>
+
+      <p class="vm-article__sources sc-t-mini">Джерела: ¹ Journal of Cosmetic Dermatology, 2024. ² Дані ультразвукової діагностики Інституту VIRTUS, 2021-2026.</p>
+
+    </div>
+
+    <aside class="vm-article__sidebar">
+      <nav class="vm-article__toc" aria-label="У матеріалі">
+        <p class="vm-article__toc-title sc-t-caption">У МАТЕРІАЛІ</p>
+        <ol class="vm-article__toc-list">
+          <li><span class="vm-article__toc-num sc-t-small">01</span><a class="sc-t-small" href="#section-1">Що таке регенеративний потенціал шкіри?</a></li>
+          <li><span class="vm-article__toc-num sc-t-small">02</span><a class="sc-t-small" href="#section-2">Як відновити регенеративний потенціал?</a></li>
+        </ol>
+      </nav>
+
+      <div class="vm-article__services">
+        <p class="vm-article__services-title sc-t-caption">КОНСУЛЬТАЦІЯ ЛІКАРЯ ЗА ТЕМОЮ</p>
+        <ul class="vm-article__services-list">
+          <li><span class="sc-t-small">Комплексна діагностика шкіри</span><span class="vm-article__price sc-t-mini">від 1200 грн</span></li>
+          <li><span class="sc-t-small">PRP-терапія</span><span class="vm-article__price sc-t-mini">від 500 грн</span></li>
+          <li><span class="sc-t-small">АМК-терапія</span><span class="vm-article__price sc-t-mini">від 500 грн</span></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+</article>

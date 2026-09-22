@@ -1,0 +1,58 @@
+<!-- ============================================================
+     B16 · FAQ
+     figma: node-id=496:550
+     ACF: faq_title (text), faq_note (textarea), faq_cta_label (text),
+          faq_cta_link (link), faq_items (repeater: question, answer)
+     Аккордеон на <details>: работает без JS. В макете написан только
+     первый ответ — остальные пункты ждут контента.
+     ============================================================ -->
+<section class="sc-faq" data-theme="inverse">
+  <div class="sc-faq__col">
+    <h2 class="sc-faq__title sc-t-h2">Відповіді, щоб рішення було усвідомленим</h2>
+
+    <p class="sc-faq__note sc-t-small">Залишились питання? <br>Відповідає лікар програми.</p>
+
+    <a class="sc-faq__cta" href="#consultation">
+      <span class="sc-faq__cta-label">Написати нам</span>
+      <span class="sc-faq__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+    </a>
+  </div>
+
+  <div class="sc-faq__list">
+      <details class="sc-faq__item" open>
+        <summary class="sc-faq__q">
+          <span class="sc-faq__question sc-t-h3">Що таке фібробласти?</span>
+          <span class="sc-faq__toggle" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="39" height="39" stroke="currentColor"/><path class="sc-faq__toggle-h" d="M13 20H27" stroke="currentColor"/><path class="sc-faq__toggle-v" d="M20 13V27" stroke="currentColor"/></svg></span>
+        </summary>
+        <p class="sc-faq__answer sc-t-small">Фібробласти — клітини сполучної тканини, які виробляють колаген та еластин. Ми використовуємо власні клітини пацієнта: після діагностики вони відновлюють структуру дерми, мікроциркуляцію та імунітет шкіри — без чужорідних матеріалів.</p>
+      </details>
+      <details class="sc-faq__item">
+        <summary class="sc-faq__q">
+          <span class="sc-faq__question sc-t-h3">Як працює неофібролифтинг?</span>
+          <span class="sc-faq__toggle" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="39" height="39" stroke="currentColor"/><path class="sc-faq__toggle-h" d="M13 20H27" stroke="currentColor"/><path class="sc-faq__toggle-v" d="M20 13V27" stroke="currentColor"/></svg></span>
+        </summary>
+        <!-- Ответ в макете не написан: заполнит редактор через ACF -->
+      </details>
+      <details class="sc-faq__item">
+        <summary class="sc-faq__q">
+          <span class="sc-faq__question sc-t-h3">Кому підходить Face Control 365?</span>
+          <span class="sc-faq__toggle" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="39" height="39" stroke="currentColor"/><path class="sc-faq__toggle-h" d="M13 20H27" stroke="currentColor"/><path class="sc-faq__toggle-v" d="M20 13V27" stroke="currentColor"/></svg></span>
+        </summary>
+        <!-- Ответ в макете не написан: заполнит редактор через ACF -->
+      </details>
+      <details class="sc-faq__item">
+        <summary class="sc-faq__q">
+          <span class="sc-faq__question sc-t-h3">Для кого програма НЕ підходить?</span>
+          <span class="sc-faq__toggle" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="39" height="39" stroke="currentColor"/><path class="sc-faq__toggle-h" d="M13 20H27" stroke="currentColor"/><path class="sc-faq__toggle-v" d="M20 13V27" stroke="currentColor"/></svg></span>
+        </summary>
+        <!-- Ответ в макете не написан: заполнит редактор через ACF -->
+      </details>
+      <details class="sc-faq__item">
+        <summary class="sc-faq__q">
+          <span class="sc-faq__question sc-t-h3">Коли видно результати?</span>
+          <span class="sc-faq__toggle" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="39" height="39" stroke="currentColor"/><path class="sc-faq__toggle-h" d="M13 20H27" stroke="currentColor"/><path class="sc-faq__toggle-v" d="M20 13V27" stroke="currentColor"/></svg></span>
+        </summary>
+        <!-- Ответ в макете не написан: заполнит редактор через ACF -->
+      </details>
+  </div>
+</section>

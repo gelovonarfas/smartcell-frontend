@@ -1,0 +1,130 @@
+/* ============================================================
+   B02 · Що це і чим відрізняється
+   figma: node-id=14:61
+   Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-difference {
+  --difference-gutter: var(--sc-space-14); /* 56 — внутренний отступ у линии */
+  --difference-h: 629px;                   /* высота фрейма B02: держит 160 между блоками */
+
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* при 1440 даёт 720 / 720, как в макете */
+  /* Поле полосы на секции: вертикальная линия остаётся в центре полосы,
+     а фон и горизонтальные линии по-прежнему идут до краёв окна. */
+  padding-inline: var(--sc-pad-x);
+  border-block: var(--hairline) solid var(--border);
+}
+
+.sc-difference *,
+.sc-difference *::before,
+.sc-difference *::after { box-sizing: border-box; }
+
+.sc-difference__statement,
+.sc-difference__answer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--section-gap);
+  /* 160 сверху, 160 снизу и 160 между блоками — как в макете.
+     Разводит их высота колонки, поэтому оба столбца встают ровно
+     по фрейму, а на узких экранах колонка растёт по содержимому. */
+  min-block-size: var(--difference-h);
+  padding-block: var(--section-padding-y);
+  min-width: 0;
+}
+
+.sc-difference__statement {
+  padding-inline: 0 var(--difference-gutter);
+}
+
+/* Вертикальная линия между колонками — граница правой колонки */
+.sc-difference__answer {
+  padding-inline: var(--difference-gutter) 0;
+  border-inline-start: var(--hairline) solid var(--border);
+}
+
+.sc-difference__title {
+  margin: 0;
+  color: var(--foreground);
+}
+
+.sc-difference__tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--stack-gap-sm);
+}
+
+.sc-difference__tag {
+  padding: var(--sc-space-2) var(--sc-space-3_5); /* 8 / 14 в макете */
+  background: var(--secondary);
+  color: var(--foreground);
+}
+
+.sc-difference__lead {
+  margin: 0;
+  max-width: var(--sc-measure);
+  color: var(--foreground);
+}
+
+/* Button/Control · primary — «контрол 48» по описанию компонента */
+.sc-difference__cta {
+  align-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--sc-line) solid transparent;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+.sc-difference__cta:hover {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.sc-difference__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-difference__cta:active { opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-difference__cta { transition: none; }
+}
+
+/* ---------- Мобильный ----------
+   Две колонки не живут в 408px: складываем в одну, вертикальная линия
+   становится горизонтальной между блоками. */
+
+@media (max-width: 640px) {
+  .sc-difference { grid-template-columns: 1fr; }
+
+  /* Поле держит секция; высоту фрейма не тянем — колонка по содержимому */
+  .sc-difference__statement,
+  .sc-difference__answer {
+    padding-inline: 0;
+    min-block-size: auto;
+  }
+
+  .sc-difference__answer {
+    border-inline-start: 0;
+    border-block-start: var(--hairline) solid var(--border);
+  }
+}

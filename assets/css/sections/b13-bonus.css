@@ -1,0 +1,124 @@
+/* ============================================================
+   B13 · CTA3 Меню на рік
+   figma: node-id=15:138
+   ============================================================ */
+
+.sc-bonus {
+  --bonus-min-h: 600px; /* высота плиты в макете (15:138) */
+
+  box-sizing: border-box;
+  /* Секция — только поля полосы, без вертикальных: в макете (496:401) плита
+     стоит встык к соседним блокам, а по бокам тёмный фон.
+     Фон глубже темы: кадр на плите почти чёрный, и --background рядом с ним
+     выглядел подложкой (правка 2026-09-13) */
+  padding-inline: var(--sc-pad-x);
+  background: var(--sc-ink-deep);
+  color: var(--foreground);
+}
+
+/* Плита 1280×600 в контентной полосе */
+.sc-bonus__frame {
+  position: relative;
+  min-block-size: var(--bonus-min-h);
+  display: flex;
+  overflow: hidden;
+}
+
+.sc-bonus *,
+.sc-bonus *::before,
+.sc-bonus *::after { box-sizing: border-box; }
+
+.sc-bonus__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--muted);
+  z-index: 0;
+}
+
+.sc-bonus__bg img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Скрима нет: в макете плита идёт с чистым кадром (правка 2026-09-08).
+   Исключение из правила «текст на фото всегда со скримом» держится на том,
+   что финальный кадр тёмный в зоне копии. При замене фото проверить контраст. */
+
+.sc-bonus__inner {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--section-gap);
+  /* По горизонтали полей нет: плита и так стоит в контентной полосе, и
+     вторые 80 внутри уводили текст на 160 от края экрана — на полстраницы
+     правее, чем в соседних блоках. В макете отступ нарисован внутри плиты,
+     но там она лежит на светлом фоне и её край виден, а у нас фон секции
+     такой же тёмный, и смещение читалось как сбитая вёрстка
+     (правка 2026-09-14). По вертикали отступ прежний. */
+  padding: var(--section-padding-y-tight) 0;
+  min-inline-size: 0;
+}
+
+.sc-bonus__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.sc-bonus__kicker {
+  margin: 0;
+  color: var(--accent-foreground);
+}
+
+.sc-bonus__title {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+/* Конверсионная кнопка — на общем токене заливки, как все кнопки проекта
+   (2026-09-13: была --sc-action, единственная синяя кнопка на сайте) */
+.sc-bonus__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--sc-line) solid transparent;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+.sc-bonus__cta:hover { opacity: 0.85; }
+
+.sc-bonus__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-bonus__cta { transition: none; }
+}
+
+@media (max-width: 640px) {
+  /* Вертикальный кадр 432×768: пропорция кадра, копия у нижнего края */
+  .sc-bonus__frame {
+    min-block-size: 0;
+    aspect-ratio: 432 / 768;
+  }
+
+  .sc-bonus__inner { justify-content: flex-end; }
+
+  .sc-bonus__cta { inline-size: 100%; }
+}

@@ -1,0 +1,272 @@
+/* ============================================================
+   B04b · Сценарії
+   figma: 469:216 · состояния 476:170 / 476:206 / 476:242
+   Раскладка по DECISIONS-2026-09-04 §2 и §4
+   ============================================================ */
+
+.sc-scenarios {
+  --sc-cta-gap: calc(var(--card-padding) - var(--sc-space-10)); /* rhythm/40 из макета */
+  --scenarios-key-w: 120px;   /* колонка ключа в hairline-таблице */
+  --scenarios-block-w: 320px; /* Button/Block */
+  --scenarios-block-h: 76px;
+  --scenarios-dur: 320ms;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-16);
+  padding-block: var(--section-padding-y);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-scenarios *,
+.sc-scenarios *::before,
+.sc-scenarios *::after { box-sizing: border-box; }
+
+.sc-scenarios__head { padding-inline: var(--sc-pad-x); }
+
+.sc-scenarios__title {
+  margin: 0;
+  text-align: center;
+}
+
+/* Колонка · медиа в пропорции макета v2 (897:2) 554 : 680, гаттер 24.
+   Ленты миниатюр больше нет — сценарии листаются стрелками. */
+.sc-scenarios__row {
+  display: grid;
+  grid-template-columns: 554fr 680fr;
+  gap: var(--sc-gutter);
+  padding-inline: var(--sc-pad-x);
+  align-items: start;
+}
+
+.sc-scenarios__col { min-inline-size: 0; }
+
+/* ---------- Переключатель ----------
+   48 в высоту, стрелки в квадратах 48 отделены вертикальной линией. */
+
+.sc-scenarios__switcher {
+  overflow: hidden; /* стрелки клипаются по внутреннему краю: фон ховера не ложится на рамку */
+  display: grid;
+  grid-template-columns: var(--control-square) minmax(0, 1fr) var(--control-square);
+  align-items: center;
+  block-size: var(--control-square);
+  border: var(--sc-line) solid var(--border); /* рамка контрола */
+}
+
+.sc-scenarios__nav {
+  inline-size: var(--control-square);
+  block-size: 100%; /* по внутренней высоте контейнера: 48 вылезал за рамку и на ховере закрывал нижнюю линию */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-scenarios__nav:first-child { border-inline-end: var(--hairline) solid var(--border); }
+.sc-scenarios__nav:last-child { border-inline-start: var(--hairline) solid var(--border); }
+
+.sc-scenarios__nav svg { inline-size: 100%; block-size: 100%; }
+
+.sc-scenarios__nav:hover { background: var(--muted); }
+
+/* Подпись переключателя (макет v2, 897:2): слева счётчик «1 / 3» лёгким
+   приглушённым, справа название жирным; поля 16. Один рисунок на все три
+   переключалки — B04b, B06, B08c (решение 2026-09-11).
+
+   Правило: заголовок внутри переключателя предельно короткий. Полоса узкая,
+   на телефоне между стрелками остаётся ~180 — длинная подпись режется
+   многоточием. Уточнения (единицы, «основний», «місяців») живут в заголовке
+   панели, на оси графика или в сокращении. */
+.sc-scenarios__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--stack-gap-sm);
+  margin: 0;
+  padding-inline: var(--sc-space-4);
+  min-inline-size: 0;
+}
+
+.sc-scenarios__count {
+  flex: none;
+  font-weight: var(--sc-weight-light);
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-scenarios__label {
+  flex: 1 1 auto;
+  text-align: end;
+  font-weight: var(--sc-weight-bold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Панели состояний ---------- */
+
+.sc-scenarios__panels { margin-block-start: var(--sc-space-16); } /* rhythm/64 */
+
+.sc-scenarios__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6);
+}
+
+.sc-scenarios__panel[hidden] { display: none; }
+
+.sc-scenarios__subtitle { margin: 0; }
+
+.sc-scenarios__note {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+
+
+/* ---------- Button/Block ----------
+   Плита 320×76: лейбл сверху слева, стрелка снизу справа. */
+
+.sc-scenarios__cta {
+  inline-size: var(--scenarios-block-w);
+  block-size: var(--scenarios-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--grid-gap);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+.sc-scenarios__cta-label {
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+.sc-scenarios__cta-arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Icon/ArrowTurn: стрелка стоит под 45° в угол плиты и на ховере мягко
+   тычется в него — сдвиг на половину внутреннего поля, 320ms ease-out,
+   назад тем же путём. Угол не меняется. Движение на самой иконке. */
+.sc-scenarios__cta-arrow svg {
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* Ховер только для мыши: на тач-устройствах он залипает после тапа */
+@media (hover: hover) and (pointer: fine) {
+  .sc-scenarios__cta:hover { background: var(--sc-primary-hover); }
+
+  .sc-scenarios__cta:hover .sc-scenarios__cta-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.sc-scenarios__cta:focus-visible,
+.sc-scenarios__nav:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* ---------- Медиа ----------
+   Кадры лежат стопкой, переключаются кроссфейдом. */
+
+.sc-scenarios__media {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--muted);
+}
+
+.sc-scenarios__media-frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--scenarios-dur) var(--sc-ease);
+}
+
+.sc-scenarios__media-frame[data-current] { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-scenarios__cta-arrow svg { transition: none; }
+  .sc-scenarios__media-frame,
+  .sc-scenarios__cta,
+  .sc-scenarios__nav,
+}
+
+/* ---------- Этапы сценария ----------
+   Таблица из макета (476:206 / 476:242): срок слева, что делаем — справа.
+   У первого сценария этапов нет: в макете протокол без введения клеток
+   описан одним абзацем. */
+
+.sc-scenarios__stages {
+  margin: var(--sc-space-6) 0 0;
+  padding: 0;
+}
+
+/* Две колонки, как в макете: срок 120 и состав от общей вертикали.
+   Раньше строка разгонялась по краям — на коротких значениях это читалось,
+   но описания из макета переносятся, и правая выключка ломала столбец
+   (правка 2026-09-14). */
+.sc-scenarios__stage {
+  --scen-stage-term-w: 120px;   /* колонка срока в макете */
+
+  display: grid;
+  grid-template-columns: var(--scen-stage-term-w) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--grid-gap);
+  padding-block: var(--sc-space-4);
+  border-block-start: var(--sc-line) solid var(--border);
+}
+
+.sc-scenarios__stage:last-child { border-block-end: var(--sc-line) solid var(--border); }
+
+.sc-scenarios__stage-term {
+  flex: none;
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.sc-scenarios__stage-value {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .sc-scenarios__row {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: var(--page-margin-x);
+    gap: var(--page-margin-x); /* содержимое идёт с шагом полей страницы */
+  }
+
+  /* Порядок на телефоне: переключатель → кадр → описание с кнопкой */
+  .sc-scenarios__row { display: flex; flex-direction: column; align-items: stretch; }
+
+  .sc-scenarios__col { display: contents; }
+
+
+  .sc-scenarios__switcher { order: 1; }
+  .sc-scenarios__media    { order: 2; inline-size: 100%; }
+  .sc-scenarios__panels   { order: 3; }
+
+
+  /* Ритм колонки на телефоне держит зазор ряда: свои отступы панелей и кнопки лишние */
+  .sc-scenarios__panels { margin-block-start: 0; }
+  .sc-scenarios__cta { order: 4; inline-size: 100%; margin-block-start: 0; }
+}

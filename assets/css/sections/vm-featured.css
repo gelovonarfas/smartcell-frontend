@@ -1,0 +1,331 @@
+/* ============================================================
+   VM/Featured · головний матеріал блога
+   figma: node-id=343:145
+   ============================================================ */
+
+.vm-featured {
+  --vm-featured-h: 800px;        /* высота полосы в макете */
+  --vm-featured-copy-w: 584px;
+  --vm-featured-interval: 6000ms;
+
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 640fr 720fr; /* 720 копии за вычетом поля 80 и квадрат 720 */
+  align-items: end;
+  min-block-size: var(--vm-featured-h);
+  padding-inline-start: var(--sc-pad-x);
+  background: var(--secondary);
+  color: var(--foreground);
+}
+
+.vm-featured *,
+.vm-featured *::before,
+.vm-featured *::after { box-sizing: border-box; }
+
+.vm-featured__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  block-size: 100%;
+  padding-block: var(--section-padding-y) var(--sc-space-10);
+  padding-inline-end: var(--section-gap);
+  min-inline-size: 0;
+}
+
+.vm-featured__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+  max-inline-size: var(--vm-featured-copy-w);
+}
+
+/* Шапка журнала: «Smart Age» обычным весом, «Journal» — ExtraLight, как в макете.
+   Отбивка до чипсов = rhythm/40 поверх шага колонки (в макете 40 + gap 20). */
+.vm-featured__masthead { margin: 0 0 var(--sc-space-10); }
+
+.vm-featured__masthead-thin { font-weight: var(--sc-weight-xlight); }
+
+/* Chip/Meta: рамка 1px, поля 10/6 */
+.vm-featured__chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-gap);
+}
+
+.vm-featured__chip {
+  padding: var(--sc-chip-pad);
+  border: var(--sc-line) solid var(--border);
+}
+
+.vm-featured__slide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+}
+
+.vm-featured__slide[hidden] { display: none; }
+
+/* ---------- Смена материала — проявление через блюр ----------
+   Тот же приём, что вход в статью (gsap-animations.js, revealArticleHead):
+   строка приходит сверху, из расфокуса в резкость. Здесь он на CSS и без
+   JS: скрытый слайд снят с потока через [hidden], и при возврате в поток
+   анимация запускается заново — на смене и на первой отрисовке одинаково.
+   Порядок задержек тот же, что у статьи: сначала плашки, потом заголовок. */
+
+.vm-featured {
+  --vm-featured-reveal-dur: 1100ms;
+  --vm-featured-reveal-step: 140ms;  /* stagger как в статье */
+  --vm-featured-reveal-blur: 12px;
+  --vm-featured-reveal-rise: 18px;
+}
+
+@keyframes vm-featured-reveal {
+  from { opacity: 0; filter: blur(var(--vm-featured-reveal-blur)); transform: translateY(calc(-1 * var(--vm-featured-reveal-rise))); }
+  to   { opacity: 1; filter: blur(0); transform: none; }
+}
+
+.vm-featured__slide .vm-featured__chips,
+.vm-featured__slide .vm-featured__title {
+  /* Без fill-mode: в покое строка нарисована как обычно. Со «both» она
+     остаётся в стартовом кадре, если анимация почему-то не пошла, и материал
+     пропадает совсем — цена страховки выше выгоды (проверка 2026-09-14). */
+  animation: vm-featured-reveal var(--vm-featured-reveal-dur) var(--sc-ease-out);
+}
+
+.vm-featured__slide .vm-featured__title { animation-delay: var(--vm-featured-reveal-step); }
+
+/* Обкладинка меняется без блюра: кадр должен оставаться резким —
+   расфокус на фото читался как дефект загрузки (решение 2026-09-14) */
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-featured__slide .vm-featured__chips,
+  .vm-featured__slide .vm-featured__title { animation: none; }
+}
+
+.vm-featured__title { margin: 0; }
+
+/* Заголовок — ссылка на материал, как и фото и стрелка */
+.vm-featured__title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+/* ---------- Ряд управления ---------- */
+
+.vm-featured__bottom {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-6);
+  inline-size: 100%;
+}
+
+.vm-featured__nav {
+  flex: none;
+  display: flex;
+  gap: var(--stack-gap-sm);
+}
+
+/* Control/Nav: квадрат 48, кромка на border.
+   Кнопка «читати» — тот же квадрат, но без кромки: в макете у неё только иконка */
+.vm-featured__nav-btn,
+.vm-featured__read {
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.vm-featured__nav-btn svg { display: block; inline-size: 100%; block-size: 100%; }
+
+.vm-featured__read { border-color: transparent; }
+
+.vm-featured__read[hidden] { display: none; }
+
+.vm-featured__counter {
+  flex: none;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Control/Progress: дорожка muted, индикатор foreground */
+.vm-featured__progress {
+  flex: 1 1 auto;
+  position: relative;
+  block-size: var(--sc-progress-h);
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.vm-featured__progress-bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  background: var(--foreground);
+  transform: scaleX(var(--vm-featured-fill, 0));
+  transform-origin: left center;
+}
+
+.vm-featured.sc-is-running .vm-featured__progress-bar {
+  transition: transform var(--vm-featured-interval) linear;
+}
+
+/* Icon/ArrowTurn: та же стрелка, что в Button/Block — в правый нижний угол,
+   на ховере мягко тычется в угол на полполя (по описанию компонента) */
+.vm-featured__read-arrow {
+  display: block;
+  inline-size: var(--sc-space-6);
+  block-size: var(--sc-space-6);
+}
+
+.vm-featured__read-arrow svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* Фото идёт от нижней кромки шапки до низа полосы: квадрат 720 при полосе 800
+   вставал по низу (align-items: end) и над ним оставалась щель (решение 2026-09-08).
+   Шапка фиксированная и прозрачная поверх полосы, поэтому фото отступает
+   на её высоту — иначе навигация ложится на кадр и не читается.
+   --header-h ставит assets/js/header.js, 80 — запасное значение.
+   Кадрирование держит object-fit: cover, поэтому пропорция не важна. */
+.vm-featured__media {
+  align-self: stretch;
+  margin-block-start: var(--header-h, 80px);
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.vm-featured__media-link {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.vm-featured__media-link[hidden] { display: none; }
+
+/* Пока летит клон обкладинки, оригинал в слоте скрыт — иначе кадр двоится */
+.vm-featured__media-link.sc-is-handoff img { visibility: hidden; }
+
+.vm-featured__media img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .vm-featured__nav-btn:hover,
+  .vm-featured__read:hover { background: var(--muted); }
+
+  .vm-featured__read:hover { background: transparent; }
+  .vm-featured__title-link:hover { opacity: 0.7; }
+
+  /* Стрелка тычется в угол и от наведения на сам заголовок: это одна ссылка,
+     поэтому и отклик общий (решение 2026-09-08). Без :has() просто нет
+     подсказки — поведение ссылки не меняется. */
+  .vm-featured__read:hover .vm-featured__read-arrow svg,
+  .vm-featured:has(.vm-featured__title-link:hover) .vm-featured__read-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.vm-featured__nav-btn:focus-visible,
+.vm-featured__read:focus-visible,
+.vm-featured__title-link:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-featured__nav-btn,
+  .vm-featured__read,
+  .vm-featured__title-link,
+  .vm-featured__read-arrow svg { transition: none; }
+}
+
+/* ---------- Переход в статью ----------
+   Клик по стрелке «читати»: обкладинка съезжает в рамку обложки статьи
+   и уже там открывается статья тем же кадром (решение 2026-09-08; полотна
+   на весь экран нет). Геометрию считает assets/js/vm-featured.js. */
+
+.vm-featured__flyer {
+  position: fixed;
+  z-index: 91;
+  inset-block-start: var(--flyer-y, 0px);
+  inset-inline-start: var(--flyer-x, 0px);
+  inline-size: var(--flyer-w, 0px);
+  block-size: var(--flyer-h, 0px);
+  object-fit: cover;
+  pointer-events: none;
+  transition:
+    inset-block-start var(--sc-dur-slow) var(--sc-ease-out),
+    inset-inline-start var(--sc-dur-slow) var(--sc-ease-out),
+    inline-size var(--sc-dur-slow) var(--sc-ease-out),
+    block-size var(--sc-dur-slow) var(--sc-ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-featured__flyer { transition: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .vm-featured {
+    grid-template-columns: minmax(0, 1fr);
+    min-block-size: 0;
+    padding-inline: var(--sc-pad-x);
+  }
+
+
+  /* Порядок на узком экране: название журнала, фото, материал, стрелки
+     (решение 2026-09-14). Название стоит над фото — это шапка раздела,
+     а не подпись к кадру. Чтобы вынуть его из копи-колонки, колонку и её
+     верх распускаем, и все части становятся строками сетки. */
+  .vm-featured {
+    row-gap: var(--section-gap);
+    padding-block: var(--section-padding-y);
+  }
+
+  .vm-featured__copy,
+  .vm-featured__top { display: contents; }
+
+  /* Отбивки частей задаёт сетка: свои поля они теряют, иначе к row-gap
+     прибавляются старые внутренние отступы копи-колонки */
+  .vm-featured__masthead {
+    order: 1;
+    margin-block-end: 0;
+  }
+
+  .vm-featured__media {
+    order: 2;
+    aspect-ratio: 1;
+    min-block-size: 0;
+    margin-block: 0;
+    margin-inline: calc(-1 * var(--page-margin-x));
+  }
+
+  .vm-featured__slide { order: 3; }
+  .vm-featured__bottom { order: 4; }
+}

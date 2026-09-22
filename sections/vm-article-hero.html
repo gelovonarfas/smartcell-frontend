@@ -1,0 +1,55 @@
+<!-- ============================================================
+     A/Hero + A/Breadcrumbs · шапка статті журналу
+     figma: node-id=64:12 и 64:23
+     ACF: рубрика и время чтения — из полей записи; H1, лид, дата,
+          автор и обкладинка — стандартные поля WP.
+     Структура как в макете: два квадрата, копия слева и обкладинка справа.
+     Шапка светлая, как в макете (2026-09-08: инверсию левого квадрата сняли).
+     Полоса прочитанного под хедером и крошки под шапкой — как в макете.
+     ============================================================ -->
+<article class="vm-article">
+
+  <!-- Полоса прочитанного: единственный элемент, который живёт только на статье -->
+  <div class="vm-article__progress" aria-hidden="true">
+    <span class="vm-article__progress-bar" data-article-progress></span>
+  </div>
+
+  <header class="vm-article__hero">
+    <div class="vm-article__hero-copy">
+      <div class="vm-article__hero-top">
+        <a class="vm-article__back sc-t-mini" href="vm-blog.html">
+          <span class="vm-article__back-arrow" aria-hidden="true"></span>
+          <span>Smart Age Journal</span>
+        </a>
+
+        <ul class="vm-article__chips">
+          <li class="vm-article__chip sc-t-mini"><a href="vm-category.html">Science</a></li>
+          <li class="vm-article__chip sc-t-mini">7 хв читання</li>
+        </ul>
+
+        <h1 class="vm-article__title sc-t-h1">Регенеративний потенціал шкіри: чому він важливіший за вік у паспорті</h1>
+
+        <p class="vm-article__dek sc-t-lead">Два паспорти шкіри можуть показувати один вік — і зовсім різну здатність відновлюватися. Регенеративний потенціал — це вимірювана характеристика: скільки ресурсу мають ваші фібробласти і як швидко шкіра здатна повернутися до молодої структури.</p>
+      </div>
+
+      <span class="vm-article__scroll" aria-hidden="true"></span>
+
+      <p class="vm-article__byline sc-t-mini">
+        <span class="vm-article__byline-item">04.08.2026</span>
+        <span class="vm-article__byline-item">Ганна Цепколенко</span>
+        <span class="vm-article__byline-item"><svg class="vm-article__byline-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1 8s2.6-4.2 7-4.2S15 8 15 8s-2.6 4.2-7 4.2S1 8 1 8Z" stroke="currentColor"/><circle cx="8" cy="8" r="1.9" stroke="currentColor"/></svg><span>234 перегляди</span></span>
+        <span class="vm-article__byline-item"><svg class="vm-article__byline-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6.2" stroke="currentColor"/><path d="M8 4.4V8l2.6 1.6" stroke="currentColor" stroke-linecap="round"/></svg><span>7 хв читання</span></span>
+      </p>
+    </div>
+
+    <div class="vm-article__hero-media">
+      <!-- PLACEHOLDER: обкладинка статті в макете помечена «потрібен ассет» -->
+      <img src="assets/img/vm/skin-after-40.jpg" alt="Обкладинка статті"
+           width="1440" height="1440" decoding="async">
+    </div>
+    </header>
+
+  <!-- Крошки под шапкой, как в макете (64:23) -->
+  <nav class="vm-article__crumbs" aria-label="Хлібні крихти">
+    <p class="sc-t-mini"><a href="https://virtus.ua">virtus.ua</a> → <a href="index.html">SmartCell</a> → <a href="vm-blog.html">Smart Age</a> → <a href="vm-category.html">Science</a> → <span aria-current="page">Регенеративний потенціал шкіри</span></p>
+  </nav>

@@ -1,0 +1,72 @@
+<!-- ============================================================
+     B17 · Smart Age Journal (лента саббренда)
+     figma: node-id=4:297 · карточка — Card/Article 363:15 (сборка 2026-09-06)
+     ACF: mag_title (text), mag_items (repeater: image, tag, read_time,
+          title, date, link)
+     Плитки — те же четыре свежих материала, что открывают ленту блога
+     (секция «Свіже» в vm-blog.html): одна запись — одна карточка, поэтому
+     на главной кодер ставит тот же WP-запрос с лимитом 4.
+     Ссылка карточки ведёт на материал, заголовок блока — на ленту.
+     ============================================================ -->
+<section class="sc-mag" id="journal">
+  <h2 class="sc-mag__title-main sc-t-h2">Smart Age Journal</h2>
+
+  <div class="sc-mag__row">
+      <article class="sc-mag__card">
+        <a class="sc-mag__photo" href="vm-article.html">
+          <img src="assets/img/vm/card-01.jpg" alt="Родина обідає за столом просто неба"
+               width="302" height="302" loading="lazy" decoding="async">
+        </a>
+        <span class="sc-mag__meta">
+          <a class="sc-mag__tag sc-t-caption" href="vm-blog.html#rubric-9">ЇЖА</a>
+          <span class="sc-mag__time sc-t-mini">6 хв</span>
+        </span>
+        <span class="sc-mag__body">
+          <a class="sc-mag__title sc-t-h3" href="vm-article.html">Харчування для довголіття: уроки найстаріших людей світу</a>
+          <span class="sc-mag__date sc-t-mini">15.08.2026</span>
+        </span>
+      </article>
+      <article class="sc-mag__card">
+        <a class="sc-mag__photo" href="vm-article.html">
+          <img src="assets/img/vm/card-02.jpg" alt="Втомлена жінка за ноутбуком тре очі"
+               width="302" height="302" loading="lazy" decoding="async">
+        </a>
+        <span class="sc-mag__meta">
+          <a class="sc-mag__tag sc-t-caption" href="vm-blog.html#rubric-11">ПСИХІКА</a>
+          <span class="sc-mag__time sc-t-mini">7 хв</span>
+        </span>
+        <span class="sc-mag__body">
+          <a class="sc-mag__title sc-t-h3" href="vm-article.html">Що хронічний стрес робить із тілом — і чому звичайні аналізи цього не покажуть</a>
+          <span class="sc-mag__date sc-t-mini">22.08.2026</span>
+        </span>
+      </article>
+      <article class="sc-mag__card">
+        <a class="sc-mag__photo" href="vm-article.html">
+          <img src="assets/img/vm/card-03.jpg" alt="Люди з піднятими руками танцюють у натовпі"
+               width="302" height="302" loading="lazy" decoding="async">
+        </a>
+        <span class="sc-mag__meta">
+          <a class="sc-mag__tag sc-t-caption" href="vm-blog.html#rubric-6">ТРЕНДИ</a>
+          <span class="sc-mag__time sc-t-mini">5 хв</span>
+        </span>
+        <span class="sc-mag__body">
+          <a class="sc-mag__title sc-t-h3" href="vm-article.html">Рейв довголіття: наука спільного танцю</a>
+          <span class="sc-mag__date sc-t-mini">05.09.2026</span>
+        </span>
+      </article>
+      <article class="sc-mag__card">
+        <a class="sc-mag__photo" href="vm-article.html">
+          <img src="assets/img/vm/card-04.jpg" alt="Чоловік працює за столом біля вікна"
+               width="302" height="302" loading="lazy" decoding="async">
+        </a>
+        <span class="sc-mag__meta">
+          <a class="sc-mag__tag sc-t-caption" href="vm-category.html">НАУКА</a>
+          <span class="sc-mag__time sc-t-mini">8 хв</span>
+        </span>
+        <span class="sc-mag__body">
+          <a class="sc-mag__title sc-t-h3" href="vm-article.html">Креатин для мозку: чому стандартних 5 г може бути замало</a>
+          <span class="sc-mag__date sc-t-mini">12.09.2026</span>
+        </span>
+      </article>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+/* ============================================================
+   B03 · Що включає програма
+   figma: node-id=4:294
+   Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-program {
+
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-program *,
+.sc-program *::before,
+.sc-program *::after { box-sizing: border-box; }
+
+.sc-program__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.sc-program__title { margin: 0; }
+
+/* Карточки стоят таблицей: рамки соседей схлопнуты отрицательными
+   отступами, чтобы линия между ячейками была одинарной — как в макете. */
+.sc-program__cards {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* одна линия на ребро: зазор-hairline и фон контейнера цвета кромки */
+  gap: var(--hairline);
+  border: var(--sc-line) solid var(--border); /* рамка — 1px, волосяная только в зазорах */
+  background: var(--border);
+}
+
+.sc-program__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  padding: var(--card-padding);
+  /* линий на ячейке нет: одна линия на ребро даёт зазор-hairline
+     и фон контейнера цвета кромки */
+  background: var(--card);
+  color: var(--card-foreground);
+}
+
+.sc-program__card-title { margin: 0; }
+
+.sc-program__card-text {
+  margin: 0;
+  max-width: var(--sc-measure);
+  color: var(--foreground);
+}
+
+/* ---------- Мобильный ----------
+   Одна колонка — так предписывает описание компонента Card/Signs. */
+
+@media (max-width: 640px) {
+  .sc-program__cards { grid-template-columns: minmax(0, 1fr); }
+}

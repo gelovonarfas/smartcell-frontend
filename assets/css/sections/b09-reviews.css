@@ -1,0 +1,215 @@
+/* ============================================================
+   B09 · Відгуки
+   figma: node-id=15:76
+   ============================================================ */
+
+.sc-reviews {
+  --reviews-progress-h: 2px;   /* Control/Progress в макете */
+  --reviews-interval: 5000ms;  /* шаг автолистания */
+
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-reviews *,
+.sc-reviews *::before,
+.sc-reviews *::after { box-sizing: border-box; }
+
+.sc-reviews__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.sc-reviews__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--stack-gap-md);
+  text-align: center;
+}
+
+.sc-reviews__kicker {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.sc-reviews__title { margin: 0; }
+
+/* ---------- Лента ----------
+   Видно три карточки, шаг листания — одна. Ширину карточки считает
+   grid-auto-columns, сдвиг ленты ставит assets/js/reviews.js в пикселях:
+   так шаг точный при любом гаттере.
+   Разделители — фон контейнера в зазорах по 1px: линия одинарная. */
+
+.sc-reviews__viewport {
+  overflow: hidden;
+  border: var(--sc-line) solid var(--border); /* рамка — 1px, волосяная только в зазорах */
+}
+
+/* Разделитель — кромка на самой карточке. Раньше линию рисовал фон ленты
+   в зазоре 1px, но зазор перекрывала соседняя карточка: в точке стыка
+   сверху лежал .sc-reviews__item, и фон ленты не проступал вовсе
+   (замер по пикселям 2026-09-14). Кромка внутри карточки такого класса
+   ошибок не допускает, а двойной линии у рамки не даёт :first-child. */
+.sc-reviews__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--reviews-card-w, calc(100% / 3));
+  gap: 0;
+  transform: translateX(var(--reviews-shift, 0px));
+  transition: transform var(--sc-dur-slow) var(--sc-ease-out);
+}
+
+.sc-reviews__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  padding: var(--card-padding);
+  border-inline-start: var(--sc-line) solid var(--border);
+  background: var(--card);
+  color: var(--card-foreground);
+}
+
+/* У первой карточки своей кромки нет — её роль играет рамка окна */
+.sc-reviews__item:first-child { border-inline-start: 0; }
+
+.sc-reviews__rating {
+  display: block;
+  color: var(--foreground);
+}
+
+.sc-reviews__quote {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-reviews__author {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+
+/* ---------- Контролы ленты ----------
+   Ряд из макета: Control/SliderNav 104, счётчик, полоса на остаток
+   строки. Кнопка «Всі відгуки» встаёт в конце ряда. */
+
+.sc-reviews__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-6);
+}
+
+.sc-reviews__nav {
+  flex: none;
+  display: flex;
+  gap: var(--stack-gap-sm); /* 8 */
+}
+
+/* Control/Nav: квадрат 48, кромка на border, стрелка на foreground */
+.sc-reviews__nav-btn {
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  padding: 0;
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-reviews__nav-btn svg { display: block; inline-size: 100%; block-size: 100%; }
+
+.sc-reviews__counter {
+  flex: none;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Control/Progress: трек — muted, индикатор — синий.
+   Полоса заполняется за интервал показа и шагает ленту дальше. */
+.sc-reviews__progress {
+  flex: 1 1 auto;
+  position: relative;
+  block-size: var(--reviews-progress-h);
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.sc-reviews__progress-bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  background: var(--foreground);
+  transform: scaleX(var(--reviews-fill, 0));
+  transform-origin: left center;
+}
+
+.sc-reviews.sc-is-running .sc-reviews__progress-bar {
+  transition: transform var(--reviews-interval) linear;
+}
+
+/* Button/Control · outline */
+.sc-reviews__all {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--control-square);
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+@media (hover: hover) and (pointer: fine) {
+  .sc-reviews__nav-btn:hover { background: var(--muted); }
+  .sc-reviews__all:hover { background: var(--primary); color: var(--primary-foreground); }
+}
+
+.sc-reviews__nav-btn:focus-visible,
+.sc-reviews__all:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-reviews__nav-btn[disabled] { opacity: 0.4; cursor: default; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-reviews__list,
+  .sc-reviews__nav-btn,
+  .sc-reviews__all { transition: none; }
+}
+
+@media (max-width: 640px) {
+  /* одна карточка в кадре — зазоров и линий между ними нет */
+  .sc-reviews__list {
+    grid-auto-columns: var(--reviews-card-w, 100%);
+    gap: 0;
+    background: none;
+  }
+
+  .sc-reviews__controls {
+    flex-wrap: wrap;
+    gap: var(--grid-gap);
+  }
+
+  .sc-reviews__progress { flex-basis: 100%; order: 3; }
+  .sc-reviews__all { order: 4; inline-size: 100%; }
+}

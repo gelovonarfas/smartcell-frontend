@@ -1,0 +1,307 @@
+/* ============================================================
+   B08 · Безпека — наука, не хайп + цифри
+   figma: node-id=4:291
+   Верх прозрачный, поверх видео; низ — стекло Glass/Bar.
+   Кромки по решению 2026-09-06: рамки контролов 1px литералом,
+   линии-разделители var(--hairline).
+   ============================================================ */
+
+.sc-science {
+  --science-label-w: 200px;   /* ширина подписи под числом в макете */
+  --sc-cta-gap: var(--stack-gap-md); /* шаг колонки: остальное добавит правило в base.css */
+  --science-half: 455px;         /* верх и низ по 455 в макете */
+  --science-glass-h: 352px;      /* стеклянная плита в нижней половине (897:269) */
+  --science-col: 520px;
+  --science-col-gap: var(--sc-space-16); /* 64 между копией и фактами (897:256) */
+  --science-nav-w: 104px;        /* Control/SliderNav: 48 + 8 + 48 */
+  --science-progress-h: 2px;
+  --science-facts-count: 4;      /* ширина индикатора = 100 / N */
+  --science-interval: 5000ms;    /* интервал автослайдера; тот же в science-facts.js */
+
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-science *,
+.sc-science *::before,
+.sc-science *::after { box-sizing: border-box; }
+
+/* ---------- Фон ---------- */
+
+/* Фон в тоне рампы (сборка 2026-09-14).
+   У кадра берём только светлоту: слой цвета лежит сверху в режиме
+   наложения color — оттенок и насыщенность его, светлота кадра.
+   Прозрачность видео над белой подложкой задаёт общую светлоту.
+   Цвет самого кадра значения не имеет — только его яркость.
+   Кадр — science_desat-mp4_no_sound.mp4: он темнее исходника (светлота 65
+   против 112), и с ним фон спокойнее. Сравнивали оба 2026-09-14, светлый
+   science.mp4 отклонён. Постер снят с этого же файла. */
+.sc-science__bg {
+  /* Тон — почти blue-300 с примесью blue-400: на чистом 300 фон мутнел
+     в средних тонах, на 400 звенел (подбор 2026-09-14). Градиент по рампе
+     пробовали и вернули одну заливку — так ровнее. */
+  --science-tone: color-mix(in srgb, var(--sc-blue-300) 78%, var(--sc-blue-400));
+  --science-video-opacity: 0.39;          /* ниже — светлее, выше — плотнее */
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--card);
+}
+
+.sc-science__video {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  opacity: var(--science-video-opacity);
+}
+
+.sc-science__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--science-tone);
+  mix-blend-mode: color;
+}
+
+/* ---------- Верх ---------- */
+
+.sc-science__top {
+  min-block-size: var(--science-half);
+  display: grid;
+  grid-template-columns: minmax(0, var(--science-col)) minmax(0, var(--science-col));
+  justify-content: start;
+  align-items: start;
+  gap: var(--science-col-gap);
+  /* Сверху — общий межблочник 160, по бокам поля страницы, снизу 80 как в плите */
+  padding: var(--section-padding-y) var(--sc-pad-x) var(--page-margin-x);
+}
+
+.sc-science__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-md); /* 14 в макете */
+}
+
+.sc-science__kicker { margin: 0; color: var(--accent-foreground); }
+.sc-science__title  { margin: 0; }
+
+/* Button/Control · outline — рамка контрола, 1px литералом */
+.sc-science__cta {
+  block-size: var(--control-square);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
+}
+
+/* ---------- Автослайдер фактов ---------- */
+
+.sc-science__facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6); /* 24 */
+  min-inline-size: 0;
+}
+
+.sc-science__controls {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sc-space-6);
+}
+
+.sc-science__nav {
+  inline-size: var(--science-nav-w);
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm); /* 8 */
+}
+
+.sc-science__nav-buttons {
+  display: flex;
+  gap: var(--stack-gap-sm);
+}
+
+/* Control/Nav: квадрат 48, кромка на border, стрелка на foreground */
+.sc-science__nav-btn {
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  padding: 0;
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-science__nav-btn svg { display: block; inline-size: 100%; block-size: 100%; }
+
+/* Control/Progress: трек — muted, индикатор — синий.
+   Полоса заполняется на всю ширину за интервал показа факта,
+   по концу отсчёта факт перещёлкивается и полоса начинается заново. */
+.sc-science__progress {
+  position: relative;
+  block-size: var(--science-progress-h);
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.sc-science__progress-bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  background: var(--foreground);
+  transform: scaleX(var(--facts-fill, 0));
+  transform-origin: left center;
+}
+
+.sc-science.sc-is-running .sc-science__progress-bar {
+  transition: transform var(--science-interval) linear;
+}
+
+.sc-science__counter {
+  margin: 0;
+  block-size: var(--control-square);
+  display: flex;
+  align-items: center;
+  /* На синем фоне --muted-foreground даёт 3.3:1 (замер 2026-09-14) */
+  color: var(--sc-neutral-600);
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-science__fact-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-science__fact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1); /* 4 */
+}
+
+.sc-science__fact[hidden] { display: none; }
+
+.sc-science__fact-title { margin: 0; }
+.sc-science__fact-text  { margin: 0; max-inline-size: var(--sc-measure); }
+
+/* ---------- Низ · стекло ---------- */
+
+/* Нижняя половина 455: стеклянная плита 352 островом в полосе стоит
+   у её верхней кромки, под плитой остаётся 103 (макет 897:268/269) */
+.sc-science__proof {
+  min-block-size: var(--science-glass-h);
+  display: flex;
+  align-items: center;
+  margin-inline: var(--sc-pad-x);
+  margin-block-end: calc(var(--science-half) - var(--science-glass-h));
+  padding-inline: var(--page-margin-x); /* 80 внутри плиты (897:270) */
+}
+
+.sc-science__stats {
+  inline-size: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Выключка — сквозное правило о числовых выносках (base.css) */
+.sc-science__stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+}
+
+.sc-science__stat-value { margin: 0; white-space: nowrap; }
+
+.sc-science__stat-label {
+  margin: 0;
+  inline-size: var(--science-label-w); /* ширина подписи в макете */
+  color: var(--sc-neutral-600); /* --muted-foreground на стекле даёт 3.2:1 */
+}
+
+/* ---------- Состояния: в Figma их нет, обязательны по CLAUDE.md ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-science__cta:hover { background: var(--primary); color: var(--primary-foreground); }
+  .sc-science__nav-btn:hover { background: var(--sc-black-alpha-20); }
+}
+
+.sc-science__cta:focus-visible,
+.sc-science__nav-btn:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-science__nav-btn:active { opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-science__cta,
+  .sc-science__nav-btn,
+  .sc-science__progress-bar { transition: none; }
+  /* Вместо видео — его же постер прямо на подложке; слой цвета на ::after
+     тонирует его так же, как кадр. Прозрачность постеру не задать, поэтому
+     он чуть плотнее видео (2026-09-14) */
+  .sc-science__video { display: none; }
+  .sc-science__bg {
+    background: url("../../img/science-poster.jpg") center / cover no-repeat, var(--card);
+  }
+
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .sc-science { --science-half: auto; }
+
+  .sc-science__top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
+    padding-block: var(--section-padding-y);
+  }
+
+  .sc-science__proof {
+    min-block-size: 0;
+    margin-block-end: var(--section-padding-y-tight);
+    padding: var(--section-padding-y-tight) var(--page-margin-x);
+  }
+
+  .sc-science__stats {
+    flex-wrap: wrap;
+    gap: var(--section-gap) var(--grid-gap);
+    justify-content: space-around;
+  }
+
+  .sc-science__stat { flex: 1 0 40%; }
+  .sc-science__stat-label { inline-size: auto; }
+
+  /* На телефоне факт идёт первым, стрелки со счётчиком — под ним:
+     сначала читаем, потом листаем */
+  .sc-science__fact-list { order: 1; }
+  .sc-science__controls  { order: 2; }
+}

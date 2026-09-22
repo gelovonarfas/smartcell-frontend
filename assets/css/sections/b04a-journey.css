@@ -1,0 +1,398 @@
+/* ============================================================
+   B04a · Journey — скролл-таймлайн программы
+   figma: node-id=4:295
+   Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-journey {
+  --sc-cta-gap: var(--stack-gap-lg); /* шаг колонки: остальное добавит правило в base.css */
+  /* --- Геометрия из макета, которой нет в ролях токенов --- */
+  --journey-label-col: 200px;   /* колонка чипа со сроком */
+  --journey-connector-w: 48px;  /* пунктирный вынос до маркера */
+  --journey-connector-gap: 6px; /* линия выноса короче ячейки: 42 из 48 */
+  --journey-marker-w: 16px;     /* ячейка маркера */
+  --journey-marker: 11px;       /* активный кружок, r=5.5 */
+  --journey-marker-idle: 8px;   /* неактивный кружок, r=4 */
+  --journey-bullet: 5px;        /* квадратный буллет пункта */
+
+  /* Активный этап — синие ступени из макета: blue/400 и blue/300 */
+  --journey-accent: var(--sc-blue-400);
+  --journey-accent-soft: var(--sc-blue-300);
+
+  /* Дим неактивного этапа и время перехода заданы ТЗ анимации;
+     в шкале движения есть только 160/280/600. */
+  --journey-dim: 0.45;
+  --journey-dur: 400ms;
+
+  box-sizing: border-box;
+  position: relative; /* без overflow: hidden — иначе ломается sticky внутри */
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-journey *,
+.sc-journey *::before,
+.sc-journey *::after { box-sizing: border-box; }
+
+/* ---------- Фон: видео + затемнение ---------- */
+
+.sc-journey__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden; /* клип видео живёт здесь, а не на секции */
+  z-index: 0;
+}
+
+.sc-journey__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sc-journey__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--sc-black-alpha-60);
+}
+
+/* ---------- Сетка: интро (4 колонки) + таймлайн (7 колонок с отступом в 1) ---------- */
+
+.sc-journey__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--sc-grid-columns), 1fr);
+  column-gap: var(--grid-gap);
+  row-gap: var(--section-gap);
+  align-items: start;
+}
+
+/* ---------- Левая колонка ---------- */
+
+.sc-journey__intro {
+  grid-column: 1 / span 4;
+  position: sticky;
+  /* Залипает ниже шапки на общем отступе липких колонок (base.css).
+     Бокс своей натуральной высоты: в 100vh он съел бы ход прилипания. */
+  top: var(--sc-sticky-top);
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-journey__title { margin: 0; }
+
+.sc-journey__subtitle {
+  margin: 0;
+  max-width: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+.sc-journey__cta {
+  align-self: start;
+  display: inline-block;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--sc-line) solid var(--input);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  text-decoration: none;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  text-transform: uppercase;
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease),
+    border-color var(--sc-dur) var(--sc-ease);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+.sc-journey__cta:hover {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+}
+
+.sc-journey__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-journey__cta:active { opacity: 0.85; }
+
+/* ---------- Правая колонка: таймлайн ---------- */
+
+.sc-journey__timeline { grid-column: 6 / -1; }
+
+.sc-journey__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-16); /* 64 в макете */
+}
+
+.sc-journey__step {
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    var(--journey-label-col)
+    var(--journey-connector-w)
+    var(--journey-marker-w)
+    minmax(0, 1fr);
+  align-items: start;
+}
+
+/* Рельс: сегмент от центра маркера этапа до центра маркера следующего.
+   --border в inverse (#262626) поверх видео не читается — hairline на белой альфе. */
+/* Якорь из хиро: секцию ставим ниже обычного смещения, чтобы в центре
+   экрана оказывался первый шаг, а не второй */
+.sc-journey[id] { scroll-margin-block-start: calc(var(--sc-anchor-offset) + var(--section-padding-y)); } /* [id] — перебить section[id] из base.css */
+
+.sc-journey__step::before {
+  content: "";
+  position: absolute;
+  inset-block: 0 calc(-1 * var(--sc-space-16));
+  inset-inline-start: calc(
+    var(--journey-label-col) + var(--journey-connector-w) + var(--journey-marker-w) / 2
+  );
+  width: var(--hairline);
+  margin-inline-start: calc(var(--hairline) / -2);
+  background: var(--sc-white-alpha-20);
+}
+
+/* Заливка рельса: тот же сегмент поверх базовой линии. journey.js ставит
+   --journey-fill 1 сегментам до активного шага и 0 — активному и дальше:
+   линия доходит ровно до активного маркера, хвоста в следующий шаг нет. */
+.sc-journey__step::after {
+  content: "";
+  position: absolute;
+  inset-block: 0 calc(-1 * var(--sc-space-16));
+  inset-inline-start: calc(
+    var(--journey-label-col) + var(--journey-connector-w) + var(--journey-marker-w) / 2
+  );
+  width: var(--hairline);
+  margin-inline-start: calc(var(--hairline) / -2);
+  background: linear-gradient(to bottom, var(--journey-accent-soft), var(--journey-accent));
+  transform-origin: top;
+  transform: scaleY(var(--journey-fill, 0));
+}
+
+.sc-journey.sc-is-animated .sc-journey__step::after {
+  transition: transform var(--sc-dur-slow) var(--sc-ease-out);
+}
+
+.sc-journey__step:first-child::before,
+.sc-journey__step:first-child::after { inset-block-start: calc(var(--h2-lh) / 2); }
+
+.sc-journey__step:last-child::before,
+.sc-journey__step:last-child::after { inset-block-end: calc(100% - var(--h2-lh) / 2); }
+
+/* Чип со сроком, вынос и маркер выровнены по центру первой строки заголовка */
+.sc-journey__label-col,
+.sc-journey__connector,
+.sc-journey__marker {
+  block-size: var(--h2-lh);
+  display: flex;
+  align-items: center;
+}
+
+.sc-journey__label-col { justify-content: flex-end; }
+
+.sc-journey__label {
+  padding: var(--sc-space-1_5) var(--sc-space-3_5); /* 6/14 — в макете 7/14 */
+  border: var(--hairline) dashed currentColor;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+}
+
+.sc-journey__connector {
+  position: relative;
+  color: var(--muted-foreground);
+}
+
+.sc-journey__connector::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0 var(--journey-connector-gap);
+  border-block-start: var(--hairline) dashed currentColor;
+}
+
+.sc-journey__marker {
+  position: relative; /* поверх рельса */
+  z-index: 1;
+  justify-content: center;
+}
+
+.sc-journey__marker::before {
+  content: "";
+  inline-size: var(--journey-marker-idle);
+  block-size: var(--journey-marker-idle);
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--sc-round-full);
+  background: var(--background); /* перекрывает рельс, как в макете */
+}
+
+/* ---------- Тело этапа ---------- */
+
+.sc-journey__body {
+  padding-inline-start: var(--sc-space-7); /* 28 в макете */
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  min-width: 0;
+}
+
+.sc-journey__step-title {
+  margin: 0;
+  color: var(--foreground);
+}
+
+/* Подзаголовок шага — не служебная приписка, а часть высказывания
+   («Три сценарії — за показаннями»): держим его цветом текста, а не
+   приглушённым. Решение 2026-09-11; на фото под скримом приглушённый
+   тон к тому же почти не читался. */
+.sc-journey__note {
+  margin: 0;
+  max-width: var(--sc-measure);
+  color: var(--foreground);
+}
+
+.sc-journey__items {
+  margin: 0;
+  padding-block-start: var(--sc-space-1_5); /* 6 в макете */
+  padding-inline: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.sc-journey__item {
+  display: grid;
+  grid-template-columns: var(--journey-bullet) minmax(0, 1fr);
+  gap: var(--stack-gap-md);
+  align-items: start;
+  max-width: var(--sc-measure);
+  color: var(--foreground);
+}
+
+.sc-journey__item::before {
+  content: "";
+  inline-size: var(--journey-bullet);
+  block-size: var(--journey-bullet);
+  /* по центру первой строки пункта */
+  margin-block-start: calc((var(--p-lh) - var(--journey-bullet)) / 2);
+  border-radius: var(--radius); /* квадрат, а не точка */
+  background: var(--muted-foreground);
+}
+
+/* ---------- Активный этап ----------
+   Дим включает скрипт (data-journey="active"): без JS все этапы читаемы.
+   При prefers-reduced-motion блок не применяется вовсе — opacity 1 и без переходов. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .sc-journey[data-journey="active"] .sc-journey__body {
+    opacity: var(--journey-dim);
+  }
+
+  .sc-journey[data-journey="active"] .sc-journey__step.sc-is-active .sc-journey__body {
+    opacity: 1;
+  }
+
+  /* Переходы включаются кадром позже: иначе стартовый дим «угасал» бы
+     от 1 к .45 прямо на загрузке. */
+  .sc-journey.sc-is-animated .sc-journey__body {
+    transition: opacity var(--journey-dur) var(--sc-ease);
+  }
+
+  .sc-journey.sc-is-animated .sc-journey__label,
+  .sc-journey.sc-is-animated .sc-journey__connector {
+    transition: color var(--journey-dur) var(--sc-ease);
+  }
+
+  .sc-journey.sc-is-animated .sc-journey__marker::before {
+    transition:
+      inline-size var(--journey-dur) var(--sc-ease),
+      block-size var(--journey-dur) var(--sc-ease),
+      background-color var(--journey-dur) var(--sc-ease),
+      border-color var(--journey-dur) var(--sc-ease);
+  }
+}
+
+.sc-journey__step.sc-is-active .sc-journey__label,
+.sc-journey__step.sc-is-active .sc-journey__connector { color: var(--journey-accent-soft); }
+
+.sc-journey__step.sc-is-active .sc-journey__marker::before {
+  inline-size: var(--journey-marker);
+  block-size: var(--journey-marker);
+  border-color: transparent;
+  background: var(--journey-accent);
+  box-shadow: 0 0 0 var(--sc-space-1) color-mix(in srgb, var(--sc-blue-400) 30%, transparent);
+}
+
+/* ---------- Мобильный ----------
+   Мобильного фрейма нет. Четыре колонки в 408px не живут: чип уходит
+   над заголовком, вынос, маркер и рельс скрываются. */
+
+@media (max-width: 640px) {
+  /* Кадр видео на узком экране прижимаем к правому краю: свечение волны
+     уходит из-под текста шагов и остаётся видимым справа */
+  .sc-journey__video { object-position: 100% center; }
+
+  /* В одну колонку кнопка уходит в самый низ блока: на узком экране
+     читатель сначала проходит все шаги и только потом решает (2026-09-14).
+     Чтобы вынуть её из вводной, вводную распускаем (display: contents),
+     и заголовок, лид, лента и кнопка становятся обычными строками сетки. */
+  .sc-journey__inner {
+    grid-template-columns: 1fr;
+    row-gap: var(--stack-gap-lg);
+  }
+
+  .sc-journey__intro { display: contents; }
+
+  .sc-journey__title { grid-area: 1 / 1; }
+  .sc-journey__subtitle { grid-area: 2 / 1; }
+
+  /* Отбивка блока — разница между общим шагом сетки и рядом вводной */
+  .sc-journey__timeline {
+    grid-area: 3 / 1;
+    margin-block-start: calc(var(--section-gap) - var(--stack-gap-lg));
+  }
+
+  /* Кнопка внизу идёт во всю ширину колонки, как остальные мобильные CTA,
+     и надпись в ней по центру: у строки сетки своя ширина, и прежняя
+     выключка влево оставляла подпись у левого края пустой плиты */
+  .sc-journey__cta {
+    grid-area: 4 / 1;
+    /* От последнего шага кнопка отбита шире обычного: иначе читается
+       как ещё один пункт ленты, а не как выход из неё */
+    margin-block-start: calc(var(--sc-space-16) - var(--stack-gap-lg));
+    align-self: start;
+    justify-self: stretch;
+    text-align: center;
+  }
+
+  .sc-journey__step {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--stack-gap-sm);
+  }
+
+  /* Вертикальная линия ленты на узком экране не нужна: шаги идут
+     колонкой, а сама линия попадает поверх текста */
+  .sc-journey__step::before,
+  .sc-journey__step::after,
+  .sc-journey__connector,
+  .sc-journey__marker { display: none; }
+
+  .sc-journey__label-col {
+    justify-content: flex-start;
+    block-size: auto;
+  }
+
+  .sc-journey__body { padding-inline-start: 0; }
+}

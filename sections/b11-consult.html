@@ -1,0 +1,42 @@
+<!-- ============================================================
+     B11 · CTA2 Консультація професора
+     figma: node-id=897:344 (v2, фон-кадр) · раньше 4:299
+     ACF: b11_kicker (text), b11_title (text),
+          b11_name_label / b11_phone_label / b11_submit (text)
+     Отправка не подключена: валидный сабмит уходит нативно,
+     кодер подставляет action / AJAX.
+     ============================================================ -->
+<section class="sc-consult" id="consultation" data-theme="inverse">
+  <!-- Фон из макета (897:344): кадр во всю полосу под скримом black 20 %.
+       Файлы: assets/img/b11-consult.jpg (1440) + @2x (1672 — исходник макета) -->
+  <div class="sc-consult__bg" aria-hidden="true">
+    <img class="sc-consult__image" src="assets/img/b11-consult.jpg"
+         srcset="assets/img/b11-consult.jpg 1440w, assets/img/b11-consult@2x.jpg 1672w"
+         sizes="100vw" alt="" width="1440" height="585" loading="lazy" decoding="async">
+    <span class="sc-consult__scrim"></span>
+  </div>
+  <div class="sc-consult__inner">
+    <div class="sc-consult__copy">
+      <p class="sc-consult__kicker sc-t-caption">БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ ПРОФЕСОРА</p>
+      <h2 class="sc-consult__title sc-t-h2">Дізнайтесь регенеративний потенціал вашої шкіри</h2>
+    </div>
+
+    <form class="sc-consult__form" data-form novalidate>
+      <div class="sc-consult__field">
+        <label class="sc-consult__label sc-t-caption" for="consult-name">ІМ'Я</label>
+        <input class="sc-consult__input" id="consult-name" name="name" type="text"
+               placeholder="Олена" autocomplete="name" required>
+        <p class="sc-consult__error" id="consult-name-error" hidden>Вкажіть імʼя</p>
+      </div>
+
+      <div class="sc-consult__field">
+        <label class="sc-consult__label sc-t-caption" for="consult-phone">ТЕЛЕФОН</label>
+        <input class="sc-consult__input" id="consult-phone" name="phone" type="tel"
+               placeholder="+380" autocomplete="tel" inputmode="tel" required>
+        <p class="sc-consult__error" id="consult-phone-error" hidden>Вкажіть номер телефону</p>
+      </div>
+
+      <button class="sc-consult__submit" type="submit">Записатись</button>
+    </form>
+  </div>
+</section>

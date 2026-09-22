@@ -1,0 +1,40 @@
+# Кеш Cloudflare.
+# Имена файлов без хешей, поэтому долгий кеш можно давать только тому,
+# что меняется редко. Стили и скрипты правим постоянно — им ревалидация
+# по ETag на каждый заход: ответ 304, трафика почти нет, но клиент всегда
+# видит свежую вёрстку сразу после деплоя (правка 2026-09-13).
+/assets/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Картинки переснимаются и переэкспортируются так же часто, как правится
+# вёрстка, а хешей в именах нет — поэтому тоже ревалидация по ETag:
+# ответ 304 почти ничего не весит, зато обновлённое фото видно сразу
+# (правка 2026-09-13: было max-age сутки, и новое фото не доходило до прода).
+/assets/img/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/b04b/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Видео тяжёлое, но пока идёт подбор кадров, его переснимают под тем же
+# именем — сутки кеша прятали новую версию на проде. Поэтому тоже
+# ревалидация по ETag: лишний запрос лёгкий, а тело приходит только когда
+# файл реально сменился (правка 2026-09-14). Вернуть долгий кеш, когда
+# кадры устоятся, или добавить хеш в имя.
+/assets/video/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Страницы всегда свежие
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Базовая безопасность статики
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

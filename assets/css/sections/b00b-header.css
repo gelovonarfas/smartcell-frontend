@@ -1,0 +1,471 @@
+/* ============================================================
+   B00b · Header (IOH transparent)
+   figma: node-id=4:288
+   Прозрачный хедер поверх хиро. Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-header {
+  /* --- Геометрия из макета, которой нет в ролях токенов --- */
+  --header-portal-h: 30px;    /* Portal 166.129 × 30.02, шеврон внутри SVG */
+  --header-pill-h: 36px;      /* pill CTA: 36 высотой, паддинги 18/20 в макете */
+  --header-pill-pl: 18px;
+  --header-pill-pr: 20px;
+  --header-menu-w: 340px;     /* Portal/Dropdown 10:5 */
+  --header-portal-dur: 320ms; /* выезд панели портала */
+  --header-burger: 36px;      /* строка хедера 36; тап-таргет добираем до 44 */
+  --header-burger-line: 18px;
+  --header-blur: 24px;        /* glass navbar из DESIGN.md §04 */
+  --header-z: 100;
+
+  box-sizing: border-box;
+  position: fixed;
+  /* высоту анонс-бара измеряет header.js; без него шапка просто прижата к верху */
+  inset-block-start: var(--announce-h, 0px);
+  inset-inline: 0;
+  z-index: var(--header-z);
+  padding: var(--bar-padding-y) var(--sc-pad-x);
+  color: var(--foreground); /* белый поверх хиро; в макете лого чёрное — см. отчёт */
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    backdrop-filter var(--sc-dur) var(--sc-ease),
+    inset-block-start var(--sc-dur) var(--sc-ease);
+}
+
+/* анонс-бар уехал вверх — шапка занимает его место */
+.sc-header.sc-is-scrolled { inset-block-start: 0; }
+
+.sc-header *,
+.sc-header *::before,
+.sc-header *::after { box-sizing: border-box; }
+
+.sc-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-12); /* 48 в макете */
+}
+
+/* ---------- Портал ---------- */
+
+.sc-header__portal { position: relative; }
+
+.sc-header__trigger {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sc-header__logo {
+  display: block;
+  block-size: var(--header-portal-h);
+  inline-size: auto;
+}
+
+/* Два варианта компонента Portal одним SVG: на тёмном хедере всё белое
+   через currentColor (вариант white), на светлом круг «C» становится
+   брендовым (вариант bi-color). */
+.sc-header--light { color: var(--foreground); }
+/* Круг «C» в варианте bi-color. Фирменный синий логотипа не является токеном
+   палитры (в выгрузке синий только в accent), поэтому берём его из ассета. */
+.sc-header--light .sc-header__logo-mark { fill: var(--sc-blue-700); }
+
+/* Шапка на светлой странице (блог): белые полупрозрачные цвета, рассчитанные
+   на видео под хиро, здесь не читаются — переводим на семантику. */
+.sc-header--light .sc-header__link { color: var(--muted-foreground); }
+.sc-header--light .sc-header__link:hover { color: var(--foreground); }
+
+.sc-header--light .sc-header__cta {
+  border-color: var(--input);
+  background: transparent;
+  color: var(--foreground);
+}
+
+.sc-header--light .sc-header__cta:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+
+/* Светлая шапка блога прочерчена снизу всегда, не только в прокрутке:
+   в макете VM/Home линия под шапкой стоит с первого экрана */
+.sc-header--light { border-block-end: var(--hairline) solid var(--border); }
+
+@media (max-width: 640px) {
+  /* Открытое меню на светлой шапке заливает всю планку, а не только панель
+     в полях: раньше фон стоял на самой панели, и по краям экрана сквозь
+     стекло просвечивало фото страницы полосами (правка 2026-09-14). */
+  .sc-header--light.sc-header--nav-open {
+    background: var(--background);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* Своей кромки у панели нет: линию под открытым меню даёт нижняя кромка
+     самой светлой шапки, а вторая читалась как лишняя палка под кнопкой
+     (правка 2026-09-14) */
+}
+
+.sc-header__chevron {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform var(--sc-dur) var(--sc-ease);
+}
+
+.sc-header__trigger[aria-expanded="true"] .sc-header__chevron { transform: rotate(180deg); }
+
+/* Панель пространств — светлая карточка поверх тёмного хедера */
+.sc-header__spaces {
+  position: absolute;
+  inset-block-start: calc(100% + var(--stack-gap-sm));
+  inset-inline-start: 0;
+  inline-size: var(--header-menu-w);
+  background: var(--card);
+  color: var(--card-foreground);
+  box-shadow: var(--shadow-lg); /* в макете 0 10px 12px rgb(20 19 17 / 12%) */
+
+  /* Вторая панель лежит в «ящике» нулевой высоты и выезжает из-под первой:
+     трек 0fr→1fr раскрывает ящик, панель внутри едет сверху вниз.
+     Ящику нужен overflow: hidden — иначе трек не схлопнется до нуля. */
+  display: grid;
+  grid-template-rows: auto 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--header-portal-dur) var(--sc-ease),
+    opacity var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-header__spaces[hidden] { display: none; }
+
+.sc-header__spaces-drawer {
+  overflow: hidden;
+  min-block-size: 0;
+}
+
+.sc-header__space--current {
+  transform: translateY(-100%);
+  transition: transform var(--header-portal-dur) var(--sc-ease);
+}
+
+.sc-header__portal.sc-is-open .sc-header__spaces {
+  grid-template-rows: auto 1fr;
+  opacity: 1;
+}
+
+.sc-header__portal.sc-is-open .sc-header__space--current { transform: none; }
+
+.sc-header__space {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-0_5);
+  padding: var(--sc-space-3_5) var(--sc-space-5); /* 14 / 20 в макете */
+  background: var(--background);
+  color: var(--card-foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-header__space:hover { background: var(--muted); }
+
+/* Активное пространство подсвечено accent — так в описании компонента */
+.sc-header__space--current,
+.sc-header__space--current:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.sc-header__space-title {
+  font: var(--h3-weight) var(--h3-size) / var(--h3-lh) var(--font-headings);
+  letter-spacing: var(--h3-ls);
+}
+
+.sc-header__space-title-alt { font-weight: 300; } /* Fixel Display Light в макете */
+
+.sc-header__space-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-0_5);
+  color: var(--muted-foreground);
+}
+
+.sc-header__space-dot { flex: none; }
+
+/* ---------- Обёртка меню ----------
+   На десктопе она не должна влиять на раскладку: display: contents
+   отдаёт nav и CTA прямо во flex шапки, как было до бургера. */
+
+.sc-header__drawer,
+.sc-header__drawer-inner { display: contents; }
+
+/* ---------- Бургер ----------
+   Мобильного фрейма хедера в макете нет — временное решение до макета. */
+
+.sc-header__burger {
+  display: none;
+  inline-size: var(--header-burger);
+  block-size: var(--header-burger);
+  /* тап-таргет 44 без роста высоты шапки */
+  padding: var(--sc-space-1);
+  margin-block: calc(-1 * var(--sc-space-1));
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sc-header__burger-box {
+  position: relative;
+  display: block;
+  inline-size: var(--header-burger-line);
+  block-size: var(--header-burger-line);
+  margin-inline: auto;
+}
+
+.sc-header__burger-box span {
+  position: absolute;
+  inset-inline: 0;
+  block-size: 1px; /* иконка — 1px, как стрелки */
+  background: currentColor;
+  transition:
+    transform var(--sc-dur) var(--sc-ease),
+    opacity var(--sc-dur-fast) var(--sc-ease);
+}
+
+/* Гамбургер из двух палочек: при открытии съезжаются к центру
+   и морфируются в крест */
+/* Палочки отстоят от краёв бокса на --burger-inset: так между ними
+   ровно 8 — как у иконки в макете */
+.sc-header__burger-box { --burger-inset: 5px; }
+.sc-header__burger-box span:nth-child(1) { inset-block-start: var(--burger-inset); }
+.sc-header__burger-box span:nth-child(2) { inset-block-end: var(--burger-inset); }
+
+.sc-header__burger[aria-expanded="true"] .sc-header__burger-box span:nth-child(1) {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.sc-header__burger[aria-expanded="true"] .sc-header__burger-box span:nth-child(2) {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+.sc-header__burger:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* ---------- Навигация ---------- */
+
+.sc-header__nav {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  gap: var(--grid-gap);
+}
+
+.sc-header__link {
+  color: var(--sc-white-alpha-80); /* в макете rgba(255,255,255,.85) — в шкале альф такой ступени нет */
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-header__link:hover { color: var(--foreground); }
+
+/* ---------- CTA-pill ---------- */
+
+.sc-header__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Button/Control: текст по центру, без стрелки */
+  block-size: var(--header-pill-h);
+  padding-inline: var(--header-pill-pl) var(--header-pill-pr);
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius); /* пилюля убрана: радиус системно 0 */
+  background: var(--sc-white-alpha-10);
+  color: var(--foreground);
+  text-decoration: none;
+  white-space: nowrap;
+  font: 500 var(--p-mini-size) / var(--caption-lh) var(--font-sans);
+  transition:
+    background-color var(--sc-dur-fast) var(--sc-ease),
+    border-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-header__cta:hover {
+  background: var(--sc-white-alpha-20);
+  border-color: var(--foreground);
+}
+
+/* ---------- Состояния ----------
+   В Figma их нет — обязательны по CLAUDE.md */
+
+.sc-header__trigger:focus-visible,
+.sc-header__link:focus-visible,
+.sc-header__cta:focus-visible,
+.sc-header__space:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-header__cta:active { opacity: 0.85; }
+
+/* ---------- Прокрученное состояние ----------
+   Фрейма нет в макете: DESIGN.md §04 описывает glass navbar со светлым стеклом,
+   но здесь текст белый, поэтому стекло тёмное. Класс вешает скрипт. */
+
+.sc-header.sc-is-scrolled {
+  background: var(--sc-black-alpha-60);
+  backdrop-filter: blur(var(--header-blur));
+  /* Кромки снизу нет: на инверсе она белая и резала фото под шапкой */
+}
+
+/* Светлая шапка блога: правило идёт ПОСЛЕ тёмного и с той же
+   специфичностью — иначе тёмное стекло ложилось на светлую страницу
+   и тёмный текст меню тонул. Фон плотнее стекла: под шапку заезжают
+   фото карточек, на 40% белого ссылки не читались. */
+.sc-header--light.sc-is-scrolled {
+  background: color-mix(in srgb, var(--background) 88%, transparent);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-header,
+  .sc-header__chevron,
+  .sc-header__link,
+  .sc-header__cta,
+  .sc-header__space,
+  .sc-header__spaces,
+  .sc-header__space--current { transition: none; }
+
+  .sc-header__space--current { transform: none; }
+  .sc-header__spaces { opacity: 1; grid-template-rows: auto 1fr; }
+}
+
+/* Переход в VIRTUS: на десктопе он в портале у логотипа,
+   поэтому строка в меню нужна только на телефоне */
+.sc-header__link--portal { display: none; }
+
+/* ---------- Мобильный ----------
+   Мобильного фрейма хедера в макете нет. Временное решение до макета:
+   пункты меню и CTA уезжают в панель под бургером. */
+
+@media (max-width: 640px) {
+  /* Планка на телефоне чуть выше базовых 8: логотипу и бургеру тесно */
+  .sc-header { padding-block: var(--sc-space-3); }
+
+  .sc-header__burger { display: block; margin-inline-start: auto; }
+
+  /* Шеврон портала на телефоне убран: переход в VIRTUS живёт строкой в меню */
+  .sc-header__chevron { display: none; }
+
+  .sc-header__link--portal {
+    display: flex;
+    color: var(--muted-foreground);
+  }
+
+  /* Открытое меню заливает и саму планку — иначе логотип висит на фото */
+  /* Открытое меню: планка и панель — один кусок стекла */
+  .sc-header--nav-open {
+    background: var(--glass-surface);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  }
+
+  /* панель начинается сразу под строкой с логотипом */
+  .sc-header--nav-open .sc-header__drawer { margin-block-start: var(--sc-space-6); }
+
+  /* Панель выезжает из-под шапки: max-height 0 → 70vh.
+     Взял max-height, а не грид-трек 0fr→1fr как у портала: панель
+     спозиционирована абсолютно и высоту берёт от содержимого, а с запасом
+     по max-height поведение предсказуемее. Запас держать выше контента.
+     visibility убирает пункты из Tab и из скринридера, пока закрыто. */
+  /* Панель в потоке, а не абсолютом: тогда шапка растёт вместе с ней и
+     стекло — одна поверхность на планку и меню. Своего backdrop-filter у
+     панели нет: у элемента внутри предка со стеклом размывать нечего. */
+  .sc-header__inner {
+    flex-wrap: wrap;
+    row-gap: 0; /* колонка меню не должна ловить десктопный зазор 48 */
+  }
+
+  .sc-header__drawer {
+    flex-basis: 100%;
+    display: block;
+    overflow: hidden;
+    max-height: 0;
+    visibility: hidden;
+    transition:
+      max-height var(--header-portal-dur) var(--sc-ease),
+      visibility 0s linear var(--header-portal-dur);
+  }
+
+  .sc-header--nav-open .sc-header__drawer {
+    visibility: visible;
+    max-height: 70vh;
+    transition:
+      max-height var(--header-portal-dur) var(--sc-ease),
+      visibility 0s;
+  }
+
+  .sc-header__drawer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    /* поля страницы уже держит сама шапка — второй раз не отступаем */
+    padding-inline: 0;
+    padding-block: 0 var(--sc-space-6);
+  }
+
+  .sc-header__nav {
+    flex: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  /* Пункты — строки-таргеты во всю ширину с делителями, как аккордеоны подвала */
+  .sc-header__nav .sc-header__link {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--control-square);
+    padding-block: var(--stack-gap-sm);
+    border-block-start: var(--hairline) solid var(--sc-white-alpha-15);
+    font-size: var(--p-size);
+    line-height: var(--p-lh);
+  }
+
+  .sc-header__nav .sc-header__link:first-child { border-block-start: 0; }
+
+  /* На светлой шапке журнала делители берут обычную кромку: белая линия
+     на светлом стекле не видна вовсе (правка 2026-09-14) */
+  .sc-header--light .sc-header__nav .sc-header__link { border-block-start-color: var(--border); }
+
+  /* Button/Control · primary: на стекле контурная кнопка терялась,
+     в меню она заливкой — как в компоненте Header/Drawer · mobile */
+  .sc-header__cta {
+    justify-content: center;
+    margin-block-start: var(--sc-space-6);
+    block-size: var(--control-square);
+    border-color: transparent;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    text-transform: uppercase;
+    font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+    letter-spacing: var(--button-ls);
+  }
+
+  .sc-header__cta:hover {
+    background: var(--primary);
+    border-color: transparent;
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-header__drawer,
+  .sc-header__burger-box span { transition: none; }
+}

@@ -1,0 +1,318 @@
+/* ============================================================
+   B06 · До-Після · 3 кейси
+   figma: node-id=925:1315 (огляд), стани — 931:1130 … 937:1383
+   ============================================================ */
+
+.sc-cases {
+  --cases-seg-h: 46px;
+  --cases-thumb: 112px;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-padding-y-tight); /* 64 между заголовком и рядом в макете */
+  padding-block: var(--section-padding-y);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-cases *,
+.sc-cases *::before,
+.sc-cases *::after { box-sizing: border-box; }
+
+.sc-cases__head { padding-inline: var(--sc-pad-x); }
+
+.sc-cases__title { margin: 0; }
+
+/* Медиа · виды контролю · колонка — пропорция макета 680 : 112 : 440, гаттер 24 */
+.sc-cases__row {
+  display: grid;
+  grid-template-columns: 680fr 112fr 440fr;
+  gap: var(--sc-gutter);
+  padding-inline: var(--sc-pad-x);
+  align-items: start;
+}
+
+/* ---------- Медиа и свитчер ДО/ПІСЛЯ ---------- */
+
+.sc-cases__media { inline-size: 100%; }
+
+.sc-cases__frames {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--muted);
+}
+
+/* Кадры одного кейса и вида лежат стопкой; неактивные выключены совсем,
+   чтобы lazy-loading не тянул все шестнадцать файлов разом */
+.sc-cases__frame {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.sc-cases__frame[data-current] {
+  display: block;
+  animation: sc-cases-in var(--sc-dur) var(--sc-ease-out);
+}
+
+@keyframes sc-cases-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Мягкая смена ДО ↔ ПІСЛЯ: оба кадра ракурса загружены и лежат друг на друге,
+   переключение — долгий кроссфейд с торможением, без резкого скачка
+   (решение 2026-09-11). Кадр «до» остаётся под «після», поэтому во время
+   перехода не бывает пустого фона. */
+.sc-cases__shot {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--sc-dur-slow) var(--sc-ease-out);
+}
+
+.sc-cases__shot[data-current] { opacity: 1; }
+
+.sc-cases__switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: var(--sc-space-3); /* 12 в макете */
+  background: var(--secondary);
+}
+
+.sc-cases__seg {
+  block-size: var(--cases-seg-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--foreground);
+  cursor: pointer;
+  text-transform: uppercase;
+  font: var(--caption-weight) var(--caption-size) / var(--caption-lh) var(--font-headings);
+  letter-spacing: var(--caption-ls);
+  transition:
+    background-color var(--sc-dur-fast) var(--sc-ease),
+    color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-cases__seg[aria-checked="true"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* ---------- Виды контролю: Фото / УЗД / Морфологія ---------- */
+
+.sc-cases__types {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap); /* 16 в макете */
+}
+
+.sc-cases__types li[hidden] { display: none; }
+
+.sc-cases__type {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sc-space-1_5); /* 6 в макете */
+  inline-size: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--foreground);
+  cursor: pointer;
+  text-align: start;
+}
+
+.sc-cases__type-thumb {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--muted);
+  overflow: hidden;
+  /* Кольцо активной миниатюры — outline, а не border: лежит снаружи кадра,
+     не ест его площадь и не двигает соседей. Решение 2026-09-11: 2px
+     с зазором 1px от фото — осознанное исключение из правила «все линии 1px»,
+     кольцу нужен вес, чтобы читаться рядом с плотным кадром. */
+  outline: var(--sc-focus-w) solid transparent;
+  outline-offset: 1px;
+  transition: outline-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-cases__type[aria-selected="true"] .sc-cases__type-thumb { outline-color: var(--border); }
+
+.sc-cases__type-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.sc-cases__type-img[hidden] { display: none; }
+
+.sc-cases__type-label { text-transform: uppercase; }
+
+/* ---------- Правая колонка ---------- */
+
+.sc-cases__col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sc-space-10);
+  min-inline-size: 0;
+  align-self: stretch;
+}
+
+.sc-cases__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-10); /* rhythm/40 */
+}
+
+.sc-cases__switcher {
+  overflow: hidden; /* стрелки клипаются по внутреннему краю: фон ховера не ложится на рамку */
+  display: grid;
+  grid-template-columns: var(--control-square) minmax(0, 1fr) var(--control-square);
+  align-items: center;
+  block-size: var(--control-square);
+  border: var(--sc-line) solid var(--input);
+}
+
+.sc-cases__nav {
+  inline-size: var(--control-square);
+  block-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-cases__nav:first-child { border-inline-end: var(--hairline) solid var(--input); }
+.sc-cases__nav:last-child { border-inline-start: var(--hairline) solid var(--input); }
+.sc-cases__nav:hover { background: var(--muted); }
+.sc-cases__nav svg { inline-size: 100%; block-size: 100%; }
+
+.sc-cases__metas { margin: 0; min-inline-size: 0; }
+
+/* Подпись переключателя (макет v2, 897:2): слева счётчик «1 / 3» лёгким
+   приглушённым, справа название жирным; поля 16. Один рисунок на все три
+   переключалки — B04b, B06, B08c (решение 2026-09-11).
+
+   Правило: заголовок внутри переключателя предельно короткий. Полоса узкая,
+   на телефоне между стрелками остаётся ~180 — длинная подпись режется
+   многоточием. Уточнения (единицы, «основний», «місяців») живут в заголовке
+   панели, на оси графика или в сокращении. */
+.sc-cases__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--stack-gap-sm);
+  margin: 0;
+  padding-inline: var(--sc-space-4);
+  min-inline-size: 0;
+}
+
+.sc-cases__count {
+  flex: none;
+  font-weight: var(--sc-weight-light);
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-cases__label {
+  flex: 1 1 auto;
+  text-align: end;
+  font-weight: var(--sc-weight-bold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sc-cases__meta[hidden] { display: none; }
+
+.sc-cases__panels { display: block; }
+
+.sc-cases__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg); /* 20: заголовок → абзацы */
+}
+
+.sc-cases__panel[hidden] { display: none; }
+
+.sc-cases__subtitle { margin: 0; }
+
+.sc-cases__note,
+.sc-cases__legal {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+.sc-cases__note b {
+  font-weight: var(--sc-weight-bold);
+  color: var(--foreground);
+}
+
+/* В Figma состояний нет — обязательны по CLAUDE.md */
+.sc-cases__seg:focus-visible,
+.sc-cases__nav:focus-visible,
+.sc-cases__type:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-cases__type:hover .sc-cases__type-thumb { outline-color: var(--muted-foreground); }
+  .sc-cases__type[aria-selected="true"]:hover .sc-cases__type-thumb { outline-color: var(--border); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-cases__shot,
+  .sc-cases__seg,
+  .sc-cases__nav,
+  .sc-cases__type-thumb { transition: none; }
+  .sc-cases__frame[data-current] { animation: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .sc-cases { gap: var(--section-gap); }
+
+  /* Порядок: переключатель кейсов → кадр → виды контролю в ряд → текст */
+  .sc-cases__row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-inline: var(--page-margin-x);
+    gap: var(--page-margin-x);
+  }
+
+  .sc-cases__col,
+  .sc-cases__top { display: contents; }
+
+  .sc-cases__switcher { order: 1; }
+  .sc-cases__media    { order: 2; inline-size: 100%; }
+  .sc-cases__types    { order: 3; flex-direction: row; gap: var(--stack-gap-sm); }
+  .sc-cases__panels   { order: 4; }
+  .sc-cases__legal    { order: 5; }
+
+  .sc-cases__types li { flex: 0 0 var(--cases-thumb); }
+}

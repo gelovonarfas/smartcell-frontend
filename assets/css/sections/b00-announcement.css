@@ -1,0 +1,34 @@
+/* ============================================================
+   B00 · Announcement
+   figma: node-id=14:59
+   Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-announce {
+  box-sizing: border-box;
+  padding: var(--sc-space-2) var(--sc-pad-x); /* 8 по вертикали в макете */
+  background: var(--background);
+  color: var(--accent-foreground);
+  text-align: center;
+}
+
+.sc-announce__text {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  /* Строка анонса длинная и на телефоне ломалась надвое. Берём кегль mini
+     и поджимаем поля самой полосы: строка идёт одной. Поля полосы здесь
+     свои, не --sc-pad-x: это узкий бар, а не контентная секция. */
+  .sc-announce {
+    padding-inline: var(--sc-space-2);
+  }
+
+  /* Кегль тянется по ширине окна: на 390 это mini (12), на 320 — 10.
+     Ступени между 10 и 12 в шкале нет, значение согласуемое: строка
+     анонса длинная, а ломать её надвое в баре нельзя. */
+  .sc-announce__text {
+    font-size: clamp(9.5px, 3.05vw, var(--p-mini-size));
+    line-height: var(--p-mini-lh);
+  }
+}

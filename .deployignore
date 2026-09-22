@@ -1,0 +1,28 @@
+# Что НЕ уезжает на прод (используется scripts/build-dist.sh)
+.git/
+.github/
+.DS_Store
+._*
+docs/
+smartcell/
+scripts/
+deploy/
+node_modules/
+dist/
+CLAUDE.md
+_*.html
+*.md
+
+# Не используется ни одной страницей, CSS или JS (проверено 2026-09-13).
+# Файлы остаются в репозитории — исключены только из выгрузки на прод.
+/assets/video/___science.mp4
+/assets/video/ambassador.mp4
+/assets/video/journey-waves+.mp4
+/assets/img/b15a-fibroblasts.jpg
+/assets/img/ceo1 1.png
+/assets/img/OLD.svg
+# Шрифты Fixel убраны решением 2026-09-04: проект на Onest из Google Fonts
+/assets/fonts/
+
+# Карантин неиспользуемых файлов (аудит 2026-09-21): в выкладку не идёт
+_unused/

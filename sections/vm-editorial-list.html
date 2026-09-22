@@ -1,0 +1,78 @@
+<!-- ============================================================
+     VM · Editorial list («Читайте також»)
+     figma: node-id=52:11
+     ACF: editorial_title (text),
+          editorial_rows (repeater: kicker, title, author, meta, link, preview_image)
+     Наведение на строку показывает парящее квадратное превью (Webflow-стиль).
+     Превью декоративное: путь лежит в data-preview у строки.
+     Материалы — из ленты журнала (2026-09-08). ⚠ [VERIFY] авторские подписи
+     остались от прежних материалов и теме не соответствуют: кодер выводит
+     реального автора записи, клиника подтверждает пары «матеріал — автор».
+     ============================================================ -->
+<section class="sc-editorial" data-editorial>
+  <div class="sc-editorial__inner">
+
+    <div class="sc-editorial__head">
+      <h2 class="sc-editorial__title sc-t-h2">Читайте також</h2>
+    </div>
+
+    <ul class="sc-editorial__list">
+
+      <li class="sc-editorial__item">
+        <a class="sc-editorial__row" href="#article-microbiome"
+           data-editorial-row data-preview="assets/img/vm/card-08.jpg">
+          <span class="sc-editorial__kicker sc-t-caption">НАУКА</span>
+          <span class="sc-editorial__mid">
+            <span class="sc-editorial__headline sc-t-h3">Перші 1000 днів: як мікробіом кишківника формує здоров’я на все життя</span>
+            <span class="sc-editorial__author sc-t-mini">Автор: Бакун О. — стоматолог, хірург-стоматолог</span>
+          </span>
+          <span class="sc-editorial__meta sc-t-mini">7 хв · 34 переглядів</span>
+        </a>
+      </li>
+
+      <li class="sc-editorial__item">
+        <a class="sc-editorial__row" href="#article-barnes-lentz"
+           data-editorial-row data-preview="assets/img/vm/card-13.jpg">
+          <span class="sc-editorial__kicker sc-t-caption">ЛЮДИ</span>
+          <span class="sc-editorial__mid">
+            <span class="sc-editorial__headline sc-t-h3">Кайла Барнс-Лентц: жінка, яка переписує жіноче довголіття зсередини</span>
+            <span class="sc-editorial__author sc-t-mini">Автор: Кадочніков С. — пластичний хірург</span>
+          </span>
+          <span class="sc-editorial__meta sc-t-mini">9 хв · 35 переглядів</span>
+        </a>
+      </li>
+
+      <li class="sc-editorial__item">
+        <a class="sc-editorial__row" href="#article-brain-habits"
+           data-editorial-row data-preview="assets/img/vm/card-05.jpg">
+          <span class="sc-editorial__kicker sc-t-caption">ПРАКТИКА</span>
+          <span class="sc-editorial__mid">
+            <span class="sc-editorial__headline sc-t-h3">П’ять звичок із доказовою базою, які захищають мозок</span>
+            <span class="sc-editorial__author sc-t-mini">Автор: Ткаченко І. — дерматолог</span>
+          </span>
+          <span class="sc-editorial__meta sc-t-mini">6 хв · 112 переглядів</span>
+        </a>
+      </li>
+
+      <li class="sc-editorial__item">
+        <a class="sc-editorial__row" href="#article-markers-women"
+           data-editorial-row data-preview="assets/img/vm/card-19.jpg">
+          <span class="sc-editorial__kicker sc-t-caption">ДОВГОЛІТТЯ</span>
+          <span class="sc-editorial__mid">
+            <span class="sc-editorial__headline sc-t-h3">Маркери довголіття, найважливіші для жінок після 30</span>
+            <span class="sc-editorial__author sc-t-mini">Автор: Моршнєва О. — ендокринолог</span>
+          </span>
+          <span class="sc-editorial__meta sc-t-mini">7 хв · 89 переглядів</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Парящее превью: один элемент на список, позицию ведёт скрипт -->
+  <div class="sc-editorial__preview" data-editorial-preview aria-hidden="true">
+    <span class="sc-editorial__preview-inner">
+      <img class="sc-editorial__preview-img" alt="" decoding="async">
+    </span>
+  </div>
+</section>

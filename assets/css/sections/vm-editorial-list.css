@@ -1,0 +1,167 @@
+/* ============================================================
+   VM · Editorial list («Читайте також»)
+   figma: node-id=52:11
+   Зависит от assets/css/tokens.css
+   ============================================================ */
+
+.sc-editorial {
+  /* --- Геометрия из макета, которой нет в ролях токенов --- */
+  --editorial-row-py: 22px;    /* вертикальные поля строки */
+  --editorial-kicker-w: 110px; /* колонка рубрики */
+
+  /* --- Парящее превью: в макете его нет, размеры подобраны --- */
+  --editorial-preview-size: 220px;
+  --editorial-preview-dur: 320ms;
+
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-editorial *,
+.sc-editorial *::before,
+.sc-editorial *::after { box-sizing: border-box; }
+
+.sc-editorial__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.sc-editorial__head { display: flex; align-items: center; }
+
+.sc-editorial__title { margin: 0; }
+
+/* ---------- Список ---------- */
+
+.sc-editorial__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-editorial__row {
+  display: grid;
+  grid-template-columns: var(--editorial-kicker-w) minmax(0, 1fr) auto;
+  gap: var(--grid-gap);
+  align-items: start;
+  padding-block: var(--editorial-row-py);
+  border-block-start: var(--hairline) solid var(--border);
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+/* Chip/Category как в макете (A/Related, «chip · category»): кромка 1px,
+   поля 6/10. Плашка не растягивается на всю колонку — прижата к её началу. */
+.sc-editorial__kicker {
+  justify-self: start;
+  padding: var(--sc-chip-pad);
+  border: var(--hairline) solid var(--border);
+  color: var(--muted-foreground);
+  transition:
+    color var(--sc-dur) var(--sc-ease),
+    border-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-editorial__mid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+  min-width: 0;
+}
+
+.sc-editorial__headline {
+  color: var(--foreground);
+  max-width: var(--sc-measure); /* в макете строка идёт во всю колонку */
+}
+
+.sc-editorial__author,
+.sc-editorial__meta { color: var(--muted-foreground); }
+
+.sc-editorial__meta { text-align: right; }
+
+/* ---------- Состояния ----------
+   В Figma их нет — обязательны по CLAUDE.md.
+   Наведение на одну строку приглушает соседние: так строка читается как цель. */
+
+/* Только там, где есть настоящий курсор. На тач-устройствах :hover залипает
+   после тапа: строка остаётся «наведённой», а соседние — приглушёнными,
+   пока не тапнешь в другом месте. Ширина для этого не критерий — планшет
+   шире мобильного брейкпоинта, но курсора у него нет. */
+@media (hover: hover) and (pointer: fine) {
+  .sc-editorial__list:hover .sc-editorial__row { opacity: 0.45; }
+  .sc-editorial__list:hover .sc-editorial__row:hover { opacity: 1; }
+  .sc-editorial__row:hover .sc-editorial__kicker {
+    color: var(--foreground);
+    border-color: var(--foreground);
+  }
+}
+
+.sc-editorial__row:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+  opacity: 1;
+}
+
+/* ---------- Парящее превью ----------
+   Позицию и наклон ведёт скрипт через transform на внешнем элементе,
+   появление — классом на внутреннем, чтобы анимации не конфликтовали. */
+
+.sc-editorial__preview {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 50;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.sc-editorial__preview-inner {
+  display: block;
+  inline-size: var(--editorial-preview-size);
+  aspect-ratio: 1 / 1; /* «квадратиком» */
+  overflow: hidden;
+  background: var(--muted);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: scale(0.86);
+  transition:
+    opacity var(--editorial-preview-dur) var(--sc-ease),
+    transform var(--editorial-preview-dur) var(--sc-ease);
+}
+
+.sc-editorial__preview.sc-is-visible .sc-editorial__preview-inner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sc-editorial__preview-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Без скрипта и при просьбе убрать анимацию превью не участвует вовсе */
+.sc-editorial__preview:not(.sc-is-ready) { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-editorial__preview { display: none; }
+  .sc-editorial__row,
+  .sc-editorial__kicker { transition: none; }
+}
+
+/* ---------- Мобильный ----------
+   Строка перестраивается в одну колонку; превью на тач-устройствах
+   не показывается — скрипт стартует только при точном указателе. */
+
+@media (max-width: 640px) {
+  .sc-editorial__row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--stack-gap-sm);
+  }
+
+  .sc-editorial__meta { text-align: left; }
+}

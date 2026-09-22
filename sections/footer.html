@@ -1,0 +1,101 @@
+<!-- ============================================================
+     Footer
+     figma: node-id=604:650 (компонент)
+     ACF: footer_cta_heading (text), footer_cta_label (text), footer_cta_url (link),
+          footer_portal_kicker / _title / _note / _link (text, link),
+          footer_cols (repeater: heading, items[label, url]),
+          footer_newsletter_note (text), footer_copyright (text)
+
+     Две части: финальный CTA с дугой-свечением и сам подвал.
+     Дуга — окружность 2600 со свечением по контуру; диск того же
+     размера сверху закрывает её изнутри, наружу выходит только край.
+     ============================================================ -->
+<footer class="sc-footer" data-theme="inverse">
+
+  <div class="sc-footer__final">
+    <div class="sc-footer__arc" aria-hidden="true">
+      <span class="sc-footer__arc-disc"></span>
+      <span class="sc-footer__arc-edge"></span>
+    </div>
+
+    <div class="sc-footer__final-copy">
+      <h2 class="sc-footer__final-title sc-t-h1">Готові побачити потенціал <br>своєї шкіри?</h2>
+      <a class="sc-footer__final-cta" href="#consultation">Записатись на діагностику</a>
+    </div>
+  </div>
+
+  <div class="sc-footer__inner">
+    <!-- Портал: возврат ко всем направлениям института -->
+    <a class="sc-footer__portal" href="https://virtus.ua">
+      <span class="sc-footer__portal-copy">
+        <span class="sc-footer__portal-kicker sc-t-caption">ВИ У ПРОСТОРІ SMARTCELL</span>
+        <span class="sc-footer__portal-title sc-t-h2">Повернутись до всіх напрямків Інституту VIRTUS</span>
+        <span class="sc-footer__portal-note sc-t-small">Пластична хірургія · Дерматологія · Гінекологія · Ендокринологія · Естетична медицина та інші відділення</span>
+      </span>
+      <span class="sc-footer__portal-action">virtus.ua</span>
+    </a>
+
+    <div class="sc-footer__cols">
+      <details class="sc-footer__col" id="footer-col-smartcell" open>
+        <summary class="sc-footer__col-head sc-t-caption">SMARTCELL<span class="sc-footer__col-sign" aria-hidden="true"></span></summary>
+        <ul class="sc-footer__list">
+        <li><a class="sc-footer__link sc-t-small" href="#hero">Face Control 365</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="#neofibrolifting">Неофіброліфтинг</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="#">Банк клітин</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="#">Лікарі</a></li>
+        </ul>
+      </details>
+      <details class="sc-footer__col" id="footer-col-science" open>
+        <summary class="sc-footer__col-head sc-t-caption">НАУКА<span class="sc-footer__col-sign" aria-hidden="true"></span></summary>
+        <ul class="sc-footer__list">
+        <li><a class="sc-footer__link sc-t-small" href="#science">Дослідження</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="#">Патенти</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="#">Словник</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="#">Лабораторія</a></li>
+        </ul>
+      </details>
+      <details class="sc-footer__col" id="footer-col-journal" open>
+        <summary class="sc-footer__col-head sc-t-caption">SMART AGE<span class="sc-footer__col-sign" aria-hidden="true"></span></summary>
+        <ul class="sc-footer__list">
+        <li><a class="sc-footer__link sc-t-small" href="vm-blog.html#rubric-5">Наука</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="vm-blog.html#rubric-2">Краса</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="vm-blog.html#rubric-3">Довголіття</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="vm-blog.html#rubric-4">Cellness</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="vm-blog.html">Усі рубрики</a></li>
+        </ul>
+      </details>
+      <details class="sc-footer__col" id="footer-col-virtus" open>
+        <summary class="sc-footer__col-head sc-t-caption">VIRTUS<span class="sc-footer__col-sign" aria-hidden="true"></span></summary>
+        <ul class="sc-footer__list">
+        <li><a class="sc-footer__link sc-t-small" href="https://virtus.ua">Про інститут</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="https://virtus.ua">Контакти</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="#reviews">Відгуки</a></li>
+        <li><a class="sc-footer__link sc-t-small" href="#">Політика</a></li>
+        </ul>
+      </details>
+
+    <form class="sc-footer__newsletter" data-form novalidate>
+      <p class="sc-footer__newsletter-note sc-t-small">Отримуйте науково-обґрунтовані поради про здоров'я шкіри</p>
+
+      <div class="sc-footer__newsletter-row">
+        <div class="sc-footer__field">
+          <label class="sc-footer__label sc-t-caption" for="footer-email">EMAIL</label>
+          <input class="sc-footer__input" id="footer-email" name="email" type="email"
+                 placeholder="Ваш email" autocomplete="email" required>
+        </div>
+        <button class="sc-footer__submit" type="submit" aria-label="Підписатись">
+          <svg viewBox="0 0 18 18" width="18" height="18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 9.07H16.5M11.07 14.51L16.5 9.07L10.92 3.49" stroke="currentColor" stroke-width="1"/></svg>
+        </button>
+      </div>
+
+      <p class="sc-footer__error sc-t-mini" id="footer-email-error" hidden>Вкажіть коректний email</p>
+    </form>
+  </div>
+
+    <!-- Крупный знак во всю ширину полосы: декоративный, читается копирайтом ниже -->
+    <img class="sc-footer__wordmark" src="assets/img/logo-smartcell-wide.svg" alt=""
+         width="1280" height="313" loading="lazy" decoding="async">
+
+  <p class="sc-footer__copy sc-t-mini">© 2026 Інститут передової медицини VIRTUS · SmartCell</p>
+  </div>
+</footer>
