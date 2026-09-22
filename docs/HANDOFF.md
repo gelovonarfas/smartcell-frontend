@@ -1,4 +1,4 @@
-# HANDOFF.md — карта блоков для кодера
+# HANDOFF.md — карта блоков для Николая
 
 Файл Figma: **SmartCell — Design System** · `t3K32ifBrrW1kD2BBbp1tA`
 Ссылка на конкретный блок: `https://www.figma.com/design/t3K32ifBrrW1kD2BBbp1tA/?node-id=<ID>` (двоеточие в ID заменить на дефис).
@@ -204,7 +204,7 @@ LCP 9,1 с, FCP 2,9 с — это не вёрстка, а доставка:
 «Browser errors in console» Lighthouse не воспроизводится в headless-Chrome на стенде
 (в консоли только предупреждение плеера об `allowfullscreen`); проверить на проде.
 
-Что остаётся кодеру: пережать три видео (см. `assets/README.md`), собрать CSS и JS
+Что остаётся Николаю: пережать три видео (см. `assets/README.md`), собрать CSS и JS
 в бандлы с хешами в именах, включить долгий кеш для картинок и видео, отдавать
 кадры лент в WebP/AVIF через `<picture>`. Стенд `smartcell-frontend.gelovonarfas.workers.dev`
 служит только для утверждения с клиентом и после переноса гасится.
@@ -229,7 +229,7 @@ Schema.org: `Article` + `Physician` + `AggregateRating`. `dateModified` — из
 3. B07 — welcome kit
 4. Подписка в блоге и в сайдбаре статьи
 
-Экшены и имена полей уточняются у кодера.
+Экшены и имена полей уточняются у Николая.
 
 ## ⚠ Не отправлять в продакшн без подтверждения
 
