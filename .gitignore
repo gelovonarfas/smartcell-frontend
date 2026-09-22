@@ -9,6 +9,8 @@ dist/
 .impeccable/
 smartcell/.claude/
 smartcell/.agents/
+smartcell/.codex/
+smartcell/.impeccable/
 
 # Карантин неиспользуемых файлов (аудит 2026-09-21), удаляется после сдачи
 _unused/

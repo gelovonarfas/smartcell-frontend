@@ -28,7 +28,7 @@ jobs:
             --exclude '.git' --exclude '.github' --exclude 'dist' --exclude 'deploy' \
             --exclude 'scripts' --exclude 'wrangler.jsonc' --exclude '.deployignore' \
             --exclude '.wrangler' --exclude '_unused' --exclude '.claude' --exclude '.impeccable' \
-            --exclude 'smartcell/.claude' --exclude 'smartcell/.agents' --exclude '.DS_Store' \
+            --exclude 'smartcell/.*' --exclude '.DS_Store' \
             --exclude '_probe*.html' --exclude '_iso*.html' --exclude '_grab.html'
           (cd /tmp/pack && zip -qr "${NAME}.zip" "${NAME}")
           mv "/tmp/pack/${NAME}.zip" .
