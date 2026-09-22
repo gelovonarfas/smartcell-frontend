@@ -22,14 +22,29 @@
     .filter(function (v) { return v.querySelector('source[data-src]'); });
   if (!videos.length) return;
 
+  /* Источник под экран: <source data-src="…" data-media="(max-width: 640px)">
+     берётся, если запрос совпал; без data-media — общий. Атрибут media у
+     <source> внутри <video> браузеры не поддерживают, поэтому выбор здесь.
+     Остальные источники убираем, чтобы браузер не переключился на них сам. */
+  function pick(video) {
+    var sources = Array.prototype.slice.call(video.querySelectorAll('source[data-src]'));
+    var chosen = null;
+    sources.forEach(function (s) {
+      var mq = s.getAttribute('data-media');
+      if (!chosen && mq && window.matchMedia && window.matchMedia(mq).matches) chosen = s;
+    });
+    if (!chosen) sources.forEach(function (s) { if (!chosen && !s.getAttribute('data-media')) chosen = s; });
+    sources.forEach(function (s) { if (s !== chosen) s.parentNode.removeChild(s); });
+    return chosen;
+  }
+
   function start(video) {
     if (video.getAttribute('data-video-started')) return;
     video.setAttribute('data-video-started', '1');
-    var sources = video.querySelectorAll('source[data-src]');
-    for (var i = 0; i < sources.length; i++) {
-      sources[i].setAttribute('src', sources[i].getAttribute('data-src'));
-      sources[i].removeAttribute('data-src');
-    }
+    var source = pick(video);
+    if (!source) return;
+    source.setAttribute('src', source.getAttribute('data-src'));
+    source.removeAttribute('data-src');
     video.load();
     var p = video.play();
     if (p && p.catch) p.catch(function () { /* автоплей запрещён — остаётся постер */ });
