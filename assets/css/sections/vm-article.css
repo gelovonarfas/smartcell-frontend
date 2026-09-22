@@ -59,111 +59,6 @@
   min-inline-size: 0;
 }
 
-/* ---------- Подсказка скролла ----------
-   Квадрат с точкой, катящейся вниз: в шапке статьи под текстом пусто,
-   и читателю нужен знак, что дальше есть материал. Скруглений в системе
-   нет (--radius: 0), поэтому знак именно квадратный; круглая здесь только
-   точка. Живёт в потоке между текстом и подписью, пока шапка на экране. */
-
-.vm-article__scroll {
-  --scroll-box: var(--sc-space-10);   /* 40 — квадрат */
-  --scroll-dot: var(--sc-space-1);    /* 4 — точка */
-  --scroll-inset: var(--sc-space-2);  /* 8 — ход точки от края */
-
-  display: block;
-  position: relative;
-  inline-size: var(--scroll-box);
-  block-size: var(--scroll-box);
-  border: var(--sc-line) solid var(--foreground);
-  flex: 0 0 auto;
-}
-
-.vm-article__scroll::before {
-  content: '';
-  position: absolute;
-  inset-inline-start: 50%;
-  inset-block-start: var(--scroll-inset);
-  inline-size: var(--scroll-dot);
-  block-size: var(--scroll-dot);
-  margin-inline-start: calc(-1 * var(--scroll-dot) / 2);
-  border-radius: 50%;
-  background: var(--foreground);
-  animation: vm-article-scroll-dot 1800ms var(--sc-ease) infinite;
-}
-
-/* Точка скатывается вниз и гаснет у нижнего края, чтобы жест читался
-   как «дальше вниз», а не как маятник. Ход считается от высоты самого
-   квадрата (проценты), поэтому знак можно тянуть под чужую высоту —
-   на узком экране он равняется по чипсам. */
-@keyframes vm-article-scroll-dot {
-  0%   { inset-block-start: var(--scroll-inset); opacity: 0; }
-  20%  { opacity: 1; }
-  70%  { inset-block-start: calc(100% - var(--scroll-inset) - var(--scroll-dot)); opacity: 1; }
-  100% { inset-block-start: calc(100% - var(--scroll-inset) - var(--scroll-dot)); opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .vm-article__scroll::before { animation: none; opacity: 1; }
-}
-
-/* ---------- Возврат ----------
-   Со статьи нужно уметь выйти: крошки лежат под шапкой статьи и до них
-   надо доскроллить, а «Почати» в углу — это призыв записаться, а не выход.
-   Поэтому строка возврата стоит первой в шапке, над плашками (2026-09-21). */
-
-.vm-article__back {
-  --back-arrow: var(--sc-space-3);
-
-  align-self: start;
-  justify-self: start;   /* в сетке шапки на мобильном иначе тянется на всю строку */
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sc-space-2);
-  color: var(--muted-foreground);
-  text-decoration: none;
-  transition: color var(--sc-dur-fast) var(--sc-ease);
-}
-
-.vm-article__back:hover { color: var(--foreground); }
-
-.vm-article__back:focus-visible {
-  outline: var(--sc-focus-w) solid var(--ring);
-  outline-offset: var(--sc-focus-offset);
-}
-
-/* Стрелка влево — та же фигура, что знак «открыть» в полочках: две кромки
-   в 1px, повёрнутые на 45°, отдельный ассет ради неё не нужен */
-.vm-article__back-arrow {
-  inline-size: calc(var(--back-arrow) / 2);
-  block-size: calc(var(--back-arrow) / 2);
-  border-inline-start: 1px solid currentColor;
-  border-block-end: 1px solid currentColor;
-  transform: rotate(45deg);
-  transition: transform var(--sc-dur-fast) var(--sc-ease-out);
-}
-
-.vm-article__back:hover .vm-article__back-arrow { transform: rotate(45deg) translate(-15%, 15%); }
-
-@media (prefers-reduced-motion: reduce) {
-  .vm-article__back,
-  .vm-article__back-arrow { transition: none; }
-}
-
-/* Рубрика в плашке — ссылка на свою страницу: второй выход из статьи */
-.vm-article__chip a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.vm-article__chip:has(a):hover {
-  border-color: var(--foreground);
-}
-
-.vm-article__chip a:focus-visible {
-  outline: var(--sc-focus-w) solid var(--ring);
-  outline-offset: var(--sc-focus-offset);
-}
-
 .vm-article__hero-top {
   display: flex;
   flex-direction: column;
@@ -968,32 +863,21 @@
     inline-size: auto;
   }
 
-  /* Подсказка скролла встаёт в строку с чипсами, справа: внизу колонки
-     на узком экране её никто не увидит — там уже подпись (2026-09-14).
-     Копию раскладываем сеткой, вводную распускаем, и знак занимает
-     вторую колонку первой строки, равняясь по высоте чипсов. */
+  /* Копию раскладываем сеткой, вводную распускаем: строка возврата, плашки,
+     заголовок, лид и подпись — отдельные строки (подсказка скролла убрана 2026-09-22) */
   .vm-article__hero-copy {
     order: 2;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
     align-content: start;
     gap: var(--section-gap) var(--sc-space-3);
   }
 
   .vm-article__hero-top { display: contents; }
 
-  /* Строка возврата и плашки делят первую строку с подсказкой скролла */
   .vm-article__back { grid-area: 1 / 1; }
   .vm-article__chips { grid-area: 2 / 1; }
 
-  .vm-article__scroll {
-    grid-area: 2 / 2;
-    align-self: start;
-    /* Ровно высота чипса: поля 6 сверху и снизу плюс строка мини-кегля.
-       Меняешь набор чипсов — проверь это число (замер 2026-09-14: 32) */
-    --scroll-box: var(--sc-space-8);
-    --scroll-inset: var(--sc-space-1_5);
-  }
 
   .vm-article__title { grid-area: 3 / 1 / auto / -1; }
   .vm-article__dek { grid-area: 4 / 1 / auto / -1; }
