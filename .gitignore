@@ -4,8 +4,9 @@ node_modules/
 .wrangler/
 dist/
 
-# Инструменты дизайн-ревью и сессий — к киту не относятся
-.claude/
+# Инструменты дизайн-ревью и сессий — к киту не относятся; навыки проекта едут в репозиторий
+.claude/*
+!.claude/skills/
 .impeccable/
 smartcell/.claude/
 smartcell/.agents/
