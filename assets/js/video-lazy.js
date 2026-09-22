@@ -50,6 +50,9 @@
     video.setAttribute('data-video-started', '1');
     var source = video.querySelector('source[data-src]');
     if (!source) return;
+    /* Постер, отложенный до старта (полосы ниже первого экрана): не тянуть
+       его вместе с обложкой первого экрана */
+    if (video.getAttribute('data-poster')) video.setAttribute('poster', video.getAttribute('data-poster'));
     source.setAttribute('src', source.getAttribute('data-src'));
     source.removeAttribute('data-src');
     video.load();

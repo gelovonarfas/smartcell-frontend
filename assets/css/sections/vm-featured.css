@@ -346,6 +346,9 @@
     margin-inline: calc(-1 * var(--page-margin-x));
   }
 
-  .vm-featured__slide { grid-row: 3; grid-column: 1; }
+  /* Строка фиксированной высоты, а материал — к её верху, под фото:
+     у сетки выравнивание по низу (align-items: end), и короткие заголовки
+     проваливались вниз, оставляя воздух над плашками (правка 2026-09-22) */
+  .vm-featured__slide { grid-row: 3; grid-column: 1; align-self: start; }
   .vm-featured__bottom { grid-row: 4; grid-column: 1; }
 }
