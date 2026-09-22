@@ -38,10 +38,17 @@
     return chosen;
   }
 
+  /* Источник выбираем сразу, при разборе страницы: если у него свой постер
+     (data-poster), он должен встать до первой отрисовки, а не после load */
+  videos.forEach(function (v) {
+    var source = pick(v);
+    if (source && source.getAttribute('data-poster')) v.setAttribute('poster', source.getAttribute('data-poster'));
+  });
+
   function start(video) {
     if (video.getAttribute('data-video-started')) return;
     video.setAttribute('data-video-started', '1');
-    var source = pick(video);
+    var source = video.querySelector('source[data-src]');
     if (!source) return;
     source.setAttribute('src', source.getAttribute('data-src'));
     source.removeAttribute('data-src');

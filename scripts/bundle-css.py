@@ -43,10 +43,16 @@ for page in sorted(dist.glob('*.html')):
     bundle = re.sub(r'@import\s+url\("[^"]+"\);\s*', '', bundle)
     (dist / 'assets' / 'css' / name).write_text(bundle, encoding='utf-8')
     for font_url in imports:
+        # display=optional вместо swap — только на стенде: шрифт, не успевший к первой
+        # отрисовке, не подменяет системный по ходу, и заголовок хиро не прыгает
+        # (Lighthouse CLS 0.08 «Web font loaded»). После первого визита шрифт в кеше
+        # и приходит вовремя. На проде правильный путь — self-host + size-adjust
+        # у запасного шрифта, см. HANDOFF.
+        stand_url = font_url.replace('display=swap', 'display=optional')
         html = html.replace(
             f'<link rel="preload" as="style" href="{font_url}">',
-            f'<link rel="preload" as="style" href="{font_url}" onload="this.onload=null;this.rel=\'stylesheet\'">\n'
-            f'  <noscript><link rel="stylesheet" href="{font_url}"></noscript>')
+            f'<link rel="preload" as="style" href="{stand_url}" onload="this.onload=null;this.rel=\'stylesheet\'">\n'
+            f'  <noscript><link rel="stylesheet" href="{stand_url}"></noscript>')
     first = True
     def swap(m):
         global first
