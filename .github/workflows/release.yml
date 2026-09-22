@@ -1,0 +1,55 @@
+# Релиз для кодера на каждый тег handoff-N.
+# Собирает архив кита без стенда Cloudflare и служебных папок (видео в
+# репозитории нет до конвертации, поэтому и в архиве его нет — отдаётся ссылкой),
+# создаёт GitHub Release и прикладывает архив. Текст релиза — раздел этого тега
+# из CHANGELOG.md.
+name: release
+
+on:
+  push:
+    tags: ['handoff-*']
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Архив кита
+        run: |
+          set -e
+          TAG="${GITHUB_REF_NAME}"
+          NAME="smartcell-frontend-${TAG}"
+          mkdir -p /tmp/pack
+          rsync -a ./ "/tmp/pack/${NAME}/" \
+            --exclude '.git' --exclude '.github' --exclude 'dist' --exclude 'deploy' \
+            --exclude 'scripts' --exclude 'wrangler.jsonc' --exclude '.deployignore' \
+            --exclude '.wrangler' --exclude '_unused' --exclude '.claude' --exclude '.impeccable' \
+            --exclude 'smartcell/.claude' --exclude 'smartcell/.agents' --exclude '.DS_Store' \
+            --exclude '_probe*.html' --exclude '_iso*.html' --exclude '_grab.html'
+          (cd /tmp/pack && zip -qr "${NAME}.zip" "${NAME}")
+          mv "/tmp/pack/${NAME}.zip" .
+          ls -la "${NAME}.zip"
+          echo "ARCHIVE=${NAME}.zip" >> "$GITHUB_ENV"
+
+      - name: Текст релиза из CHANGELOG
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          awk -v tag="$TAG" '
+            $0 ~ "^## "tag { on=1; print; next }
+            on && /^## / { exit }
+            on { print }
+          ' CHANGELOG.md > /tmp/notes.md
+          [ -s /tmp/notes.md ] || echo "Передача ${TAG}. Подробности — CHANGELOG.md и docs/HANDOFF.md." > /tmp/notes.md
+          printf '\n\nВидео в архив не входит — см. assets/README.md.\n' >> /tmp/notes.md
+
+      - name: GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" "${ARCHIVE}" \
+            --title "Передача ${GITHUB_REF_NAME}" \
+            --notes-file /tmp/notes.md

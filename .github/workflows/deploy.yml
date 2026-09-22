@@ -1,0 +1,67 @@
+# Автодеплой стенда на Cloudflare Workers Static Assets.
+# Срабатывает на каждый пуш в main; повторяет scripts/deploy.sh один в один.
+#
+# Две защиты, пока проект в переходном состоянии:
+#   1. нет секретов CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID — деплой пропускается;
+#   2. в репозитории нет видео (assets/video/*.mp4 в .gitignore до конвертации) —
+#      деплой пропускается, иначе стенд уехал бы без роликов.
+# В обоих случаях сборка и проверка ссылок всё равно выполняются.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-stand
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Сборка dist
+        run: sh scripts/build-dist.sh
+
+      - name: Битые ссылки на assets
+        run: |
+          set -e
+          missing=0
+          for page in dist/*.html; do
+            for ref in $(grep -oE '(href|src)="assets/[^"]+"' "$page" | sed -E 's/^(href|src)="//; s/"$//' | sed -E 's/[?#].*$//' | sort -u); do
+              case "$ref" in *"/case-N-"*|*"/logo-portal-") continue;; esac
+              if [ ! -e "dist/$ref" ]; then echo "::error file=$page::нет файла $ref"; missing=$((missing+1)); fi
+            done
+          done
+          echo "битых ссылок: $missing"
+          [ "$missing" -eq 0 ]
+
+      - name: Условия деплоя
+        id: guard
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          ok=true
+          if [ -z "$TOKEN" ] || [ -z "$ACCOUNT" ]; then
+            echo "::notice::Секреты Cloudflare не заданы — деплой пропущен, стенд выкладывается вручную"; ok=false
+          fi
+          if ! ls assets/video/*.mp4 >/dev/null 2>&1; then
+            echo "::notice::В репозитории нет видео (см. .gitignore) — деплой пропущен, чтобы стенд не остался без роликов"; ok=false
+          fi
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        if: steps.guard.outputs.ok == 'true'
+        with:
+          node-version: 22
+
+      - name: Деплой на Cloudflare
+        if: steps.guard.outputs.ok == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@latest deploy
