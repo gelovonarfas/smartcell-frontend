@@ -15,13 +15,21 @@
 <section class="sc-hero" data-theme="inverse" data-hero>
 
   <div class="sc-hero__bg" aria-hidden="true">
+    <!-- Постер — обычная картинка под видео, а не атрибут poster: так браузер
+         выбирает кадр под экран сам, без скрипта, и рисует его сразу после
+         стилей. С poster= мобильный кадр подставлял video-lazy.js, а скрипты
+         с defer ждут загрузки CSS — LCP уезжал на 2 с (PSI, 2026-09-22).
+         Видео стартует поверх и закрывает картинку. -->
+    <picture class="sc-hero__poster">
+      <source media="(max-width: 640px)" srcset="assets/img/hero-poster-mob.jpg" width="720" height="1280">
+      <img src="assets/img/hero-poster.jpg" alt="" width="1280" height="720"
+           fetchpriority="high" decoding="async">
+    </picture>
     <video class="sc-hero__video" autoplay muted loop playsinline
-           width="1280" height="720" preload="metadata"
-           poster="assets/img/hero-poster.jpg" tabindex="-1">
-      <!-- Телефон: вертикальный кадр 720×1280 и свой постер; выбор по data-media
-           делает assets/js/video-lazy.js — media у <source> в <video> браузеры не читают -->
-      <source data-src="assets/video/hero-mob.mp4" data-media="(max-width: 640px)"
-              data-poster="assets/img/hero-poster-mob.jpg" type="video/mp4">
+           width="1280" height="720" preload="metadata" tabindex="-1">
+      <!-- Телефон: вертикальный кадр 720×1280; выбор по data-media делает
+           assets/js/video-lazy.js — media у <source> в <video> браузеры не читают -->
+      <source data-src="assets/video/hero-mob.mp4" data-media="(max-width: 640px)" type="video/mp4">
       <source data-src="assets/video/hero.mp4" type="video/mp4">
     </video>
     <span class="sc-hero__scrim sc-hero__scrim--top"></span>

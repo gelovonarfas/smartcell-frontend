@@ -34,14 +34,23 @@
   z-index: 0;
 }
 
+/* Постер лежит под видео: картинка выбирается <picture> под экран и рисуется
+   сразу после стилей — это LCP-элемент хиро. Видео ложится поверх и закрывает
+   его, как только пойдёт. Оба слоя заполняют фон целиком. */
+.sc-hero__poster,
+.sc-hero__poster img,
 .sc-hero__video {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.sc-hero__scrim { position: absolute; inset-inline: 0; }
+.sc-hero__video { z-index: 1; }
+
+.sc-hero__scrim { position: absolute; inset-inline: 0; z-index: 2; } /* над постером и видео */
 
 /* DESIGN.md: тексты на фото — всегда со скримом (--sc-black-alpha-40 сверху, 60 снизу) */
 .sc-hero__scrim--top {
