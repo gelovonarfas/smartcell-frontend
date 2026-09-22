@@ -38,6 +38,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700&display=swap">
+  <!-- Обкладинка — LCP-элемент статьи: запрос уходит с первых байт, не ждёт разбора тела -->
+  <link rel="preload" as="image" href="assets/img/vm/oblik-cover.jpg" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/sections/b00b-header.css">
@@ -175,9 +177,9 @@
 
       <div class="vm-article__share">
         <span class="sc-t-mini">Поділіться цим матеріалом:</span>
-        <a class="vm-article__share-link sc-t-caption" href="#share-fb" aria-label="Поділитись у Facebook">FB</a>
-        <a class="vm-article__share-link sc-t-caption" href="#share-tw" aria-label="Поділитись у X">TW</a>
-        <a class="vm-article__share-link sc-t-caption" href="#share-tg" aria-label="Поділитись у Telegram">TG</a>
+        <a class="vm-article__share-link sc-t-caption" href="#share-fb" aria-label="FB — поділитись у Facebook">FB</a>
+        <a class="vm-article__share-link sc-t-caption" href="#share-tw" aria-label="TW — поділитись у X">TW</a>
+        <a class="vm-article__share-link sc-t-caption" href="#share-tg" aria-label="TG — поділитись у Telegram">TG</a>
       </div>
 
       <section class="vm-article__summary">

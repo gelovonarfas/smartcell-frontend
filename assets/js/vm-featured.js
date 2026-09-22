@@ -73,10 +73,28 @@
     });
   }
 
+  /* Следующий кадр греем заранее: скрытые кадры ленивые, и без прогрева
+     переключение на медленной сети рисовало картинку через 4 с после смены —
+     Lighthouse считал её LCP на 18-й секунде (замер 2026-09-22). */
+  function warm(i, done) {
+    var img = medias.length ? medias[(i + total) % total].querySelector('img') : null;
+    if (!img || img.complete && img.naturalWidth) { if (done) done(); return; }
+    var pre = new Image();
+    if (img.getAttribute('sizes')) pre.sizes = img.getAttribute('sizes');
+    if (img.getAttribute('srcset')) pre.srcset = img.getAttribute('srcset');
+    pre.src = img.getAttribute('src');
+    var fin = function () { if (done) { var d = done; done = null; d(); } };
+    pre.onload = fin; pre.onerror = fin;
+    if (pre.decode) pre.decode().then(fin, fin);
+  }
+
   function schedule() {
     clearTimeout(timer);
     if (!auto || paused || total < 2) return;
-    timer = setTimeout(function () { go(index + 1); }, interval);
+    timer = setTimeout(function () {
+      /* переключаемся только с готовым кадром */
+      warm(index + 1, function () { if (!paused) go(index + 1); });
+    }, interval);
   }
 
   function go(i) {
@@ -234,6 +252,9 @@
   });
 
   render();
-  armBar();
-  schedule();
+  /* Отсчёт стартует после полной загрузки страницы: до этого первый кадр и
+     стили важнее, а следующий кадр прогреваем в фоне */
+  var kick = function () { warm(index + 1); armBar(); schedule(); };
+  if (document.readyState === 'complete') kick();
+  else window.addEventListener('load', kick, { once: true });
 }());
