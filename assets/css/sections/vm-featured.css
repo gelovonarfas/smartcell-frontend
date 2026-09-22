@@ -342,7 +342,10 @@
     grid-column: 1;
     aspect-ratio: 1;
     min-block-size: 0;
-    margin-block: 0;
+    /* Под фото — то же поле, что по бокам страницы, а не шаг сетки:
+       кадр навылет, и материал должен стоять от него на «поле», как от края
+       (правка 2026-09-22). Остальные шаги сетки не трогаем. */
+    margin-block: 0 calc(var(--page-margin-x) - var(--section-gap));
     margin-inline: calc(-1 * var(--page-margin-x));
   }
 
