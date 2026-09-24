@@ -257,8 +257,16 @@ Schema.org — JSON-LD в `<head>` статьи (образец собран и�
 | `MedicalOrganization` | `name`, `url`, `address` | константы темы |
 | `FAQPage` | `mainEntity[]` → `Question` + `acceptedAnswer` | faq[] (q, a) |
 
-`AggregateRating` добавляется в `Article` только когда рейтинг реально собирается
-(поле `rating`: value, count) — с заглушкой не выводить, иначе штраф от поиска.
+`AggregateRating` добавляется в `Article` только когда есть хотя бы один голос
+(`rating_count > 0`) — с нулём не выводить, иначе штраф от поиска.
+
+**Рейтинг статьи** (`.vm-article__rating`, `data-article-rating`): звёзды — кнопки в
+`radiogroup`, голос по клику принимает `assets/js/article-rating.js`. Что нужно от темы:
+`data-rating-value` и `data-rating-count` из полей `rating_value`/`rating_count`;
+`data-rating-endpoint` = `admin-ajax.php`, скрипт шлёт `POST action=sc_rate&url=…&value=1..5`
+(имя экшена и защита от накрутки — на стороне темы; клиент повторный голос с устройства
+не считает через localStorage). Ответ сервера скрипт не ждёт: среднее и счётчик он
+пересчитывает сам, страница отвечает мгновенно.
 
 Семантика в разметке, сверх классов: дата — `<time datetime="YYYY-MM-DD">`; блок «Коротко» —
 `<section role="doc-abstract" aria-labelledby="…">`; ответы FAQ лежат в DOM всегда (`<details>`),

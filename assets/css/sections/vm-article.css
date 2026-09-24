@@ -907,6 +907,46 @@
 
 .vm-article__rating-note { color: var(--muted-foreground); }
 
+/* Звёзды — кнопки: горят до наведённой/выбранной, после голоса замирают.
+   Кнопка 12px мала для пальца — тап-зона 24 за счёт полей, без роста ряда */
+.vm-article__stars {
+  display: flex;
+  gap: var(--sc-space-0_5);
+}
+
+.vm-article__star {
+  --vm-a-star: var(--sc-space-3);
+
+  display: inline-flex;
+  padding: var(--sc-space-1_5);
+  margin: calc(-1 * var(--sc-space-1_5)) 0;
+  border: 0;
+  background: none;
+  color: var(--foreground);
+  opacity: 0.25;
+  cursor: pointer;
+  transition: opacity var(--sc-dur-fast) var(--sc-ease), transform var(--sc-dur-fast) var(--sc-ease-out);
+}
+
+.vm-article__star svg { inline-size: var(--vm-a-star); block-size: var(--vm-a-star); display: block; }
+
+.vm-article__star.sc-is-on { opacity: 1; }
+.vm-article__star:hover { transform: scale(1.15); }
+
+.vm-article__star:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: 0;
+  opacity: 1;
+}
+
+.vm-article__rating.sc-is-voted .vm-article__star { cursor: default; }
+.vm-article__rating.sc-is-voted .vm-article__star:hover { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-article__star { transition: none; }
+  .vm-article__star:hover { transform: none; }
+}
+
 /* Мелкие подписи меру строки не держат: --sc-measure задан для прозы,
    а перечень источников и подпись к схеме набраны мини-кеглем — на нём
    65ch уже уводит строку в столбик посреди пустой колонки.

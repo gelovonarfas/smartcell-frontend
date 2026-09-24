@@ -127,6 +127,13 @@
           ".vm-article__summary-list",
           ".vm-article__answer"
         ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": 5.0,
+        "bestRating": 5,
+        "worstRating": 1,
+        "ratingCount": 12
       }
     },
     {
@@ -445,6 +452,22 @@
         </div>
       </section>
 
+      <!-- Рейтинг: звёзды — кнопки, голос принимает assets/js/article-rating.js.
+           ACF/AJAX: rating_value (number), rating_count (int); голос уходит POST-ом на
+           data-rating-endpoint (admin-ajax.php, action=sc_rate) — экшен уточняет Николай.
+           Повторный голос с одного устройства не считается (localStorage). -->
+      <div class="vm-article__rating" data-article-rating data-rating-value="5" data-rating-count="12" data-rating-endpoint="">
+        <span class="sc-t-small" id="rating-label">Рейтинг статті:</span>
+        <div class="vm-article__stars" role="radiogroup" aria-labelledby="rating-label" data-rating-stars>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="false" aria-label="1 з 5" data-star="1"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="false" aria-label="2 з 5" data-star="2"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="false" aria-label="3 з 5" data-star="3"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="false" aria-label="4 з 5" data-star="4"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="true" aria-label="5 з 5" data-star="5"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+        </div>
+        <span class="vm-article__rating-note sc-t-mini" data-rating-note aria-live="polite">5 з 5 на основі 12 оцінок</span>
+      </div>
+
       <p class="vm-article__sources sc-t-mini">Джерела: ¹ Sorrell M., Caplan A. I. Fibroblasts — a diverse population at the center of it all. Int. Rev. Cell Mol. Biol., 2009, v. 276, 161–214. ² Varani J. et al. Decreased Collagen Production in Chronologically Aged Skin. AJP, 2006, 168 (6), 1861–1868. ³ Fisher G., Varani J., Voorhees J. Looking older: Fibroblast Collapse and Therapeutic Implications. Arch Dermatol, 2008, 144 (5), 666–672. ⁴ Fisher G. et al. Mechanism of photoaging and chronological skin aging. Arch Dermatol, 2002, 138, 1462–1467. ⁵ Фріденштейн О. Я. Клонування стромальних клітин-попередників, 1988, с. 257–265. ⁶ Патент RU 2466680, 2012. ⁷ US 8.790.890 B2, 2014. ⁸ Bayreuther K. et al. Arch Gerontol Geriatr, 1992, 15 (1), 47–74. ⁹ Ryan J. et al. In vitro, 1981, 17 (1), 20–27. ¹⁰ Schneider E., Smith J. Int. Rev. Cytology, 1981, 69, 261–270. ¹¹ Терехов С. М., 1984. ¹² Зорін В. Л. та ін. Вісник естетичної медицини, 2011, 10 (2), 16–26. ¹³ Zorin V. et al. J. Tissue Eng. Regen. Med., 2014. ¹⁴ Лебединська О. В. та ін. Морфологія, 2004, 126 (6), 46–49. ¹⁵ Владимирська Є. В., Кошель І. В. Гематологія і трансфузіологія, 1990, 1, 3–5. ¹⁶ Nolte S. V. et al. Cells Tissues Organs, 2008, 187, 165–176.</p>
 
     </div>
@@ -638,6 +661,7 @@
 <script src="assets/js/forms.js" defer></script>
 <script src="assets/js/editorial-preview.js" defer></script>
 <script src="assets/js/article-progress.js" defer></script>
+<script src="assets/js/article-rating.js" defer></script>
 <script src="assets/js/article-intro.js" defer></script>
 </body>
 </html>

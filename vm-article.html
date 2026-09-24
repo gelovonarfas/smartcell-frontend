@@ -101,6 +101,13 @@
           ".vm-article__summary-list",
           ".vm-article__answer"
         ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": 4.0,
+        "bestRating": 5,
+        "worstRating": 1,
+        "ratingCount": 4
       }
     },
     {
@@ -392,10 +399,20 @@
         </div>
       </section>
 
-      <div class="vm-article__rating">
-        <span class="sc-t-small">Рейтинг статті:</span>
-        <svg class="vm-article__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 4 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor" opacity="0.25"/></svg>
-        <span class="vm-article__rating-note sc-t-mini">4 з 5 на основі 4 оцінок</span>
+      <!-- Рейтинг: звёзды — кнопки, голос принимает assets/js/article-rating.js.
+           ACF/AJAX: rating_value (number), rating_count (int); голос уходит POST-ом на
+           data-rating-endpoint (admin-ajax.php, action=sc_rate) — экшен уточняет Николай.
+           Повторный голос с одного устройства не считается (localStorage). -->
+      <div class="vm-article__rating" data-article-rating data-rating-value="4" data-rating-count="4" data-rating-endpoint="">
+        <span class="sc-t-small" id="rating-label">Рейтинг статті:</span>
+        <div class="vm-article__stars" role="radiogroup" aria-labelledby="rating-label" data-rating-stars>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="false" aria-label="1 з 5" data-star="1"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="false" aria-label="2 з 5" data-star="2"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="false" aria-label="3 з 5" data-star="3"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="true" aria-label="4 з 5" data-star="4"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+          <button class="vm-article__star" type="button" role="radio" aria-checked="false" aria-label="5 з 5" data-star="5"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/></svg></button>
+        </div>
+        <span class="vm-article__rating-note sc-t-mini" data-rating-note aria-live="polite">4 з 5 на основі 4 оцінок</span>
       </div>
 
       <p class="vm-article__sources sc-t-mini">Джерела: ¹ Journal of Cosmetic Dermatology, 2024. ² Дані ультразвукової діагностики Інституту VIRTUS, 2021-2026.</p>
@@ -593,6 +610,7 @@
 <script src="assets/js/forms.js" defer></script>
 <script src="assets/js/editorial-preview.js" defer></script>
 <script src="assets/js/article-progress.js" defer></script>
+<script src="assets/js/article-rating.js" defer></script>
 <script src="assets/js/article-intro.js" defer></script>
 <!-- ============================================================
      GSAP-слой (пробный): анимации появления на десктопе.
