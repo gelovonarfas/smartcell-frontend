@@ -463,6 +463,30 @@
   font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
 }
 
+/* Ссылка внутри прозы — и из кита, и из редактора: подчёркивание кромкой,
+   чтобы линия шла по базовой, а не резала выносные элементы */
+.vm-article__main > p a,
+.vm-article__main > ul a,
+.vm-article__main > ol a,
+.vm-article__main > blockquote a,
+.vm-article__p a,
+.vm-article__answer a,
+.vm-article__faq-a a {
+  color: inherit;
+  text-decoration: none;
+  border-block-end: var(--hairline) solid var(--primary);
+  transition: color var(--sc-dur-fast) var(--sc-ease), border-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.vm-article__main a:hover { color: var(--primary); }
+
+.vm-article__main a:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* Сноски в тексте (¹ ² ⁴) приходят символами — отдельной разметки не требуют */
+
 /* Первый элемент тела не отбивается сверху: отступ даёт сам блок */
 .vm-article__main > :first-child:not([class]) { margin-block-start: 0; }
 
