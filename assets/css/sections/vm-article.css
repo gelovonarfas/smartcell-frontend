@@ -477,9 +477,23 @@
   transition: color var(--sc-dur-fast) var(--sc-ease), border-color var(--sc-dur-fast) var(--sc-ease);
 }
 
-.vm-article__main a:hover { color: var(--primary); }
+/* Наведение и фокус — только у этих же ссылок: селектор `.vm-article__main a:hover`
+   зацепил бы и кнопку промо, она тоже <a>, и её текст темнел на тёмной заливке
+   (замечание Николая 2026-09-23) */
+.vm-article__main > p a:hover,
+.vm-article__main > ul a:hover,
+.vm-article__main > ol a:hover,
+.vm-article__main > blockquote a:hover,
+.vm-article__p a:hover,
+.vm-article__answer a:hover,
+.vm-article__faq-a a:hover { color: var(--primary); }
 
-.vm-article__main a:focus-visible {
+.vm-article__main > p a:focus-visible,
+.vm-article__main > ul a:focus-visible,
+.vm-article__main > ol a:focus-visible,
+.vm-article__main > blockquote a:focus-visible,
+.vm-article__answer a:focus-visible,
+.vm-article__faq-a a:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
 }
@@ -527,17 +541,27 @@
   gap: var(--stack-gap-sm);
 }
 
-.vm-article__checklist li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--card-gap);
+/* Пункт — голый <li>, как отдаёт репитер: ни класса, ни SVG внутри. Галочка
+   рисуется псевдоэлементом, кегль задан по тегу (правка 2026-09-23 по замечанию
+   Николая: «в li классы не обязательны»). */
+.vm-article__checklist > li {
+  --vm-a-check: var(--sc-space-3_5);
+  position: relative;
+  padding-inline-start: calc(var(--vm-a-check) + var(--card-gap));
   max-inline-size: var(--sc-measure);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
 }
 
-.vm-article__check {
-  --vm-a-check: var(--sc-space-3_5);
-  flex: none;
-  margin-block-start: calc((var(--p-lh) - var(--vm-a-check)) / 2);
+.vm-article__checklist > li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: calc((var(--p-lh) - var(--vm-a-check)) / 2);
+  inline-size: var(--vm-a-check);
+  block-size: var(--vm-a-check);
+  background: currentColor;
+  /* та же галочка, что была в SVG (M2 7.5 L5.5 11 L12 3.5), обводкой в 1px */
+  clip-path: polygon(10% 52%, 4% 60%, 39% 92%, 96% 22%, 88% 14%, 39% 76%);
 }
 
 /* ---------- Иллюстрация ----------

@@ -152,12 +152,17 @@
 
 | модуль | поле | разметка |
 |---|---|---|
-| «Коротко» — саммари в начале | repeater `summary` (point) | `.vm-article__summary` + `ul.vm-article__summary-list` |
+| «Коротко» — саммари в начале | repeater `summary` (point) | `.vm-article__summary` + `ul.vm-article__summary-list` > `<li>` |
 | Прямой ответ под H2 (AEO) | у каждого раздела: `answer` | `p.vm-article__answer` (+ метка `.vm-article__answer-label`) |
-| Чеклист | repeater `checklist` | `ul.vm-article__checklist` |
+| Чеклист | repeater `checklist` (text) | `ul.vm-article__checklist` > голые `<li>` — галочка из CSS |
 | Инлайн-промо услуги | группа `promo` | `aside.vm-article__promo` |
 | FAQ | repeater `faq` (q, a) | `section.vm-article__faq` + `<details>` |
 | Подписка, автор, рейтинг, джерела | см. поля выше в этом файле | свои секции |
+
+**Типы списков в статье — три**, и только у первого нет класса: обычный `<ul>`/`<ol>` из
+редактора (маркер точкой, стиль по тегу); чеклист с галочками — модуль, класс только на
+`<ul>`; «Коротко» — модуль с репитером пунктов, класс только на контейнере. Внутри всех
+трёх `<li>` голые.
 
 Порядок вставки модулей в тело: если редакция должна сама решать, где стоит промо
 или чеклист, для них делается **flexible content** (набор блоков), а проза остаётся
