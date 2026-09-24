@@ -70,6 +70,15 @@
 
 .sc-saving__row:last-child { border-block-end: 0; }
 
+/* Итоговая строка отделена жирной чертой: 0.7 и 1 браузер округляет
+   одинаково, поэтому берём 2 — черта под списком, а не ещё одна строка
+   (2026-09-23) */
+.sc-saving__rows { --saving-total-line: var(--sc-space-0_5); }
+
+.sc-saving__row:last-child {
+  border-block-start: var(--saving-total-line) solid var(--border);
+}
+
 /* Две цены стоят рядом: слева вход, справа сама программа — выбор из двух,
    а не продолжение списка. Колонки равные, шаг тот же, что у сетки (2026-09-23) */
 .sc-saving__prices {
