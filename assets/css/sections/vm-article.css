@@ -911,14 +911,15 @@
    Кнопка 12px мала для пальца — тап-зона 24 за счёт полей, без роста ряда */
 .vm-article__stars {
   display: flex;
-  gap: var(--sc-space-0_5);
+  gap: 0; /* шаг звёзд задают их боковые поля: 2+2 = 4, как в исходной картинке */
 }
 
 .vm-article__star {
   --vm-a-star: var(--sc-space-3);
 
   display: inline-flex;
-  padding: var(--sc-space-1_5);
+  /* по вертикали поле 6 — тап-зона 24; по бокам 2, чтобы звёзды стояли плотно */
+  padding: var(--sc-space-1_5) var(--sc-space-0_5);
   margin: calc(-1 * var(--sc-space-1_5)) 0;
   border: 0;
   background: none;
