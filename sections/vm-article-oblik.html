@@ -46,6 +46,141 @@
   <link rel="stylesheet" href="assets/css/sections/vm-article.css">
   <link rel="stylesheet" href="assets/css/sections/footer.css">
   <link rel="stylesheet" href="assets/css/sections/vm-editorial-list.css">
+  <!-- Структурированные данные для поисковиков и LLM: собраны из разметки этой
+       страницы (заголовок, «Коротко» → abstract, автор-врач, FAQ, джерела).
+       В теме генерируются из полей — таблица соответствия в docs/HANDOFF.md -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "@id": "https://smartcell-frontend.gelovonarfas.workers.dev/vm-article-oblik#page",
+      "url": "https://smartcell-frontend.gelovonarfas.workers.dev/vm-article-oblik",
+      "name": "Регенераторний потенціал шкіри: як його вимірюють і навіщо це косметологу",
+      "inLanguage": "uk-UA",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Smart Age Journal · SmartCell",
+        "url": "https://smartcell-frontend.gelovonarfas.workers.dev/vm-blog",
+        "publisher": {
+          "@id": "https://smartcell-frontend.gelovonarfas.workers.dev/#org"
+        }
+      },
+      "mainEntity": {
+        "@id": "https://smartcell-frontend.gelovonarfas.workers.dev/vm-article-oblik#article"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://smartcell-frontend.gelovonarfas.workers.dev/vm-article-oblik#article",
+      "mainEntityOfPage": "https://smartcell-frontend.gelovonarfas.workers.dev/vm-article-oblik",
+      "headline": "Регенераторний потенціал шкіри: як його вимірюють і навіщо це косметологу",
+      "description": "Ефективність колонієутворення фібробластів, проліферативний потенціал і те, як ці показники визначають вибір косметологічної процедури.",
+      "abstract": "Вікові зміни шкіри — це передусім зменшення кількості фібробластів і зниження їхньої активності: у літніх людей фібробластів у середньому на 35 % менше, а продукція колагену знижена на 75 % ² ⁴ Регенераторний потенціал оцінюють за ефективністю колонієутворення фібробластів (ЕКУф) у культурі — показник індивідуальний і від віку не залежить ⁹ ¹⁰ ¹¹ Проліферативний потенціал визначають за співвідношенням щільних, дифузних і змішаних колоній: він показує, як швидко тканина відновиться після втручання ⁶ ⁷ ¹⁴ ¹⁵",
+      "articleSection": "Science",
+      "inLanguage": "uk-UA",
+      "datePublished": "2026-09-07",
+      "dateModified": "2026-09-07",
+      "wordCount": 793,
+      "timeRequired": "PT9M",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://smartcell-frontend.gelovonarfas.workers.dev/assets/img/vm/oblik-cover.jpg",
+        "width": 1200,
+        "height": 1200
+      },
+      "author": {
+        "@type": "Physician",
+        "name": "Цепколенко Ганна Володимирівна",
+        "jobTitle": "Завідуюча відділенням регенеративних, лазерних та фототехнологій · кандидат медичних наук",
+        "url": "https://virtus.ua/doctor/cepkolenko-anna-vladimirovna",
+        "affiliation": {
+          "@id": "https://smartcell-frontend.gelovonarfas.workers.dev/#org"
+        },
+        "medicalSpecialty": "Dermatology"
+      },
+      "publisher": {
+        "@id": "https://smartcell-frontend.gelovonarfas.workers.dev/#org"
+      },
+      "citation": [
+        "¹ Sorrell M., Caplan A. I. Fibroblasts — a diverse population at the center of it all. Int. Rev. Cell Mol. Biol., 2009, v. 276, 161–214",
+        "² Varani J. et al. Decreased Collagen Production in Chronologically Aged Skin. AJP, 2006, 168 (6), 1861–1868",
+        "³ Fisher G., Varani J., Voorhees J. Looking older: Fibroblast Collapse and Therapeutic Implications. Arch Dermatol, 2008, 144 (5), 666–672",
+        "⁴ Fisher G. et al. Mechanism of photoaging and chronological skin aging. Arch Dermatol, 2002, 138, 1462–1467",
+        "⁵ Фріденштейн О. Я. Клонування стромальних клітин-попередників, 1988, с. 257–265",
+        "⁶ Патент RU 2466680, 2012",
+        "⁷ US 8.790.890 B2, 2014",
+        "⁸ Bayreuther K. et al. Arch Gerontol Geriatr, 1992, 15 (1), 47–74",
+        "⁹ Ryan J. et al. In vitro, 1981, 17 (1), 20–27",
+        "¹⁰ Schneider E., Smith J. Int. Rev. Cytology, 1981, 69, 261–270",
+        "¹¹ Терехов С. М., 1984",
+        "¹² Зорін В. Л. та ін. Вісник естетичної медицини, 2011, 10 (2), 16–26",
+        "¹³ Zorin V. et al. J. Tissue Eng. Regen. Med., 2014",
+        "¹⁴ Лебединська О. В. та ін. Морфологія, 2004, 126 (6), 46–49",
+        "¹⁵ Владимирська Є. В., Кошель І. В. Гематологія і трансфузіологія, 1990, 1, 3–5",
+        "¹⁶ Nolte S. V. et al. Cells Tissues Organs, 2008, 187, 165–176"
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".vm-article__summary-list",
+          ".vm-article__answer"
+        ]
+      }
+    },
+    {
+      "@type": "MedicalOrganization",
+      "@id": "https://smartcell-frontend.gelovonarfas.workers.dev/#org",
+      "name": "Інститут VIRTUS · SmartCell",
+      "url": "https://virtus.ua/",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Одеса",
+        "addressCountry": "UA"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://smartcell-frontend.gelovonarfas.workers.dev/vm-article-oblik#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Які процедури показані саме мені?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ті, інтенсивність яких відповідає вашому регенераторному й проліферативному потенціалу. За низьких показників починають із відновлення клітинного ресурсу, а не з травмуючих методик."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Як часто їх можна проводити?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Інтервал визначає швидкість відновлення тканини — саме її показує проліферативний потенціал: що більше щільних колоній у культурі, то швидше йдуть регенеративні процеси."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чи залежить регенераторний потенціал від віку?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ні. ЕКУф генетично детермінована й від віку не залежить: це індивідуальний параметр ⁹ ¹⁰ ¹¹. Від віку залежить кількість самих фібробластів і їхня біосинтетична активність."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "З якого віку доречні втручання за естетичними показаннями?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Відповідь дає діагностика, а не паспортний вік: рішення ухвалює лікар за показниками потенціалу шкіри та станом тканини."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
@@ -151,7 +286,7 @@
 
 
       <p class="vm-article__byline sc-t-mini">
-        <span class="vm-article__byline-item">07.09.2026</span>
+        <span class="vm-article__byline-item"><time datetime="2026-09-07">07.09.2026</time></span>
         <span class="vm-article__byline-item">Ганна Цепколенко</span>
         <span class="vm-article__byline-item"><svg class="vm-article__byline-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1 8s2.6-4.2 7-4.2S15 8 15 8s-2.6 4.2-7 4.2S1 8 1 8Z" stroke="currentColor"/><circle cx="8" cy="8" r="1.9" stroke="currentColor"/></svg><span>112 переглядів</span></span>
         <span class="vm-article__byline-item"><svg class="vm-article__byline-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6.2" stroke="currentColor"/><path d="M8 4.4V8l2.6 1.6" stroke="currentColor" stroke-linecap="round"/></svg><span>9 хв читання</span></span>
@@ -181,8 +316,8 @@
         <a class="vm-article__share-link sc-t-caption" href="#share-tg" aria-label="TG — поділитись у Telegram">TG</a>
       </div>
 
-      <section class="vm-article__summary">
-        <h2 class="vm-article__summary-title sc-t-caption">КОРОТКО</h2>
+      <section class="vm-article__summary" role="doc-abstract" aria-labelledby="summary-title">
+        <h2 class="vm-article__summary-title sc-t-caption" id="summary-title">КОРОТКО</h2>
         <ul class="vm-article__summary-list">
           <li class="sc-t-body">Вікові зміни шкіри — це передусім зменшення кількості фібробластів і зниження їхньої активності: у літніх людей фібробластів у середньому на 35 % менше, а продукція колагену знижена на 75 % ² ⁴</li>
           <li class="sc-t-body">Регенераторний потенціал оцінюють за ефективністю колонієутворення фібробластів (ЕКУф) у культурі — показник індивідуальний і від віку не залежить ⁹ ¹⁰ ¹¹</li>

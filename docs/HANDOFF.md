@@ -246,7 +246,24 @@ LCP 9,1 с, FCP 2,9 с — это не вёрстка, а доставка:
 
 Время чтения · счётчик просмотров · автор со специальностью и аватаром · дата публикации И дата обновления · хлебные крошки полного пути · «Читайте також» · связанные услуги с ценами «від N грн» · карточка врача «Консультує та оперує» · рейтинг статьи · подписка с согласием на обработку данных · тег-облака в футере.
 
-Schema.org: `Article` + `Physician` + `AggregateRating`. `dateModified` — из поля «оновлено».
+Schema.org — JSON-LD в `<head>` статьи (образец собран из разметки страницы, в теме
+генерируется из полей). Граф из четырёх узлов:
+
+| узел | свойства | из какого поля |
+|---|---|---|
+| `MedicalWebPage` | `url`, `name`, `isPartOf` → сайт журнала, `mainEntity` → статья | permalink, title |
+| `Article` | `headline`, `description`, **`abstract`** (пункты «Коротко» через пробел), `articleSection`, `datePublished`, `dateModified`, `wordCount`, `timeRequired` (`PT9M`), `image`, `author`, `publisher`, `citation` (каждый источник строкой), `speakable` (селекторы «Коротко» и прямых ответов) | title, excerpt, summary[], category, published, updated, reading_time, cover, author, sources[] |
+| `Physician` (внутри author) | `name`, `jobTitle`, `url`, `affiliation` → организация, `medicalSpecialty` | author: name, role, url |
+| `MedicalOrganization` | `name`, `url`, `address` | константы темы |
+| `FAQPage` | `mainEntity[]` → `Question` + `acceptedAnswer` | faq[] (q, a) |
+
+`AggregateRating` добавляется в `Article` только когда рейтинг реально собирается
+(поле `rating`: value, count) — с заглушкой не выводить, иначе штраф от поиска.
+
+Семантика в разметке, сверх классов: дата — `<time datetime="YYYY-MM-DD">`; блок «Коротко» —
+`<section role="doc-abstract" aria-labelledby="…">`; ответы FAQ лежат в DOM всегда (`<details>`),
+скрытие не мешает индексации; прямой ответ под каждым H2 — `.vm-article__answer`.
+Проверка: Google Rich Results Test и Lighthouse SEO → «Structured data is valid».
 
 ## Анимации (заложены в именах слоёв Figma)
 

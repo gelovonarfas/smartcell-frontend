@@ -1,0 +1,6 @@
+# Стенд для согласования. На проде правила задаёт тема; здесь — открыто всем,
+# включая краулеры ИИ-ассистентов (GPTBot, ClaudeBot, PerplexityBot, Google-Extended).
+User-agent: *
+Allow: /
+
+Sitemap: https://smartcell-frontend.gelovonarfas.workers.dev/sitemap.xml

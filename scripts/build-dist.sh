@@ -16,6 +16,8 @@ rsync -a --exclude-from="$ROOT/.deployignore" \
 # Правила Pages кладём в корень выгрузки
 cp "$ROOT/deploy/_headers" "$DIST/_headers"
 cp "$ROOT/deploy/_redirects" "$DIST/_redirects"
+# Файлы для поисковиков и ИИ-агентов: robots, sitemap, llms.txt (llmstxt.org)
+cp "$ROOT/deploy/robots.txt" "$ROOT/deploy/sitemap.xml" "$ROOT/deploy/llms.txt" "$DIST/"
 
 # Секции — исходники для переноса в тему, на проде они не нужны:
 # разметка уже вставлена копиями в страницы
