@@ -70,12 +70,21 @@
 
 .sc-saving__row:last-child { border-block-end: 0; }
 
-/* Две цены идут парой: вход в программу и сама программа. Между ними шаг
-   меньше, чем до таблицы, — читаются как один ответ на список (2026-09-23) */
+/* Две цены стоят рядом: слева вход, справа сама программа — выбор из двух,
+   а не продолжение списка. Колонки равные, шаг тот же, что у сетки (2026-09-23) */
 .sc-saving__prices {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: stretch;
+}
+
+/* Плиты в колонках — подпись сверху, цена под ней: в строку они не влезают
+   и цена липла бы к подписи */
+.sc-saving__prices .sc-saving__total {
   flex-direction: column;
-  gap: var(--sc-space-2);
+  align-items: flex-start;
+  gap: var(--stack-gap-sm);
 }
 
 /* Ответ на список: та же строка, но сама по себе — без рамки таблицы.
@@ -90,12 +99,8 @@
   color: var(--foreground);
 }
 
-/* Первый шаг — светлая плита с кромкой: доступный вход, а не итог */
-.sc-saving__total--entry {
-  border: var(--sc-line) solid var(--border);
-  background: var(--card);
-  color: var(--card-foreground);
-}
+/* Обе плиты чернильные (2026-09-23): вход и программа — один ответ на список,
+   разной заливкой они читались как разные по важности вещи */
 
 .sc-saving__label {
   flex: 1 0 0;
@@ -119,5 +124,11 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--stack-gap-sm);
+  }
+
+  /* На телефоне две цены — одна под другой: рядом они ужимают и подпись, и сумму */
+  .sc-saving__prices {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sc-space-2);
   }
 }
