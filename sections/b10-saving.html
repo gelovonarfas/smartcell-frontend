@@ -2,8 +2,10 @@
      B10 · Економія
      figma: node-id=15:91
      ACF: b10_kicker (text), b10_title (text), b10_note (textarea),
-          b10_rows (repeater: label, value), b10_total (label, value)
-     Цена программы в макете стоит заглушкой «X грн» — заменить перед публикацией.
+          b10_rows (repeater: label, value),
+          b10_entry (group: label, value) — первинна консультація + діагностика,
+          b10_total (group: label, value) — річна програма
+     Цены от клиники 2026-09-23: вхід 2 550 грн, програма 132 500 грн.
      ============================================================ -->
 <section class="sc-saving">
   <div class="sc-saving__inner">
@@ -36,9 +38,19 @@
         </li>
       </ul>
 
-      <div class="sc-saving__total" data-theme="inverse">
-        <p class="sc-saving__label sc-t-body">Face Control 365 — річна програма з контролем</p>
-        <p class="sc-saving__value sc-t-h3">X грн · фіксована ціна</p>
+      <!-- Две цены, а не одна: вхід у програму оплачується окремо від самої
+           програми (решение клиники 2026-09-23). Первая плита светлая — это
+           доступный первый шаг, вторая чернильная — годовая программа. -->
+      <div class="sc-saving__prices">
+        <div class="sc-saving__total sc-saving__total--entry">
+          <p class="sc-saving__label sc-t-body">Перший крок — консультація, УЗД шкіри, доплер, дерматоскопія</p>
+          <p class="sc-saving__value sc-t-h3">2 550 грн</p>
+        </div>
+
+        <div class="sc-saving__total" data-theme="inverse">
+          <p class="sc-saving__label sc-t-body">Face Control 365 — річна програма з контролем</p>
+          <p class="sc-saving__value sc-t-h3">132 500 грн · фіксована ціна</p>
+        </div>
       </div>
     </div>
   </div>
