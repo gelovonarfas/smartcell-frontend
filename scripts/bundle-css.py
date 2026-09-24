@@ -26,6 +26,7 @@ COMMENT = re.compile(r'/\*.*?\*/', re.S)
 CRITICAL = {
     'index': ['tokens', 'base', 'b00-announcement', 'b00b-header', 'b01-hero'],
     'vm-blog': ['tokens', 'base', 'b00b-header', 'vm-featured', 'vm-rubrics'],
+    'vm-blog-test': ['tokens', 'base', 'b00b-header', 'vm-featured', 'vm-rubrics'],
     'vm-category': ['tokens', 'base', 'b00b-header', 'vm-category', 'vm-rubrics'],
     'vm-article': ['tokens', 'base', 'b00b-header', 'vm-article'],
     'vm-article-oblik': ['tokens', 'base', 'b00b-header', 'vm-article'],
