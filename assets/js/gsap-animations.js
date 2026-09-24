@@ -74,7 +74,7 @@
        Проза не анимируется: текст, который проявляется под курсором чтения,
        мешает читать. Двигаются только заголовки разделов, врезки и карточки. */
     var articleBlocks = [
-      '.vm-article__summary', '.vm-article__h2', '.vm-article__answer',
+      '.vm-article__summary', '.vm-article__main > h2', '.vm-article__answer',
       '.vm-article__checklist', '.vm-article__figure', '.vm-article__promo',
       '.vm-article__series', '.vm-article__faq-item', '.vm-article__subscribe',
       '.vm-article__author', '.vm-article__sources',

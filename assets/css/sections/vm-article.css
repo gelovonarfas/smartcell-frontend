@@ -406,43 +406,42 @@
    редактора выглядит точно так же, без единого класса (2026-09-23).
    Селекторы с `:not([class])`: элементы кита со своими классами (прямой ответ,
    подпись к фото, джерела) эти правила не задевают — у них свои отступы.
+   Тег обёрнут в `:where()`, чтобы вес был как у одного класса: иначе они
+   перебивали сквозное правило base.css «после фото отступ ноль».
 
    Что это значит для темы: тело статьи — одно поле wysiwyg, репитер не нужен.
    Репитер нужен только «модулям»: прямой ответ, чеклист, промо, врезка с
    фото, FAQ, подписка, автор, джерела — у каждого своя разметка, см. HANDOFF.
    ============================================================ */
 
-.vm-article__main > h2:not([class]) {
+.vm-article__main > :where(h2:not([class])) {
   margin: var(--sc-space-14) 0 0;
   max-inline-size: var(--sc-measure);
   font: var(--h2-weight) var(--h2-size) / var(--h2-lh) var(--font-headings);
   letter-spacing: var(--h2-ls);
 }
 
-.vm-article__main > h3:not([class]) {
+.vm-article__main > :where(h3:not([class])) {
   margin: var(--sc-space-8) 0 0;
   max-inline-size: var(--sc-measure);
   font: var(--h3-weight) var(--h3-size) / var(--h3-lh) var(--font-headings);
   letter-spacing: var(--h3-ls);
 }
 
-.vm-article__main > p:not([class]),
-.vm-article__main > ul:not([class]),
-.vm-article__main > ol:not([class]) {
+.vm-article__main > :where(p:not([class]), ul:not([class]), ol:not([class])) {
   margin: var(--stack-gap-md) 0 0;
   max-inline-size: var(--sc-measure);
   font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
 }
 
-.vm-article__main > ul:not([class]),
-.vm-article__main > ol:not([class]) {
+.vm-article__main > :where(ul:not([class]), ol:not([class])) {
   padding-inline-start: var(--card-padding);
   display: flex;
   flex-direction: column;
   gap: var(--stack-gap-sm);
 }
 
-.vm-article__main > blockquote:not([class]) {
+.vm-article__main > :where(blockquote:not([class])) {
   margin: var(--sc-space-8) 0 0;
   max-inline-size: var(--sc-measure);
   padding-inline-start: var(--card-padding);
@@ -450,14 +449,14 @@
   font: 400 var(--p-large-size) / var(--p-large-lh) var(--font-sans);
 }
 
-.vm-article__main > blockquote:not([class]) > p { margin: 0; }
+.vm-article__main > :where(blockquote:not([class])) > p { margin: 0; }
 
-.vm-article__main > figure:not([class]) {
+.vm-article__main > :where(figure:not([class])) {
   margin: var(--vm-a-block-gap) 0 0;
   inline-size: 100%;
 }
 
-.vm-article__main > figure:not([class]) figcaption {
+.vm-article__main > :where(figure:not([class])) figcaption {
   margin-block-start: var(--stack-gap-sm);
   color: var(--muted-foreground);
   font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
@@ -488,7 +487,7 @@
 /* Сноски в тексте (¹ ² ⁴) приходят символами — отдельной разметки не требуют */
 
 /* Первый элемент тела не отбивается сверху: отступ даёт сам блок */
-.vm-article__main > :first-child:not([class]) { margin-block-start: 0; }
+.vm-article__main > :where(:first-child:not([class])) { margin-block-start: 0; }
 
 .vm-article__h2 {
   margin: var(--sc-space-14) 0 0; /* rhythm/56 */
