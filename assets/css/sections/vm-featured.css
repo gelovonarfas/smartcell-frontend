@@ -97,9 +97,12 @@
   --vm-featured-reveal-rise: 18px;
 }
 
+/* Только расфокус и прозрачность: подъём на --vm-featured-reveal-rise читался
+   как дёрганье блока на каждой смене материала (правка 2026-09-24).
+   Переменная оставлена — вернуть движение можно одной строкой. */
 @keyframes vm-featured-reveal {
-  from { opacity: 0; filter: blur(var(--vm-featured-reveal-blur)); transform: translateY(calc(-1 * var(--vm-featured-reveal-rise))); }
-  to   { opacity: 1; filter: blur(0); transform: none; }
+  from { opacity: 0; filter: blur(var(--vm-featured-reveal-blur)); }
+  to   { opacity: 1; filter: blur(0); }
 }
 
 .vm-featured__slide:not([hidden]) .vm-featured__chips,
