@@ -93,6 +93,7 @@ body {
      такой роли нет: --muted-foreground на светлом даёт 3.2:1. */
   --sc-neutral-600: #4A453F;
 
+  --sc-weight-medium: 500; /* «Smart Age» в названии журнала на лендинге (B17) */
   --sc-weight-bold: 700;   /* подписи переключателей: в макете Onest Bold */
   --sc-weight-xlight: 200; /* «Journal» в шапке журнала: Onest ExtraLight */
   --sc-weight-light: 300;  /* счётчик в переключателях: в макете Onest Light */
