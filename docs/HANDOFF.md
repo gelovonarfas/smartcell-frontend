@@ -21,7 +21,7 @@
 | B04b | 4:290 | Три сценарії — карусель | `scenarios` (repeater: tag, title, text, image) |
 | B04c | 14:65 | Clinical data — 4 цифры | `clinical_stats` (repeater: value, label) ⚠ [VERIFY] |
 | B05 | 14:80 | Амбасадор Катерина Катеринчик | `amb_quote`, `amb_name`, `amb_role`, `amb_photo`, `amb_video` |
-| B06 | 14:89 | До–Після (3 плитки) | `before_after` (repeater: image, caption), `ba_note` |
+| B06 | 931:1130 | До–Після: 3 пацієнтки, вкладки ФОТО / УЗД, шторка до/після (`cases.js`) | `cases_title`, `cases_legal`, `cases_items` (repeater: label, title, paragraphs (repeater: text), views (repeater: type [photo\|uzd], image_before, image_after)) — старт шторки: фото 33, УЗД 30 (`data-case-start`) |
 | B07 | 15:68 | CTA1 + Welcome kit | `wk_title`, `wk_text`, `wk_image`, `wk_cta` |
 | B08a | 4:291 | Безпека «Наука, не хайп» + таблица 2×2 | `safety_title`, `safety_features` (repeater: title, text) |
 | B08b | 4:292 | Тёмный бэнд статистики | `stats` (repeater: value, label) ⚠ [VERIFY] |
