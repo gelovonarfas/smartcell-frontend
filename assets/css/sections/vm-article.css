@@ -240,7 +240,7 @@
   inset-inline: 0;
   inset-block-end: 0;
   margin: 0;
-  padding: var(--sc-space-6) var(--sc-space-4) var(--sc-space-3);
+  padding: var(--card-padding); /* то же поле, что у карточек: 28 / 20 на мобильном */
   color: var(--primary-foreground);
   background: linear-gradient(to top, var(--sc-black-alpha-60), var(--sc-black-alpha-0));
 }
