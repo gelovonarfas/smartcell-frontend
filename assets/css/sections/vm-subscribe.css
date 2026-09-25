@@ -10,7 +10,10 @@
   --vm-sub-h: 300px; /* высота плиты в макете */
 
   box-sizing: border-box;
-  padding: var(--sc-space-20) var(--sc-pad-x); /* обёртка Frame 2: поля 80 со всех сторон */
+  /* По вертикали поля не добавляем: ленты сверху и снизу уже дают
+     --section-padding-y, и своя восьмидесятка делала просвет 240 против 160
+     у полосы Цепколенко. Ритм между полосами общий (правка 2026-09-24). */
+  padding-inline: var(--sc-pad-x);
   background: var(--background);
   color: var(--foreground);
 }

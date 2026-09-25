@@ -45,23 +45,6 @@
   <link rel="stylesheet" href="assets/css/sections/vm-tsepkolenko.css">
   <link rel="stylesheet" href="assets/css/sections/vm-subscribe.css">
   <link rel="stylesheet" href="assets/css/sections/footer.css">
-<style>
-  /* Подписи к фото — только на пробной странице; в кит переедут вместе с блоком, если подойдут */
-  .vm-featured__media-link { position: relative; }
-  .vm-credit {
-    position: absolute;
-    inset-block-end: var(--page-margin-x);
-    inset-inline-end: var(--page-margin-x);
-    padding: var(--sc-chip-pad);
-    color: var(--primary-foreground);
-    background: var(--sc-black-alpha-60);
-  }
-  .vm-credits {
-    margin: var(--stack-gap-md) 0 0;
-    max-inline-size: var(--sc-measure);
-    color: var(--sc-neutral-600);
-  }
-</style>
 </head>
 <body>
 
@@ -217,22 +200,18 @@
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
       <img data-src="assets/img/test/v2-06-1024.jpg" alt="Науковиця ставить чашку Петрі під мікроскоп"
            width="1024" height="1024" loading="lazy" decoding="async">
-      <span class="vm-credit sc-t-mini">Фото: ThisIsEngineering / Pexels</span>
     </div>
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
       <img data-src="assets/img/test/v2-04-1024.jpg" alt="Лабораторна діагностика: зразки в роботі"
            width="1024" height="1024" loading="lazy" decoding="async">
-      <span class="vm-credit sc-t-mini">Ілюстрація: SmartCell</span>
     </div>
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
       <img data-src="assets/img/test/v2-09-1024.jpg" alt="Усміхнена жінка торкається обличчя"
            width="1024" height="1024" loading="lazy" decoding="async">
-      <span class="vm-credit sc-t-mini">Фото: Angela Roma / Pexels</span>
     </div>
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
       <img data-src="assets/img/test/v2-13-1024.jpg" alt="Людина готує салат зі свіжих овочів"
            width="1024" height="1024" loading="lazy" decoding="async">
-      <span class="vm-credit sc-t-mini">Фото: Igor Murakhin / Pexels</span>
     </div>
   </div>
 </section>
@@ -599,7 +578,6 @@
       <a class="vm-feed__page sc-t-small" href="#page-16">16</a>
       <a class="vm-feed__pager-nav" href="#next" aria-label="Наступна сторінка"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32M26 30L32 24L26 18" stroke="currentColor"/></svg></a>
     </nav>
-    <p class="vm-credits sc-t-mini">Фото: Mikhail Nilov, MART PRODUCTION, Ron Lach, Cedric Fauntleroy, ThisIsEngineering, Miriam Alonso, Angela Roma, Andrea Piacquadio, Kampus Production, SHVETS production, Igor Murakhin, Mizuno K — Pexels. Ілюстрація до матеріалу про діагностику: SmartCell. У статтях підпис ставиться під кожним фото окремо.</p>
   </div>
 </section>
 <!-- Подвал — копия sections/footer.html -->

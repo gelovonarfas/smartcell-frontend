@@ -230,6 +230,36 @@
   object-fit: cover;
 }
 
+/* ---------- Подпись к обложке ----------
+   Источник кадра и пометка об обработке. Лежит на фото: рамка обложки
+   абсолютная и с overflow: hidden, под ней в потоке места нет (2026-09-24).
+   Скрим обязателен — текст на фото без него не читается (CLAUDE.md). */
+
+.vm-article__credit {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  margin: 0;
+  padding: var(--sc-space-6) var(--sc-space-4) var(--sc-space-3);
+  color: var(--primary-foreground);
+  background: linear-gradient(to top, var(--sc-black-alpha-60), var(--sc-black-alpha-0));
+}
+
+.vm-article__credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: var(--sc-space-0_5);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-article__credit a:hover { text-decoration: none; }
+}
+
+.vm-article__credit a:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
 /* ---------- Подхват перехода из ленты ----------
    Обкладинка приезжает из ленты уже в свою рамку (assets/js/article-intro.js):
    снимок стоит в тех же координатах, куда его привёл слайдер, и растворяется
@@ -1074,7 +1104,12 @@
   }
 
   .vm-article__hero-media {
-    position: static;
+    /* Было static; relative — чтобы подпись к обложке считалась от кадра,
+       а не улетала к шапке статьи (правка 2026-09-24). В потоке ведёт себя так же. */
+    position: relative;
+    /* Смещения из десктопного правила при relative уже работают — гасим их,
+       иначе кадр уезжает влево и вниз на свои inset-ы */
+    inset: auto;
     order: 1;
     inline-size: auto;
   }
