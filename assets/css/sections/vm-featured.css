@@ -43,11 +43,25 @@
   max-inline-size: var(--vm-featured-copy-w);
 }
 
-.vm-featured__masthead { grid-row: 1; grid-column: 1; }
+.vm-featured__head { grid-row: 1; grid-column: 1; }
 
 /* Шапка журнала: «Smart Age» обычным весом, «Journal» — ExtraLight, как в макете.
    Отбивка до чипсов = rhythm/40 поверх шага колонки (в макете 40 + gap 20). */
-.vm-featured__masthead { margin: 0 0 var(--sc-space-10); }
+.vm-featured__head {
+  margin: 0 0 var(--sc-space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.vm-featured__masthead { margin: 0; }
+
+/* Дескриптор журнала второй строкой (правка 2026-09-25), тот же, что в B17
+   на лендинге. Полоса серая — мелкий текст --sc-neutral-600, не muted (CLAUDE.md) */
+.vm-featured__descriptor {
+  margin: 0;
+  color: var(--sc-neutral-600);
+}
 
 .vm-featured__masthead-thin { font-weight: var(--sc-weight-xlight); }
 
@@ -334,7 +348,7 @@
      прибавляются старые внутренние отступы копи-колонки */
   /* Строки заданы явно: все слайды делят третью, и высота строки — по самому
      длинному заголовку, как и на десктопе */
-  .vm-featured__masthead {
+  .vm-featured__head {
     grid-row: 1;
     grid-column: 1;
     margin-block-end: 0;
