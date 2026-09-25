@@ -273,9 +273,11 @@
       <!-- PLACEHOLDER: обкладинка статті в макете помечена «потрібен ассет» -->
       <img src="assets/img/vm/skin-after-40.jpg" alt="Обкладинка статті"
            width="1440" height="1440" decoding="async" fetchpriority="high">
-      <!-- Подпись к обложке: автор и ссылка на исходник + пометка об обработке.
-           Мок — имя, ссылка и текст придут из поля CMS (photo_credit).
-           По нашему набору кадров данные в assets/img/test/ATTRIBUTION.md. -->
+      <!-- Подпись к обложке: автор со ссылкой на исходник + пометка об обработке.
+           Нужно поле в админке статьи: группа photo_credit (author, source_url, note) —
+           редакция заполняет его у каждой статьи со стоковым или обработанным кадром;
+           пусто — строка не выводится. Здесь мок. Данные по нашим кадрам —
+           assets/img/vm/ATTRIBUTION.md. -->
       <p class="vm-article__credit sc-t-mini">Фото: <a href="https://www.pexels.com/" rel="noopener">Автор / Pexels</a>. Кадровано та оброблено, зокрема засобами AI.</p>
     </div>
     </header>

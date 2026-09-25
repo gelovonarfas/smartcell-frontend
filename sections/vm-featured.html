@@ -12,7 +12,9 @@
      стрілка «читати» на них ховається (assets/js/vm-featured.js).
      Кодер виводить реальні матеріали з репітера, і посилання буде в кожного.
      Файли: oblik-cover.jpg (той самий кадр, що обкладинка статті Oblik —
-     перехід садить його в рамку статті), hero-2…5.jpg (квадратний кроп 1200)
+     перехід садить його в рамку статті), кадри 2–5 — <slug>-1024.jpg (квадрат 1024, більше вихідники не дають;
+     набір articles-clinical-v2, оброблено зокрема засобами AI — див.
+     assets/img/vm/ATTRIBUTION.md)
      ============================================================ -->
 <section class="vm-featured" data-vm-featured>
   <div class="vm-featured__copy">
@@ -23,10 +25,34 @@
       <article class="vm-featured__slide" data-vm-featured-slide>
         <ul class="vm-featured__chips">
           <li class="vm-featured__chip sc-t-mini">Топ</li>
-          <li class="vm-featured__chip sc-t-mini">Science</li>
+          <li class="vm-featured__chip sc-t-mini">Наука</li>
           <li class="vm-featured__chip sc-t-mini">9 хв читання</li>
         </ul>
-        <p class="vm-featured__title sc-t-h1"><a class="vm-featured__title-link" href="vm-article-oblik.html">Регенераторний потенціал шкіри: як його вимірюють і навіщо це косметологу</a></p>
+        <p class="vm-featured__title sc-t-h1"><a class="vm-featured__title-link" href="vm-article-oblik.html">Фібробласти шкіри: що це за клітини і чому від них залежить молодість</a></p>
+      </article>
+      <article class="vm-featured__slide" data-vm-featured-slide hidden>
+        <ul class="vm-featured__chips">
+          <li class="vm-featured__chip sc-t-mini">Топ</li>
+          <li class="vm-featured__chip sc-t-mini">Cellness</li>
+          <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
+        </ul>
+        <p class="vm-featured__title sc-t-h1">Регенеративний потенціал: чому біологічний вік важливіший за паспортний</p>
+      </article>
+      <article class="vm-featured__slide" data-vm-featured-slide hidden>
+        <ul class="vm-featured__chips">
+          <li class="vm-featured__chip sc-t-mini">Топ</li>
+          <li class="vm-featured__chip sc-t-mini">Практика</li>
+          <li class="vm-featured__chip sc-t-mini">7 хв читання</li>
+        </ul>
+        <p class="vm-featured__title sc-t-h1">Омолодження: чому сучасний підхід починається з діагностики</p>
+      </article>
+      <article class="vm-featured__slide" data-vm-featured-slide hidden>
+        <ul class="vm-featured__chips">
+          <li class="vm-featured__chip sc-t-mini">Топ</li>
+          <li class="vm-featured__chip sc-t-mini">Краса</li>
+          <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
+        </ul>
+        <p class="vm-featured__title sc-t-h1">Чому після 35 років шкіра старіє швидше — і чи можна це змінити</p>
       </article>
       <article class="vm-featured__slide" data-vm-featured-slide hidden>
         <ul class="vm-featured__chips">
@@ -34,31 +60,7 @@
           <li class="vm-featured__chip sc-t-mini">Їжа</li>
           <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
         </ul>
-        <p class="vm-featured__title sc-t-h1">Рослинні сполуки, що стоять за раціоном кожного довгожителя</p>
-      </article>
-      <article class="vm-featured__slide" data-vm-featured-slide hidden>
-        <ul class="vm-featured__chips">
-          <li class="vm-featured__chip sc-t-mini">Топ</li>
-          <li class="vm-featured__chip sc-t-mini">Наука</li>
-          <li class="vm-featured__chip sc-t-mini">7 хв читання</li>
-        </ul>
-        <p class="vm-featured__title sc-t-h1">24-годинна модель сну: чому кращий сон починається напередодні зранку</p>
-      </article>
-      <article class="vm-featured__slide" data-vm-featured-slide hidden>
-        <ul class="vm-featured__chips">
-          <li class="vm-featured__chip sc-t-mini">Топ</li>
-          <li class="vm-featured__chip sc-t-mini">Практика</li>
-          <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
-        </ul>
-        <p class="vm-featured__title sc-t-h1">Звички для здоров’я мозку, які найважливіші у 30–40 років</p>
-      </article>
-      <article class="vm-featured__slide" data-vm-featured-slide hidden>
-        <ul class="vm-featured__chips">
-          <li class="vm-featured__chip sc-t-mini">Топ</li>
-          <li class="vm-featured__chip sc-t-mini">Наука</li>
-          <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
-        </ul>
-        <p class="vm-featured__title sc-t-h1">Гіпербарична оксигенація і довголіття: що насправді показує наука</p>
+        <p class="vm-featured__title sc-t-h1">Що їсти, щоб підтримувати природне оновлення клітин?</p>
       </article>
     </div>
 
@@ -87,20 +89,20 @@
            width="1120" height="1120" decoding="async" fetchpriority="high">
     </a>
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
-      <img src="assets/img/vm/hero-2.jpg" alt="Стіл із різноманітними овочевими стравами, вигляд згори"
-           width="1200" height="1200" loading="lazy" decoding="async">
+      <img data-src="assets/img/vm/regenerative-potential-1024.jpg" alt="Науковиця ставить чашку Петрі під мікроскоп"
+           width="1024" height="1024" loading="lazy" decoding="async">
     </div>
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
-      <img src="assets/img/vm/hero-3.jpg" alt="Жінка спить у світлому ліжку"
-           width="1200" height="1200" loading="lazy" decoding="async">
+      <img data-src="assets/img/vm/diagnostics-first-1024.jpg" alt="Лабораторна діагностика: зразки в роботі"
+           width="1024" height="1024" loading="lazy" decoding="async">
     </div>
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
-      <img src="assets/img/vm/hero-4.jpg" alt="Робочий стіл із ноутбуком і нотатками"
-           width="1200" height="1200" loading="lazy" decoding="async">
+      <img data-src="assets/img/vm/skin-after-35-1024.jpg" alt="Усміхнена жінка торкається обличчя"
+           width="1024" height="1024" loading="lazy" decoding="async">
     </div>
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
-      <img src="assets/img/vm/hero-5.jpg" alt="Чоловік із заплющеними очима робить дихальну вправу"
-           width="1200" height="1200" loading="lazy" decoding="async">
+      <img data-src="assets/img/vm/cell-renewal-food-1024.jpg" alt="Людина готує салат зі свіжих овочів"
+           width="1024" height="1024" loading="lazy" decoding="async">
     </div>
   </div>
 </section>

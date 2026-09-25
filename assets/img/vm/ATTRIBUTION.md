@@ -7,6 +7,27 @@
 імʼя автора — посилання на сторінку оригіналу.
 
 
+## Файли в кіті
+
+Картки стрічки — `assets/img/vm/<файл>.jpg` (640), кадри слайдера — `<файл>-1024.jpg`.
+
+| № | файл |
+|---|---|
+| 01 | `biological-age` |
+| 02 | `botox-fillers-regen` |
+| 03 | `beyond-creams` |
+| 04 | `diagnostics-first` |
+| 05 | `personalized-medicine` |
+| 06 | `regenerative-potential` |
+| 07 | `sleep-anti-age` |
+| 08 | `oblik-cover.jpg` — власний кадр, не з цього набору (фото №08 не використано) |
+| 09 | `skin-after-35` |
+| 10 | `energy-after-40` |
+| 11 | `recovery-after-40` |
+| 12 | `weight-after-40` |
+| 13 | `cell-renewal-food` |
+| 14 | `chronic-stress` |
+
 ## 01 — Біологічний вік: чому він важливіший за дату народження
 
 Файлы: `01.jpg` / `01.png`
