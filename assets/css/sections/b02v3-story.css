@@ -137,6 +137,28 @@
 
 .sc-story__photo { inline-size: 100%; }
 
+/* Подпись авторства под кадром со стока (2026-09-25): мельчайший текст,
+   на светлой полосе — --sc-neutral-600, не muted (контраст, CLAUDE.md) */
+.sc-story__credit {
+  margin: var(--stack-gap-sm) 0 0;
+  color: var(--sc-neutral-600);
+}
+
+.sc-story__credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: var(--sc-space-0_5);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-story__credit a:hover { color: var(--foreground); }
+}
+
+.sc-story__credit a:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
 /* Цитата из кабинета: линия слева, поля 20, как в макете */
 .sc-story__quote {
   margin: 0;

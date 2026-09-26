@@ -93,6 +93,10 @@ body {
      такой роли нет: --muted-foreground на светлом даёт 3.2:1. */
   --sc-neutral-600: #4A453F;
 
+  /* Самый мелкий текст — подписи авторства фото (2026-09-25). В выгрузке Figma
+     меньше 12 ничего нет — согласуемое значение, при появлении токена заменить */
+  --sc-fine-size: 10px;
+  --sc-fine-lh: 14px;
   --sc-weight-medium: 500; /* «Smart Age» в названии журнала на лендинге (B17) */
   --sc-weight-bold: 700;   /* подписи переключателей: в макете Onest Bold */
   --sc-weight-xlight: 200; /* «Journal» в шапке журнала: Onest ExtraLight */
@@ -398,6 +402,7 @@ body {
 .sc-t-body    { font: 400 var(--p-size) / var(--p-lh) var(--font-sans); }
 .sc-t-small   { font: 400 var(--p-small-size) / var(--p-small-lh) var(--font-sans); }
 .sc-t-mini    { font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans); }
+.sc-t-fine    { font: 400 var(--sc-fine-size) / var(--sc-fine-lh) var(--font-sans); } /* подписи авторства фото */
 
 /* ============================================================
    Медиа

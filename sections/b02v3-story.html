@@ -81,12 +81,17 @@
           <span class="sc-story__facts__desc sc-t-small">замінює діагностику — і працює лише випадково</span>
         </li>
         </ul>
-        <div class="sc-story__photo sc-media--square">
-          <img src="assets/img/story/ages.jpg"
-               srcset="assets/img/story/ages.jpg 680w, assets/img/story/ages@2x.jpg 1254w"
-               sizes="(max-width: 640px) 100vw, 680px"
-               alt="Три усміхнені жінки лежать на траві, вигляд згори" width="680" height="680" loading="lazy" decoding="async">
-        </div>
+        <!-- Кадр со стока: подпись авторства под фото, как у обложек статей.
+             ACF: story_photo_credit (group: author, source_url, note); пусто — figcaption не выводится -->
+        <figure class="sc-story__photo">
+          <div class="sc-media--square">
+            <img src="assets/img/story/ages.jpg"
+                 srcset="assets/img/story/ages.jpg 680w, assets/img/story/ages@2x.jpg 1254w"
+                 sizes="(max-width: 640px) 100vw, 680px"
+                 alt="Три усміхнені жінки лежать на траві, вигляд згори" width="680" height="680" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="sc-story__credit sc-t-fine">Фото: <a href="https://www.pexels.com/photo/top-view-of-three-woman-in-white-clothes-lying-down-on-grass-12928872/" rel="noopener">Aleksey Bystrov / Pexels</a>. Кадровано та оброблено, зокрема засобами AI.</figcaption>
+        </figure>
       </section>
 
       <!-- § 03 · це не вік -->
