@@ -50,6 +50,14 @@
   color: var(--foreground);
 }
 
+/* «Не за віком.» — акцент заголовка фирменным синим, как рост в B12 (2026-09-28).
+   <em> — смысловое выделение, курсив снят: в системе заголовки прямые */
+.sc-difference__accent {
+  display: block; /* всегда своей строкой — и на телефоне, где <br> в заголовке отключены */
+  font-style: normal;
+  color: var(--sc-action);
+}
+
 .sc-difference__tags {
   margin: 0;
   padding: 0;
