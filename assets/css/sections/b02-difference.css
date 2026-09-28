@@ -50,6 +50,9 @@
   color: var(--foreground);
 }
 
+/* «Не за віком.» — чуть плотнее остальной строки, без цвета (правка 2026-09-28) */
+.sc-difference__stress { font-weight: var(--sc-weight-medium); }
+
 .sc-difference__tags {
   margin: 0;
   padding: 0;
