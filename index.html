@@ -271,17 +271,21 @@
       <div class="sc-story__sticky" aria-live="polite">
         <div class="sc-story__hook" data-story-hook="0" data-current>
           <p class="sc-story__phase sc-t-caption">Проблема</p>
-          <p class="sc-story__hook-text sc-t-h2">«Скажіть, вони хороші?» — запитують деякі пацієнтки.</p>
+          <p class="sc-story__hook-text sc-t-h2">Чому шкіра перестала відновлюватись сама?</p>
         </div>
         <div class="sc-story__hook" data-story-hook="1" hidden>
           <p class="sc-story__phase sc-t-caption">Проблема</p>
-          <p class="sc-story__hook-text sc-t-h2">Чому процедури, які раніше працювали, більше не дають результату?</p>
+          <p class="sc-story__hook-text sc-t-h2">«Скажіть, вони хороші?» — запитують деякі пацієнтки.</p>
         </div>
         <div class="sc-story__hook" data-story-hook="2" hidden>
+          <p class="sc-story__phase sc-t-caption">Проблема</p>
+          <p class="sc-story__hook-text sc-t-h2">Чому процедури, які раніше працювали, більше не дають результату?</p>
+        </div>
+        <div class="sc-story__hook" data-story-hook="3" hidden>
           <p class="sc-story__phase sc-t-caption">Рішення</p>
           <p class="sc-story__hook-text sc-t-h2">Face Control 365 — програма, яка починається з розуміння біології вашої шкіри</p>
         </div>
-        <div class="sc-story__hook" data-story-hook="3" hidden>
+        <div class="sc-story__hook" data-story-hook="4" hidden>
           <p class="sc-story__phase sc-t-caption">Рішення</p>
           <p class="sc-story__hook-text sc-t-h2">Не гадаємо. Знаємо.</p>
         </div>
@@ -290,8 +294,16 @@
 
     <div class="sc-story__article">
 
+      <!-- § 00 · чому шкіра перестала відновлюватись — правка клиники 2026-09-28:
+           блок «Проблема» начинается с этого вопроса и двух абзацев (раньше они стояли
+           в § 03 после кремов). Откат — git: коммит «B02v3: проблема начинается…». -->
+      <section class="sc-story__part" data-story-part="0" data-story-hook-index="0">
+        <p class="sc-story__lead sc-t-lead">Якщо вам 35+ і ви відчули «б’юті-вигорання» — процедури стали менш ефективними, набряки після уколів тримаються тижнями, а догляд «не працює» — це не вік.</p>
+        <p class="sc-story__p sc-t-body">Це сигнал: шкіра перебуває в стані клітинної гіпоксії та втратила свій регенеративний потенціал. Знизилась мікроциркуляція, виснажився запас фібробластів, зламалася міжклітинна комунікація. І будь-яка агресивна стимуляція в цей момент — це не допомога, а додаткове навантаження на орган, який потребує ресурсу.</p>
+      </section>
+
       <!-- § 01 · історія з кабінету -->
-      <section class="sc-story__part" data-story-part="1" data-story-hook-index="0">
+      <section class="sc-story__part" data-story-part="1" data-story-hook-index="1">
         <figure class="sc-story__quote">
           <blockquote class="sc-story__quote-text sc-t-h3">
             <p>«До нас приходять жінки з великими сумками. Всередині — дорогі креми, сироватки, ампули з активними компонентами. „Скажіть, вони хороші?“ — запитують вони.</p>
@@ -309,7 +321,7 @@
       </section>
 
       <!-- § 02 · те, що підходить подрузі -->
-      <section class="sc-story__part" data-story-part="2" data-story-hook-index="1">
+      <section class="sc-story__part" data-story-part="2" data-story-hook-index="2">
         <p class="sc-story__p sc-t-body">Кожна шкіра — унікальна. Те, що дало «вау-результат» подрузі, може спровокувати у вас алергічну реакцію, набряк або прискорити фіброз. Синтетичні філери, які «всі роблять», з часом змінюють риси обличчя, порушують міміку, накопичуються в тканинах і ведуть до хронічного запалення. А агресивна стимуляція виснаженої шкіри не відновлює її — вона поглиблює проблему.</p>
         <ul class="sc-story__facts">
         <li class="sc-story__facts__row">
@@ -338,10 +350,8 @@
         </figure>
       </section>
 
-      <!-- § 03 · це не вік -->
-      <section class="sc-story__part" data-story-part="3" data-story-hook-index="1">
-        <p class="sc-story__lead sc-t-lead">Якщо вам 35+ і ви відчули «б’юті-вигорання» — процедури стали менш ефективними, набряки після уколів тримаються тижнями, а догляд «не працює» — це не вік.</p>
-        <p class="sc-story__p sc-t-body">Це сигнал: шкіра перебуває в стані клітинної гіпоксії та втратила свій регенеративний потенціал. Знизилась мікроциркуляція, виснажився запас фібробластів, зламалася міжклітинна комунікація. І будь-яка агресивна стимуляція в цей момент — це не допомога, а додаткове навантаження на орган, який потребує ресурсу.</p>
+      <!-- § 03 · самоперевірка і дзеркало (абзаци «35+» переїхали в § 00) -->
+      <section class="sc-story__part" data-story-part="3" data-story-hook-index="2">
 
         <!-- Самоперевірка: один симптом у кадрі, автоперемикання з відліком, як факти в B08 -->
         <div class="sc-story__check" data-story-check>
@@ -419,7 +429,7 @@
       </section>
 
       <!-- § 04 · рішення — з цього місця блок інвертується -->
-      <section class="sc-story__part sc-story__part--solution" data-story-part="4" data-story-hook-index="2" data-story-solution>
+      <section class="sc-story__part sc-story__part--solution" data-story-part="4" data-story-hook-index="3" data-story-solution>
         <h2 class="sc-story__h2 sc-t-h2">Face Control 365 — програма, яка починається з розуміння біології вашої шкіри</h2>
         <p class="sc-story__p sc-t-body">Спочатку — УЗД м’яких тканин, доплерографія судин та лабораторна оцінка кількості й якості ваших фібробластів. Ми вимірюємо регенеративний потенціал шкіри у точних цифрах. І тільки після цього розробляємо персональний протокол. Не за вашим віком. Не за модним трендом. За реальними даними вашого організму.</p>
         <div class="sc-story__photo sc-media--square">
@@ -471,7 +481,7 @@
       </section>
 
       <!-- § 05 · це я. це моє. — друга фраза рішення -->
-      <section class="sc-story__part sc-story__part--solution" data-story-part="5" data-story-hook-index="3">
+      <section class="sc-story__part sc-story__part--solution" data-story-part="5" data-story-hook-index="4">
         <h2 class="sc-story__h1 sc-t-h1">Це я. Це моє.</h2>
         <p class="sc-story__p sc-t-body">Кріолізат тромбоцитів і фібробласти — це не препарат із флакона. Це ваш власний біологічний матеріал, створений індивідуально під вас. Організм отримує рідні сигнали — і відповідає справжнім відновленням.</p>
         <ul class="sc-story__facts">
