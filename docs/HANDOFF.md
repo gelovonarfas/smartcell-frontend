@@ -216,6 +216,19 @@ URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
 Наши стили и скрипты подключаются в тему как есть, под теми же путями, без ручных
 правок: свои дополнения — отдельным файлом поверх. Тексты не передаются, они живут в WordPress.
 
+**Версия в адресе CSS/JS — обязательно** (2026-09-27): перед virtus.ua стоит Cloudflare, он
+держит статику до 4 часов (`max-age=14400`). Если файл подключён без версии, после замены
+посетители и сам кодер видят старую копию (`cf-cache-status: HIT`). Подключать с версией
+по времени изменения файла — адрес меняется сам при каждой замене:
+
+```php
+$f = 'assets/css/sections/vm-article.css';
+wp_enqueue_style( 'sc-vm-article', get_theme_file_uri( $f ), [], filemtime( get_theme_file_path( $f ) ) );
+```
+
+То же для всех файлов кита (`wp_enqueue_script` — так же). Уже закешированное сбросить:
+Cloudflare → Caching → Purge Cache → по адресу файла; плюс очистить кеш W3 Total Cache.
+
 Стенд `smartcell-frontend.gelovonarfas.workers.dev` обновляется автоматически с
 каждого пуша в `main` (workflow `deploy`), пока идёт согласование с клиентом.
 
