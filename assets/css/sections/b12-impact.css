@@ -8,7 +8,6 @@
   /* --- Геометрия строки из макета. В токенах таких ролей нет.
          Понадобится системная роль — заводим переменную в Figma, не здесь. --- */
   --impact-label-w: 250px;
-  --impact-term-w: 90px;
   --impact-value-w: 80px;
   --impact-track-h: 3px;
 
@@ -80,14 +79,16 @@
   list-style: none;
 }
 
+/* Строка: показатель · полоса · значение, под ними — результат дословно по
+   ориентиру клиники. Колонки срока больше нет: у всех строк «6 міс», срок вынесен
+   в подпись над списком (правка 2026-09-28) */
 .sc-impact__row {
   display: grid;
   grid-template-columns:
     var(--impact-label-w)
-    var(--impact-term-w)
     minmax(0, 1fr)
     var(--impact-value-w);
-  gap: var(--grid-gap);
+  gap: var(--stack-gap-sm) var(--grid-gap);
   align-items: center;
   padding-block: var(--bar-padding-y);
   border-bottom: var(--hairline) solid var(--border);
@@ -95,8 +96,22 @@
 
 .sc-impact__label { color: var(--foreground); }
 
-/* --muted-foreground на сером бэнде даёт 4.31:1 — берём --muted-foreground (см. CLAUDE.md) */
-.sc-impact__term { color: var(--muted-foreground); }
+/* Результат — мелкий текст на светлой полосе: --sc-neutral-600, не muted (контраст, CLAUDE.md) */
+.sc-impact__result {
+  grid-column: 1 / -1;
+  max-inline-size: var(--sc-measure);
+  color: var(--sc-neutral-600);
+}
+
+/* У качественной строки нет полосы и значения — название на всю ширину */
+.sc-impact__row--quality .sc-impact__label { grid-column: 1 / -1; }
+
+/* Подпись над списком стоит вплотную к нему, а не на шаге колонки данных */
+.sc-impact__caption {
+  margin: 0;
+  margin-block-end: calc(var(--stack-gap-md) - var(--section-gap));
+  color: var(--sc-neutral-600);
+}
 
 .sc-impact__track {
   display: block;
@@ -117,6 +132,13 @@
 .sc-impact__value {
   text-align: right;
   font-variant-numeric: tabular-nums; /* цифры не дёргаются во время счёта */
+}
+
+/* Источник и сноска к звёздочке — отдельными строками, вплотную */
+.sc-impact__notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
 }
 
 .sc-impact__note {
@@ -142,10 +164,7 @@
 @media (max-width: 640px) {
   .sc-impact__inner { grid-template-columns: 1fr; }
 
-  .sc-impact__row {
-    grid-template-columns: auto minmax(0, 1fr) var(--impact-value-w);
-    row-gap: var(--stack-gap-sm);
-  }
+  .sc-impact__row { grid-template-columns: minmax(0, 1fr) var(--impact-value-w); }
 
   .sc-impact__label { grid-column: 1 / -1; }
 }
