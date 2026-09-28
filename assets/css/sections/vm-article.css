@@ -439,39 +439,56 @@
    Тег обёрнут в `:where()`, чтобы вес был как у одного класса: иначе они
    перебивали сквозное правило base.css «после фото отступ ноль».
 
+   Контейнер — `.vm-article__main` или обёртка `.vm-article__content`: если в теме
+   the_content() выводится внутри своего <div>, ему нужен этот класс, иначе
+   правила «прямой потомок» не сработают (правка 2026-09-27). `:is()` держит вес
+   как у одного класса.
+
    Что это значит для темы: тело статьи — одно поле wysiwyg, репитер не нужен.
    Репитер нужен только «модулям»: прямой ответ, чеклист, промо, врезка с
    фото, FAQ, подписка, автор, джерела — у каждого своя разметка, см. HANDOFF.
    ============================================================ */
 
-.vm-article__main > :where(h2:not([class])) {
+:is(.vm-article__main, .vm-article__content) > :where(h2:not([class])) {
   margin: var(--sc-space-14) 0 0;
   max-inline-size: var(--sc-measure);
   font: var(--h2-weight) var(--h2-size) / var(--h2-lh) var(--font-headings);
   letter-spacing: var(--h2-ls);
 }
 
-.vm-article__main > :where(h3:not([class])) {
+:is(.vm-article__main, .vm-article__content) > :where(h3:not([class])) {
   margin: var(--sc-space-8) 0 0;
   max-inline-size: var(--sc-measure);
   font: var(--h3-weight) var(--h3-size) / var(--h3-lh) var(--font-headings);
   letter-spacing: var(--h3-ls);
 }
 
-.vm-article__main > :where(p:not([class]), ul:not([class]), ol:not([class])) {
+:is(.vm-article__main, .vm-article__content) > :where(p:not([class]), ul:not([class]), ol:not([class])) {
   margin: var(--stack-gap-md) 0 0;
   max-inline-size: var(--sc-measure);
   font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
 }
 
-.vm-article__main > :where(ul:not([class]), ol:not([class])) {
+:is(.vm-article__main, .vm-article__content) > :where(ol:not([class])) {
   padding-inline-start: var(--card-padding);
   display: flex;
   flex-direction: column;
   gap: var(--stack-gap-sm);
 }
 
-.vm-article__main > :where(blockquote:not([class])) {
+/* Маркированный список из редактора выглядит как чеклист шаблона: в макете
+   статьи других маркированных списков нет, а из админки <ul> приходит без класса
+   (замечание Николая 2026-09-27). Пункты и галочка — общие с .vm-article__checklist ниже. */
+:is(.vm-article__main, .vm-article__content) > :where(ul:not([class])) {
+  margin: var(--sc-space-5) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+:is(.vm-article__main, .vm-article__content) > :where(blockquote:not([class])) {
   margin: var(--sc-space-8) 0 0;
   max-inline-size: var(--sc-measure);
   padding-inline-start: var(--card-padding);
@@ -479,25 +496,81 @@
   font: 400 var(--p-large-size) / var(--p-large-lh) var(--font-sans);
 }
 
-.vm-article__main > :where(blockquote:not([class])) > p { margin: 0; }
+:is(.vm-article__main, .vm-article__content) > :where(blockquote:not([class])) > p { margin: 0; }
 
-.vm-article__main > :where(figure:not([class])) {
+:is(.vm-article__main, .vm-article__content) > :where(figure:not([class])) {
   margin: var(--vm-a-block-gap) 0 0;
   inline-size: 100%;
 }
 
-.vm-article__main > :where(figure:not([class])) figcaption {
+:is(.vm-article__main, .vm-article__content) > :where(figure:not([class])) figcaption {
   margin-block-start: var(--stack-gap-sm);
   color: var(--muted-foreground);
   font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
 }
 
+/* Фото с подписью из редактора WordPress. Классический редактор отдаёт
+   <figure class="wp-caption alignleft" style="width: 1158px"><img class="size-full wp-image-…">
+   <figcaption class="wp-caption-text">, Gutenberg — <figure class="wp-block-image">
+   с <figcaption class="wp-element-caption">. Классы, выравнивание и инлайн-ширину ставит
+   сам WP: без этих правил кадр обтекался и вылезал на сайдбар (замечание Николая
+   2026-09-27). Приводим к виду кадра кита: во всю колонку, без обтекания, воздух как у фото. */
+:is(.vm-article__main, .vm-article__content) > :where(figure.wp-caption, figure.wp-block-image, div.wp-caption) {
+  float: none;
+  /* !important — единственный способ перебить style="width: …px" от WordPress */
+  inline-size: 100% !important;
+  max-inline-size: 100%;
+  margin-inline: 0;
+  margin-block: calc(var(--sc-media-gap) - var(--sc-media-own-gap, 0px));
+}
+
+:is(.vm-article__main, .vm-article__content) > :where(figure.wp-caption, figure.wp-block-image, div.wp-caption) + * {
+  margin-block-start: 0;
+}
+
+/* Только картинки редактора: с классом wp-image-… где угодно в тексте, либо голый <img>
+   прямо в теле или в абзаце. Картинки модулей кита (промо, автор) не задеваются */
+:where(.vm-article__main, .vm-article__content) :where(img[class*="wp-image-"]),
+:where(.vm-article__main, .vm-article__content) > :where(img:not([class])),
+:where(.vm-article__main, .vm-article__content) > :where(p) > :where(img:not([class])) {
+  display: block;
+  float: none;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  block-size: auto;
+  margin: 0;
+  background: var(--card);
+}
+
+:where(.vm-article__main, .vm-article__content) :where(.wp-caption-text, .wp-element-caption, figure.wp-caption > figcaption, figure.wp-block-image > figcaption) {
+  margin: var(--stack-gap-sm) 0 0;
+  padding: 0;
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+  font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
+  text-align: start;
+}
+
+/* Абзац с картинкой (так классический редактор вставляет фото без подписи) идёт
+   на всю колонку, как кадр кита, а не на меру строки. :only-child не считает текст
+   вокруг картинки — фото в абзаце с текстом тоже во всю колонку, так и задумано */
+:is(.vm-article__main, .vm-article__content) > :where(p:has(> img:only-child)) {
+  max-inline-size: none;
+  margin-block: calc(var(--sc-media-gap) - var(--sc-media-own-gap, 0px));
+}
+
+/* Одиночная картинка с выравниванием внутри абзаца — тоже без обтекания */
+:where(.vm-article__main, .vm-article__content) :where(img.alignleft, img.alignright, img.aligncenter, img.alignnone) {
+  float: none;
+  margin-inline: 0;
+}
+
 /* Ссылка внутри прозы — и из кита, и из редактора: подчёркивание кромкой,
    чтобы линия шла по базовой, а не резала выносные элементы */
-.vm-article__main > p a,
-.vm-article__main > ul a,
-.vm-article__main > ol a,
-.vm-article__main > blockquote a,
+:is(.vm-article__main, .vm-article__content) > p a,
+:is(.vm-article__main, .vm-article__content) > ul a,
+:is(.vm-article__main, .vm-article__content) > ol a,
+:is(.vm-article__main, .vm-article__content) > blockquote a,
 .vm-article__p a,
 .vm-article__answer a,
 .vm-article__faq-a a {
@@ -510,18 +583,18 @@
 /* Наведение и фокус — только у этих же ссылок: селектор `.vm-article__main a:hover`
    зацепил бы и кнопку промо, она тоже <a>, и её текст темнел на тёмной заливке
    (замечание Николая 2026-09-23) */
-.vm-article__main > p a:hover,
-.vm-article__main > ul a:hover,
-.vm-article__main > ol a:hover,
-.vm-article__main > blockquote a:hover,
+:is(.vm-article__main, .vm-article__content) > p a:hover,
+:is(.vm-article__main, .vm-article__content) > ul a:hover,
+:is(.vm-article__main, .vm-article__content) > ol a:hover,
+:is(.vm-article__main, .vm-article__content) > blockquote a:hover,
 .vm-article__p a:hover,
 .vm-article__answer a:hover,
 .vm-article__faq-a a:hover { color: var(--primary); }
 
-.vm-article__main > p a:focus-visible,
-.vm-article__main > ul a:focus-visible,
-.vm-article__main > ol a:focus-visible,
-.vm-article__main > blockquote a:focus-visible,
+:is(.vm-article__main, .vm-article__content) > p a:focus-visible,
+:is(.vm-article__main, .vm-article__content) > ul a:focus-visible,
+:is(.vm-article__main, .vm-article__content) > ol a:focus-visible,
+:is(.vm-article__main, .vm-article__content) > blockquote a:focus-visible,
 .vm-article__answer a:focus-visible,
 .vm-article__faq-a a:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
@@ -531,7 +604,17 @@
 /* Сноски в тексте (¹ ² ⁴) приходят символами — отдельной разметки не требуют */
 
 /* Первый элемент тела не отбивается сверху: отступ даёт сам блок */
-.vm-article__main > :where(:first-child:not([class])) { margin-block-start: 0; }
+.vm-article__main > :where(:first-child:not([class])),
+.vm-article__main > .vm-article__content:first-child > :where(:first-child:not([class])) { margin-block-start: 0; }
+
+/* Обёртка текста из редактора, если тема выводит the_content() в своём <div>:
+   во всю ширину колонки (у .vm-article__main flex-start) и без своих отступов —
+   ритм задают абзацы внутри, как будто обёртки нет */
+.vm-article__content {
+  align-self: stretch;
+  min-inline-size: 0;
+  margin: 0;
+}
 
 .vm-article__h2 {
   margin: var(--sc-space-14) 0 0; /* rhythm/56 */
@@ -574,7 +657,8 @@
 /* Пункт — голый <li>, как отдаёт репитер: ни класса, ни SVG внутри. Галочка
    рисуется псевдоэлементом, кегль задан по тегу (правка 2026-09-23 по замечанию
    Николая: «в li классы не обязательны»). */
-.vm-article__checklist > li {
+.vm-article__checklist > li,
+:is(.vm-article__main, .vm-article__content) > :where(ul:not([class])) > li {
   --vm-a-check: var(--sc-space-3_5);
   position: relative;
   padding-inline-start: calc(var(--vm-a-check) + var(--card-gap));
@@ -582,7 +666,8 @@
   font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
 }
 
-.vm-article__checklist > li::before {
+.vm-article__checklist > li::before,
+:is(.vm-article__main, .vm-article__content) > :where(ul:not([class])) > li::before {
   content: "";
   position: absolute;
   inset-inline-start: 0;
