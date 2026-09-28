@@ -1,12 +1,16 @@
 <!-- ============================================================
      B01 · Хиро
      figma: node-id=4:289
-     Формулировки обновлены 2026-09-08. Прежний вариант («Face Control.
-     Це я. Це моє.» / «Почати з діагностики») сохранён в имени слоя
-     hero-copy в макете — на случай отката.
-     ACF: hero_video (file), hero_poster (image), hero_title (text),
-          hero_subtitle (textarea), hero_cta_label (text), hero_cta_link (link),
-          hero_facts (repeater: label, value)
+     Формулировки клиники 2026-09-28: надзаголовок «Річна програма-подорож»,
+     заголовок «Face Control 365» (без «Це я. Це моє.» — фраза уедет в блок
+     про собственные клетки), дескриптор из трёх коротких фраз. Подпись
+     «Регенеративна естетична медицина · VIRTUS» переехала из надзаголовка
+     к фактам справа; в фактах сначала число, потом подпись.
+     Надписи пишутся обычным регистром — капс даёт класс sc-t-caption.
+     ACF: hero_video (file), hero_poster (image), hero_eyebrow (text),
+          hero_title (text), hero_subtitle (textarea), hero_brand (text),
+          hero_cta_label (text), hero_cta_link (link),
+          hero_facts (repeater: value, label)
      Цифры (10+, 3000+) согласованы клиникой 2026-09-04. Факт про 13 стран
      из хиро убран 2026-09-14: в шапке он читался без опоры на контекст.
      Он остался в блоке B08 «Наука не хайп», где стоит рядом с пояснением.
@@ -39,22 +43,25 @@
   <div class="sc-hero__inner">
 
     <div class="sc-hero__copy">
-      <p class="sc-hero__eyebrow sc-t-caption">РЕГЕНЕРАТИВНА ЕСТЕТИЧНА МЕДИЦИНА · VIRTUS</p>
-      <h1 class="sc-hero__title sc-t-display">Face Control 365. <br>Це я. Це моє.</h1>
-      <p class="sc-hero__lead sc-t-body">Персональний протокол процедур для здорової <br>та доглянутої шкіри обличчя.</p>
+      <p class="sc-hero__eyebrow sc-t-caption">Річна програма-подорож</p>
+      <h1 class="sc-hero__title sc-t-display">Face Control 365</h1>
+      <p class="sc-hero__lead sc-t-body">Глибока діагностика. Персональний протокол. Здорова і доглянута шкіра.</p>
     </div>
 
     <div class="sc-hero__aside">
-      <ul class="sc-hero__facts">
-        <li class="sc-hero__fact">
-          <p class="sc-hero__fact-label sc-t-caption">РОКІВ ДОСЛІДЖЕНЬ</p>
-          <p class="sc-hero__fact-value sc-t-stat">10+</p>
-        </li>
-        <li class="sc-hero__fact">
-          <p class="sc-hero__fact-label sc-t-caption">ПАЦІЄНТІВ ПРОЙШЛИ ЛІКУВАННЯ</p>
-          <p class="sc-hero__fact-value sc-t-stat">3000+</p>
-        </li>
-      </ul>
+      <div class="sc-hero__proof">
+        <p class="sc-hero__brand sc-t-caption">Регенеративна естетична медицина&nbsp;·&nbsp;VIRTUS</p>
+        <ul class="sc-hero__facts">
+          <li class="sc-hero__fact">
+            <p class="sc-hero__fact-value sc-t-stat">10+</p>
+            <p class="sc-hero__fact-label sc-t-caption">років досліджень</p>
+          </li>
+          <li class="sc-hero__fact">
+            <p class="sc-hero__fact-value sc-t-stat">3000+</p>
+            <p class="sc-hero__fact-label sc-t-caption">пацієнтів пройшли програму</p>
+          </li>
+        </ul>
+      </div>
 
       <a class="sc-hero__cta is-glass" href="#journey">
         <span class="sc-hero__cta-label">Почати свою програму</span>

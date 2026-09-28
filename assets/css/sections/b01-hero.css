@@ -125,15 +125,29 @@
   border-block-start: var(--hairline) solid var(--border);
 }
 
-.sc-hero__fact-label {
+/* Сначала число, под ним подпись (правка клиники 2026-09-28) */
+.sc-hero__fact-value {
   margin: 0;
   color: var(--foreground);
 }
 
-.sc-hero__fact-value {
-  margin-block: var(--sc-space-0_5) 0;
-  margin-inline: 0;
+.sc-hero__fact-label {
+  margin: var(--sc-space-0_5) 0 0;
   color: var(--foreground);
+}
+
+/* Подпись клиники над фактами и сами факты — одна группа: колонка раздвигает
+   по высоте только её и кнопку, кнопка остаётся внизу */
+.sc-hero__proof {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-hero__brand {
+  margin: 0;
+  color: var(--secondary-foreground);
+  text-transform: uppercase;
 }
 
 /* ---------- CTA: Button/Block на светлом стекле ----------
@@ -223,8 +237,19 @@
     align-self: start;
   }
 
-  /* На телефоне остаются только заголовок и описание во всю ширину:
+  /* На телефоне остаются подпись клиники, заголовок и описание во всю ширину:
      полоса фактов и кнопка скрыты целиком, а не визуально — иначе
-     скринридер читал бы то, чего на экране нет. Запись — через меню. */
-  .sc-hero__aside { display: none; }
+     скринридер читал бы то, чего на экране нет. Запись — через меню.
+     Подпись VIRTUS встаёт над надзаголовком с шагом копии, а не секции
+     (правка 2026-09-28): иначе клиника пропадала бы с первого экрана. */
+  .sc-hero__aside,
+  .sc-hero__proof { display: contents; }
+
+  .sc-hero__facts,
+  .sc-hero__cta { display: none; }
+
+  .sc-hero__brand {
+    order: 0;
+    margin-block-end: calc(var(--stack-gap-md) - var(--section-gap));
+  }
 }
