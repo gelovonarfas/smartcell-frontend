@@ -275,17 +275,13 @@
         </div>
         <div class="sc-story__hook" data-story-hook="1" hidden>
           <p class="sc-story__phase sc-t-caption">Проблема</p>
-          <p class="sc-story__hook-text sc-t-h2">«Скажіть, вони хороші?» — запитують деякі пацієнтки.</p>
-        </div>
-        <div class="sc-story__hook" data-story-hook="2" hidden>
-          <p class="sc-story__phase sc-t-caption">Проблема</p>
           <p class="sc-story__hook-text sc-t-h2">Чому процедури, які раніше працювали, більше не дають результату?</p>
         </div>
-        <div class="sc-story__hook" data-story-hook="3" hidden>
+        <div class="sc-story__hook" data-story-hook="2" hidden>
           <p class="sc-story__phase sc-t-caption">Рішення</p>
           <p class="sc-story__hook-text sc-t-h2">Face Control 365 — програма, яка починається з розуміння біології вашої шкіри</p>
         </div>
-        <div class="sc-story__hook" data-story-hook="4" hidden>
+        <div class="sc-story__hook" data-story-hook="3" hidden>
           <p class="sc-story__phase sc-t-caption">Рішення</p>
           <p class="sc-story__hook-text sc-t-h2">Не гадаємо. Знаємо.</p>
         </div>
@@ -303,7 +299,7 @@
       </section>
 
       <!-- § 01 · історія з кабінету -->
-      <section class="sc-story__part" data-story-part="1" data-story-hook-index="1">
+      <section class="sc-story__part" data-story-part="1" data-story-hook-index="0">
         <figure class="sc-story__quote">
           <blockquote class="sc-story__quote-text sc-t-h3">
             <p>«До нас приходять жінки з великими сумками. Всередині — дорогі креми, сироватки, ампули з активними компонентами. „Скажіть, вони хороші?“ — запитують вони.</p>
@@ -312,16 +308,29 @@
           <figcaption class="sc-story__quote-cite sc-t-small">— лікар Інституту VIRTUS</figcaption>
         </figure>
         <p class="sc-story__p sc-t-body">Саме так і працює індустрія краси. Вона продає обіцянки та надію на результат — а не результат. Красива упаковка, модний інгредієнт, порада подруги або реклама в Instagram замінюють реальну діагностику. Ви купуєте, пробуєте, сподіваєтесь. Потім купуєте знову, потрапляючи в замкнене коло «б’юті-фастфуду».</p>
+        <!-- Фото кремов заменено кадром с девушками на траве (2026-09-28) — вернуть: снять комментарий
         <div class="sc-story__photo sc-media--square">
           <img src="assets/img/story/cosmetics.jpg"
                srcset="assets/img/story/cosmetics.jpg 680w, assets/img/story/cosmetics@2x.jpg 1360w"
                sizes="(max-width: 640px) 100vw, 680px"
                alt="Ряд однакових тюбиків косметики" width="680" height="680" loading="lazy" decoding="async">
         </div>
+        -->
+        <!-- Кадр со стока: подпись авторства под фото, как у обложек статей.
+             ACF: story_photo_credit (group: author, source_url, note); пусто — figcaption не выводится -->
+        <figure class="sc-story__photo">
+          <div class="sc-media--square">
+            <img src="assets/img/story/ages.jpg"
+                 srcset="assets/img/story/ages.jpg 680w, assets/img/story/ages@2x.jpg 1254w"
+                 sizes="(max-width: 640px) 100vw, 680px"
+                 alt="Три усміхнені жінки лежать на траві, вигляд згори" width="680" height="680" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="sc-story__credit sc-t-fine">Фото: <a href="https://www.pexels.com/photo/top-view-of-three-woman-in-white-clothes-lying-down-on-grass-12928872/" rel="noopener">Aleksey Bystrov / Pexels</a>. Кадрування й обробка редакції SmartCell, зокрема з використанням AI.</figcaption>
+        </figure>
       </section>
 
       <!-- § 02 · те, що підходить подрузі -->
-      <section class="sc-story__part" data-story-part="2" data-story-hook-index="2">
+      <section class="sc-story__part" data-story-part="2" data-story-hook-index="1">
         <p class="sc-story__p sc-t-body">Кожна шкіра — унікальна. Те, що дало «вау-результат» подрузі, може спровокувати у вас алергічну реакцію, набряк або прискорити фіброз. Синтетичні філери, які «всі роблять», з часом змінюють риси обличчя, порушують міміку, накопичуються в тканинах і ведуть до хронічного запалення. А агресивна стимуляція виснаженої шкіри не відновлює її — вона поглиблює проблему.</p>
         <ul class="sc-story__facts">
         <li class="sc-story__facts__row">
@@ -337,21 +346,10 @@
           <span class="sc-story__facts__desc sc-t-small">замінює діагностику — і працює лише випадково</span>
         </li>
         </ul>
-        <!-- Кадр со стока: подпись авторства под фото, как у обложек статей.
-             ACF: story_photo_credit (group: author, source_url, note); пусто — figcaption не выводится -->
-        <figure class="sc-story__photo">
-          <div class="sc-media--square">
-            <img src="assets/img/story/ages.jpg"
-                 srcset="assets/img/story/ages.jpg 680w, assets/img/story/ages@2x.jpg 1254w"
-                 sizes="(max-width: 640px) 100vw, 680px"
-                 alt="Три усміхнені жінки лежать на траві, вигляд згори" width="680" height="680" loading="lazy" decoding="async">
-          </div>
-          <figcaption class="sc-story__credit sc-t-fine">Фото: <a href="https://www.pexels.com/photo/top-view-of-three-woman-in-white-clothes-lying-down-on-grass-12928872/" rel="noopener">Aleksey Bystrov / Pexels</a>. Кадрування й обробка редакції SmartCell, зокрема з використанням AI.</figcaption>
-        </figure>
       </section>
 
       <!-- § 03 · самоперевірка і дзеркало (абзаци «35+» переїхали в § 00) -->
-      <section class="sc-story__part" data-story-part="3" data-story-hook-index="2">
+      <section class="sc-story__part" data-story-part="3" data-story-hook-index="1">
 
         <!-- Самоперевірка: один симптом у кадрі, автоперемикання з відліком, як факти в B08 -->
         <div class="sc-story__check" data-story-check>
@@ -381,8 +379,9 @@
                alt="Жінка роздивляється шкіру обличчя в дзеркалі" width="680" height="680" loading="lazy" decoding="async">
         </div>
 
-        <!-- Картка «Для яких станів шкіри»: аккордеон на <details> — раскрывается без JS.
-             ACF: mirror_title, mirror_lead, mirror_items (repeater: label, cause) -->
+        <!-- Карточка «Що ви бачите в дзеркалі» скрыта по решению 2026-09-28 — вернуть: снять комментарий.
+             Картка: аккордеон на <details>, раскрывается без JS.
+             ACF: mirror_title, mirror_lead, mirror_items (repeater: label, cause)
         <div class="sc-story__mirror">
           <h2 class="sc-story__mirror-title sc-t-h2">Що ви бачите в дзеркалі — і що ховається за цим</h2>
           <p class="sc-story__mirror-lead sc-t-body">Більшість естетичних клінік маскують наслідки в дзеркалі. Ми знаходимо біологічну причину — і усуваємо її.</p>
@@ -426,10 +425,11 @@
           </details>
           </div>
         </div>
+        -->
       </section>
 
       <!-- § 04 · рішення — з цього місця блок інвертується -->
-      <section class="sc-story__part sc-story__part--solution" data-story-part="4" data-story-hook-index="3" data-story-solution>
+      <section class="sc-story__part sc-story__part--solution" data-story-part="4" data-story-hook-index="2" data-story-solution>
         <h2 class="sc-story__h2 sc-t-h2">Face Control 365 — програма, яка починається з розуміння біології вашої шкіри</h2>
         <p class="sc-story__p sc-t-body">Спочатку — УЗД м’яких тканин, доплерографія судин та лабораторна оцінка кількості й якості ваших фібробластів. Ми вимірюємо регенеративний потенціал шкіри у точних цифрах. І тільки після цього розробляємо персональний протокол. Не за вашим віком. Не за модним трендом. За реальними даними вашого організму.</p>
         <div class="sc-story__photo sc-media--square">
@@ -481,7 +481,7 @@
       </section>
 
       <!-- § 05 · це я. це моє. — друга фраза рішення -->
-      <section class="sc-story__part sc-story__part--solution" data-story-part="5" data-story-hook-index="4">
+      <section class="sc-story__part sc-story__part--solution" data-story-part="5" data-story-hook-index="3">
         <h2 class="sc-story__h1 sc-t-h1">Це я. Це моє.</h2>
         <p class="sc-story__p sc-t-body">Кріолізат тромбоцитів і фібробласти — це не препарат із флакона. Це ваш власний біологічний матеріал, створений індивідуально під вас. Організм отримує рідні сигнали — і відповідає справжнім відновленням.</p>
         <ul class="sc-story__facts">
