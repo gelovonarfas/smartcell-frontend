@@ -130,6 +130,9 @@
   max-inline-size: var(--sc-measure);
 }
 
+/* Выделение внутри абзаца статьи — болд системной переменной, а не «bolder» браузера (2026-09-28) */
+.sc-story__p strong { font-weight: var(--sc-weight-bold); }
+
 .sc-story__photo { inline-size: 100%; }
 
 /* Фото последним в части: свой нижний «воздух» не нужен — дальше и так шаг
