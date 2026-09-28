@@ -994,6 +994,9 @@
   inline-size: var(--vm-a-avatar);
   block-size: var(--vm-a-avatar);
   object-fit: cover;
+  /* Фото врача из системы — поясные и вертикальные кадры: при обрезке в квадрат
+     держим верх, чтобы лицо не уходило за край (правка 2026-09-28) */
+  object-position: top center;
 }
 
 .vm-article__bio {
