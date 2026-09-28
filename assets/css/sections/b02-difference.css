@@ -71,6 +71,48 @@
   color: var(--foreground);
 }
 
+/* «Для яких станів…» — вопрос и перечень одной группой: колонка разводит
+   по высоте только её и кнопку (правка клиники 2026-09-28) */
+.sc-difference__for {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-6);
+}
+
+.sc-difference__q {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-difference__list {
+  --difference-bullet: var(--sc-space-1_5); /* квадратный маркер 6, как у пунктов в B04a */
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.sc-difference__item {
+  display: grid;
+  grid-template-columns: var(--difference-bullet) minmax(0, 1fr);
+  gap: var(--stack-gap-md);
+  align-items: start;
+  max-inline-size: var(--sc-measure);
+  color: var(--foreground);
+}
+
+.sc-difference__item::before {
+  content: "";
+  inline-size: var(--difference-bullet);
+  block-size: var(--difference-bullet);
+  /* по центру первой строки пункта */
+  margin-block-start: calc((var(--p-lh) - var(--difference-bullet)) / 2);
+  background: currentColor;
+}
+
 /* Button/Control · primary — «контрол 48» по описанию компонента */
 .sc-difference__cta {
   align-self: start;
