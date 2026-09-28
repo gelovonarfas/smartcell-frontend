@@ -75,18 +75,13 @@
   gap: var(--grid-gap); /* 16 в макете */
   opacity: 0;
   pointer-events: none;
-  /* без GSAP смена идёт CSS-переходом (см. story.js) */
-  transition:
-    opacity var(--sc-dur-slow) var(--sc-ease-out),
-    filter var(--sc-dur-slow) var(--sc-ease-out);
-  filter: blur(12px);
+  /* Смена фразы без анимации — просто видимость (решение 2026-09-28) */
 }
 
 .sc-story__hook[hidden] { display: none; }
 
 .sc-story__hook[data-current] {
   opacity: 1;
-  filter: none;
   pointer-events: auto;
 }
 

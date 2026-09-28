@@ -6,7 +6,7 @@
    1. Зачіпка. Каждая часть статьи справа несёт индекс фразы
       (data-story-hook-index). На каждый скролл заново считаем, какая часть
       стоит на своей линии, и оттуда берём фразу: старая уходит в размытие,
-      новая из него проявляется (GSAP; без него — CSS-переход по data-current).
+      новая появляется сразу, без анимации (с 2026-09-28; раньше — размытие GSAP).
    2. Инверсия. Части с data-story-solution — «рішення». Пока активная часть
       не раньше первой из них, на секции стоит data-theme="inverse".
       Состояние не копится обработчиками «вошли/вышли», поэтому возврат
@@ -23,10 +23,9 @@
   var root = document.querySelector('[data-story]');
   if (!root) return;
 
+  /* «Меньше движения» — самопроверка не листает симптомы сама */
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  /* GSAP нужен только для размытия при смене фразы: сам переход состояний
-     считается от координат и работает без него (ScrollTrigger здесь не нужен) */
-  var hasGsap = !!window.gsap && !reduced;
+
 
   /* ---------- Зачіпка ---------- */
   var hooks = Array.prototype.slice.call(root.querySelectorAll('[data-story-hook]'));
@@ -37,29 +36,15 @@
   hooks.forEach(function (h, i) {
     h.hidden = false;
     if (h.hasAttribute('data-current')) current = i;
-    if (hasGsap) gsap.set(h, i === current ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 0, filter: 'blur(12px)' });
   });
 
+  /* Смена фразы мгновенная, без проявления из размытия (решение 2026-09-28):
+     только переставляем data-current, видимость задаёт CSS */
   function setHook(i) {
     if (i === current || !hooks[i]) return;
-    var prev = hooks[current];
-    var next = hooks[i];
+    hooks[current].removeAttribute('data-current');
+    hooks[i].setAttribute('data-current', '');
     current = i;
-
-    if (!hasGsap) {
-      prev.removeAttribute('data-current');
-      next.setAttribute('data-current', '');
-      return;
-    }
-
-    /* CSS-переход отключаем — ведёт GSAP */
-    gsap.killTweensOf([prev, next]);
-    prev.removeAttribute('data-current');
-    next.setAttribute('data-current', '');
-    gsap.to(prev, { opacity: 0, filter: 'blur(12px)', y: -10, duration: 0.35, ease: 'power2.in', overwrite: true });
-    gsap.fromTo(next,
-      { opacity: 0, filter: 'blur(12px)', y: 12 },
-      { opacity: 1, filter: 'blur(0px)', y: 0, duration: 0.9, ease: 'power3.out', delay: 0.2, overwrite: true });
   }
 
   /* ---------- Инверсия ---------- */
