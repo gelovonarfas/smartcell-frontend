@@ -1135,6 +1135,15 @@
 
 .vm-article__services-list li:first-child { border-block-start: 0; }
 
+/* Услуга в теме — ссылка на страницу услуги (в ките просто текст). Вид как у
+   пунктов содержания: цвет текста, без подчёркивания; :visited явно — иначе тема
+   красит посещённые ссылки своим синим (замечание 2026-09-27) */
+.vm-article__services-list a,
+.vm-article__services-list a:visited {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
 .vm-article__price {
   flex: none;
   color: var(--muted-foreground);
@@ -1149,6 +1158,7 @@
   .vm-article__subscribe-cta:hover { background: var(--sc-primary-hover); }
   .vm-article__crumbs a:hover,
   .vm-article__toc-list a:hover,
+  .vm-article__services-list a:hover,
   .vm-article__series-next:hover,
   .vm-article__author-link:hover { text-decoration: underline; }
 }
