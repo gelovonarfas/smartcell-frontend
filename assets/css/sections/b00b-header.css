@@ -262,7 +262,8 @@
   min-width: 0;
   display: flex;
   justify-content: center;
-  gap: var(--grid-gap);
+  /* 28 вместо 16: пункты разошлись после «Smart Age Journal» (правка 2026-09-28) */
+  gap: var(--sc-space-7);
 }
 
 .sc-header__link {

@@ -133,21 +133,37 @@
 
 .sc-story__part:last-child { padding-block-end: 0; }
 
-/* Порог «рішення»: перед первой тёмной частью — дополнительный воздух.
-   Триггер инверсии стоит на верхней кромке этой части (story.js), то есть
-   фон начинает темнеть, когда к линии зачіпки подходит именно этот
-   отступ, и к заголовку уже перетёк */
-.sc-story__part[data-story-solution] {
-  padding-block-start: var(--story-solution-gap);
+/* ---------- Склейка «проблема → рішення» (правка клиники 2026-09-28) ----------
+   Философия программы — полосой на всю ширину между двумя большими частями.
+   С неё блок темнеет (story.js), дальше снова две колонки: слева подзаголовок
+   части, справа детали. Воздух сверху и снизу — тот же, что был порогом «рішення». */
+.sc-story__bridge {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+  padding-block: var(--story-solution-gap);
+  /* Якорь #solution («Про підхід» в B02): полоса встаёт под шапку, её собственное
+     поле сверху — воздух над заголовком */
+  scroll-margin-block-start: calc(var(--announce-h, 0px) + var(--header-h, 80px) - var(--story-solution-gap) + var(--sc-space-16));
 }
 
-/* Якорь #solution («Про підхід» в B02): внутренний воздух над заголовком уходит
-   под шапку, и «Не гадаємо. Знаємо.» встаёт сразу под ней (2026-09-28) */
-.sc-story__part[data-story-solution][id] {
-  /* Считаем от фактической высоты: анонс + шапка (их ставит header.js) и 32 воздуха.
-     Общий --sc-anchor-offset (96) меньше шапки с анонсом (106) — здесь поле части
-     вычитается, и заголовок заходил бы под шапку */
-  scroll-margin-block-start: calc(var(--announce-h, 0px) + var(--header-h, 80px) + var(--sc-space-8) - var(--story-solution-gap));
+.sc-story__bridge-title {
+  margin: 0;
+  max-inline-size: 22ch; /* на кегле h1 — две строки на всю ширину полосы */
+}
+
+/* Во втором ряду подзаголовок стоит слева (зачіпка), поэтому справа его
+   прячем визуально — для поиска и скринридера он остаётся на месте */
+@media (min-width: 641px) {
+  .sc-story__row--solution .sc-story__part > :is(.sc-story__h1, .sc-story__h2):first-child {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
 
 .sc-story__p,
@@ -564,7 +580,8 @@
   .sc-story__aside { display: none; }
 
   .sc-story__part { padding-block-end: var(--section-padding-y-tight); }
-  .sc-story__part[data-story-solution] { padding-block-start: var(--sc-space-16); }
+  .sc-story__bridge { padding-block: var(--sc-space-16); }
+  .sc-story__bridge-title { max-inline-size: none; }
 
   /* Карточка сжимается: поля 48 на узком экране съедают колонку */
   .sc-story__mirror { padding: var(--sc-space-6); }
