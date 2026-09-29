@@ -1,14 +1,17 @@
 <!-- ============================================================
      B08c · Динаміка за даними УЗД
      figma: 496:575 (в лендинге state 1) · состояния 508:122 / 509:122 / 509:202
-     ACF: usg_title (textarea), usg_states (repeater: label, title, note,
+     ACF: usg_title (text), usg_lead (text — «Один рік спостереження, чотири вікові групи»);
+           usg_title (textarea), usg_states (repeater: label, title, note,
           unit, axis[], series[name, dash, values[]]), usg_source (textarea)
      График рисует assets/js/ultrasound.js: ряды и шкалы лежат в объекте
      данных там же. Значения сверены с состояниями макета 2026-09-04.
      ============================================================ -->
 <section class="sc-usg" data-usg>
+  <!-- Заголовок слева, вторая фраза — подзаголовком (правка 2026-09-29; было по центру одной строкой h2) -->
   <div class="sc-usg__head">
-    <h2 class="sc-usg__title sc-t-h2">Що показує ультразвук. <br>Один рік спостереження, чотири вікові групи</h2>
+    <h2 class="sc-usg__title sc-t-h2">Що показує ультразвук</h2>
+    <p class="sc-usg__lead sc-t-body">Один рік спостереження, чотири вікові групи</p>
   </div>
 
   <div class="sc-usg__row">

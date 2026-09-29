@@ -20,9 +20,20 @@
 .sc-usg *::before,
 .sc-usg *::after { box-sizing: border-box; }
 
-.sc-usg__title {
+/* Заголовок слева, над ним же левой кромкой идёт ряд; подзаголовок — вторичная фраза
+   (правка 2026-09-29). Мелкий текст на светлой полосе — --sc-neutral-600 (контраст) */
+.sc-usg__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+}
+
+.sc-usg__title { margin: 0; }
+
+.sc-usg__lead {
   margin: 0;
-  text-align: center;
+  max-inline-size: var(--sc-measure);
+  color: var(--sc-neutral-600);
 }
 
 /* Ряд занимает контентную полосу целиком, от поля до поля.
