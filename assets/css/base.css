@@ -24,7 +24,10 @@ section[id] { scroll-margin-block-start: var(--sc-anchor-offset); }
    полосы, «Історія» после «рішення») не трогаем: там два поля читаются как
    поля двух разных блоков. Порядок секций — как на лендинге. */
 .sc-cdata + .sc-scenarios,
-.sc-cdata + .sc-usg,        /* ультразвук на месте скрытых «Сценаріїв» */
+.sc-cdata + .sc-usg,
+.sc-cdata + .sc-cases,      /* «До — Після» на месте скрытых «Сценаріїв» */
+.sc-cases + .sc-ambassador,
+.sc-usg + .sc-kit,
 .sc-usg + .sc-ambassador,
 .sc-scenarios + .sc-ambassador,
 .sc-cases + .sc-kit,
@@ -34,6 +37,7 @@ section[id] { scroll-margin-block-start: var(--sc-anchor-offset); }
 /* Плиты (амбассадор, нейро-блок): их нижнее поле уходит, если ниже светлый блок
    со своим полным полем */
 .sc-ambassador:has(+ .sc-cases),
+.sc-ambassador:has(+ .sc-usg),
 .sc-neo:has(+ .sc-usg) { padding-block-end: 0; }
 
 /* Перед тёмной полосой — полный шаг светлого поля, как у welcome kit перед «Наукой»:
