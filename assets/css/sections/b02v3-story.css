@@ -122,6 +122,15 @@
   padding-block-start: var(--story-solution-gap);
 }
 
+/* Якорь #solution («Про підхід» в B02): внутренний воздух над заголовком уходит
+   под шапку, и «Не гадаємо. Знаємо.» встаёт сразу под ней (2026-09-28) */
+.sc-story__part[data-story-solution][id] {
+  /* Считаем от фактической высоты: анонс + шапка (их ставит header.js) и 32 воздуха.
+     Общий --sc-anchor-offset (96) меньше шапки с анонсом (106) — здесь поле части
+     вычитается, и заголовок заходил бы под шапку */
+  scroll-margin-block-start: calc(var(--announce-h, 0px) + var(--header-h, 80px) + var(--sc-space-8) - var(--story-solution-gap));
+}
+
 .sc-story__p,
 .sc-story__lead,
 .sc-story__h2,
