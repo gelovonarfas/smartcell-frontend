@@ -510,7 +510,7 @@
 /* ---------- CTA · Button/Block ---------- */
 
 .sc-story__cta {
-  --story-cta-w: 320px;   /* Button/Block в макете */
+  --story-cta-w: var(--sc-cta-block-w);   /* Button/Block в макете */
 
   align-self: flex-start;
   inline-size: var(--story-cta-w);

@@ -9,7 +9,7 @@
   /* --- Геометрия из макета, которой нет в ролях токенов --- */
   --journey-label-col: 200px;   /* колонка чипа со сроком */
   --journey-connector-w: 48px;  /* пунктирный вынос до маркера */
-  --journey-connector-gap: 6px; /* линия выноса короче ячейки: 42 из 48 */
+  --journey-connector-gap: var(--sc-space-1_5); /* 6 */ /* линия выноса короче ячейки: 42 из 48 */
   --journey-marker-w: 16px;     /* ячейка маркера */
   --journey-marker: 11px;       /* активный кружок, r=5.5 */
   --journey-marker-idle: 8px;   /* неактивный кружок, r=4 */

@@ -6,8 +6,8 @@
 
 .sc-faq {
   --faq-gutter: var(--sc-space-14); /* 56 — внутренний отступ у стыка колонок */
-  --faq-block-w: 320px;
-  --faq-block-h: 76px;
+  --faq-block-w: var(--sc-cta-block-w);
+  --faq-block-h: var(--sc-cta-block-h);
   --faq-toggle: 40px;
 
   box-sizing: border-box;

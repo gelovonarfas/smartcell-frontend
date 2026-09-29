@@ -7,8 +7,8 @@
 .sc-scenarios {
   --sc-cta-gap: calc(var(--card-padding) - var(--sc-space-10)); /* rhythm/40 из макета */
   --scenarios-key-w: 120px;   /* колонка ключа в hairline-таблице */
-  --scenarios-block-w: 320px; /* Button/Block */
-  --scenarios-block-h: 76px;
+  --scenarios-block-w: var(--sc-cta-block-w); /* Button/Block */
+  --scenarios-block-h: var(--sc-cta-block-h);
   --scenarios-dur: 320ms;
 
   box-sizing: border-box;

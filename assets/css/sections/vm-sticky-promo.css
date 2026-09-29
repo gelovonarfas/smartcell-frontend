@@ -6,22 +6,22 @@
 
 .vm-promo {
   /* --- Геометрия из макета, которой нет в токенах --- */
-  --promo-h: 64px;                 /* высота полосы и тоста */
+  --promo-h: var(--sc-space-16);   /* 64: высота полосы и тоста */
   --promo-poster-w: 120px;         /* постер 120×150 */
   --promo-poster-h: 150px;
-  --promo-poster-photo: 112px;
+  --promo-poster-photo: calc(var(--promo-poster-w) - 2 * var(--sc-space-1)); /* 112: постер минус рамка 4 */
   --promo-poster-over: 94px;       /* на столько постер выступает над полосой */
   --promo-poster-tilt: -6deg;     /* постер справа — наклон к центру полосы (в макете слева, +6°) */
   --promo-caption-size: 13px;      /* подпись постера — Onest Bold 13 в макете */
-  --promo-thumb: 48px;
-  --promo-thumb-over: 16px;      /* наклейка на телефоне выступает над тостом */
-  --promo-toast-gap: 12px;         /* тост: отступ от краёв и над safe area */
+  --promo-thumb: var(--control-square); /* 48 */
+  --promo-thumb-over: var(--sc-space-4); /* 16: наклейка на телефоне выступает над тостом */
+  --promo-toast-gap: var(--sc-space-3); /* 12: тост — отступ от краёв и над safe area */
 
   /* --- Движение: выезд снизу с выраженным торможением, фото — позже --- */
   --promo-in-dur: 900ms;
   --promo-card-delay: 280ms;       /* постер выезжает позже полосы */
   --promo-card-dur: 700ms;
-  --promo-card-rise: 24px;
+  --promo-card-rise: var(--sc-space-6); /* 24 */
 
   box-sizing: border-box;
   position: fixed;
