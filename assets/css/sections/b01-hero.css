@@ -100,23 +100,6 @@
   color: var(--sc-white-alpha-80);
 }
 
-/* Плашки под описанием — три тезиса программы коротко (правка 2026-09-28).
-   Рамка светлая полупрозрачная: плашки читаются на видео, но не спорят с заголовком */
-.sc-hero__chips {
-  margin: var(--stack-gap-sm) 0 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--stack-gap-sm);
-}
-
-.sc-hero__chip {
-  padding: var(--sc-chip-pad);
-  border: var(--sc-line) solid var(--sc-white-alpha-40);
-  color: var(--foreground);
-}
-
 .sc-hero__aside {
   grid-column: 10 / -1;
   display: flex;
