@@ -34,6 +34,7 @@
   <link rel="stylesheet" href="assets/css/sections/vm-article.css">
   <link rel="stylesheet" href="assets/css/sections/footer.css">
   <link rel="stylesheet" href="assets/css/sections/vm-editorial-list.css">
+  <link rel="stylesheet" href="assets/css/sections/vm-sticky-promo.css">
   <!-- Структурированные данные для поисковиков и LLM: собраны из разметки этой
        страницы (заголовок, «Коротко» → abstract, автор-врач, FAQ, джерела).
        В теме генерируются из полей — таблица соответствия в docs/HANDOFF.md -->
@@ -610,6 +611,29 @@
   </div>
 </footer>
 
+<!-- Секция — копия sections/vm-sticky-promo.html -->
+<aside class="vm-promo" data-theme="inverse" data-promo hidden aria-label="Програма Face Control 365">
+  <a class="vm-promo__poster" href="index.html" tabindex="-1" aria-hidden="true">
+    <img class="vm-promo__photo" data-promo-src="assets/img/vm/promo-face-control.jpg" alt="" width="112" height="112" decoding="async">
+    <span class="vm-promo__poster-caption">Face Control 365</span>
+  </a>
+
+  <a class="vm-promo__body" href="index.html">
+    <img class="vm-promo__thumb" data-promo-src="assets/img/vm/promo-face-control.jpg" alt="" width="48" height="48" decoding="async">
+    <span class="vm-promo__text">
+      <span class="vm-promo__name">Face Control 365</span>
+      <span class="vm-promo__sep" aria-hidden="true">·</span>
+      <span class="vm-promo__line vm-promo__line--wide">Річна програма відновлення шкіри власними клітинами</span>
+      <span class="vm-promo__sep" aria-hidden="true">·</span>
+      <span class="vm-promo__line">Запис на діагностику відкрито</span>
+    </span>
+  </a>
+
+  <button class="vm-promo__close" type="button" data-promo-close aria-label="Закрити промо">
+    <svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M17 17L31 31M31 17L17 31" stroke="currentColor" stroke-linecap="round"/></svg>
+  </button>
+</aside>
+
 <script src="assets/js/header.js" defer></script>
 <script src="assets/js/img-lazy.js" defer></script>
 <script src="assets/js/footer-cols.js" defer></script>
@@ -618,6 +642,7 @@
 <script src="assets/js/article-progress.js" defer></script>
 <script src="assets/js/article-rating.js" defer></script>
 <script src="assets/js/article-intro.js" defer></script>
+<script src="assets/js/sticky-promo.js" defer></script>
 <!-- ============================================================
      GSAP-слой (пробный): анимации появления на десктопе.
      ОТКАТ: удалить три строки ниже и файл assets/js/gsap-animations.js.

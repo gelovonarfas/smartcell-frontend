@@ -148,6 +148,7 @@ body {
   --sc-dur-slow: 600ms;
   --sc-dur-arrow: 320ms;                          /* задано в описании Icon/ArrowTurn */
   --sc-ease-out: cubic-bezier(0, 0, 0.2, 1);      /* торможение к концу, без разгона */
+  --sc-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1); /* выраженное торможение: быстрый старт, долгий доезд (промо в статье) */
 
   /* Синий конверсионных кнопок (B11 и далее). В выгрузке 2026-09-04 синий
      остался только фоновым --accent, отдельной роли под кнопку нет —
@@ -163,6 +164,9 @@ body {
   --sc-blue-500: #2E6EBF;
   --sc-blue-700: #00448B;
   --sc-blue-800: #083868;
+  /* Чорнильно-синій: blue-800 навпіл із глибоким чорним, ~#07213B. «Ніч» у «рішенні»
+     B02v3 і фон промо Face Control у статтях (у макеті — --promo #07213b). */
+  --sc-ink-blue: color-mix(in srgb, var(--sc-blue-800) 55%, var(--sc-ink-deep));
 
   --sc-action: var(--sc-blue-500);
   --sc-action-foreground: #FFFFFF;

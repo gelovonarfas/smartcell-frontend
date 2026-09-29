@@ -318,7 +318,10 @@ Schema.org — JSON-LD в `<head>` статьи (образец собран и�
 - **B04a Journey**: левая колонка `position: sticky`; шаги `opacity .45 → 1` при попадании в вьюпорт (ScrollTrigger).
 - **B12 Impact**: полосы `scaleX 0 → N` + счётчик значения от нуля при скролле.
 - **B01 Hero**: видео-фон, скримы поверх (`--black-alpha-40` сверху, `--black-alpha-60` снизу).
-- **Sticky promo (блог)**: `position: fixed; bottom: 0`, состояние «закрыто» в localStorage.
+- **Sticky promo в статье** (`sections/vm-sticky-promo.html`, `vm-sticky-promo.css`, `sticky-promo.js`, макет 1091:769):
+  полоса 64 внизу (десктоп, постер 120×150 справа) и тост 351×64 (телефон). Выезжает через 5,5 с, фото — с задержкой;
+  над подвалом прячется; крестик прячет на 7 дней (localStorage `sc-promo-fc-closed`); свайп вниз закрывает тост.
+  Поля: `promo_title`, `promo_lines` (repeater), `promo_link`, `promo_image`. Картинка — `data-promo-src`, скрипт ставит её за 1 с до показа.
 
 ## Точки конверсии (формы → admin-ajax.php)
 

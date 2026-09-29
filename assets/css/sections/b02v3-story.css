@@ -34,7 +34,7 @@
    підписи білим 60 %, поверхні й наведення — «ніч» трохи світліша.
    Відкат — прибрати цей блок: повернеться звичайна тёмна тема (#100E0C). */
 .sc-story {
-  --story-night: color-mix(in srgb, var(--sc-blue-800) 55%, var(--sc-ink-deep));
+  --story-night: var(--sc-ink-blue);
 }
 
 .sc-story[data-theme="inverse"] {

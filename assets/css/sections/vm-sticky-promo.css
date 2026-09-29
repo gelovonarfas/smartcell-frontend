@@ -1,0 +1,240 @@
+/* ============================================================
+   VM/StickyPromo · Face Control — промо программы в статье
+   figma: node-id=1091:769
+   Поведение — assets/js/sticky-promo.js (состояния в data-promo-state)
+   ============================================================ */
+
+.vm-promo {
+  /* --- Геометрия из макета, которой нет в токенах --- */
+  --promo-h: 64px;                 /* высота полосы и тоста */
+  --promo-poster-w: 120px;         /* постер 120×150 */
+  --promo-poster-h: 150px;
+  --promo-poster-photo: 112px;
+  --promo-poster-over: 94px;       /* на столько постер выступает над полосой */
+  --promo-poster-tilt: -6deg;     /* постер справа — наклон к центру полосы (в макете слева, +6°) */
+  --promo-caption-size: 13px;      /* подпись постера — Onest Bold 13 в макете */
+  --promo-thumb: 48px;
+  --promo-toast-gap: 12px;         /* тост: отступ от краёв и над safe area */
+
+  /* --- Движение: выезд снизу с выраженным торможением, фото — позже --- */
+  --promo-in-dur: 900ms;
+  --promo-photo-delay: 280ms;
+  --promo-photo-dur: 700ms;
+  --promo-photo-rise: 24px;
+
+  box-sizing: border-box;
+  position: fixed;
+  z-index: calc(var(--header-z, 100) - 10); /* под меню шапки, над статьёй */
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: var(--promo-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--sc-pad-x);
+  background: var(--sc-ink-blue);
+  color: var(--foreground);
+  transform: translateY(100%);
+  transition: transform var(--promo-in-dur) var(--sc-ease-out-expo);
+}
+
+.vm-promo[hidden] { display: none; }
+
+.vm-promo *,
+.vm-promo *::before,
+.vm-promo *::after { box-sizing: border-box; }
+
+/* Выехал; «спрятан» — над подвалом или после закрытия */
+.vm-promo[data-promo-state="in"] { transform: none; }
+
+.vm-promo[data-promo-state="out"] {
+  transition-duration: var(--sc-dur-slow);
+  transition-timing-function: var(--sc-ease);
+}
+
+/* ---------- Постер (десктоп) ---------- */
+
+/* Справа, левее крестика (решение 2026-09-28; в макете постер слева) */
+.vm-promo__poster {
+  position: absolute;
+  inset-inline-end: calc(var(--sc-pad-x) + var(--control-square) + var(--sc-space-6));
+  inset-block-start: calc(-1 * var(--promo-poster-over));
+  inline-size: var(--promo-poster-w);
+  block-size: var(--promo-poster-h);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--sc-space-1) var(--sc-space-1) 0;
+  background: var(--card-foreground); /* светлая карточка на тёмной полосе */
+  color: var(--background);
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+  transform: rotate(var(--promo-poster-tilt));
+}
+
+.vm-promo__photo,
+.vm-promo__thumb {
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--muted);
+}
+
+.vm-promo__photo {
+  inline-size: var(--promo-poster-photo);
+  block-size: var(--promo-poster-photo);
+}
+
+.vm-promo__poster-caption {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  font: var(--sc-weight-bold) var(--promo-caption-size) / 1 var(--font-sans);
+  white-space: nowrap;
+}
+
+/* Фото анимируется отдельно: проявляется и чуть поднимается, когда полоса
+   уже почти доехала (задержка --promo-photo-delay) */
+.vm-promo__photo,
+.vm-promo__thumb {
+  opacity: 0;
+  transform: translateY(var(--promo-photo-rise));
+  transition:
+    opacity var(--promo-photo-dur) var(--sc-ease-out-expo) var(--promo-photo-delay),
+    transform var(--promo-photo-dur) var(--sc-ease-out-expo) var(--promo-photo-delay);
+}
+
+.vm-promo[data-promo-state="in"] .vm-promo__photo,
+.vm-promo[data-promo-state="in"] .vm-promo__thumb {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Текст ---------- */
+
+.vm-promo__body {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-3);
+  min-inline-size: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.vm-promo__thumb { display: none; }
+
+.vm-promo__text {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-3);
+  min-inline-size: 0;
+  white-space: nowrap;
+}
+
+.vm-promo__name {
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.vm-promo__sep,
+.vm-promo__line {
+  font: 400 var(--p-small-size) / var(--p-small-lh) var(--font-sans);
+  color: var(--muted-foreground);
+}
+
+.vm-promo__line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Крестик ---------- */
+
+.vm-promo__close {
+  position: absolute;
+  inset-inline-end: var(--sc-pad-x);
+  inset-block-start: calc((var(--promo-h) - var(--control-square)) / 2);
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  display: flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.vm-promo__close svg { inline-size: 100%; block-size: 100%; }
+
+/* ---------- Состояния (в Figma их нет — обязательны по CLAUDE.md) ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-promo__body:hover .vm-promo__name { text-decoration-thickness: var(--sc-space-0_5); }
+  .vm-promo__close:hover { background: var(--sc-white-alpha-10); }
+  .vm-promo__poster:hover { box-shadow: var(--shadow-xl); }
+}
+
+.vm-promo__body:focus-visible,
+.vm-promo__close:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.vm-promo__close:active { background: var(--sc-white-alpha-20); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-promo,
+  .vm-promo__photo,
+  .vm-promo__thumb { transition: none; }
+}
+
+/* ---------- Телефон: тост 351×64 ----------
+   Раскладка меняется принципиально: постера нет, миниатюра и две строки */
+
+@media (max-width: 640px) {
+  .vm-promo {
+    inset-inline: var(--promo-toast-gap);
+    inset-block-end: calc(env(safe-area-inset-bottom, 0px) + var(--promo-toast-gap));
+    justify-content: flex-start;
+    gap: var(--sc-space-3);
+    padding: var(--sc-space-2) 0 var(--sc-space-2) var(--sc-space-2);
+    box-shadow: var(--shadow-lg);
+    /* уезжает вниз целиком, вместе с отступом над краем экрана */
+    transform: translateY(calc(100% + var(--promo-toast-gap) + env(safe-area-inset-bottom, 0px)));
+  }
+
+  .vm-promo__poster,
+  .vm-promo__sep,
+  .vm-promo__line--wide { display: none; }
+
+  .vm-promo__body {
+    flex: 1 1 auto;
+    gap: var(--sc-space-3);
+  }
+
+  .vm-promo__thumb {
+    display: block;
+    flex: none;
+    inline-size: var(--promo-thumb);
+    block-size: var(--promo-thumb);
+  }
+
+  .vm-promo__text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sc-space-0_5);
+  }
+
+  .vm-promo__name {
+    font: 400 var(--p-small-size) / var(--p-small-lh) var(--font-sans);
+    text-decoration: none;
+  }
+
+  .vm-promo__line { font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans); }
+
+  .vm-promo__close {
+    position: static;
+    flex: none;
+  }
+}
