@@ -7,8 +7,8 @@
      Слайдер головних матеріалів: стрілки, лічильник, полоса відліку
      і квадратна кнопка-стрілка «читати». Заголовок і фото — посилання
      на матеріал. Фон полосы — secondary.
-     Клікабельний лише перший слайд — під нього є готовий матеріал.
-     Слайди 2–5 показують перемикання: заголовок і фото без посилання,
+     Клікабельні перші два слайди — під них є готові матеріали (vm-article-oblik,
+     vm-article). Слайди 3–5 показують перемикання: заголовок і фото без посилання,
      стрілка «читати» на них ховається (assets/js/vm-featured.js).
      Кодер виводить реальні матеріали з репітера, і посилання буде в кожного.
      Файли: oblik-cover.jpg (той самий кадр, що обкладинка статті Oblik —
@@ -39,7 +39,7 @@
           <li class="vm-featured__chip sc-t-mini">Cellness</li>
           <li class="vm-featured__chip sc-t-mini">6 хв читання</li>
         </ul>
-        <p class="vm-featured__title sc-t-h1">Регенеративний потенціал: чому біологічний вік важливіший за паспортний</p>
+        <p class="vm-featured__title sc-t-h1"><a class="vm-featured__title-link" href="vm-article.html">Регенеративний потенціал: чому біологічний вік важливіший за паспортний</a></p>
       </article>
       <article class="vm-featured__slide" data-vm-featured-slide hidden>
         <ul class="vm-featured__chips">
@@ -91,10 +91,10 @@
       <img src="assets/img/vm/oblik-cover.jpg" alt="Фібробласти у культуральному середовищі"
            width="1120" height="1120" decoding="async" fetchpriority="high">
     </a>
-    <div class="vm-featured__media-link" data-vm-featured-media hidden>
+    <a class="vm-featured__media-link" href="vm-article.html" data-vm-featured-media hidden>
       <img data-src="assets/img/vm/regenerative-potential-1024.jpg" alt="Науковиця ставить чашку Петрі під мікроскоп"
            width="1024" height="1024" loading="lazy" decoding="async">
-    </div>
+    </a>
     <div class="vm-featured__media-link" data-vm-featured-media hidden>
       <img data-src="assets/img/vm/diagnostics-first-1024.jpg" alt="Лабораторна діагностика: зразки в роботі"
            width="1024" height="1024" loading="lazy" decoding="async">
