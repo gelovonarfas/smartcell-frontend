@@ -141,7 +141,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--grid-gap);
-  padding-block: var(--story-solution-gap);
+  /* Снизу — линия цвета текста (в тёмной части белая) на всю полосу контента,
+     воздух делится поровну до и после неё (правка 2026-09-28) */
+  padding-block: var(--story-solution-gap) var(--section-gap);
+  margin-block-end: var(--section-gap);
+  border-block-end: var(--sc-line) solid var(--border);
   /* Якорь #solution («Про підхід» в B02): полоса встаёт под шапку, её собственное
      поле сверху — воздух над заголовком */
   scroll-margin-block-start: calc(var(--announce-h, 0px) + var(--header-h, 80px) - var(--story-solution-gap) + var(--sc-space-16));
@@ -580,7 +584,7 @@
   .sc-story__aside { display: none; }
 
   .sc-story__part { padding-block-end: var(--section-padding-y-tight); }
-  .sc-story__bridge { padding-block: var(--sc-space-16); }
+  .sc-story__bridge { padding-block: var(--sc-space-16) var(--sc-space-10); margin-block-end: var(--sc-space-10); }
 
   /* Карточка сжимается: поля 48 на узком экране съедают колонку */
   .sc-story__mirror { padding: var(--sc-space-6); }
