@@ -24,7 +24,8 @@ section[id] { scroll-margin-block-start: var(--sc-anchor-offset); }
    полосы, «Історія» после «рішення») не трогаем: там два поля читаются как
    поля двух разных блоков. Порядок секций — как на лендинге. */
 .sc-cdata + .sc-scenarios,
-.sc-cdata + .sc-ambassador, /* пока B04b «Сценарії» скрыт */
+.sc-cdata + .sc-usg,        /* ультразвук на месте скрытых «Сценаріїв» */
+.sc-usg + .sc-ambassador,
 .sc-scenarios + .sc-ambassador,
 .sc-cases + .sc-kit,
 .sc-reviews + .sc-saving,
@@ -34,6 +35,10 @@ section[id] { scroll-margin-block-start: var(--sc-anchor-offset); }
    со своим полным полем */
 .sc-ambassador:has(+ .sc-cases),
 .sc-neo:has(+ .sc-usg) { padding-block-end: 0; }
+
+/* Перед тёмной полосой — полный шаг светлого поля, как у welcome kit перед «Наукой»:
+   64 у плиты читались как недорезанный край (нейро-блок → FAQ, 2026-09-29) */
+.sc-neo:has(+ .sc-faq) { padding-block-end: var(--section-padding-y); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

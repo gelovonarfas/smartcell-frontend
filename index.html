@@ -935,6 +935,52 @@
      Вернуть — вставить сюда разметку из sections/b04b-scenarios.html (файл секции не менялся),
      стили и scenarios.js подключены как были. -->
 
+<!-- Секция — копия sections/b08c-ultrasound.html · перенесена 2026-09-29 на место B04b «Сценарії», над амбасадором -->
+<section class="sc-usg" data-usg>
+  <div class="sc-usg__head">
+    <h2 class="sc-usg__title sc-t-h2">Що показує ультразвук. <br>Один рік спостереження, чотири вікові групи</h2>
+  </div>
+
+  <div class="sc-usg__row">
+    <div class="sc-usg__col">
+
+      <div class="sc-usg__switcher">
+        <button class="sc-usg__nav" type="button" data-usg-prev aria-label="Попередній показник"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M26.5 19L21.5 24L26.5 29" stroke="currentColor"/></svg></button>
+        <p class="sc-usg__meta sc-t-small">
+          <span class="sc-usg__count" data-usg-count>1 / 3</span>
+          <b class="sc-usg__label" data-usg-label>Товщина епідермісу</b>
+        </p>
+        <button class="sc-usg__nav" type="button" data-usg-next aria-label="Наступний показник"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M21.5 19L26.5 24L21.5 29" stroke="currentColor"/></svg></button>
+      </div>
+
+      <div class="sc-usg__panels">
+        <div class="sc-usg__panel" id="sc-usg-panel-1" data-usg-panel="1">
+          <h3 class="sc-usg__subtitle sc-t-h3">Товщина епідермісу в динаміці лікування</h3>
+          <p class="sc-usg__note sc-t-body">Ультразвукова діагностика. Після введення фібробластів товщина епідермісу тимчасово знижується, а до 6 місяця повертається до вихідних значень і стабілізується.</p>
+        </div>
+        <div class="sc-usg__panel" id="sc-usg-panel-2" data-usg-panel="2" hidden>
+          <h3 class="sc-usg__subtitle sc-t-h3">Товщина дерми відносно значень до лікування</h3>
+          <p class="sc-usg__note sc-t-body">Показник нормовано на вихідне значення кожної пацієнтки: 1.0 — товщина до терапії. Приріст читається як частка від початкового стану.</p>
+        </div>
+        <div class="sc-usg__panel" id="sc-usg-panel-3" data-usg-panel="3" hidden>
+          <h3 class="sc-usg__subtitle sc-t-h3">Акустична щільність шкіри відносно значень до лікування</h3>
+          <p class="sc-usg__note sc-t-body">Щільність відображає стан колагенових волокон. Тимчасове зниження після введення змінюється зростанням вище початкового рівня в усіх групах.</p>
+        </div>
+      </div>
+
+      <!-- Легенду собирает скрипт: подписи рядов и значения меняются со состоянием -->
+      <ul class="sc-usg__legend" data-usg-legend></ul>
+
+      <p class="sc-usg__source sc-t-mini">Джерело: УЗД-діагностика Інституту VIRTUS.</p>
+    </div>
+
+    <div class="sc-usg__chart" data-usg-chart>
+      <!-- Единицу и оси со рядами пишет скрипт; при переключении SVG не пересоздаётся -->
+      <p class="sc-usg__unit" data-usg-unit aria-hidden="true"></p>
+    </div>
+  </div>
+
+</section>
 <!-- Секция — копия sections/b05-ambassador.html -->
 <section class="sc-ambassador">
   <!-- Тема на плите, а не на секции: поля вокруг остаются в цвете страницы -->
@@ -1458,53 +1504,6 @@
       <a class="sc-neo__cta" href="/neofibrolifting">Дізнатись більше</a>
     </div>
   </div>
-</section>
-
-<!-- Секция — копия sections/b08c-ultrasound.html -->
-<section class="sc-usg" data-usg>
-  <div class="sc-usg__head">
-    <h2 class="sc-usg__title sc-t-h2">Що показує ультразвук. <br>Один рік спостереження, чотири вікові групи</h2>
-  </div>
-
-  <div class="sc-usg__row">
-    <div class="sc-usg__col">
-
-      <div class="sc-usg__switcher">
-        <button class="sc-usg__nav" type="button" data-usg-prev aria-label="Попередній показник"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M26.5 19L21.5 24L26.5 29" stroke="currentColor"/></svg></button>
-        <p class="sc-usg__meta sc-t-small">
-          <span class="sc-usg__count" data-usg-count>1 / 3</span>
-          <b class="sc-usg__label" data-usg-label>Товщина епідермісу</b>
-        </p>
-        <button class="sc-usg__nav" type="button" data-usg-next aria-label="Наступний показник"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M21.5 19L26.5 24L21.5 29" stroke="currentColor"/></svg></button>
-      </div>
-
-      <div class="sc-usg__panels">
-        <div class="sc-usg__panel" id="sc-usg-panel-1" data-usg-panel="1">
-          <h3 class="sc-usg__subtitle sc-t-h3">Товщина епідермісу в динаміці лікування</h3>
-          <p class="sc-usg__note sc-t-body">Ультразвукова діагностика. Після введення фібробластів товщина епідермісу тимчасово знижується, а до 6 місяця повертається до вихідних значень і стабілізується.</p>
-        </div>
-        <div class="sc-usg__panel" id="sc-usg-panel-2" data-usg-panel="2" hidden>
-          <h3 class="sc-usg__subtitle sc-t-h3">Товщина дерми відносно значень до лікування</h3>
-          <p class="sc-usg__note sc-t-body">Показник нормовано на вихідне значення кожної пацієнтки: 1.0 — товщина до терапії. Приріст читається як частка від початкового стану.</p>
-        </div>
-        <div class="sc-usg__panel" id="sc-usg-panel-3" data-usg-panel="3" hidden>
-          <h3 class="sc-usg__subtitle sc-t-h3">Акустична щільність шкіри відносно значень до лікування</h3>
-          <p class="sc-usg__note sc-t-body">Щільність відображає стан колагенових волокон. Тимчасове зниження після введення змінюється зростанням вище початкового рівня в усіх групах.</p>
-        </div>
-      </div>
-
-      <!-- Легенду собирает скрипт: подписи рядов и значения меняются со состоянием -->
-      <ul class="sc-usg__legend" data-usg-legend></ul>
-
-      <p class="sc-usg__source sc-t-mini">Джерело: УЗД-діагностика Інституту VIRTUS.</p>
-    </div>
-
-    <div class="sc-usg__chart" data-usg-chart>
-      <!-- Единицу и оси со рядами пишет скрипт; при переключении SVG не пересоздаётся -->
-      <p class="sc-usg__unit" data-usg-unit aria-hidden="true"></p>
-    </div>
-  </div>
-
 </section>
 
 <!-- Секция — копия sections/b16-faq.html -->
