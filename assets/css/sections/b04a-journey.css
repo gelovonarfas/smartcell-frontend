@@ -281,6 +281,16 @@
   color: var(--foreground);
 }
 
+/* Пункт со пояснением: название сценария, под ним — что это и когда подходит
+   (перенесено из B04b «Сценарії», 2026-09-29). Пояснение мельче и приглушённее */
+.sc-journey__item-text { display: block; }
+
+.sc-journey__item-note {
+  display: block;
+  margin-block-start: var(--sc-space-1);
+  color: var(--muted-foreground);
+}
+
 .sc-journey__item::before {
   content: "";
   inline-size: var(--journey-bullet);

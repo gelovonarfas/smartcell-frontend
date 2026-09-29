@@ -24,6 +24,7 @@ section[id] { scroll-margin-block-start: var(--sc-anchor-offset); }
    полосы, «Історія» после «рішення») не трогаем: там два поля читаются как
    поля двух разных блоков. Порядок секций — как на лендинге. */
 .sc-cdata + .sc-scenarios,
+.sc-cdata + .sc-ambassador, /* пока B04b «Сценарії» скрыт */
 .sc-scenarios + .sc-ambassador,
 .sc-cases + .sc-kit,
 .sc-reviews + .sc-saving,
