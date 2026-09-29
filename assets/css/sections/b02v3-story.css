@@ -135,6 +135,14 @@
 
 .sc-story__part:last-child { padding-block-end: 0; }
 
+/* Порог «рішення» (снова на первой части второго ряда с 2026-09-29, когда полоса-
+   склейка ушла): перед ней дополнительный воздух, на нём фон и переключается.
+   Якорь #solution встаёт заголовком сразу под шапку */
+.sc-story__part[data-story-solution] {
+  padding-block-start: var(--story-solution-gap);
+  scroll-margin-block-start: calc(var(--announce-h, 0px) + var(--header-h, 80px) + var(--sc-space-8) - var(--story-solution-gap));
+}
+
 /* ---------- Склейка «проблема → рішення» (правка клиники 2026-09-28) ----------
    Философия программы — полосой на всю ширину между двумя большими частями.
    С неё блок темнеет (story.js), дальше снова две колонки: слева подзаголовок
@@ -582,6 +590,7 @@
 
   .sc-story__part { padding-block-end: var(--section-padding-y-tight); }
   .sc-story__bridge { padding-block: var(--sc-space-16) var(--sc-space-10); margin-block-end: var(--sc-space-10); }
+  .sc-story__part[data-story-solution] { padding-block-start: var(--sc-space-16); }
 
   /* Карточка сжимается: поля 48 на узком экране съедают колонку */
   .sc-story__mirror { padding: var(--sc-space-6); }

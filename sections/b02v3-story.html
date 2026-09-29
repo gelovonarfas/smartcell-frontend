@@ -180,13 +180,13 @@
     </div>
   </div>
 
-  <!-- Склейка «проблема → рішення» на всю ширину (правка клиники 2026-09-28): философия
-       программы отдельной полосой, с неё блок темнеет. Дальше снова две колонки: слева
-       подзаголовок части, справа детали. Якорь #solution («Про підхід» в B02) — здесь. -->
-  <section class="sc-story__bridge" id="solution" data-story-part="4" data-story-hook-index="2" data-story-solution>
+  <!-- Полоса-склейка «Рішення» на всю ширину снята 2026-09-29: её фраза ушла в первый экран.
+       Вернуть — снять комментарий и перенести id="solution" / data-story-solution обратно на неё.
+  <section class="sc-story__bridge">
     <p class="sc-story__phase sc-t-caption">Рішення</p>
     <h2 class="sc-story__bridge-title sc-t-h1">Face Control 365 — програма, яка починається з розуміння біології вашої шкіри</h2>
   </section>
+  -->
 
   <div class="sc-story__row sc-story__row--solution">
 
@@ -206,7 +206,7 @@
     <div class="sc-story__article">
 
       <!-- § 05 · не гадаємо. знаємо. -->
-      <section class="sc-story__part sc-story__part--solution" data-story-part="5" data-story-hook-index="2">
+      <section class="sc-story__part sc-story__part--solution" id="solution" data-story-part="5" data-story-hook-index="2" data-story-solution>
         <h2 class="sc-story__h2 sc-t-h2">Не гадаємо. Знаємо.</h2>
         <p class="sc-story__p sc-t-body">Спочатку — УЗД м’яких тканин, доплерографія судин та лабораторна оцінка кількості й якості ваших фібробластів. Ми вимірюємо регенеративний потенціал шкіри у точних цифрах. І тільки після цього розробляємо персональний протокол. Не за вашим віком. Не за модним трендом. За реальними даними вашого організму.</p>
         <!-- Фото клеток скрыто 2026-09-28: в «рішенні» остаётся только кадр с флаконом — вернуть: снять комментарий

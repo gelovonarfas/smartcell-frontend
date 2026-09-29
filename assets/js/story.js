@@ -82,10 +82,7 @@
   function lineFor(i) {
     /* «Проблема» переключается на 45% экрана, «рішення» — позже,
        по линии sticky-зачіпки (см. комментарий к stickyLine) */
-    /* Склейка «рішення» на всю ширину темнеет, когда её верх доходит до
-       середины экрана: читатель видит смену «день → ніч» на самой полосе */
-    if (i === firstSolutionIdx) return window.innerHeight * 0.55;
-    return i > firstSolutionIdx ? stickyLine() : window.innerHeight * 0.45;
+    return i >= firstSolutionIdx ? stickyLine() : window.innerHeight * 0.45;
   }
 
   function resolve() {
