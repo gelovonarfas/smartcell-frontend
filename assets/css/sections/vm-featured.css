@@ -6,7 +6,7 @@
 .vm-featured {
   --vm-featured-h: 800px;        /* высота полосы в макете */
   --vm-featured-copy-w: 584px;
-  --vm-featured-interval: 6000ms;
+  --vm-featured-interval: 8000ms; /* 8 с: за 6 не успевали дочитать заголовок (правка клиники 2026-09-28) */
 
   box-sizing: border-box;
   display: grid;
