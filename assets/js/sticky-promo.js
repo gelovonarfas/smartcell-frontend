@@ -32,6 +32,11 @@
     } catch (e) { return false; }
   }
 
+  /* Для просмотра: адрес с ?promo сбрасывает «закрыто» — блок снова покажется */
+  if (/[?&]promo\b/.test(location.search)) {
+    try { localStorage.removeItem(KEY); } catch (e) { /* приватный режим */ }
+  }
+
   if (closedRecently()) return;
 
   var visible = false;   /* выехал по таймеру */
