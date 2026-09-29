@@ -220,9 +220,19 @@
     transform: translateY(calc(100% + var(--promo-toast-gap) + env(safe-area-inset-bottom, 0px)));
   }
 
+  /* На телефоне под названием — «что это», а не «запис відкрито» (решение
+     2026-09-28). Строка из макета не сокращается: ложится в две строки,
+     и тост растёт от 64 по тексту */
   .vm-promo__poster,
   .vm-promo__sep,
-  .vm-promo__line--wide { display: none; }
+  .vm-promo__line--status { display: none; }
+
+  .vm-promo {
+    block-size: auto;
+    min-block-size: var(--promo-h);
+  }
+
+  .vm-promo__text { white-space: normal; }
 
   .vm-promo__group {
     flex: 1 1 auto;
