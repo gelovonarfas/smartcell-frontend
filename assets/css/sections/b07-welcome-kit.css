@@ -105,7 +105,7 @@
 }
 
 @media (max-width: 640px) {
-  .sc-kit { padding: var(--section-padding-y-tight) var(--page-margin-x); }
+  .sc-kit { padding: var(--section-padding-y-tight) var(--page-margin-x) var(--section-padding-y); }
 
   .sc-kit__inner {
     grid-template-columns: minmax(0, 1fr);
