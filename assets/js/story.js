@@ -11,7 +11,7 @@
       не раньше первой из них, на секции стоит data-theme="inverse".
       Состояние не копится обработчиками «вошли/вышли», поэтому возврат
       снизу вверх не оставляет застрявшую фразу и тёмный фон.
-      Цвета перетекают за --story-invert-dur (transition в CSS).
+      Цвета переключаются мгновенно (--story-invert-dur: 0s, решение 2026-09-28).
    3. Самоперевірка. Один симптом в кадре, стрелки листают, полоса
       отсчитывает интервал и переключает — та же механика, что у фактов B08.
 
@@ -108,27 +108,6 @@
     window.addEventListener('load', resolve);
     resolve();
   }
-
-  /* Переход по якорю в блок («Про підхід» → #solution): цвета переключаются
-     мгновенно — иначе при прыжке видно, как тёмный текст перетекает в белый.
-     Мягкое «день → ніч» остаётся только при обычной прокрутке (2026-09-28).
-     Окно с запасом покрывает плавную прокрутку до якоря. */
-  var INSTANT_MS = 1500;
-  var instantTimer = null;
-  function instant() {
-    root.classList.add('sc-is-instant');
-    clearTimeout(instantTimer);
-    instantTimer = setTimeout(function () { root.classList.remove('sc-is-instant'); }, INSTANT_MS);
-  }
-  var ids = Array.prototype.map.call(root.querySelectorAll('[id]'), function (el) { return el.id; });
-  if (root.id) ids.push(root.id);
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href*="#"]');
-    if (!a) return;
-    var hash = a.getAttribute('href').split('#')[1];
-    if (hash && ids.indexOf(hash) >= 0) instant();
-  });
-  if (location.hash && ids.indexOf(location.hash.slice(1)) >= 0) instant();
 
   bindParts();
 
