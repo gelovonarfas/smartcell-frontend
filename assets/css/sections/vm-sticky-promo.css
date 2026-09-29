@@ -14,6 +14,7 @@
   --promo-poster-tilt: -6deg;     /* постер справа — наклон к центру полосы (в макете слева, +6°) */
   --promo-caption-size: 13px;      /* подпись постера — Onest Bold 13 в макете */
   --promo-thumb: 48px;
+  --promo-thumb-over: 16px;      /* наклейка на телефоне выступает над тостом */
   --promo-toast-gap: 12px;         /* тост: отступ от краёв и над safe area */
 
   /* --- Движение: выезд снизу с выраженным торможением, фото — позже --- */
@@ -115,14 +116,14 @@
 }
 
 .vm-promo__poster { transform: translateY(var(--promo-card-rise)) rotate(var(--promo-poster-tilt)); }
-.vm-promo__thumb { transform: translateY(var(--promo-card-rise)); }
+.vm-promo__thumb { transform: translateY(var(--promo-card-rise)) rotate(var(--promo-poster-tilt)); }
 
 .vm-promo[data-promo-state="in"] .vm-promo__poster { opacity: 1; transform: rotate(var(--promo-poster-tilt)); }
 
 /* Когда выезд закончился (data-promo-settled ставит скрипт), задержка не нужна:
    иначе постер возвращался бы с опозданием после ухода курсора */
 .vm-promo[data-promo-settled] .vm-promo__poster { transition-delay: 0s; }
-.vm-promo[data-promo-state="in"] .vm-promo__thumb { opacity: 1; transform: none; }
+.vm-promo[data-promo-state="in"] .vm-promo__thumb { opacity: 1; transform: rotate(var(--promo-poster-tilt)); }
 
 /* ---------- Текст ---------- */
 
@@ -244,11 +245,19 @@
     gap: var(--sc-space-3);
   }
 
+  /* Фото — наклейкой, как постер на десктопе (2026-09-28): светлая рамка,
+     наклон, тень и выступ над верхним краем тоста */
   .vm-promo__thumb {
     display: block;
     flex: none;
+    box-sizing: content-box;
     inline-size: var(--promo-thumb);
     block-size: var(--promo-thumb);
+    padding: var(--sc-space-1);
+    background: var(--card-foreground);
+    box-shadow: var(--shadow-lg);
+    align-self: flex-start;
+    margin-block-start: calc(-1 * var(--promo-thumb-over));
   }
 
   .vm-promo__text {
