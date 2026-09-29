@@ -16,6 +16,24 @@ html { scroll-behavior: smooth; }
 
 section[id] { scroll-margin-block-start: var(--sc-anchor-offset); }
 
+/* ---------- Стыки светлых блоков (2026-09-28) ----------
+   Когда два соседних блока одного светлого фона, их поля складывались:
+   160 снизу у первого + 160 сверху у второго = 320 пустоты (и 224 у плит
+   с полем 64). На таком стыке остаётся один шаг — поле первого блока,
+   --section-padding-y (160, на телефоне 80). Стыки со сменой фона (тёмные
+   полосы, «Історія» после «рішення») не трогаем: там два поля читаются как
+   поля двух разных блоков. Порядок секций — как на лендинге. */
+.sc-cdata + .sc-scenarios,
+.sc-scenarios + .sc-ambassador,
+.sc-cases + .sc-kit,
+.sc-reviews + .sc-saving,
+.sc-notfit + .sc-neo { padding-block-start: 0; }
+
+/* Плиты (амбассадор, нейро-блок): их нижнее поле уходит, если ниже светлый блок
+   со своим полным полем */
+.sc-ambassador:has(+ .sc-cases),
+.sc-neo:has(+ .sc-usg) { padding-block-end: 0; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
