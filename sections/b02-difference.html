@@ -2,7 +2,8 @@
      B02 · Що це і чим відрізняється
      figma: node-id=14:61
      Заголовок — правка клиники 2026-09-28: «Відновлення шкіри…» (добавлено «шкіри»).
-     ACF: b02_statement (textarea), b02_tags (repeater: label),
+     ACF: b02_statement (textarea), b02_kicker (text — «Регенеративна естетична медицина · VIRTUS»),
+          b02_tags (repeater: label),
           b02_for_title (text), b02_for_items (repeater: text),
           b02_cta_label (text), b02_cta_link (link)
           (b02_answer — прежний абзац справа, закомментирован 2026-09-28)
@@ -12,11 +13,15 @@
     <h2 class="sc-difference__title sc-t-h2">Відновлення шкіри на основі даних <br>про ваші власні клітини. <br><span class="sc-difference__stress">Не за віком.</span></h2>
     <!-- Было «Доказовість · Річний цикл · Власні клітини» (до 2026-09-28): на их место
          переехали три тезиса программы из первого экрана -->
-    <ul class="sc-difference__tags">
-      <li class="sc-difference__tag sc-t-mini">Глибока діагностика</li>
-      <li class="sc-difference__tag sc-t-mini">Персональний протокол</li>
-      <li class="sc-difference__tag sc-t-mini">Здорова шкіра</li>
-    </ul>
+    <!-- Подзаголовок над плашками — плашки и есть расшифровка понятия (правка клиники 2026-09-29) -->
+    <div class="sc-difference__descriptor">
+      <p class="sc-difference__kicker sc-t-caption">Регенеративна естетична медицина&nbsp;·&nbsp;VIRTUS</p>
+      <ul class="sc-difference__tags">
+        <li class="sc-difference__tag sc-t-mini">Глибока діагностика</li>
+        <li class="sc-difference__tag sc-t-mini">Персональний протокол</li>
+        <li class="sc-difference__tag sc-t-mini">Здорова і доглянута шкіра</li>
+      </ul>
+    </div>
   </div>
 
   <div class="sc-difference__answer">

@@ -53,6 +53,21 @@
 /* «Не за віком.» — чуть плотнее остальной строки, без цвета (правка 2026-09-28) */
 .sc-difference__stress { font-weight: var(--sc-weight-medium); }
 
+/* Подзаголовок и плашки — одна группа внизу колонки: колонка раздвигает по
+   высоте заголовок и эту группу, подзаголовок стоит вплотную к плашкам */
+.sc-difference__descriptor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+}
+
+/* Мелкий капс на светлой полосе — --sc-neutral-600, не muted (контраст, CLAUDE.md) */
+.sc-difference__kicker {
+  margin: 0;
+  color: var(--sc-neutral-600);
+  text-transform: uppercase;
+}
+
 .sc-difference__tags {
   margin: 0;
   padding: 0;
