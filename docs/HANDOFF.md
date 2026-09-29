@@ -172,7 +172,7 @@
 | модуль | поле | разметка |
 |---|---|---|
 | «Коротко» — саммари в начале | repeater `summary` (point) | `.vm-article__summary` + `ul.vm-article__summary-list` > `<li>` |
-| Прямой ответ под H2 (AEO) | у каждого раздела: `answer` | `p.vm-article__answer` (+ метка `.vm-article__answer-label`) |
+| Прямой ответ под H2 (AEO) | у каждого раздела: `answer` | `p.vm-article__answer` — первый абзац раздела лидом, без метки и плашки (с 2026-09-28) |
 | Чеклист | repeater `checklist` (text) | `ul.vm-article__checklist` > голые `<li>` — галочка из CSS |
 | Инлайн-промо услуги | группа `promo` | `aside.vm-article__promo` |
 | FAQ | карточки FAQ, привязанные к статье (relationship): q, a (wysiwyg) | `section.vm-article__faq` + `<details>`; ответ — `<div class="vm-article__faq-a">` с абзацами `<p>` внутри, сколько угодно |
