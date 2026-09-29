@@ -149,7 +149,7 @@
 
 .sc-story__bridge-title {
   margin: 0;
-  max-inline-size: 22ch; /* на кегле h1 — две строки на всю ширину полосы */
+  max-inline-size: none; /* на всю ширину полосы (проба 2026-09-28; было 22ch) */
 }
 
 /* Во втором ряду подзаголовок стоит слева (зачіпка), поэтому справа его
@@ -581,7 +581,6 @@
 
   .sc-story__part { padding-block-end: var(--section-padding-y-tight); }
   .sc-story__bridge { padding-block: var(--sc-space-16); }
-  .sc-story__bridge-title { max-inline-size: none; }
 
   /* Карточка сжимается: поля 48 на узком экране съедают колонку */
   .sc-story__mirror { padding: var(--sc-space-6); }
