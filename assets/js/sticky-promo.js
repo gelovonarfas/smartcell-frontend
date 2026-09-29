@@ -23,6 +23,7 @@
   var HIDE_DAYS = 7;
   var KEY = 'sc-promo-fc-closed';
   var SWIPE = 40;                 /* px вниз, чтобы свайп закрыл тост */
+  var SETTLE = 1300;              /* выезд полосы 900 + задержка постера 280 + запас */
 
   function closedRecently() {
     try {
@@ -56,6 +57,8 @@
     void root.offsetHeight;
     visible = true;
     paint();
+    /* выезд закончился — снимаем задержку постера для наведения */
+    setTimeout(function () { root.setAttribute('data-promo-settled', ''); }, SETTLE);
   }, SHOW_AFTER);
 
   /* над подвалом — прячемся */

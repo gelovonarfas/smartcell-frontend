@@ -6,33 +6,35 @@
           promo_link (link), promo_image (image, квадрат от 240×240)
 
      Десктоп: полоса 64 внизу экрана, в центре название-ссылка и строки,
-     справа (левее крестика; в макете — слева) постер 120×150 под −6°
-     выступает над полосой на 94 и не доходит до низа окна на 8. Клик по постеру или названию — на лендинг,
+     сразу за текстом постер 120×150 под −6° (текст и постер — одна группа
+     по центру; в макете постер слева) выступает над полосой на 94 и не доходит
+     до низа окна на 8. При наведении на полосу постер выпрямляется до −2°. Клик по постеру или названию — на лендинг,
      отдельной кнопки нет. Телефон: тост 351×64 над safe area, отступ 12.
 
      Поведение (assets/js/sticky-promo.js): выезжает снизу через 5,5 с
-     после открытия статьи с выраженным ease-out, фото — отдельно, позже;
+     после открытия статьи с выраженным ease-out, постер целиком — отдельно, позже;
      над подвалом прячется, при возврате выезжает снова; крестик прячет
      на 7 дней (localStorage), на телефоне закрывает и свайп вниз.
      Без JS блок не показывается (hidden).
      Картинка грузится за секунду до показа — статье не мешает.
      ============================================================ -->
 <aside class="vm-promo" data-theme="inverse" data-promo hidden aria-label="Програма Face Control 365">
-  <a class="vm-promo__poster" href="index.html" tabindex="-1" aria-hidden="true">
-    <img class="vm-promo__photo" data-promo-src="assets/img/vm/promo-face-control.jpg" alt="" width="112" height="112" decoding="async">
-    <span class="vm-promo__poster-caption">Face Control 365</span>
-  </a>
-
-  <a class="vm-promo__body" href="index.html">
-    <img class="vm-promo__thumb" data-promo-src="assets/img/vm/promo-face-control.jpg" alt="" width="48" height="48" decoding="async">
-    <span class="vm-promo__text">
-      <span class="vm-promo__name">Face Control 365</span>
-      <span class="vm-promo__sep" aria-hidden="true">·</span>
-      <span class="vm-promo__line vm-promo__line--wide">Річна програма відновлення шкіри власними клітинами</span>
-      <span class="vm-promo__sep" aria-hidden="true">·</span>
-      <span class="vm-promo__line">Запис на діагностику відкрито</span>
-    </span>
-  </a>
+  <div class="vm-promo__group">
+    <a class="vm-promo__body" href="index.html">
+      <img class="vm-promo__thumb" data-promo-src="assets/img/vm/promo-face-control.jpg" alt="" width="48" height="48" decoding="async">
+      <span class="vm-promo__text">
+        <span class="vm-promo__name">Face Control 365</span>
+        <span class="vm-promo__sep" aria-hidden="true">·</span>
+        <span class="vm-promo__line vm-promo__line--wide">Річна програма відновлення шкіри власними клітинами</span>
+        <span class="vm-promo__sep" aria-hidden="true">·</span>
+        <span class="vm-promo__line">Запис на діагностику відкрито</span>
+      </span>
+    </a>
+    <a class="vm-promo__poster" href="index.html" tabindex="-1" aria-hidden="true">
+      <img class="vm-promo__photo" data-promo-src="assets/img/vm/promo-face-control.jpg" alt="" width="112" height="112" decoding="async">
+      <span class="vm-promo__poster-caption">Face Control 365</span>
+    </a>
+  </div>
 
   <button class="vm-promo__close" type="button" data-promo-close aria-label="Закрити промо">
     <svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M17 17L31 31M31 17L17 31" stroke="currentColor" stroke-linecap="round"/></svg>

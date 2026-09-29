@@ -18,9 +18,10 @@
 
   /* --- Движение: выезд снизу с выраженным торможением, фото — позже --- */
   --promo-in-dur: 900ms;
-  --promo-photo-delay: 280ms;
-  --promo-photo-dur: 700ms;
-  --promo-photo-rise: 24px;
+  --promo-card-delay: 280ms;       /* постер выезжает позже полосы */
+  --promo-card-dur: 700ms;
+  --promo-card-rise: 24px;
+  --promo-poster-tilt-hover: -2deg; /* при наведении постер чуть выпрямляется */
 
   box-sizing: border-box;
   position: fixed;
@@ -54,10 +55,21 @@
 
 /* ---------- Постер (десктоп) ---------- */
 
-/* Справа, левее крестика (решение 2026-09-28; в макете постер слева) */
+/* Текст и постер — одна группа по центру полосы (решение 2026-09-28; в макете
+   постер слева у поля). Группа во всю высоту полосы и с полем справа под постер:
+   так постер входит в центровку, а сам стоит абсолютно и не раздувает полосу */
+.vm-promo__group {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  min-inline-size: 0;
+  padding-inline-end: calc(var(--promo-poster-w) + var(--sc-space-6));
+}
+
 .vm-promo__poster {
   position: absolute;
-  inset-inline-end: calc(var(--sc-pad-x) + var(--control-square) + var(--sc-space-6));
+  inset-inline-end: 0;
   inset-block-start: calc(-1 * var(--promo-poster-over));
   inline-size: var(--promo-poster-w);
   block-size: var(--promo-poster-h);
@@ -69,7 +81,6 @@
   color: var(--background);
   box-shadow: var(--shadow-lg);
   text-decoration: none;
-  transform: rotate(var(--promo-poster-tilt));
 }
 
 .vm-promo__photo,
@@ -93,22 +104,26 @@
   white-space: nowrap;
 }
 
-/* Фото анимируется отдельно: проявляется и чуть поднимается, когда полоса
-   уже почти доехала (задержка --promo-photo-delay) */
-.vm-promo__photo,
+/* Постер анимируется целиком и отдельно от полосы: проявляется и поднимается,
+   когда полоса уже почти доехала (задержка --promo-card-delay). На телефоне
+   постера нет — так же ведёт себя миниатюра. */
+.vm-promo__poster,
 .vm-promo__thumb {
   opacity: 0;
-  transform: translateY(var(--promo-photo-rise));
   transition:
-    opacity var(--promo-photo-dur) var(--sc-ease-out-expo) var(--promo-photo-delay),
-    transform var(--promo-photo-dur) var(--sc-ease-out-expo) var(--promo-photo-delay);
+    opacity var(--promo-card-dur) var(--sc-ease-out-expo) var(--promo-card-delay),
+    transform var(--promo-card-dur) var(--sc-ease-out-expo) var(--promo-card-delay);
 }
 
-.vm-promo[data-promo-state="in"] .vm-promo__photo,
-.vm-promo[data-promo-state="in"] .vm-promo__thumb {
-  opacity: 1;
-  transform: none;
-}
+.vm-promo__poster { transform: translateY(var(--promo-card-rise)) rotate(var(--promo-poster-tilt)); }
+.vm-promo__thumb { transform: translateY(var(--promo-card-rise)); }
+
+.vm-promo[data-promo-state="in"] .vm-promo__poster { opacity: 1; transform: rotate(var(--promo-poster-tilt)); }
+
+/* Когда выезд закончился (data-promo-settled ставит скрипт), задержка не нужна:
+   иначе постер возвращался бы с опозданием после ухода курсора */
+.vm-promo[data-promo-settled] .vm-promo__poster { transition-delay: 0s; }
+.vm-promo[data-promo-state="in"] .vm-promo__thumb { opacity: 1; transform: none; }
 
 /* ---------- Текст ---------- */
 
@@ -172,7 +187,13 @@
 @media (hover: hover) and (pointer: fine) {
   .vm-promo__body:hover .vm-promo__name { text-decoration-thickness: var(--sc-space-0_5); }
   .vm-promo__close:hover { background: var(--sc-white-alpha-10); }
-  .vm-promo__poster:hover { box-shadow: var(--shadow-xl); }
+  /* Наведение на полосу или сам постер — постер чуть выпрямляется. Без задержки
+     появления: она нужна только при выезде */
+  .vm-promo[data-promo-state="in"]:hover .vm-promo__poster {
+    transform: rotate(var(--promo-poster-tilt-hover));
+    box-shadow: var(--shadow-xl);
+    transition-delay: 0s;
+  }
 }
 
 .vm-promo__body:focus-visible,
@@ -185,7 +206,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .vm-promo,
-  .vm-promo__photo,
+  .vm-promo__poster,
   .vm-promo__thumb { transition: none; }
 }
 
@@ -207,6 +228,11 @@
   .vm-promo__poster,
   .vm-promo__sep,
   .vm-promo__line--wide { display: none; }
+
+  .vm-promo__group {
+    flex: 1 1 auto;
+    padding-inline-end: 0;
+  }
 
   .vm-promo__body {
     flex: 1 1 auto;
