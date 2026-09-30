@@ -1,0 +1,170 @@
+/* ============================================================
+   VM/Rubrics · варіант чипи — конфигуратор ленты (проба)
+   figma: node-id=1123:875
+   Поведение — assets/js/vm-topics.js
+   ============================================================ */
+
+.vm-topics {
+  --topics-chip-h: 38px; /* рубрика-чип в макете: 38 высотой, поля 12 */
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-8); /* 32 в макете */
+}
+
+.vm-topics *,
+.vm-topics *::before,
+.vm-topics *::after { box-sizing: border-box; }
+
+.vm-topics__title { margin: 0; }
+
+.vm-topics__rubrics,
+.vm-topics__tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.vm-topics__rubrics { gap: var(--sc-space-2); }   /* 8 */
+.vm-topics__tags { gap: var(--sc-space-1_5); }    /* 6 */
+
+/* ---------- Рубрика: клик раскрывает темы, не фильтрует ---------- */
+
+.vm-topics__rubric {
+  display: flex;
+  align-items: center;
+  block-size: var(--topics-chip-h);
+  padding: 0 var(--sc-space-3);
+  border: var(--sc-line) solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color var(--sc-dur-fast) var(--sc-ease),
+    color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.vm-topics__rubric[aria-expanded="true"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* ---------- Панель тем ---------- */
+
+.vm-topics__panel {
+  padding-block: var(--sc-space-6); /* 24 */
+  border-block: var(--sc-line) solid var(--border);
+}
+
+.vm-topics__panel[hidden],
+.vm-topics__group[hidden] { display: none; }
+
+.vm-topics__group {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-8);
+}
+
+.vm-topics__tags { flex: 1 1 auto; min-inline-size: 0; }
+
+.vm-topics__tag {
+  padding: var(--sc-chip-pad); /* 6 / 10 в макете */
+  border: var(--sc-line) solid var(--input);
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition:
+    background-color var(--sc-dur-fast) var(--sc-ease),
+    color var(--sc-dur-fast) var(--sc-ease);
+}
+
+/* Тема без материалов: приглушена и не нажимается (disabled ставит скрипт) */
+.vm-topics__tag:disabled {
+  border-color: var(--border);
+  color: var(--muted-foreground);
+  cursor: default;
+}
+
+.vm-topics__tag[aria-pressed="true"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.vm-topics__all {
+  flex: none;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* ---------- Результат фильтра ---------- */
+
+.vm-topics__result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.vm-topics__result[hidden] { display: none; }
+
+.vm-topics__result-head {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sc-space-2);
+  color: var(--sc-neutral-600);
+}
+
+.vm-topics__result-topic {
+  font-weight: var(--sc-weight-bold);
+  color: var(--foreground);
+}
+
+.vm-topics__reset {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  cursor: pointer;
+}
+
+/* ---------- Состояния (в Figma их нет — обязательны по CLAUDE.md) ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-topics__rubric[aria-expanded="false"]:hover,
+  .vm-topics__tag:not(:disabled):not([aria-pressed="true"]):hover { background: var(--muted); }
+  .vm-topics__all:hover,
+  .vm-topics__reset:hover { text-decoration: none; }
+}
+
+.vm-topics__rubric:focus-visible,
+.vm-topics__tag:focus-visible,
+.vm-topics__all:focus-visible,
+.vm-topics__reset:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.vm-topics__rubric:active,
+.vm-topics__tag:not(:disabled):active { background: var(--secondary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-topics__rubric,
+  .vm-topics__tag { transition: none; }
+}
+
+/* ---------- Телефон: ссылка «Усі матеріали» под темами ---------- */
+
+@media (max-width: 640px) {
+  .vm-topics__group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sc-space-5);
+  }
+}

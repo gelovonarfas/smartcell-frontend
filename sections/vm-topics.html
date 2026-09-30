@@ -1,0 +1,152 @@
+<!-- ============================================================
+     VM/Rubrics · варіант чипи (над плитками) — конфигуратор ленты
+     figma: node-id=1123:875 (1123:876 закрыто · 1123:899 open Краса)
+     ПРОБА 2026-09-29 на копии главной журнала (vm-blog-rubrics.html).
+
+     Рубрика не фильтрует сразу: клик раскрывает под рядом её темы
+     (тоже чипами) и ссылку «Усі матеріали рубрики» на страницу рубрики.
+     Фильтрует тема: под конфигуратором вместо «Свіже» показываются
+     материалы этой темы со всей ленты; повторный клик или «Скинути»
+     возвращает ленту.
+
+     Тема без материалов приглушена и не нажимается — скрипт сам сверяет
+     темы с карточками на странице (data-topics у карточки), руками флаг
+     «є матеріали» не ставится.
+     Рубрики и темы — из таблицы клиента «Рубрики SmartAGE» (2026-09-29),
+     там же — к какой теме относится каждая статья (data-topics у карточек).
+
+     ACF / WP: рубрики — таксономия журнала (порядок и названия), темы —
+     дочерние термы рубрики; у карточки — slug-и её тем в data-topics.
+     Скрипт: assets/js/vm-topics.js. Все подписи — цельные узлы в разметке.
+     ============================================================ -->
+<div class="vm-topics" data-vm-topics>
+  <h2 class="vm-topics__title sc-t-h2">Рубрики</h2>
+
+  <ul class="vm-topics__rubrics">
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="dovgolittia">Довголіття</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="krasa">Краса</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="zdorovia">Здоров’я</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="kharchuvannia">Харчування</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="rukh">Рух</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="mentalne">Ментальне здоров’я</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="nauka">Наука</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="klitynni">Клітинні технології</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="liudy">Люди</button></li>
+    <li><button class="vm-topics__rubric sc-t-caption" type="button" aria-expanded="false" aria-controls="vm-topics-panel" data-rubric="yakist">Якість життя</button></li>
+  </ul>
+
+  <div class="vm-topics__panel" id="vm-topics-panel" hidden>
+    <div class="vm-topics__group" data-rubric-panel="dovgolittia" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="dovgolittia-1">Здорове довголіття</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="dovgolittia-2">Біологічний вік</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="dovgolittia-3">Старіння організму</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="dovgolittia-4">Біохакінг</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="dovgolittia-5">Звички довгожителів</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="krasa" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="krasa-1">Шкіра</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="krasa-2">Волосся</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="krasa-3">Природне омолодження</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="krasa-4">Естетична медицина</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="krasa-5">Ін’єкційні та клітинні методики</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="zdorovia" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="zdorovia-1">Гормони</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="zdorovia-2">Імунітет</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="zdorovia-3">Сон</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="zdorovia-4">Жіноче здоров’я</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="zdorovia-5">Чоловіче здоров’я</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="zdorovia-6">Чек-ап і профілактика</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="zdorovia-7">Діагностика</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="kharchuvannia" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="kharchuvannia-1">Персоналізоване харчування</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="kharchuvannia-2">Метаболізм</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="kharchuvannia-3">Продукти</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="kharchuvannia-4">Добавки</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="kharchuvannia-5">Рецепти</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="rukh" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="rukh-1">Силові тренування</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="rukh-2">Кардіо</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="rukh-3">Ходьба</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="rukh-4">Мобільність</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="rukh-5">Активне довголіття</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="mentalne" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="mentalne-1">Стрес</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="mentalne-2">Пам’ять і концентрація</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="mentalne-3">Емоційна стійкість</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="mentalne-4">Психологія</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="mentalne-5">Мозок і довголіття</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="nauka" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="nauka-1">Наукові дослідження</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="nauka-2">Біотехнології</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="nauka-3">Доказова медицина</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="nauka-4">Штучний інтелект у медицині</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="nauka-5">Технології майбутнього</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="klitynni" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="klitynni-1">Cellness</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="klitynni-2">Стовбурові клітини</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="klitynni-3">Клітинна терапія</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="klitynni-4">Біотехнології</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="klitynni-5">Медицина майбутнього</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="liudy" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="liudy-1">Інтерв’ю</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="liudy-2">Лікарі</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="liudy-3">Вчені</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="liudy-4">Історії пацієнтів</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="liudy-5">Зіркове життя</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+    <div class="vm-topics__group" data-rubric-panel="yakist" hidden>
+      <ul class="vm-topics__tags">
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="yakist-1">Здорові звички</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="yakist-2">Відпочинок</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="yakist-3">Wellness і відновлення</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="yakist-4">Подорожі</button></li>
+        <li><button class="vm-topics__tag sc-t-mini" type="button" aria-pressed="false" data-topic="yakist-5">Lifestyle</button></li>
+      </ul>
+      <a class="vm-topics__all sc-t-small" href="vm-category.html">Усі матеріали рубрики</a>
+    </div>
+  </div>
+
+  <!-- Результат фильтра по теме: сюда скрипт копирует подходящие карточки ленты -->
+  <div class="vm-topics__result" data-topics-result hidden>
+    <p class="vm-topics__result-head sc-t-small" aria-live="polite">
+      <span class="vm-topics__result-label">Матеріали на тему</span>
+      <b class="vm-topics__result-topic" data-topics-current></b>
+      <button class="vm-topics__reset sc-t-small" type="button" data-topics-reset>Скинути</button>
+    </p>
+    <ul class="vm-feed__row" data-topics-list></ul>
+  </div>
+</div>
