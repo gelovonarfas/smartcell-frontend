@@ -6,6 +6,10 @@
 
 .vm-topics {
   --topics-chip-h: 38px; /* рубрика-чип в макете: 38 высотой, поля 12 */
+  --topics-open-dur: 700ms;   /* раскрытие полочки */
+  --topics-chip-dur: 520ms;   /* появление чипа темы */
+  --topics-chip-step: 40ms;   /* волна: шаг между чипами */
+  --topics-x: 10px;           /* крестик в выбранной теме */
 
   display: flex;
   flex-direction: column;
@@ -54,13 +58,49 @@
 
 /* ---------- Панель тем ---------- */
 
+/* Полочка тем раскрывается плавно: строка сетки растёт от 0fr до 1fr с выраженным
+   ease-out, отступ сверху (шаг колонки) доезжает вместе с ней — в закрытом виде
+   полочка не оставляет пустой щели. Закрытая — inert: фокус внутрь не попадает */
 .vm-topics__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-block-start: calc(-1 * var(--sc-space-8));
+  opacity: 0;
+  transition:
+    grid-template-rows var(--topics-open-dur) var(--sc-ease-out-expo),
+    margin-block-start var(--topics-open-dur) var(--sc-ease-out-expo),
+    opacity var(--sc-dur) var(--sc-ease-out);
+}
+
+.vm-topics__panel.sc-is-open {
+  grid-template-rows: 1fr;
+  margin-block-start: 0;
+  opacity: 1;
+}
+
+.vm-topics__clip {
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.vm-topics__shelf {
   padding-block: var(--sc-space-6); /* 24 */
   border-block: var(--sc-line) solid var(--border);
 }
 
-.vm-topics__panel[hidden],
 .vm-topics__group[hidden] { display: none; }
+
+/* Темы появляются волной: каждый чип чуть позже предыдущего (--i ставит скрипт) */
+.vm-topics__panel.sc-is-open .vm-topics__group:not([hidden]) .vm-topics__tags > li,
+.vm-topics__panel.sc-is-open .vm-topics__group:not([hidden]) .vm-topics__all {
+  animation: vm-topics-in var(--topics-chip-dur) var(--sc-ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * var(--topics-chip-step));
+}
+
+@keyframes vm-topics-in {
+  from { opacity: 0; transform: translateY(var(--sc-space-2)); }
+  to   { opacity: 1; transform: none; }
+}
 
 .vm-topics__group {
   display: flex;
@@ -93,6 +133,24 @@
   color: var(--background);
 }
 
+/* Темы выбираются по нескольку: у выбранной справа крестик — «снять».
+   Иконка — маска, цвет берёт от текста */
+.vm-topics__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sc-space-2);
+}
+
+.vm-topics__tag[aria-pressed="true"]::after {
+  content: "";
+  flex: none;
+  inline-size: var(--topics-x);
+  block-size: var(--topics-x);
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
 .vm-topics__all {
   flex: none;
   color: var(--foreground);
@@ -122,6 +180,12 @@
 .vm-topics__result-topic {
   font-weight: var(--sc-weight-bold);
   color: var(--foreground);
+}
+
+.vm-topics__result-name + .vm-topics__result-name::before {
+  content: " · ";
+  font-weight: normal;
+  color: var(--sc-neutral-600);
 }
 
 .vm-topics__reset {
@@ -156,7 +220,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .vm-topics__rubric,
-  .vm-topics__tag { transition: none; }
+  .vm-topics__tag,
+  .vm-topics__panel { transition: none; }
+  .vm-topics__panel.sc-is-open .vm-topics__group:not([hidden]) .vm-topics__tags > li,
+  .vm-topics__panel.sc-is-open .vm-topics__group:not([hidden]) .vm-topics__all { animation: none; }
 }
 
 /* ---------- Телефон: ссылка «Усі матеріали» под темами ---------- */
