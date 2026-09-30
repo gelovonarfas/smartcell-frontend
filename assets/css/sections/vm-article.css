@@ -181,6 +181,28 @@
   gap: var(--sc-space-1_5);
 }
 
+/* Имя автора — ссылка на блок «Автор статті» внизу (#author): плавная
+   прокрутка и отступ под шапку — из base.css. Подчёркнута тонко, чтобы
+   читалась как ссылка, но не спорила с заголовком (2026-09-30) */
+.vm-article__byline-author {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: var(--hairline);
+  text-underline-offset: var(--sc-space-1);
+  transition: color var(--sc-dur-fast) var(--sc-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-article__byline-author:hover { color: var(--foreground); }
+}
+
+.vm-article__byline-author:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.vm-article__byline-author:active { color: var(--foreground); }
+
 .vm-article__byline-item + .vm-article__byline-item::before {
   content: "·";
   margin-inline-end: var(--sc-space-1_5);
