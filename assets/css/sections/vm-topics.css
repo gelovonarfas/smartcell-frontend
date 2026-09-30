@@ -10,6 +10,7 @@
   --topics-chip-dur: 520ms;   /* появление чипа темы */
   --topics-chip-step: 40ms;   /* волна: шаг между чипами */
   --topics-x: 10px;           /* крестик в выбранной теме */
+  --topics-icon: var(--sc-space-5); /* 20: иконка рубрики (в Figma 40, stroke 1) */
 
   display: flex;
   flex-direction: column;
@@ -50,6 +51,40 @@
     background-color var(--sc-dur-fast) var(--sc-ease),
     color var(--sc-dur-fast) var(--sc-ease);
 }
+
+/* Иконки рубрик — из Figma (Icon/Rubric · 40 · stroke 1, node 1110:782), проба
+   2026-09-30. Инлайн-SVG: цвет — от текста (в открытой рубрике светлеет),
+   линия держит 1px при уменьшении до 20 */
+.vm-topics__rubric { gap: var(--sc-space-2); }
+
+/* С иконками десять рубрик в строку не входят (1380 при колонке 1265): на
+   десктопе — ровная сетка 5 × 2 вместо ряда с одиноким хвостом на второй
+   строке. Сетка — только где пять колонок входят целиком (самая длинная
+   рубрика ~210): уже — обычный перенос по строкам */
+@media (min-width: 1200px) {
+  .vm-topics__rubrics {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(max-content, 1fr));
+  }
+
+  .vm-topics__rubric {
+    inline-size: 100%;
+    white-space: nowrap;
+  }
+}
+
+.vm-topics__icon {
+  flex: none;
+  inline-size: var(--topics-icon);
+  block-size: var(--topics-icon);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vm-topics__icon path { vector-effect: non-scaling-stroke; }
 
 .vm-topics__rubric[aria-expanded="true"] {
   background: var(--foreground);
