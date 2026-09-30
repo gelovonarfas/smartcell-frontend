@@ -60,22 +60,30 @@
 
 /* Полочка тем раскрывается плавно: строка сетки растёт от 0fr до 1fr с выраженным
    ease-out, отступ сверху (шаг колонки) доезжает вместе с ней — в закрытом виде
-   полочка не оставляет пустой щели. Закрытая — inert: фокус внутрь не попадает */
+   полочка не оставляет пустой щели. Закрытая — inert: фокус внутрь не попадает.
+   Линии сверху и снизу — на самой панели, вне обрезки: при открытии они на месте
+   сразу, нижняя едет вниз вместе с краем (2026-09-30: раньше нижняя линия
+   показывалась только в конце раскрытия). При закрытии линии пропадают, когда
+   полочка уже свернулась */
 .vm-topics__panel {
   display: grid;
   grid-template-rows: 0fr;
   margin-block-start: calc(-1 * var(--sc-space-8));
-  opacity: 0;
+  border-block: 0 solid var(--border);
   transition:
     grid-template-rows var(--topics-open-dur) var(--sc-ease-out-expo),
     margin-block-start var(--topics-open-dur) var(--sc-ease-out-expo),
-    opacity var(--sc-dur) var(--sc-ease-out);
+    border-block-width 0s linear var(--topics-open-dur);
 }
 
 .vm-topics__panel.sc-is-open {
   grid-template-rows: 1fr;
   margin-block-start: 0;
-  opacity: 1;
+  border-block-width: var(--sc-line);
+  transition:
+    grid-template-rows var(--topics-open-dur) var(--sc-ease-out-expo),
+    margin-block-start var(--topics-open-dur) var(--sc-ease-out-expo),
+    border-block-width 0s;
 }
 
 .vm-topics__clip {
@@ -83,10 +91,7 @@
   overflow: hidden;
 }
 
-.vm-topics__shelf {
-  padding-block: var(--sc-space-6); /* 24 */
-  border-block: var(--sc-line) solid var(--border);
-}
+.vm-topics__shelf { padding-block: var(--sc-space-6); /* 24 */ }
 
 .vm-topics__group[hidden] { display: none; }
 
@@ -221,7 +226,8 @@
 @media (prefers-reduced-motion: reduce) {
   .vm-topics__rubric,
   .vm-topics__tag,
-  .vm-topics__panel { transition: none; }
+  .vm-topics__panel,
+  .vm-topics__panel.sc-is-open { transition: none; }
   .vm-topics__panel.sc-is-open .vm-topics__group:not([hidden]) .vm-topics__tags > li,
   .vm-topics__panel.sc-is-open .vm-topics__group:not([hidden]) .vm-topics__all { animation: none; }
 }
