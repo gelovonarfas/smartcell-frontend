@@ -40,7 +40,7 @@
 
 /* ---------- Рубрика: плитка, клик раскрывает темы, не фильтрует ----------
    Проба 2026-09-30: плитка в размер кнопки-блока лендинга (Button/Block,
-   --sc-cta-block-*: 320 × 76) — иконка сверху слева, название снизу слева. Сетка: колонка не уже --topics-tile-min, на десктопе
+   --sc-cta-block-*: 320 × 76) — иконка сверху слева, название снизу справа. Сетка: колонка не уже --topics-tile-min, на десктопе
    выходит четыре плитки по ~310, на телефоне две.
    Иконки — из Figma (Icon/Rubric · 40 · stroke 1, node 1110:782): инлайн-SVG,
    цвет от текста (в открытой рубрике светлеет), линия держит 1px */
@@ -64,16 +64,16 @@
   min-block-size: var(--sc-cta-block-h);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: var(--sc-space-2);
-  align-items: flex-start;
-  padding: var(--grid-gap);
+  justify-content: space-between; /* 16 + иконка 24 + строка 20 + 16 = ровно 76 */
+  align-items: flex-end;   /* название — внизу справа */
+  /* рамка входит в 76: поля по вертикали меньше на её толщину */
+  padding: calc(var(--grid-gap) - var(--sc-line)) var(--grid-gap);
   border: var(--sc-line) solid var(--border);
   background: transparent;
   color: var(--foreground);
   font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
   letter-spacing: var(--button-ls);
-  text-align: start;
+  text-align: end;
   text-transform: uppercase;
   cursor: pointer;
   transition:
@@ -82,9 +82,12 @@
 }
 
 .vm-topics__icon {
-  /* Иконка сверху, название снизу (2026-09-30; было наоборот: название
-     сверху, иконка снизу справа на месте стрелки — order: 1 и
-     align-self: flex-end) */
+  /* Иконка сверху слева, название снизу справа — зеркально кнопке-блоку
+     (2026-09-30). Варианты для отката: название снизу слева — у плитки
+     align-items: flex-start и text-align: start, у иконки align-self убрать;
+     исходный — название сверху, иконка снизу справа: order: 1 и
+     align-self: flex-end у иконки */
+  align-self: flex-start;
   flex: none;
   inline-size: var(--topics-icon);
   block-size: var(--topics-icon);
