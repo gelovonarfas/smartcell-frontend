@@ -12,7 +12,6 @@
   --topics-chip-step: 40ms;   /* волна: шаг между чипами */
   --topics-x: 10px;           /* крестик в выбранной теме */
   --topics-busy-opacity: 0.4; /* выдача, пока грузятся карточки (согласуемое) */
-  --topics-icon: var(--sc-space-6); /* 24: иконка рубрики, как стрелка в кнопке-блоке */
 
   display: flex;
   flex-direction: column;
@@ -39,11 +38,13 @@
 }
 
 /* ---------- Рубрика: плитка, клик раскрывает темы, не фильтрует ----------
-   Проба 2026-09-30: плитка в размер кнопки-блока лендинга (Button/Block,
-   --sc-cta-block-*: 320 × 76) — иконка сверху слева, название снизу справа. Сетка: колонка не уже --topics-tile-min, на десктопе
-   выходит четыре плитки по ~310, на телефоне две.
-   Иконки — из Figma (Icon/Rubric · 40 · stroke 1, node 1110:782): инлайн-SVG,
-   цвет от текста (в открытой рубрике светлеет), линия держит 1px */
+   Проба 2026-09-30: плитка — кнопка-блок лендинга (Button/Block,
+   --sc-cta-block-*: 320 × 76): название сверху слева, стрелка снизу справа,
+   на наведении стрелка тычется в угол, как в хиро. В открытой рубрике
+   стрелка смотрит вниз — на раскрытую полочку.
+   Сетка: колонка не уже --topics-tile-min, на десктопе четыре плитки по ~310,
+   на телефоне две. Иконки рубрик из Figma (Icon/Rubric, node 1110:782)
+   пробовали на месте стрелки — сняты 2026-09-30, разметка в коммите fb5f791 */
 .vm-topics__rubrics {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--topics-tile-min)), 1fr));
@@ -64,8 +65,8 @@
   min-block-size: var(--sc-cta-block-h);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 16 + иконка 24 + строка 20 + 16 = ровно 76 */
-  align-items: flex-end;   /* название — внизу справа */
+  justify-content: space-between; /* 16 + строка 20 + стрелка 24 + 16 = 76 */
+  align-items: stretch;
   /* рамка входит в 76: поля по вертикали меньше на её толщину */
   padding: calc(var(--grid-gap) - var(--sc-line)) var(--grid-gap);
   border: var(--sc-line) solid var(--border);
@@ -73,7 +74,7 @@
   color: var(--foreground);
   font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
   letter-spacing: var(--button-ls);
-  text-align: end;
+  text-align: start;
   text-transform: uppercase;
   cursor: pointer;
   transition:
@@ -81,24 +82,18 @@
     color var(--sc-dur-fast) var(--sc-ease);
 }
 
-.vm-topics__icon {
-  /* Иконка сверху слева, название снизу справа — зеркально кнопке-блоку
-     (2026-09-30). Варианты для отката: название снизу слева — у плитки
-     align-items: flex-start и text-align: start, у иконки align-self убрать;
-     исходный — название сверху, иконка снизу справа: order: 1 и
-     align-self: flex-end у иконки */
-  align-self: flex-start;
-  flex: none;
-  inline-size: var(--topics-icon);
-  block-size: var(--topics-icon);
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.vm-topics__arrow {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.vm-topics__icon path { vector-effect: non-scaling-stroke; }
+.vm-topics__arrow svg {
+  display: block;
+  transform: rotate(45deg); /* вниз-вправо, в угол */
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+.vm-topics__rubric[aria-expanded="true"] .vm-topics__arrow svg { transform: rotate(90deg); }
 
 .vm-topics__rubric[aria-expanded="true"] {
   background: var(--foreground);
@@ -261,6 +256,9 @@
 /* ---------- Состояния (в Figma их нет — обязательны по CLAUDE.md) ---------- */
 
 @media (hover: hover) and (pointer: fine) {
+  .vm-topics__rubric[aria-expanded="false"]:hover .vm-topics__arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
   .vm-topics__rubric[aria-expanded="false"]:hover,
   .vm-topics__tag:not(:disabled):not([aria-pressed="true"]):hover { background: var(--muted); }
   .vm-topics__all:hover,
@@ -280,6 +278,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .vm-topics__rubric,
+  .vm-topics__arrow svg,
   .vm-topics__tag,
   .vm-topics__panel,
   .vm-topics__panel.sc-is-open { transition: none; }
