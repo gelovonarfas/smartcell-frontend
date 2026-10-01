@@ -5,13 +5,14 @@
    ============================================================ */
 
 .vm-topics {
-  --topics-chip-h: 38px; /* рубрика-чип в макете: 38 высотой, поля 12 */
+  --topics-tile-min: 280px;          /* плитка рубрики: при колонке 1265 — четыре по ~310 */
+  --topics-tile-gap: var(--sc-space-2); /* 8 */
   --topics-open-dur: 700ms;   /* раскрытие полочки */
   --topics-chip-dur: 520ms;   /* появление чипа темы */
   --topics-chip-step: 40ms;   /* волна: шаг между чипами */
   --topics-x: 10px;           /* крестик в выбранной теме */
   --topics-busy-opacity: 0.4; /* выдача, пока грузятся карточки (согласуемое) */
-  --topics-icon: var(--sc-space-5); /* 20: иконка рубрики (в Figma 40, stroke 1) */
+  --topics-icon: var(--sc-space-6); /* 24: иконка рубрики, как стрелка в кнопке-блоке */
 
   display: flex;
   flex-direction: column;
@@ -29,23 +30,47 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
 }
 
-.vm-topics__rubrics { gap: var(--sc-space-2); }   /* 8 */
-.vm-topics__tags { gap: var(--sc-space-1_5); }    /* 6 */
+.vm-topics__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sc-space-1_5); /* 6 */
+}
 
-/* ---------- Рубрика: клик раскрывает темы, не фильтрует ---------- */
+/* ---------- Рубрика: плитка, клик раскрывает темы, не фильтрует ----------
+   Проба 2026-09-30: плитка в размер кнопки-блока лендинга (Button/Block,
+   --sc-cta-block-*: 320 × 76) — название сверху слева, иконка снизу справа,
+   на месте стрелки. Сетка: колонка не уже --topics-tile-min, на десктопе
+   выходит четыре плитки по ~310, на телефоне две.
+   Иконки — из Figma (Icon/Rubric · 40 · stroke 1, node 1110:782): инлайн-SVG,
+   цвет от текста (в открытой рубрике светлеет), линия держит 1px */
+.vm-topics__rubrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--topics-tile-min)), 1fr));
+  column-gap: var(--topics-tile-gap);
+  /* Просвет между рядами — полями пунктов, а не row-gap: строка закрытой
+     полочки иначе оставляла бы лишний просвет (отрицательный отступ не
+     делает строку сетки меньше нуля). Поля крайних рядов гасит margin */
+  margin-block: calc(-0.5 * var(--topics-tile-gap));
+}
+
+.vm-topics__rubrics > li:not(.vm-topics__panel) { padding-block: calc(0.5 * var(--topics-tile-gap)); }
 
 .vm-topics__rubric {
+  inline-size: 100%;
+  block-size: var(--sc-cta-block-h);
   display: flex;
-  align-items: center;
-  block-size: var(--topics-chip-h);
-  padding: 0 var(--sc-space-3);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--grid-gap);
   border: var(--sc-line) solid var(--border);
   background: transparent;
   color: var(--foreground);
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  text-align: start;
   text-transform: uppercase;
   cursor: pointer;
   transition:
@@ -53,28 +78,9 @@
     color var(--sc-dur-fast) var(--sc-ease);
 }
 
-/* Иконки рубрик — из Figma (Icon/Rubric · 40 · stroke 1, node 1110:782), проба
-   2026-09-30. Инлайн-SVG: цвет — от текста (в открытой рубрике светлеет),
-   линия держит 1px при уменьшении до 20 */
-.vm-topics__rubric { gap: var(--sc-space-2); }
-
-/* С иконками десять рубрик в строку не входят (1380 при колонке 1265): на
-   десктопе — ровная сетка 5 × 2 вместо ряда с одиноким хвостом на второй
-   строке. Сетка — только где пять колонок входят целиком (самая длинная
-   рубрика ~210): уже — обычный перенос по строкам */
-@media (min-width: 1200px) {
-  .vm-topics__rubrics {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(max-content, 1fr));
-  }
-
-  .vm-topics__rubric {
-    inline-size: 100%;
-    white-space: nowrap;
-  }
-}
-
 .vm-topics__icon {
+  order: 1; /* в разметке иконка первой — в плитке она внизу справа */
+  align-self: flex-end;
   flex: none;
   inline-size: var(--topics-icon);
   block-size: var(--topics-icon);
@@ -94,33 +100,35 @@
 
 /* ---------- Панель тем ---------- */
 
-/* Полочка тем раскрывается плавно: строка сетки растёт от 0fr до 1fr с выраженным
-   ease-out, отступ сверху (шаг колонки) доезжает вместе с ней — в закрытом виде
-   полочка не оставляет пустой щели. Закрытая — inert: фокус внутрь не попадает.
-   Линии сверху и снизу — на самой панели, вне обрезки: при открытии они на месте
-   сразу, нижняя едет вниз вместе с краем (2026-09-30: раньше нижняя линия
-   показывалась только в конце раскрытия). При закрытии линии пропадают, когда
+/* Полочка — строка сетки рубрик во всю ширину; скрипт ставит её сразу за
+   рядом нажатой плитки. Раскрывается плавно: строка растёт от 0fr до 1fr с
+   выраженным ease-out. Закрытая — строка нулевой высоты, пустой щели нет. Закрытая — inert: фокус внутрь не попадает.
+   Линии сверху и снизу — на самой панели, вне обрезки: при открытии они на
+   месте сразу, нижняя едет вниз вместе с краем; при закрытии пропадают, когда
    полочка уже свернулась */
 .vm-topics__panel {
+  grid-column: 1 / -1;
   display: grid;
   grid-template-rows: 0fr;
-  margin-block-start: calc(-1 * var(--sc-space-8));
   border-block: 0 solid var(--border);
   transition:
     grid-template-rows var(--topics-open-dur) var(--sc-ease-out-expo),
-    margin-block-start var(--topics-open-dur) var(--sc-ease-out-expo),
+    margin-block var(--topics-open-dur) var(--sc-ease-out-expo),
     border-block-width 0s linear var(--topics-open-dur);
 }
 
 .vm-topics__panel.sc-is-open {
   grid-template-rows: 1fr;
-  margin-block-start: 0;
+  margin-block: calc(1.5 * var(--topics-tile-gap)); /* + поле пункта 4 = 16 от плиток */
   border-block-width: var(--sc-line);
   transition:
     grid-template-rows var(--topics-open-dur) var(--sc-ease-out-expo),
-    margin-block-start var(--topics-open-dur) var(--sc-ease-out-expo),
+    margin-block var(--topics-open-dur) var(--sc-ease-out-expo),
     border-block-width 0s;
 }
+
+/* Переезд в другой ряд — без анимации закрытия (класс ставит скрипт) */
+.vm-topics__panel.sc-is-moving { transition: none; }
 
 .vm-topics__clip {
   min-block-size: 0;
@@ -275,6 +283,8 @@
 /* ---------- Телефон: ссылка «Усі матеріали» под темами ---------- */
 
 @media (max-width: 640px) {
+  .vm-topics { --topics-tile-min: 140px; } /* две плитки в ряд */
+
   .vm-topics__group {
     flex-direction: column;
     align-items: flex-start;

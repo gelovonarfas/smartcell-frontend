@@ -65,10 +65,36 @@
   });
 
   /* Раскрытие — класс sc-is-open (переход в CSS). При закрытии группа остаётся
-     видимой, пока полочка сворачивается: меняем её только при открытии */
+     видимой, пока полочка сворачивается: меняем её только при открытии.
+     Полочка — пункт того же списка, что и плитки: ставим её сразу за последней
+     плиткой ряда, где живёт нажатая рубрика (ряды считаем по offsetTop —
+     сетка сама решает, сколько плиток в ряду). Переезд в другой ряд — без
+     анимации закрытия, раскрытие на новом месте — с анимацией */
+  var openId = null;
+
+  function rowEnd(li) {
+    var last = li;
+    rubrics.forEach(function (b) {
+      if (b.parentNode.offsetTop === li.offsetTop) last = b.parentNode;
+    });
+    return last;
+  }
+
+  function placePanel(id, keepOpen) {
+    var end = rowEnd(root.querySelector('[data-rubric="' + id + '"]').parentNode);
+    if (end.nextElementSibling === panel) return;
+    panel.classList.add('sc-is-moving');
+    if (!keepOpen) panel.classList.remove('sc-is-open');
+    end.parentNode.insertBefore(panel, end.nextElementSibling);
+    void panel.offsetHeight; /* зафиксировать закрытое состояние до раскрытия */
+    panel.classList.remove('sc-is-moving');
+  }
+
   function openRubric(id) {
+    openId = id;
     rubrics.forEach(function (b) { b.setAttribute('aria-expanded', b.getAttribute('data-rubric') === id ? 'true' : 'false'); });
     if (id) {
+      placePanel(id, false);
       groups.forEach(function (g) { g.hidden = g.getAttribute('data-rubric-panel') !== id; });
       panel.classList.add('sc-is-open');
       panel.inert = false;
@@ -77,6 +103,15 @@
       panel.inert = true;
     }
   }
+
+  /* Ширина поменялась — плиток в ряду может стать другое число */
+  var resizeFrame = 0;
+  window.addEventListener('resize', function () {
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(function () {
+      if (openId) placePanel(openId, true);
+    });
+  });
 
   rubrics.forEach(function (b) {
     b.addEventListener('click', function () {
