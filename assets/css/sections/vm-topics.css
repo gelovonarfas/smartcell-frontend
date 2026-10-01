@@ -40,8 +40,7 @@
 
 /* ---------- Рубрика: плитка, клик раскрывает темы, не фильтрует ----------
    Проба 2026-09-30: плитка в размер кнопки-блока лендинга (Button/Block,
-   --sc-cta-block-*: 320 × 76) — название сверху слева, иконка снизу справа,
-   на месте стрелки. Сетка: колонка не уже --topics-tile-min, на десктопе
+   --sc-cta-block-*: 320 × 76) — иконка сверху слева, название снизу слева. Сетка: колонка не уже --topics-tile-min, на десктопе
    выходит четыре плитки по ~310, на телефоне две.
    Иконки — из Figma (Icon/Rubric · 40 · stroke 1, node 1110:782): инлайн-SVG,
    цвет от текста (в открытой рубрике светлеет), линия держит 1px */
@@ -59,10 +58,14 @@
 
 .vm-topics__rubric {
   inline-size: 100%;
-  block-size: var(--sc-cta-block-h);
+  /* 76 — минимум: название в две строки (телефон) растит ряд, соседняя
+     плитка тянется следом (100% от растянутого пункта сетки) */
+  block-size: 100%;
+  min-block-size: var(--sc-cta-block-h);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: var(--sc-space-2);
   align-items: flex-start;
   padding: var(--grid-gap);
   border: var(--sc-line) solid var(--border);
@@ -79,8 +82,9 @@
 }
 
 .vm-topics__icon {
-  order: 1; /* в разметке иконка первой — в плитке она внизу справа */
-  align-self: flex-end;
+  /* Иконка сверху, название снизу (2026-09-30; было наоборот: название
+     сверху, иконка снизу справа на месте стрелки — order: 1 и
+     align-self: flex-end) */
   flex: none;
   inline-size: var(--topics-icon);
   block-size: var(--topics-icon);
