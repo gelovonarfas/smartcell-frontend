@@ -9,6 +9,8 @@
    3. Темы выбираются независимо (можно несколько, из разных рубрик): под
       конфигуратором вместо «Свіже» — копии карточек хотя бы одной из
       выбранных тем. Отжать все темы или «Скинути» — обратно.
+   4. Выбор пишется в адрес после # и восстанавливается по ссылке;
+      страница при этом не перезагружается.
    Тексты не собираются в JS: подпись темы копируется из её чипа.
    ============================================================ */
 (function () {
@@ -84,32 +86,65 @@
 
   /* 3. темы → карточки. Темы не взаимоисключающие (2026-09-30): каждая
      нажимается и отжимается сама по себе, в выдаче — материалы хотя бы
-     одной из выбранных тем, в том числе из разных рубрик */
-  function clear() {
-    tags.forEach(function (t) { t.setAttribute('aria-pressed', 'false'); });
-    render();
-  }
+     одной из выбранных тем, в том числе из разных рубрик.
 
-  function render() {
-    var picked = tags.filter(function (x) { return x.getAttribute('aria-pressed') === 'true'; });
-    list.innerHTML = '';
-    current.innerHTML = '';
-    if (!picked.length) {
-      result.hidden = true;
-      fresh.forEach(function (el) { el.hidden = false; });
-      return;
-    }
-    var ids = picked.map(function (x) { return x.getAttribute('data-topic'); });
-    cards.filter(function (c) {
+     Выбор живёт в адресе после # (#topics=krasa-1,krasa-5): ссылкой можно
+     поделиться, а поисковик такие адреса не обходит — комбинации тем не
+     плодят страниц (совет Google для фильтров, faceted navigation).
+     Страница не перезагружается: адрес меняет history.replaceState,
+     карточки приходят из loadCards. */
+
+  /* ЗАМЕНИТЬ В ТЕМЕ. В вёрстке карточки берутся из ленты на этой странице.
+     На сайте — запрос к REST API, например
+       fetch('/wp-json/wp/v2/posts?topics=12,15&per_page=12&_embed')
+     и отрисовка ответа той же разметкой .sc-mag__card (или admin-ajax,
+     который отдаёт готовый HTML карточек). Контракт: принимает ключи тем,
+     возвращает Promise со списком элементов-карточек. */
+  function loadCards(ids) {
+    var found = cards.filter(function (c) {
       return topicsOf(c).some(function (t) { return ids.indexOf(t) >= 0; });
-    }).forEach(function (c) {
-      var li = document.createElement('li');
+    }).map(function (c) {
       var copy = c.cloneNode(true);
       /* ленивые картинки в копии: грузим сразу, наблюдатель img-lazy.js их не видит */
       all(copy, 'img[data-src]').forEach(function (img) { img.src = img.getAttribute('data-src'); });
-      li.appendChild(copy);
-      list.appendChild(li);
+      return copy;
     });
+    return Promise.resolve(found);
+  }
+
+  var HASH_KEY = 'topics=';
+  var request = 0; /* номер последнего запроса: ответ на устаревший выбор не рисуем */
+
+  function pickedTags() {
+    return tags.filter(function (x) { return x.getAttribute('aria-pressed') === 'true'; });
+  }
+
+  function writeHash(ids) {
+    var base = location.pathname + location.search;
+    history.replaceState(history.state, '', ids.length ? base + '#' + HASH_KEY + ids.join(',') : base);
+  }
+
+  function readHash() {
+    var h = location.hash.slice(1);
+    if (h.indexOf(HASH_KEY) !== 0) return [];
+    return decodeURIComponent(h.slice(HASH_KEY.length)).split(',').filter(Boolean);
+  }
+
+  function render() {
+    var picked = pickedTags();
+    var ids = picked.map(function (x) { return x.getAttribute('data-topic'); });
+    var my = ++request;
+    writeHash(ids);
+    current.innerHTML = '';
+
+    if (!ids.length) {
+      list.innerHTML = '';
+      result.hidden = true;
+      result.removeAttribute('aria-busy');
+      fresh.forEach(function (el) { el.hidden = false; });
+      return;
+    }
+
     /* подпись каждой темы — целым узлом из её чипа, разделитель рисует CSS */
     picked.forEach(function (x) {
       var span = document.createElement('span');
@@ -119,6 +154,38 @@
     });
     result.hidden = false;
     fresh.forEach(function (el) { el.hidden = true; });
+    result.setAttribute('aria-busy', 'true'); /* загрузка: старые карточки приглушены */
+
+    loadCards(ids).then(function (found) {
+      if (my !== request) return;
+      list.innerHTML = '';
+      found.forEach(function (card) {
+        var li = document.createElement('li');
+        li.appendChild(card);
+        list.appendChild(li);
+      });
+      result.removeAttribute('aria-busy');
+    }, function () {
+      if (my !== request) return;
+      result.removeAttribute('aria-busy');
+    });
+  }
+
+  function clear() {
+    tags.forEach(function (t) { t.setAttribute('aria-pressed', 'false'); });
+    render();
+  }
+
+  /* Выбор из адреса: при открытии ссылки и при ручной правке # */
+  function applyHash() {
+    var ids = readHash();
+    tags.forEach(function (t) {
+      var on = !t.disabled && ids.indexOf(t.getAttribute('data-topic')) >= 0;
+      t.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    var first = pickedTags()[0];
+    if (first) openRubric(first.closest('[data-rubric-panel]').getAttribute('data-rubric-panel'));
+    render();
   }
 
   tags.forEach(function (tag) {
@@ -129,4 +196,7 @@
   });
 
   if (reset) reset.addEventListener('click', clear);
+
+  window.addEventListener('hashchange', applyHash);
+  if (readHash().length) applyHash();
 }());

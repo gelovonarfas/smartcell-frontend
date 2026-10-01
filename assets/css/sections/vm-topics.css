@@ -10,6 +10,7 @@
   --topics-chip-dur: 520ms;   /* появление чипа темы */
   --topics-chip-step: 40ms;   /* волна: шаг между чипами */
   --topics-x: 10px;           /* крестик в выбранной теме */
+  --topics-busy-opacity: 0.4; /* выдача, пока грузятся карточки (согласуемое) */
   --topics-icon: var(--sc-space-5); /* 20: иконка рубрики (в Figma 40, stroke 1) */
 
   display: flex;
@@ -207,6 +208,10 @@
 }
 
 .vm-topics__result[hidden] { display: none; }
+
+/* Загрузка (aria-busy ставит скрипт, пока идёт запрос карточек) */
+.vm-topics__result [data-topics-list] { transition: opacity var(--sc-dur-fast) var(--sc-ease); }
+.vm-topics__result[aria-busy="true"] [data-topics-list] { opacity: var(--topics-busy-opacity); pointer-events: none; }
 
 .vm-topics__result-head {
   margin: 0;
