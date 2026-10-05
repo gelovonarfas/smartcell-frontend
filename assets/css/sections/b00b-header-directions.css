@@ -1,16 +1,20 @@
 /* ============================================================
-   B00b · Header — меню «Напрямки» (ПРОБА 2026-10-04)
-   Мега-полка под шапкой. Состав — как в прежнем меню virtus.ua (разделы
-   SmartCell, 16 напрямків), справа — анонс статьи журнала; оформление — кит:
-   капсы, колонки разведены воздухом, текущее как во вкладках, обложка — квадрат.
-   Раскрытие — как полочка тем журнала (vm-topics.css): строка сетки
-   0fr → 1fr с выраженным ease-out. Поведение — assets/js/header-directions.js
+   B00b · Header — меню «Напрямки» (ПРОБА v3, 2026-10-04)
+   Мега-полка под шапкой по образцу OneSkin: второй уровень — полоса
+   вкладок (разделы SmartCell), под ней панель раздела, справа — анонс
+   статьи журнала с квадратной обложкой. Раскрытие — как полочка тем
+   журнала (vm-topics.css): строка сетки 0fr → 1fr с выраженным ease-out.
+   Поведение — assets/js/header-directions.js
    Зависит от b00b-header.css (подключается после него).
+   v2 (колонка разделов слева, без вкладок) — коммит 614e825.
    ============================================================ */
 
 .sc-header {
   --hdir-open-dur: 600ms;
-  --hdir-cols: minmax(0, 1fr) minmax(0, 2fr) var(--sc-cta-block-w); /* разделы · напрямки · статья (колонка = плита 320) */
+  --hdir-tab-dur: 420ms;                       /* бегунок вкладки — как в sc-dtabs */
+  --hdir-indicator-h: 3px;                      /* бегунок в макете вкладок 3 px */
+  --hdir-cols: minmax(0, 1fr) var(--sc-cta-block-w); /* панель · статья (колонка = плита 320) */
+  --hdir-tile-w: 200px;                         /* плитка консультанта: квадрат 200 */
 }
 
 /* Обёртка пункта не позиционирована: полка встаёт от края шапки
@@ -68,13 +72,62 @@
 }
 
 .sc-hdir__shelf {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Полоса вкладок: разделы SmartCell ---------- */
+
+.sc-hdir__tabs {
+  position: relative;
+  display: flex;
+  gap: var(--sc-space-8); /* 32, как у вкладок страницы */
+  padding-inline: var(--sc-pad-x);
+  border-block-end: var(--sc-line) solid var(--border);
+}
+
+.sc-hdir__tab {
+  padding: var(--sc-space-4) 0; /* 16: строка 48 */
+  border: 0;
+  background: none;
+  color: var(--sc-neutral-600);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-hdir__tab[aria-selected="true"] { color: var(--foreground); }
+
+/* Бегунок: позицию и ширину ставит скрипт (--tab-x, --tab-w) */
+.sc-hdir__indicator {
+  position: absolute;
+  inset-block-end: calc(-1 * var(--sc-line));
+  inset-inline-start: 0;
+  inline-size: var(--tab-w, 0);
+  block-size: var(--hdir-indicator-h);
+  background: var(--foreground);
+  transform: translateX(var(--tab-x, 0));
+}
+
+.sc-hdir__tabs.sc-is-ready .sc-hdir__indicator {
+  transition:
+    transform var(--hdir-tab-dur) var(--sc-ease-out-expo),
+    inline-size var(--hdir-tab-dur) var(--sc-ease-out-expo);
+}
+
+/* ---------- Тело полки: панель раздела + анонс ---------- */
+
+.sc-hdir__body {
   display: grid;
   grid-template-columns: var(--hdir-cols);
-  gap: var(--section-gap); /* 56 — колонки разведены воздухом, без линий (правка 2026-10-04) */
+  gap: var(--section-gap); /* 56 — колонки разведены воздухом */
   padding: var(--sc-space-10) var(--sc-pad-x) var(--sc-space-12); /* 40 / 48 */
 }
 
-.sc-hdir__col {
+.sc-hdir__panels { min-inline-size: 0; }
+
+/* Панели разделов */
+.sc-hdir__pane {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -82,41 +135,31 @@
   min-inline-size: 0;
 }
 
-.sc-hdir__label {
+.sc-hdir__pane[hidden] { display: none; }
+
+/* «Усі напрямки…» / «Перейти до розділу» — подчёркнутой ссылкой, как в полочке тем */
+.sc-hdir__all {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.sc-hdir__lead {
   margin: 0;
-  color: var(--sc-neutral-600);
+  max-inline-size: var(--sc-measure);
 }
 
-/* ---------- Разделы SmartCell ---------- */
-
-.sc-hdir__sections {
-  display: flex;
-  flex-direction: column;
-  gap: var(--grid-gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* Как пункты шапки и вкладки: остальные приглушены, текущий — в полную силу */
-.sc-hdir__section {
-  color: var(--muted-foreground);
-  text-decoration: none;
-  transition: color var(--sc-dur-fast) var(--sc-ease);
-}
-
-.sc-hdir__section[aria-current] { color: var(--foreground); }
-
-/* ---------- Напрямки: 16 в две колонки, порядок как на virtus.ua ---------- */
-
+/* Напрямки: 16 в три колонки, порядок как на virtus.ua */
 .sc-hdir__list {
-  columns: 2;
+  columns: 3;
   column-gap: var(--sc-space-8);
   margin: 0;
   padding: 0;
   list-style: none;
   inline-size: 100%;
 }
+
+.sc-hdir__list--short { columns: 1; }
 
 .sc-hdir__list > li {
   break-inside: avoid;
@@ -144,14 +187,62 @@
   transform: translateY(-50%);
 }
 
-/* «Усі клітинні технології» — под разделами, подчёркнутой ссылкой как в полочке тем */
-.sc-hdir__all {
-  color: var(--foreground);
-  text-decoration: underline;
-  text-underline-position: from-font;
+/* Плитки консультантов: квадратное фото, узкая щель (--grid-gap, как в ленте) */
+.sc-hdir__tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--hdir-tile-w));
+  gap: var(--grid-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  inline-size: 100%;
 }
 
+.sc-hdir__tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+}
+
+.sc-hdir__tile-photo {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-block-end: var(--sc-space-2);
+  background: var(--muted);
+}
+
+.sc-hdir__tile-photo img,
+.sc-hdir__article-photo img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform var(--sc-dur-slow) var(--sc-ease-out);
+}
+
+.sc-hdir__tile-title {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.sc-hdir__tile-meta { color: var(--sc-neutral-600); }
+
 /* ---------- Анонс статьи: карточка ленты журнала, обложка — квадрат во всю колонку ---------- */
+
+.sc-hdir__col--article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+  min-inline-size: 0;
+}
+
+.sc-hdir__label {
+  margin: 0;
+  color: var(--sc-neutral-600);
+}
 
 .sc-hdir__article {
   display: flex;
@@ -166,14 +257,6 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--muted);
-}
-
-.sc-hdir__article-photo img {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-  transition: transform var(--sc-dur-slow) var(--sc-ease-out);
 }
 
 .sc-hdir__article-meta {
@@ -199,12 +282,11 @@
   text-decoration: none;
 }
 
-/* Колонки проявляются вслед за полкой — та же волна, что у тем журнала */
-.sc-hdir.sc-is-open .sc-hdir__shelf > * {
+/* Тело проявляется вслед за полкой — та же волна, что у тем журнала */
+.sc-hdir.sc-is-open .sc-hdir__body > * {
   animation: sc-hdir-in var(--hdir-open-dur) var(--sc-ease-out-expo) both;
 }
-.sc-hdir.sc-is-open .sc-hdir__shelf > :nth-child(2) { animation-delay: 40ms; }
-.sc-hdir.sc-is-open .sc-hdir__shelf > :nth-child(3) { animation-delay: 80ms; }
+.sc-hdir.sc-is-open .sc-hdir__body > :nth-child(2) { animation-delay: 60ms; }
 
 @keyframes sc-hdir-in {
   from { opacity: 0; transform: translateY(var(--sc-space-2)); }
@@ -221,21 +303,25 @@
 /* ---------- Состояния ---------- */
 
 @media (hover: hover) and (pointer: fine) {
-  .sc-hdir__section:hover { color: var(--foreground); }
+  .sc-hdir__tab[aria-selected="false"]:hover { color: var(--foreground); }
   .sc-hdir__link:hover,
+  .sc-hdir__tile-title:hover,
   .sc-hdir__article-tag:hover,
   .sc-hdir__article-title:hover {
     text-decoration: underline;
     text-underline-position: from-font;
   }
   .sc-hdir__all:hover { text-decoration: none; }
+  .sc-hdir__tile-photo:hover img,
   .sc-hdir__article-photo:hover img { transform: scale(1.03); }
 }
 
 .sc-hdir__trigger:focus-visible,
+.sc-hdir__tab:focus-visible,
 .sc-hdir__link:focus-visible,
-.sc-hdir__section:focus-visible,
 .sc-hdir__all:focus-visible,
+.sc-hdir__tile-photo:focus-visible,
+.sc-hdir__tile-title:focus-visible,
 .sc-hdir__article-photo:focus-visible,
 .sc-hdir__article-tag:focus-visible,
 .sc-hdir__article-title:focus-visible {
@@ -247,12 +333,15 @@
   .sc-hdir__chevron,
   .sc-hdir__panel,
   .sc-hdir.sc-is-open .sc-hdir__panel,
-  .sc-hdir__section,
+  .sc-hdir__tab,
+  .sc-hdir__tabs.sc-is-ready .sc-hdir__indicator,
+  .sc-hdir__tile-photo img,
   .sc-hdir__article-photo img { transition: none; }
-  .sc-hdir.sc-is-open .sc-hdir__shelf > * { animation: none; }
+  .sc-hdir.sc-is-open .sc-hdir__body > * { animation: none; }
 }
 
-/* ---------- Телефон: «Напрямки» — раскрывающийся пункт в меню под бургером ---------- */
+/* ---------- Телефон: «Напрямки» — раскрывающийся пункт в меню под бургером ----------
+   Полоса вкладок листается по горизонтали, как у OneSkin; анонс не показывается */
 
 @media (max-width: 640px) {
   .sc-hdir { display: block; }
@@ -274,36 +363,36 @@
 
   .sc-hdir.sc-is-open .sc-hdir__panel { box-shadow: none; border-block-end-width: 0; }
 
-  .sc-hdir__shelf {
+  .sc-hdir__tabs {
+    gap: var(--sc-space-6);
+    padding-inline: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .sc-hdir__tabs::-webkit-scrollbar { display: none; }
+
+  .sc-hdir__tab { padding-block: var(--sc-space-3); }
+
+  .sc-hdir__body {
     grid-template-columns: minmax(0, 1fr);
-    padding: 0 0 var(--grid-gap);
+    gap: 0;
+    padding: var(--stack-gap-lg) 0 var(--grid-gap);
   }
 
-  .sc-hdir__col { gap: var(--stack-gap-sm); }
+  .sc-hdir__pane { gap: var(--stack-gap-md); }
 
-  .sc-hdir__col + .sc-hdir__col { margin-block-start: var(--stack-gap-lg); }
-
-  .sc-hdir__label { display: none; } /* в списке меню подписи колонок лишние */
-
-  .sc-hdir__sections { gap: var(--stack-gap-sm); }
-
-  .sc-hdir__section { font: 400 var(--p-size) / var(--p-lh) var(--font-sans); }
-
-  .sc-hdir__list {
-    columns: 1;
-    padding-inline-start: var(--grid-gap); /* напрямки — вложены в текущий раздел */
-  }
-
+  .sc-hdir__list { columns: 1; }
   .sc-hdir__list > li { padding-block-end: var(--stack-gap-sm); }
-
   .sc-hdir__link { font-size: var(--p-small-size); line-height: var(--p-small-lh); }
 
-  /* анонс статьи на телефоне не нужен: меню и так длинное */
+  .sc-hdir__tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
   .sc-hdir__col--article { display: none; }
 
   .sc-header.sc-hdir-open { background: var(--glass-surface); }
 
-  /* Список длинный (30 пунктов): ящик меню листается сам, страница под ним стоит */
+  /* Список длинный: ящик меню листается сам, страница под ним стоит */
   .sc-header--nav-open .sc-header__drawer {
     overflow-y: auto;
     overscroll-behavior: contain;

@@ -11,7 +11,8 @@
      в языке кита: подписи-капсы, волосяные разделители, текущее — как во вкладках.
      Текущий напрямок отмечен (aria-current).
 
-     ACF / WP Menus: меню «Напрямки» — разделы (4), напрямки (16), menu_article (запись журнала для анонса),
+     ACF / WP Menus: меню «Напрямки» — разделы (4, у каждого: лид, ссылка, подпункты или консультанты),
+     напрямки (16), menu_article (запись журнала для анонса),
      текущий пункт тема помечает current-menu-item → aria-current="page".
      Скрипт: assets/js/header-directions.js (открыть/закрыть, Esc, клик мимо).
      На телефоне полка — раскрывающийся пункт внутри меню под бургером.
@@ -41,61 +42,103 @@
           <div class="sc-hdir__clip">
             <div class="sc-hdir__shelf">
 
-              <!-- Разделы SmartCell (состав — как в прежнем меню virtus.ua).
-                   Текущий раздел — тот, чьи напрямки показаны в середине -->
-              <div class="sc-hdir__col">
-              <p class="sc-hdir__label sc-t-caption">SmartCell</p>
-              <ul class="sc-hdir__sections">
-                <li><a class="sc-hdir__section sc-t-h3" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya" aria-current="true">Клітинне омолодження і терапія</a></li>
-                <li><a class="sc-hdir__section sc-t-h3" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Клітинні препарати SmartCell</a></li>
-                <li><a class="sc-hdir__section sc-t-h3" href="https://virtus.ua/smartcell-consultants">Консультанти SmartCell</a></li>
-                <li><a class="sc-hdir__section sc-t-h3" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/bank-biolohichnoho-strakhuvannia">Банк біологічного страхування</a></li>
-              </ul>
-              <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii">Усі клітинні технології</a>
+              <!-- Второй уровень — полоса вкладок, как у OneSkin (проба v3, 2026-10-04):
+                   четыре раздела SmartCell, активная подчёркнута бегунком (тот же
+                   приём, что вкладки страницы). Наведение/клик переключает панель. -->
+              <div class="sc-hdir__tabs" role="tablist" aria-label="Розділи SmartCell">
+                <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-therapy" aria-selected="true" aria-controls="hdir-panel-therapy" data-hdir-tab>Клітинне омолодження і терапія</button>
+                <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-preparations" aria-selected="false" aria-controls="hdir-panel-preparations" data-hdir-tab tabindex="-1">Клітинні препарати SmartCell</button>
+                <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-consultants" aria-selected="false" aria-controls="hdir-panel-consultants" data-hdir-tab tabindex="-1">Консультанти SmartCell</button>
+                <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-bank" aria-selected="false" aria-controls="hdir-panel-bank" data-hdir-tab tabindex="-1">Банк біологічного страхування</button>
+                <span class="sc-hdir__indicator" aria-hidden="true" data-hdir-indicator></span>
               </div>
 
-              <!-- Напрямки раздела «Клітинне омолодження і терапія» — 16, в две колонки -->
-              <div class="sc-hdir__col sc-hdir__col--dirs">
-              <p class="sc-hdir__label sc-t-caption" id="hdir-dirs-label">Напрямки клітинної терапії</p>
-              <ul class="sc-hdir__list" aria-labelledby="hdir-dirs-label">
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Ендокринологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Гастроентерологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-otolaringologii">Отоларингологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-estetichnij-medicini">Естетична медицина</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-oftalmologii">Офтальмологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Травматологія та ортопедія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Стоматологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/smartcell-ginekologiya">Гінекологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-urologii">Урологія</a></li>
-                  <li><a class="sc-hdir__link" href="direction-plastic-nav.html" aria-current="page">Пластична хірургія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-nevrologii">Неврологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitynni-tekhnolohii-v-sudynnii-khirurhii">Судинна хірургія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-dermatologii">Дерматологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-pulmonologii">Пульмонологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Кардіологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii">Anti-age терапія</a></li>
-              </ul>
-              </div>
+              <div class="sc-hdir__body">
+                <div class="sc-hdir__panels">
 
-              <!-- Справа — анонс статьи Smart Age Journal: карточка как в ленте
-                   журнала (.sc-mag__card в B17): квадратная обложка во всю колонку,
-                   рубрика · время, заголовок. Статью выбирает редакция (ACF: menu_article →
-                   запись журнала), по умолчанию — последний материал рубрики «Наука» -->
-              <div class="sc-hdir__col sc-hdir__col--article">
-                <p class="sc-hdir__label sc-t-caption">Smart Age Journal</p>
-                <article class="sc-hdir__article">
-                  <a class="sc-hdir__article-photo" href="vm-article-oblik.html">
-                    <img src="assets/img/vm/oblik-cover-640.jpg"
-                         srcset="assets/img/vm/oblik-cover-640.jpg 640w, assets/img/vm/oblik-cover.jpg 1120w"
-                         sizes="320px" width="640" height="640"
-                         alt="Фібробласти у культуральному середовищі" loading="lazy" decoding="async">
-                  </a>
-                  <span class="sc-hdir__article-meta">
-                    <a class="sc-hdir__article-tag sc-t-caption" href="vm-blog.html#rubric-5">Наука</a>
-                    <span class="sc-hdir__article-time sc-t-mini">9 хв</span>
-                  </span>
-                  <a class="sc-hdir__article-title sc-t-h3" href="vm-article-oblik.html">Фібробласти шкіри: що це за клітини і чому від них залежить молодість</a>
-                </article>
+                  <!-- Напрямки раздела — 16, в три колонки, порядок как на virtus.ua -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-therapy" aria-labelledby="hdir-tab-therapy">
+                    <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya">Усі напрямки клітинної терапії</a>
+                    <ul class="sc-hdir__list">
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Ендокринологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Гастроентерологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-otolaringologii">Отоларингологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-estetichnij-medicini">Естетична медицина</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-oftalmologii">Офтальмологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Травматологія та ортопедія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Стоматологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/smartcell-ginekologiya">Гінекологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-urologii">Урологія</a></li>
+                      <li><a class="sc-hdir__link" href="direction-plastic-nav.html" aria-current="page">Пластична хірургія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-nevrologii">Неврологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitynni-tekhnolohii-v-sudynnii-khirurhii">Судинна хірургія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-dermatologii">Дерматологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-pulmonologii">Пульмонологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Кардіологія</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii">Anti-age терапія</a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Препарати: лид и страницы раздела (с virtus.ua) -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-preparations" aria-labelledby="hdir-tab-preparations" hidden>
+                    <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Перейти до розділу</a>
+                    <p class="sc-hdir__lead sc-t-body">Інститут VIRTUS і біотехнологічна компанія SmartCell представляють CELLNESS — унікальні косметичні та лікувальні продукти для вашої краси.</p>
+                    <ul class="sc-hdir__list sc-hdir__list--short">
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami">Омолодження організму власними стовбуровими клітинами</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/stvolovye-kletki-kostnogo-mozga">Cellness. Лікування стовбуровими клітинами</a></li>
+                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/plazmaferez">Плазмаферез</a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Консультанти: плитки врачей с квадратным фото, узкая щель; на virtus.ua их 24 -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-consultants" aria-labelledby="hdir-tab-consultants" hidden>
+                    <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/smartcell-consultants">Усі консультанти SmartCell</a>
+                    <ul class="sc-hdir__tiles">
+                    <li class="sc-hdir__tile">
+                      <a class="sc-hdir__tile-photo" href="https://virtus.ua/ceo"><img src="assets/img/direction/doctor-tsepkolenko-volodymyr.jpg" width="445" height="445" alt="Цепколенко Володимир Олександрович" loading="lazy" decoding="async"></a>
+                      <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/ceo">Цепколенко Володимир Олександрович</a>
+                      <span class="sc-hdir__tile-meta sc-t-mini">Керівник Інституту VIRTUS і компанії SmartCell</span>
+                    </li>
+                    <li class="sc-hdir__tile">
+                      <a class="sc-hdir__tile-photo" href="https://virtus.ua/doctor/kadochnikov-sergej-valerevich"><img src="assets/img/direction/doctor-kadochnikov-serhii.jpg" width="445" height="445" alt="Кадочніков Сергій Валерійович" loading="lazy" decoding="async"></a>
+                      <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/doctor/kadochnikov-sergej-valerevich">Кадочніков Сергій Валерійович</a>
+                      <span class="sc-hdir__tile-meta sc-t-mini">Пластичний хірург</span>
+                    </li>
+                    <li class="sc-hdir__tile">
+                      <a class="sc-hdir__tile-photo" href="https://virtus.ua/doctor/sarkisyan-arman-grajrovich"><img src="assets/img/direction/doctor-sarkisian-arman.jpg" width="445" height="445" alt="Саркісян Арман Грайрович" loading="lazy" decoding="async"></a>
+                      <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/doctor/sarkisyan-arman-grajrovich">Саркісян Арман Грайрович</a>
+                      <span class="sc-hdir__tile-meta sc-t-mini">Пластичний хірург</span>
+                    </li>
+                    </ul>
+                  </div>
+
+                  <!-- Банк: лид с virtus.ua -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-bank" aria-labelledby="hdir-tab-bank" hidden>
+                    <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/bank-biolohichnoho-strakhuvannia">Перейти до розділу</a>
+                    <p class="sc-hdir__lead sc-t-body">Банк біологічного страхування компанії SmartCell на базі Інституту VIRTUS — це унікальна можливість лікування захворювань, відновлення та омолодження організму за допомогою власних стовбурових клітин, якою можна скористатися у будь-який момент.</p>
+                  </div>
+
+                </div>
+
+                <!-- Справа — анонс статьи Smart Age Journal: карточка как в ленте
+                     журнала (.sc-mag__card в B17), квадратная обложка во всю колонку.
+                     Статью выбирает редакция (ACF: menu_article → запись журнала) -->
+                <div class="sc-hdir__col--article">
+                  <p class="sc-hdir__label sc-t-caption">Smart Age Journal</p>
+                  <article class="sc-hdir__article">
+                    <a class="sc-hdir__article-photo" href="vm-article-oblik.html">
+                      <img src="assets/img/vm/oblik-cover-640.jpg"
+                           srcset="assets/img/vm/oblik-cover-640.jpg 640w, assets/img/vm/oblik-cover.jpg 1120w"
+                           sizes="320px" width="640" height="640"
+                           alt="Фібробласти у культуральному середовищі" loading="lazy" decoding="async">
+                    </a>
+                    <span class="sc-hdir__article-meta">
+                      <a class="sc-hdir__article-tag sc-t-caption" href="vm-blog.html#rubric-5">Наука</a>
+                      <span class="sc-hdir__article-time sc-t-mini">9 хв</span>
+                    </span>
+                    <a class="sc-hdir__article-title sc-t-h3" href="vm-article-oblik.html">Фібробласти шкіри: що це за клітини і чому від них залежить молодість</a>
+                  </article>
+                </div>
               </div>
 
             </div>
