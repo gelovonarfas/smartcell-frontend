@@ -209,6 +209,129 @@
   transform: translateY(-50%);
 }
 
+/* ---------- Протоколи: витрина Face Control 365 (2026-10-05) ----------
+   Квадрат шириной в плиту (320) · текст, плита Button/Block прижата к низу,
+   так что низ кадра и низ плиты стоят на одной линии. */
+.sc-hdir__protocol {
+  display: grid;
+  grid-template-columns: var(--sc-cta-block-w) minmax(0, 1fr);
+  gap: var(--section-gap);
+  inline-size: 100%;
+}
+
+.sc-hdir__protocol-photo {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.sc-hdir__protocol-photo img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transition: transform var(--sc-dur-slow) var(--sc-ease-out);
+}
+
+.sc-hdir__protocol-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--section-gap);
+  min-inline-size: 0;
+}
+
+.sc-hdir__protocol-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-hdir__protocol-title {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+/* Три опоры программы — плашки как в B02 (sc-difference__tag) */
+.sc-hdir__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sc-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-hdir__tag {
+  padding: var(--sc-space-2) var(--sc-space-3_5); /* 8 / 14, как в B02 */
+  background: var(--secondary);
+  color: var(--foreground);
+}
+
+/* Button/Block — плита 320×76: лейбл сверху слева, стрелка снизу справа */
+.sc-hdir__block {
+  inline-size: var(--sc-cta-block-w);
+  block-size: var(--sc-cta-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--grid-gap);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-hdir__block-label {
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+.sc-hdir__block-arrow { display: flex; justify-content: flex-end; }
+
+.sc-hdir__block-arrow svg {
+  display: block;
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-hdir__protocol-title:hover {
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+  .sc-hdir__protocol-photo:hover img { transform: scale(1.03); }
+  .sc-hdir__block:hover { background: var(--sc-primary-hover); }
+  .sc-hdir__block:hover .sc-hdir__block-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.sc-hdir__block:active { background: var(--sc-primary-hover); }
+
+.sc-hdir__protocol-title:focus-visible,
+.sc-hdir__block:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-hdir__protocol-photo img,
+  .sc-hdir__block-arrow svg { transition: none; }
+}
+
+@media (max-width: 640px) {
+  /* на телефоне кадр не нужен — как и анонс статьи; плита во всю ширину */
+  .sc-hdir__protocol { grid-template-columns: minmax(0, 1fr); }
+  .sc-hdir__protocol-photo { display: none; }
+  .sc-hdir__protocol-copy { gap: var(--stack-gap-lg); }
+  .sc-hdir__block { inline-size: 100%; }
+}
+
 /* Плитки консультантов: квадратное фото, узкая щель (--grid-gap, как в ленте) */
 .sc-hdir__tiles {
   display: grid;
