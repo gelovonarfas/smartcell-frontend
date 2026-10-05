@@ -92,7 +92,7 @@
 .sc-dservices {
   display: flex;
   flex-direction: column;
-  gap: var(--stack-gap-lg);
+  gap: var(--sc-head-gap); /* заголовок → содержимое, всегда одинаково (2026-10-05); было --stack-gap-lg */
 }
 
 .sc-dservices__title { margin: 0; }
@@ -233,7 +233,7 @@
 .sc-dindications {
   display: flex;
   flex-direction: column;
-  gap: var(--stack-gap-lg);
+  gap: var(--sc-head-gap); /* заголовок → содержимое, всегда одинаково (2026-10-05); было --stack-gap-lg */
 }
 
 .sc-dindications__title { margin: 0; }

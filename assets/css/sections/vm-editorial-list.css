@@ -27,7 +27,7 @@
 .sc-editorial__inner {
   display: flex;
   flex-direction: column;
-  gap: var(--section-gap);
+  gap: var(--sc-head-gap); /* заголовок → содержимое, всегда одинаково (2026-10-05) */
 }
 
 .sc-editorial__head { display: flex; align-items: center; }
