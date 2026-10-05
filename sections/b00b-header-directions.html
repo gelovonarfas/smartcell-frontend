@@ -3,14 +3,14 @@
      Основа — sections/b00b-header.html; добавлен пункт «Напрямки»
      и мега-полка под шапкой. Остальная шапка без изменений.
 
-     Зачем: у SmartCell на virtus.ua ~30 разделов «Клітинні технології в …»,
-     в строку меню они не помещаются. Полка раскладывает их по смыслу
-     в четыре колонки, текущий напрямок отмечен (aria-current).
-     Разделы — с virtus.ua/kletochnye-tehnologii (sitemap, 2026-10-04);
-     подписи сокращены до названия напрямку: «Клітинні технології в
-     пластичній хірургії» → «Пластична хірургія».
+     Зачем: напрямки SmartCell на virtus.ua в строку меню не помещаются.
+     Полка повторяет прежнее меню virtus.ua (правка 2026-10-04, «как было»):
+     слева четыре раздела SmartCell, в середине 16 напрямків раздела
+     «Клітинне омолодження і терапія» в две колонки в том же порядке,
+     справа анонс «Випустіть молодість з клітки!» (картинка и текст оттуда).
+     Текущий напрямок отмечен (aria-current).
 
-     ACF / WP Menus: меню «Напрямки» — 4 группы (заголовок + пункты),
+     ACF / WP Menus: меню «Напрямки» — разделы (4), напрямки (16), анонс (картинка, заголовок, текст, ссылка),
      текущий пункт тема помечает current-menu-item → aria-current="page".
      Скрипт: assets/js/header-directions.js (открыть/закрыть, Esc, клик мимо).
      На телефоне полка — раскрывающийся пункт внутри меню под бургером.
@@ -40,60 +40,43 @@
           <div class="sc-hdir__clip">
             <div class="sc-hdir__shelf">
 
-              <section class="sc-hdir__group" aria-labelledby="hdir-beauty">
-                <p class="sc-hdir__title sc-t-caption" id="hdir-beauty">Краса і молодість</p>
-                <ul class="sc-hdir__list">
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-estetichnij-medicini">Естетична медицина</a></li>
-                  <li><a class="sc-hdir__link" href="direction-plastic-nav.html" aria-current="page">Пластична хірургія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-dermatologii">Дерматологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii">Anti-age терапія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Стоматологія</a></li>
-                </ul>
-              </section>
+              <!-- Разделы SmartCell — как в меню virtus.ua: текущий раздел отмечен -->
+              <ul class="sc-hdir__sections">
+                <li><a class="sc-hdir__section sc-is-current" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya">Клітинне омолодження і терапія<svg class="sc-hdir__section-chevron" viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 1.5L7 5L3.5 8.5" stroke="currentColor"/></svg></a></li>
+                <li><a class="sc-hdir__section" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Клітинні препарати SmartCell</a></li>
+                <li><a class="sc-hdir__section" href="https://virtus.ua/smartcell-consultants">Консультанти SmartCell</a></li>
+                <li><a class="sc-hdir__section" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/bank-biolohichnoho-strakhuvannia">Банк біологічного страхування</a></li>
+              </ul>
 
-              <section class="sc-hdir__group sc-hdir__group--wide" aria-labelledby="hdir-medical">
-                <p class="sc-hdir__title sc-t-caption" id="hdir-medical">Медичні напрямки</p>
-                <ul class="sc-hdir__list sc-hdir__list--cols">
+              <!-- Напрямки раздела «Клітинне омолодження і терапія» — 16, в две колонки -->
+              <ul class="sc-hdir__list" aria-label="Напрямки клітинної терапії">
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Ендокринологія</a></li>
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Гастроентерологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Кардіологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-pulmonologii">Пульмонологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-nevrologii">Неврологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-oftalmologii">Офтальмологія</a></li>
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-otolaringologii">Отоларингологія</a></li>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-estetichnij-medicini">Естетична медицина</a></li>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-oftalmologii">Офтальмологія</a></li>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Травматологія та ортопедія</a></li>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Стоматологія</a></li>
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/smartcell-ginekologiya">Гінекологія</a></li>
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-urologii">Урологія</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Травматологія та ортопедія</a></li>
+                  <li><a class="sc-hdir__link" href="direction-plastic-nav.html" aria-current="page">Пластична хірургія</a></li>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-nevrologii">Неврологія</a></li>
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitynni-tekhnolohii-v-sudynnii-khirurhii">Судинна хірургія</a></li>
-                </ul>
-              </section>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-dermatologii">Дерматологія</a></li>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-pulmonologii">Пульмонологія</a></li>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Кардіологія</a></li>
+                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii">Anti-age терапія</a></li>
+              </ul>
 
-              <section class="sc-hdir__group" aria-labelledby="hdir-diseases">
-                <p class="sc-hdir__title sc-t-caption" id="hdir-diseases">Лікування захворювань</p>
-                <ul class="sc-hdir__list">
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/alzheimer_cell">Хвороба Альцгеймера</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/amyotrophic_lateral_sclerosis">Боковий аміотрофічний склероз</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/demyelinating_diseases">Демієлінізуючі захворювання</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/spinal_cord">Спінальна травма</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/arthritis_arthrosis">Артрити та артрози</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/autoimmune_rheumatological_diseases">Аутоімунні та ревматологічні</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii/cirrhosis_cell">Цироз і фіброз печінки</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/chronic_fatigue_syndrome">Синдром хронічної втоми</a></li>
-                </ul>
-              </section>
-
-              <section class="sc-hdir__group sc-hdir__group--programs" aria-labelledby="hdir-programs">
-                <p class="sc-hdir__title sc-t-caption" id="hdir-programs">Програми SmartCell</p>
-                <ul class="sc-hdir__list">
-                  <li><a class="sc-hdir__link" href="index.html">Face Control 365</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami">Омолодження стовбуровими клітинами</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/stvolovye-kletki-kostnogo-mozga">Cellness</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Клітинні препарати SmartCell</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/plazmaferez">Плазмаферез</a></li>
-                  <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/bank-biolohichnoho-strakhuvannia">Банк біологічного страхування</a></li>
-                </ul>
-                <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii">Усі клітинні технології</a>
-              </section>
+              <!-- Анонс справа — как на virtus.ua: картинка и текст оттуда же -->
+              <a class="sc-hdir__promo" href="https://virtus.ua/kletochnye-tehnologii">
+                <img class="sc-hdir__promo-img" src="assets/img/direction/menu-promo-stemcells.jpg"
+                     srcset="assets/img/direction/menu-promo-stemcells.jpg 240w, assets/img/direction/menu-promo-stemcells@2x.jpg 480w"
+                     sizes="240px" width="240" height="125" alt="" loading="lazy" decoding="async">
+                <span class="sc-hdir__promo-title sc-t-h3">Випустіть молодість з клітки!</span>
+                <span class="sc-hdir__promo-text sc-t-small">Дізнайтеся все про омолодження обличчя і оздоровлення тіла власними стовбуровими клітинами</span>
+                <span class="sc-hdir__promo-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+              </a>
 
             </div>
           </div>

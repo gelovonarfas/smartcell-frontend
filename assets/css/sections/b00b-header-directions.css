@@ -1,6 +1,7 @@
 /* ============================================================
    B00b · Header — меню «Напрямки» (ПРОБА 2026-10-04)
-   Мега-полка под шапкой: разделы SmartCell с virtus.ua в четыре колонки.
+   Мега-полка под шапкой по образцу прежнего меню virtus.ua: разделы SmartCell,
+   16 напрямків в две колонки, анонс справа (правка 2026-10-04, «как было»).
    Раскрытие — как полочка тем журнала (vm-topics.css): строка сетки
    0fr → 1fr с выраженным ease-out. Поведение — assets/js/header-directions.js
    Зависит от b00b-header.css (подключается после него).
@@ -8,7 +9,8 @@
 
 .sc-header {
   --hdir-open-dur: 600ms;
-  --hdir-cols: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1.3fr) minmax(0, 1.3fr);
+  --hdir-cols: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr); /* разделы · напрямки · анонс */
+  --hdir-promo-img-w: 240px; /* картинка анонса с virtus.ua: 240 × 125, @2x 480 */
 }
 
 /* Обёртка пункта не позиционирована: полка встаёт от края шапки
@@ -69,51 +71,64 @@
   display: grid;
   grid-template-columns: var(--hdir-cols);
   gap: var(--section-gap);
-  padding: var(--sc-space-10) var(--sc-pad-x) var(--sc-space-12); /* 40 / 48 */
+  /* справа поля нет: анонс тёплой плашкой доходит до края, как на virtus.ua */
+  padding-inline-start: var(--sc-pad-x);
 }
 
-.sc-hdir__group {
+/* ---------- Разделы SmartCell ---------- */
+
+.sc-hdir__sections {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: var(--grid-gap);
-  min-inline-size: 0;
+  margin: 0;
+  padding: var(--sc-space-10) 0 var(--sc-space-12); /* 40 / 48 */
+  list-style: none;
 }
 
-.sc-hdir__title {
-  margin: 0;
-  color: var(--sc-neutral-600);
+.sc-hdir__section {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sc-space-2);
+  color: var(--foreground);
+  text-decoration: none;
+  font: var(--h3-weight) var(--h3-size) / var(--h3-lh) var(--font-headings);
+  letter-spacing: var(--h3-ls);
 }
+
+/* Текущий раздел — синим, со стрелкой к его напрямкам */
+.sc-hdir__section.sc-is-current { color: var(--sc-blue-700); }
+
+.sc-hdir__section-chevron {
+  flex: none;
+  inline-size: var(--sc-space-2_5);
+  block-size: var(--sc-space-2_5);
+}
+
+/* ---------- Напрямки: 16 в две колонки, порядок как на virtus.ua ---------- */
 
 .sc-hdir__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--stack-gap-sm);
-}
-
-/* «Медичні напрямки» — одиннадцать пунктов в две колонки */
-.sc-hdir__list--cols {
-  display: block;
   columns: 2;
   column-gap: var(--section-gap);
+  margin: 0;
+  padding: var(--sc-space-10) 0 var(--sc-space-12);
+  list-style: none;
 }
 
-.sc-hdir__list--cols > li { break-inside: avoid; padding-block-end: var(--stack-gap-sm); }
+.sc-hdir__list > li {
+  break-inside: avoid;
+  padding-block-end: var(--sc-space-3);
+}
 
 .sc-hdir__link {
+  position: relative;
   color: var(--foreground);
   text-decoration: none;
   font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
 }
 
 /* Текущий напрямок: точка слева и вес — «ви тут» без лишних слов */
-.sc-hdir__link[aria-current="page"] {
-  position: relative;
-  font-weight: var(--sc-weight-medium);
-}
+.sc-hdir__link[aria-current="page"] { font-weight: var(--sc-weight-medium); }
 
 .sc-hdir__link[aria-current="page"]::before {
   content: "";
@@ -126,20 +141,44 @@
   transform: translateY(-50%);
 }
 
-.sc-hdir__all {
-  margin-block-start: var(--sc-space-2);
+/* ---------- Анонс справа ---------- */
+
+.sc-hdir__promo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--grid-gap);
+  padding: var(--sc-space-10) var(--sc-pad-x) var(--sc-space-12) var(--sc-space-10);
+  background: var(--warm);
   color: var(--foreground);
-  text-decoration: underline;
-  text-underline-position: from-font;
+  text-decoration: none;
 }
 
-/* Пункты проявляются вслед за полкой — та же волна, что у тем журнала */
-.sc-hdir.sc-is-open .sc-hdir__group {
+.sc-hdir__promo-img {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--hdir-promo-img-w);
+  block-size: auto;
+  aspect-ratio: 240 / 125;
+  object-fit: cover;
+}
+
+.sc-hdir__promo-text {
+  color: var(--sc-neutral-600);
+  max-inline-size: var(--sc-measure-narrow);
+}
+
+.sc-hdir__promo-arrow svg {
+  display: block;
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* Колонки проявляются вслед за полкой — та же волна, что у тем журнала */
+.sc-hdir.sc-is-open .sc-hdir__shelf > * {
   animation: sc-hdir-in var(--hdir-open-dur) var(--sc-ease-out-expo) both;
 }
-.sc-hdir.sc-is-open .sc-hdir__group:nth-child(2) { animation-delay: 40ms; }
-.sc-hdir.sc-is-open .sc-hdir__group:nth-child(3) { animation-delay: 80ms; }
-.sc-hdir.sc-is-open .sc-hdir__group:nth-child(4) { animation-delay: 120ms; }
+.sc-hdir.sc-is-open .sc-hdir__shelf > :nth-child(2) { animation-delay: 40ms; }
+.sc-hdir.sc-is-open .sc-hdir__shelf > :nth-child(3) { animation-delay: 80ms; }
 
 @keyframes sc-hdir-in {
   from { opacity: 0; transform: translateY(var(--sc-space-2)); }
@@ -157,16 +196,17 @@
 
 @media (hover: hover) and (pointer: fine) {
   .sc-hdir__link:hover,
-  .sc-hdir__all:hover {
+  .sc-hdir__section:hover {
     text-decoration: underline;
     text-underline-position: from-font;
   }
-  .sc-hdir__all:hover { text-decoration: none; }
+  .sc-hdir__promo:hover .sc-hdir__promo-arrow svg { transform: translateX(var(--sc-space-1_5)); }
 }
 
 .sc-hdir__trigger:focus-visible,
 .sc-hdir__link:focus-visible,
-.sc-hdir__all:focus-visible {
+.sc-hdir__section:focus-visible,
+.sc-hdir__promo:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
 }
@@ -174,8 +214,9 @@
 @media (prefers-reduced-motion: reduce) {
   .sc-hdir__chevron,
   .sc-hdir__panel,
-  .sc-hdir.sc-is-open .sc-hdir__panel { transition: none; }
-  .sc-hdir.sc-is-open .sc-hdir__group { animation: none; }
+  .sc-hdir.sc-is-open .sc-hdir__panel,
+  .sc-hdir__promo-arrow svg { transition: none; }
+  .sc-hdir.sc-is-open .sc-hdir__shelf > * { animation: none; }
 }
 
 /* ---------- Телефон: «Напрямки» — раскрывающийся пункт в меню под бургером ---------- */
@@ -202,13 +243,28 @@
 
   .sc-hdir__shelf {
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--stack-gap-lg);
+    gap: 0;
     padding: 0 0 var(--grid-gap);
   }
 
-  .sc-hdir__list--cols { columns: 1; }
+  .sc-hdir__sections {
+    gap: var(--stack-gap-sm);
+    padding: 0 0 var(--stack-gap-lg);
+  }
+
+  .sc-hdir__section { font: 400 var(--p-size) / var(--p-lh) var(--font-sans); }
+
+  .sc-hdir__list {
+    columns: 1;
+    padding: 0 0 0 var(--grid-gap); /* напрямки — вложены в текущий раздел */
+  }
+
+  .sc-hdir__list > li { padding-block-end: var(--stack-gap-sm); }
 
   .sc-hdir__link { font-size: var(--p-small-size); line-height: var(--p-small-lh); }
+
+  /* анонс на телефоне не нужен: меню и так длинное */
+  .sc-hdir__promo { display: none; }
 
   .sc-header.sc-hdir-open { background: var(--glass-surface); }
 
