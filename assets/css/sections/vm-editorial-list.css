@@ -122,6 +122,7 @@
 .sc-editorial__preview-inner {
   display: block;
   inline-size: var(--editorial-preview-size);
+  transform-origin: left center; /* вырастает от курсора: квадрат справа от него */
   aspect-ratio: 1 / 1; /* «квадратиком» */
   overflow: hidden;
   background: var(--muted);

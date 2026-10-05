@@ -148,6 +148,7 @@
 .sc-dservices__preview-inner {
   display: block;
   inline-size: var(--dtabs-preview-size);
+  transform-origin: left center; /* вырастает от курсора: квадрат справа от него */
   aspect-ratio: 1 / 1; /* «квадратиком» */
   overflow: hidden;
   background: var(--muted);
