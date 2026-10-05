@@ -1,10 +1,11 @@
 <!-- ============================================================
-     SC/Direction · CTA «Консультація» с формой
+     SC/Direction · CTA «Консультація» — затравка, запись в попапе
      figma: node-id=318:51
      ACF: consult_kicker (text), consult_title (textarea), consult_text (textarea),
-          consult_submit (text), consult_consent (text, ссылка на политику)
-     Проверка полей — assets/js/forms.js (data-form). Отправка не подключена:
-     валидный сабмит уходит нативно, кодер подставляет action / AJAX.
+          consult_cta_label (text)
+     Форма со страницы снята (2026-10-04): кнопка открывает попап записи —
+     тот же, что на Face Control (data-modal-open="booking"); тексты попапа
+     для напрямку — в копии модалки на странице. Старая форма — в комментарии ниже.
      ============================================================ -->
 <section class="sc-dconsult" id="direction-consult" data-theme="inverse">
   <div class="sc-dconsult__copy">
@@ -13,6 +14,14 @@
     <p class="sc-dconsult__text sc-t-body">Прийом веде керівник клініки, доктор медичних наук, професор Володимир Цепколенко. За потреби до консультації долучаються профільні фахівці — спільне рішення дозволяє обрати ефективну тактику лікування.</p>
   </div>
 
+  <!-- Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
+       Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. -->
+  <a class="sc-dconsult__cta" href="#direction-consult" data-modal-open="booking">
+    <span class="sc-dconsult__cta-label">Записатись на консультацію</span>
+    <span class="sc-dconsult__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+  </a>
+
+  <!-- Прежняя форма на странице (до 2026-10-04) — для отката:
   <form class="sc-dconsult__form" data-form novalidate>
     <div class="sc-dconsult__field">
       <label class="sc-dconsult__label sc-t-caption" for="dconsult-name">Прізвище, імʼя, по батькові*</label>
@@ -38,4 +47,5 @@
     <button class="sc-dconsult__submit" type="submit">Записатися</button>
     <p class="sc-dconsult__consent sc-t-mini">Надсилаючи форму, ви підтверджуєте згоду з політикою обробки персональних даних.</p>
   </form>
+  -->
 </section>

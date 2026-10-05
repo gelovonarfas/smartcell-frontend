@@ -1,18 +1,19 @@
 /* ============================================================
-   SC/Direction · CTA «Консультація» с формой
+   SC/Direction · CTA «Консультація» — затравка, запись в попапе (форма снята 2026-10-04)
    figma: node-id=318:51
    Поля — Form/Input в теме inverse; состояния как у B11 (b11-consult.css)
    ============================================================ */
 
 .sc-dconsult {
   /* --- Геометрия из макета, которой нет в токенах --- */
-  --dconsult-form-w: 456px; /* колонка формы */
+  --dconsult-form-w: 456px; /* колонка формы (форма снята 2026-10-04, правила ниже — для отката) */
 
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--dconsult-form-w);
+  /* Затравка: текст слева, кнопка-плита справа по низу текста (2026-10-04) */
+  grid-template-columns: minmax(0, 1fr) var(--sc-cta-block-w);
   gap: var(--section-gap);
-  align-items: start;
+  align-items: end;
   padding: var(--section-padding-y) var(--sc-pad-x);
   background: var(--background);
   color: var(--foreground);
@@ -38,6 +39,55 @@
   max-inline-size: var(--sc-measure);
   color: var(--muted-foreground);
 }
+
+
+/* ---------- Button/Block · primary — открывает попап записи ----------
+   В inverse primary светлый, текст тёмный: так же, как кнопка-плита hero */
+.sc-dconsult__cta {
+  inline-size: 100%;
+  max-inline-size: var(--sc-cta-block-w);
+  block-size: var(--sc-cta-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--grid-gap);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-dconsult__cta-label {
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+.sc-dconsult__cta-arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sc-dconsult__cta-arrow svg {
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-dconsult__cta:hover { background: var(--sc-primary-hover); }
+  .sc-dconsult__cta:hover .sc-dconsult__cta-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.sc-dconsult__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-dconsult__cta:active { background: var(--sc-primary-hover); }
+
+/* ---------- Форма на странице — снята 2026-10-04, стили оставлены для отката ---------- */
 
 .sc-dconsult__form {
   display: flex;
@@ -127,6 +177,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .sc-dconsult__cta,
+  .sc-dconsult__cta-arrow svg,
   .sc-dconsult__input,
   .sc-dconsult__submit { transition: none; }
 }
@@ -134,7 +186,11 @@
 /* ---------- Телефон ---------- */
 
 @media (max-width: 640px) {
-  .sc-dconsult { grid-template-columns: minmax(0, 1fr); }
+  .sc-dconsult {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+  .sc-dconsult__cta { max-inline-size: none; }
   .sc-dconsult__submit {
     inline-size: 100%;
     margin-block-start: calc(var(--sc-form-cta-gap) - var(--control-gap));

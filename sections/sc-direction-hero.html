@@ -4,8 +4,8 @@
      ACF: direction_title (textarea, перенос строки — <br>), direction_lead (textarea),
           direction_branches (relationship → філії: виводится адреса),
           direction_cta_label (text), direction_image (image, 1:1)
-     Кнопка ведёт к форме внизу страницы (#direction-consult), не в модалку:
-     в макете форма своя, с полем email.
+     Кнопка открывает попап записи, как на Face Control (data-modal-open="booking",
+     2026-10-04); без скрипта — ссылка на затравку консультации внизу (#direction-consult).
      Фото — кадр из макета (клітини), 720 × 720, @2x 1440.
      ============================================================ -->
 <section class="sc-dhero">
@@ -25,7 +25,7 @@
         </ul>
       </div>
 
-      <a class="sc-dhero__cta" href="#direction-consult">
+      <a class="sc-dhero__cta" href="#direction-consult" data-modal-open="booking">
         <span class="sc-dhero__cta-label">Записатись на консультацію</span>
         <span class="sc-dhero__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
       </a>
