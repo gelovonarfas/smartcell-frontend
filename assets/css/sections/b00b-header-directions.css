@@ -2,7 +2,7 @@
    B00b · Header — меню «Напрямки» (ПРОБА 2026-10-04)
    Мега-полка под шапкой. Состав — как в прежнем меню virtus.ua (разделы
    SmartCell, 16 напрямків), справа — анонс статьи журнала; оформление — кит:
-   капсы, волосяные разделители, текущее как во вкладках, обложка — квадрат.
+   капсы, колонки разведены воздухом, текущее как во вкладках, обложка — квадрат.
    Раскрытие — как полочка тем журнала (vm-topics.css): строка сетки
    0fr → 1fr с выраженным ease-out. Поведение — assets/js/header-directions.js
    Зависит от b00b-header.css (подключается после него).
@@ -70,22 +70,17 @@
 .sc-hdir__shelf {
   display: grid;
   grid-template-columns: var(--hdir-cols);
+  gap: var(--section-gap); /* 56 — колонки разведены воздухом, без линий (правка 2026-10-04) */
   padding: var(--sc-space-10) var(--sc-pad-x) var(--sc-space-12); /* 40 / 48 */
 }
 
-/* Колонки разведены волосяными линиями, как строки в «Читайте також» */
 .sc-hdir__col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--stack-gap-lg);
   min-inline-size: 0;
-  padding-inline: var(--sc-space-8); /* 32 */
 }
-
-.sc-hdir__col:first-child { padding-inline-start: 0; }
-.sc-hdir__col + .sc-hdir__col { border-inline-start: var(--hairline) solid var(--border); }
-.sc-hdir__col:last-child { padding-inline-end: 0; }
 
 .sc-hdir__label {
   margin: 0;
@@ -284,12 +279,7 @@
     padding: 0 0 var(--grid-gap);
   }
 
-  .sc-hdir__col,
-  .sc-hdir__col + .sc-hdir__col {
-    padding-inline: 0;
-    border-inline-start: 0;
-    gap: var(--stack-gap-sm);
-  }
+  .sc-hdir__col { gap: var(--stack-gap-sm); }
 
   .sc-hdir__col + .sc-hdir__col { margin-block-start: var(--stack-gap-lg); }
 
