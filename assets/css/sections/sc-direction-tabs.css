@@ -119,7 +119,6 @@
   column-gap: var(--grid-gap);
   row-gap: var(--sc-space-2);
   padding: var(--grid-gap);
-  padding-inline-start: var(--sc-space-3); /* текст ближе к левому краю: 12 (было 16, проба 24; 2026-10-05) */
   border: var(--sc-line) solid var(--border);
   color: var(--foreground);
   font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
@@ -127,7 +126,11 @@
   transition: background-color var(--sc-dur-fast) var(--sc-ease);
 }
 
-.sc-dservices__label { grid-column: 1; grid-row: 1 / -1; }
+.sc-dservices__label {
+  grid-column: 1 / -1; /* на всю ширину: 75% одинаковы у плиток с меткой и без */
+  grid-row: 1 / -1;
+  max-inline-size: 75%; /* строка не длиннее 3/4 плитки — текст держится левого края, не тянется к метке (2026-10-05) */
+}
 
 /* Метка «Virtus»: плитка ведёт на страницу virtus.ua, а не на услугу SmartCell */
 .sc-dservices__source {
