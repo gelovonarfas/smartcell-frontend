@@ -44,7 +44,14 @@
       if (p) p.hidden = !on;
     });
     moveIndicator(tab);
+    syncFull(tab);
     if (focus) tab.focus();
+  }
+
+  /* Вкладка во всю полку (data-hdir-full на панели): анонс журнала прячется */
+  function syncFull(tab) {
+    var p = panelOf(tab);
+    panel.classList.toggle('sc-is-full', !!(p && p.hasAttribute('data-hdir-full')));
   }
 
   function currentTab() {
@@ -80,6 +87,7 @@
     if (open && tabs.length) {
       /* первая установка бегунка — без анимации, затем включаем переход */
       moveIndicator(currentTab());
+      syncFull(currentTab());
       requestAnimationFrame(function () {
         requestAnimationFrame(function () { if (tablist) tablist.classList.add('sc-is-ready'); });
       });

@@ -210,11 +210,16 @@
 }
 
 /* ---------- Протоколи: витрина Face Control 365 (2026-10-05) ----------
-   Квадрат шириной в плиту (320) · текст, плита Button/Block прижата к низу,
-   так что низ кадра и низ плиты стоят на одной линии. */
+   Вкладка без анонса журнала (data-hdir-full → .sc-is-full на полке): витрина
+   во всю ширину. Квадрат слева — 5 колонок сетки кита (12 колонок, гаттер 24),
+   справа название и описание, ссылка на этапы — в нижнем углу. */
+.sc-hdir__panel.sc-is-full .sc-hdir__body { grid-template-columns: minmax(0, 1fr); }
+.sc-hdir__panel.sc-is-full .sc-hdir__col--article { display: none; }
+
 .sc-hdir__protocol {
+  --hdir-protocol-photo: calc(5 * (100% - 11 * var(--sc-grid-gutter)) / 12 + 4 * var(--sc-grid-gutter));
   display: grid;
-  grid-template-columns: var(--sc-cta-block-w) minmax(0, 1fr);
+  grid-template-columns: var(--hdir-protocol-photo) minmax(0, 1fr);
   gap: var(--section-gap);
   inline-size: 100%;
 }
@@ -255,45 +260,20 @@
   text-decoration: none;
 }
 
-/* Три опоры программы — плашки как в B02 (sc-difference__tag) */
-.sc-hdir__tags {
-  display: flex;
-  flex-wrap: wrap;
+/* Ссылка на этапы — в нижнем углу витрины: подчёркнутая, со стрелкой кита */
+.sc-hdir__protocol-more {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
   gap: var(--sc-space-2);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.sc-hdir__tag {
-  padding: var(--sc-space-2) var(--sc-space-3_5); /* 8 / 14, как в B02 */
-  background: var(--secondary);
   color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
 }
 
-/* Button/Block — плита 320×76: лейбл сверху слева, стрелка снизу справа */
-.sc-hdir__block {
-  inline-size: var(--sc-cta-block-w);
-  block-size: var(--sc-cta-block-h);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: var(--grid-gap);
-  background: var(--primary);
-  color: var(--primary-foreground);
-  text-decoration: none;
-  transition: background-color var(--sc-dur) var(--sc-ease);
-}
+.sc-hdir__protocol-more-arrow { display: flex; }
 
-.sc-hdir__block-label {
-  text-transform: uppercase;
-  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
-  letter-spacing: var(--button-ls);
-}
-
-.sc-hdir__block-arrow { display: flex; justify-content: flex-end; }
-
-.sc-hdir__block-arrow svg {
+.sc-hdir__protocol-more-arrow svg {
   display: block;
   transform: rotate(45deg);
   transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
@@ -305,31 +285,29 @@
     text-underline-position: from-font;
   }
   .sc-hdir__protocol-photo:hover img { transform: scale(1.03); }
-  .sc-hdir__block:hover { background: var(--sc-primary-hover); }
-  .sc-hdir__block:hover .sc-hdir__block-arrow svg {
-    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  .sc-hdir__protocol-more:hover { text-decoration: none; }
+  .sc-hdir__protocol-more:hover .sc-hdir__protocol-more-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 4), calc(var(--grid-gap) / 4)) rotate(45deg);
   }
 }
 
-.sc-hdir__block:active { background: var(--sc-primary-hover); }
-
 .sc-hdir__protocol-title:focus-visible,
-.sc-hdir__block:focus-visible {
+.sc-hdir__protocol-more:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sc-hdir__protocol-photo img,
-  .sc-hdir__block-arrow svg { transition: none; }
+  .sc-hdir__protocol-more-arrow svg { transition: none; }
 }
 
 @media (max-width: 640px) {
-  /* на телефоне кадр не нужен — как и анонс статьи; плита во всю ширину */
+  /* на телефоне кадр не нужен — как и анонс статьи */
   .sc-hdir__protocol { grid-template-columns: minmax(0, 1fr); }
   .sc-hdir__protocol-photo { display: none; }
   .sc-hdir__protocol-copy { gap: var(--stack-gap-lg); }
-  .sc-hdir__block { inline-size: 100%; }
+  .sc-hdir__protocol-more { align-self: flex-start; }
 }
 
 /* Плитки консультантов: квадратное фото, узкая щель (--grid-gap, как в ленте) */

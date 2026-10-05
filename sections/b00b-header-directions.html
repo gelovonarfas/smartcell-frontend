@@ -57,30 +57,26 @@
                 <div class="sc-hdir__panels">
 
                   <!-- Протоколи: протокол один — Face Control 365, поэтому не список, а витрина
-                       (правка 2026-10-05): квадратный кадр из первого экрана лендинга, надзаголовок,
-                       название, философия программы, три опоры (плашки из B02) и плита Button/Block.
-                       Тексты — с лендинга как есть. ACF: menu_protocol (страница программы).
-                       Было: список из 4 пунктов — Омолодження и Плазмаферез ушли в «Препарати»,
-                       Неофіброліфтинг есть в строке меню. -->
-                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-protocols" aria-labelledby="hdir-tab-protocols">
+                       (правка 2026-10-05): во всю полку, без анонса журнала (data-hdir-full).
+                       Слева квадрат на 5 колонок сетки — кадр из B12 «На що впливаємо»,
+                       справа название и описание с лендинга (лид B03), в нижнем углу —
+                       ссылка на этапы. Тексты — с лендинга как есть. ACF: menu_protocol.
+                       Было (утро 2026-10-05): кадр 320 из первого экрана, надзаголовок,
+                       слоган, три плашки, плита Button/Block — коммит d4fbd02. -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-protocols" aria-labelledby="hdir-tab-protocols" data-hdir-full>
                     <div class="sc-hdir__protocol">
                       <a class="sc-hdir__protocol-photo" href="index.html" tabindex="-1" aria-hidden="true">
-                        <img src="assets/img/menu-fc365.jpg" width="640" height="640" alt="" loading="lazy" decoding="async">
+                        <img src="assets/img/b12-impact.jpg" srcset="assets/img/b12-impact.jpg 460w, assets/img/b12-impact@2x.jpg 920w"
+                             sizes="(max-width: 640px) 0px, 520px" width="460" height="460" alt="" loading="lazy" decoding="async">
                       </a>
                       <div class="sc-hdir__protocol-copy">
                         <div class="sc-hdir__protocol-text">
-                          <p class="sc-hdir__label sc-t-caption">Річна програма-подорож</p>
                           <a class="sc-hdir__protocol-title sc-t-h2" href="index.html">Face Control 365</a>
-                          <p class="sc-hdir__lead sc-t-body">Все починається з розуміння біології вашої шкіри.</p>
-                          <ul class="sc-hdir__tags">
-                            <li class="sc-hdir__tag sc-t-mini">Глибока діагностика</li>
-                            <li class="sc-hdir__tag sc-t-mini">Персональний протокол</li>
-                            <li class="sc-hdir__tag sc-t-mini">Здорова і доглянута шкіра</li>
-                          </ul>
+                          <p class="sc-hdir__lead sc-t-body">Цілісна програма-подорож із глибокою діагностикою шкіри та персональним протоколом на 12 місяців.</p>
                         </div>
-                        <a class="sc-hdir__block" href="index.html#journey">
-                          <span class="sc-hdir__block-label">Етапи річної подорожі</span>
-                          <span class="sc-hdir__block-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+                        <a class="sc-hdir__protocol-more sc-t-small" href="index.html#journey">
+                          <span>Етапи річної подорожі</span>
+                          <span class="sc-hdir__protocol-more-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
                         </a>
                       </div>
                     </div>
