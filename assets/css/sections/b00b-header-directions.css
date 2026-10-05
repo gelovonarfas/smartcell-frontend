@@ -161,6 +161,28 @@
 
 .sc-hdir__list--short { columns: 1; }
 
+/* Банк и консультанти — в строку под напрямками */
+.sc-hdir__list--row {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--sc-space-8);
+  columns: auto;
+}
+
+/* Вкладка «Напрямки»: группы друг под другом, вторая — за волосяной линией (2026-10-05) */
+.sc-hdir__group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+  inline-size: 100%;
+}
+
+.sc-hdir__group + .sc-hdir__group {
+  padding-block-start: var(--stack-gap-lg);
+  border-block-start: var(--hairline) solid var(--border);
+}
+
 .sc-hdir__list > li {
   break-inside: avoid;
   padding-block-end: var(--sc-space-3);
