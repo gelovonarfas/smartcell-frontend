@@ -210,7 +210,7 @@ URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
 
 ## Репозиторий и обновления
 
-Код живёт в приватном репозитории `github.com/olegsafranov-hue/smartcell-frontend`.
+Код живёт в приватном репозитории `github.com/gelovonarfas/smartcell-frontend`.
 Каждая передача — тег `handoff-N`, на него автоматически собирается GitHub Release
 с архивом кита (без стенда и без видео). Что изменилось между передачами — в
 `CHANGELOG.md`, с пометкой на каждый пункт:
