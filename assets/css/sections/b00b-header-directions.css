@@ -169,7 +169,34 @@
   columns: auto;
 }
 
-/* Вкладка «Напрямки»: группы друг под другом, вторая — за волосяной линией (2026-10-05) */
+/* Кнопки «де саме» — чипы как «Показання» на странице напрямку (12/14, волосяная кромка);
+   текущий напрямок — залитый, как активная рубрика в ленте */
+.sc-hdir__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-gap); /* 10 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-hdir__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sc-space-3) var(--sc-space-3_5);
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-hdir__chip[aria-current="page"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Вкладки «Клітинні технології» и «Препарати»: группы друг под другом, вторая — за волосяной линией (2026-10-05) */
 .sc-hdir__group {
   display: flex;
   flex-direction: column;
@@ -312,6 +339,7 @@
     text-underline-position: from-font;
   }
   .sc-hdir__protocol-photo:hover img { transform: scale(1.03); }
+  .sc-hdir__chip:not([aria-current="page"]):hover { background: var(--muted); }
   .sc-hdir__block:hover { background: var(--sc-primary-hover); }
   .sc-hdir__block:hover .sc-hdir__block-arrow svg {
     transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
@@ -321,6 +349,7 @@
 .sc-hdir__block:active { background: var(--sc-primary-hover); }
 
 .sc-hdir__protocol-title:focus-visible,
+.sc-hdir__chip:focus-visible,
 .sc-hdir__block:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
