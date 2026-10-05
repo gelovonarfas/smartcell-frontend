@@ -229,6 +229,10 @@
 
 .sc-hdir__tile-meta { color: var(--sc-neutral-600); }
 
+/* текст не ближе 90% ширины плитки */
+.sc-hdir__tile-title,
+.sc-hdir__tile-meta { padding-inline-end: var(--sc-tile-text-inset); }
+
 /* ---------- Анонс статьи: карточка ленты журнала, обложка — квадрат во всю колонку ---------- */
 
 .sc-hdir__col--article {

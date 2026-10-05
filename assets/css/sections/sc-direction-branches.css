@@ -52,6 +52,10 @@
   background: var(--muted);
 }
 
+.sc-dbranches__name,
+.sc-dbranches__address,
+.sc-dbranches__hours { padding-inline-end: var(--sc-tile-text-inset); } /* текст не ближе 90% ширины плитки */
+
 .sc-dbranches__address,
 .sc-dbranches__hours {
   margin: 0;
@@ -61,7 +65,8 @@
 /* График — списком, не <br>: на телефоне base.css гасит все <br> (2026-09-11),
    а строки графика — данные, а не перенос под ширину */
 .sc-dbranches__hours {
-  padding: 0;
+  padding-block: 0;
+  padding-inline-start: 0; /* справа — отступ плитки выше */
   list-style: none;
 }
 
