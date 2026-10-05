@@ -379,6 +379,9 @@
   inline-size: 100%;
 }
 
+/* Четыре продукта во всю ширину полки */
+.sc-hdir__tiles--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
 .sc-hdir__tile {
   display: flex;
   flex-direction: column;
@@ -571,7 +574,8 @@
   .sc-hdir__list > li { padding-block-end: var(--stack-gap-sm); }
   .sc-hdir__link { font-size: var(--p-small-size); line-height: var(--p-small-lh); }
 
-  .sc-hdir__tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sc-hdir__tiles,
+  .sc-hdir__tiles--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .sc-hdir__col--article { display: none; }
 
