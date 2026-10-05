@@ -28,6 +28,7 @@ CRITICAL = {
     'vm-blog': ['tokens', 'base', 'b00b-header', 'vm-featured', 'vm-rubrics'],
     'vm-blog-rubrics': ['tokens', 'base', 'b00b-header', 'vm-featured', 'vm-rubrics'],
     'vm-category': ['tokens', 'base', 'b00b-header', 'vm-category', 'vm-rubrics'],
+    'direction-plastic': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'vm-article': ['tokens', 'base', 'b00b-header', 'vm-article'],
     'vm-article-oblik': ['tokens', 'base', 'b00b-header', 'vm-article'],
 }

@@ -1,0 +1,142 @@
+/* ============================================================
+   SC/Direction · CTA «Консультація» с формой
+   figma: node-id=318:51
+   Поля — Form/Input в теме inverse; состояния как у B11 (b11-consult.css)
+   ============================================================ */
+
+.sc-dconsult {
+  /* --- Геометрия из макета, которой нет в токенах --- */
+  --dconsult-form-w: 456px; /* колонка формы */
+
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--dconsult-form-w);
+  gap: var(--section-gap);
+  align-items: start;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-dconsult *,
+.sc-dconsult *::before,
+.sc-dconsult *::after { box-sizing: border-box; }
+
+.sc-dconsult__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-dconsult__kicker,
+.sc-dconsult__title,
+.sc-dconsult__text { margin: 0; }
+
+.sc-dconsult__kicker { color: var(--accent-foreground); }
+
+.sc-dconsult__text {
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+.sc-dconsult__form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--control-gap); /* 12 */
+}
+
+.sc-dconsult__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1_5); /* 6 */
+  inline-size: 100%;
+}
+
+.sc-dconsult__label { color: var(--field-label); }
+
+.sc-dconsult__input {
+  block-size: var(--field-height);
+  inline-size: 100%;
+  padding-inline: var(--field-padding-x);
+  border: var(--sc-line) solid var(--field-border);
+  border-radius: var(--radius);
+  background: var(--field-bg);
+  color: var(--field-text);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+  transition: border-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-dconsult__input::placeholder { color: var(--field-placeholder); }
+
+/* Рамку не утолщаем — по описанию Form/Input layout поедет; берём кольцо */
+.sc-dconsult__input:focus-visible {
+  outline: var(--sc-field-ring-w) solid var(--field-focus-ring);
+  outline-offset: 0;
+  border-color: var(--field-border-focus);
+}
+
+.sc-dconsult__input[aria-invalid="true"] { border-color: var(--field-border-error); }
+
+.sc-dconsult__input:disabled { opacity: 0.45; }
+
+.sc-dconsult__error {
+  margin: 0;
+  color: var(--field-text-error);
+  font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
+}
+
+/* Button/Control · primary */
+.sc-dconsult__submit {
+  block-size: var(--control-square);
+  padding-inline: var(--control-padding-x);
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  cursor: pointer;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-dconsult__consent {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Состояния (в Figma их нет — обязательны по CLAUDE.md) ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-dconsult__submit:hover { background: var(--sc-primary-hover); }
+}
+
+.sc-dconsult__submit:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-dconsult__submit:active { background: var(--sc-primary-hover); }
+
+.sc-dconsult__form[data-state="loading"] .sc-dconsult__submit,
+.sc-dconsult__submit:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-dconsult__input,
+  .sc-dconsult__submit { transition: none; }
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width: 640px) {
+  .sc-dconsult { grid-template-columns: minmax(0, 1fr); }
+  .sc-dconsult__submit {
+    inline-size: 100%;
+    margin-block-start: calc(var(--sc-form-cta-gap) - var(--control-gap));
+  }
+}

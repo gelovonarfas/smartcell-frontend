@@ -1,0 +1,45 @@
+<!-- ============================================================
+     SC/Direction · Hero напрямку
+     figma: node-id=316:4 (страница 316:3 «SC/Direction — Пластична хірургія»)
+     ACF: direction_title (textarea, перенос строки — <br>), direction_lead (textarea),
+          direction_branches (relationship → філії: виводится адреса),
+          direction_cta_label (text), direction_image (image, 1:1)
+     Кнопка ведёт к форме внизу страницы (#direction-consult), не в модалку:
+     в макете форма своя, с полем email.
+     Фото — кадр из макета (клітини), 720 × 720, @2x 1440.
+     ============================================================ -->
+<section class="sc-dhero">
+  <div class="sc-dhero__copy">
+    <div class="sc-dhero__top">
+      <h1 class="sc-dhero__title sc-t-h1">Клітинні технології <br>в пластичній хірургії</h1>
+      <p class="sc-dhero__lead sc-t-lead">Ще кілька десятків років тому пластична хірургія асоціювалася виключно зі скальпелем і силіконовими імплантатами. Сьогодні вона поєднується з клітинними методиками — власними фібробластами, стовбуровими і жировими клітинами.</p>
+    </div>
+
+    <div class="sc-dhero__bottom">
+      <div class="sc-dhero__branches">
+        <p class="sc-dhero__branches-label sc-t-caption">Напрямок представлений в філіях:</p>
+        <ul class="sc-dhero__branches-list sc-t-small">
+          <li>Одеса, Суднобудівна, 1Б</li>
+          <li>Одеса, Буніна, 10</li>
+          <li>Київ, Костянтинівська, 57</li>
+        </ul>
+      </div>
+
+      <a class="sc-dhero__cta" href="#direction-consult">
+        <span class="sc-dhero__cta-label">Записатись на консультацію</span>
+        <span class="sc-dhero__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- LCP-кадр первого экрана: src сразу, fetchpriority, preload в <head> страницы -->
+  <div class="sc-dhero__media">
+    <picture>
+      <source media="(max-width: 640px)" srcset="assets/img/direction/plastic/hero-mob.jpg" width="780" height="780">
+      <img class="sc-dhero__image" src="assets/img/direction/plastic/hero.jpg"
+           srcset="assets/img/direction/plastic/hero.jpg 720w, assets/img/direction/plastic/hero@2x.jpg 1440w"
+           sizes="50vw" width="720" height="720"
+           alt="Клітини під мікроскопом" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+</section>

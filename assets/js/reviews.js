@@ -9,6 +9,10 @@
 
    Наведение и фокус ставят таймер на паузу. При prefers-reduced-motion
    автолистания нет — только стрелки.
+
+   data-reviews-manual (страница напрямку, 2026-10-04): листание только
+   стрелками, полоса показывает не таймер, а место в ленте —
+   Control/SliderNav progress=off + Control/Progress «manual» в макете.
    ============================================================ */
 (function () {
   'use strict';
@@ -26,7 +30,8 @@
   var bar = root.querySelector('[data-reviews-progress]');
   var viewport = root.querySelector('.sc-reviews__viewport');
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
-  var auto = !(reduced && reduced.matches);
+  var manual = root.hasAttribute('data-reviews-manual');
+  var auto = !manual && !(reduced && reduced.matches);
 
   var interval = parseFloat(getComputedStyle(root).getPropertyValue('--reviews-interval')) || 5000;
 
@@ -64,6 +69,8 @@
     /* сдвиг округляем: дробный translate размывает кромки карточек */
     root.style.setProperty('--reviews-shift', (-Math.round(items[index].offsetLeft)) + 'px');
     if (counter) counter.textContent = pad(index + 1) + ' / ' + pad(items.length);
+    /* ручной режим: полоса — доля пройденной ленты */
+    if (manual) root.style.setProperty('--reviews-fill', ((index + perView()) / items.length).toFixed(3));
     var single = maxIndex() === 0;
     if (prev) prev.disabled = single;
     if (next) next.disabled = single;
@@ -73,6 +80,7 @@
      кадром позже — включаем переход до 1 длиной в интервал. */
   function armBar() {
     if (!bar) return;
+    if (manual) return;
     root.classList.remove('sc-is-running');
     root.style.setProperty('--reviews-fill', 0);
     if (!auto || maxIndex() === 0) return;
@@ -103,6 +111,7 @@
   if (next) next.addEventListener('click', function () { go(index >= maxIndex() ? maxIndex() + 1 : index + perView()); });
 
   function pause() {
+    if (manual) return;
     paused = true;
     clearTimeout(timer);
     if (!bar) return;

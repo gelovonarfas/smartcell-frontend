@@ -1,0 +1,495 @@
+/* ============================================================
+   SC/Direction · Вкладки напрямку: Опис · Консультанти · Відгуки
+   figma: 316:17 (Sub-nav), 317:3 (Опис), 858:85 (Консультанти), 877:297 (Відгуки)
+   Поведение — assets/js/direction-tabs.js; превью плиток — editorial-preview.js
+   ============================================================ */
+
+.sc-dtabs {
+  /* --- Геометрия из макета, которой нет в токенах --- */
+  --dtabs-indicator-h: 3px;              /* бегунок вкладки — в макете 3 px */
+  --dtabs-indicator-dur: 420ms;
+  --dtabs-quote-w: 416px;                /* колонка цитаты в «Опис» */
+  --dtabs-tile-min-h: 94px;              /* плитка услуги: две строки + стрелка */
+  --dtabs-preview-size: 220px;           /* как превью «Читайте також» в статьях */
+  --dtabs-preview-dur: 320ms;
+  --dtabs-play: 56px;                    /* кнопка play в макете */
+  --dtabs-review-meta-w: 220px;          /* колонка автора в списке отзывов */
+  --dtabs-review-source-w: 140px;
+  --dtabs-fact-label-w: 110px;
+
+  box-sizing: border-box;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-dtabs *,
+.sc-dtabs *::before,
+.sc-dtabs *::after { box-sizing: border-box; }
+
+/* ---------- Sub-nav: вкладки и бегунок по линии ---------- */
+
+.sc-dtabs__bar {
+  padding-inline: var(--sc-pad-x);
+  border-block-end: var(--sc-line) solid var(--border);
+}
+
+.sc-dtabs__list {
+  position: relative;
+  display: flex;
+  gap: var(--sc-space-8); /* 32 */
+}
+
+.sc-dtabs__tab {
+  padding: var(--sc-space-4) 0; /* 16: строка 48 */
+  border: 0;
+  background: none;
+  color: var(--sc-neutral-600); /* мелкий текст на светлом — контраст ≥ 4.5 */
+  cursor: pointer;
+  transition: color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-dtabs__tab[aria-selected="true"] { color: var(--foreground); }
+
+/* Бегунок: позицию и ширину ставит скрипт (--tab-x, --tab-w); без скрипта —
+   под первой вкладкой по её ширине */
+.sc-dtabs__indicator {
+  position: absolute;
+  inset-block-end: calc(-1 * var(--sc-line));
+  inset-inline-start: 0;
+  inline-size: var(--tab-w, 0);
+  block-size: var(--dtabs-indicator-h);
+  background: var(--foreground);
+  transform: translateX(var(--tab-x, 0));
+}
+
+/* Едет только после первой установки (sc-is-ready ставит скрипт) — иначе
+   при открытии ссылки на вкладку бегунок выезжал бы из нуля */
+.sc-dtabs__list.sc-is-ready .sc-dtabs__indicator {
+  transition:
+    transform var(--dtabs-indicator-dur) var(--sc-ease-out-expo),
+    inline-size var(--dtabs-indicator-dur) var(--sc-ease-out-expo);
+}
+
+/* ---------- Панели ---------- */
+
+.sc-dtabs__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-padding-y); /* 160 между частями «Опис» */
+  padding: var(--section-padding-y) var(--sc-pad-x);
+}
+
+/* «Консультанти» и «Відгуки» — плотнее, 56 как в кадрах 858:2 и 877:2 */
+.sc-dtabs__panel--tight { gap: var(--section-gap); }
+
+.sc-dtabs__panel[hidden] { display: none; }
+
+.sc-dtabs__group { margin: 0; }
+
+/* ---------- Види послуги ---------- */
+
+.sc-dservices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-dservices__title { margin: 0; }
+
+.sc-dservices__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sc-space-2); /* 8 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dservices__list > li { display: flex; }
+
+.sc-dservices__tile {
+  flex: 1 1 auto;
+  min-block-size: var(--dtabs-tile-min-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sc-space-2);
+  padding: var(--grid-gap);
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+  text-decoration: none;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-dservices__arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sc-dservices__arrow svg {
+  display: block;
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* Парящее превью — тот же приём, что «Читайте також» (vm-editorial-list.css):
+   позицию и наклон ведёт скрипт на внешнем элементе, появление — класс на внутреннем */
+.sc-dservices__preview {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 50;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.sc-dservices__preview-inner {
+  display: block;
+  inline-size: var(--dtabs-preview-size);
+  aspect-ratio: 1 / 1; /* «квадратиком» */
+  overflow: hidden;
+  background: var(--muted);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: scale(0.86);
+  transition:
+    opacity var(--dtabs-preview-dur) var(--sc-ease),
+    transform var(--dtabs-preview-dur) var(--sc-ease);
+}
+
+.sc-dservices__preview.sc-is-visible .sc-dservices__preview-inner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sc-dservices__preview-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.sc-dservices__preview:not(.sc-is-ready) { display: none; }
+
+/* ---------- Цитата + описание ---------- */
+
+.sc-dabout {
+  display: grid;
+  grid-template-columns: var(--dtabs-quote-w) minmax(0, 1fr);
+  gap: var(--section-gap); /* 56 */
+  align-items: start;
+}
+
+.sc-dabout--quote-only { grid-template-columns: var(--dtabs-quote-w); }
+
+.sc-dabout__quote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap); /* 16 */
+}
+
+.sc-dabout__kicker,
+.sc-dabout__text { margin: 0; }
+
+.sc-dabout__kicker { color: var(--sc-neutral-600); }
+
+/* Описание — поле wysiwyg: стили по тегу, классов у абзацев нет */
+.sc-dabout__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md); /* 14 */
+}
+
+.sc-dabout__body > :where(p:not([class])) {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+}
+
+/* ---------- Застосування: чипы, ссылочные со стрелкой ↗ ---------- */
+
+.sc-dindications {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-dindications__title { margin: 0; }
+
+.sc-dindications__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-gap); /* 10 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dindications__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--stack-gap-sm);
+  padding: var(--sc-space-3) var(--sc-space-3_5); /* 12 / 14 */
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-dindications__icon {
+  flex: none;
+  display: block;
+  inline-size: var(--sc-space-2_5);
+  block-size: var(--sc-space-2_5);
+}
+
+/* ---------- Видео: постер, play, модалка по клику ---------- */
+
+.sc-dvideo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+}
+
+.sc-dvideo__open {
+  position: relative;
+  display: block;
+  aspect-ratio: 1280 / 726; /* кадр в макете */
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: var(--muted);
+  cursor: pointer;
+}
+
+.sc-dvideo__poster {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.sc-dvideo__play {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: var(--dtabs-play);
+  block-size: var(--dtabs-play);
+  display: block;
+  background: var(--background);
+  color: var(--foreground);
+  transform: translate(-50%, -50%);
+  transition: transform var(--sc-dur) var(--sc-ease-out);
+}
+
+.sc-dvideo__play svg { display: block; inline-size: 100%; block-size: 100%; }
+
+.sc-dvideo__caption { color: var(--sc-neutral-600); }
+
+/* ---------- Консультанти: три карточки врачей ---------- */
+
+.sc-ddoctors {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sc-space-6); /* 24 */
+  padding: 0;
+  list-style: none;
+}
+
+.sc-ddoctors__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap); /* rhythm/16 в макете */
+}
+
+.sc-ddoctors__photo {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--muted);
+}
+
+.sc-ddoctors__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.sc-ddoctors__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--card-gap);
+  margin: 0;
+}
+
+.sc-ddoctors__stars,
+.sc-dreviews__stars { flex: none; display: block; }
+
+.sc-ddoctors__name {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.sc-ddoctors__meta {
+  margin: 0;
+  color: var(--sc-neutral-600);
+}
+
+/* ---------- Відгуки: полный список, строки через одну на тёплом ---------- */
+
+.sc-dreviews {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dreviews__row {
+  display: grid;
+  grid-template-columns: var(--dtabs-review-meta-w) minmax(0, 1fr) var(--dtabs-review-source-w);
+  gap: var(--sc-space-8); /* 32 */
+  padding: var(--card-padding) var(--sc-space-6); /* 28 / 24 */
+}
+
+.sc-dreviews__row:nth-child(even) { background: var(--warm); }
+
+.sc-dreviews__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.sc-dreviews__author,
+.sc-dreviews__date,
+.sc-dreviews__text,
+.sc-dreviews__source { margin: 0; }
+
+.sc-dreviews__date,
+.sc-dreviews__source { color: var(--sc-neutral-600); }
+
+.sc-dreviews__source { text-align: end; }
+
+.sc-dreviews__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+}
+
+.sc-dreviews__text { max-inline-size: var(--sc-measure); }
+
+.sc-dreviews__facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-0_5);
+  margin: 0;
+}
+
+.sc-dreviews__facts > div {
+  display: grid;
+  grid-template-columns: var(--dtabs-fact-label-w) minmax(0, 1fr);
+  gap: var(--stack-gap-sm);
+}
+
+.sc-dreviews__facts dt { color: var(--sc-neutral-600); }
+.sc-dreviews__facts dd { margin: 0; }
+
+/* Button/Control · outline */
+.sc-dreviews__more-btn {
+  block-size: var(--control-square);
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+/* ---------- Состояния (в Figma их нет — обязательны по CLAUDE.md) ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-dtabs__tab[aria-selected="false"]:hover { color: var(--foreground); }
+  a.sc-dservices__tile:hover,
+  a.sc-dindications__chip:hover,
+  .sc-dreviews__more-btn:hover { background: var(--muted); }
+  a.sc-dservices__tile:hover .sc-dservices__arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+  .sc-dvideo__open:hover .sc-dvideo__play { transform: translate(-50%, -50%) scale(1.08); }
+  .sc-ddoctors__name:hover { text-decoration: none; }
+}
+
+.sc-dtabs__tab:focus-visible,
+.sc-dservices__tile:focus-visible,
+.sc-dindications__chip:focus-visible,
+.sc-dvideo__open:focus-visible,
+.sc-ddoctors__name:focus-visible,
+.sc-dreviews__more-btn:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+a.sc-dservices__tile:active,
+a.sc-dindications__chip:active,
+.sc-dreviews__more-btn:active { background: var(--secondary); }
+
+.sc-dreviews__more-btn:disabled { opacity: 0.45; cursor: default; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-dtabs__list.sc-is-ready .sc-dtabs__indicator,
+  .sc-dtabs__tab,
+  .sc-dservices__tile,
+  .sc-dservices__arrow svg,
+  .sc-dindications__chip,
+  .sc-dvideo__play,
+  .sc-dreviews__more-btn { transition: none; }
+  .sc-dservices__preview { display: none; }
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width: 640px) {
+  .sc-dtabs__list { gap: var(--sc-space-6); }
+
+  .sc-dtabs__panel {
+    gap: var(--section-padding-y);
+    padding-block: var(--section-padding-y);
+  }
+
+  .sc-dservices__list { grid-template-columns: minmax(0, 1fr); }
+
+  .sc-dabout,
+  .sc-dabout--quote-only {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--stack-gap-lg);
+  }
+
+  .sc-ddoctors {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
+  }
+
+  .sc-dreviews__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--stack-gap-md);
+    padding: var(--sc-space-6) var(--sc-space-4);
+  }
+
+  .sc-dreviews__meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--stack-gap-sm) var(--grid-gap);
+  }
+
+  .sc-dreviews__source { text-align: start; }
+
+  .sc-dreviews__more-btn { inline-size: 100%; }
+}

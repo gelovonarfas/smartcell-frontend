@@ -157,6 +157,12 @@
   transition: transform var(--reviews-interval) linear;
 }
 
+/* Ручной режим (data-reviews-manual): полоса показывает место в ленте и едет
+   за стрелками — страница напрямку, 2026-10-04 */
+.sc-reviews[data-reviews-manual] .sc-reviews__progress-bar {
+  transition: transform var(--sc-dur-slow) var(--sc-ease-out-expo);
+}
+
 /* Button/Control · outline */
 .sc-reviews__all {
   flex: none;
@@ -191,7 +197,24 @@
 
 .sc-reviews__nav-btn[disabled] { opacity: 0.4; cursor: default; }
 
+/* ---------- Вариант страницы напрямку (figma 318:2, 2026-10-04) ----------
+   Заголовок слева без кикера, полоса отбита линиями сверху и снизу,
+   карточка ведёт на вкладку «Відгуки» (data-tab-link, direction-tabs.js) */
+.sc-reviews--direction { border-block: var(--hairline) solid var(--border); }
+
+.sc-reviews--direction .sc-reviews__head {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.sc-reviews__item[data-tab-link] { cursor: pointer; }
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-reviews__item[data-tab-link]:hover { background: var(--muted); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .sc-reviews[data-reviews-manual] .sc-reviews__progress-bar,
   .sc-reviews__list,
   .sc-reviews__nav-btn,
   .sc-reviews__all { transition: none; }

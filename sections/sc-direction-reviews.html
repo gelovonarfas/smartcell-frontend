@@ -1,0 +1,63 @@
+<!-- ============================================================
+     SC/Direction · Відгуки про лікарів напрямку — вариант B09
+     figma: node-id=318:2
+     Разметка и скрипт — B09 (sections/b09-reviews.html, assets/js/reviews.js)
+     с модификатором sc-reviews--direction и ручным режимом data-reviews-manual:
+     листание только стрелками, полоса показывает место в ленте.
+     Карточка и «Усі відгуки» включают вкладку «Відгуки» (direction-tabs.js);
+     на самой вкладке «Відгуки» секция скрыта (data-direction-hide-on).
+     ACF: reviews_title (text); отзывы — те же записи, что во вкладке «Відгуки»
+          (запрос по напрямку, последние N): текст, автор, дата, оценка
+     ============================================================ -->
+<section class="sc-reviews sc-reviews--direction" data-reviews data-reviews-manual data-direction-hide-on="vidguky">
+  <div class="sc-reviews__inner">
+    <div class="sc-reviews__head">
+      <h2 class="sc-reviews__title sc-t-h2">Відгуки про лікарів напрямку</h2>
+    </div>
+
+    <div class="sc-reviews__viewport">
+      <ul class="sc-reviews__list" data-reviews-track>
+        <li class="sc-reviews__item" data-tab-link="vidguky">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Досвідчений та чуйний лікар. Отримав змістовну консультацію та гарне ставлення. Звертався стосовно послуги плазмаферезу — гарний сервіс у безпечних та комфортних умовах.</p>
+          <p class="sc-reviews__author sc-t-mini">Андрій · 19.08.2025</p>
+        </li>
+        <li class="sc-reviews__item" data-tab-link="vidguky">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Приїжджаємо з чоловіком у клініку на плазмаферез, не перший місяць. Дуже гарний лікар, фахівець своєї справи, завжди привітний — усе проходить швидко і без проблем.</p>
+          <p class="sc-reviews__author sc-t-mini">Христина · 12.08.2025</p>
+        </li>
+        <li class="sc-reviews__item" data-tab-link="vidguky">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Все виконано чудово.</p>
+          <p class="sc-reviews__author sc-t-mini">Петро · 12.08.2025</p>
+        </li>
+        <li class="sc-reviews__item" data-tab-link="vidguky">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Пояснили кожен крок і показали результат на УЗД. Це те, чого бракувало в інших клініках.</p>
+          <p class="sc-reviews__author sc-t-mini">Олена · 02.08.2025</p>
+        </li>
+        <li class="sc-reviews__item" data-tab-link="vidguky">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Записалась на консультацію за рекомендацією. Лікар детально розібрав мою ситуацію, без нав'язування процедур.</p>
+          <p class="sc-reviews__author sc-t-mini">Ірина · 28.07.2025</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sc-reviews__controls">
+      <div class="sc-reviews__nav">
+        <button class="sc-reviews__nav-btn" type="button" data-reviews-prev aria-label="Попередній відгук"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M32 24H16M22 30L16 24L22 18" stroke="currentColor"/></svg></button>
+        <button class="sc-reviews__nav-btn" type="button" data-reviews-next aria-label="Наступний відгук"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32M26 30L32 24L26 18" stroke="currentColor"/></svg></button>
+      </div>
+
+      <p class="sc-reviews__counter sc-t-mini" data-reviews-counter>01 / 05</p>
+
+      <div class="sc-reviews__progress" aria-hidden="true">
+        <span class="sc-reviews__progress-bar" data-reviews-progress></span>
+      </div>
+
+      <a class="sc-reviews__all" href="#vidguky" data-tab-link="vidguky">Усі відгуки</a>
+    </div>
+  </div>
+</section>

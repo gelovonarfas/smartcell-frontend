@@ -23,7 +23,9 @@
 
   function setup(section) {
     var preview = section.querySelector('[data-editorial-preview]');
-    var img = preview && preview.querySelector('.sc-editorial__preview-img');
+    /* картинку ищем по месту, а не по классу: тот же скрипт ведёт превью
+       плиток «Види послуги» на странице напрямку (2026-10-04) */
+    var img = preview && preview.querySelector('img');
     var rows = section.querySelectorAll('[data-editorial-row]');
     if (!preview || !img || !rows.length) return;
 

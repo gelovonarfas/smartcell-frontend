@@ -1,0 +1,168 @@
+/* ============================================================
+   SC/Direction · Hero напрямку
+   figma: node-id=316:4
+   Зависит от assets/css/tokens.css, assets/css/base.css
+   ============================================================ */
+
+.sc-dhero {
+  /* --- Геометрия из макета, которой нет в токенах --- */
+  --dhero-h: 800px;                       /* первый экран: 80 шапка + 720 кадр */
+  --dhero-copy-pe: var(--sc-space-14);    /* 56: зазор колонки до фото */
+  --dhero-block-w: var(--sc-cta-block-w); /* Button/Block 320 × 76 */
+  --dhero-block-h: var(--sc-cta-block-h);
+
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-block-size: var(--dhero-h);
+  background: var(--warm);
+  color: var(--foreground);
+}
+
+.sc-dhero *,
+.sc-dhero *::before,
+.sc-dhero *::after { box-sizing: border-box; }
+
+/* Текст встаёт в полосу контента: слева --sc-pad-x, как у всех секций */
+.sc-dhero__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--section-gap);
+  padding:
+    var(--section-padding-y)
+    var(--dhero-copy-pe)
+    var(--page-margin-x)
+    var(--sc-pad-x);
+}
+
+.sc-dhero__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.sc-dhero__title,
+.sc-dhero__lead { margin: 0; }
+
+.sc-dhero__lead {
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+.sc-dhero__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sc-space-6); /* 24 в макете */
+}
+
+.sc-dhero__branches {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-2_5);
+  color: var(--muted-foreground);
+}
+
+.sc-dhero__branches-label { margin: 0; }
+
+.sc-dhero__branches-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sc-space-1) var(--sc-space-5); /* 20 между адресами */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Button/Block · primary ---------- */
+
+.sc-dhero__cta {
+  inline-size: 100%;
+  max-inline-size: var(--dhero-block-w);
+  block-size: var(--dhero-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--grid-gap);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-dhero__cta-label {
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+.sc-dhero__cta-arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sc-dhero__cta-arrow svg {
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* ---------- Фото: начинается под шапкой, квадрат во всю правую половину ---------- */
+
+.sc-dhero__media {
+  margin-block-start: var(--header-h, 80px);
+  aspect-ratio: 1 / 1;
+  align-self: end;
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.sc-dhero__media picture { display: contents; }
+
+.sc-dhero__image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Состояния (в Figma их нет — обязательны по CLAUDE.md) ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-dhero__cta:hover { background: var(--sc-primary-hover); }
+  .sc-dhero__cta:hover .sc-dhero__cta-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.sc-dhero__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-dhero__cta:active { background: var(--sc-primary-hover); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-dhero__cta,
+  .sc-dhero__cta-arrow svg { transition: none; }
+}
+
+/* ---------- Телефон: колонка, текст под шапкой, кадр под текстом ---------- */
+
+@media (max-width: 640px) {
+  .sc-dhero {
+    grid-template-columns: minmax(0, 1fr);
+    min-block-size: 0;
+  }
+
+  .sc-dhero__copy {
+    padding:
+      calc(var(--header-h, 80px) + var(--section-padding-y-tight))
+      var(--sc-pad-x)
+      var(--section-padding-y-tight);
+  }
+
+  .sc-dhero__cta { max-inline-size: none; }
+
+  .sc-dhero__media { margin-block-start: 0; }
+}

@@ -1,0 +1,282 @@
+<!-- ============================================================
+     SC/Direction · Вкладки напрямку: Опис · Консультанти · Відгуки
+     figma: Sub-nav 316:17 · «Опис» 317:3 · «Консультанти» 858:85 (кадр 858:2)
+            · «Відгуки» 877:297 (кадр 877:2)
+     Скрипт: assets/js/direction-tabs.js — переключает панели без перезагрузки,
+     пишет вкладку в адрес (#konsultanty, #vidguky) и читает её при открытии ссылки.
+     Без скрипта видна только «Опис»: это полная страница, остальное — дополнения.
+     На вкладке «Відгуки» слайдер отзывов ниже (секция [data-direction-hide-on="vidguky"])
+     прячется: там уже полный список.
+
+     ACF «Опис»:
+       services_title (text), services (repeater: label, link опційний, preview_image 1:1)
+         — плитка с ссылкой рисует стрелку, без ссылки — просто плитка;
+         preview_image — квадрат при наведении (≥ 300 × 300, лучше 440 × 440);
+       quote_kicker (text), quote_text (textarea), description (wysiwyg: обычные <p>);
+       indications_title (text), indications (repeater: label, link опційний);
+       video_url (oEmbed YouTube), video_poster (image 16:9), video_caption (text)
+     ACF «Консультанти»: doctors (relationship → лікарі: фото, ПІБ, роль, стаж,
+       філії, рейтинг і кількість відгуків, посилання на профіль)
+     ACF «Відгуки»: reviews (relationship/запит по напрямку: оцінка, автор, дата,
+       текст, філія, напрямок, фахівець, джерело); «Показати ще» — догрузка запитом
+     ============================================================ -->
+<section class="sc-dtabs" id="direction-tabs" data-direction-tabs>
+  <div class="sc-dtabs__bar">
+    <div class="sc-dtabs__list" role="tablist" aria-label="Розділи напрямку">
+      <button class="sc-dtabs__tab sc-t-caption" type="button" role="tab" id="dtab-opys"
+              aria-selected="true" aria-controls="dpanel-opys" data-tab="opys">Опис</button>
+      <button class="sc-dtabs__tab sc-t-caption" type="button" role="tab" id="dtab-konsultanty"
+              aria-selected="false" aria-controls="dpanel-konsultanty" data-tab="konsultanty" tabindex="-1">Консультанти</button>
+      <button class="sc-dtabs__tab sc-t-caption" type="button" role="tab" id="dtab-vidguky"
+              aria-selected="false" aria-controls="dpanel-vidguky" data-tab="vidguky" tabindex="-1">Відгуки</button>
+      <span class="sc-dtabs__indicator" aria-hidden="true" data-tabs-indicator></span>
+    </div>
+  </div>
+
+  <!-- ==================== Опис ==================== -->
+  <div class="sc-dtabs__panel" role="tabpanel" id="dpanel-opys" aria-labelledby="dtab-opys">
+
+    <!-- Види послуги: наведение на плитку показывает квадратное превью,
+         как «Читайте також» в статьях (assets/js/editorial-preview.js, те же data-*).
+         Превью — обложки услуг с virtus.ua (2026-10-04); ⚠ [VERIFY] соответствие
+         «плитка — кадр» и ссылки на страницы услуг подтверждает клиника. -->
+    <div class="sc-dtabs__group sc-dservices" data-editorial>
+      <h2 class="sc-dservices__title sc-t-h2">Види послуги</h2>
+      <ul class="sc-dservices__list">
+        <li><a class="sc-dservices__tile" href="https://virtus.ua/plasticheskaya-hirurgiya/bioimplanting/bioimplanting-grudi"
+               data-editorial-row data-preview="assets/img/direction/plastic/service-1.jpg">
+          <span class="sc-dservices__label">Збільшення грудей власними стовбуровими клітинами</span>
+          <span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+        </a></li>
+        <li><a class="sc-dservices__tile" href="https://virtus.ua/plasticheskaya-hirurgiya/bioimplanting"
+               data-editorial-row data-preview="assets/img/direction/plastic/service-2.jpg">
+          <span class="sc-dservices__label">Контурна пластика обличчя біоімплантатами з власних жирових клітин</span>
+          <span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+        </a></li>
+        <li><div class="sc-dservices__tile" data-editorial-row data-preview="assets/img/direction/plastic/service-3.jpg">
+          <span class="sc-dservices__label">Контурна ментопластика власними жировими і стовбуровими клітинами</span>
+        </div></li>
+        <li><a class="sc-dservices__tile" href="https://virtus.ua/plasticheskaya-hirurgiya/rinoplastika"
+               data-editorial-row data-preview="assets/img/direction/plastic/service-4.jpg">
+          <span class="sc-dservices__label">Контурна ринопластика власними жировими і стовбуровими клітинами</span>
+          <span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+        </a></li>
+        <li><div class="sc-dservices__tile" data-editorial-row data-preview="assets/img/direction/plastic/service-5.jpg">
+          <span class="sc-dservices__label">Ліпомоделювання</span>
+        </div></li>
+        <li><a class="sc-dservices__tile" href="https://virtus.ua/plasticheskaya-hirurgiya/lipodystrophy_buttocks"
+               data-editorial-row data-preview="assets/img/direction/plastic/service-6.jpg">
+          <span class="sc-dservices__label">Корекція ліподистрофій в області сідниць</span>
+          <span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+        </a></li>
+        <li><div class="sc-dservices__tile" data-editorial-row data-preview="assets/img/direction/plastic/service-7.jpg">
+          <span class="sc-dservices__label">Омолоджуючі операції з введенням фібробластів або стовбурових клітин</span>
+        </div></li>
+        <li><a class="sc-dservices__tile" href="https://virtus.ua/plasticheskaya-hirurgiya/secondary_operations"
+               data-editorial-row data-preview="assets/img/direction/plastic/service-8.jpg">
+          <span class="sc-dservices__label">Клітинні технології в лікуванні ускладнень традиційних пластичних операцій</span>
+          <span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+        </a></li>
+        <li><a class="sc-dservices__tile" href="https://virtus.ua/esteticheskaya-medicina/korrekciya-rubcov"
+               data-editorial-row data-preview="assets/img/direction/plastic/service-9.jpg">
+          <span class="sc-dservices__label">Клітинні технології в лікуванні посттравматичних і післяопікових рубців</span>
+          <span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+        </a></li>
+      </ul>
+
+      <!-- Парящее превью: один элемент на список, позицию ведёт скрипт -->
+      <div class="sc-dservices__preview" data-editorial-preview aria-hidden="true">
+        <span class="sc-dservices__preview-inner">
+          <img class="sc-dservices__preview-img" alt="" decoding="async">
+        </span>
+      </div>
+    </div>
+
+    <!-- Цитата + описание. Описание — поле wysiwyg: обычные <p> без классов -->
+    <div class="sc-dtabs__group sc-dabout">
+      <div class="sc-dabout__quote">
+        <p class="sc-dabout__kicker sc-t-caption">Наш пріоритет</p>
+        <p class="sc-dabout__text sc-t-h3">Пластика створює форму. Клітини повертають шкірі молодість.</p>
+      </div>
+      <div class="sc-dabout__body">
+        <p>В Інституті VIRTUS уперше у світі успішно виростили жирові клітини зі стовбурових — для пацієнтів, у яких власної жирової тканини для процедур недостатньо. Клітинні технології застосовуються не лише для заповнення втрачених обʼємів, а й для контурної пластики, омолодження та відновлення шкіри після невдалих втручань.</p>
+        <p>Пластична хірургія створює нові форми і видаляє надлишки шкіри, клітинна терапія повертає їй молодість. Комбінація двох технологій покращує результат операції, скорочує реабілітацію і зводить до мінімуму небажані явища.</p>
+      </div>
+    </div>
+
+    <div class="sc-dtabs__group sc-dindications">
+      <h2 class="sc-dindications__title sc-t-h2">Застосування клітинної терапії</h2>
+      <ul class="sc-dindications__list">
+        <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/plasticheskaya-hirurgiya/bioimplanting">Контурна пластика обличчя біоімплантатами з власних жирових клітин<svg class="sc-dindications__icon" viewBox="0 0 10 10" width="9" height="9" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H2.5M9 1V7.5" stroke="currentColor"/></svg></a></li>
+        <li><span class="sc-dindications__chip sc-t-small">Контурна ментопластика власними жировими і стовбуровими клітинами</span></li>
+        <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/plasticheskaya-hirurgiya/rinoplastika">Контурна ринопластика власними жировими і стовбуровими клітинами<svg class="sc-dindications__icon" viewBox="0 0 10 10" width="9" height="9" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H2.5M9 1V7.5" stroke="currentColor"/></svg></a></li>
+        <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/plasticheskaya-hirurgiya/bioimplanting/bioimplanting-grudi">Збільшення грудей власними стовбуровими клітинами<svg class="sc-dindications__icon" viewBox="0 0 10 10" width="9" height="9" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H2.5M9 1V7.5" stroke="currentColor"/></svg></a></li>
+        <li><span class="sc-dindications__chip sc-t-small">Омолоджуючі операції з введенням фібробластів або стовбурових клітин</span></li>
+        <li><span class="sc-dindications__chip sc-t-small">Ліпомоделювання</span></li>
+        <li><span class="sc-dindications__chip sc-t-small">Корекція ліподистрофій в області сідниць</span></li>
+        <li><span class="sc-dindications__chip sc-t-small">Клітинні технології в лікуванні ускладнень традиційних пластичних операцій</span></li>
+        <li><span class="sc-dindications__chip sc-t-small">Клітинні технології в лікуванні посттравматичних і післяопікових рубців</span></li>
+      </ul>
+    </div>
+
+    <!-- Видео: постер картинкой, ролик — в модалке (sections/modal-video.html, modal.js),
+         iframe грузится только по клику. ⚠ [VERIFY] ролик: в макете постер из
+         youtu.be/IGChOMFmjfY («Клітинні технології для краси і молодості»),
+         а подпись — «Ефір „Регенеративна медицина…“»; клиника выбирает одно. -->
+    <figure class="sc-dtabs__group sc-dvideo">
+      <button class="sc-dvideo__open" type="button" data-modal-open="direction-video"
+              aria-label="Дивитись відео: Ефір «Регенеративна медицина для покращення життя»">
+        <img class="sc-dvideo__poster"
+             data-src="assets/img/direction/plastic/video-poster.jpg"
+             data-srcset="assets/img/direction/plastic/video-poster-640.jpg 640w, assets/img/direction/plastic/video-poster.jpg 1280w"
+             sizes="(max-width: 640px) 100vw, 1280px" width="1280" height="720"
+             alt="" loading="lazy" decoding="async">
+        <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
+      </button>
+      <figcaption class="sc-dvideo__caption sc-t-mini">Ефір «Регенеративна медицина для покращення життя»</figcaption>
+    </figure>
+  </div>
+
+  <!-- ==================== Консультанти ==================== -->
+  <div class="sc-dtabs__panel sc-dtabs__panel--tight" role="tabpanel" id="dpanel-konsultanty" aria-labelledby="dtab-konsultanty" hidden>
+    <div class="sc-dtabs__group sc-dabout sc-dabout--quote-only">
+      <div class="sc-dabout__quote">
+        <p class="sc-dabout__kicker sc-t-caption">Наш пріоритет</p>
+        <p class="sc-dabout__text sc-t-h3">Пластика створює форму. Клітини повертають шкірі молодість.</p>
+      </div>
+    </div>
+
+    <ul class="sc-dtabs__group sc-ddoctors">
+      <li class="sc-ddoctors__card">
+        <img class="sc-ddoctors__photo" src="assets/img/direction/doctor-tsepkolenko-volodymyr.jpg"
+             width="445" height="445" alt="Цепколенко Володимир Олександрович" loading="lazy" decoding="async">
+        <div class="sc-ddoctors__body">
+          <p class="sc-ddoctors__rating sc-t-small">
+            <svg class="sc-ddoctors__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+            <span>5,0 · 3 відгуки</span>
+          </p>
+          <a class="sc-ddoctors__name sc-t-h3" href="https://virtus.ua/ceo">Цепколенко Володимир Олександрович</a>
+          <p class="sc-ddoctors__meta sc-t-small">Керівник Інституту VIRTUS і біотехнологічної компанії SmartCell</p>
+          <p class="sc-ddoctors__meta sc-t-small">50 років стажу · веде прийом: Одеса, Суднобудівна, 1Б · Київ, Костянтинівська, 57</p>
+        </div>
+      </li>
+      <li class="sc-ddoctors__card">
+        <img class="sc-ddoctors__photo" src="assets/img/direction/doctor-kadochnikov-serhii.jpg"
+             width="445" height="445" alt="Кадочніков Сергій Валерійович" loading="lazy" decoding="async">
+        <div class="sc-ddoctors__body">
+          <p class="sc-ddoctors__rating sc-t-small">
+            <svg class="sc-ddoctors__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+            <span>5,0 · 92 відгуки</span>
+          </p>
+          <a class="sc-ddoctors__name sc-t-h3" href="https://virtus.ua/doctor/kadochnikov-sergej-valerevich">Кадочніков Сергій Валерійович</a>
+          <p class="sc-ddoctors__meta sc-t-small">Пластичний хірург · понад 10 000 пластичних і реконструктивних операцій</p>
+          <p class="sc-ddoctors__meta sc-t-small">20 років стажу · веде прийом: Одеса, Суднобудівна, 1Б</p>
+        </div>
+      </li>
+      <li class="sc-ddoctors__card">
+        <img class="sc-ddoctors__photo" src="assets/img/direction/doctor-sarkisian-arman.jpg"
+             width="445" height="445" alt="Саркісян Арман Грайрович" loading="lazy" decoding="async">
+        <div class="sc-ddoctors__body">
+          <p class="sc-ddoctors__rating sc-t-small">
+            <svg class="sc-ddoctors__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+            <span>5,0 · 81 відгук</span>
+          </p>
+          <a class="sc-ddoctors__name sc-t-h3" href="https://virtus.ua/doctor/sarkisyan-arman-grajrovich">Саркісян Арман Грайрович</a>
+          <p class="sc-ddoctors__meta sc-t-small">Пластичний хірург</p>
+          <p class="sc-ddoctors__meta sc-t-small">11 років стажу · веде прийом: Одеса, Суднобудівна, 1Б · Київ, Костянтинівська, 57</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ==================== Відгуки ==================== -->
+  <div class="sc-dtabs__panel sc-dtabs__panel--tight" role="tabpanel" id="dpanel-vidguky" aria-labelledby="dtab-vidguky" hidden>
+    <ul class="sc-dtabs__group sc-dreviews">
+      <li class="sc-dreviews__row">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__author sc-t-small">Андрій</p>
+          <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-19">19.08.2025</time></p>
+        </div>
+        <div class="sc-dreviews__body">
+          <p class="sc-dreviews__text sc-t-body">Досвідчений та чуйний лікар. Отримав змістовну консультацію та гарне ставлення. Звертався стосовно послуги плазмаферезу — гарний сервіс у безпечних та комфортних умовах.</p>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+      </li>
+      <li class="sc-dreviews__row">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__author sc-t-small">Дирда Христина</p>
+          <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-12">12.08.2025</time></p>
+        </div>
+        <div class="sc-dreviews__body">
+          <p class="sc-dreviews__text sc-t-body">Приїжджаємо з чоловіком у клініку на плазмаферез, не перший місяць. Дуже гарний лікар, фахівець своєї справи, завжди привітний — усе проходить швидко і без проблем.</p>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+      </li>
+      <li class="sc-dreviews__row">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__author sc-t-small">Богатий Петро</p>
+          <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-12">12.08.2025</time></p>
+        </div>
+        <div class="sc-dreviews__body">
+          <p class="sc-dreviews__text sc-t-body">Все виконано чудово.</p>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+      </li>
+      <li class="sc-dreviews__row">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__author sc-t-small">Олена</p>
+          <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-02">02.08.2025</time></p>
+        </div>
+        <div class="sc-dreviews__body">
+          <p class="sc-dreviews__text sc-t-body">Пояснили кожен крок і показали результат на УЗД. Це те, чого бракувало в інших клініках.</p>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Київ, Костянтинівська, 57</dd></div>
+            <div><dt>Напрямок</dt><dd>Пластична хірургія</dd></div>
+            <div><dt>Фахівець</dt><dd>Кадочніков Сергій Валерійович</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+      </li>
+      <li class="sc-dreviews__row">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__author sc-t-small">Ірина</p>
+          <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-07-28">28.07.2025</time></p>
+        </div>
+        <div class="sc-dreviews__body">
+          <p class="sc-dreviews__text sc-t-body">Записалась на консультацію за рекомендацією. Лікар детально розібрав мою ситуацію, без нав'язування процедур.</p>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Пластична хірургія</dd></div>
+            <div><dt>Фахівець</dt><dd>Саркісян Арман Грайрович</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+      </li>
+    </ul>
+
+    <!-- «Показати ще» — догрузка следующей страницы отзывов (кодер: запрос по напрямку) -->
+    <div class="sc-dreviews__more">
+      <button class="sc-dreviews__more-btn" type="button" data-reviews-more>Показати ще</button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+<!-- ============================================================
+     SC/Direction · CTA «Консультація» с формой
+     figma: node-id=318:51
+     ACF: consult_kicker (text), consult_title (textarea), consult_text (textarea),
+          consult_submit (text), consult_consent (text, ссылка на политику)
+     Проверка полей — assets/js/forms.js (data-form). Отправка не подключена:
+     валидный сабмит уходит нативно, кодер подставляет action / AJAX.
+     ============================================================ -->
+<section class="sc-dconsult" id="direction-consult" data-theme="inverse">
+  <div class="sc-dconsult__copy">
+    <p class="sc-dconsult__kicker sc-t-caption">Консультація</p>
+    <h2 class="sc-dconsult__title sc-t-h2">Лікування стовбуровими клітинами <br>починається з консультації</h2>
+    <p class="sc-dconsult__text sc-t-body">Прийом веде керівник клініки, доктор медичних наук, професор Володимир Цепколенко. За потреби до консультації долучаються профільні фахівці — спільне рішення дозволяє обрати ефективну тактику лікування.</p>
+  </div>
+
+  <form class="sc-dconsult__form" data-form novalidate>
+    <div class="sc-dconsult__field">
+      <label class="sc-dconsult__label sc-t-caption" for="dconsult-name">Прізвище, імʼя, по батькові*</label>
+      <input class="sc-dconsult__input" id="dconsult-name" name="name" type="text"
+             placeholder="Олена" autocomplete="name" required>
+      <p class="sc-dconsult__error" id="dconsult-name-error" hidden>Вкажіть імʼя</p>
+    </div>
+
+    <div class="sc-dconsult__field">
+      <label class="sc-dconsult__label sc-t-caption" for="dconsult-phone">Телефон*</label>
+      <input class="sc-dconsult__input" id="dconsult-phone" name="phone" type="tel"
+             placeholder="+380" autocomplete="tel" inputmode="tel" required>
+      <p class="sc-dconsult__error" id="dconsult-phone-error" hidden>Вкажіть номер телефону</p>
+    </div>
+
+    <div class="sc-dconsult__field">
+      <label class="sc-dconsult__label sc-t-caption" for="dconsult-email">Email*</label>
+      <input class="sc-dconsult__input" id="dconsult-email" name="email" type="email"
+             placeholder="name@mail.com" autocomplete="email" inputmode="email" required>
+      <p class="sc-dconsult__error" id="dconsult-email-error" hidden>Вкажіть email</p>
+    </div>
+
+    <button class="sc-dconsult__submit" type="submit">Записатися</button>
+    <p class="sc-dconsult__consent sc-t-mini">Надсилаючи форму, ви підтверджуєте згоду з політикою обробки персональних даних.</p>
+  </form>
+</section>

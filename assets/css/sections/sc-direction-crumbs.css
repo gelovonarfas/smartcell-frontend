@@ -1,0 +1,47 @@
+/* ============================================================
+   SC/Direction · Хлібні крихти
+   figma: node-id=318:72 — полоса 50 с кромкой, разделитель «→»
+   ============================================================ */
+
+.sc-dcrumbs {
+  box-sizing: border-box;
+  padding: var(--sc-space-4) var(--sc-pad-x); /* 16: полоса 50 */
+  border-block: var(--sc-line) solid var(--border);
+  background: var(--background);
+  color: var(--sc-neutral-600);
+}
+
+.sc-dcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sc-space-1) var(--sc-space-1_5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Разделитель — в CSS: каждая подпись остаётся цельным узлом (qTranslate) */
+.sc-dcrumbs__list li + li::before {
+  content: "→";
+  margin-inline-end: var(--sc-space-1_5);
+}
+
+.sc-dcrumbs__list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sc-dcrumbs__list [aria-current] { color: var(--foreground); }
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-dcrumbs__list a:hover {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+}
+
+.sc-dcrumbs__list a:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}

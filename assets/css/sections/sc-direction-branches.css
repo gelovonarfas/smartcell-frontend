@@ -1,0 +1,89 @@
+/* ============================================================
+   SC/Direction · Напрямок представлений у філіях
+   figma: node-id=318:38
+   ============================================================ */
+
+.sc-dbranches {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-dbranches *,
+.sc-dbranches *::before,
+.sc-dbranches *::after { box-sizing: border-box; }
+
+.sc-dbranches__title { margin: 0; }
+
+.sc-dbranches__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sc-space-6); /* 24 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dbranches__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+}
+
+/* Фото и название — одна ссылка на страницу филиала */
+.sc-dbranches__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.sc-dbranches__photo {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--muted);
+}
+
+.sc-dbranches__address,
+.sc-dbranches__hours {
+  margin: 0;
+  color: var(--sc-neutral-600);
+}
+
+/* График — списком, не <br>: на телефоне base.css гасит все <br> (2026-09-11),
+   а строки графика — данные, а не перенос под ширину */
+.sc-dbranches__hours {
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Состояния ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-dbranches__link:hover .sc-dbranches__name {
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+}
+
+.sc-dbranches__link:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width: 640px) {
+  .sc-dbranches__list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
+  }
+}
