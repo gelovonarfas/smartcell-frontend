@@ -22,7 +22,7 @@
 .sc-dbranches__list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--grid-gap); /* узкая щель между плитками, как в ленте журнала (в Figma 24; правка 2026-10-04) */
+  gap: var(--sc-tile-gap); /* узкая щель между плитками (в Figma было 24; правка 2026-10-04) */
   margin: 0;
   padding: 0;
   list-style: none;
@@ -82,5 +82,5 @@
 /* ---------- Телефон ---------- */
 
 @media (max-width: 640px) {
-  .sc-dbranches__list { grid-template-columns: minmax(0, 1fr); }
+  .sc-dbranches__list { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
 }

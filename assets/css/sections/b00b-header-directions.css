@@ -191,7 +191,7 @@
 .sc-hdir__tiles {
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--hdir-tile-w));
-  gap: var(--grid-gap);
+  gap: var(--sc-tile-gap);
   margin: 0;
   padding: 0;
   list-style: none;

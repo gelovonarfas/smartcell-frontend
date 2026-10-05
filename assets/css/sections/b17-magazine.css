@@ -40,7 +40,7 @@
 .sc-mag__row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--grid-gap);
+  gap: var(--sc-tile-gap); /* было var(--grid-gap) */
   align-items: stretch;
 }
 
