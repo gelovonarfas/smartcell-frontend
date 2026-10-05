@@ -143,16 +143,23 @@
           <div class="sc-hdir__clip">
             <div class="sc-hdir__shelf">
 
-              <!-- Разделы SmartCell — как в меню virtus.ua: текущий раздел отмечен -->
+              <!-- Разделы SmartCell (состав — как в прежнем меню virtus.ua).
+                   Текущий раздел — тот, чьи напрямки показаны в середине -->
+              <div class="sc-hdir__col">
+              <p class="sc-hdir__label sc-t-caption">SmartCell</p>
               <ul class="sc-hdir__sections">
-                <li><a class="sc-hdir__section sc-is-current" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya">Клітинне омолодження і терапія<svg class="sc-hdir__section-chevron" viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 1.5L7 5L3.5 8.5" stroke="currentColor"/></svg></a></li>
-                <li><a class="sc-hdir__section" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Клітинні препарати SmartCell</a></li>
-                <li><a class="sc-hdir__section" href="https://virtus.ua/smartcell-consultants">Консультанти SmartCell</a></li>
-                <li><a class="sc-hdir__section" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/bank-biolohichnoho-strakhuvannia">Банк біологічного страхування</a></li>
+                <li><a class="sc-hdir__section sc-t-h3" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya" aria-current="true">Клітинне омолодження і терапія</a></li>
+                <li><a class="sc-hdir__section sc-t-h3" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Клітинні препарати SmartCell</a></li>
+                <li><a class="sc-hdir__section sc-t-h3" href="https://virtus.ua/smartcell-consultants">Консультанти SmartCell</a></li>
+                <li><a class="sc-hdir__section sc-t-h3" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/bank-biolohichnoho-strakhuvannia">Банк біологічного страхування</a></li>
               </ul>
+              <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii">Усі клітинні технології</a>
+              </div>
 
               <!-- Напрямки раздела «Клітинне омолодження і терапія» — 16, в две колонки -->
-              <ul class="sc-hdir__list" aria-label="Напрямки клітинної терапії">
+              <div class="sc-hdir__col sc-hdir__col--dirs">
+              <p class="sc-hdir__label sc-t-caption" id="hdir-dirs-label">Напрямки клітинної терапії</p>
+              <ul class="sc-hdir__list" aria-labelledby="hdir-dirs-label">
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Ендокринологія</a></li>
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Гастроентерологія</a></li>
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-otolaringologii">Отоларингологія</a></li>
@@ -170,16 +177,28 @@
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Кардіологія</a></li>
                   <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii">Anti-age терапія</a></li>
               </ul>
+              </div>
 
-              <!-- Анонс справа — как на virtus.ua: картинка и текст оттуда же -->
-              <a class="sc-hdir__promo" href="https://virtus.ua/kletochnye-tehnologii">
-                <img class="sc-hdir__promo-img" src="assets/img/direction/menu-promo-stemcells.jpg"
-                     srcset="assets/img/direction/menu-promo-stemcells.jpg 240w, assets/img/direction/menu-promo-stemcells@2x.jpg 480w"
-                     sizes="240px" width="240" height="125" alt="" loading="lazy" decoding="async">
-                <span class="sc-hdir__promo-title sc-t-h3">Випустіть молодість з клітки!</span>
-                <span class="sc-hdir__promo-text sc-t-small">Дізнайтеся все про омолодження обличчя і оздоровлення тіла власними стовбуровими клітинами</span>
-                <span class="sc-hdir__promo-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
-              </a>
+              <!-- Справа — анонс статьи Smart Age Journal: карточка как в ленте
+                   журнала (.sc-mag__card в B17): квадратная обложка во всю колонку,
+                   рубрика · время, заголовок. Статью выбирает редакция (ACF: menu_article →
+                   запись журнала), по умолчанию — последний материал рубрики «Наука» -->
+              <div class="sc-hdir__col sc-hdir__col--article">
+                <p class="sc-hdir__label sc-t-caption">Smart Age Journal</p>
+                <article class="sc-hdir__article">
+                  <a class="sc-hdir__article-photo" href="vm-article-oblik.html">
+                    <img src="assets/img/vm/oblik-cover-640.jpg"
+                         srcset="assets/img/vm/oblik-cover-640.jpg 640w, assets/img/vm/oblik-cover.jpg 1120w"
+                         sizes="320px" width="640" height="640"
+                         alt="Фібробласти у культуральному середовищі" loading="lazy" decoding="async">
+                  </a>
+                  <span class="sc-hdir__article-meta">
+                    <a class="sc-hdir__article-tag sc-t-caption" href="vm-blog.html#rubric-5">Наука</a>
+                    <span class="sc-hdir__article-time sc-t-mini">9 хв</span>
+                  </span>
+                  <a class="sc-hdir__article-title sc-t-h3" href="vm-article-oblik.html">Фібробласти шкіри: що це за клітини і чому від них залежить молодість</a>
+                </article>
+              </div>
 
             </div>
           </div>
