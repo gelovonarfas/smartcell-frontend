@@ -12,6 +12,7 @@
   --dtabs-tile-min-h: 94px;              /* плитка услуги: две строки + стрелка */
   --dtabs-preview-size: 220px;           /* как превью «Читайте також» в статьях */
   --dtabs-preview-dur: 320ms;
+  --preview-offset: var(--sc-space-6); /* квадрат правее курсора на 24 (читает editorial-preview.js) */
   --dtabs-play: 56px;                    /* кнопка play в макете */
   --dtabs-review-meta-w: 220px;          /* колонка автора в списке отзывов */
   --dtabs-review-source-w: 140px;

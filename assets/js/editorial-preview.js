@@ -34,6 +34,7 @@
 
     var targetX = 0, targetY = 0, x = 0, y = 0, prevX = 0, tilt = 0;
     var active = false, raf = null, placed = false;
+    var offset = parseFloat(getComputedStyle(preview).getPropertyValue('--preview-offset')) || 0;
 
     /* предзагрузка, чтобы картинка не мигала на первом наведении */
     for (var i = 0; i < rows.length; i++) {
@@ -50,9 +51,15 @@
       var wanted = Math.max(-TILT_MAX, Math.min(TILT_MAX, dx * 0.6));
       tilt += (wanted - tilt) * 0.1;
 
+      /* Квадрат держится чуть справа от курсора, а не под ним (2026-10-05):
+         левая кромка — на --preview-offset правее; у правого края окна
+         прижимается к нему, а не уезжает за экран.
+         Было: центр квадрата на курсоре — translate(-50%,-50%). */
+      var w = preview.offsetWidth;
+      var tx = Math.min(x + offset, window.innerWidth - w - offset);
       preview.style.transform =
-        'translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px,0)' +
-        ' translate(-50%,-50%) rotate(' + tilt.toFixed(2) + 'deg)';
+        'translate3d(' + tx.toFixed(2) + 'px,' + y.toFixed(2) + 'px,0)' +
+        ' translateY(-50%) rotate(' + tilt.toFixed(2) + 'deg)';
 
       if (active || Math.abs(targetX - x) > 0.1 || Math.abs(targetY - y) > 0.1) {
         raf = requestAnimationFrame(render);

@@ -12,6 +12,7 @@
   /* --- Парящее превью: в макете его нет, размеры подобраны --- */
   --editorial-preview-size: 220px;
   --editorial-preview-dur: 320ms;
+  --preview-offset: var(--sc-space-6); /* квадрат правее курсора на 24 (читает editorial-preview.js) */
 
   box-sizing: border-box;
   padding: var(--section-padding-y) var(--sc-pad-x);
