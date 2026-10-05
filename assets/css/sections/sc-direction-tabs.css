@@ -292,7 +292,7 @@
 .sc-ddoctors {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--sc-space-6); /* 24 */
+  gap: var(--grid-gap); /* узкая щель между плитками, как в ленте журнала (в Figma 24; правка 2026-10-04) */
   padding: 0;
   list-style: none;
 }
@@ -471,10 +471,7 @@ a.sc-dindications__chip:active,
     gap: var(--stack-gap-lg);
   }
 
-  .sc-ddoctors {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--section-gap);
-  }
+  .sc-ddoctors { grid-template-columns: minmax(0, 1fr); }
 
   .sc-dreviews__row {
     grid-template-columns: minmax(0, 1fr);
