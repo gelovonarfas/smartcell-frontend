@@ -137,6 +137,12 @@
 
 .sc-hdir__pane[hidden] { display: none; }
 
+/* Заголовок вкладки — ссылкой на раздел, без подчёркивания (появляется на ховере) */
+.sc-hdir__heading {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
 /* «Усі напрямки…» / «Перейти до розділу» — подчёркнутой ссылкой, как в полочке тем */
 .sc-hdir__all {
   color: var(--foreground);
@@ -340,6 +346,7 @@
   }
   .sc-hdir__protocol-photo:hover img { transform: scale(1.03); }
   .sc-hdir__chip:not([aria-current="page"]):hover { background: var(--muted); }
+  .sc-hdir__heading:hover { text-decoration: underline; text-underline-position: from-font; }
   .sc-hdir__block:hover { background: var(--sc-primary-hover); }
   .sc-hdir__block:hover .sc-hdir__block-arrow svg {
     transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
@@ -349,6 +356,7 @@
 .sc-hdir__block:active { background: var(--sc-primary-hover); }
 
 .sc-hdir__protocol-title:focus-visible,
+.sc-hdir__heading:focus-visible,
 .sc-hdir__chip:focus-visible,
 .sc-hdir__block:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
