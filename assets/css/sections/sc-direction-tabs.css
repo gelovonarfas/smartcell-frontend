@@ -111,11 +111,15 @@
 .sc-dservices__tile {
   flex: 1 1 auto;
   min-block-size: var(--dtabs-tile-min-h);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--sc-space-2);
+  /* было: flex-колонка «подпись / стрелка». Сетка — чтобы справа над стрелкой
+     встала метка «Virtus» (2026-10-05) */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: 1fr auto;
+  column-gap: var(--grid-gap);
+  row-gap: var(--sc-space-2);
   padding: var(--grid-gap);
+  padding-inline-start: var(--sc-space-6); /* текст чуть отбит слева (было 16; 2026-10-05) */
   border: var(--sc-line) solid var(--border);
   color: var(--foreground);
   font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
@@ -123,7 +127,19 @@
   transition: background-color var(--sc-dur-fast) var(--sc-ease);
 }
 
+.sc-dservices__label { grid-column: 1; grid-row: 1 / -1; }
+
+/* Метка «Virtus»: плитка ведёт на страницу virtus.ua, а не на услугу SmartCell */
+.sc-dservices__source {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  color: var(--sc-neutral-600); /* вторичный текст; --muted-foreground на светлом не держит контраст */
+}
+
 .sc-dservices__arrow {
+  grid-column: 2;
+  grid-row: 2;
   display: flex;
   justify-content: flex-end;
 }
