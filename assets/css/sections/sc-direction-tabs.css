@@ -369,6 +369,8 @@
   flex-direction: column;
   padding: 0;
   list-style: none;
+  /* нижняя линия — у списка, а не у последней строки: «Показати ще» прячет хвост */
+  border-block-end: var(--hairline) solid var(--border);
 }
 
 .sc-dreviews__row {
@@ -376,6 +378,7 @@
   grid-template-columns: var(--dtabs-review-meta-w) minmax(0, 1fr) var(--dtabs-review-source-w);
   gap: var(--sc-space-8); /* 32 */
   padding: var(--card-padding) var(--sc-space-6); /* 28 / 24 */
+  border-block-start: var(--hairline) solid var(--border); /* строки прочерчены линиями во всю ширину (2026-10-05) */
 }
 
 .sc-dreviews__row:nth-child(even) { background: var(--warm); }
