@@ -86,7 +86,7 @@
   justify-content: space-between;
   gap: var(--grid-gap);
   padding-block: var(--sc-space-4); /* 16 в макете */
-  padding-inline-end: var(--sc-tile-text-inset); /* текст не ближе 90% ширины, линия — во всю */
+  padding-inline-end: var(--sc-tile-text-inset); /* текст не ближе 95% ширины, линия — во всю */
   border-block-end: var(--hairline) solid var(--border);
 }
 

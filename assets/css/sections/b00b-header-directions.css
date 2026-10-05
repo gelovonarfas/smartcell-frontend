@@ -229,7 +229,7 @@
 
 .sc-hdir__tile-meta { color: var(--sc-neutral-600); }
 
-/* текст не ближе 90% ширины плитки */
+/* текст не ближе 95% ширины плитки */
 .sc-hdir__tile-title,
 .sc-hdir__tile-meta { padding-inline-end: var(--sc-tile-text-inset); }
 

@@ -54,7 +54,7 @@
 
 .sc-dbranches__name,
 .sc-dbranches__address,
-.sc-dbranches__hours { padding-inline-end: var(--sc-tile-text-inset); } /* текст не ближе 90% ширины плитки */
+.sc-dbranches__hours { padding-inline-end: var(--sc-tile-text-inset); } /* текст не ближе 95% ширины плитки */
 
 .sc-dbranches__address,
 .sc-dbranches__hours {
