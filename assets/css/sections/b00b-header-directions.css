@@ -260,20 +260,47 @@
   text-decoration: none;
 }
 
-/* Ссылка на этапы — в нижнем углу витрины: подчёркнутая, со стрелкой кита */
-.sc-hdir__protocol-more {
-  align-self: flex-end;
-  display: inline-flex;
-  align-items: center;
+/* Три опоры программы — плашки как в B02 (sc-difference__tag) */
+.sc-hdir__tags {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--sc-space-2);
-  color: var(--foreground);
-  text-decoration: underline;
-  text-underline-position: from-font;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.sc-hdir__protocol-more-arrow { display: flex; }
+.sc-hdir__tag {
+  padding: var(--sc-space-2) var(--sc-space-3_5); /* 8 / 14, как в B02 */
+  background: var(--secondary);
+  color: var(--foreground);
+}
 
-.sc-hdir__protocol-more-arrow svg {
+/* Button/Block — плита 320×76, как на первом экране лендинга (там на стекле,
+   здесь на светлом — primary): лейбл сверху слева, стрелка снизу справа; в углу витрины */
+.sc-hdir__block {
+  align-self: flex-end;
+  inline-size: var(--sc-cta-block-w);
+  block-size: var(--sc-cta-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--grid-gap);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-hdir__block-label {
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+.sc-hdir__block-arrow { display: flex; justify-content: flex-end; }
+
+.sc-hdir__block-arrow svg {
   display: block;
   transform: rotate(45deg);
   transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
@@ -285,21 +312,23 @@
     text-underline-position: from-font;
   }
   .sc-hdir__protocol-photo:hover img { transform: scale(1.03); }
-  .sc-hdir__protocol-more:hover { text-decoration: none; }
-  .sc-hdir__protocol-more:hover .sc-hdir__protocol-more-arrow svg {
-    transform: translate(calc(var(--grid-gap) / 4), calc(var(--grid-gap) / 4)) rotate(45deg);
+  .sc-hdir__block:hover { background: var(--sc-primary-hover); }
+  .sc-hdir__block:hover .sc-hdir__block-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
   }
 }
 
+.sc-hdir__block:active { background: var(--sc-primary-hover); }
+
 .sc-hdir__protocol-title:focus-visible,
-.sc-hdir__protocol-more:focus-visible {
+.sc-hdir__block:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sc-hdir__protocol-photo img,
-  .sc-hdir__protocol-more-arrow svg { transition: none; }
+  .sc-hdir__block-arrow svg { transition: none; }
 }
 
 @media (max-width: 640px) {
@@ -307,7 +336,7 @@
   .sc-hdir__protocol { grid-template-columns: minmax(0, 1fr); }
   .sc-hdir__protocol-photo { display: none; }
   .sc-hdir__protocol-copy { gap: var(--stack-gap-lg); }
-  .sc-hdir__protocol-more { align-self: flex-start; }
+  .sc-hdir__block { align-self: stretch; inline-size: 100%; }
 }
 
 /* Плитки консультантов: квадратное фото, узкая щель (--grid-gap, как в ленте) */

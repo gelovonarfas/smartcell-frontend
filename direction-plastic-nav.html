@@ -160,8 +160,8 @@
                   <!-- Протоколи: протокол один — Face Control 365, поэтому не список, а витрина
                        (правка 2026-10-05): во всю полку, без анонса журнала (data-hdir-full).
                        Слева квадрат на 5 колонок сетки — кадр из B12 «На що впливаємо»,
-                       справа название и описание с лендинга (лид B03), в нижнем углу —
-                       ссылка на этапы. Тексты — с лендинга как есть. ACF: menu_protocol.
+                       справа название, описание с лендинга (лид B03 + абзац B02), плашки B02,
+                       в нижнем углу — плита Button/Block (как на первом экране). Тексты — с лендинга как есть. ACF: menu_protocol.
                        Было (утро 2026-10-05): кадр 320 из первого экрана, надзаголовок,
                        слоган, три плашки, плита Button/Block — коммит d4fbd02. -->
                   <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-protocols" aria-labelledby="hdir-tab-protocols" data-hdir-full>
@@ -173,11 +173,20 @@
                       <div class="sc-hdir__protocol-copy">
                         <div class="sc-hdir__protocol-text">
                           <a class="sc-hdir__protocol-title sc-t-h2" href="index.html">Face Control 365</a>
+                          <!-- Лид B03 и абзац B02 «Історія» — с лендинга как есть -->
                           <p class="sc-hdir__lead sc-t-body">Цілісна програма-подорож із глибокою діагностикою шкіри та персональним протоколом на 12 місяців.</p>
+                          <p class="sc-hdir__lead sc-t-body">Ми вимірюємо регенеративний потенціал шкіри у точних цифрах. І тільки після цього розробляємо персональний протокол. Не за вашим віком. Не за модним трендом. За реальними даними вашого організму.</p>
+                          <!-- Три опори програми — плашки з B02 -->
+                          <ul class="sc-hdir__tags">
+                            <li class="sc-hdir__tag sc-t-mini">Глибока діагностика</li>
+                            <li class="sc-hdir__tag sc-t-mini">Персональний протокол</li>
+                            <li class="sc-hdir__tag sc-t-mini">Здорова і доглянута шкіра</li>
+                          </ul>
                         </div>
-                        <a class="sc-hdir__protocol-more sc-t-small" href="index.html#journey">
-                          <span>Етапи річної подорожі</span>
-                          <span class="sc-hdir__protocol-more-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+                        <!-- Button/Block, как на первом экране лендинга, — в нижнем углу витрины -->
+                        <a class="sc-hdir__block" href="index.html#journey">
+                          <span class="sc-hdir__block-label">Етапи річної подорожі</span>
+                          <span class="sc-hdir__block-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
                         </a>
                       </div>
                     </div>
@@ -215,15 +224,40 @@
                     </div>
                   </div>
 
-                  <!-- Препарати: лид и страницы раздела (с virtus.ua) -->
+                  <!-- Препарати: четыре верхних продукта virtus.ua/…/kletochnye-preparaty-smartcell
+                       карточками с квадратным кадром, щель узкая (2026-10-05). Своих страниц у продуктов
+                       на virtus нет — карточки ведут в раздел. [VERIFY] фото: на virtus у денного і крему
+                       для очей одна картинка, у тоніка — банка; заменить на продуктовые кадры клиники.
+                       Ниже за волосяной линией — страницы раздела. ACF: menu_products (repeater: фото, назва, посилання) -->
                   <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-preparations" aria-labelledby="hdir-tab-preparations" hidden>
-                    <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Перейти до розділу</a>
-                    <p class="sc-hdir__lead sc-t-body">Інститут VIRTUS і біотехнологічна компанія SmartCell представляють CELLNESS — унікальні косметичні та лікувальні продукти для вашої краси.</p>
-                    <ul class="sc-hdir__list sc-hdir__list--short">
-                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami">Омолодження організму власними стовбуровими клітинами</a></li>
-                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/stvolovye-kletki-kostnogo-mozga">Cellness. Лікування стовбуровими клітинами</a></li>
-                      <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/plazmaferez">Плазмаферез</a></li>
-                    </ul>
+                    <div class="sc-hdir__group">
+                      <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Усі препарати SmartCell</a>
+                      <ul class="sc-hdir__tiles">
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-day.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Денний крем CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-night.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Нічний крем CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-eye.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Крем для шкіри навколо очей CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-tonic.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Тонік CELLNESS</a>
+                      </li>
+                      </ul>
+                    </div>
+                    <div class="sc-hdir__group">
+                      <ul class="sc-hdir__list sc-hdir__list--row">
+                        <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami">Омолодження власними стовбуровими клітинами</a></li>
+                        <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/stvolovye-kletki-kostnogo-mozga">Cellness. Лікування стовбуровими клітинами</a></li>
+                        <li><a class="sc-hdir__link" href="https://virtus.ua/kletochnye-tehnologii/plazmaferez">Плазмаферез</a></li>
+                      </ul>
+                    </div>
                   </div>
 
                 </div>
