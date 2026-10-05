@@ -1,0 +1,220 @@
+/* ============================================================
+   B00b · Header — меню «Напрямки» (ПРОБА 2026-10-04)
+   Мега-полка под шапкой: разделы SmartCell с virtus.ua в четыре колонки.
+   Раскрытие — как полочка тем журнала (vm-topics.css): строка сетки
+   0fr → 1fr с выраженным ease-out. Поведение — assets/js/header-directions.js
+   Зависит от b00b-header.css (подключается после него).
+   ============================================================ */
+
+.sc-header {
+  --hdir-open-dur: 600ms;
+  --hdir-cols: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1.3fr) minmax(0, 1.3fr);
+}
+
+/* Обёртка пункта не позиционирована: полка встаёт от края шапки
+   (position: fixed у .sc-header), а не от пункта меню */
+.sc-hdir { display: contents; }
+
+.sc-hdir__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sc-space-1_5);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer; /* кегль — от .sc-t-small, как у соседних пунктов */
+}
+
+.sc-hdir__chevron {
+  flex: none;
+  inline-size: var(--sc-space-2_5);
+  block-size: var(--sc-space-2_5);
+  transition: transform var(--sc-dur) var(--sc-ease-out);
+}
+
+.sc-hdir__trigger[aria-expanded="true"] { color: var(--foreground); }
+.sc-hdir__trigger[aria-expanded="true"] .sc-hdir__chevron { transform: rotate(180deg); }
+
+/* ---------- Полка ---------- */
+
+.sc-hdir__panel {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  background: var(--background);
+  color: var(--foreground);
+  border-block-end: 0 solid var(--border);
+  transition:
+    grid-template-rows var(--hdir-open-dur) var(--sc-ease-out-expo),
+    border-block-end-width 0s linear var(--hdir-open-dur);
+}
+
+.sc-hdir.sc-is-open .sc-hdir__panel {
+  grid-template-rows: 1fr;
+  border-block-end-width: var(--sc-line);
+  box-shadow: var(--shadow-lg);
+  transition:
+    grid-template-rows var(--hdir-open-dur) var(--sc-ease-out-expo),
+    border-block-end-width 0s;
+}
+
+.sc-hdir__clip {
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.sc-hdir__shelf {
+  display: grid;
+  grid-template-columns: var(--hdir-cols);
+  gap: var(--section-gap);
+  padding: var(--sc-space-10) var(--sc-pad-x) var(--sc-space-12); /* 40 / 48 */
+}
+
+.sc-hdir__group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--grid-gap);
+  min-inline-size: 0;
+}
+
+.sc-hdir__title {
+  margin: 0;
+  color: var(--sc-neutral-600);
+}
+
+.sc-hdir__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+/* «Медичні напрямки» — одиннадцать пунктов в две колонки */
+.sc-hdir__list--cols {
+  display: block;
+  columns: 2;
+  column-gap: var(--section-gap);
+}
+
+.sc-hdir__list--cols > li { break-inside: avoid; padding-block-end: var(--stack-gap-sm); }
+
+.sc-hdir__link {
+  color: var(--foreground);
+  text-decoration: none;
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+}
+
+/* Текущий напрямок: точка слева и вес — «ви тут» без лишних слов */
+.sc-hdir__link[aria-current="page"] {
+  position: relative;
+  font-weight: var(--sc-weight-medium);
+}
+
+.sc-hdir__link[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(-1 * var(--sc-space-3));
+  inset-block-start: 50%;
+  inline-size: var(--sc-space-1_5);
+  block-size: var(--sc-space-1_5);
+  background: var(--sc-blue-700);
+  transform: translateY(-50%);
+}
+
+.sc-hdir__all {
+  margin-block-start: var(--sc-space-2);
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* Пункты проявляются вслед за полкой — та же волна, что у тем журнала */
+.sc-hdir.sc-is-open .sc-hdir__group {
+  animation: sc-hdir-in var(--hdir-open-dur) var(--sc-ease-out-expo) both;
+}
+.sc-hdir.sc-is-open .sc-hdir__group:nth-child(2) { animation-delay: 40ms; }
+.sc-hdir.sc-is-open .sc-hdir__group:nth-child(3) { animation-delay: 80ms; }
+.sc-hdir.sc-is-open .sc-hdir__group:nth-child(4) { animation-delay: 120ms; }
+
+@keyframes sc-hdir-in {
+  from { opacity: 0; transform: translateY(var(--sc-space-2)); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Пока полка открыта, планка шапки — сплошная, полка и шапка одним куском */
+.sc-header.sc-hdir-open {
+  background: var(--background);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* ---------- Состояния ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-hdir__link:hover,
+  .sc-hdir__all:hover {
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+  .sc-hdir__all:hover { text-decoration: none; }
+}
+
+.sc-hdir__trigger:focus-visible,
+.sc-hdir__link:focus-visible,
+.sc-hdir__all:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-hdir__chevron,
+  .sc-hdir__panel,
+  .sc-hdir.sc-is-open .sc-hdir__panel { transition: none; }
+  .sc-hdir.sc-is-open .sc-hdir__group { animation: none; }
+}
+
+/* ---------- Телефон: «Напрямки» — раскрывающийся пункт в меню под бургером ---------- */
+
+@media (max-width: 640px) {
+  .sc-hdir { display: block; }
+
+  .sc-hdir__trigger {
+    inline-size: 100%;
+    justify-content: space-between;
+    min-block-size: var(--control-square);
+    padding-block: var(--stack-gap-sm);
+    font-size: var(--p-size);
+    line-height: var(--p-lh);
+  }
+
+  .sc-hdir__panel {
+    position: static;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .sc-hdir.sc-is-open .sc-hdir__panel { box-shadow: none; border-block-end-width: 0; }
+
+  .sc-hdir__shelf {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--stack-gap-lg);
+    padding: 0 0 var(--grid-gap);
+  }
+
+  .sc-hdir__list--cols { columns: 1; }
+
+  .sc-hdir__link { font-size: var(--p-small-size); line-height: var(--p-small-lh); }
+
+  .sc-header.sc-hdir-open { background: var(--glass-surface); }
+
+  /* Список длинный (30 пунктов): ящик меню листается сам, страница под ним стоит */
+  .sc-header--nav-open .sc-header__drawer {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
