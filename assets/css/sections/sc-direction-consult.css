@@ -1,5 +1,5 @@
 /* ============================================================
-   SC/Direction · CTA «Консультація» — затравка, запись в попапе (форма снята 2026-10-04)
+   SC/Direction · CTA «Консультація» — полоса как B11, запись в попапе (2026-10-04)
    figma: node-id=318:51
    Поля — Form/Input в теме inverse; состояния как у B11 (b11-consult.css)
    ============================================================ */
@@ -10,14 +10,42 @@
 
   box-sizing: border-box;
   display: grid;
-  /* Затравка: текст слева, кнопка-плита справа по низу текста (2026-10-04) */
-  grid-template-columns: minmax(0, 1fr) var(--sc-cta-block-w);
-  gap: var(--section-gap);
-  align-items: end;
+  /* Как B11: колонки 473 / 743 из макета лендинга, текст слева,
+     справа на месте полей — одна кнопка (2026-10-04) */
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: 473fr 743fr;
+  gap: var(--sc-space-16);
+  align-items: center;
   padding: var(--section-padding-y) var(--sc-pad-x);
   background: var(--background);
   color: var(--foreground);
 }
+
+/* Фон-кадр B11 под скримом black 20 %: планета у левого края, текст на своём контрасте */
+.sc-dconsult__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--background);
+}
+
+.sc-dconsult__image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+
+.sc-dconsult__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--sc-black-alpha-20);
+}
+
+.sc-dconsult__action { display: flex; }
 
 .sc-dconsult *,
 .sc-dconsult *::before,
@@ -41,43 +69,27 @@
 }
 
 
-/* ---------- Button/Block · primary — открывает попап записи ----------
-   В inverse primary светлый, текст тёмный: так же, как кнопка-плита hero */
+/* ---------- Button/Control · primary — открывает попап записи ----------
+   В inverse primary светлый, текст тёмный — как «Записатись» в B11 */
 .sc-dconsult__cta {
-  inline-size: 100%;
-  max-inline-size: var(--sc-cta-block-w);
-  block-size: var(--sc-cta-block-h);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: var(--grid-gap);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--control-square);
+  padding-inline: var(--control-padding-x);
+  border-radius: var(--radius);
   background: var(--primary);
   color: var(--primary-foreground);
   text-decoration: none;
-  transition: background-color var(--sc-dur) var(--sc-ease);
-}
-
-.sc-dconsult__cta-label {
   text-transform: uppercase;
+  white-space: nowrap;
   font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
   letter-spacing: var(--button-ls);
-}
-
-.sc-dconsult__cta-arrow {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.sc-dconsult__cta-arrow svg {
-  transform: rotate(45deg);
-  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+  transition: background-color var(--sc-dur) var(--sc-ease);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .sc-dconsult__cta:hover { background: var(--sc-primary-hover); }
-  .sc-dconsult__cta:hover .sc-dconsult__cta-arrow svg {
-    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
-  }
 }
 
 .sc-dconsult__cta:focus-visible {
@@ -178,7 +190,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sc-dconsult__cta,
-  .sc-dconsult__cta-arrow svg,
   .sc-dconsult__input,
   .sc-dconsult__submit { transition: none; }
 }
@@ -188,9 +199,10 @@
 @media (max-width: 640px) {
   .sc-dconsult {
     grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
     align-items: start;
   }
-  .sc-dconsult__cta { max-inline-size: none; }
+  .sc-dconsult__cta { inline-size: 100%; }
   .sc-dconsult__submit {
     inline-size: 100%;
     margin-block-start: calc(var(--sc-form-cta-gap) - var(--control-gap));
