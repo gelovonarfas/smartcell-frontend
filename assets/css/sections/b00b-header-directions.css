@@ -425,8 +425,7 @@
   background: var(--muted);
 }
 
-.sc-hdir__tile-photo img,
-.sc-hdir__article-photo img {
+.sc-hdir__tile-photo img {
   display: block;
   inline-size: 100%;
   block-size: 100%;
@@ -446,7 +445,7 @@
 .sc-hdir__tile-title,
 .sc-hdir__tile-meta { padding-inline-end: var(--sc-tile-text-inset); }
 
-/* ---------- Анонс статьи: карточка ленты журнала, обложка — квадрат во всю колонку ---------- */
+/* ---------- Анонс статьи: колонка 320 с подписью, внутри — карточка ленты ---------- */
 
 .sc-hdir__col--article {
   display: flex;
@@ -461,95 +460,20 @@
   color: var(--sc-neutral-600);
 }
 
-.sc-hdir__article {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  inline-size: 100%;
-  min-inline-size: 0;
-}
-
-.sc-hdir__article-photo {
-  display: block;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--muted);
-}
-
-.sc-hdir__article-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--grid-gap);
-  padding-block: var(--sc-space-4); /* 16, как в карточке ленты */
-  border-block-end: var(--hairline) solid var(--border);
-}
-
-.sc-hdir__article-tag {
-  color: var(--foreground);
-  text-decoration: none;
-}
-
-.sc-hdir__article-time { color: var(--sc-neutral-600); }
-
-.sc-hdir__article-title {
-  display: block;
-  padding-block-start: var(--sc-space-4);
-  color: var(--foreground);
-  text-decoration: none;
-}
-
-/* Тело проявляется вслед за полкой — та же волна, что у тем журнала */
-.sc-hdir.sc-is-open .sc-hdir__body > * {
-  animation: sc-hdir-in var(--hdir-open-dur) var(--sc-ease-out-expo) both;
-}
-.sc-hdir.sc-is-open .sc-hdir__body > :nth-child(2) { animation-delay: 60ms; }
-
-@keyframes sc-hdir-in {
-  from { opacity: 0; transform: translateY(var(--sc-space-2)); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* ---------- GSAP-режим (root.sc-hdir--gsap ставит header-directions.js, 2026-10-06) ----------
-   Высоту, скрим и волну ведёт скрипт: CSS-переходы и анимации полки выключены,
-   трек сетки сразу 1fr, высота режется на .sc-hdir__clip; скрим читает --hdir-scrim. */
-.sc-hdir--gsap .sc-hdir__panel,
-.sc-hdir--gsap.sc-is-open .sc-hdir__panel {
-  grid-template-rows: 1fr;
-  transition: none;
-}
-/* высоту режет .sc-hdir__clip (overflow: hidden у него и так есть): полка без обрезки,
-   чтобы скрим-псевдоэлемент под ней не отсекался (правка 2026-10-06) */
-.sc-hdir--gsap:not(.sc-is-open) .sc-hdir__clip { block-size: 0; }
-.sc-hdir--gsap .sc-hdir__panel::after {
-  opacity: var(--hdir-scrim, 0);
-  transition: none;
-  /* скрим живёт под полкой, а не внутри обрезанной высоты */
-  inset-block-start: 100%;
-}
-.sc-hdir--gsap.sc-is-open .sc-hdir__body > * { animation: none; }
-
-/* Пока полка открыта, планка шапки — сплошная, полка и шапка одним куском */
-.sc-header.sc-hdir-open {
-  background: var(--background);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
+/* Сама карточка — Card/Article из B17 (.sc-mag__card, b17-magazine.css): свои правила
+   для анонса сняты 2026-10-06, страница подключает b17-magazine.css. */
 
 /* ---------- Состояния ---------- */
 
 @media (hover: hover) and (pointer: fine) {
   .sc-hdir__tab[aria-selected="false"]:hover { color: var(--foreground); }
   .sc-hdir__link:hover,
-  .sc-hdir__tile-title:hover,
-  .sc-hdir__article-tag:hover,
-  .sc-hdir__article-title:hover {
+  .sc-hdir__tile-title:hover {
     text-decoration: underline;
     text-underline-position: from-font;
   }
   .sc-hdir__all:hover { text-decoration: none; }
-  .sc-hdir__tile-photo:hover img,
-  .sc-hdir__article-photo:hover img { transform: scale(1.03); }
+  .sc-hdir__tile-photo:hover img { transform: scale(1.03); }
 }
 
 .sc-hdir__trigger:focus-visible,
@@ -557,10 +481,7 @@
 .sc-hdir__link:focus-visible,
 .sc-hdir__all:focus-visible,
 .sc-hdir__tile-photo:focus-visible,
-.sc-hdir__tile-title:focus-visible,
-.sc-hdir__article-photo:focus-visible,
-.sc-hdir__article-tag:focus-visible,
-.sc-hdir__article-title:focus-visible {
+.sc-hdir__tile-title:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
 }
@@ -572,8 +493,7 @@
   .sc-hdir.sc-is-open .sc-hdir__panel,
   .sc-hdir__tab,
   .sc-hdir__tabs.sc-is-ready .sc-hdir__indicator,
-  .sc-hdir__tile-photo img,
-  .sc-hdir__article-photo img { transition: none; }
+  .sc-hdir__tile-photo img { transition: none; }
   .sc-hdir.sc-is-open .sc-hdir__body > * { animation: none; }
 }
 
