@@ -14,7 +14,9 @@
      Было: секция сама сеткой 473/743 — коммит 55106d6. */
   position: relative;
   isolation: isolate;
-  padding: var(--section-padding-y) var(--sc-pad-x);
+  /* Поле внутри полосы — 80, как у плиты Welcome kit (--kit-plate-pad), раз текст
+     собран по её образцу (правка 2026-10-06). В Figma 318:51 и в B11 — 160 (--section-padding-y). */
+  padding: var(--sc-space-20) var(--sc-pad-x);
   background: var(--background);
   color: var(--foreground);
 }
