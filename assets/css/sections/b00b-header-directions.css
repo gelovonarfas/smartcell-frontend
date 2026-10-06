@@ -83,6 +83,7 @@
   display: flex;
   gap: var(--sc-space-8); /* 32, как у вкладок страницы */
   padding-inline: var(--sc-pad-x);
+  background: var(--warm); /* полоса вкладок отбита тёплым, как у OneSkin (2026-10-06) */
   border-block-end: var(--sc-line) solid var(--border);
 }
 
