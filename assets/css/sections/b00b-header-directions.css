@@ -510,6 +510,24 @@
   to   { opacity: 1; transform: none; }
 }
 
+/* ---------- GSAP-режим (root.sc-hdir--gsap ставит header-directions.js, 2026-10-06) ----------
+   Высоту, скрим и волну ведёт скрипт: CSS-переходы и анимации полки выключены,
+   трек сетки сразу 1fr, высота режется overflow; скрим читает --hdir-scrim. */
+.sc-hdir--gsap .sc-hdir__panel,
+.sc-hdir--gsap.sc-is-open .sc-hdir__panel {
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  transition: none;
+}
+.sc-hdir--gsap:not(.sc-is-open) .sc-hdir__panel { block-size: 0; }
+.sc-hdir--gsap .sc-hdir__panel::after {
+  opacity: var(--hdir-scrim, 0);
+  transition: none;
+  /* скрим живёт под полкой, а не внутри обрезанной высоты */
+  inset-block-start: 100%;
+}
+.sc-hdir--gsap.sc-is-open .sc-hdir__body > * { animation: none; }
+
 /* Пока полка открыта, планка шапки — сплошная, полка и шапка одним куском */
 .sc-header.sc-hdir-open {
   background: var(--background);

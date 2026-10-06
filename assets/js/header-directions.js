@@ -7,6 +7,12 @@
    2. Внутри полки — вкладки разделов (WAI-ARIA tabs): переключаются
       наведением на десктопе, кликом и стрелками; бегунок едет по линии
       (--tab-x / --tab-w на полосе вкладок).
+   3. Анимация (2026-10-06): если на странице есть GSAP (window.gsap,
+      подключается отдельным <script> перед этим файлом), полка открывается
+      таймлайном — высота expo.out, скрим, содержимое волной со сдвигом;
+      закрывается быстрее; при смене вкладки высота доезжает, панель
+      проявляется. Без GSAP работают CSS-переходы (ПРОБА — только
+      на тестовой странице direction-plastic-nav.html).
    ============================================================ */
 (function () {
   'use strict';
@@ -35,7 +41,31 @@
     tablist.style.setProperty('--tab-w', tab.offsetWidth + 'px');
   }
 
+  /* ---------- GSAP (если подключён) ---------- */
+
+  var gsap = window.gsap || null;
+  var wide = window.matchMedia ? window.matchMedia('(min-width: 641px)') : null;
+  function animated() { return !!(gsap && (!wide || wide.matches)); }
+  if (gsap) root.classList.add('sc-hdir--gsap');
+
+  var EASE_IN = 'expo.out', EASE_OUT = 'power3.inOut';
+  var D_OPEN = 0.7, D_CLOSE = 0.42, D_TAB = 0.45;
+
+  /* что проявляется волной: полоса вкладок и блоки открытой панели + анонс */
+  function waveItems() {
+    var items = [];
+    var tabsEl = panel.querySelector('.sc-hdir__tabs');
+    if (tabsEl) items.push(tabsEl);
+    var pane = panelOf(currentTab());
+    if (pane) all(pane, ':scope > *').forEach(function (n) { items.push(n); });
+    var article = panel.querySelector('.sc-hdir__col--article');
+    if (article && article.offsetParent) items.push(article);
+    return items;
+  }
+
   function selectTab(tab, focus) {
+    var was = tabs.length ? currentTab() : null;
+    var h0 = (animated() && isOpen() && was !== tab) ? panel.offsetHeight : null;
     tabs.forEach(function (t) {
       var on = t === tab;
       t.setAttribute('aria-selected', on ? 'true' : 'false');
@@ -46,6 +76,19 @@
     moveIndicator(tab);
     syncFull(tab);
     if (focus) tab.focus();
+    /* смена вкладки в открытой полке: высота доезжает до новой, панель проявляется */
+    if (h0 !== null) {
+      var pane = panelOf(tab);
+      gsap.killTweensOf(panel);
+      gsap.set(panel, { height: 'auto' });
+      var h1 = panel.offsetHeight;
+      gsap.fromTo(panel, { height: h0 }, { height: h1, duration: D_TAB, ease: EASE_IN, clearProps: 'height' });
+      if (pane) {
+        var kids = all(pane, ':scope > *');
+        gsap.killTweensOf(kids);
+        gsap.fromTo(kids, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: EASE_IN, stagger: 0.05, clearProps: 'opacity,transform' });
+      }
+    }
   }
 
   /* Вкладка во всю полку (data-hdir-full на панели): анонс журнала прячется */
@@ -79,10 +122,10 @@
 
   function isOpen() { return trigger.getAttribute('aria-expanded') === 'true'; }
 
+  var tl = null;
+
   function set(open) {
     trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    root.classList.toggle('sc-is-open', open);
-    if (header) header.classList.toggle('sc-hdir-open', open);
     panel.inert = !open;
     if (open && tabs.length) {
       /* первая установка бегунка — без анимации, затем включаем переход */
@@ -91,6 +134,37 @@
       requestAnimationFrame(function () {
         requestAnimationFrame(function () { if (tablist) tablist.classList.add('sc-is-ready'); });
       });
+    }
+    if (!animated()) {
+      root.classList.toggle('sc-is-open', open);
+      if (header) header.classList.toggle('sc-hdir-open', open);
+      return;
+    }
+
+    /* --- GSAP: таймлайн открытия / закрытия --- */
+    if (tl) tl.kill();
+    var items = waveItems();
+    gsap.killTweensOf([panel].concat(items));
+    tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
+
+    if (open) {
+      root.classList.add('sc-is-open');
+      if (header) header.classList.add('sc-hdir-open');
+      gsap.set(panel, { height: 'auto' });
+      var h = panel.offsetHeight;
+      tl.fromTo(panel, { height: 0 }, { height: h, duration: D_OPEN, ease: EASE_IN, clearProps: 'height' }, 0)
+        .fromTo(panel, { '--hdir-scrim': 0 }, { '--hdir-scrim': 1, duration: 0.6, ease: 'power2.out' }, 0)
+        .fromTo(items, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.65, ease: EASE_IN, stagger: 0.055, clearProps: 'opacity,transform' }, 0.1);
+    } else {
+      tl.to(items, { opacity: 0, y: 6, duration: 0.18, ease: 'power2.in', stagger: { each: 0.02, from: 'end' } }, 0)
+        .to(panel, { '--hdir-scrim': 0, duration: 0.35, ease: 'power2.out' }, 0)
+        .to(panel, { height: 0, duration: D_CLOSE, ease: EASE_OUT }, 0.06)
+        .add(function () {
+          root.classList.remove('sc-is-open');
+          if (header) header.classList.remove('sc-hdir-open');
+          gsap.set(panel, { clearProps: 'height' });
+          gsap.set(items, { clearProps: 'opacity,transform' });
+        });
     }
   }
 
