@@ -716,24 +716,33 @@
      Кадр фона — тот же assets/img/b11-consult*.jpg; ниже первого экрана — data-src.
      ============================================================ -->
 <section class="sc-dconsult" id="direction-consult" data-theme="inverse">
+  <!-- Сборка как B11 на Face Control (правка 2026-10-06): кадр под скримом с запасом
+       под медленный скролл (gsap-animations.js, --dconsult-parallax), внутри —
+       сетка 473/743: слева надпись и заголовок, справа кнопка. Кадр — тот же,
+       что в B11, но отзеркален: планета у правого края (assets/img/direction/consult-bg*.jpg).
+       Абзац «Прийом веде керівник клініки…» снят — см. комментарий ниже. -->
   <div class="sc-dconsult__bg" aria-hidden="true">
     <img class="sc-dconsult__image"
-         data-src="assets/img/b11-consult.jpg"
-         data-srcset="assets/img/b11-consult.jpg 1440w, assets/img/b11-consult@2x.jpg 1672w"
+         data-src="assets/img/direction/consult-bg.jpg"
+         data-srcset="assets/img/direction/consult-bg.jpg 1440w, assets/img/direction/consult-bg@2x.jpg 1672w"
          sizes="100vw" alt="" width="1440" height="585" loading="lazy" decoding="async">
     <span class="sc-dconsult__scrim"></span>
   </div>
 
-  <div class="sc-dconsult__copy">
-    <p class="sc-dconsult__kicker sc-t-caption">Консультація</p>
-    <h2 class="sc-dconsult__title sc-t-h2">Лікування стовбуровими клітинами починається з консультації</h2>
-    <p class="sc-dconsult__text sc-t-body">Прийом веде керівник клініки, доктор медичних наук, професор Володимир Цепколенко. За потреби до консультації долучаються профільні фахівці — спільне рішення дозволяє обрати ефективну тактику лікування.</p>
-  </div>
+  <div class="sc-dconsult__inner">
+    <div class="sc-dconsult__copy">
+      <p class="sc-dconsult__kicker sc-t-caption">Консультація</p>
+      <h2 class="sc-dconsult__title sc-t-h2">Лікування стовбуровими клітинами починається з консультації</h2>
+      <!-- Снято 2026-10-06 (сборка как B11 — без абзаца):
+      <p class="sc-dconsult__text sc-t-body">Прийом веде керівник клініки, доктор медичних наук, професор Володимир Цепколенко. За потреби до консультації долучаються профільні фахівці — спільне рішення дозволяє обрати ефективну тактику лікування.</p>
+      -->
+    </div>
 
-  <!-- Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
-       Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. -->
-  <div class="sc-dconsult__action">
-    <a class="sc-dconsult__cta" href="#direction-consult" data-modal-open="booking">Записатись на консультацію</a>
+    <!-- Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
+         Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. -->
+    <div class="sc-dconsult__action">
+      <a class="sc-dconsult__cta" href="#direction-consult" data-modal-open="booking">Записатись на консультацію</a>
+    </div>
   </div>
 
   <!-- Прежняя форма на странице (до 2026-10-04) — для отката:
@@ -1005,5 +1014,8 @@
 <script src="assets/js/editorial-preview.js" defer></script>
 <script src="assets/js/reviews.js" defer></script>
 <script src="assets/js/direction-tabs.js" defer></script>
+<!-- GSAP-слой, как на лендинге (gsap.min.js подключён выше, перед меню): кадр и блок «Консультація» -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/gsap-animations.js" defer></script>
 </body>
 </html>

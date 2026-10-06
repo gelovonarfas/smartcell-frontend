@@ -102,7 +102,8 @@
        Величину берём из той же CSS-переменной — правится в одном месте. */
     [
       ['.sc-neo__image', '.sc-neo__frame', '--neo-parallax'],
-      ['.sc-consult__image', '.sc-consult', '--consult-parallax']
+      ['.sc-consult__image', '.sc-consult', '--consult-parallax'],
+      ['.sc-dconsult__image', '.sc-dconsult', '--dconsult-parallax'] /* страница напрямку (2026-10-06) */
     ].forEach(function (pair) {
       var img = document.querySelector(pair[0]);
       var frame = document.querySelector(pair[1]);
@@ -140,6 +141,7 @@
       ['.sc-reviews', '.sc-reviews__head, .sc-reviews__item, .sc-reviews__controls'],
       ['.sc-saving', '.sc-saving__copy > *, .sc-saving__table'],
       ['.sc-consult', '.sc-consult__copy > *, .sc-consult__form'],
+      ['.sc-dconsult', '.sc-dconsult__copy > *, .sc-dconsult__action'], /* страница напрямку */
       ['.sc-impact', '.sc-impact__title, .sc-impact__media, .sc-impact__rows, .sc-impact__note'],
       ['.sc-bonus', '.sc-bonus__frame'],
       ['.sc-notfit', '.sc-notfit__title, .sc-notfit__copy, .sc-notfit__grid'],

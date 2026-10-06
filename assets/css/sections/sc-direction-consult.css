@@ -7,22 +7,28 @@
 .sc-dconsult {
   /* --- Геометрия из макета, которой нет в токенах --- */
   --dconsult-form-w: 456px; /* колонка формы (форма снята 2026-10-04, правила ниже — для отката) */
+  --dconsult-parallax: var(--sc-space-20); /* 80: запас кадра сверху и снизу под медленный скролл, как в B11 */
 
   box-sizing: border-box;
-  display: grid;
-  /* Как B11: колонки 473 / 743 из макета лендинга, текст слева,
-     справа на месте полей — одна кнопка (2026-10-04) */
+  /* Сборка как B11 (2026-10-06): секция — рамка кадра, сетка внутри (.sc-dconsult__inner).
+     Было: секция сама сеткой 473/743 — коммит 55106d6. */
   position: relative;
   isolation: isolate;
-  grid-template-columns: 473fr 743fr;
-  gap: var(--sc-space-16);
-  align-items: center;
   padding: var(--section-padding-y) var(--sc-pad-x);
   background: var(--background);
   color: var(--foreground);
 }
 
-/* Фон-кадр B11 под скримом black 20 %: планета у левого края, текст на своём контрасте */
+.sc-dconsult__inner {
+  display: grid;
+  grid-template-columns: 473fr 743fr; /* колонки B11 из макета лендинга */
+  gap: var(--sc-space-16);
+  align-items: center;
+}
+
+/* Фон-кадр под скримом black 20 %: кадр B11 отзеркален — планета у правого края,
+   текст слева на тёмном. Кадр выше полосы на --dconsult-parallax сверху и снизу:
+   этот запас проезжает при скролле (gsap-animations.js). Без JS стоит по центру. */
 .sc-dconsult__bg {
   position: absolute;
   inset: 0;
@@ -33,10 +39,15 @@
 
 .sc-dconsult__image {
   display: block;
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0;
   inline-size: 100%;
-  block-size: 100%;
+  block-size: calc(100% + var(--dconsult-parallax) * 2);
   object-fit: cover;
-  object-position: left center;
+  object-position: right center;
+  translate: 0 -50%;
+  will-change: translate;
 }
 
 .sc-dconsult__scrim {
@@ -54,8 +65,11 @@
 .sc-dconsult__copy {
   display: flex;
   flex-direction: column;
-  gap: var(--stack-gap-lg);
+  gap: var(--stack-gap-md); /* как в B11 */
+  min-inline-size: 0;
 }
+
+.sc-dconsult__title { max-inline-size: var(--sc-measure); }
 
 .sc-dconsult__kicker,
 .sc-dconsult__title,
@@ -197,7 +211,7 @@
 /* ---------- Телефон ---------- */
 
 @media (max-width: 640px) {
-  .sc-dconsult {
+  .sc-dconsult__inner {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--section-gap);
     align-items: start;

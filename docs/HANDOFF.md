@@ -81,7 +81,8 @@
 ## GSAP-слой (пробный)
 
 На десктопе подключён GSAP + ScrollTrigger (CDN, три строки в конце
-`index.html`) и `assets/js/gsap-animations.js`: появление секций и хиро.
+`index.html`, `vm-article.html` и `direction-plastic.html`) и `assets/js/gsap-animations.js`:
+появление секций и хиро, медленный скролл кадров B15a, B11 и полосы «Консультація» напрямку.
 На телефоне и при prefers-reduced-motion не запускается. Слой изолирован:
 откат — удалить три строки подключения и файл, стили и разметку он не трогает.
 Решение пробное, до утверждения заказчиком.
@@ -232,7 +233,8 @@ URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
   пока без обработчика).
 - **Слайдер отзывов** — B09 с `data-reviews-manual`: листание стрелками, полоса — место в ленте.
 - **Запись** — формы на странице нет (снята 2026-10-04): кнопки в hero и в полосе «Консультація»
-  (над филиалами, вид как B11 — кадр с планетой, без полей) открывают попап записи, тот же, что на Face Control (`data-modal-open="booking"`,
+  (над филиалами, сборка как B11 — кадр с планетой, отзеркаленный: `assets/img/direction/consult-bg*.jpg`,
+  медленный скролл кадра через `gsap-animations.js`, без полей и без абзаца) открывают попап записи, тот же, что на Face Control (`data-modal-open="booking"`,
   `modal-booking`, `modal.js`). Тексты попапа на этой странице — консультация по напрямку
   (`booking_kicker` / `booking_title` / `booking_note` берутся со страницы). Старая форма —
   в комментарии в `sections/sc-direction-consult.html`.
