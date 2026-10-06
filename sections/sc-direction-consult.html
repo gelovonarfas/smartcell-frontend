@@ -11,11 +11,9 @@
      Кадр фона — тот же assets/img/b11-consult*.jpg; ниже первого экрана — data-src.
      ============================================================ -->
 <section class="sc-dconsult" id="direction-consult" data-theme="inverse">
-  <!-- Сборка как B11 на Face Control (правка 2026-10-06): кадр под скримом с запасом
-       под медленный скролл (gsap-animations.js, --dconsult-parallax), внутри —
-       сетка 473/743: слева надпись и заголовок, справа кнопка. Кадр — тот же,
-       что в B11, но отзеркален: планета у правого края (assets/img/direction/consult-bg*.jpg).
-       Абзац «Прийом веде керівник клініки…» снят — см. комментарий ниже. -->
+  <!-- Полоса как B11 на Face Control (2026-10-06): кадр под скримом с запасом под медленный
+       скролл (gsap-animations.js, --dconsult-parallax). Кадр — тот же, что в B11, но отзеркален:
+       планета у правого края (assets/img/direction/consult-bg*.jpg). -->
   <div class="sc-dconsult__bg" aria-hidden="true">
     <img class="sc-dconsult__image"
          data-src="assets/img/direction/consult-bg.jpg"
@@ -24,18 +22,16 @@
     <span class="sc-dconsult__scrim"></span>
   </div>
 
+  <!-- Сборка текста как в B07 Welcome kit (.sc-kit__copy; правка 2026-10-06): надпись,
+       заголовок, заметка приглушённым, под ними кнопка. Колонка текста слева — 743 из 1216,
+       справа под планетой пусто. Было (утро 2026-10-06): сетка B11 473/743, кнопка справа. -->
   <div class="sc-dconsult__inner">
     <div class="sc-dconsult__copy">
       <p class="sc-dconsult__kicker sc-t-caption">Консультація</p>
       <h2 class="sc-dconsult__title sc-t-h2">Лікування стовбуровими клітинами починається з консультації</h2>
-      <!-- Снято 2026-10-06 (сборка как B11 — без абзаца):
       <p class="sc-dconsult__text sc-t-body">Прийом веде керівник клініки, доктор медичних наук, професор Володимир Цепколенко. За потреби до консультації долучаються профільні фахівці — спільне рішення дозволяє обрати ефективну тактику лікування.</p>
-      -->
-    </div>
-
-    <!-- Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
-         Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. -->
-    <div class="sc-dconsult__action">
+      <!-- Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
+           Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. -->
       <a class="sc-dconsult__cta" href="#direction-consult" data-modal-open="booking">Записатись на консультацію</a>
     </div>
   </div>

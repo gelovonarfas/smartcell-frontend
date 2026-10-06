@@ -21,7 +21,9 @@
 
 .sc-dconsult__inner {
   display: grid;
-  grid-template-columns: 473fr 743fr; /* колонки B11 из макета лендинга */
+  /* Текст в левой колонке 743 из 1216, справа планета без текста (сборка как B07 Welcome kit,
+     2026-10-06). Было: 473fr 743fr, кнопка справа — коммит 2e39994. */
+  grid-template-columns: 743fr 473fr;
   gap: var(--sc-space-16);
   align-items: center;
 }
@@ -56,7 +58,6 @@
   background: var(--sc-black-alpha-20);
 }
 
-.sc-dconsult__action { display: flex; }
 
 .sc-dconsult *,
 .sc-dconsult *::before,
@@ -65,9 +66,13 @@
 .sc-dconsult__copy {
   display: flex;
   flex-direction: column;
-  gap: var(--stack-gap-md); /* как в B11 */
+  align-items: flex-start;
+  gap: var(--stack-gap-lg); /* 20, как в .sc-kit__copy */
   min-inline-size: 0;
 }
+
+/* кнопка отбита от заметки сильнее, чем строки друг от друга — как в B07 */
+.sc-dconsult__copy > .sc-dconsult__cta { margin-block-start: var(--sc-space-6); }
 
 .sc-dconsult__title { max-inline-size: var(--sc-measure); }
 

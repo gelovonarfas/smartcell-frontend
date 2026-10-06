@@ -141,7 +141,7 @@
       ['.sc-reviews', '.sc-reviews__head, .sc-reviews__item, .sc-reviews__controls'],
       ['.sc-saving', '.sc-saving__copy > *, .sc-saving__table'],
       ['.sc-consult', '.sc-consult__copy > *, .sc-consult__form'],
-      ['.sc-dconsult', '.sc-dconsult__copy > *, .sc-dconsult__action'], /* страница напрямку */
+      ['.sc-dconsult', '.sc-dconsult__copy > *'], /* страница напрямку */
       ['.sc-impact', '.sc-impact__title, .sc-impact__media, .sc-impact__rows, .sc-impact__note'],
       ['.sc-bonus', '.sc-bonus__frame'],
       ['.sc-notfit', '.sc-notfit__title, .sc-notfit__copy, .sc-notfit__grid'],
