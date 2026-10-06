@@ -52,7 +52,8 @@
   if (gsap) root.classList.add('sc-hdir--gsap');
 
   var EASE_IN = 'expo.out', EASE_OUT = 'power3.inOut';
-  var D_OPEN = 0.7, D_CLOSE = 0.42, D_TAB = 0.45;
+  /* темп подтянут 2026-10-06: полка не должна «думать» после наведения */
+  var D_OPEN = 0.55, D_CLOSE = 0.36, D_TAB = 0.32;
 
   /* что проявляется волной: полоса вкладок и блоки открытой панели + анонс */
   function waveItems() {
@@ -89,7 +90,7 @@
       if (pane) {
         var kids = all(pane, ':scope > *');
         gsap.killTweensOf(kids);
-        gsap.fromTo(kids, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: EASE_IN, stagger: 0.05, clearProps: 'opacity,transform' });
+        gsap.fromTo(kids, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.32, ease: EASE_IN, stagger: 0.03, clearProps: 'opacity,transform' });
       }
     }
   }
@@ -157,7 +158,7 @@
       var h = clip.offsetHeight;
       tl.fromTo(clip, { height: 0 }, { height: h, duration: D_OPEN, ease: EASE_IN, clearProps: 'height' }, 0)
         .fromTo(panel, { '--hdir-scrim': 0 }, { '--hdir-scrim': 1, duration: 0.6, ease: 'power2.out' }, 0)
-        .fromTo(items, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.65, ease: EASE_IN, stagger: 0.055, clearProps: 'opacity,transform' }, 0.1);
+        .fromTo(items, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: EASE_IN, stagger: 0.04, clearProps: 'opacity,transform' }, 0.04);
     } else {
       /* занавес и содержимое уходят вместе: текст тает, пока полка сворачивается,
          а не раньше неё — иначе на миг остаётся пустая белая коробка */
@@ -173,7 +174,29 @@
     }
   }
 
-  trigger.addEventListener('click', function () { set(!isOpen()); });
+  trigger.addEventListener('click', function () { cancelHover(); set(!isOpen()); });
+
+  /* Наведение открывает полку на курсорных устройствах (2026-10-06): раньше
+     только клик, и после наведения казалось, что меню «думает». Небольшая
+     пауза отсекает случайный пролёт курсора; уход с шапки и полки закрывает
+     с запасом, чтобы путь курсора по диагонали к полке не захлопывал её. */
+  var hoverIn = null, hoverOut = null;
+  var hoverZone = header || root;
+  function cancelHover() { clearTimeout(hoverIn); clearTimeout(hoverOut); hoverIn = hoverOut = null; }
+  if (fine && fine.matches) {
+    trigger.addEventListener('mouseenter', function () {
+      clearTimeout(hoverOut);
+      if (isOpen()) return;
+      hoverIn = setTimeout(function () { if (!isOpen()) set(true); }, 60);
+    });
+    trigger.addEventListener('mouseleave', function () { clearTimeout(hoverIn); });
+    hoverZone.addEventListener('mouseleave', function () {
+      clearTimeout(hoverIn);
+      if (!isOpen()) return;
+      hoverOut = setTimeout(function () { if (isOpen()) set(false); }, 220);
+    });
+    hoverZone.addEventListener('mouseenter', function () { clearTimeout(hoverOut); });
+  }
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && isOpen()) { set(false); trigger.focus(); }

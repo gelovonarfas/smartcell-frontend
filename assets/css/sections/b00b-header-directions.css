@@ -463,6 +463,32 @@
 /* Сама карточка — Card/Article из B17 (.sc-mag__card, b17-magazine.css): свои правила
    для анонса сняты 2026-10-06, страница подключает b17-magazine.css. */
 
+/* ---------- GSAP-режим (root.sc-hdir--gsap ставит header-directions.js, 2026-10-06) ----------
+   Высоту, скрим и волну ведёт скрипт: CSS-переходы и анимации полки выключены,
+   трек сетки сразу 1fr, высота режется на .sc-hdir__clip; скрим читает --hdir-scrim.
+   NB: блок случайно вырезали при замене анонса на карточку (2e39994) — полка
+   тогда снова ехала CSS-переходом 600 мс и «тупила»; восстановлен 2026-10-06. */
+.sc-hdir--gsap .sc-hdir__panel,
+.sc-hdir--gsap.sc-is-open .sc-hdir__panel {
+  grid-template-rows: 1fr;
+  transition: none;
+}
+.sc-hdir--gsap:not(.sc-is-open) .sc-hdir__clip { block-size: 0; }
+.sc-hdir--gsap .sc-hdir__panel::after {
+  opacity: var(--hdir-scrim, 0);
+  transition: none;
+  will-change: opacity; /* размытие на весь экран — свой слой, чтобы не дёргать полку */
+  inset-block-start: 100%;
+}
+.sc-hdir--gsap.sc-is-open .sc-hdir__body > * { animation: none; }
+
+/* Пока полка открыта, планка шапки — сплошная, полка и шапка одним куском */
+.sc-header.sc-hdir-open {
+  background: var(--background);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 /* ---------- Состояния ---------- */
 
 @media (hover: hover) and (pointer: fine) {
