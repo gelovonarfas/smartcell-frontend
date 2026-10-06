@@ -44,6 +44,9 @@
   /* ---------- GSAP (если подключён) ---------- */
 
   var gsap = window.gsap || null;
+  /* высоту ведём на .sc-hdir__clip (у него overflow: hidden): сама полка остаётся без
+     обрезки, иначе скрим-псевдоэлемент под ней отсекался (правка 2026-10-06) */
+  var clip = panel.querySelector('.sc-hdir__clip') || panel;
   var wide = window.matchMedia ? window.matchMedia('(min-width: 641px)') : null;
   function animated() { return !!(gsap && (!wide || wide.matches)); }
   if (gsap) root.classList.add('sc-hdir--gsap');
@@ -65,7 +68,7 @@
 
   function selectTab(tab, focus) {
     var was = tabs.length ? currentTab() : null;
-    var h0 = (animated() && isOpen() && was !== tab) ? panel.offsetHeight : null;
+    var h0 = (animated() && isOpen() && was !== tab) ? clip.offsetHeight : null;
     tabs.forEach(function (t) {
       var on = t === tab;
       t.setAttribute('aria-selected', on ? 'true' : 'false');
@@ -79,10 +82,10 @@
     /* смена вкладки в открытой полке: высота доезжает до новой, панель проявляется */
     if (h0 !== null) {
       var pane = panelOf(tab);
-      gsap.killTweensOf(panel);
-      gsap.set(panel, { height: 'auto' });
-      var h1 = panel.offsetHeight;
-      gsap.fromTo(panel, { height: h0 }, { height: h1, duration: D_TAB, ease: EASE_IN, clearProps: 'height' });
+      gsap.killTweensOf(clip);
+      gsap.set(clip, { height: 'auto' });
+      var h1 = clip.offsetHeight;
+      gsap.fromTo(clip, { height: h0 }, { height: h1, duration: D_TAB, ease: EASE_IN, clearProps: 'height' });
       if (pane) {
         var kids = all(pane, ':scope > *');
         gsap.killTweensOf(kids);
@@ -144,15 +147,15 @@
     /* --- GSAP: таймлайн открытия / закрытия --- */
     if (tl) tl.kill();
     var items = waveItems();
-    gsap.killTweensOf([panel].concat(items));
+    gsap.killTweensOf([panel, clip].concat(items));
     tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
 
     if (open) {
       root.classList.add('sc-is-open');
       if (header) header.classList.add('sc-hdir-open');
-      gsap.set(panel, { height: 'auto' });
-      var h = panel.offsetHeight;
-      tl.fromTo(panel, { height: 0 }, { height: h, duration: D_OPEN, ease: EASE_IN, clearProps: 'height' }, 0)
+      gsap.set(clip, { height: 'auto' });
+      var h = clip.offsetHeight;
+      tl.fromTo(clip, { height: 0 }, { height: h, duration: D_OPEN, ease: EASE_IN, clearProps: 'height' }, 0)
         .fromTo(panel, { '--hdir-scrim': 0 }, { '--hdir-scrim': 1, duration: 0.6, ease: 'power2.out' }, 0)
         .fromTo(items, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.65, ease: EASE_IN, stagger: 0.055, clearProps: 'opacity,transform' }, 0.1);
     } else {
@@ -160,11 +163,11 @@
          а не раньше неё — иначе на миг остаётся пустая белая коробка */
       tl.to(items, { opacity: 0, y: -6, duration: D_CLOSE * 0.85, ease: 'power1.in' }, 0)
         .to(panel, { '--hdir-scrim': 0, duration: D_CLOSE, ease: 'power2.out' }, 0)
-        .to(panel, { height: 0, duration: D_CLOSE, ease: EASE_OUT }, 0)
+        .to(clip, { height: 0, duration: D_CLOSE, ease: EASE_OUT }, 0)
         .add(function () {
           root.classList.remove('sc-is-open');
           if (header) header.classList.remove('sc-hdir-open');
-          gsap.set(panel, { clearProps: 'height' });
+          gsap.set(clip, { clearProps: 'height' });
           gsap.set(items, { clearProps: 'opacity,transform' });
         });
     }
