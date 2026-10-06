@@ -111,8 +111,10 @@
 
 .sc-dhero__media {
   margin-block-start: var(--header-h, 80px);
-  aspect-ratio: 1 / 1;
-  align-self: end;
+  /* Кадр тянется от низа шапки до низа секции: при колонке текста выше 800
+     квадрат с align-self: end отрывался от шапки на несколько пикселей
+     (правка 2026-10-06). Было: aspect-ratio: 1 / 1; align-self: end. */
+  align-self: stretch;
   overflow: hidden;
   background: var(--muted);
 }
@@ -164,5 +166,5 @@
 
   .sc-dhero__cta { max-inline-size: none; }
 
-  .sc-dhero__media { margin-block-start: 0; }
+  .sc-dhero__media { margin-block-start: 0; aspect-ratio: 1 / 1; } /* в колонке кадр снова квадрат */
 }
