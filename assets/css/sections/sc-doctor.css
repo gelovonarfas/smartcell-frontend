@@ -1,0 +1,262 @@
+/* ============================================================
+   SC/Doctor · страница лікаря — обёртка секций, факты в hero,
+   конфигуратор послуг (плитки → полочка), строки биографии
+   figma: макета нет — собрано из компонентов SC/Direction и VM/Rubrics (1123:875)
+   Зависит от tokens.css, base.css, sc-direction-hero.css, sc-direction-tabs.css
+   Поведение конфигуратора — assets/js/doctor-services.js
+   ============================================================ */
+
+/* ---------- Секция страницы: заголовок → содержимое через --sc-head-gap ---------- */
+
+.sc-doc {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-head-gap);
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-doc *,
+.sc-doc *::before,
+.sc-doc *::after { box-sizing: border-box; }
+
+.sc-doc__title { margin: 0; }
+
+/* «Опис»: самостоятельные блоки через полный шаг секции, как части «Опису» напрямку */
+.sc-doc--about { gap: var(--section-padding-y); }
+
+/* Отзывы: сетка строк sc-dreviews читает переменные страницы напрямку (.sc-dtabs) —
+   здесь они заданы на секции с теми же значениями */
+.sc-doc--reviews {
+  --dtabs-review-meta-w: 220px;
+  --dtabs-review-source-w: 140px;
+  --dtabs-fact-label-w: 110px;
+}
+
+.sc-doc__group { margin: 0; }
+
+/* ---------- Hero: рейтинг и стаж над филиалами ---------- */
+
+.sc-dhero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sc-space-2) var(--sc-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dhero__fact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--card-gap);
+}
+
+.sc-dhero__stars { flex: none; display: block; }
+
+.sc-dhero__fact-muted { color: var(--sc-neutral-600); }
+
+/* ---------- Послуги: плитки → полочка (та же механика, что тематики журнала) ---------- */
+
+.sc-dsvc {
+  --dsvc-tile-min: 280px;              /* плитка: при колонке 1280 — четыре по ~314 */
+  --dsvc-tile-gap: var(--sc-space-2);  /* 8 */
+  --dsvc-open-dur: 700ms;              /* раскрытие полочки */
+  --dsvc-chip-dur: 520ms;              /* появление чипа */
+  --dsvc-chip-step: 40ms;              /* волна: шаг между чипами */
+}
+
+.sc-dsvc__tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--dsvc-tile-min)), 1fr));
+  column-gap: var(--dsvc-tile-gap);
+  /* Просвет между рядами — полями пунктов, а не row-gap: строка закрытой
+     полочки иначе оставляла бы лишний просвет. Поля крайних рядов гасит margin */
+  margin: calc(-0.5 * var(--dsvc-tile-gap)) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dsvc__tiles > li:not(.sc-dsvc__panel) { padding-block: calc(0.5 * var(--dsvc-tile-gap)); }
+
+/* Плитка — Button/Block (320 × 76): название сверху слева, стрелка снизу справа;
+   на наведении стрелка тычется в угол, в открытой — смотрит вниз, на полочку */
+.sc-dsvc__tile {
+  inline-size: 100%;
+  block-size: 100%;
+  min-block-size: var(--sc-cta-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: calc(var(--grid-gap) - var(--sc-line)) var(--grid-gap);
+  border: var(--sc-line) solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  text-align: start;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color var(--sc-dur-fast) var(--sc-ease),
+    color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-dsvc__arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sc-dsvc__arrow svg {
+  display: block;
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow svg { transform: rotate(90deg); }
+
+.sc-dsvc__tile[aria-expanded="true"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* Полочка — строка сетки во всю ширину; скрипт ставит её сразу за рядом нажатой плитки.
+   Раскрывается от 0fr до 1fr с выраженным ease-out; закрытая — строка нулевой высоты, inert */
+.sc-dsvc__panel {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: 0fr;
+  border-block: 0 solid var(--border);
+  transition:
+    grid-template-rows var(--dsvc-open-dur) var(--sc-ease-out-expo),
+    margin-block var(--dsvc-open-dur) var(--sc-ease-out-expo),
+    border-block-width 0s linear var(--dsvc-open-dur);
+}
+
+.sc-dsvc__panel.sc-is-open {
+  grid-template-rows: 1fr;
+  margin-block: calc(1.5 * var(--dsvc-tile-gap)); /* + поле пункта 4 = 16 от плиток */
+  border-block-width: var(--sc-line);
+  transition:
+    grid-template-rows var(--dsvc-open-dur) var(--sc-ease-out-expo),
+    margin-block var(--dsvc-open-dur) var(--sc-ease-out-expo),
+    border-block-width 0s;
+}
+
+/* Переезд в другой ряд — без анимации закрытия (класс ставит скрипт) */
+.sc-dsvc__panel.sc-is-moving { transition: none; }
+
+.sc-dsvc__clip {
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.sc-dsvc__shelf { padding-block: var(--sc-space-6); /* 24 */ }
+
+.sc-dsvc__pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-8); /* 32 между подгруппами */
+}
+
+.sc-dsvc__pane[hidden] { display: none; }
+
+/* Второй уровень: подпись подгруппы капсом, под ней чипы (чипы — sc-dindications из страницы напрямку) */
+.sc-dsvc__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+}
+
+.sc-dsvc__subtitle {
+  margin: 0;
+  color: var(--sc-neutral-600);
+}
+
+/* Чипы появляются волной: каждый чуть позже предыдущего (--i ставит скрипт) */
+.sc-dsvc__panel.sc-is-open .sc-dsvc__pane:not([hidden]) .sc-dindications__list > li,
+.sc-dsvc__panel.sc-is-open .sc-dsvc__pane:not([hidden]) .sc-dsvc__subtitle {
+  animation: sc-dsvc-in var(--dsvc-chip-dur) var(--sc-ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * var(--dsvc-chip-step));
+}
+
+@keyframes sc-dsvc-in {
+  from { opacity: 0; transform: translateY(var(--sc-space-2)); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Биография: строки через волосяную линию, подпись слева ---------- */
+
+.sc-dbio {
+  --dbio-label-w: 320px; /* колонка подписи = плита Button/Block */
+  display: flex;
+  flex-direction: column;
+  border-block-start: var(--hairline) solid var(--border);
+}
+
+.sc-dbio__row {
+  display: grid;
+  grid-template-columns: var(--dbio-label-w) minmax(0, 1fr);
+  gap: var(--section-gap);
+  padding-block: var(--sc-space-8); /* 32 */
+  border-block-end: var(--hairline) solid var(--border);
+}
+
+.sc-dbio__label { margin: 0; }
+
+.sc-dbio__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-dbio__body > p,
+.sc-dbio__body > ul { margin: 0; }
+
+.sc-dbio__body > ul {
+  padding-inline-start: var(--sc-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+}
+
+/* ---------- Состояния (в Figma их нет — обязательны по CLAUDE.md) ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-dsvc__tile[aria-expanded="false"]:hover .sc-dsvc__arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+  .sc-dsvc__tile[aria-expanded="false"]:hover { background: var(--muted); }
+}
+
+.sc-dsvc__tile:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-dsvc__tile:active { background: var(--secondary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-dsvc__tile,
+  .sc-dsvc__arrow svg,
+  .sc-dsvc__panel,
+  .sc-dsvc__panel.sc-is-open { transition: none; }
+  .sc-dsvc__panel.sc-is-open .sc-dsvc__pane:not([hidden]) .sc-dindications__list > li,
+  .sc-dsvc__panel.sc-is-open .sc-dsvc__pane:not([hidden]) .sc-dsvc__subtitle { animation: none; }
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width: 640px) {
+  .sc-dsvc { --dsvc-tile-min: 140px; } /* две плитки в ряд */
+
+  .sc-dbio__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--stack-gap-md);
+  }
+}

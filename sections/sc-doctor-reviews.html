@@ -1,0 +1,63 @@
+<!-- ============================================================
+     SC/Doctor · Відгуки про лікаря
+     figma: макета нет — список отзывов страницы напрямку (sc-dreviews,
+     sc-direction-tabs.css): строки через волосяные линии, через одну на тёплом.
+     Отзывы — virtus.ua, как есть (2026-10-06): три последних, у лікаря их 73.
+     ACF: отзывы лікаря (оценка, автор, дата, текст, філія, напрямок, джерело);
+     «Показати ще» — догрузка следующей страницы (кнопка data-reviews-more пока без обработчика).
+     ============================================================ -->
+<section class="sc-doc sc-doc--reviews" id="doctor-reviews">
+  <h2 class="sc-doc__title sc-t-h2">Відгуки про лікаря</h2>
+  <ul class="sc-dreviews">
+    <li class="sc-dreviews__row">
+      <div class="sc-dreviews__meta">
+        <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-dreviews__author sc-t-small">Наточа Ноель</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2026-10-01">01.10.2026</time></p>
+      </div>
+      <div class="sc-dreviews__body">
+        <p class="sc-dreviews__text sc-t-body">Якщо за красою в будь-якому віці, то до Ганни Володимирівни. Високопрофесійний спеціаліст, вирішить будь-яку проблему, проконсультує і підбере ефективну програму саме для Ваших потреб. Я цілком довіряю.</p>
+        <dl class="sc-dreviews__facts sc-t-mini">
+          <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+          <div><dt>Напрямок</dt><dd>Дерматологія</dd></div>
+        </dl>
+      </div>
+      <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+    </li>
+    <li class="sc-dreviews__row">
+      <div class="sc-dreviews__meta">
+        <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-dreviews__author sc-t-small">Осадча Вероніка</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2026-09-29">29.09.2026</time></p>
+      </div>
+      <div class="sc-dreviews__body">
+        <p class="sc-dreviews__text sc-t-body">Дуже гарний лікар, грамотно провела лікування. Всім раджу Ганну Володимирівну.</p>
+        <dl class="sc-dreviews__facts sc-t-mini">
+          <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+          <div><dt>Напрямок</dt><dd>Дерматологія</dd></div>
+        </dl>
+      </div>
+      <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+    </li>
+    <li class="sc-dreviews__row">
+      <div class="sc-dreviews__meta">
+        <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-dreviews__author sc-t-small">Мартин Тетяна</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2026-09-28">28.09.2026</time></p>
+      </div>
+      <div class="sc-dreviews__body">
+        <p class="sc-dreviews__text sc-t-body">Дуже сподобалася лікар Цепколенко Ганна – привітна, уважна, турботлива. Тому ставлю 5!</p>
+        <dl class="sc-dreviews__facts sc-t-mini">
+          <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+          <div><dt>Напрямок</dt><dd>Дерматологія</dd></div>
+        </dl>
+      </div>
+      <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+    </li>
+  </ul>
+
+  <!-- «Показати ще» — догрузка следующей страницы отзывов (кодер: запрос по лікарю) -->
+  <div class="sc-dreviews__more">
+    <button class="sc-dreviews__more-btn" type="button" data-reviews-more>Показати ще</button>
+  </div>
+</section>

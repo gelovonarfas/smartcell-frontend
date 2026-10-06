@@ -1,0 +1,78 @@
+<!-- ============================================================
+     SC/Doctor · Опис лікаря: клітинні технології, відеовізитка, біографія
+     figma: макета нет — блоки собраны из компонентов страницы напрямку
+     (чипы sc-dindications, видео sc-dvideo из sc-direction-tabs.css) и строк
+     биографии sc-dbio (sc-doctor.css). Тексты — virtus.ua, как есть (2026-10-06).
+     ACF: doctor_smartcell (repeater: послуга), doctor_video (url YouTube) + doctor_video_poster,
+          doctor_bio (repeater: label, text — Освіта, Стажування…, Членство…, Наукова робота).
+     Видео: постер картинкой, ролик — в модалке (data-modal="doctor-video"), iframe грузится по клику.
+     ============================================================ -->
+<section class="sc-doc sc-doc--about">
+
+  <div class="sc-doc__group sc-dindications">
+    <h2 class="sc-dindications__title sc-t-h2">Застосовує клітинні технології SmartCell</h2>
+    <ul class="sc-dindications__list">
+      <li><span class="sc-dindications__chip sc-t-small">омолодження шкіри (неофіброліфтінг)</span></li>
+      <li><span class="sc-dindications__chip sc-t-small">наслідки вугрових висипань</span></li>
+      <li><span class="sc-dindications__chip sc-t-small">лікування рубців</span></li>
+      <li><span class="sc-dindications__chip sc-t-small">об’ємна контурна пластика власними жировими клітинами</span></li>
+      <li><span class="sc-dindications__chip sc-t-small">АМК-терапія (омолодження шкіри, підготовка шкіри до лазерних, радіохвильовим або ультрафіолетовим впливів)</span></li>
+      <li><span class="sc-dindications__chip sc-t-small">омолодження аутологічна стовбуровими клітинами</span></li>
+      <li><span class="sc-dindications__chip sc-t-small">клітинні технології в лікуванні ускладнень традиційної контурної пластики і агресивних процедур</span></li>
+    </ul>
+  </div>
+
+  <figure class="sc-doc__group sc-dvideo">
+    <button class="sc-dvideo__open" type="button" data-modal-open="doctor-video"
+            aria-label="Дивитись відео: Відеовізитка лікаря">
+      <img class="sc-dvideo__poster"
+           data-src="assets/img/doctor/tsepkolenko-hanna/video-poster.jpg"
+           data-srcset="assets/img/doctor/tsepkolenko-hanna/video-poster-640.jpg 640w, assets/img/doctor/tsepkolenko-hanna/video-poster.jpg 1280w"
+           sizes="(max-width: 640px) 100vw, 1280px" width="1280" height="720"
+           alt="" loading="lazy" decoding="async">
+      <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
+    </button>
+    <figcaption class="sc-dvideo__caption sc-t-mini">Відеовізитка лікаря</figcaption>
+  </figure>
+
+  <!-- Биография — строки через волосяную линию: подпись слева, текст справа -->
+  <dl class="sc-doc__group sc-dbio">
+    <div class="sc-dbio__row">
+      <dt class="sc-dbio__label sc-t-h3">Освіта</dt>
+      <dd class="sc-dbio__body sc-t-body">
+        <p>У 2002 році закінчила Одеський національний медичний університет.</p>
+        <p>З 2002 по 2003 рік на базі кафедри дерматовенерології в Одеському національному медичному університеті.</p>
+        <p>У 2008 році пройшла професійну підготовку за спеціалізацією дерматовенерологія на базі кафедри дерматовенерології в Одеському національному медичному університеті</p>
+        <p>У 2012 році пройшла цикл тематичного удосконалення з дерматології на базі кафедри дерматовенерології Донецького медінституту.</p>
+        <p>З 2016 по 2019 рік аспірант кафедри дерматовенерології інституту ім. П.Л.Шупика.</p>
+      </dd>
+    </div>
+    <div class="sc-dbio__row">
+      <dt class="sc-dbio__label sc-t-h3">Стажування, конференції, семінари</dt>
+      <dd class="sc-dbio__body sc-t-body">
+        <p>Протягом багатьох років є постійним учасником Європейського конгресу дерматовенерологів EADV.</p>
+        <p>Анна Володимирівна безперервно навчається і відвідує профільні стажування:</p>
+        <ul>
+          <li>За лазерним технологіям Friedrich-Schiller University of Jena (м. Йена, Німеччина)</li>
+          <li>За дерматології в університетській клініці (м. Малага, Іспанія)</li>
+          <li>Мюнхенська Літня Школа практичної дерматології</li>
+        </ul>
+      </dd>
+    </div>
+    <div class="sc-dbio__row">
+      <dt class="sc-dbio__label sc-t-h3">Членство в професійних співтовариствах</dt>
+      <dd class="sc-dbio__body sc-t-body">
+        <p>Член європейської асоціації дерматовенерологів (EADV).</p>
+        <p>Член міжнародної організації естетичної медицини (UIME).</p>
+      </dd>
+    </div>
+    <div class="sc-dbio__row">
+      <dt class="sc-dbio__label sc-t-h3">Наукова та науково-просвітницька робота</dt>
+      <dd class="sc-dbio__body sc-t-body">
+        <p>Співавтор 3 патентів в області медицини серед яких спосіб епігенетичного культивування аутологічних дермальних фібробластів людини.</p>
+        <p>Автор і співавтор багатьох популярних статей в спеціалізованих виданнях «Нова косметологія», «KOSMETIK international», «Дерматологія і венерологія», «Лікар», «Aesthetic Medicine» та «Clinical».</p>
+      </dd>
+    </div>
+  </dl>
+
+</section>

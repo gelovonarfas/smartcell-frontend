@@ -1,0 +1,142 @@
+<!-- ============================================================
+     SC/Doctor · Послуги, які надає лікар — конфигуратор (плитки → полочка)
+     figma: макета нет — та же сборка, что тематики журнала (VM/Rubrics, 1123:875):
+     крупные плитки Button/Block, клик раскрывает под рядом полочку; внутри —
+     услуги в два уровня: подгруппа (H4 на virtus.ua) и её чипы.
+     Состав и порядок — со страницы лікаря на virtus.ua (2026-10-06), как есть;
+     подгруппы без услуг (Медична косметологія, Профілактика старіння шкіри,
+     Видалення татуювань…) не показаны. Ссылок на страницы услуг у virtus
+     в этом списке нет — чипы без ссылок. [VERIFY] ссылки на услуги — кодер
+     подставит из карточек услуг.
+     ACF: services — таксономия услуг лікаря: категорія (плитка) → підгрупа → послуга.
+     Скрипт: assets/js/doctor-services.js. Стили: assets/css/sections/sc-doctor.css.
+     ============================================================ -->
+<section class="sc-doc sc-dsvc" data-doctor-services>
+  <h2 class="sc-doc__title sc-t-h2">Послуги, які надає лікар</h2>
+  <ul class="sc-dsvc__tiles">
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="smartcell"><span class="sc-dsvc__label">Клітинні технології SmartCell</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="dermatology"><span class="sc-dsvc__label">Дерматологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="aesthetic"><span class="sc-dsvc__label">Естетична медицина</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="laser"><span class="sc-dsvc__label">Лазернi технологіï</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+
+    <!-- Полочка — последний пункт списка: скрипт переносит её сразу за ряд нажатой плитки -->
+    <li class="sc-dsvc__panel" id="dsvc-panel" role="none" inert>
+      <div class="sc-dsvc__clip">
+      <div class="sc-dsvc__shelf">
+
+      <div class="sc-dsvc__pane" data-service-panel="smartcell" hidden>
+        <div class="sc-dsvc__group">
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Неофіброліфтинг (фібробласти)</span></li>
+          </ul>
+        </div>
+        <div class="sc-dsvc__group">
+          <h3 class="sc-dsvc__subtitle sc-t-caption">Клітинні технології в естетичній медицині</h3>
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Неофіброліфтинг (фібробласти)</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Омолодження власними стовбуровими клітинами</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">АМК-терапія</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лікування наслідків вугрових висипів</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Об'ємна контурна пластика власними жировими клітинами</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лікування рубців</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лікування ускладнень традиційної контурної пластики та агресивних процедур</span></li>
+          </ul>
+        </div>
+        <div class="sc-dsvc__group">
+          <h3 class="sc-dsvc__subtitle sc-t-caption">Клітиннi препарати SmartCell</h3>
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Омолодження власними стовбуровими клітинами</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sc-dsvc__pane" data-service-panel="dermatology" hidden>
+        <div class="sc-dsvc__group">
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Лікування вугревої хвороби (акне)</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Усунення пігментних плям</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерне видалення судинних новоутворень шкiри</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лікування себорейного дерматиту</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лікування рубців</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sc-dsvc__pane" data-service-panel="aesthetic" hidden>
+        <div class="sc-dsvc__group">
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">АМК-терапія</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Фракційний фототермоліз (фраксель CO2)</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Симультанні операції</span></li>
+          </ul>
+        </div>
+        <div class="sc-dsvc__group">
+          <h3 class="sc-dsvc__subtitle sc-t-caption">Догляд за шкірою обличчя, шиї та зони декольте</h3>
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Лазерне омолодження</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Неабляцiйне лазерне омолодження шкіри</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерна шліфовка обличчя</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Ультразвуковий SMAS-ліфтинг</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Микрострумова терапія</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Мезотерапія обличчя та тіла</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Ін’єкції наповнювачів</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лікування вугревої хвороби (акне)</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Підбір косметики для домашнього догляду</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерне видалення судинних новоутворень шкiри</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерне омолодження шкіри</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Фракційний фототермоліз (фраксель CO2)</span></li>
+          </ul>
+        </div>
+        <div class="sc-dsvc__group">
+          <h3 class="sc-dsvc__subtitle sc-t-caption">Догляд за тілом і корекція фігури</h3>
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Лікування розтяжок</span></li>
+          </ul>
+        </div>
+        <div class="sc-dsvc__group">
+          <h3 class="sc-dsvc__subtitle sc-t-caption">Безопераційне омолодження</h3>
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Лазерне відновлення шкіри (Fraxel)</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">SMAS-ліфтинг</span></li>
+          </ul>
+        </div>
+        <div class="sc-dsvc__group">
+          <h3 class="sc-dsvc__subtitle sc-t-caption">Лазерна епіляція</h3>
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Лазерна епіляція ніг</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерна епіляція обличчя</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерна епіляція</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерна епіляція спини та живота</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерна епіляція рук</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Лазерна епіляція підпахв</span></li>
+          </ul>
+        </div>
+        <div class="sc-dsvc__group">
+          <h3 class="sc-dsvc__subtitle sc-t-caption">Корекція рубців</h3>
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Лазерне лікування рубців</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Ін'єкції в рубець</span></li>
+          </ul>
+        </div>
+        <div class="sc-dsvc__group">
+          <h3 class="sc-dsvc__subtitle sc-t-caption">Діагностика</h3>
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Панч-біопсія</span></li>
+            <li><span class="sc-dindications__chip sc-t-small">Дерматоскопія</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sc-dsvc__pane" data-service-panel="laser" hidden>
+        <div class="sc-dsvc__group">
+          <ul class="sc-dindications__list">
+            <li><span class="sc-dindications__chip sc-t-small">Лазерне видалення судинних новоутворень шкiри</span></li>
+          </ul>
+        </div>
+      </div>
+
+      </div>
+      </div>
+    </li>
+  </ul>
+</section>

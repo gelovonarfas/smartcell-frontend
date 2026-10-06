@@ -1,0 +1,54 @@
+<!-- ============================================================
+     SC/Doctor · Hero лікаря
+     figma: макета нет — собрано на классах SC/Direction · Hero (316:4,
+     assets/css/sections/sc-direction-hero.css) + добавка .sc-dhero__facts (sc-doctor.css).
+     Тексты — со страницы лікаря на virtus.ua
+     (doctor/cepkolenko-anna-vladimirovna?view=smartcell, 2026-10-06), как есть.
+     ACF: doctor_name (title), doctor_position (textarea), doctor_experience (number — стаж),
+          рейтинг и число отзывов — из отзывов лікаря, doctor_branches (relationship → філії),
+          doctor_photo (image, 1:1). Фото — с virtus.ua, квадрат по макушке.
+     Кнопка открывает попап записи, как на Face Control (data-modal-open="booking");
+     без скрипта — ссылка на затравку консультации внизу (#direction-consult).
+     [VERIFY] подпись «Філії VIRTUS:» — на virtus.ua филиалы у лікаря без подписи.
+     ============================================================ -->
+<section class="sc-dhero sc-dhero--doctor">
+  <div class="sc-dhero__copy">
+    <div class="sc-dhero__top">
+      <h1 class="sc-dhero__title sc-t-h1">Цепколенко Ганна Володимирівна</h1>
+      <p class="sc-dhero__lead sc-t-lead">Завідуюча відділенням регенеративних, лазерних та фото технологій. Лікар-дерматовенеролог вищої категорії, спеціаліст з лазерних технологій. Кандидат медичних наук.</p>
+    </div>
+    <div class="sc-dhero__bottom">
+      <!-- Рейтинг і стаж — як на virtus.ua: зірки, «5 з 5», число відгуків, стаж -->
+      <ul class="sc-dhero__facts sc-t-small">
+        <li class="sc-dhero__fact">
+          <svg class="sc-dhero__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <span>5 з 5</span>
+          <span class="sc-dhero__fact-muted">73 відгуки</span>
+        </li>
+        <li class="sc-dhero__fact">Стаж роботи (років): 23</li>
+      </ul>
+      <div class="sc-dhero__branches">
+        <p class="sc-dhero__branches-label sc-t-caption">Філії VIRTUS:</p>
+        <ul class="sc-dhero__branches-list sc-t-small">
+          <li>Одеса, Суднобудівна, 1Б</li>
+          <li>Київ, Костянтинівська, 57</li>
+        </ul>
+      </div>
+      <a class="sc-dhero__cta" href="#direction-consult" data-modal-open="booking">
+        <span class="sc-dhero__cta-label">Записатись на консультацію</span>
+        <span class="sc-dhero__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+      </a>
+    </div>
+  </div>
+  <!-- LCP-кадр первого экрана: src сразу, fetchpriority, preload в <head> страницы.
+       Исходник virtus.ua 890×1184 — квадрат 890 (@2x), 720 (1x), 780 (телефон) -->
+  <div class="sc-dhero__media">
+    <picture>
+      <source media="(max-width: 640px)" srcset="assets/img/doctor/tsepkolenko-hanna/hero-mob.jpg" width="780" height="780">
+      <img class="sc-dhero__image" src="assets/img/doctor/tsepkolenko-hanna/hero.jpg"
+           srcset="assets/img/doctor/tsepkolenko-hanna/hero.jpg 720w, assets/img/doctor/tsepkolenko-hanna/hero@2x.jpg 890w"
+           sizes="50vw" width="720" height="720"
+           alt="Цепколенко Ганна Володимирівна" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+</section>

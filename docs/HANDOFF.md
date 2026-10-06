@@ -242,6 +242,31 @@ URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
   текущая страница; JSON-LD `BreadcrumbList` + `MedicalWebPage` в `<head>`.
 - **График филиала** — списком `<ul>`, не `<br>`: на телефоне `base.css` гасит все `<br>`.
 
+## Страница лікаря (SC Doctor)
+
+`doctor-tsepkolenko-hanna.html` — шаблон страницы лікаря на примере Цепколенко Ганни
+Володимирівни (контент — virtus.ua/doctor/cepkolenko-anna-vladimirovna?view=smartcell, 2026-10-06).
+Макета в Figma нет: собрано из компонентов страницы напрямку. Якорной навигации virtus нет.
+
+- **Hero** — `sections/sc-doctor-hero.html` на классах `sc-dhero` (стили страницы напрямку) +
+  `.sc-dhero__facts` (рейтинг, число отзывов, стаж — `sc-doctor.css`). Поля: ПІБ, должность
+  (textarea), стаж, филиалы (relationship), фото 1:1 (квадрат по макушке, 720 / 890).
+- **Послуги, які надає лікар** — `sections/sc-doctor-services.html` + `assets/js/doctor-services.js`:
+  конфигуратор как тематики журнала — плитки Button/Block (категория), клик раскрывает под рядом
+  полочку; внутри два уровня: подгруппа (`h3.sc-dsvc__subtitle`) и чипы услуг (`sc-dindications__chip`).
+  Таксономия услуг: категорія → підгрупа → послуга; подгруппы без услуг не выводить. ⚠ [VERIFY]
+  ссылки на страницы услуг — в списке virtus их нет, чипы без `href`.
+- **Опис** — `sections/sc-doctor-about.html`: чипы «Застосовує клітинні технології SmartCell»
+  (repeater), відеовізитка (постер + YouTube в модалке `data-modal="doctor-video"`), биография —
+  `dl.sc-dbio` (repeater: label, wysiwyg — Освіта, Стажування, Членство, Наукова робота).
+- **Консультація, филиалы, крихти** — секции страницы напрямку как есть; заголовок филиалов
+  «Філії VIRTUS» и подпись в hero — ⚠ [VERIFY] (на virtus без подписи). Попап записи тот же,
+  `booking_note` — регалии лікаря.
+- **Відгуки про лікаря** — `sections/sc-doctor-reviews.html`: список `sc-dreviews` страницы
+  напрямку (переменные сетки заданы на `.sc-doc--reviews`), отзывы лікаря, «Показати ще» —
+  догрузка (`data-reviews-more` без обработчика).
+- JSON-LD: `Physician` + `BreadcrumbList`. Критический CSS — в `scripts/bundle-css.py`.
+
 ## Репозиторий и обновления
 
 Код живёт в приватном репозитории `github.com/gelovonarfas/smartcell-frontend`.
