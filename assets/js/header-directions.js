@@ -156,9 +156,11 @@
         .fromTo(panel, { '--hdir-scrim': 0 }, { '--hdir-scrim': 1, duration: 0.6, ease: 'power2.out' }, 0)
         .fromTo(items, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.65, ease: EASE_IN, stagger: 0.055, clearProps: 'opacity,transform' }, 0.1);
     } else {
-      tl.to(items, { opacity: 0, y: 6, duration: 0.18, ease: 'power2.in', stagger: { each: 0.02, from: 'end' } }, 0)
-        .to(panel, { '--hdir-scrim': 0, duration: 0.35, ease: 'power2.out' }, 0)
-        .to(panel, { height: 0, duration: D_CLOSE, ease: EASE_OUT }, 0.06)
+      /* занавес и содержимое уходят вместе: текст тает, пока полка сворачивается,
+         а не раньше неё — иначе на миг остаётся пустая белая коробка */
+      tl.to(items, { opacity: 0, y: -6, duration: D_CLOSE * 0.85, ease: 'power1.in' }, 0)
+        .to(panel, { '--hdir-scrim': 0, duration: D_CLOSE, ease: 'power2.out' }, 0)
+        .to(panel, { height: 0, duration: D_CLOSE, ease: EASE_OUT }, 0)
         .add(function () {
           root.classList.remove('sc-is-open');
           if (header) header.classList.remove('sc-hdir-open');
