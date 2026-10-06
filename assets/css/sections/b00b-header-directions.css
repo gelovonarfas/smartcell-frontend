@@ -14,6 +14,7 @@
   --hdir-tab-dur: 420ms;                       /* бегунок вкладки — как в sc-dtabs */
   --hdir-indicator-h: 3px;                      /* бегунок в макете вкладок 3 px */
   --hdir-cols: minmax(0, 1fr) var(--sc-cta-block-w); /* панель · статья (колонка = плита 320) */
+  --hdir-scrim-blur: 16px;                      /* размытие страницы под полкой — как --modal-blur */
   --hdir-tile-w: 200px;                         /* плитка консультанта: квадрат 200 */
 }
 
@@ -56,6 +57,25 @@
     grid-template-rows var(--hdir-open-dur) var(--sc-ease-out-expo),
     border-block-end-width 0s linear var(--hdir-open-dur);
 }
+
+/* Страница под открытой полкой затемнена и размыта — как оверлей модалки
+   (#000 40% + blur 16; правка 2026-10-06). Клики проходят сквозь скрим
+   на страницу — их ловит документ и закрывает меню. */
+.sc-hdir__panel::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline: 0;
+  block-size: 100vh;
+  background: var(--sc-black-alpha-40);
+  -webkit-backdrop-filter: blur(var(--hdir-scrim-blur));
+  backdrop-filter: blur(var(--hdir-scrim-blur));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--sc-dur) var(--sc-ease);
+}
+
+.sc-hdir.sc-is-open .sc-hdir__panel::after { opacity: 1; }
 
 .sc-hdir.sc-is-open .sc-hdir__panel {
   grid-template-rows: 1fr;
@@ -529,6 +549,7 @@
 @media (prefers-reduced-motion: reduce) {
   .sc-hdir__chevron,
   .sc-hdir__panel,
+  .sc-hdir__panel::after,
   .sc-hdir.sc-is-open .sc-hdir__panel,
   .sc-hdir__tab,
   .sc-hdir__tabs.sc-is-ready .sc-hdir__indicator,
@@ -589,6 +610,9 @@
   .sc-hdir__col--article { display: none; }
 
   .sc-header.sc-hdir-open { background: var(--glass-surface); }
+
+  /* полка внутри ящика меню — скрим страницы не нужен */
+  .sc-hdir__panel::after { display: none; }
 
   /* Список длинный: ящик меню листается сам, страница под ним стоит */
   .sc-header--nav-open .sc-header__drawer {
