@@ -408,6 +408,10 @@
   color: var(--muted-foreground);
 }
 
+/* В сайдбаре (2026-10-07): подпись строкой, кнопки под ней */
+.vm-article__sidebar .vm-article__share { flex-wrap: wrap; }
+.vm-article__sidebar .vm-article__share > span { inline-size: 100%; }
+
 .vm-article__share-link {
   padding: var(--sc-chip-pad);
   border: var(--sc-line) solid var(--border);
@@ -998,7 +1002,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--sc-space-6) var(--sc-space-16);
-  padding: var(--sc-space-6) var(--sc-pad-x);
+  inline-size: 100%; /* в начале колонки текста (2026-10-07; была полоса под шапкой с полями --sc-pad-x) */
 }
 
 .vm-article__person {
