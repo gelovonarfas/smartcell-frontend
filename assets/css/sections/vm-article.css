@@ -409,7 +409,11 @@
 }
 
 /* В сайдбаре (2026-10-07): подпись строкой, кнопки под ней */
-.vm-article__sidebar .vm-article__share { flex-wrap: wrap; }
+.vm-article__sidebar .vm-article__share {
+  flex-wrap: wrap;
+  column-gap: var(--sc-space-1); /* кнопки встык, как плитки (4) */
+  row-gap: var(--stack-gap-md);
+}
 .vm-article__sidebar .vm-article__share > span { inline-size: 100%; }
 
 .vm-article__share-link {
