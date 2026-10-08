@@ -186,10 +186,8 @@
    читалась как ссылка, но не спорила с заголовком (2026-09-30) */
 .vm-article__byline-author {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: var(--hairline);
-  text-underline-offset: var(--sc-space-1);
-  transition: color var(--sc-dur-fast) var(--sc-ease);
+  /* Было ссылкой с подчёркиванием и прокруткой к блоку автора; с 2026-10-08 —
+     просто текст: профиль автора стоит сразу под шапкой */
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -205,7 +203,8 @@
 
 .vm-article__byline-item + .vm-article__byline-item::before {
   content: "·";
-  margin-inline-end: var(--sc-space-1_5);
+  /* просвет после точки задаёт gap пункта (6) — такой же, как column-gap до неё;
+     прежний margin давал 12 после и 6 до (правка 2026-10-08) */
   color: inherit;
 }
 
