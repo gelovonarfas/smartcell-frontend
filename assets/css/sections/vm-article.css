@@ -1012,7 +1012,7 @@
 /* Рядок «Автор: Ім'я» / «Стаття перевірена: Ім'я» — через волосяную линию */
 .vm-article__person {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* по верху: имя на уровне верха фото (правка 2026-10-07) */
   gap: var(--stack-gap-md);
   padding-block: var(--sc-space-4);
   min-inline-size: 0;
