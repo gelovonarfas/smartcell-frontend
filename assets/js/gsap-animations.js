@@ -29,7 +29,7 @@
      на узком экране по-прежнему не запускается. */
   function revealArticleHead() {
     var articleHead = document.querySelectorAll(
-      '.vm-article__chips, .vm-article__title, .vm-article__dek');
+      '.vm-article__chips, .vm-article__title, .vm-article__dek, .vm-article__persons');
     if (!articleHead.length) return;
     gsap.from(articleHead, {
       opacity: 0,

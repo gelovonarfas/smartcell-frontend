@@ -262,6 +262,31 @@
       </div>
 
 
+      <!-- Автор — компактным блоком в начале статьи (решение редакции 2026-10-07, по образцу
+           Healthline / mindbodygreen): фото, ім'я, професійний статус, перехід на профіль.
+           Лікар VIRTUS — ссылка на страницу лікаря на сайте; сторонній експерт — ссылки на
+           соцмережі (той же repeater links). Второй .vm-article__person с kicker «Рецензент» —
+           когда лікар перевіряє статтю стороннього автора.
+           ACF: authors (repeater: kicker — Автор / Авторка / Рецензент, person (user или
+           relationship → лікар), photo (1:1, от 112), name, role, links (repeater: label, url)).
+           Прежний развёрнутый блок с биографией внизу статьи — снят, биография живёт на
+           странице лікаря (doctor-tsepkolenko-hanna.html). -->
+      <div class="vm-article__persons" id="author">
+        <div class="vm-article__person">
+          <a class="vm-article__person-photo" href="doctor-tsepkolenko-hanna.html" tabindex="-1" aria-hidden="true">
+            <img src="assets/img/vm/author-tsepkolenko-anna.jpg"
+                 srcset="assets/img/vm/author-tsepkolenko-anna.jpg 120w, assets/img/vm/author-tsepkolenko-anna@2x.jpg 240w"
+                 sizes="56px" alt="" width="120" height="120" decoding="async">
+          </a>
+          <div class="vm-article__person-text">
+            <p class="vm-article__person-kicker sc-t-caption">Авторка</p>
+            <p class="vm-article__person-name sc-t-small"><a href="doctor-tsepkolenko-hanna.html">Цепколенко Ганна Володимирівна</a></p>
+            <p class="vm-article__person-role sc-t-mini">Лікар-дерматовенеролог вищої категорії · кандидат медичних наук</p>
+            <p class="vm-article__person-links sc-t-mini"><a href="doctor-tsepkolenko-hanna.html">Профіль лікаря</a></p>
+          </div>
+        </div>
+      </div>
+
       <p class="vm-article__byline sc-t-mini">
         <span class="vm-article__byline-item"><time datetime="2026-08-04">04.08.2026</time></span>
         <span class="vm-article__byline-item"><a class="vm-article__byline-author" href="#author">Ганна Цепколенко</a></span>
@@ -390,8 +415,11 @@
         </div>
       </aside>
 
-      <section class="vm-article__author" id="author">
-        <!-- PLACEHOLDER: фото автора -->
+      <!-- Развёрнутый блок автора с биографией — снят 2026-10-07: профиль автора теперь
+           компактно в начале статьи (.vm-article__persons), биография — на странице лікаря.
+           Для отката:
+      <section class="vm-article__author" id="author-bio">
+        <!— PLACEHOLDER: фото автора —>
         <img class="vm-article__avatar" data-src="assets/img/vm/author-tsepkolenko-anna.jpg"
              data-srcset="assets/img/vm/author-tsepkolenko-anna.jpg 120w, assets/img/vm/author-tsepkolenko-anna@2x.jpg 240w"
              sizes="120px" alt="Цепколенко Ганна Володимирівна"
@@ -405,6 +433,7 @@
           <p><a class="vm-article__author-link sc-t-small" href="https://virtus.ua/doctor/cepkolenko-anna-vladimirovna">Профіль лікаря →</a></p>
         </div>
       </section>
+      -->
 
       <!-- Рейтинг: звёзды — кнопки, голос принимает assets/js/article-rating.js.
            ACF/AJAX: rating_value (number), rating_count (int); голос уходит POST-ом на

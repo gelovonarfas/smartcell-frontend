@@ -991,7 +991,92 @@
   object-fit: cover;
 }
 
-/* ---------- Автор ---------- */
+/* ---------- Автор в начале статьи: фото, ім'я, статус, профіль (2026-10-07) ---------- */
+
+.vm-article__persons {
+  --vm-a-person-photo: 56px; /* квадрат фото в компактном блоке */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sc-space-6) var(--section-gap);
+}
+
+.vm-article__person {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--stack-gap-md);
+  min-inline-size: 0;
+}
+
+.vm-article__person-photo {
+  flex: none;
+  display: block;
+  inline-size: var(--vm-a-person-photo);
+  block-size: var(--vm-a-person-photo);
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.vm-article__person-photo img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: top center; /* поясные кадры: лицо не уходит за край */
+}
+
+.vm-article__person-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-0_5);
+  min-inline-size: 0;
+}
+
+.vm-article__person-text p { margin: 0; }
+
+.vm-article__person-kicker {
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.vm-article__person-name a {
+  color: var(--foreground);
+  font-weight: var(--sc-weight-medium);
+  text-decoration: none;
+}
+
+.vm-article__person-role { color: var(--muted-foreground); }
+
+.vm-article__person-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--sc-space-1_5);
+}
+
+.vm-article__person-links a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.vm-article__person-links a + a::before {
+  content: "·";
+  margin-inline-end: var(--sc-space-1_5);
+  color: var(--muted-foreground);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-article__person-name a:hover { text-decoration: underline; text-underline-position: from-font; }
+  .vm-article__person-links a:hover { text-decoration: none; }
+}
+
+.vm-article__person-name a:focus-visible,
+.vm-article__person-links a:focus-visible,
+.vm-article__person-photo:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* ---------- Автор (развёрнутый блок внизу — снят 2026-10-07, стили для отката) ---------- */
 
 .vm-article__author {
   display: flex;
