@@ -1006,10 +1006,10 @@
   display: flex;
   flex-direction: column;
   inline-size: 100%; /* в начале колонки текста (2026-10-07) */
-  border-block: var(--hairline) solid var(--border);
+  border-block-end: var(--hairline) solid var(--border); /* только нижняя линия (верх и разделитель сняты 2026-10-08) */
 }
 
-/* Рядок «Автор: Ім'я» / «Стаття перевірена: Ім'я» — через волосяную линию */
+/* Рядки «Автор: Ім'я» / «Стаття перевірена: Ім'я» */
 .vm-article__person {
   display: flex;
   align-items: flex-start; /* по верху: имя на уровне верха фото (правка 2026-10-07) */
@@ -1018,7 +1018,6 @@
   min-inline-size: 0;
 }
 
-.vm-article__person + .vm-article__person { border-block-start: var(--hairline) solid var(--border); }
 
 .vm-article__person-label { font-weight: var(--sc-weight-medium); }
 
