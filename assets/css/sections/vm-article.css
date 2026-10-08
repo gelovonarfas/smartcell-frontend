@@ -1048,6 +1048,13 @@
   min-inline-size: 0;
 }
 
+/* Имя и должность — одной группой, между ними 8 (правка 2026-10-08) */
+.vm-article__person-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-2);
+}
+
 .vm-article__person-text p { margin: 0; }
 
 .vm-article__person-kicker {
