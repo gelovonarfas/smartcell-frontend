@@ -29,7 +29,7 @@
      на узком экране по-прежнему не запускается. */
   function revealArticleHead() {
     var articleHead = document.querySelectorAll(
-      '.vm-article__chips, .vm-article__title, .vm-article__dek, .vm-article__persons');
+      '.vm-article__chips, .vm-article__title, .vm-article__dek');
     if (!articleHead.length) return;
     gsap.from(articleHead, {
       opacity: 0,
@@ -75,6 +75,7 @@
        мешает читать. Двигаются только заголовки разделов, врезки и карточки. */
     var articleBlocks = [
       '.vm-article__summary', '.vm-article__main > h2', '.vm-article__answer',
+      '.vm-article__persons', '.vm-article__quote',
       '.vm-article__checklist', '.vm-article__figure', '.vm-article__promo',
       '.vm-article__series', '.vm-article__faq-item', '.vm-article__subscribe',
       '.vm-article__author', '.vm-article__sources',

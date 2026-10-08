@@ -991,13 +991,14 @@
   object-fit: cover;
 }
 
-/* ---------- Автор в начале статьи: фото, ім'я, статус, профіль (2026-10-07) ---------- */
+/* ---------- Автори: полоса под шапкой — фото, ім'я, статус, профіль / соцмережі (2026-10-07) ---------- */
 
 .vm-article__persons {
-  --vm-a-person-photo: 56px; /* квадрат фото в компактном блоке */
+  --vm-a-person-photo: 56px; /* квадрат фото в компактном профиле */
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sc-space-6) var(--section-gap);
+  gap: var(--sc-space-6) var(--sc-space-16);
+  padding: var(--sc-space-6) var(--sc-pad-x);
 }
 
 .vm-article__person {
@@ -1005,6 +1006,7 @@
   align-items: flex-start;
   gap: var(--stack-gap-md);
   min-inline-size: 0;
+  max-inline-size: var(--sc-measure);
 }
 
 .vm-article__person-photo {
@@ -1015,6 +1017,8 @@
   overflow: hidden;
   background: var(--muted);
 }
+
+.vm-article__person-photo--sm { --vm-a-person-photo: 40px; }
 
 .vm-article__person-photo img {
   display: block;
@@ -1046,10 +1050,13 @@
 
 .vm-article__person-role { color: var(--muted-foreground); }
 
+/* Ссылки: профіль текстом, соцмережі — иконками 16 в ряд */
 .vm-article__person-links {
   display: flex;
   flex-wrap: wrap;
-  column-gap: var(--sc-space-1_5);
+  align-items: center;
+  gap: var(--sc-space-2);
+  margin-block-start: var(--sc-space-1);
 }
 
 .vm-article__person-links a {
@@ -1058,15 +1065,22 @@
   text-underline-position: from-font;
 }
 
-.vm-article__person-links a + a::before {
-  content: "·";
-  margin-inline-end: var(--sc-space-1_5);
-  color: var(--muted-foreground);
+.vm-article__person-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sc-space-6);  /* тап-зона 24 вокруг иконки 16 */
+  block-size: var(--sc-space-6);
+  text-decoration: none !important;
+  color: var(--sc-neutral-600);
 }
+
+.vm-article__person-icon { display: block; }
 
 @media (hover: hover) and (pointer: fine) {
   .vm-article__person-name a:hover { text-decoration: underline; text-underline-position: from-font; }
   .vm-article__person-links a:hover { text-decoration: none; }
+  .vm-article__person-social:hover { color: var(--foreground); }
 }
 
 .vm-article__person-name a:focus-visible,
@@ -1074,6 +1088,30 @@
 .vm-article__person-photo:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
+}
+
+/* ---------- Цитата с выноской на автора ---------- */
+
+.vm-article__quote {
+  margin: var(--vm-a-block-gap) 0 0;
+  padding-inline-start: var(--sc-space-6);
+  border-inline-start: var(--sc-line) solid var(--foreground);
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+}
+
+.vm-article__quote-text {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.vm-article__quote-text p { margin: 0; }
+
+.vm-article__quote-by {
+  display: flex;
+  align-items: center;
+  gap: var(--stack-gap-md);
 }
 
 /* ---------- Автор (развёрнутый блок внизу — снят 2026-10-07, стили для отката) ---------- */
