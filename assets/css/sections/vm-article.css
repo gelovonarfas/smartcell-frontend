@@ -1002,20 +1002,25 @@
 /* ---------- Автори: полоса под шапкой — фото, ім'я, статус, профіль / соцмережі (2026-10-07) ---------- */
 
 .vm-article__persons {
-  --vm-a-person-photo: 56px; /* квадрат фото в компактном профиле */
+  --vm-a-person-photo: 72px; /* квадрат фото в рядке автора (было 56; крупнее — правка 2026-10-07) */
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--sc-space-6) var(--sc-space-16);
-  inline-size: 100%; /* в начале колонки текста (2026-10-07; была полоса под шапкой с полями --sc-pad-x) */
+  flex-direction: column;
+  inline-size: 100%; /* в начале колонки текста (2026-10-07) */
+  border-block: var(--hairline) solid var(--border);
 }
 
+/* Рядок «Автор: Ім'я» / «Стаття перевірена: Ім'я» — через волосяную линию */
 .vm-article__person {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--stack-gap-md);
+  padding-block: var(--sc-space-4);
   min-inline-size: 0;
-  max-inline-size: var(--sc-measure);
 }
+
+.vm-article__person + .vm-article__person { border-block-start: var(--hairline) solid var(--border); }
+
+.vm-article__person-label { font-weight: var(--sc-weight-medium); }
 
 .vm-article__person-photo {
   flex: none;
@@ -1052,8 +1057,8 @@
 
 .vm-article__person-name a {
   color: var(--foreground);
-  font-weight: var(--sc-weight-medium);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-position: from-font;
 }
 
 .vm-article__person-role { color: var(--muted-foreground); }
@@ -1086,7 +1091,7 @@
 .vm-article__person-icon { display: block; }
 
 @media (hover: hover) and (pointer: fine) {
-  .vm-article__person-name a:hover { text-decoration: underline; text-underline-position: from-font; }
+  .vm-article__person-name a:hover { text-decoration: none; }
   .vm-article__person-links a:hover { text-decoration: none; }
   .vm-article__person-social:hover { color: var(--foreground); }
 }
@@ -1098,15 +1103,35 @@
   outline-offset: var(--sc-focus-offset);
 }
 
-/* ---------- Цитата с выноской на автора ---------- */
+/* ---------- Цитата з підводкою: хто говорить → цитата → «Розповідає:» з фото праворуч ---------- */
 
 .vm-article__quote {
   margin: var(--vm-a-block-gap) 0 0;
-  padding-inline-start: var(--sc-space-6);
-  border-inline-start: var(--sc-line) solid var(--foreground);
   display: flex;
   flex-direction: column;
   gap: var(--stack-gap-lg);
+  inline-size: 100%;
+}
+
+.vm-article__quote-lead {
+  margin: 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.vm-article__quote-lead a,
+.vm-article__quote-who a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* Линия слева — через цитату и подпись (правка 2026-10-07; было: только у цитаты, подпись справа) */
+.vm-article__quote-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-lg);
+  padding-inline-start: var(--sc-space-6);
+  border-inline-start: var(--sc-line) solid var(--foreground);
 }
 
 .vm-article__quote-text {
@@ -1116,10 +1141,18 @@
 
 .vm-article__quote-text p { margin: 0; }
 
+/* Подпись — слева, фото перед текстом */
 .vm-article__quote-by {
   display: flex;
   align-items: center;
   gap: var(--stack-gap-md);
+}
+
+.vm-article__quote-who { font-weight: var(--sc-weight-medium); }
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-article__quote-lead a:hover,
+  .vm-article__quote-who a:hover { text-decoration: none; }
 }
 
 /* ---------- Автор (развёрнутый блок внизу — снят 2026-10-07, стили для отката) ---------- */
