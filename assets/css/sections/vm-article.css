@@ -1067,7 +1067,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--sc-space-2);
+  gap: var(--sc-space-1); /* 4 между иконками (правка 2026-10-08; было 8) */
   margin-block-start: var(--sc-space-1);
 }
 
