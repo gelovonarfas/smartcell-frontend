@@ -7,7 +7,7 @@
   --vm-tsep-h: 300px;      /* высота полосы в макете */
   --vm-tsep-copy-w: 555px; /* мера колонки текста из макета */
   /* Новый кадр 2026-10-07 — поясной, с поднятым большим пальцем (assets/img/ceo_pic.png):
-     шире прежнего портрета, поэтому 380 вместо 249 и левее — 55 % вместо 53,4 %.
+     шире прежнего портрета, поэтому 380 вместо 249 и левее — 50 % вместо 53,4 %.
      Прежний портрет — assets/img/vm/tsepkolenko-2026-09.png (249 / 53.4%) */
   --vm-tsep-photo-w: 380px;
 
@@ -68,7 +68,7 @@
 .vm-tsep__photo {
   position: absolute;
   inset-block-end: 0;
-  inset-inline-start: 55%;
+  inset-inline-start: 50%; /* левее: палец у середины полосы (правка 2026-10-07; было 55 %) */
   inline-size: var(--vm-tsep-photo-w);
   block-size: auto;
 }
