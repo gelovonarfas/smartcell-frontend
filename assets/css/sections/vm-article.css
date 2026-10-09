@@ -1006,7 +1006,11 @@
   flex-direction: column;
   inline-size: 100%; /* в начале колонки текста (2026-10-07) */
   border-block-end: var(--hairline) solid var(--border); /* только нижняя линия (верх и разделитель сняты 2026-10-08) */
+  /* линия отбита от авторов и от следующего блока ритмом блоков статьи — 80 (56 на телефоне) */
+  padding-block-end: var(--vm-a-block-gap);
 }
+
+.vm-article__persons + * { margin-block-start: var(--vm-a-block-gap); }
 
 /* Рядки «Автор: Ім'я» / «Стаття перевірена: Ім'я» */
 .vm-article__person {
