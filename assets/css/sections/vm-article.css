@@ -428,7 +428,12 @@
 .vm-article__summary {
   margin-block-start: var(--sc-space-10); /* rhythm/40 */
   inline-size: 100%;
+  /* как у блока авторов: линия снизу, 80 до неё и 80 после (2026-10-08) */
+  padding-block-end: var(--vm-a-block-gap);
+  border-block-end: var(--hairline) solid var(--border);
 }
+
+.vm-article__main > .vm-article__summary + * { margin-block-start: var(--vm-a-block-gap); }
 
 .vm-article__summary-title {
   margin: 0 0 var(--sc-space-3);
