@@ -226,7 +226,7 @@ URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
   нет — `<div>` без стрелки), `preview_image` (квадрат от 300, лучше 440). Превью при наведении
   ведёт `editorial-preview.js` по `data-editorial` / `data-editorial-row` / `data-preview`.
 - **Описание** — одно поле wysiwyg, обычные `<p>` без классов.
-- **Читайте в Smart Age Journal** — дорожка из 4 карточек ленты внизу «Опису» (`.sc-darticles`, карточка `.sc-mag__card`): relationship `direction_articles`, пусто — запрос записей журнала за тегом напрямку.
+- **Читайте в Smart Age Journal** — `sections/sc-direction-articles.html`, секция перед футером с 4 карточками ленты (`.sc-darticles`, карточка `.sc-mag__card`): relationship `direction_articles`, пусто — запрос записей журнала за тегом напрямку.
 - **Видео** — постер картинкой, YouTube в модалке `data-modal="direction-video"` (`modal.js`),
   iframe получает адрес только при открытии.
 - **Консультанти** — врачи направления (relationship): фото 1:1, ПІБ со ссылкой на профиль,

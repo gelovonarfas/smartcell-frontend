@@ -409,7 +409,15 @@ div.sc-dservices__tile {
   color: var(--sc-neutral-600);
 }
 
-/* ---------- Smart Age Journal: дорожка анонсов внизу «Опису» (2026-10-12) ---------- */
+/* ---------- Smart Age Journal: дорожка анонсов — секция перед футером (2026-10-12) ---------- */
+
+.sc-darticles-section {
+  box-sizing: border-box;
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
 
 .sc-darticles {
   display: flex;
