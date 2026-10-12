@@ -77,7 +77,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--section-padding-y); /* 160 между частями «Опис» */
-  padding: var(--section-padding-y) var(--sc-pad-x);
+  /* Сверху — укороченный шаг (64): над панелью теперь две полосы, крихти и вкладки,
+     и полные 160 читались провалом (правка 2026-10-11). Снизу — полный шаг. */
+  padding: var(--section-padding-y-tight) var(--sc-pad-x) var(--section-padding-y);
 }
 
 /* «Консультанти» и «Відгуки» — плотнее, 56 как в кадрах 858:2 и 877:2 */
@@ -145,6 +147,13 @@
   grid-row: 2;
   display: flex;
   justify-content: flex-end;
+}
+
+/* Плитка без своей страницы (<div>) — приглушена, как темы без материалов в журнале
+   и пункты «Застосування» ниже; ссылки — тёмные, с меткой Virtus и стрелкой (2026-10-11) */
+div.sc-dservices__tile {
+  border-color: var(--border);
+  color: var(--muted-foreground);
 }
 
 .sc-dservices__arrow svg {
