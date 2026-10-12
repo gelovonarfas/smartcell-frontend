@@ -242,6 +242,7 @@
    --header-h ставит assets/js/header.js, 80 — запасное значение.
    Кадрирование держит object-fit: cover, поэтому пропорция не важна. */
 .vm-featured__media {
+  position: relative; /* кадр — абсолютом внутри: высоту слота задаёт сетка, не картинка (2026-10-11) */
   align-self: stretch;
   margin-block-start: var(--header-h, 80px);
   overflow: hidden;
@@ -260,6 +261,10 @@
 .vm-featured__media-link.sc-is-handoff img { visibility: hidden; }
 
 .vm-featured__media img {
+  /* Абсолютом во весь слот: пока кадр не загружен, слот не меняет высоту —
+     раньше пустой <img> схлопывал колонку и страница прыгала при смене (2026-10-11) */
+  position: absolute;
+  inset: 0;
   display: block;
   inline-size: 100%;
   block-size: 100%;

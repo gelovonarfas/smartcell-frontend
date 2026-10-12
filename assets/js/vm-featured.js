@@ -76,9 +76,23 @@
   /* Следующий кадр греем заранее: скрытые кадры ленивые, и без прогрева
      переключение на медленной сети рисовало картинку через 4 с после смены —
      Lighthouse считал её LCP на 18-й секунде (замер 2026-09-22). */
+  /* Скрытые кадры ленивые: адрес лежит в data-src, а img-lazy.js скрытый
+     элемент не видит. Поэтому адрес ставим на сам <img> здесь — до показа,
+     иначе кадр приходил пустым, слот менял высоту и страница прыгала
+     (правка 2026-10-11). */
+  function hydrate(img) {
+    if (!img || img.getAttribute('src')) return;
+    var srcset = img.getAttribute('data-srcset');
+    if (srcset) { img.setAttribute('srcset', srcset); img.removeAttribute('data-srcset'); }
+    var src = img.getAttribute('data-src');
+    if (src) { img.setAttribute('src', src); img.removeAttribute('data-src'); }
+  }
+
   function warm(i, done) {
     var img = medias.length ? medias[(i + total) % total].querySelector('img') : null;
-    if (!img || img.complete && img.naturalWidth) { if (done) done(); return; }
+    if (!img) { if (done) done(); return; }
+    hydrate(img);
+    if (img.complete && img.naturalWidth) { if (done) done(); return; }
     var pre = new Image();
     if (img.getAttribute('sizes')) pre.sizes = img.getAttribute('sizes');
     if (img.getAttribute('srcset')) pre.srcset = img.getAttribute('srcset');
@@ -99,6 +113,7 @@
 
   function go(i) {
     index = (i + total) % total;
+    if (medias[index]) hydrate(medias[index].querySelector('img')); /* клик стрелкой — без прогрева */
     render();
     armBar();
     schedule();
