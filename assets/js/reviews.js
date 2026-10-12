@@ -63,6 +63,15 @@
 
   function maxIndex() { return Math.max(0, items.length - perView()); }
 
+  /* Окно ужато до «N карточек» в пикселях — при смене ширины окна (поворот,
+     открытые devtools) его надо пересчитать, иначе лента вылезает за полосу,
+     а первая карточка режется слева (правка 2026-10-12) */
+  var resizeFrame = 0;
+  window.addEventListener('resize', function () {
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(function () { render(); });
+  });
+
   function render() {
     fit();
     if (index > maxIndex()) index = maxIndex();

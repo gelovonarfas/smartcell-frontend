@@ -281,8 +281,10 @@ URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
 
 - **`cell-technologies.html`** — хаб «Клітинні технології SmartCell» (контент virtus.ua, як є).
   Hero (`sc-dhero`) → крихти → вкладки Опис · Консультанти · Відгуки (`direction-tabs.js`).
-  Опис: 19 плиток напрямків у 4 колонки (`sc-dservices__list--cols-4`, relationship `hub_directions`;
-  «Пластична хірургія» і «Препарати» — внутрішні сторінки, решта — virtus.ua з міткою Virtus),
+  Опис: 16 плиток напрямків — конфігуратор як послуги лікаря (`sc-dsvc`, `doctor-services.js`): плитка
+  розкриває полочку з вкладеними послугами напрямку (чіпи, з посиланням або без) і посиланням «Сторінка
+  напрямку» (relationship `hub_directions`, у напрямку repeater `services`); нижче «Також у розділі» —
+  банк, препарати, консультанти плитками-посиланнями (`sc-dservices__list--cols-4`),
   цитата + текст (`sc-dabout`), «У відділенні проводять» рядками (`sc-dbio`, repeater `hub_capabilities`),
   три прозові блоки (`sc-dprose`, wysiwyg), дорожка журналу. Далі слайдер відгуків, FAQ (B16,
   `data-theme="inverse"`, repeater `faq`), полоса «Консультація», філії.
