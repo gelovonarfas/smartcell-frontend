@@ -271,6 +271,29 @@ URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
   догрузка (`data-reviews-more` без обработчика).
 - JSON-LD: `Physician` + `BreadcrumbList`. Критический CSS — в `scripts/bundle-css.py`.
 
+## Хаб розділу і препарати (SC Hub, SC Preparations)
+
+Аудит virtus.ua/kletochnye-tehnologii (2026-10-12): крім шаблону напрямку, банку і консультантів
+розділ має ще три типи сторінок — хаб розділу, «Клітинні препарати» і сторінку лікаря.
+Усі три зібрані в Figma (сторінка «SC Direction — Desktop»: SC/Hub, SC/Preparations, SC/Doctor)
+і на стенді. Підсторінки напрямків (cirrhosis_cell, arthritis_arthrosis…) і сторінки розділу
+препаратів (омолодження, Cellness, плазмаферез) — за шаблоном напрямку.
+
+- **`cell-technologies.html`** — хаб «Клітинні технології SmartCell» (контент virtus.ua, як є).
+  Hero (`sc-dhero`) → крихти → вкладки Опис · Консультанти · Відгуки (`direction-tabs.js`).
+  Опис: 19 плиток напрямків у 4 колонки (`sc-dservices__list--cols-4`, relationship `hub_directions`;
+  «Пластична хірургія» і «Препарати» — внутрішні сторінки, решта — virtus.ua з міткою Virtus),
+  цитата + текст (`sc-dabout`), «У відділенні проводять» рядками (`sc-dbio`, repeater `hub_capabilities`),
+  три прозові блоки (`sc-dprose`, wysiwyg), дорожка журналу. Далі слайдер відгуків, FAQ (B16,
+  `data-theme="inverse"`, repeater `faq`), полоса «Консультація», філії.
+- **`preparations.html`** — «Клітинні препарати SmartCell». Hero → крихти → `sc-prep`: вступ і
+  картки продуктів (`sc-product`: квадратне фото, назва, ефекти списком, `<details>` «Склад і
+  застосування», кнопка «Замовити» → попап запису), дві групи — косметика CELLNESS і лікувальні
+  продукти (repeater `products`: group, photo, name, effects, details, text). «Також у розділі» —
+  плитки на сторінки virtus. ⚠ [VERIFY] фото продуктів з virtus малі (263 px), крем для очей =
+  фото денного, тонік — банка; замовлення через консультацію — підтвердити з клінікою.
+- Критичний CSS обох сторінок — у `scripts/bundle-css.py`.
+
 ## Репозиторий и обновления
 
 Код живёт в приватном репозитории `github.com/gelovonarfas/smartcell-frontend`.
