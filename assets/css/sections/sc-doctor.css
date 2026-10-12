@@ -206,7 +206,9 @@
 /* ---------- Биография: строки через волосяную линию, подпись слева ---------- */
 
 .sc-dbio {
-  --dbio-label-w: 320px; /* колонка подписи = плита Button/Block */
+  /* Колонка подписи — половина полосы (сетка 6 из 12 колонок): текст справа начинается
+     от середины, как колонка «что получаете» в B12 (правка 2026-10-11; было 320) */
+  --dbio-label-w: calc(6 * (100% - 11 * var(--sc-grid-gutter)) / 12 + 5 * var(--sc-grid-gutter));
   display: flex;
   flex-direction: column;
   border-block-start: var(--hairline) solid var(--border);
