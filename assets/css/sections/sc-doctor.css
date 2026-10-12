@@ -154,26 +154,38 @@
   overflow: hidden;
 }
 
-.sc-dsvc__shelf { padding-block: var(--sc-space-6); /* 24 */ }
+.sc-dsvc__shelf { padding-block: 0; } /* строки сами несут поля; было 24 (правка 2026-10-11) */
 
 .sc-dsvc__pane {
   display: flex;
   flex-direction: column;
-  gap: var(--sc-space-8); /* 32 между подгруппами */
 }
 
 .sc-dsvc__pane[hidden] { display: none; }
 
 /* Второй уровень: подпись подгруппы капсом, под ней чипы (чипы — sc-dindications из страницы напрямку) */
+/* Второй уровень строками, как биография (.sc-dbio__row): слева подгруппа в колонке 320,
+   справа чипы; строки через волосяную линию, последняя — без (низ закрывает линия полочки).
+   Первая группа категории без подгруппы — левая ячейка пустая (2026-10-11) */
 .sc-dsvc__group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--stack-gap-md);
+  --dsvc-label-w: 320px; /* = плита Button/Block и колонка подписи биографии */
+  display: grid;
+  grid-template-columns: var(--dsvc-label-w) minmax(0, 1fr);
+  gap: var(--section-gap);
+  align-items: start;
+  padding-block: var(--sc-space-6); /* 24 */
+  border-block-end: var(--hairline) solid var(--border);
 }
+
+.sc-dsvc__group:last-child { border-block-end: 0; }
+
+/* группа без подписи: чипы с первой колонки */
+.sc-dsvc__group > .sc-dindications__list:first-child { grid-column: 1 / -1; }
 
 .sc-dsvc__subtitle {
   margin: 0;
-  color: var(--sc-neutral-600);
+  padding-block: var(--sc-space-3); /* на линии текста чипа (12 — поле чипа) */
+  color: var(--foreground);
 }
 
 /* Чипы появляются волной: каждый чуть позже предыдущего (--i ставит скрипт) */
@@ -254,6 +266,12 @@
 
 @media (max-width: 640px) {
   .sc-dsvc { --dsvc-tile-min: 140px; } /* две плитки в ряд */
+
+  .sc-dsvc__group {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--stack-gap-md);
+  }
+  .sc-dsvc__subtitle { padding-block: 0; }
 
   .sc-dbio__row {
     grid-template-columns: minmax(0, 1fr);
