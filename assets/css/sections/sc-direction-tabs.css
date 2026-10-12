@@ -376,6 +376,41 @@ div.sc-dservices__tile {
   color: var(--sc-neutral-600);
 }
 
+/* ---------- Smart Age Journal: дорожка анонсов внизу «Опису» (2026-10-12) ---------- */
+
+.sc-darticles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-head-gap);
+}
+
+.sc-darticles__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--section-gap);
+}
+
+.sc-darticles__title { margin: 0; }
+
+.sc-darticles__all {
+  flex: none;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* Четыре карточки ленты встык — как «Свіже» в журнале */
+.sc-darticles__row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sc-tile-gap);
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 /* ---------- Відгуки: полный список, строки через одну на тёплом ---------- */
 
 .sc-dreviews {
@@ -458,6 +493,7 @@ div.sc-dservices__tile {
   a.sc-dservices__tile:hover,
   a.sc-dindications__chip:hover,
   .sc-dreviews__more-btn:hover { background: var(--muted); }
+  .sc-darticles__all:hover { text-decoration: none; }
   a.sc-dservices__tile:hover .sc-dservices__arrow svg {
     transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
   }
@@ -511,6 +547,10 @@ a.sc-dindications__chip:active,
   }
 
   .sc-ddoctors { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
+
+  /* карточки журнала в колонку с разрядкой, как в ленте */
+  .sc-darticles__row { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
+  .sc-darticles__head { flex-direction: column; align-items: flex-start; gap: var(--stack-gap-sm); }
 
   .sc-dreviews__row {
     grid-template-columns: minmax(0, 1fr);
