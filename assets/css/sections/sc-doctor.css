@@ -184,7 +184,10 @@
 
 .sc-dsvc__subtitle {
   margin: 0;
-  padding-block: var(--sc-space-3); /* на линии текста чипа (12 — поле чипа) */
+  /* по верху ряда, на одной линии с верхом чипов; текст чипа ниже на поле 12 —
+     подпись компенсирует это полем сверху и ложится на его базовую линию (2026-10-11) */
+  padding-block: var(--sc-space-3) 0;
+  font-weight: var(--sc-weight-medium);
   color: var(--foreground);
 }
 
