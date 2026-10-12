@@ -35,7 +35,7 @@
 .vm-topics__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sc-space-1_5); /* 6 */
+  gap: var(--card-gap); /* 10 — как чипы «Показань» и послуг лікаря (2026-10-11; было 6) */
 }
 
 /* ---------- Рубрика: плитка, клик раскрывает темы, не фильтрует ----------
@@ -163,7 +163,9 @@
 .vm-topics__tags { flex: 1 1 auto; min-inline-size: 0; }
 
 .vm-topics__tag {
-  padding: var(--sc-chip-pad); /* 6 / 10 в макете */
+  /* Крупнее, как чипы послуг на странице лікаря (sc-dindications__chip): кегль small,
+     поля 12 / 14 (правка 2026-10-11; в макете chip 28 — --sc-chip-pad 6 / 10 и mini) */
+  padding: var(--sc-space-3) var(--sc-space-3_5);
   border: var(--sc-line) solid var(--input);
   background: var(--background);
   color: var(--foreground);
