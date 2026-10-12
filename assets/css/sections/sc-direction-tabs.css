@@ -258,11 +258,13 @@
   transition: background-color var(--sc-dur-fast) var(--sc-ease);
 }
 
-.sc-dindications__icon {
-  flex: none;
-  display: block;
-  inline-size: var(--sc-space-2_5);
-  block-size: var(--sc-space-2_5);
+/* Пункт без ссылки — приглушён, как тема без материалов в журнале (vm-topics__tag:disabled);
+   стрелка у ссылок снята 2026-10-11, активность читается по цвету */
+/* Только на странице напрямку: на странице лікаря чипы послуг пока все без ссылок
+   (адреса подставит кодер) — их не глушим */
+.sc-dtabs span.sc-dindications__chip {
+  border-color: var(--border);
+  color: var(--muted-foreground);
 }
 
 /* ---------- Видео: постер, play, модалка по клику ---------- */
