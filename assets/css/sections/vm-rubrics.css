@@ -4,7 +4,7 @@
    ============================================================ */
 
 .vm-rubrics {
-  --vm-rubrics-h: 70px; /* высота полосы в макете */
+  --vm-rubrics-h: var(--sc-crumbs-h); /* 70 в макете; общая высота полосы крихт (base.css) */
 
   box-sizing: border-box;
   display: flex;

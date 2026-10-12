@@ -207,6 +207,24 @@
   </div>
 </section>
 
+<!-- Секция — копия sections/sc-direction-crumbs.html -->
+<!-- ============================================================
+     SC/Direction · Хлібні крихти — на странице лікаря сразу под первым экраном,
+     как в блоге и статьях (2026-10-11); на странице напрямку — внизу
+     figma: node-id=318:72
+     Последний пункт в макете — «Ендокринологія» (остался от шаблона другого
+     направления); здесь — текущая страница, «Пластична хірургія» (2026-10-04).
+     ACF: не нужен — крихти строит тема (Yoast/Rank Math + BreadcrumbList).
+     ============================================================ -->
+<nav class="sc-dcrumbs" aria-label="Хлібні крихти">
+  <ol class="sc-dcrumbs__list sc-t-mini">
+    <li><a href="https://virtus.ua/">virtus.ua</a></li>
+    <li><a href="index.html">Клітинні технології SmartCell</a></li>
+    <li><a href="https://virtus.ua/smartcell-consultants">Консультанти SmartCell</a></li>
+    <li><span aria-current="page">Цепколенко Ганна Володимирівна</span></li>
+  </ol>
+</nav>
+
 <!-- Секция — копия sections/sc-doctor-services.html -->
 <!-- ============================================================
      SC/Doctor · Послуги, які надає лікар — конфигуратор (плитки → полочка)
@@ -224,7 +242,7 @@
 <section class="sc-doc sc-dsvc" data-doctor-services>
   <h2 class="sc-doc__title sc-t-h2">Послуги, які надає лікар</h2>
   <ul class="sc-dsvc__tiles">
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="smartcell"><span class="sc-dsvc__label">Клітинні технології SmartCell</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="true" aria-controls="dsvc-panel" data-service="smartcell"><span class="sc-dsvc__label">Клітинні технології SmartCell</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
     <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="dermatology"><span class="sc-dsvc__label">Дерматологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
     <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="aesthetic"><span class="sc-dsvc__label">Естетична медицина</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
     <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="laser"><span class="sc-dsvc__label">Лазернi технологіï</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
@@ -608,23 +626,6 @@
     <button class="sc-dreviews__more-btn" type="button" data-reviews-more>Показати ще</button>
   </div>
 </section>
-
-<!-- Секция — копия sections/sc-direction-crumbs.html -->
-<!-- ============================================================
-     SC/Direction · Хлібні крихти внизу страницы
-     figma: node-id=318:72
-     Последний пункт в макете — «Ендокринологія» (остался от шаблона другого
-     направления); здесь — текущая страница, «Пластична хірургія» (2026-10-04).
-     ACF: не нужен — крихти строит тема (Yoast/Rank Math + BreadcrumbList).
-     ============================================================ -->
-<nav class="sc-dcrumbs" aria-label="Хлібні крихти">
-  <ol class="sc-dcrumbs__list sc-t-mini">
-    <li><a href="https://virtus.ua/">virtus.ua</a></li>
-    <li><a href="index.html">Клітинні технології SmartCell</a></li>
-    <li><a href="https://virtus.ua/smartcell-consultants">Консультанти SmartCell</a></li>
-    <li><span aria-current="page">Цепколенко Ганна Володимирівна</span></li>
-  </ol>
-</nav>
 
 </main>
 

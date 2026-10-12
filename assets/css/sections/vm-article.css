@@ -334,7 +334,7 @@
    чтобы при переходе из ленты в статью полоса не прыгала (решение 2026-09-08). */
 .vm-article__crumbs {
   display: flex;
-  --vm-a-crumbs-h: 70px;   /* = --vm-rubrics-h на главной блога */
+  --vm-a-crumbs-h: var(--sc-crumbs-h);   /* 70 — общая высота полосы крихт (base.css) */
 
   align-items: center;
   min-block-size: var(--vm-a-crumbs-h);

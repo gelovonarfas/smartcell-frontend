@@ -77,4 +77,13 @@
       open(b.getAttribute('aria-expanded') === 'true' ? null : b.getAttribute('data-service'));
     });
   });
+
+  /* Плитка с aria-expanded="true" в разметке открыта сразу, без анимации раскрытия (2026-10-11) */
+  var initial = tiles.filter(function (b) { return b.getAttribute('aria-expanded') === 'true'; })[0];
+  if (initial) {
+    panel.classList.add('sc-is-moving');
+    open(initial.getAttribute('data-service'));
+    void panel.offsetHeight;
+    panel.classList.remove('sc-is-moving');
+  }
 }());

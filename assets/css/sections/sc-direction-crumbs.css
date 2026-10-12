@@ -5,8 +5,11 @@
 
 .sc-dcrumbs {
   box-sizing: border-box;
-  padding: var(--sc-space-4) var(--sc-pad-x); /* 16: полоса 50 */
-  border-block: var(--sc-line) solid var(--border);
+  display: flex;
+  align-items: center;
+  min-block-size: var(--sc-crumbs-h); /* 70 — как в блоге и статьях (2026-10-11; в макете 318:72 полоса 50) */
+  padding: var(--sc-space-2) var(--sc-pad-x);
+  border-block: var(--hairline) solid var(--border);
   background: var(--background);
   color: var(--sc-neutral-600);
 }
