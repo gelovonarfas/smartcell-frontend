@@ -10,7 +10,7 @@
   min-block-size: var(--sc-crumbs-h); /* 70 — как в блоге и статьях (2026-10-11; в макете 318:72 полоса 50) */
   padding: var(--sc-space-2) var(--sc-pad-x);
   border-block: var(--hairline) solid var(--border);
-  background: var(--background);
+  background: var(--warm); /* в тон первого экрана и шапки над ним — полоса продолжает hero (2026-10-11) */
   color: var(--sc-neutral-600);
 }
 

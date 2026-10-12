@@ -30,6 +30,9 @@
 /* ---------- Sub-nav: вкладки и бегунок по линии ---------- */
 
 .sc-dtabs__bar {
+  display: flex;
+  align-items: flex-end; /* вкладки у нижней кромки: бегунок лежит на линии */
+  min-block-size: var(--sc-crumbs-h); /* 70 — та же высота, что у полосы крихт над ней (2026-10-11) */
   padding-inline: var(--sc-pad-x);
   border-block-end: var(--sc-line) solid var(--border);
 }
