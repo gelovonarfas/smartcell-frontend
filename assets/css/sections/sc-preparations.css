@@ -1,0 +1,158 @@
+/* ============================================================
+   SC/Preparations · розділ «Клітинні препарати SmartCell» — картки продуктів
+   figma: SC/Preparations (2026-10-12)
+   Зависит от tokens.css, base.css; плитки «Також у розділі» — sc-direction-tabs.css
+   ============================================================ */
+
+.sc-prep {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-head-gap);
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-prep *,
+.sc-prep *::before,
+.sc-prep *::after { box-sizing: border-box; }
+
+.sc-prep--links { padding-block-start: 0; }
+
+.sc-prep__title { margin: 0; }
+
+/* Вступ: заголовок і три абзаци з virtus, міра рядка */
+.sc-prep__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-head-gap);
+}
+
+.sc-prep__lead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-prep__lead > p { margin: 0; }
+
+/* Друга група — через повний крок секції */
+.sc-prep__grid + .sc-prep__title { margin-block-start: calc(var(--section-padding-y) - var(--sc-head-gap)); }
+
+/* Картки продуктів: квадрат встык (щель 4), як лента журналу */
+.sc-prep__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sc-tile-gap);
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-product {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  min-inline-size: 0;
+}
+
+.sc-product__photo {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.sc-product__photo img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Текст не ближче 95 % ширини плитки (як у лентi) */
+.sc-product__name,
+.sc-product__text,
+.sc-product__effects,
+.sc-product__more { padding-inline-end: var(--sc-tile-text-inset); }
+
+.sc-product__name {
+  margin: 0;
+  padding-block-start: var(--sc-space-2);
+}
+
+.sc-product__text { margin: 0; color: var(--sc-neutral-600); }
+
+.sc-product__effects {
+  margin: 0;
+  padding-inline-start: var(--sc-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+  color: var(--sc-neutral-600);
+}
+
+/* «Склад і застосування» — розкривний блок, без JS */
+.sc-product__more { margin: 0; }
+
+.sc-product__more-toggle {
+  cursor: pointer;
+  list-style: none;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.sc-product__more-toggle::-webkit-details-marker { display: none; }
+
+.sc-product__more[open] .sc-product__more-toggle { text-decoration: none; }
+
+.sc-product__more-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-2);
+  padding-block-start: var(--stack-gap-md);
+  color: var(--sc-neutral-600);
+}
+
+.sc-product__more-body > p { margin: 0; }
+.sc-product__more-body > li { list-style: disc; margin-inline-start: var(--sc-space-4); }
+
+/* «Замовити» — Button/Control · outline, притиснута до низу картки */
+.sc-product__cta {
+  align-self: flex-start;
+  margin-block-start: auto;
+  display: inline-flex;
+  align-items: center;
+  block-size: var(--control-square);
+  padding-inline: var(--control-padding-x);
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-product__cta:hover { background: var(--muted); }
+  .sc-product__more-toggle:hover { text-decoration: none; }
+}
+
+.sc-product__cta:focus-visible,
+.sc-product__more-toggle:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+.sc-product__cta:active { background: var(--secondary); }
+
+@media (max-width: 640px) {
+  .sc-prep__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--section-gap) var(--sc-tile-gap);
+  }
+}
