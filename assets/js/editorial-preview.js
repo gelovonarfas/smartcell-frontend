@@ -29,10 +29,14 @@
     var rows = section.querySelectorAll('[data-editorial-row]');
     if (!preview || !img || !rows.length) return;
 
-    /* Превью существует только когда скрипт жив — см. :not(.sc-is-ready) в CSS */
+    /* Превью существует только когда скрипт жив — см. :not(.sc-is-ready) в CSS.
+       В разметке у него атрибут hidden: без скрипта (и до первого наведения)
+       квадрат не виден, даже если в теме потерялись правила opacity/display
+       (на virtus.ua он показывался в углу страницы — правка 2026-10-12) */
     preview.classList.add('sc-is-ready');
 
     var targetX = 0, targetY = 0, x = 0, y = 0, prevX = 0, tilt = 0;
+    var hideTimer = null;
     var active = false, raf = null, placed = false;
     var offset = parseFloat(getComputedStyle(preview).getPropertyValue('--preview-offset')) || 0;
 
@@ -87,6 +91,8 @@
       if (!src) return;
       if (img.getAttribute('src') !== src) img.setAttribute('src', src);
       active = true;
+      clearTimeout(hideTimer);
+      preview.hidden = false;
       preview.classList.add('sc-is-visible');
       start();
     }
@@ -94,6 +100,9 @@
     function hide() {
       active = false;
       preview.classList.remove('sc-is-visible');
+      /* снова hidden — когда проявление отыграло назад (длительность из CSS) */
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(function () { if (!active) preview.hidden = true; }, 400);
     }
 
     for (var j = 0; j < rows.length; j++) {

@@ -204,6 +204,10 @@ div.sc-dservices__tile {
 }
 
 .sc-dservices__preview:not(.sc-is-ready) { display: none; }
+/* Страховка: пока не наведено — не рисуется вовсе (hidden ставит разметка и скрипт);
+   на virtus.ua без этого квадрат появлялся в углу страницы (правка 2026-10-12) */
+.sc-dservices__preview[hidden] { display: none; }
+.sc-dservices__preview:not(.sc-is-visible) { visibility: hidden; transition: visibility 0s linear var(--dtabs-preview-dur); }
 
 /* Хаб розділу (cell-technologies.html, 2026-10-12): напрямки у чотири колонки */
 .sc-dservices__list--cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }

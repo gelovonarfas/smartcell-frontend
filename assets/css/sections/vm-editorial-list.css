@@ -148,6 +148,10 @@
 
 /* Без скрипта и при просьбе убрать анимацию превью не участвует вовсе */
 .sc-editorial__preview:not(.sc-is-ready) { display: none; }
+/* Страховка: пока не наведено — не рисуется вовсе (hidden ставит разметка и скрипт);
+   на virtus.ua без этого квадрат появлялся в углу страницы (правка 2026-10-12) */
+.sc-editorial__preview[hidden] { display: none; }
+.sc-editorial__preview:not(.sc-is-visible) { visibility: hidden; transition: visibility 0s linear var(--editorial-preview-dur); }
 
 @media (prefers-reduced-motion: reduce) {
   .sc-editorial__preview { display: none; }
