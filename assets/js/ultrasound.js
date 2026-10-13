@@ -9,6 +9,14 @@
    Подписи оси X и единица измерения — латиницей, как в макете:
    это обозначения протокола (AMC, PRP, FB), а не проза для перевода.
 
+   Ось X — время в месяцах (0…12), как на слайдах исследования, а не
+   равные шаги между подписями: FB стоит рядом с PRP/AMC (≈1,3 міс),
+   6 и 12 місяців — на своих местах. У каждого состояния свой список
+   points (месяц каждой точки ряда) и ticks (подписи оси). Значения
+   сняты с оригинальных слайдов попиксельно (2026-10-12, замечание
+   професора: прежняя версия ставила FB на треть шкалы и не показывала
+   просадку на PRP у нормированных показателей).
+
    Показатель переключают только стрелки, как в макете.
    SVG создаётся один раз: при переключении обновляются подписи осей
    и атрибут d у линий — узлы не пересоздаются.
@@ -24,6 +32,8 @@
     '56 і старше': '8 4 2 4'
   };
 
+  var SPAN = 12; /* месяцев на оси X */
+
   var STATES = [
     {
       id: '1',
@@ -32,11 +42,18 @@
       axisUnit: 'µm',
       decimals: 0,
       axisY: [70, 80, 90, 100, 110],
-      axisX: ['AMC', 'FB', '6 mo', '12 mo'],
+      /* AMC — вихідне значення, FB через ≈1,3 міс (слайд: дно у всіх груп на FB) */
+      points: [0, 1.3, 6, 12],
+      ticks: [
+        { at: 0,   name: 'AMC' },
+        { at: 1.3, name: 'FB' },
+        { at: 6,   name: '6 mo' },
+        { at: 12,  name: '12 mo' }
+      ],
       baseline: null,
       series: [
-        { name: '25–35',       values: [94, 82, 89, 90] },
-        { name: '36–45',       values: [90, 76, 85, 85] },
+        { name: '25–35',       values: [94, 82, 88.5, 90] },
+        { name: '36–45',       values: [90, 76, 85, 85.5] },
         { name: '45–55',       values: [103, 89, 99, 99.5] },
         { name: '56 і старше', values: [88, 75, 83, 85] }
       ]
@@ -48,16 +65,21 @@
       axisUnit: 'ratio',
       decimals: 2,
       axisY: [0.90, 1.00, 1.10, 1.20],
-      axisX: ['PRP', 'FB', '6 mo', '12 mo'],
+      /* Нормовано на значення до лікування (1.00 у точці 0): невелика просадка
+         на PRP (≈0,4 міс), різкий приріст до FB (≈1,3 міс), далі плато */
+      points: [0, 0.4, 1.3, 6, 12],
+      ticks: [
+        { at: 0.4, name: 'PRP' },
+        { at: 1.3, name: 'FB' },
+        { at: 6,   name: '6 mo' },
+        { at: 12,  name: '12 mo' }
+      ],
       baseline: { value: 1.00, name: 'До лікування' },
       series: [
-        { name: '25–35',       values: [1.00, 1.00, 1.00, 1.00] },
-        { name: '36–45',       values: [1.00, 1.04, 1.08, 1.09] },
-        /* Первая точка у всех групп ровно 1.00: график нормирован на
-           значение до терапии, и просадки на старте в нём нет
-           (сверено с оригиналом исследования 2026-09-14) */
-        { name: '45–55',       values: [1.00, 1.05, 1.09, 1.11] },
-        { name: '56 і старше', values: [1.00, 1.06, 1.13, 1.11] }
+        { name: '25–35',       values: [1.00, 1.00, 1.00, 1.00, 1.00] },
+        { name: '36–45',       values: [1.00, 0.99, 1.03, 1.07, 1.09] },
+        { name: '45–55',       values: [1.00, 0.975, 1.05, 1.09, 1.11] },
+        { name: '56 і старше', values: [1.00, 0.975, 1.055, 1.12, 1.11] }
       ]
     },
     {
@@ -67,16 +89,30 @@
       axisUnit: 'ratio',
       decimals: 2,
       axisY: [0.90, 0.95, 1.00, 1.05, 1.10],
-      axisX: ['PRP', 'FB', '6 mo', '12 mo'],
+      /* Просадка на PRP (≈0,4 міс), у групи 56+ дно трохи пізніше — на FB;
+         далі рівномірне зростання до 12 міс вище вихідного рівня */
+      points: [0, 0.4, 1.3, 6, 12],
+      ticks: [
+        { at: 0.4, name: 'PRP' },
+        { at: 1.3, name: 'FB' },
+        { at: 6,   name: '6 mo' },
+        { at: 12,  name: '12 mo' }
+      ],
       baseline: { value: 1.00, name: 'До лікування' },
       series: [
-        { name: '25–35',       values: [1.00, 0.95, 1.03, 1.09] },
-        { name: '36–45',       values: [1.00, 0.95, 1.02, 1.08] },
-        { name: '45–55',       values: [1.00, 0.93, 1.00, 1.08] },
-        { name: '56 і старше', values: [1.00, 0.93, 0.98, 1.04] }
+        { name: '25–35',       values: [1.00, 0.945, 0.965, 1.045, 1.095] },
+        { name: '36–45',       values: [1.00, 0.945, 0.955, 1.04, 1.09] },
+        { name: '45–55',       values: [1.00, 0.935, 0.95, 1.025, 1.095] },
+        { name: '56 і старше', values: [1.00, 0.965, 0.95, 1.02, 1.045] }
       ]
     }
   ];
+
+  /* Было до 2026-10-12 (равные шаги оси, 4 точки, без просадки на PRP) — для отката:
+     axisX: ['AMC'|'PRP', 'FB', '6 mo', '12 mo'];
+     епідерміс  25–35 [94, 82, 89, 90] · 36–45 [90, 76, 85, 85] · 45–55 [103, 89, 99, 99.5] · 56+ [88, 75, 83, 85]
+     дерма      25–35 [1.00 ×4] · 36–45 [1.00, 1.04, 1.08, 1.09] · 45–55 [1.00, 1.05, 1.09, 1.11] · 56+ [1.00, 1.06, 1.13, 1.11]
+     щільність  25–35 [1.00, 0.95, 1.03, 1.09] · 36–45 [1.00, 0.95, 1.02, 1.08] · 45–55 [1.00, 0.93, 1.00, 1.08] · 56+ [1.00, 0.93, 0.98, 1.04] */
 
   var NS = 'http://www.w3.org/2000/svg';
 
@@ -143,9 +179,9 @@
       return plot.y + plot.h - ((v - min) / (max - min)) * plot.h;
     }
 
-    function scaleX(i, state) {
-      var n = state.axisX.length - 1;
-      return plot.x + (plot.w / n) * i;
+    /* ось X — месяцы: положение точки пропорционально времени */
+    function scaleX(month) {
+      return plot.x + plot.w * (month / SPAN);
     }
 
     function draw(state) {
@@ -164,18 +200,17 @@
         gAxis.appendChild(t);
       });
 
-      /* засечки и подписи оси X; крайние прижаты внутрь, как в макете */
-      var last = state.axisX.length - 1;
-      state.axisX.forEach(function (name, i) {
-        var x = scaleX(i, state);
+      /* засечки и подписи оси X — по месяцам; подпись у правого края прижата внутрь */
+      state.ticks.forEach(function (tick) {
+        var x = scaleX(tick.at);
         gAxis.appendChild(el('line', {
           x1: x, y1: plot.y + plot.h, x2: x, y2: plot.y + plot.h + 6, class: 'sc-usg__tickline'
         }));
         var t = el('text', {
           x: x, y: plot.y + plot.h + 29, class: 'sc-usg__tick',
-          'text-anchor': i === 0 ? 'start' : (i === last ? 'end' : 'middle')
+          'text-anchor': tick.at >= SPAN ? 'end' : 'middle'
         });
-        t.textContent = name;
+        t.textContent = tick.name;
         gAxis.appendChild(t);
       });
 
@@ -191,7 +226,7 @@
       /* ряды */
       state.series.forEach(function (s) {
         var d = s.values.map(function (v, i) {
-          return (i ? 'L' : 'M') + scaleX(i, state).toFixed(1) + ' ' + scaleY(v, state).toFixed(1);
+          return (i ? 'L' : 'M') + scaleX(state.points[i]).toFixed(1) + ' ' + scaleY(v, state).toFixed(1);
         }).join(' ');
 
         var path = el('path', { d: d, class: 'sc-usg__line' });
@@ -200,7 +235,7 @@
 
         s.values.forEach(function (v, i) {
           gSeries.appendChild(el('rect', {
-            x: scaleX(i, state) - MARK / 2,
+            x: scaleX(state.points[i]) - MARK / 2,
             y: scaleY(v, state) - MARK / 2,
             width: MARK, height: MARK, class: 'sc-usg__dot'
           }));
