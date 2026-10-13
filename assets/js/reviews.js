@@ -72,11 +72,18 @@
     resizeFrame = requestAnimationFrame(function () { render(); });
   });
 
+  /* Скрипт defer отрабатывает до прихода асинхронного CSS (preload → onload на стенде):
+     ширина окна и карточек померяна без стилей. Пересчитать, когда всё загрузилось (2026-10-12) */
+  window.addEventListener('load', function () { render(); });
+
   function render() {
     fit();
     if (index > maxIndex()) index = maxIndex();
-    /* сдвиг округляем: дробный translate размывает кромки карточек */
-    root.style.setProperty('--reviews-shift', (-Math.round(items[index].offsetLeft)) + 'px');
+    /* сдвиг округляем: дробный translate размывает кромки карточек.
+       Считаем от первой карточки, а не от offsetParent: на стенде CSS грузится
+       асинхронно, и до его прихода offsetParent ленты — не лента, а полоса;
+       offsetLeft тогда равен полю 80 и лента уезжала влево (правка 2026-10-12) */
+    root.style.setProperty('--reviews-shift', (-Math.round(items[index].offsetLeft - items[0].offsetLeft)) + 'px');
     if (counter) counter.textContent = pad(index + 1) + ' / ' + pad(items.length);
     /* ручной режим: полоса — доля пройденной ленты */
     if (manual) root.style.setProperty('--reviews-fill', ((index + perView()) / items.length).toFixed(3));
