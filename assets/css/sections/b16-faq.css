@@ -136,6 +136,20 @@
   color: var(--muted-foreground);
 }
 
+/* Ответ из нескольких абзацев и списка (страница послуги, wysiwyg): контейнер — div,
+   внутри обычные <p> и <ul> без классов (2026-10-12) */
+.sc-faq__answer > p,
+.sc-faq__answer > ul { margin: 0; }
+
+.sc-faq__answer > * + * { margin-block-start: var(--stack-gap-sm); }
+
+.sc-faq__answer > ul {
+  padding-inline-start: var(--sc-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sc-faq__cta-arrow svg { transition: none; }
   .sc-faq__cta,

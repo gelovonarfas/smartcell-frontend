@@ -24,17 +24,19 @@
   /* порядковый номер для волны появления: подпись подгруппы, затем её чипы */
   panes.forEach(function (pane) {
     var i = 0;
-    all(pane, '.sc-dsvc__subtitle, .sc-dindications__list > li').forEach(function (el) {
+    all(pane, '.sc-dsvc__subtitle, .sc-dindications__list > li, .sc-dsvc__all').forEach(function (el) {
       el.style.setProperty('--i', i++);
     });
   });
 
   var openId = null;
 
+  /* Последний пункт того же ряда — среди всех плиток, включая плитки-ссылки
+     без полочки (a.sc-dsvc__tile--link, хаб 2026-10-12) */
   function rowEnd(li) {
     var last = li;
-    tiles.forEach(function (b) {
-      if (b.parentNode.offsetTop === li.offsetTop) last = b.parentNode;
+    all(root, '.sc-dsvc__tiles > li:not(.sc-dsvc__panel)').forEach(function (item) {
+      if (item.offsetTop === li.offsetTop) last = item;
     });
     return last;
   }

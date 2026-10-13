@@ -197,6 +197,10 @@
   </ol>
 </nav>
 
+<!-- Полочка як тематики журналу (vm-topics, правка 2026-10-12): чіпи послуг зліва,
+     «Сторінка напрямку · Virtus» справа; напрямок без вкладених послуг — плитка-посилання
+     (a.sc-dsvc__tile--link): клік одразу веде на сторінку, полочка не відкривається.
+     Було: ряд із підписом-посиланням у лівій колонці (sc-dsvc__group). -->
 <section class="sc-dtabs" id="direction-tabs" data-direction-tabs>
   <div class="sc-dtabs__bar">
     <div class="sc-dtabs__list" role="tablist" aria-label="Розділи напрямку">
@@ -221,33 +225,27 @@
     <div class="sc-dtabs__group sc-dsvc" data-doctor-services>
       <h2 class="sc-doc__title sc-t-h2">Напрямки клітинної терапії</h2>
       <ul class="sc-dsvc__tiles">
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="true" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-urologii"><span class="sc-dsvc__label">Урологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-plastichnij-hirurg"><span class="sc-dsvc__label">Пластична хірургія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-endokrinologii"><span class="sc-dsvc__label">Ендокринологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-gastroenterologii"><span class="sc-dsvc__label">Гастроентерологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-otolaringologii"><span class="sc-dsvc__label">Отоларингологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-estetichnij-medici"><span class="sc-dsvc__label">Естетична медицина</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-oftalmologii"><span class="sc-dsvc__label">Офтальмологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-nevrologii"><span class="sc-dsvc__label">Неврологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-travmatologii-ta-o"><span class="sc-dsvc__label">Травматологія та ортопедія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitynni-tekhnolohii-v-sudynnii-khirurhi"><span class="sc-dsvc__label">Судинна хірургія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-dermatologii"><span class="sc-dsvc__label">Дерматологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-pulmonologii"><span class="sc-dsvc__label">Пульмонологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-kardiologii"><span class="sc-dsvc__label">Кардіологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-anti-age-terapii"><span class="sc-dsvc__label">Anti-age терапія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="smartcell-ginekologiya"><span class="sc-dsvc__label">Гінекологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-stomatologii"><span class="sc-dsvc__label">Стоматологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><a class="sc-dsvc__tile sc-dsvc__tile--link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-urologii"><span class="sc-dsvc__label">Урологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="true" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-plastichnij-hirurg"><span class="sc-dsvc__label">Пластична хірургія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-endokrinologii"><span class="sc-dsvc__label">Ендокринологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-gastroenterologii"><span class="sc-dsvc__label">Гастроентерологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-otolaringologii"><span class="sc-dsvc__label">Отоларингологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-estetichnij-medici"><span class="sc-dsvc__label">Естетична медицина</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-oftalmologii"><span class="sc-dsvc__label">Офтальмологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-nevrologii"><span class="sc-dsvc__label">Неврологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-travmatologii-ta-o"><span class="sc-dsvc__label">Травматологія та ортопедія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><a class="sc-dsvc__tile sc-dsvc__tile--link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitynni-tekhnolohii-v-sudynnii-khirurhii"><span class="sc-dsvc__label">Судинна хірургія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-dermatologii"><span class="sc-dsvc__label">Дерматологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-pulmonologii"><span class="sc-dsvc__label">Пульмонологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-kardiologii"><span class="sc-dsvc__label">Кардіологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><a class="sc-dsvc__tile sc-dsvc__tile--link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii"><span class="sc-dsvc__label">Anti-age терапія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="smartcell-ginekologiya"><span class="sc-dsvc__label">Гінекологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-stomatologii"><span class="sc-dsvc__label">Стоматологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-head" d="M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
     <li class="sc-dsvc__panel" id="dsvc-panel" role="none" inert>
       <div class="sc-dsvc__clip">
       <div class="sc-dsvc__shelf">
-      <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-urologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-urologii">Сторінка напрямку · Virtus</a>
-        </div>
-      </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-plastichnij-hirurg" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="direction-plastic.html">Сторінка напрямку</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/plasticheskaya-hirurgiya/lipodystrophy_buttocks">Корекція ліподистрофій (ямок та западин шкіри) в області сідниці</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Контурна пластика обличчя біоімплантатами з власних жирових клітин (збільшення губ, вилиць, заповнення носогубних і міжбрівних складок)</span></li>
@@ -259,11 +257,11 @@
             <li><span class="sc-dindications__chip sc-t-small">Контурна ринопластика власними жировими і стовбуровими клітинами</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Контурна ментопластика власними жировими і стовбуровими клітинами</span></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="direction-plastic.html">Сторінка напрямку</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-endokrinologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/saharnyj-diabet-1-tipa">Клітинна терапія при цукровому діабеті 1 типу</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/saharnyj-diabet-2-tipa">Клітинна терапія при цукровому діабеті 2 типу</a></li>
@@ -271,30 +269,30 @@
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/diabetes_children">Клітинна терапія при цукровому діабеті у дітей</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/chronic_fatigue_syndrome">Клітинна терапія при синдромі хронічної втомлюваності (СХВ)</a></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-gastroenterologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/gastroenterology/lechenie-cirroza-pecheni-stvolovymi-kletkami">Лікування цирозу печінки</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii/cirrhosis_cell">Клітинна терапія при цирозі, фіброзі та амілоїдозі печінки</a></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-otolaringologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-otolaringologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/otorinolaringologiya/lechenie-zabolevanij-uha/vosstanovlenie-sluha-s-pomoshhju-kletochnyh-tehnologij">Відновлення слуху за допомогою клітинних технологій</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Відновлення голосу жировими клітинами</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Відновлення нюху кріолізатом тромбоцитів і стовбуровими клітинами</span></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-otolaringologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-estetichnij-medici" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-estetichnij-medicini">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami">Омолодження власними стовбуровими клітинами</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
@@ -304,11 +302,11 @@
             <li><span class="sc-dindications__chip sc-t-small">Об’ємна контурна пластика власними жировими клітинами</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування наслідків вугрових висипів</span></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-estetichnij-medicini">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-oftalmologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-oftalmologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування синдрому сухого ока</span></li>
@@ -322,11 +320,11 @@
             <li><span class="sc-dindications__chip sc-t-small">Відновлення дистрофії рогівки (після опіків і травм), запалення, операцій</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування діабетичної ретинопатії</span></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-oftalmologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-nevrologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-nevrologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/alzheimer_cell">Клітинна терапія при хворобі Альцгеймера</a></li>
@@ -334,27 +332,22 @@
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/amyotrophic_lateral_sclerosis">Клітинна терапія при боковому аміотрофічному склерозі (БАС)</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/chronic_fatigue_syndrome">Клітинна терапія при синдромі хронічної втомлюваності (СХВ)</a></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-nevrologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-travmatologii-ta-o" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/arthritis_arthrosis">Клітинна терапія артритів та артрозів</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/spinal_cord">Клітинна терапія для відновлення після спінальної травми</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/autoimmune_rheumatological_diseases">Клітинна терапія при аутоімунних та ревматологічних захворюваннях</a></li>
           </ul>
-        </div>
-      </div>
-      <div class="sc-dsvc__pane" data-service-panel="klitynni-tekhnolohii-v-sudynnii-khirurhi" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitynni-tekhnolohii-v-sudynnii-khirurhii">Сторінка напрямку · Virtus</a>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-dermatologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-dermatologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-vitiligo">Лікування вітіліго</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-atopicheskogo-dermatita-u-detej-i-vzroslyh">Лікування атопічного дерматиту</a></li>
@@ -367,19 +360,19 @@
             <li><span class="sc-dindications__chip sc-t-small">Лікування системного червоного вовчака</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування системної склеродермії</span></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-dermatologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-pulmonologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-pulmonologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><span class="sc-dindications__chip sc-t-small">Сучасне відновлювальне лікування з використанням аутологічних стовбурових клітин</span></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-pulmonologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-kardiologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><span class="sc-dindications__chip sc-t-small">Відновлення після COVID-19</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Відновлення після операцій на серці</span></li>
@@ -392,16 +385,11 @@
             <li><span class="sc-dindications__chip sc-t-small">Лікування інфаркту міокарда</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування аритмії</span></li>
           </ul>
-        </div>
-      </div>
-      <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-anti-age-terapii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii">Сторінка напрямку · Virtus</a>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="smartcell-ginekologiya" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/smartcell-ginekologiya">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/ginekologiya/klitinne-intimne-omolodzhennya">Клiтинне iнтимне омолодження</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування клімаксу</span></li>
@@ -411,15 +399,16 @@
             <li><span class="sc-dindications__chip sc-t-small">Інтимна контурна пластика власними жировими клітинами</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування крауроза</span></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/smartcell-ginekologiya">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-stomatologii" hidden>
-        <div class="sc-dsvc__group">
-          <a class="sc-dsvc__subtitle sc-dsvc__link sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Сторінка напрямку · Virtus</a>
+        <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/stomatologiya/prp-v-stomatologii">PRP в стоматології</a></li>
           </ul>
+          <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Сторінка напрямку · Virtus</a>
         </div>
       </div>
       </div>

@@ -8,13 +8,12 @@
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
-  <!-- Служебная страница: все страницы стенда одним списком (2026-10-12).
-       В тему не переносится; стили — только здесь, на переменных кита. -->
+  <!-- Служебная страница: все шаблоны стенда одним списком, по уровням раздела
+       (уровни — из переписки с кодером 2026-10-04). В тему не переносится;
+       стили — только здесь, на переменных кита. -->
   <style>
     .sc-map {
       box-sizing: border-box;
-      max-inline-size: var(--container);
-      margin-inline: auto;
       padding: var(--section-padding-y) var(--sc-pad-x);
       display: flex;
       flex-direction: column;
@@ -35,11 +34,12 @@
     }
     .sc-map__row {
       display: grid;
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      grid-template-columns: minmax(0, 2fr) minmax(0, 4fr) minmax(0, 6fr);
       gap: var(--sc-space-6);
       padding-block: var(--sc-space-5);
       border-block-end: var(--hairline) solid var(--border);
     }
+    .sc-map__level { margin: 0; color: var(--sc-neutral-600); }
     .sc-map__link {
       color: var(--foreground);
       text-decoration: underline;
@@ -48,6 +48,7 @@
     .sc-map__link:hover { text-decoration: none; }
     .sc-map__link:focus-visible { outline: var(--sc-focus-w) solid var(--ring); outline-offset: var(--sc-focus-offset); }
     .sc-map__what { margin: 0; color: var(--sc-neutral-600); }
+    .sc-map__muted { color: var(--sc-neutral-600); }
     @media (max-width: 640px) {
       .sc-map__row { grid-template-columns: minmax(0, 1fr); gap: var(--sc-space-1); }
     }
@@ -57,30 +58,50 @@
 <main class="sc-map">
   <div class="sc-map__head">
     <h1 class="sc-t-h2">Карта стенду SmartCell</h1>
-    <p class="sc-map__note sc-t-body">Усі сторінки кита одним списком. Кнопки «Записатись» і «Замовити» всюди відкривають попап запису.</p>
+    <p class="sc-map__note sc-t-body">Усі шаблони кита одним списком — за рівнями розділу «Клітинні технології» на virtus.ua. Кнопки «Записатись» і «Замовити» всюди відкривають попап запису.</p>
   </div>
 
   <section class="sc-map__group">
-    <h2 class="sc-map__group-title sc-t-caption">Розділ «Клітинні технології» на virtus.ua</h2>
+    <h2 class="sc-map__group-title sc-t-caption">Розділ «Клітинні технології» — за рівнями</h2>
     <ul class="sc-map__list">
       <li class="sc-map__row">
-        <a class="sc-map__link sc-t-body" href="cell-technologies.html">Хаб розділу — Клітинні технології SmartCell</a>
+        <p class="sc-map__level sc-t-small">Рівень 1 · категорія<br>окремий шаблон SmartCell</p>
+        <a class="sc-map__link sc-t-body" href="cell-technologies.html">Хаб — Клітинні технології SmartCell</a>
         <p class="sc-map__what sc-t-small">Напрямки плитками з вкладеними послугами, «Також у розділі», опис, відгуки, FAQ, консультація, філії, дорожка журналу</p>
       </li>
       <li class="sc-map__row">
-        <a class="sc-map__link sc-t-body" href="direction-plastic.html">Сторінка напрямку — Пластична хірургія</a>
-        <p class="sc-map__what sc-t-small">Вкладки Опис · Консультанти · Відгуки, плитки послуг із ховер-прев’ю, показання, відео</p>
+        <p class="sc-map__level sc-t-small">Рівні 2–3 · підкатегорія<br>спільний шаблон</p>
+        <a class="sc-map__link sc-t-body" href="direction-plastic.html">Напрямок — Пластична хірургія</a>
+        <p class="sc-map__what sc-t-small">Вкладки Опис · Консультанти · Відгуки, плитки послуг із ховер-прев’ю, показання, відео. Рівень 2 («Клітинне омолодження і терапія») — той самий шаблон, у «Видах послуги» — напрямки</p>
       </li>
       <li class="sc-map__row">
-        <a class="sc-map__link sc-t-body" href="direction-plastic-nav.html">Та сама сторінка з мегаменю в шапці</a>
+        <p class="sc-map__level sc-t-small">Рівні 2–3 · варіант</p>
+        <a class="sc-map__link sc-t-body" href="direction-plastic-nav.html">Напрямок із мегаменю в шапці</a>
         <p class="sc-map__what sc-t-small">Меню «Клітинні технології»: Протоколи · Терапія · Препарати, відкривається з наведення</p>
       </li>
       <li class="sc-map__row">
+        <p class="sc-map__level sc-t-small">Рівень 4 · послуга<br>шаблон послуг SmartCell</p>
+        <a class="sc-map__link sc-t-body" href="service-spinal-cord.html">Послуга — Клітинна терапія після спінальної травми</a>
+        <p class="sc-map__what sc-t-small">Вкладки Опис · Підготовка та етапи · Лікарі, розділи тексту, «Популярні питання», відгуки, консультація, філії</p>
+      </li>
+      <li class="sc-map__row">
+        <p class="sc-map__level sc-t-small">Окрема сторінка<br>свій шаблон</p>
         <a class="sc-map__link sc-t-body" href="preparations.html">Клітинні препарати SmartCell</a>
         <p class="sc-map__what sc-t-small">Картки косметики CELLNESS і лікувальних продуктів, «Замовити» → попап</p>
       </li>
       <li class="sc-map__row">
-        <a class="sc-map__link sc-t-body" href="doctor-tsepkolenko-hanna.html">Сторінка лікаря — Цепколенко Ганна</a>
+        <p class="sc-map__level sc-t-small">Окрема сторінка<br>свій шаблон</p>
+        <a class="sc-map__link sc-t-body" href="bank.html">Банк біологічного страхування (кріобанк)</a>
+        <p class="sc-map__what sc-t-small">Що приймається на зберігання, цитата + опис, спектр застосування, відео, відгуки, консультація, філії</p>
+      </li>
+      <li class="sc-map__row">
+        <p class="sc-map__level sc-t-small">Окрема сторінка<br>свій шаблон</p>
+        <a class="sc-map__link sc-t-body" href="consultants.html">Консультанти SmartCell</a>
+        <p class="sc-map__what sc-t-small">Усі 28 лікарів відділення плитками з рейтингом і посадою, відгуки, консультація, філії</p>
+      </li>
+      <li class="sc-map__row">
+        <p class="sc-map__level sc-t-small">Сторінка лікаря</p>
+        <a class="sc-map__link sc-t-body" href="doctor-tsepkolenko-hanna.html">Лікар — Цепколенко Ганна</a>
         <p class="sc-map__what sc-t-small">Hero з фактами, послуги плитками з полочкою у два рівні, клітинні технології, відеовізитка, біографія, відгуки</p>
       </li>
     </ul>
@@ -90,7 +111,8 @@
     <h2 class="sc-map__group-title sc-t-caption">Face Control 365</h2>
     <ul class="sc-map__list">
       <li class="sc-map__row">
-        <a class="sc-map__link sc-t-body" href="index.html">Лендинг Face Control 365</a>
+        <p class="sc-map__level sc-t-small">Лендинг</p>
+        <a class="sc-map__link sc-t-body" href="index.html">Face Control 365</a>
         <p class="sc-map__what sc-t-small">Протокол на рік, цифри, «До — Після», амбасадор, графіки УЗД, welcome kit, FAQ, запис</p>
       </li>
     </ul>
@@ -100,18 +122,22 @@
     <h2 class="sc-map__group-title sc-t-caption">Smart Age Journal</h2>
     <ul class="sc-map__list">
       <li class="sc-map__row">
+        <p class="sc-map__level sc-t-small">Головна</p>
         <a class="sc-map__link sc-t-body" href="vm-blog.html">Головна журналу</a>
         <p class="sc-map__what sc-t-small">Слайдер головних, тематики плитками з підрубриками, стрічка карток</p>
       </li>
       <li class="sc-map__row">
+        <p class="sc-map__level sc-t-small">Рубрика</p>
         <a class="sc-map__link sc-t-body" href="vm-category.html">Рубрика</a>
         <p class="sc-map__what sc-t-small">Назва, лід, лічильник, картки рубрики</p>
       </li>
       <li class="sc-map__row">
+        <p class="sc-map__level sc-t-small">Стаття</p>
         <a class="sc-map__link sc-t-body" href="vm-article-oblik.html">Стаття-зразок (брати її)</a>
         <p class="sc-map__what sc-t-small">Шапка статті, автор і рецензент, «Коротко», зміст, цитата, чекліст, FAQ, джерела, «Читайте також»</p>
       </li>
       <li class="sc-map__row">
+        <p class="sc-map__level sc-t-small">Стаття · варіант</p>
         <a class="sc-map__link sc-t-body" href="vm-article.html">Стаття (перший варіант)</a>
         <p class="sc-map__what sc-t-small">Той самий шаблон із іншим контентом</p>
       </li>

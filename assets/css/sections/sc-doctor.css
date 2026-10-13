@@ -61,6 +61,10 @@
 /* ---------- Послуги: плитки → полочка (та же механика, что тематики журнала) ---------- */
 
 .sc-dsvc {
+  /* заголовок → плитки через --sc-head-gap и вне .sc-doc (хаб: группа внутри «Опису»; 2026-10-12) */
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-head-gap);
   --dsvc-tile-min: 280px;              /* плитка: при колонке 1280 — четыре по ~314 */
   --dsvc-tile-gap: var(--sc-space-2);  /* 8 */
   --dsvc-open-dur: 700ms;              /* раскрытие полочки */
@@ -116,7 +120,20 @@
   transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
 }
 
-.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow svg { transform: rotate(90deg); }
+/* Раскрытие (правка 2026-10-12): ножка стрелки втягивается в уголок к шеврону,
+   шеврон разворачивается на 180° и смотрит в обратную сторону. Было: стрелка
+   целиком поворачивалась вниз (rotate 90). Ножка и шеврон — отдельные path в разметке. */
+.sc-dsvc__arrow-shaft,
+.sc-dsvc__arrow-head {
+  transform-box: view-box;
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+.sc-dsvc__arrow-shaft { transform-origin: 22px 12px; }   /* к острию */
+.sc-dsvc__arrow-head  { transform-origin: 18.35px 12px; } /* центр шеврона */
+
+.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow-shaft { transform: scaleX(0); }
+.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow-head  { transform: rotate(180deg); }
 
 .sc-dsvc__tile[aria-expanded="true"] {
   background: var(--foreground);
@@ -182,6 +199,36 @@
 /* группа без подписи: чипы с первой колонки */
 .sc-dsvc__group > .sc-dindications__list:first-child { grid-column: 1 / -1; }
 
+/* Полочка как тематики журнала (хаб, 2026-10-12; vm-topics.css .vm-topics__group):
+   чипы послуг слева, «Сторінка напрямку · Virtus» справа — ссылка на линии текста
+   первого ряда чипов (поле 12 сверху, как у подписи подгруппы) */
+.sc-dsvc__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sc-space-8);
+  padding-block: var(--sc-space-6); /* 24, как полочка журнала */
+}
+
+.sc-dsvc__row > .sc-dindications__list {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+.sc-dsvc__all {
+  flex: none;
+  padding-block: var(--sc-space-3) 0;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  white-space: nowrap;
+}
+
+/* Напрямок без вкладених послуг — плитка-посилання: клік одразу веде на сторінку (2026-10-12) */
+a.sc-dsvc__tile--link {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
 /* Підпис-посилання (хаб: «Сторінка напрямку») */
 a.sc-dsvc__link {
   color: var(--foreground);
@@ -203,6 +250,7 @@ a.sc-dsvc__link {
 
 /* Чипы появляются волной: каждый чуть позже предыдущего (--i ставит скрипт) */
 .sc-dsvc__panel.sc-is-open .sc-dsvc__pane:not([hidden]) .sc-dindications__list > li,
+.sc-dsvc__panel.sc-is-open .sc-dsvc__pane:not([hidden]) .sc-dsvc__all,
 .sc-dsvc__panel.sc-is-open .sc-dsvc__pane:not([hidden]) .sc-dsvc__subtitle {
   animation: sc-dsvc-in var(--dsvc-chip-dur) var(--sc-ease-out-expo) both;
   animation-delay: calc(var(--i, 0) * var(--dsvc-chip-step));
