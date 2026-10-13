@@ -32,6 +32,8 @@ CRITICAL = {
     'doctor-tsepkolenko-hanna': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'cell-technologies': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'preparations': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
+    'consultants': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
+    'bank': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'vm-article': ['tokens', 'base', 'b00b-header', 'vm-article'],
     'vm-article-oblik': ['tokens', 'base', 'b00b-header', 'vm-article'],
 }

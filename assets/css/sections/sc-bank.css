@@ -1,0 +1,48 @@
+/* ============================================================
+   SC/Bank · Банк біологічного страхування — «Що приймається на зберігання»
+   figma: node-id=865:24 (кадр 865:2): два поля в ряд, рамка-волосяная линия,
+   текст в один абзац. Остальные блоки страницы — компоненты страницы
+   напрямку (sc-direction-tabs.css): цитата + описание, чипы, видео.
+   Зависит от tokens.css, base.css
+   ============================================================ */
+
+.sc-dbank {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-head-gap);
+}
+
+.sc-dbank__title { margin: 0; }
+
+/* две ячейки встык через щель плиток, как плитки послуг */
+.sc-dbank__cells {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sc-tile-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dbank__cell {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+  padding: var(--card-p);
+  border: var(--sc-line) solid var(--border);
+}
+
+.sc-dbank__cell-title,
+.sc-dbank__cell-text { margin: 0; }
+
+.sc-dbank__cell-text {
+  color: var(--sc-neutral-600);
+  max-inline-size: var(--sc-measure);
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width: 640px) {
+  .sc-dbank__cells { grid-template-columns: minmax(0, 1fr); }
+}
