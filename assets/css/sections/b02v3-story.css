@@ -191,6 +191,25 @@
 /* Выделение внутри абзаца статьи — болд системной переменной, а не «bolder» браузера (2026-09-28) */
 .sc-story__p strong { font-weight: var(--sc-weight-bold); }
 
+/* Список в статье (хаб розділу, 2026-10-12): как списки прозы напрямку */
+.sc-story__list {
+  margin: 0;
+  padding-inline-start: var(--sc-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+  max-inline-size: var(--sc-measure);
+}
+
+/* Видео в статье (хаб розділу, 2026-10-12): кадр 16:9 с постером и кнопкой — компонент
+   sc-dvideo страницы напрямку; подпись на тёмном — приглушённым, а не neutral-600 */
+.sc-story__video {
+  inline-size: 100%;
+  margin: 0;
+}
+
+.sc-story__video .sc-dvideo__caption { color: var(--muted-foreground); }
+
 .sc-story__photo { inline-size: 100%; }
 
 /* Фото последним в части: свой нижний «воздух» не нужен — дальше и так шаг

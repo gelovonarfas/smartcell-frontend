@@ -286,8 +286,11 @@ URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
   напрямку» (relationship `hub_directions`, у напрямку repeater `services`); нижче «Також у розділі» —
   банк, препарати, консультанти плитками-посиланнями (`sc-dservices__list--cols-4`),
   цитата + текст (`sc-dabout`), «У відділенні проводять» рядками (`sc-dbio`, repeater `hub_capabilities`),
-  три прозові блоки (`sc-dprose`, wysiwyg), дорожка журналу. Далі слайдер відгуків, FAQ (B16,
-  `data-theme="inverse"`, repeater `faq`), полоса «Консультація», філії.
+  «Також у розділі». Далі — тёмна стаття розділу (`sc-story sc-hub-story`, як «Історія» Face Control,
+  2026-10-12): sticky-зачіпка зліва, справа цитата + вступ, «У відділенні проводять» рядками
+  (`.sc-story__facts`), три прозові розділи зі списками (`.sc-story__list`), три відео (`.sc-story__video`,
+  модалки `hub-video-N`), квадратний кадр, CTA, «Популярні питання» карткою (`.sc-story__mirror`, repeater
+  `faq`). Тема статична (`data-story-static-theme`). Потім слайдер відгуків, полоса «Консультація», філії, журнал.
 - **`preparations.html`** — «Клітинні препарати SmartCell». Hero → крихти → `sc-prep`: вступ і
   картки продуктів (`sc-product`: квадратне фото, назва, ефекти списком, `<details>` «Склад і
   застосування», кнопка «Замовити» → попап запису), дві групи — косметика CELLNESS і лікувальні

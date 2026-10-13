@@ -49,6 +49,9 @@
 
   /* ---------- Инверсия ---------- */
   function setSolution(on) {
+    /* Стаття, тёмная целиком (хаб розділу, data-story-static-theme): тему
+       ставит разметка, скрипт её не трогает — только зачіпка (2026-10-12) */
+    if (root.hasAttribute('data-story-static-theme')) return;
     if (on) root.setAttribute('data-theme', 'inverse');
     else root.removeAttribute('data-theme');
   }
