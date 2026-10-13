@@ -120,20 +120,23 @@
   transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
 }
 
-/* Раскрытие (правка 2026-10-12): ножка стрелки втягивается в уголок к шеврону,
-   шеврон разворачивается на 180° и смотрит в обратную сторону. Было: стрелка
-   целиком поворачивалась вниз (rotate 90). Ножка и шеврон — отдельные path в разметке. */
+/* Раскрытие (правка 2026-10-12, вторая редакция): стрелка остаётся в позиции наведения
+   (уткнулась в угол), ножка и вертикальная половинка острия плавно уходят в угол —
+   остаётся одна горизонтальная чёрточка, «минус». Ножка и две ножки острия — отдельные
+   path в разметке (__arrow-shaft, __arrow-leg--h, __arrow-leg--v). Было: поворот вниз (rotate 90). */
 .sc-dsvc__arrow-shaft,
-.sc-dsvc__arrow-head {
+.sc-dsvc__arrow-leg {
   transform-box: view-box;
+  transform-origin: 22px 12px; /* остриё — угол плитки */
   transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
 }
 
-.sc-dsvc__arrow-shaft { transform-origin: 22px 12px; }   /* к острию */
-.sc-dsvc__arrow-head  { transform-origin: 18.35px 12px; } /* центр шеврона */
+.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow svg {
+  transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+}
 
-.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow-shaft { transform: scaleX(0); }
-.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow-head  { transform: rotate(180deg); }
+.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow-shaft,
+.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__arrow-leg--v { transform: scale(0); }
 
 .sc-dsvc__tile[aria-expanded="true"] {
   background: var(--foreground);
