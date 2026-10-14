@@ -991,6 +991,107 @@
   color: var(--muted-foreground);
 }
 
+/* ---------- Стани підписки: надсилання → success (2026-10-14, figma 1273:968) ---------- */
+
+/* Смужка під формою: невизначений прогрес — довжина запиту невідома, тому біжить
+   циклом, як смуга відліку у фактах B08, але без прив'язки до часу */
+.vm-article__subscribe-form { position: relative; }
+
+.vm-article__subscribe-progress {
+  --vm-a-send-dur: 1.2s;
+  /* лежить у просвіті під формою (абсолютно) — висота блоку під час надсилання не змінюється */
+  position: absolute;
+  inset-block-start: calc(100% + var(--sc-space-1_5));
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: var(--sc-progress-h);
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.vm-article__subscribe-progress-bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 40%;
+  background: var(--foreground);
+  animation: vm-a-sending var(--vm-a-send-dur) var(--sc-ease) infinite;
+}
+
+@keyframes vm-a-sending {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(250%); }
+}
+
+/* поки йде надсилання — кнопка і поле вимкнені, без зміни висоти */
+.vm-article__subscribe[data-state="sending"] .vm-article__subscribe-cta,
+.vm-article__subscribe[data-state="sending"] .vm-article__input {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* success: кікер лишається, решта колонки ховається, замість неї — блок «лист надіслано» */
+.vm-article__subscribe[data-state="done"] .vm-article__subscribe-copy > :not(.vm-article__subscribe-kicker):not(.vm-article__subscribe-done) { display: none; }
+
+.vm-article__subscribe-done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-md);
+}
+
+.vm-article__subscribe-done[hidden] { display: none; }
+
+.vm-article__subscribe-done > * { margin: 0; }
+
+/* фокус на статус ставить скрипт (для читалок) — рамка тут не потрібна */
+.vm-article__subscribe-status:focus { outline: none; }
+
+/* статус із галочкою — той самий знак, що в перевагах */
+.vm-article__subscribe-status {
+  position: relative;
+  padding-inline-start: var(--sc-space-6);
+  color: var(--muted-foreground);
+}
+
+.vm-article__subscribe-status::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  --vm-a-tick: var(--sc-space-3);
+  inset-block-start: calc((var(--p-lh) - var(--vm-a-tick)) / 2);
+  inline-size: var(--vm-a-tick);
+  block-size: var(--vm-a-tick);
+  background: currentColor;
+  clip-path: polygon(14% 52%, 8% 60%, 40% 92%, 96% 22%, 88% 14%, 39% 76%);
+}
+
+.vm-article__subscribe-email { color: var(--foreground); }
+
+.vm-article__subscribe-again {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  cursor: pointer;
+  text-align: start;
+}
+
+.vm-article__subscribe-again:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-article__subscribe-again:hover { text-decoration: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-article__subscribe-progress-bar { animation: none; inline-size: 100%; opacity: 0.5; }
+}
+
 .vm-article__subscribe-visual {
   overflow: hidden;
   background: var(--muted);

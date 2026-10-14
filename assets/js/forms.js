@@ -42,12 +42,58 @@
 
       if (firstBad) { e.preventDefault(); firstBad.focus(); return; }
       form.setAttribute('data-state', 'loading');
+
+      /* Підписка в статті: стани на блоці [data-subscribe] (2026-10-14) */
+      var box = form.closest && form.closest('[data-subscribe]');
+      if (box) { e.preventDefault(); sendSubscribe(box, form); }
     });
 
     form.addEventListener('input', function (e) {
       if (e.target.getAttribute('aria-invalid') === 'true') mark(e.target, false);
     });
   }
+
+  /* ---------- Підписка: idle → sending → done ----------
+     Висота блоку не стрибає: перед перемиканням колонка отримує min-height поточної.
+     Надсилання тут — імітація (таймер --vm-a-send-dur × 2): кодер замінює
+     fakeSend() на реальний запит і викликає done() у відповіді, fail() — у помилці. */
+  function sendSubscribe(box, form) {
+    var copy = box.querySelector('.vm-article__subscribe-copy');
+    var progress = box.querySelector('.vm-article__subscribe-progress');
+    var doneBox = box.querySelector('.vm-article__subscribe-done');
+    var emailOut = box.querySelector('[data-subscribe-email]');
+    var email = form.querySelector('input[type="email"]');
+    if (copy && !copy.style.minBlockSize) copy.style.minBlockSize = copy.offsetHeight + 'px';
+
+    box.setAttribute('data-state', 'sending');
+    if (progress) progress.hidden = false;
+
+    function done() {
+      if (progress) progress.hidden = true;
+      if (emailOut && email) emailOut.textContent = email.value.trim();
+      if (doneBox) doneBox.hidden = false;
+      box.setAttribute('data-state', 'done');
+      form.removeAttribute('data-state');
+      var status = doneBox && doneBox.querySelector('.vm-article__subscribe-status');
+      if (status) { status.setAttribute('tabindex', '-1'); status.focus(); }
+    }
+
+    function fakeSend() { window.setTimeout(done, 1600); }
+    fakeSend();
+  }
+
+  var subs = document.querySelectorAll('[data-subscribe]');
+  for (var s = 0; s < subs.length; s++) (function (box) {
+    var again = box.querySelector('[data-subscribe-again]');
+    var form = box.querySelector('form');
+    if (!again || !form) return;
+    again.addEventListener('click', function () {
+      /* «Надіслати ще раз»: той самий цикл, success ховається на час надсилання */
+      var doneBox = box.querySelector('.vm-article__subscribe-done');
+      if (doneBox) doneBox.hidden = true;
+      sendSubscribe(box, form);
+    });
+  }(subs[s]));
 
   for (var k = 0; k < forms.length; k++) setup(forms[k]);
 }());
