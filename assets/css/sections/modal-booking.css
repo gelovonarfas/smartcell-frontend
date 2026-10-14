@@ -331,3 +331,57 @@ body.sc-has-modal { overflow: hidden; }
 
   .sc-modal__panel { padding: var(--card-padding); }
 }
+
+/* ---------- Передреєстрація: надсилання → success (2026-10-14) ----------
+   Макет: Components «Modal/Booking · передреєстрація — стани» (1275:3298) */
+
+.sc-modal__actions { position: relative; }
+
+/* смужка невизначеного прогресу під кнопками — як у підписці в статті */
+.sc-modal__progress {
+  --modal-send-dur: 1.2s;
+  position: absolute;
+  inset-block-start: calc(100% + var(--sc-space-1_5));
+  inset-inline: 0;
+  block-size: var(--sc-progress-h);
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.sc-modal__progress-bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 40%;
+  background: var(--foreground);
+  animation: sc-modal-sending var(--modal-send-dur) var(--sc-ease) infinite;
+}
+
+@keyframes sc-modal-sending {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(250%); }
+}
+
+/* надсилання: обидві кнопки і поля приглушені, висота та сама */
+.sc-modal__form[data-state="sending"] .sc-modal__submit,
+.sc-modal__form[data-state="sending"] .sc-modal__later,
+.sc-modal__form[data-state="sending"] .sc-modal__input {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* success: панель ховає кікер, заголовок, підводку і форму — показує блок «Ви в списку»;
+   вертикально по центру, як у макеті */
+.sc-modal__panel[data-state="done"] > :not(.sc-modal__close):not(.sc-modal__done) { display: none; }
+.sc-modal__panel[data-state="done"] { justify-content: center; }
+
+.sc-modal__done { display: contents; } /* ті самі діти панелі: кікер, заголовок, підводка, кнопки */
+.sc-modal__done[hidden] { display: none; }
+
+/* кнопка-посилання «Читати Smart Age Journal» — той самий primary */
+a.sc-modal__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}

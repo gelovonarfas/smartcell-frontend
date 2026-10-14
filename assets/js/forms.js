@@ -46,6 +46,9 @@
       /* Підписка в статті: стани на блоці [data-subscribe] (2026-10-14) */
       var box = form.closest && form.closest('[data-subscribe]');
       if (box) { e.preventDefault(); sendSubscribe(box, form); }
+
+      /* Підписка у футері: тост у куті (2026-10-14) */
+      if (form.classList.contains('sc-footer__newsletter')) { e.preventDefault(); sendFooter(form); }
     });
 
     form.addEventListener('input', function (e) {
@@ -80,6 +83,55 @@
 
     function fakeSend() { window.setTimeout(done, 1600); }
     fakeSend();
+  }
+
+  /* ---------- Футер: тост «надсилаємо → лист надіслано» ----------
+     Тост лежить у розмітці футера ([data-footer-toast]); скрипт лише показує його,
+     перемикає стан і підставляє e-mail. Імітація надсилання — таймер, як у статті:
+     кодер замінює fakeSend() на запит і викликає done(). Ховається через 8 с або хрестиком. */
+  var toast = document.querySelector('[data-footer-toast]');
+  var toastTimer = null;
+
+  function toastHide() {
+    if (!toast) return;
+    window.clearTimeout(toastTimer);
+    toast.classList.remove('sc-is-in');
+    toast.addEventListener('transitionend', function onEnd() {
+      toast.removeEventListener('transitionend', onEnd);
+      if (!toast.classList.contains('sc-is-in')) { toast.hidden = true; toast.setAttribute('data-state', 'hidden'); }
+    });
+    /* без переходу (reduced motion) — сховати одразу */
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { toast.hidden = true; toast.setAttribute('data-state', 'hidden'); }
+  }
+
+  function sendFooter(form) {
+    if (!toast) return;
+    var email = form.querySelector('input[type="email"]');
+    var doneBox = toast.querySelector('[data-toast-done]');
+    var emailOut = toast.querySelector('[data-subscribe-email]');
+    window.clearTimeout(toastTimer);
+    if (doneBox) doneBox.hidden = true;
+    toast.setAttribute('data-state', 'sending');
+    toast.hidden = false;
+    /* примусовий reflow після зняття display: none — інакше переходу в'їзду не буде */
+    void toast.offsetHeight;
+    toast.classList.add('sc-is-in');
+
+    function done() {
+      if (emailOut && email) emailOut.textContent = email.value.trim();
+      if (doneBox) doneBox.hidden = false;
+      toast.setAttribute('data-state', 'done');
+      form.removeAttribute('data-state');
+      form.reset();
+      toastTimer = window.setTimeout(toastHide, 8000);
+    }
+    function fakeSend() { window.setTimeout(done, 1600); }
+    fakeSend();
+  }
+
+  if (toast) {
+    var closeBtn = toast.querySelector('[data-toast-close]');
+    if (closeBtn) closeBtn.addEventListener('click', toastHide);
   }
 
   var subs = document.querySelectorAll('[data-subscribe]');

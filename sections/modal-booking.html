@@ -29,9 +29,13 @@
         </svg>
       </button>
 
-      <p class="sc-modal__kicker sc-t-caption">ЗАПИС НА ДІАГНОСТИКУ</p>
-      <h2 class="sc-modal__title sc-t-h3" id="booking-title">Дізнайтесь свій регенеративний потенціал</h2>
-      <p class="sc-modal__note sc-t-small">Комплексна діагностика Face Control 365</p>
+      <!-- Передреєстрація (2026-10-14, figma Components «Modal/Booking · передреєстрація — стани» 1275:3298):
+           програма ще не стартувала — збираємо контакти, дат не називаємо. Було (запис на діагностику):
+           «ЗАПИС НА ДІАГНОСТИКУ» · «Дізнайтесь свій регенеративний потенціал» · «Комплексна діагностика Face Control 365» · «ЗАПИСАТИСЬ».
+           Стани: форма → надсилання (смужка під кнопкою, висота не змінюється) → success (блок нижче, форма ховається). -->
+      <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ</p>
+      <h2 class="sc-modal__title sc-t-h3" id="booking-title">Станьте першими у програмі Face Control 365</h2>
+      <p class="sc-modal__note sc-t-small">Запис на діагностику відкриємо незабаром. Залиште контакти — повідомимо першими і запропонуємо зручну дату.</p>
 
       <form class="sc-modal__form" novalidate>
         <div class="sc-modal__fields">
@@ -53,12 +57,27 @@
         </div>
 
         <div class="sc-modal__actions">
-          <button class="sc-modal__submit" type="submit">ЗАПИСАТИСЬ</button>
+          <button class="sc-modal__submit" type="submit">ЗАРЕЄСТРУВАТИСЬ</button>
           <button class="sc-modal__later" type="button" data-modal-close>ПІЗНІШЕ</button>
+          <!-- смужка надсилання — абсолютно під кнопками, висоту панелі не змінює -->
+          <div class="sc-modal__progress" role="progressbar" aria-label="Надсилаємо заявку" hidden>
+            <span class="sc-modal__progress-bar"></span>
+          </div>
         </div>
 
         <p class="sc-modal__legal">Натискаючи, ви погоджуєтесь з політикою обробки даних</p>
       </form>
+
+      <!-- success: замість заголовка, підводки і форми (кнопка «Закрити» — та сама data-modal-close) -->
+      <div class="sc-modal__done" data-booking-done hidden>
+        <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ · ГОТОВО</p>
+        <h2 class="sc-modal__title sc-t-h3">Ви в списку</h2>
+        <p class="sc-modal__note sc-t-small">Дякуємо! Щойно відкриємо запис на діагностику, ми зателефонуємо вам і запропонуємо зручну дату. Тим часом — читайте Smart Age Journal.</p>
+        <div class="sc-modal__actions">
+          <a class="sc-modal__submit" href="vm-blog.html">ЧИТАТИ SMART AGE JOURNAL</a>
+          <button class="sc-modal__later" type="button" data-modal-close>ЗАКРИТИ</button>
+        </div>
+      </div>
     </div>
 
   </div>

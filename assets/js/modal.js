@@ -195,6 +195,29 @@
 
     /* Валидно: показываем загрузку и отдаём отправку кодеру */
     form.setAttribute('data-state', 'loading');
+
+    /* Передреєстрація (2026-10-14): смужка під кнопками, потім success у тій самій панелі.
+       Висота панелі фіксується перед перемиканням. Надсилання — імітація таймером:
+       кодер замінює fakeSend() на запит і викликає done() у відповіді. */
+    var panel = form.closest('.sc-modal__panel');
+    var doneBox = panel && panel.querySelector('[data-booking-done]');
+    var progress = form.querySelector('.sc-modal__progress');
+    if (!panel || !doneBox) return;
+    e.preventDefault();
+    if (!panel.style.minBlockSize) panel.style.minBlockSize = panel.offsetHeight + 'px';
+    form.setAttribute('data-state', 'sending');
+    if (progress) progress.hidden = false;
+
+    function done() {
+      if (progress) progress.hidden = true;
+      form.removeAttribute('data-state');
+      doneBox.hidden = false;
+      panel.setAttribute('data-state', 'done');
+      var title = doneBox.querySelector('.sc-modal__title');
+      if (title) { title.setAttribute('tabindex', '-1'); title.focus(); }
+    }
+    function fakeSend() { window.setTimeout(done, 1600); }
+    fakeSend();
   });
 
   form.addEventListener('input', function (e) {

@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="assets/css/sections/vm-topics.css">
   <link rel="stylesheet" href="assets/css/sections/vm-tsepkolenko.css">
   <link rel="stylesheet" href="assets/css/sections/vm-subscribe.css">
+  <link rel="stylesheet" href="assets/css/sections/modal-booking.css">
   <link rel="stylesheet" href="assets/css/sections/footer.css">
 </head>
 <body>
@@ -104,7 +105,7 @@
       <a class="sc-header__link sc-header__link--portal sc-t-small" href="https://virtus.ua/">VIRTUS · Всі напрямки інституту</a>
     </nav>
 
-    <a class="sc-header__cta" href="index.html#consultation">
+    <a class="sc-header__cta" href="index.html#consultation" data-modal-open="booking">
       <span class="sc-header__cta-label">Почати з діагностики</span>
     </a>
       </div>
@@ -796,6 +797,24 @@
 
       <p class="sc-footer__error sc-t-mini" id="footer-email-error" hidden>Вкажіть коректний email</p>
     </form>
+
+    <!-- Тост підписки (2026-10-14): після відправки плавно випливає з правого нижнього кута —
+         спершу «надсилаємо» зі смужкою, потім success із тими ж текстами, що у блоці підписки
+         в статті (e-mail підставляє скрипт). Станами керує assets/js/forms.js ([data-footer-toast]);
+         закривається хрестиком або сам через 8 с. Стилі — footer.css (.sc-toast). -->
+    <div class="sc-toast" data-footer-toast data-state="hidden" role="status" aria-live="polite" hidden>
+      <div class="sc-toast__progress" aria-hidden="true"><span class="sc-toast__progress-bar"></span></div>
+      <p class="sc-toast__sending sc-t-small" data-toast-sending>Надсилаємо лист…</p>
+      <div class="sc-toast__done" data-toast-done hidden>
+        <p class="sc-toast__status sc-t-small">Лист надіслано</p>
+        <p class="sc-toast__title sc-t-h3">Перевірте пошту</p>
+        <p class="sc-toast__text sc-t-small">Ми надіслали лист на <span class="sc-toast__email" data-subscribe-email>вашу адресу</span>. Підтвердіть підписку за посиланням у ньому — перший випуск прийде у четвер.</p>
+        <p class="sc-toast__foot sc-t-mini">Перевірте папку «Спам». Відписка в один клік.</p>
+      </div>
+      <button class="sc-toast__close" type="button" aria-label="Закрити" data-toast-close>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1"/></svg>
+      </button>
+    </div>
   </div>
 
     <!-- Крупный знак во всю ширину полосы: декоративный, читается копирайтом ниже -->
@@ -806,12 +825,89 @@
   </div>
 </footer>
 
+<!-- Секция — копия sections/modal-booking.html · попап передреєстрації Face Control 365 (2026-10-14):
+     відкривають кнопка шапки «Почати з діагностики» і промо в статті (data-modal-open="booking") -->
+<div class="sc-modal" data-modal="booking" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+
+  <div class="sc-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+
+    <div class="sc-modal__photo">
+      <img src="assets/img/booking.jpg"
+           srcset="assets/img/booking.jpg 520w, assets/img/booking@2x.jpg 1040w"
+           sizes="(max-width: 640px) 100vw, 520px"
+           alt="Клітинна структура під мікроскопом"
+           width="520" height="520" loading="lazy" decoding="async">
+    </div>
+
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+
+      <!-- Передреєстрація (2026-10-14, figma Components «Modal/Booking · передреєстрація — стани» 1275:3298):
+           програма ще не стартувала — збираємо контакти, дат не називаємо. Було (запис на діагностику):
+           «ЗАПИС НА ДІАГНОСТИКУ» · «Дізнайтесь свій регенеративний потенціал» · «Комплексна діагностика Face Control 365» · «ЗАПИСАТИСЬ».
+           Стани: форма → надсилання (смужка під кнопкою, висота не змінюється) → success (блок нижче, форма ховається). -->
+      <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ</p>
+      <h2 class="sc-modal__title sc-t-h3" id="booking-title">Станьте першими у програмі Face Control 365</h2>
+      <p class="sc-modal__note sc-t-small">Запис на діагностику відкриємо незабаром. Залиште контакти — повідомимо першими і запропонуємо зручну дату.</p>
+
+      <form class="sc-modal__form" novalidate>
+        <div class="sc-modal__fields">
+
+          <div class="sc-modal__field">
+            <label class="sc-modal__label" for="booking-name">Ваше ім'я</label>
+            <input class="sc-modal__input" id="booking-name" name="name" type="text"
+                   placeholder="Ваше ім'я" autocomplete="name" required>
+            <p class="sc-modal__error" id="booking-name-error" hidden>Вкажіть імʼя</p>
+          </div>
+
+          <div class="sc-modal__field">
+            <label class="sc-modal__label" for="booking-phone">Номер телефону</label>
+            <input class="sc-modal__input" id="booking-phone" name="phone" type="tel"
+                   placeholder="+380" autocomplete="tel" inputmode="tel" required>
+            <p class="sc-modal__error" id="booking-phone-error" hidden>Вкажіть номер телефону</p>
+          </div>
+
+        </div>
+
+        <div class="sc-modal__actions">
+          <button class="sc-modal__submit" type="submit">ЗАРЕЄСТРУВАТИСЬ</button>
+          <button class="sc-modal__later" type="button" data-modal-close>ПІЗНІШЕ</button>
+          <!-- смужка надсилання — абсолютно під кнопками, висоту панелі не змінює -->
+          <div class="sc-modal__progress" role="progressbar" aria-label="Надсилаємо заявку" hidden>
+            <span class="sc-modal__progress-bar"></span>
+          </div>
+        </div>
+
+        <p class="sc-modal__legal">Натискаючи, ви погоджуєтесь з політикою обробки даних</p>
+      </form>
+
+      <!-- success: замість заголовка, підводки і форми (кнопка «Закрити» — та сама data-modal-close) -->
+      <div class="sc-modal__done" data-booking-done hidden>
+        <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ · ГОТОВО</p>
+        <h2 class="sc-modal__title sc-t-h3">Ви в списку</h2>
+        <p class="sc-modal__note sc-t-small">Дякуємо! Щойно відкриємо запис на діагностику, ми зателефонуємо вам і запропонуємо зручну дату. Тим часом — читайте Smart Age Journal.</p>
+        <div class="sc-modal__actions">
+          <a class="sc-modal__submit" href="vm-blog.html">ЧИТАТИ SMART AGE JOURNAL</a>
+          <button class="sc-modal__later" type="button" data-modal-close>ЗАКРИТИ</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script src="assets/js/header.js" defer></script>
 <script src="assets/js/vm-topics.js" defer></script>
 <script src="assets/js/img-lazy.js" defer></script>
 <script src="assets/js/video-lazy.js" defer></script>
 <script src="assets/js/footer-cols.js" defer></script>
 <script src="assets/js/forms.js" defer></script>
+<script src="assets/js/modal.js" defer></script>
 <script src="assets/js/vm-featured.js" defer></script>
 <script src="assets/js/vm-search.js" defer></script>
 </body>

@@ -490,3 +490,142 @@
 
 
 }
+
+/* ---------- Тост підписки (2026-10-14) ----------
+   Фіксований у правому нижньому куті, тёмный как футер (data-theme ставить разметка? нет —
+   цвета берём из инверсной темы явно через переменные футера). Випливає знизу з легким
+   зсувом і прозорістю, ховається так само; «надсилаємо» — смужка невизначеного прогресу,
+   як у підписці в статті; success — ті самі тексти. */
+.sc-toast {
+  --toast-w: 360px;
+  --toast-gap: var(--sc-space-6);                 /* 24 від країв екрана */
+  --toast-send-dur: 1.2s;
+  position: fixed;
+  inset-inline-end: var(--toast-gap);
+  inset-block-end: calc(env(safe-area-inset-bottom, 0px) + var(--toast-gap));
+  z-index: calc(var(--header-z, 100) - 5);
+  box-sizing: border-box;
+  inline-size: var(--toast-w);
+  max-inline-size: calc(100vw - 2 * var(--toast-gap));
+  padding: var(--card-padding);
+  padding-inline-end: calc(var(--card-padding) + var(--sc-space-8)); /* місце під хрестик */
+  border: var(--sc-line) solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(var(--sc-space-6));
+  opacity: 0;
+  transition:
+    transform var(--sc-dur) var(--sc-ease-out-expo),
+    opacity var(--sc-dur) var(--sc-ease-out-expo);
+}
+
+.sc-toast[hidden] { display: none; }
+.sc-toast.sc-is-in { transform: none; opacity: 1; }
+
+.sc-toast *,
+.sc-toast *::before,
+.sc-toast *::after { box-sizing: border-box; }
+
+.sc-toast > p,
+.sc-toast__done > p { margin: 0; }
+
+.sc-toast__done {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+}
+
+.sc-toast__done[hidden] { display: none; }
+
+/* смужка надсилання — верхня кромка тоста */
+.sc-toast__progress {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: var(--sc-progress-h);
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.sc-toast__progress-bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 40%;
+  background: var(--foreground);
+  animation: sc-toast-sending var(--toast-send-dur) var(--sc-ease) infinite;
+}
+
+@keyframes sc-toast-sending {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(250%); }
+}
+
+.sc-toast[data-state="done"] .sc-toast__progress,
+.sc-toast[data-state="done"] .sc-toast__sending { display: none; }
+
+.sc-toast__sending { color: var(--muted-foreground); }
+
+/* статус із галочкою — той самий знак, що в перевагах підписки */
+.sc-toast__status {
+  position: relative;
+  padding-inline-start: var(--sc-space-6);
+  color: var(--muted-foreground);
+}
+
+.sc-toast__status::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  --toast-tick: var(--sc-space-3);
+  inset-block-start: calc((var(--p-small-lh) - var(--toast-tick)) / 2);
+  inline-size: var(--toast-tick);
+  block-size: var(--toast-tick);
+  background: currentColor;
+  clip-path: polygon(14% 52%, 8% 60%, 40% 92%, 96% 22%, 88% 14%, 39% 76%);
+}
+
+.sc-toast__text,
+.sc-toast__foot { color: var(--muted-foreground); }
+.sc-toast__email { color: var(--foreground); }
+
+.sc-toast__close {
+  position: absolute;
+  inset-block-start: var(--sc-space-3);
+  inset-inline-end: var(--sc-space-3);
+  inline-size: var(--sc-space-8);
+  block-size: var(--sc-space-8);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-toast__close svg { display: block; }
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-toast__close:hover { color: var(--foreground); }
+}
+
+.sc-toast__close:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-toast { transition: none; }
+  .sc-toast__progress-bar { animation: none; inline-size: 100%; opacity: 0.5; }
+}
+
+@media (max-width: 640px) {
+  .sc-toast {
+    --toast-gap: var(--sc-space-3);
+    inline-size: auto;
+    inset-inline: var(--toast-gap);
+  }
+}

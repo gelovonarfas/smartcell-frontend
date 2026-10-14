@@ -999,6 +999,24 @@
 
       <p class="sc-footer__error sc-t-mini" id="footer-email-error" hidden>Вкажіть коректний email</p>
     </form>
+
+    <!-- Тост підписки (2026-10-14): після відправки плавно випливає з правого нижнього кута —
+         спершу «надсилаємо» зі смужкою, потім success із тими ж текстами, що у блоці підписки
+         в статті (e-mail підставляє скрипт). Станами керує assets/js/forms.js ([data-footer-toast]);
+         закривається хрестиком або сам через 8 с. Стилі — footer.css (.sc-toast). -->
+    <div class="sc-toast" data-footer-toast data-state="hidden" role="status" aria-live="polite" hidden>
+      <div class="sc-toast__progress" aria-hidden="true"><span class="sc-toast__progress-bar"></span></div>
+      <p class="sc-toast__sending sc-t-small" data-toast-sending>Надсилаємо лист…</p>
+      <div class="sc-toast__done" data-toast-done hidden>
+        <p class="sc-toast__status sc-t-small">Лист надіслано</p>
+        <p class="sc-toast__title sc-t-h3">Перевірте пошту</p>
+        <p class="sc-toast__text sc-t-small">Ми надіслали лист на <span class="sc-toast__email" data-subscribe-email>вашу адресу</span>. Підтвердіть підписку за посиланням у ньому — перший випуск прийде у четвер.</p>
+        <p class="sc-toast__foot sc-t-mini">Перевірте папку «Спам». Відписка в один клік.</p>
+      </div>
+      <button class="sc-toast__close" type="button" aria-label="Закрити" data-toast-close>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1"/></svg>
+      </button>
+    </div>
   </div>
 
     <!-- Крупный знак во всю ширину полосы: декоративный, читается копирайтом ниже -->
