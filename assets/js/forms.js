@@ -47,8 +47,8 @@
       var box = form.closest && form.closest('[data-subscribe]');
       if (box) { e.preventDefault(); sendSubscribe(box, form); }
 
-      /* Підписка у футері: тост у куті (2026-10-14) */
-      if (form.classList.contains('sc-footer__newsletter')) { e.preventDefault(); sendFooter(form); }
+      /* Підписка у футері і смуга розсилки журналу: тост у куті (data-form-toast, 2026-10-14) */
+      if (form.hasAttribute('data-form-toast')) { e.preventDefault(); sendFooter(form); }
     });
 
     form.addEventListener('input', function (e) {
