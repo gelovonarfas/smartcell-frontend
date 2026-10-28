@@ -174,7 +174,14 @@
     }
   }
 
-  trigger.addEventListener('click', function () { cancelHover(); set(!isOpen()); });
+  /* Клік мишею по «Клітинні технології» веде на хаб розділу (data-href, 2026-10-27):
+     на курсорних пристроях полку вже відкриває наведення. На тачі і з клавіатури
+     (e.detail === 0) — як і раніше, відкриває/закриває полку. */
+  trigger.addEventListener('click', function (e) {
+    var href = trigger.getAttribute('data-href');
+    if (href && fine && fine.matches && e.detail > 0) { window.location.href = href; return; }
+    cancelHover(); set(!isOpen());
+  });
 
   /* Наведение открывает полку на курсорных устройствах (2026-10-06): раньше
      только клик, и после наведения казалось, что меню «думает». Небольшая

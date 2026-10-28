@@ -114,7 +114,7 @@
           </span>
         </a>
         <div class="sc-header__spaces-drawer">
-        <a class="sc-header__space sc-header__space--current" href="/" aria-current="page">
+        <a class="sc-header__space sc-header__space--current" href="cell-technologies.html" aria-current="true">
           <span class="sc-header__space-title">SMARTCELL <span class="sc-header__space-title-alt">BY VIRTUS</span></span>
           <span class="sc-header__space-meta sc-t-mini">
             <span>Клітинний простір</span>
@@ -136,7 +136,8 @@
     <nav class="sc-header__nav" aria-label="Головне меню">
       <div class="sc-hdir" data-directions>
         <button class="sc-header__link sc-hdir__trigger sc-t-small" type="button"
-                aria-expanded="false" aria-controls="header-directions" data-directions-trigger>
+                aria-expanded="false" aria-controls="header-directions" data-directions-trigger
+                data-href="cell-technologies.html">
           <span>Клітинні технології</span>
           <svg class="sc-hdir__chevron" viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 3.5L5 7L8.5 3.5" stroke="currentColor"/></svg>
         </button>
@@ -149,11 +150,16 @@
                    Активная подчёркнута бегунком (тот же приём, что вкладки страницы).
                    Было (v3, 2026-10-04): четыре раздела virtus — терапія / препарати /
                    консультанти / банк; разметка — коммит a0a8734. -->
-              <div class="sc-hdir__tabs" role="tablist" aria-label="Розділи SmartCell">
-                <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-protocols" aria-selected="true" aria-controls="hdir-panel-protocols" data-hdir-tab>Протоколи</button>
-                <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-directions" aria-selected="false" aria-controls="hdir-panel-directions" data-hdir-tab tabindex="-1">Терапія</button>
-                <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-preparations" aria-selected="false" aria-controls="hdir-panel-preparations" data-hdir-tab tabindex="-1">Препарати</button>
-                <span class="sc-hdir__indicator" aria-hidden="true" data-hdir-indicator></span>
+              <!-- Полоса меню: вкладки + справа посилання на хаб розділу (2026-10-27) — тригер «Клітинні технології»
+                   у шапці лише відкриває меню, тож вхід на сторінку розділу — тут. У темі: virtus.ua/kletochnye-tehnologii -->
+              <div class="sc-hdir__bar">
+                <div class="sc-hdir__tabs" role="tablist" aria-label="Розділи SmartCell">
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-protocols" aria-selected="true" aria-controls="hdir-panel-protocols" data-hdir-tab>Протоколи</button>
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-directions" aria-selected="false" aria-controls="hdir-panel-directions" data-hdir-tab tabindex="-1">Терапія</button>
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-preparations" aria-selected="false" aria-controls="hdir-panel-preparations" data-hdir-tab tabindex="-1">Препарати</button>
+                  <span class="sc-hdir__indicator" aria-hidden="true" data-hdir-indicator></span>
+                </div>
+                <a class="sc-hdir__all sc-t-small" href="cell-technologies.html">Усі клітинні технології<svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></a>
               </div>
 
               <div class="sc-hdir__body">
@@ -199,7 +205,7 @@
                        Банк и консультанти убраны — они уже в строке меню.
                        Было: список «проводять» со страницы раздела и подпись-капс над кнопками — коммит 3190d0b. -->
                   <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-directions" aria-labelledby="hdir-tab-directions" hidden>
-                    <a class="sc-hdir__heading sc-t-h3" href="https://virtus.ua/kletochnye-tehnologii">Клітинні технології SmartCell</a>
+                    <a class="sc-hdir__heading sc-t-h3" href="cell-technologies.html">Клітинні технології SmartCell</a>
                       <ul class="sc-hdir__chips">
                         <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Ендокринологія</a></li>
                         <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Гастроентерологія</a></li>

@@ -98,13 +98,45 @@
 
 /* ---------- Полоса вкладок: разделы SmartCell ---------- */
 
+/* Полоса меню (2026-10-27): вкладки слева, посилання на хаб розділу справа.
+   Тёплий фон і лінія — на полосі, а не на списку вкладок */
+.sc-hdir__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sc-space-8);
+  padding-inline: var(--sc-pad-x);
+  background: var(--warm); /* полоса вкладок отбита тёплым, как у OneSkin (2026-10-06) */
+  border-block-end: var(--sc-line) solid var(--border);
+}
+
 .sc-hdir__tabs {
   position: relative;
   display: flex;
   gap: var(--sc-space-8); /* 32, как у вкладок страницы */
-  padding-inline: var(--sc-pad-x);
-  background: var(--warm); /* полоса вкладок отбита тёплым, как у OneSkin (2026-10-06) */
-  border-block-end: var(--sc-line) solid var(--border);
+  min-inline-size: 0;
+}
+
+.sc-hdir__all {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sc-space-2);
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.sc-hdir__all svg { display: block; flex: none; transition: transform var(--sc-dur-fast) var(--sc-ease); }
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-hdir__all:hover { text-decoration: none; }
+  .sc-hdir__all:hover svg { transform: translateX(2px); }
+}
+
+.sc-hdir__all:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
 }
 
 .sc-hdir__tab {
@@ -546,12 +578,20 @@
 
   .sc-hdir.sc-is-open .sc-hdir__panel { box-shadow: none; border-block-end-width: 0; }
 
+  .sc-hdir__bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding-inline: 0;
+  }
+
   .sc-hdir__tabs {
     gap: var(--sc-space-6);
-    padding-inline: 0;
     overflow-x: auto;
     scrollbar-width: none;
   }
+
+  .sc-hdir__all { padding-block: var(--sc-space-3); }
 
   .sc-hdir__tabs::-webkit-scrollbar { display: none; }
 
