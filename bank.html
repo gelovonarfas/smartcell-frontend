@@ -113,7 +113,7 @@
           </span>
         </a>
         <div class="sc-header__spaces-drawer">
-        <a class="sc-header__space sc-header__space--current" href="/" aria-current="page">
+        <a class="sc-header__space sc-header__space--current" href="cell-technologies.html" aria-current="true">
           <span class="sc-header__space-title">SMARTCELL <span class="sc-header__space-title-alt">BY VIRTUS</span></span>
           <span class="sc-header__space-meta sc-t-mini">
             <span>Клітинний простір</span>
@@ -292,14 +292,14 @@
      SC/Direction · Відгуки про лікарів напрямку — вариант B09
      figma: node-id=318:2
      Разметка и скрипт — B09 (sections/b09-reviews.html, assets/js/reviews.js)
-     с модификатором sc-reviews--direction и ручным режимом data-reviews-manual:
+     с модификатором sc-reviews--direction; лента листается сама, как на лендинге (2026-10-27; было — ручной режим data-reviews-manual):
      листание только стрелками, полоса показывает место в ленте.
      Карточка и «Усі відгуки» включают вкладку «Відгуки» (direction-tabs.js);
      на самой вкладке «Відгуки» секция скрыта (data-direction-hide-on).
      ACF: reviews_title (text); отзывы — те же записи, что во вкладке «Відгуки»
           (запрос по напрямку, последние N): текст, автор, дата, оценка
      ============================================================ -->
-<section class="sc-reviews sc-reviews--direction" data-reviews data-reviews-manual>
+<section class="sc-reviews sc-reviews--direction" data-reviews>
   <div class="sc-reviews__inner">
     <div class="sc-reviews__head">
       <h2 class="sc-reviews__title sc-t-h2">Відгуки про лікарів напрямку</h2>
