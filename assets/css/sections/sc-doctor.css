@@ -345,3 +345,16 @@ a.sc-dsvc__link {
     gap: var(--stack-gap-md);
   }
 }
+
+/* Метка «Virtus» на плитці категорії послуг лікаря (2026-10-27): категорія не з клітинних
+   технологій — як на плитках «Види послуги» сторінки напрямку, у правому верхньому куті */
+.sc-dsvc__tile { position: relative; }
+.sc-dsvc__source {
+  position: absolute;
+  inset-block-start: calc(var(--grid-gap) - var(--sc-line));
+  inset-inline-end: var(--grid-gap);
+  color: var(--sc-neutral-600);
+  text-transform: none;
+  letter-spacing: normal;
+}
+.sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__source { color: var(--sc-white-alpha-60); }
