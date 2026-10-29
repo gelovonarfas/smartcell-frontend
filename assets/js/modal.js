@@ -90,7 +90,38 @@
     if (target) target.focus();
   }
 
+  /* Відео всередині попапу (data-inline-video): клік по постеру ставить плеєр на його місце,
+     закриття попапу повертає постер — ролик зупиняється (2026-10-28) */
+  function resetInlineVideo(modal) {
+    var boxes = modal.querySelectorAll('[data-inline-video][data-poster-html]');
+    for (var i = 0; i < boxes.length; i++) {
+      boxes[i].innerHTML = boxes[i].getAttribute('data-poster-html');
+      boxes[i].removeAttribute('data-poster-html');
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-inline-video] .sc-dvideo__open');
+    if (!btn) return;
+    var box = btn.closest('[data-inline-video]');
+    e.preventDefault();
+    box.setAttribute('data-poster-html', box.innerHTML);
+    var cap = box.querySelector('figcaption');
+    var frame = document.createElement('div');
+    frame.className = 'sc-review-full__frame';
+    var iframe = document.createElement('iframe');
+    iframe.src = box.getAttribute('data-inline-video');
+    iframe.title = btn.getAttribute('aria-label') || '';
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.appendChild(iframe);
+    box.replaceChild(frame, btn);
+    iframe.focus();
+  });
+
   function finishClose(modal) {
+    resetInlineVideo(modal);
     modal.hidden = true;
     modal.classList.remove('sc-is-closing');
     loadMedia(modal, false);

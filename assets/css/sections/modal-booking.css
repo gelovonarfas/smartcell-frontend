@@ -435,22 +435,22 @@ a.sc-modal__submit {
   .sc-modal__dialog--review .sc-modal__panel { padding: var(--card-padding); }
 }
 
-/* Відео-відгук у попапі — ролик 16:9 у колонці */
-.sc-review-full__video {
+/* Відео-відгук у попапі — як у стрічці: постер кита (sc-dvideo, 16:9) з кнопкою Play,
+   по кліку на його місці плеєр того ж розміру */
+.sc-review-full__video { margin: 0; }
+.sc-review-full__video .sc-dvideo__open { inline-size: 100%; aspect-ratio: 16 / 9; }
+.sc-review-full__frame {
   position: relative;
   aspect-ratio: 16 / 9;
   background: var(--sc-black-alpha-80);
 }
-
-.sc-review-full__video iframe {
+.sc-review-full__frame iframe {
   position: absolute;
   inset: 0;
   inline-size: 100%;
   block-size: 100%;
   border: 0;
 }
-
-.sc-review-full__caption { margin: calc(-1 * var(--sc-space-4)) 0 0; color: var(--sc-neutral-600); }
 
 /* Запис у гостьовій книзі — скан сторінки, клік відкриває повний */
 .sc-review-full__scan {
