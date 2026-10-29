@@ -487,3 +487,37 @@ body {
   white-space: nowrap;
   border: 0;
 }
+
+/* ---------- Хлібні крихти на телефоні — одна ланка «‹ рівень вище» (2026-10-27) ----------
+   Спільно для журналу (рядок <p> з «→» текстом) — для розділу SmartCell те саме в
+   sc-direction-crumbs.css (список <ol>). Розмітка не змінюється: повний ланцюг лишається
+   в HTML для SEO; на вузькому екрані видно лише останнє посилання (батьківська сторінка)
+   зі шевроном назад. Стрілки «→» і поточна сторінка — текст без тегу, тож гасимо їх
+   нульовим кеглем рядка й повертаємо кегль тільки посиланню. */
+@media (max-width: 640px) {
+  .vm-rubrics__crumbs,
+  .vm-article__crumbs p { font-size: 0; line-height: 0; }
+
+  .vm-rubrics__crumbs a,
+  .vm-article__crumbs a { display: none; }
+
+  .vm-rubrics__crumbs a:last-of-type,
+  .vm-article__crumbs a:last-of-type {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sc-space-2);
+    min-block-size: 44px; /* тап-зона */
+    color: var(--foreground);
+    font: 400 var(--p-mini-size) / var(--p-mini-lh) var(--font-sans);
+  }
+
+  .vm-rubrics__crumbs a:last-of-type::before,
+  .vm-article__crumbs a:last-of-type::before {
+    content: "";
+    inline-size: var(--sc-space-2);
+    block-size: var(--sc-space-2);
+    border-inline-start: var(--sc-line) solid currentColor;
+    border-block-end: var(--sc-line) solid currentColor;
+    transform: rotate(45deg);
+  }
+}

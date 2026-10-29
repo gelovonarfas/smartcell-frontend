@@ -218,10 +218,20 @@ div.sc-dservices__tile {
 /* ---------- Хаб: «проводять» рядками (sc-dbio зі сторінки лікаря) і проза ---------- */
 
 .sc-dhub-caps,
+/* Заголовок ліворуч, текст праворуч — та сама сітка, що в «цитата + опис» (.sc-dabout):
+   колонка заголовків і колонка тексту стоять в одну лінію по всій вкладці (правка 2026-10-27;
+   було: заголовок над текстом на всю ширину, текст лише в лівій половині — справа порожньо) */
 .sc-dprose {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sc-head-gap);
+  display: grid;
+  grid-template-columns: var(--dtabs-quote-w) minmax(0, 1fr);
+  gap: var(--section-gap);
+  align-items: start;
+}
+
+/* заголовок у колонці 416 — кегль h3, як текст цитати поруч; h2 у розмітці лишається для структури */
+.sc-dprose__title {
+  font: var(--h3-weight) var(--h3-size) / var(--h3-lh) var(--font-headings);
+  letter-spacing: var(--h3-ls);
 }
 
 .sc-dhub-caps__title,
@@ -599,6 +609,7 @@ a.sc-dindications__chip:active,
 
   .sc-dservices__list { grid-template-columns: minmax(0, 1fr); }
 
+  .sc-dprose,
   .sc-dabout,
   .sc-dabout--quote-only {
     grid-template-columns: minmax(0, 1fr);
@@ -629,4 +640,162 @@ a.sc-dindications__chip:active,
   .sc-dreviews__source { text-align: start; }
 
   .sc-dreviews__more-btn { inline-size: 100%; }
+}
+
+/* ---------- Відео-відгуки пацієнтів (шаблон послуги, 2026-10-27) ----------
+   На virtus — на кожній послузі: ролики + посилання на сторінку відгуків.
+   Шапка — як у дорожки журналу (.sc-darticles__head), картки — кадр sc-dvideo,
+   у ряд по три через щілину плиток; одна картка займає третину. */
+.sc-dvlog {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-head-gap);
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-dvlog__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sc-tile-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dvlog__row .sc-dvideo { margin: 0; }
+.sc-dvlog__row .sc-dvideo__open { inline-size: 100%; aspect-ratio: 16 / 9; }
+
+@media (max-width: 640px) {
+  .sc-dvlog__row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Метка «Virtus» на чипі послуги (2026-10-27) ----------
+   Послуга не з клітинних технологій веде на virtus.ua — як «Virtus» на плитках «Види послуги» */
+/* Надрядковик, як ™ (2026-10-27): метка стоїть угорі біля назви, дрібніше, і не тягне чип
+   у висоту. Виводиться автоматично, якщо послуга не ексклюзивна для SmartCell (service_external) */
+.sc-dindications__chip--virtus { gap: var(--sc-space-1); align-items: flex-start; }
+.sc-dindications__source {
+  color: var(--sc-neutral-600);
+  font-size: var(--p-mini-size);
+  line-height: 1;
+  margin-block-start: calc(-1 * var(--sc-space-1));
+}
+
+/* ---------- «До і Після» — острівець (шаблон послуги, 2026-10-27) ----------
+   Як плита «Неофіброліфтинг» на Face Control (b15a-science.css): темна плита в полі
+   верстки, поля 80 усередині. Фон — чорний тёмної теми (--background під data-theme="inverse", #100E0C);
+   синю «ніч» пробували і повернули (2026-10-27). Під кадр праворуч — модифікатор --media. */
+.sc-dba {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--section-gap);
+  align-items: start; /* текст і кнопка — до верху плити, як усюди в ките */
+  padding: var(--page-margin-x);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.sc-dba__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-md);
+  min-inline-size: 0;
+}
+
+.sc-dba__kicker,
+.sc-dba__title,
+.sc-dba__text { margin: 0; }
+
+.sc-dba__kicker { color: var(--accent-foreground); }
+
+/* Заголовок острівця — коротка міра (2026-10-27): «Хочете побачити приклади / До і Після?»
+   у два рядки, не на всю колонку */
+.sc-dba__title { max-inline-size: 13em; }
+/* абзац — не ширше заголовка: «…процедур переконують / краще будь-яких слів…» (правка 2026-10-27) */
+.sc-dba__text { max-inline-size: 28em; color: var(--muted-foreground); }
+
+/* Кнопка острівця — компонент Button/Block (.sc-story__cta), власних стилів немає (правка 2026-10-27) */
+.sc-dba__copy > .sc-story__cta { margin-block-start: var(--sc-space-4); position: relative; }
+
+/* «Virtus» на плиті Button/Block — як .sc-dservices__source на плитках «Види послуги»:
+   кнопка веде на virtus.ua, а не на сторінку SmartCell */
+.sc-dba__source {
+  position: absolute;
+  inset-block-start: var(--sc-space-4);
+  inset-inline-end: var(--sc-space-4);
+  color: var(--sc-neutral-600);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.sc-dba--media { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+
+
+/* Кадр острівця — квадрат на чорному, тягнеться до правого краю плити без внутрішнього поля:
+   фон кадру й плити однаково чорні, тож межі не видно */
+.sc-dba--media { padding-block: 0; padding-inline-end: 0; }
+.sc-dba__media {
+  margin: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.sc-dba__media img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  /* чорний фон кадру (≈#000) набирає колір плити: lighten бере світліше з двох шарів —
+     фрукт лишається як є, а фон кадру стає тим самим тёплим чорним, що й плита */
+}
+/* плід — PNG без фону (2026-10-27), збільшений кадруванням файлу (центр 1576 з 2048) */
+
+/* Під плодом — радіальне сяйво фірмовим синім (blue/700, як «C» у логотипі): пляма під центром
+   кадру тане до чорного плити; плід стоїть на ній без власного фону (правка 2026-10-27) */
+.sc-dba__media {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-blue-600) 55%, transparent) 0%, color-mix(in srgb, var(--sc-blue-700) 40%, transparent) 45%, transparent 100%);
+}
+.sc-dba--media .sc-dba__copy { padding-block: var(--page-margin-x); }
+
+.sc-dba__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sc-tile-gap);
+}
+
+.sc-dba__photo {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.sc-dba__photo img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Підпис на кадрі — плашка в кутку, без скриму на все фото */
+.sc-dba__label {
+  position: absolute;
+  inset-block-end: var(--sc-space-3);
+  inset-inline-start: var(--sc-space-3);
+  padding: var(--sc-space-1) var(--sc-space-2);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@media (max-width: 640px) {
+  .sc-dba,
+  .sc-dba--media {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--card-padding);
+  }
+  .sc-dba--media .sc-dba__copy { padding-block: 0; }
 }

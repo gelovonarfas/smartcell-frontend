@@ -76,6 +76,19 @@
      ширина окна и карточек померяна без стилей. Пересчитать, когда всё загрузилось (2026-10-12) */
   window.addEventListener('load', function () { render(); });
 
+  /* Ширина полосы может смениться без resize окна: поздний CSS, шрифт, полоса прокрутки,
+     раскрытая вкладка. Тогда окно, ужатое fit() по старой ширине, вылезало за поле
+     (правка 2026-10-27). Следим за самой полосой и пересчитываем, когда её ширина изменилась. */
+  if (window.ResizeObserver && root.querySelector('.sc-reviews__inner')) {
+    var lastW = 0;
+    new ResizeObserver(function (entries) {
+      var w = Math.round(entries[0].contentRect.width);
+      if (w === lastW) return;
+      lastW = w;
+      requestAnimationFrame(function () { render(); });
+    }).observe(root.querySelector('.sc-reviews__inner'));
+  }
+
   function render() {
     fit();
     if (index > maxIndex()) index = maxIndex();
@@ -117,7 +130,11 @@
   /* Шаг — кадр целиком: три карточки на десктопе, одна на телефоне */
   function go(i) {
     var max = maxIndex();
-    index = i < 0 ? max : (i > max ? 0 : Math.min(i, max));
+    /* Шаг больше хвоста ленты (5 отзывов, кадр по 3): сначала встаём на последний кадр,
+       и только следующий шаг возвращает к началу. Раньше 0 + 3 > max сразу давало 0 —
+       лента «листалась» на месте и казалось, что автолистание не работает (правка 2026-10-27) */
+    if (i > max) index = index < max ? max : 0;
+    else index = i < 0 ? max : i;
     render();
     armBar();
     schedule();

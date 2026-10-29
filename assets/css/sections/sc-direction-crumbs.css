@@ -48,3 +48,31 @@
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
 }
+
+/* ---------- Телефон: одна ланка «‹ батьківська сторінка» (2026-10-27) ----------
+   Повний ланцюг на вузькому екрані розсипався на три рядки. Як у дизайн-системах
+   Queensland Gov і Volvo: лишаємо тільки посилання на рівень вище зі шевроном назад.
+   Розмітка та сама (повний <ol> для SEO і BreadcrumbList) — ховає лише CSS */
+@media (max-width: 640px) {
+  .sc-dcrumbs__list li { display: none; }
+  .sc-dcrumbs__list li:nth-last-child(2) { display: block; }
+
+  .sc-dcrumbs__list li:nth-last-child(2)::before { content: none; }
+
+  .sc-dcrumbs__list li:nth-last-child(2) a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sc-space-2);
+    min-block-size: var(--sc-space-11, 44px); /* тап-зона 44 */
+    color: var(--foreground);
+  }
+
+  .sc-dcrumbs__list li:nth-last-child(2) a::before {
+    content: "";
+    inline-size: var(--sc-space-2);
+    block-size: var(--sc-space-2);
+    border-inline-start: var(--sc-line) solid currentColor;
+    border-block-end: var(--sc-line) solid currentColor;
+    transform: rotate(45deg);
+  }
+}
