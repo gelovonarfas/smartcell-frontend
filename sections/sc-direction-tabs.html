@@ -219,6 +219,31 @@
         </div>
         <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
       </li>
+      <!-- Тип «Відео-відгук» (virtus: .feedback-video): замість тексту — ролик (постер + модалка), підписи ті самі.
+           ACF: review_type = video, youtube_url, poster (16:9) -->
+      <li class="sc-dreviews__row sc-dreviews__row--video">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__author sc-t-small">Марія</p>
+        </div>
+        <div class="sc-dreviews__body">
+          <figure class="sc-dreviews__video sc-dvideo">
+            <button class="sc-dvideo__open" type="button" data-modal-open="review-video-1" aria-label="Дивитись відео-відгук: Марія, пацієнтка доктора Олени Єсауленко в місті Києві">
+              <img class="sc-dvideo__poster" data-src="assets/img/direction/service/video-review-1.jpg"
+                   data-srcset="assets/img/direction/service/video-review-1-640.jpg 640w, assets/img/direction/service/video-review-1.jpg 1280w"
+                   sizes="(max-width: 640px) 100vw, 480px" width="1280" height="720" alt="" loading="lazy" decoding="async">
+              <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
+            </button>
+            <figcaption class="sc-dvideo__caption sc-t-mini">Марія, пацієнтка доктора Олени Єсауленко в місті Києві</figcaption>
+          </figure>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Київ, Костянтинівська, 57</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Єсауленко Олена Володимирівна</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Відео-відгук</p>
+      </li>
       <li class="sc-dreviews__row">
         <div class="sc-dreviews__meta">
           <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
@@ -234,6 +259,28 @@
           </dl>
         </div>
         <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+      </li>
+      <!-- Тип «Запис в гостьовій книзі» (virtus: .feedback-guestbook): текст переписано з рукописного відгуку,
+           поруч — скан сторінки книги (мініатюра, клік — повний скан). Автор не підписаний — лише дата.
+           ACF: review_type = guestbook, scans (gallery) -->
+      <li class="sc-dreviews__row sc-dreviews__row--guestbook">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__date sc-t-mini"><time datetime="2021-04-09">09.04.2021</time></p>
+        </div>
+        <div class="sc-dreviews__body">
+          <p class="sc-dreviews__text sc-t-body">Якщо коротко, то 5 зірок! Щодо сервісу, дружнього відношення персоналу, фаховості та пропонуємих послуг (медичної допомоги). Всюди 5 зірок! Дякую за все!</p>
+          <a class="sc-dreviews__scan" href="assets/img/direction/reviews/guestbook-1.jpg" target="_blank" rel="noopener">
+            <img data-src="assets/img/direction/reviews/guestbook-1-thumb.jpg" width="400" height="283"
+                 alt="Скан запису в гостьовій книзі VIRTUS" loading="lazy" decoding="async">
+            <span class="sc-dreviews__scan-label sc-t-mini">Скан сторінки</span>
+          </a>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Запис в гостьовій книзі</p>
       </li>
       <li class="sc-dreviews__row">
         <div class="sc-dreviews__meta">

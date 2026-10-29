@@ -541,6 +541,51 @@ div.sc-dservices__tile {
 .sc-dreviews__facts dt { color: var(--sc-neutral-600); }
 .sc-dreviews__facts dd { margin: 0; }
 
+/* ---------- Типи відгуків (як на virtus.ua/reviews, 2026-10-28) ----------
+   «Відгук на сайті» — текст; «Відео-відгук» — ролик замість тексту; «Запис в гостьовій книзі» —
+   текст + мініатюра скану сторінки. Тип видно в колонці джерела праворуч, підписи (філія,
+   напрямок, фахівець) — однакові для всіх. ACF: review_type (site | video | guestbook) */
+/* figure має власне поле браузера (40) — гасимо з запасом специфічності, кадр стоїть на лінії тексту */
+.sc-dreviews .sc-dreviews__video {
+  margin: 0;
+  max-inline-size: 480px; /* кадр 16:9 у колонці тексту — не на всю ширину */
+}
+
+.sc-dreviews__video .sc-dvideo__open { aspect-ratio: 16 / 9; inline-size: 100%; }
+
+.sc-dreviews__scan {
+  position: relative;
+  display: block;
+  inline-size: 200px;
+  border: var(--sc-line) solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.sc-dreviews__scan img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.sc-dreviews__scan-label {
+  position: absolute;
+  inset-block-end: var(--sc-space-2);
+  inset-inline-start: var(--sc-space-2);
+  padding: var(--sc-space-0_5) var(--sc-space-1_5);
+  background: var(--background);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-dreviews__scan:hover { border-color: var(--foreground); }
+}
+
+.sc-dreviews__scan:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
 /* Button/Control · outline */
 .sc-dreviews__more-btn {
   block-size: var(--control-square);
