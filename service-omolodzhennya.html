@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Клітинна терапія після спінальної травми · SmartCell · VIRTUS</title>
-  <meta name="description" content="Клітинна терапія NeuroCELLNESS-Combi для відновлення після травми спинного мозку: системне та локальне введення мезенхімальних стовбурових клітин. Показання, механізм дії, підготовка та етапи. Інститут VIRTUS, Одеса та Київ.">
-  <link rel="canonical" href="https://smartcell-frontend.gelovonarfas.workers.dev/service-spinal-cord">
+  <title>Омолодження власними стовбуровими клітинами · SmartCell · VIRTUS</title>
+  <meta name="description" content="Омолодження організму власними стовбуровими клітинами в Інституті VIRTUS: культивування клітин у лабораторії SmartCell, внутрішньовенне введення, результати для якості життя. Одеса та Київ.">
+  <link rel="canonical" href="https://smartcell-frontend.gelovonarfas.workers.dev/service-omolodzhennya">
 
   <!-- Соцкарточка: og:image кодер подставит из темы -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SmartCell">
-  <meta property="og:title" content="Клітинна терапія для відновлення після спінальної травми — SmartCell · VIRTUS">
-  <meta property="og:description" content="Програма NeuroCELLNESS-Combi: системне та локальне введення МСК після травми спинного мозку.">
+  <meta property="og:title" content="Омолодження власними стовбуровими клітинами — SmartCell · VIRTUS">
+  <meta property="og:description" content="Власні стовбурові клітини — «золотий резерв» оновлення організму. Процедура, результати, лікарі.">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Фавикон · Foundations 245:1430. SVG — основной, PNG — фолбэк -->
@@ -37,16 +37,17 @@
   <link rel="stylesheet" href="assets/css/sections/sc-direction-branches.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-consult.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-crumbs.css">
-  <link rel="stylesheet" href="assets/css/sections/b16-faq.css">
+  <!-- Button/Block острівця «До і Після» — .sc-story__cta -->
+  <link rel="stylesheet" href="assets/css/sections/b02v3-story.css">
   <link rel="stylesheet" href="assets/css/sections/footer.css">
   <link rel="stylesheet" href="assets/css/sections/modal-booking.css">
   <link rel="stylesheet" href="assets/css/sections/modal-video.css">
 
   <!-- LCP — кадр hero: запрос уходит с первых байт -->
-  <link rel="preload" as="image" fetchpriority="high" href="assets/img/direction/service/spinal-hero.jpg"
-        imagesrcset="assets/img/direction/service/spinal-hero.jpg 720w, assets/img/direction/service/spinal-hero@2x.jpg 1440w"
+  <link rel="preload" as="image" fetchpriority="high" href="assets/img/direction/service/omol-hero.jpg"
+        imagesrcset="assets/img/direction/service/omol-hero.jpg 720w"
         imagesizes="50vw" media="(min-width: 641px)">
-  <link rel="preload" as="image" fetchpriority="high" href="assets/img/direction/service/spinal-hero-mob.jpg" media="(max-width: 640px)">
+  <link rel="preload" as="image" fetchpriority="high" href="assets/img/direction/service/omol-hero-mob.jpg" media="(max-width: 640px)">
 
   <!-- Разметка для поиска и ИИ-ответов: страница напрямку и крихти.
        В теме — из полей страницы (см. docs/HANDOFF.md) -->
@@ -56,20 +57,19 @@
     "@graph": [
       {
         "@type": "MedicalWebPage",
-        "name": "Клітинна терапія для відновлення після спінальної травми",
-        "description": "Спінальна травма — це механічне пошкодження спинного мозку, внаслідок якого запускається друга хвиля патологій: втрата мієліну, нейрозапалення, окислювальний стрес.",
+        "name": "Омолодження організму власними стовбуровими клітинами",
+        "description": "Сучасні регенеративні технології сьогодні успішно застосовуються в багатьох країнах світу. У тому числі не тільки для лікування цілого ряду захворювань, але й з метою омо…",
         "inLanguage": "uk",
-        "about": { "@type": "MedicalTherapy", "name": "Клітинна терапія NeuroCELLNESS-Combi" },
+        "about": { "@type": "MedicalTherapy", "name": "Омолодження власними стовбуровими клітинами" },
         "publisher": { "@type": "MedicalOrganization", "name": "Інститут передової медицини VIRTUS", "url": "https://virtus.ua/" }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "virtus.ua", "item": "https://virtus.ua/" },
-          { "@type": "ListItem", "position": 2, "name": "Клітинні технології SmartCell", "item": "https://smartcell-frontend.gelovonarfas.workers.dev/cell-technologies" },
-          { "@type": "ListItem", "position": 3, "name": "Клітинне омолодження і терапія", "item": "https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya" },
-          { "@type": "ListItem", "position": 4, "name": "Травматологія та ортопедія", "item": "https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii" },
-          { "@type": "ListItem", "position": 5, "name": "Клітинна терапія після спінальної травми" }
+          { "@type": "ListItem", "position": 2, "name": "Клітинні технології SmartCell", "item": "https://virtus.ua/kletochnye-tehnologii" },
+          { "@type": "ListItem", "position": 3, "name": "Клітиннi препарати SmartCell", "item": "https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" },
+          { "@type": "ListItem", "position": 4, "name": "Омолодження власними стовбуровими клітинами" }
         ]
       }
     ]
@@ -114,7 +114,7 @@
           </span>
         </a>
         <div class="sc-header__spaces-drawer">
-        <a class="sc-header__space sc-header__space--current" href="/" aria-current="page">
+        <a class="sc-header__space sc-header__space--current" href="cell-technologies.html" aria-current="true">
           <span class="sc-header__space-title">SMARTCELL <span class="sc-header__space-title-alt">BY VIRTUS</span></span>
           <span class="sc-header__space-meta sc-t-mini">
             <span>Клітинний простір</span>
@@ -164,12 +164,14 @@
      2026-10-04); без скрипта — ссылка на затравку консультации внизу (#direction-consult).
      Фото — кадр из макета (клітини), 720 × 720, @2x 1440.
      ============================================================ -->
-<!-- SC/Service: hero той самий, що у напрямку; «Послуга доступна у філіях» замість «Напрямок представлений». -->
+<!-- SC/Service: hero той самий, що у напрямку; «Послуга доступна у філіях» замість «Напрямок представлений».
+     Кадр — фото послуги з virtus (fibroblast@2x, 1080×604; набір для забору біоматеріалу), квадрат 604 → 720 / 780.
+     @2x немає: оригінал малий — кращий кадр від клініки замінить без правки розмітки -->
 <section class="sc-dhero">
   <div class="sc-dhero__copy">
     <div class="sc-dhero__top">
-      <h1 class="sc-dhero__title sc-t-h1">Клітинна терапія <br>для відновлення після спінальної травми</h1>
-      <p class="sc-dhero__lead sc-t-lead">Спінальна травма — це механічне пошкодження спинного мозку, внаслідок якого запускається друга хвиля патологій: втрата мієліну, нейрозапалення, окислювальний стрес.</p>
+      <h1 class="sc-dhero__title sc-t-h1">Омолодження організму <br>власними стовбуровими клітинами</h1>
+      <p class="sc-dhero__lead sc-t-lead">Сучасні регенеративні технології сьогодні успішно застосовуються в багатьох країнах світу. У тому числі не тільки для лікування цілого ряду захворювань, але й з метою омолодження, покращення якості життя в цілому, продовження повноцінного, активного довголіття, лікування синдрому хронічної втоми і результатів постійного стресу, покращення якості сексуального життя.</p>
     </div>
 
     <div class="sc-dhero__bottom">
@@ -191,11 +193,11 @@
   <!-- LCP-кадр первого экрана: src сразу, fetchpriority, preload в <head> страницы -->
   <div class="sc-dhero__media">
     <picture>
-      <source media="(max-width: 640px)" srcset="assets/img/direction/service/spinal-hero-mob.jpg" width="780" height="780">
-      <img class="sc-dhero__image" src="assets/img/direction/service/spinal-hero.jpg"
-           srcset="assets/img/direction/service/spinal-hero.jpg 720w, assets/img/direction/service/spinal-hero@2x.jpg 1440w"
+      <source media="(max-width: 640px)" srcset="assets/img/direction/service/omol-hero-mob.jpg" width="780" height="780">
+      <img class="sc-dhero__image" src="assets/img/direction/service/omol-hero.jpg"
+           srcset="assets/img/direction/service/omol-hero.jpg 720w"
            sizes="50vw" width="720" height="720"
-           alt="Лабораторія клітинних технологій SmartCell" fetchpriority="high" decoding="async">
+           alt="Набір SmartCell для забору біоматеріалу: флакони, пробірка і квіти" fetchpriority="high" decoding="async">
     </picture>
   </div>
 </section>
@@ -205,19 +207,19 @@
   <ol class="sc-dcrumbs__list sc-t-mini">
     <li><a href="https://virtus.ua/">virtus.ua</a></li>
     <li><a href="cell-technologies.html">Клітинні технології SmartCell</a></li>
-    <li><a href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya">Клітинне омолодження і терапія</a></li>
-    <li><a href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Травматологія та ортопедія</a></li>
-    <li><span aria-current="page">Клітинна терапія після спінальної травми</span></li>
+    <li><a href="preparations.html">Клітиннi препарати SmartCell</a></li>
+    <li><span aria-current="page">Омолодження власними стовбуровими клітинами</span></li>
   </ol>
 </nav>
 
 <!-- ============================================================
-     SC/Service · Послуга SmartCell (рівень 4) — «Клітинна терапія для відновлення після спінальної травми»
+     SC/Service · Послуга SmartCell (рівень 4) — «Омолодження власними стовбуровими клітинами» («рідна» послуга SmartCell, розділ «Клітинні препарати»)
      figma: node-id=1254:1039 («SC/Service — … (послуга, рівень 4)»)
-     Шаблон послуги: hero → крихти → вкладки Опис · Підготовка та етапи · Лікарі (як на virtus.ua)
+     Шаблон послуги: hero → крихти → вкладки Опис · Рекомендації · Лікарі — як у послуг SmartCell на virtus (плазмаферез, Cellness; 2026-10-27).
+     Послуги не клітинних технологій (АМК тощо) — сторінки virtus у їхньому шаблоні, сюди не входять; у нас лише метка «Virtus»
      → «Популярні питання» (B16) → відгуки → консультація → філії → журнал.
-     Тексти — virtus.ua/…/klitinni-tehnologii-v-travmatologii-ta-ortopedii/spinal_cord (2026-10-12), як є;
-     у «Опис» — абзаци до «Популярних питань», у «Підготовка та етапи» — три розділи після них.
+     Тексти — virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami (2026-10-27; замінила приклад «спінальна травма»), як є;
+     у «Опис» — абзаци до «Популярних питань», у «Рекомендації» — підготовка, етапи, відновлення.
      Лікар у вкладці «Лікарі» — [VERIFY] клініка (на virtus список не підтягнувся; поки керівник Інституту).
      Кадр hero — ілюстрація зі сторінки послуги на virtus (1920 × 1080 → квадрат 720 / 1440).
      ACF: service_title, service_lead (textarea), service_branches, service_image (1:1),
@@ -229,93 +231,91 @@
     <div class="sc-dtabs__list" role="tablist" aria-label="Розділи послуги">
       <button class="sc-dtabs__tab sc-t-caption" type="button" role="tab" id="dtab-opys"
               aria-selected="true" aria-controls="dpanel-opys" data-tab="opys">Опис</button>
-      <button class="sc-dtabs__tab sc-t-caption" type="button" role="tab" id="dtab-pidgotovka"
-              aria-selected="false" aria-controls="dpanel-pidgotovka" data-tab="pidgotovka" tabindex="-1">Підготовка та етапи</button>
+      <button class="sc-dtabs__tab sc-t-caption" type="button" role="tab" id="dtab-rekomendatsii"
+              aria-selected="false" aria-controls="dpanel-rekomendatsii" data-tab="rekomendatsii" tabindex="-1">Рекомендації</button>
       <button class="sc-dtabs__tab sc-t-caption" type="button" role="tab" id="dtab-likari"
               aria-selected="false" aria-controls="dpanel-likari" data-tab="likari" tabindex="-1">Лікарі</button>
       <span class="sc-dtabs__indicator" aria-hidden="true" data-tabs-indicator></span>
     </div>
   </div>
 
-    <!-- ==================== Опис ==================== -->
+  <!-- ==================== Опис ==================== -->
   <div class="sc-dtabs__panel" role="tabpanel" id="dpanel-opys" aria-labelledby="dtab-opys">
 
     <div class="sc-dtabs__group sc-dabout">
       <div class="sc-dabout__quote">
-        <p class="sc-dabout__kicker sc-t-caption">NeuroCELLNESS-Combi</p>
-        <p class="sc-dabout__text sc-t-h3">Перевага полягає у комбінації системної й локальної дії, що забезпечує цілеспрямоване та ефективне ланцюгове лікування.</p>
+        <p class="sc-dabout__kicker sc-t-caption">Стовбурові клітини</p>
+        <p class="sc-dabout__text sc-t-h3">Саме тому стовбурові клітини називають «золотим резервом» оновлення нашого організму.</p>
       </div>
       <div class="sc-dabout__body">
-        <p>Клітинна терапія NeuroCELLNESS-Combi — це комплексна система, що поєднує системне та локальне введення мезенхімальних стовбурових клітин (МСК), спрямована на глибоке відновлення функцій центральної нервової системи після травми спинного мозку.</p>
-        <p>Найтяжчим ускладненням травми або іншої патології спинного мозку є повний незворотний параліч.</p>
+        <p>Ці унікальні можливості відкривають перед нами власні стовбурні клітини. Вони є неспеціалізованими, здатними до самооновлення впродовж тривалого часу. Стовбурові клітини значно довше всіх інших клітин нашого організму залишаються молодими, так як мають низьку метаболічну активність і відносно рідко діляться. Але головне, лише стовбурові клітини володіють особливою властивістю – в разі необхідності набувати потрібної спеціалізації, приймаючи риси і здатності клітин, що виконують в організмі конкретну роль.</p>
+        <p>В людині природою закладена здатність до самовідновлення і оновлення, яка чітко прослідковується на прикладі загоєння ран. Однак така можливість зберігається до того часу, доки стовбурові клітини шкіри зберігають свою функціональну активність. А оскільки вони довше інших клітин залишаються молодими, чому ж з певного віку швидкість природного відновлення шкіри істотно знижується?</p>
       </div>
     </div>
 
+    <!-- Відео з опису послуги на virtus.ua (YouTube VeE5u2brPaM; підпис на virtus — російською, тут — назва ролика українською) -->
+    <figure class="sc-dtabs__group sc-dvideo">
+      <button class="sc-dvideo__open" type="button" data-modal-open="service-video-1" aria-label="Дивитись відео: Розпакування біоматеріалу, підготовленого у лабораторії SmartCell">
+        <img class="sc-dvideo__poster" data-src="assets/img/direction/hub/video-3.jpg"
+             data-srcset="assets/img/direction/hub/video-3-640.jpg 640w, assets/img/direction/hub/video-3.jpg 1280w"
+             sizes="(max-width: 640px) 100vw, 1280px" width="1280" height="720" alt="" loading="lazy" decoding="async">
+        <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
+      </button>
+      <figcaption class="sc-dvideo__caption sc-t-mini">Розпакування біоматеріалу, підготовленого у лабораторії SmartCell</figcaption>
+    </figure>
+
     <div class="sc-dtabs__group sc-dprose">
-      <h2 class="sc-dprose__title sc-t-h2">Що таке спінальна травма: причини та наслідки</h2>
+      <h2 class="sc-dprose__title sc-t-h2">Процедура омолодження власними стовбуровими клітинами</h2>
       <div class="sc-dprose__body sc-t-body">
-        <p>Спінальна травма настає при пошкодженні спинного мозку внаслідок зовнішнього механічного впливу (наприклад, після травми хребта під час ДТП, падіння, пірнання). Вона викликає тимчасові або постійні зміни функцій спинного мозку: втрату м’язової активності, порушення чутливості або вегетативну дисфункцію в окремих частинах тіла.</p>
-        <p>Наслідки спінальної травми залежать від ступеня тяжкості та рівня ураження. Наприклад, при травмі шиї можуть виникнути утруднення дихання. В цілому зниження рухомості внаслідок здавлення спинного мозку збільшує ризик утворення тромбів, інфекцій сечовивідних шляхів, пролежнів. Після усунення гострого фактора — пошкоджень кісток чи дисків — запускається друга хвиля патології спінальної травми:</p>
-        <ul>
-          <li>нейрозапалення — викликає високу активність мікроглії, цитокінів (TNF-α, IL-1β), що активно руйнує тканини;</li>
-          <li>окислювальний стрес — пошкоджує мембрани нейронів та олігодендроцитів;</li>
-          <li>вторинний набряк спинного мозку — підвищує внутрішньочерепний тиск, блокує кровопостачання;</li>
-          <li>втрата мієліну — мієлінова оболонка нервових волокон руйнується, нервові імпульси гальмуються або втрачаються.</li>
-        </ul>
-        <p>Ще одним наслідком травми спинного мозку є спінальний шок — раптове тимчасове зникнення всіх спінальних рефлексів нижче рівня ураження.</p>
-        <p>Програма NeuroCELLNESS-Combi прагне вплинути на ці процеси, одночасно підтримуючи всі ключові ланки регенерації — від ангіогенезу до ремієлінізації.</p>
+        <p>В першу чергу проводяться попередні лабораторно-діагностичні дослідження для оцінки загального стану здоров’я пацієнта. Потім проводиться забір невеликої кількості жирової тканини, з якої виділяються і культивуються в лабораторних умовах до необхідної кількості стовбурові клітини. Після цього проводиться власне процедура аутотрансплантації стовбурових клітин шляхом внутрішньовенного введення. Відразу ж після проведення процедури пацієнт може повернутися до свого повсякденного життя.</p>
       </div>
     </div>
-    <div class="sc-dtabs__group sc-dprose">
-      <h2 class="sc-dprose__title sc-t-h2">Показання та протипоказання до клітинної терапії при травмах спинного мозку</h2>
-      <div class="sc-dprose__body sc-t-body">
-        <p>Ураження спинного мозку внаслідок травми або захворювання призводить до розвитку м’язової слабкості, часткового або повного порушення чутливості кінцівок, болю у спині. Тож показаннями до клітинної терапії є власне травми спинного мозку (забій хребта, струс, стиснення, травма нирця). Наприклад, програма SmartCELLNESS-Combi призначається при переломі хребта зі зміщенням хребців, що супроводжується стисненням та набряком спинного мозку. Клітинна терапія має сенс тоді, коли існує хоча б мінімальний шанс на відновлення і покращення якості життя пацієнта.</p>
+
+    <!-- «Хочете побачити приклади До і Після?» — острівець, як плита «Неофіброліфтинг» на Face Control (B15a, 2026-10-27):
+         чорна плита в полі верстки — надпис, заголовок, фраза virtus як є і кнопка «Дивитись До і Після».
+         Власних прикладів у послуги немає: кнопка веде у відповідний розділ «До і Після» на virtus.ua (рішення 2026-10-27).
+         ACF: ba_link, ba_image (1:1) (посилання на розділ virtus, за замовчуванням virtus.ua/do-i-posle) -->
+    <div class="sc-dtabs__group sc-dba sc-dba--media" data-theme="inverse">
+      <div class="sc-dba__copy">
+        <p class="sc-dba__kicker sc-t-caption">До і Після</p>
+        <h2 class="sc-dba__title sc-t-h2">Хочете побачити приклади До і Після?</h2>
+        <p class="sc-dba__text sc-t-body">Результати наших операцій та процедур переконують краще будь-яких слів. Судіть самі!</p>
+        <!-- Button/Block — компонент кита (.sc-story__cta, b02v3-story.css), як у тёмній статті хаба; на тёмній плиті — світлий.
+             Метка «Virtus» у правому верхньому куті — як на плитках «Види послуги»: посилання веде на virtus.ua -->
+        <a class="sc-story__cta" href="https://virtus.ua/do-i-posle">
+          <span class="sc-story__cta-label">Дивитись До і Після</span>
+          <span class="sc-dba__source sc-t-mini">Virtus</span>
+          <span class="sc-story__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+        </a>
       </div>
+      <!-- Ілюстрація (2026-10-27): згенерована (Seedream 5.0 Pro) — цитрус без фону (PNG з прозорістю), половина бугриста шкірка Sumo
+           («до»), половина гладкий лимон («після»). Без людей і без «прикладів»: прикладів у послуги немає. -->
+      <figure class="sc-dba__media">
+        <img data-src="assets/img/direction/service/ba-citrus.png"
+             data-srcset="assets/img/direction/service/ba-citrus.png 720w, assets/img/direction/service/ba-citrus@2x.png 1440w"
+             sizes="(max-width: 640px) 100vw, 560px" width="720" height="720"
+             alt="Цитрус: одна половина з бугристою шкіркою, друга — з гладкою" loading="lazy" decoding="async">
+      </figure>
     </div>
-    <div class="sc-dtabs__group sc-dprose">
-      <h2 class="sc-dprose__title sc-t-h2">Механізм дії клітинної терапії при пошкодженні спинного мозку</h2>
-      <div class="sc-dprose__body sc-t-body">
-        <p>NeuroCELLNESS‑Combi поєднує внутрішньовенне введення для системної підтримки та локальне введення МСК поблизу ушкоджених ділянок (міжфасціально чи паравертебрально), що забезпечує високу концентрацію клітин саме там, де вона найбільш потрібна. Механізм дії клітинної терапії при пошкодженні спинного мозку включає в себе:</p>
-        <ul>
-          <li>припинення нейрозапалення. МСК секретують імуносупресорні (протизапальні) молекули (IL‑10, TGF‑β), пригнічують активацію мікроглії, стабілізують тканину;</li>
-          <li>захист нейронів (нейропротекція). Провокується вивільнення BDNF, NGF — залишкові нейрони отримують живлення й підтримку, а апоптоз (запрограмоване згортання) сповільнюється;</li>
-          <li>відновлення судинної мережі (ангіогенез). Через VEGF та PDGF запускається формування нових капілярів, з імпульсів тканина відновлює нормальний кровообіг;</li>
-          <li>ремієлінізацію пошкоджених волокон. МСК активують олігодендроцити — клітини, що оновлюють мієлінові оболонки. Це дозволяє повернути швидкість передачі нервових сигналів;</li>
-          <li>формування нових зв’язків (синаптогенез). Пошкоджені нервові ланцюги починають реорганізовуватись, тим самим відновлюється зв’язок між сегментами спинного мозку;</li>
-          <li>антиоксидантну дію та клітинне відновлення. МСК виробляють ферменти, що нейтралізують вільні радикали та покращують роботу мітохондрій, живлячи клітини енергією;</li>
-          <li>імунорегуляцію. Клітини знижують аутоімунну агресію — це важливо, оскільки після травми організм може атакувати власні нервові тканини;</li>
-          <li>створення нейротрофічного середовища. Через інтенсивне вироблення факторів росту створюється середовище, де клітини самі регенеруються.</li>
-        </ul>
-        <p>Все це дозволяє отримати значне покращення навіть пацієнтам у хронічному стані.</p>
-      </div>
-    </div>
-    <div class="sc-dtabs__group sc-dprose">
-      <h2 class="sc-dprose__title sc-t-h2">Результати клітинної терапії при спінальній травмі</h2>
-      <div class="sc-dprose__body sc-t-body">
-        <p>Комбінований підхід при лікуванні спінальних травм МСК припиняє запалення, витягує токсини та облямовує нервові клітини від стресових факторів. Активація судин подає живлення, кисень та фактори росту, а відновлення мієліну повертає фізіологічну функцію. При стимуляції нейропластичності утворюються нові шляхи обходу пошкоджених ділянок, і в результаті пацієнт почувається краще, а симптоми спінальної травми зменшуються.</p>
-      </div>
-    </div>
+
   </div>
 
-  <!-- ==================== Підготовка та етапи ==================== -->
-  <div class="sc-dtabs__panel" role="tabpanel" id="dpanel-pidgotovka" aria-labelledby="dtab-pidgotovka" hidden>
+  <!-- ==================== Рекомендації ==================== -->
+  <div class="sc-dtabs__panel" role="tabpanel" id="dpanel-rekomendatsii" aria-labelledby="dtab-rekomendatsii" hidden>
     <div class="sc-dtabs__group sc-dprose">
-      <h2 class="sc-dprose__title sc-t-h2">Підготовка до клітинної терапії при спінальній травмі</h2>
+      <h2 class="sc-dprose__title sc-t-h2">Результати</h2>
       <div class="sc-dprose__body sc-t-body">
-        <p>Перед лікуванням пацієнт відвідує консультацію лікаря клітинних технологій та проходить необхідні обстеження. Для підготовки до клітинної терапії при спінальній травмі йому призначаються процедури плазмаферезу. Це екстракорпоральний метод очищення крові через апарат, що дозволяє вилучити з неї патогени, аутоімунні антитіла та інші шкідливі речовини, які спричиняють хронічні захворювання та аутоімунні реакції. Таким чином, МСК діятимуть в оптимальних умовах.</p>
-      </div>
-    </div>
-    <div class="sc-dtabs__group sc-dprose">
-      <h2 class="sc-dprose__title sc-t-h2">Як проходить процедура клітинної терапії при травмах спини?</h2>
-      <div class="sc-dprose__body sc-t-body">
-        <p>Клітинна терапія за програмою NeuroCELLNESS-Combi — це безпечний і комфортний для пацієнта процес, який відбувається під чітким моніторингом висококваліфікованих професіоналів. Введення МСК проводиться і в безпосередньо в палаті пацієнта, і в операційній залежно від випадку.</p>
-        <p>При внутрішньовенному введенні МСК забезпечують генералізовану системну підтримку всього організму, а завдяки властивості хоумінгу знаходять зону пошкодження, інтегруються і відновлюють її, запускаючи комплексний процес регенерації. За потреби здійснюється також локальне введення клітин безпосередньо поблизу пошкодженої ділянки хребта.</p>
-      </div>
-    </div>
-    <div class="sc-dtabs__group sc-dprose">
-      <h2 class="sc-dprose__title sc-t-h2">Відновлення та спостереження після клітинної терапії при спінальній травмі</h2>
-      <div class="sc-dprose__body sc-t-body">
-        <p>При лікуванні спінальних травм важливо розуміти, що його результат багато у чому залежить від зусиль, які докладає сам пацієнт. Щоб відновити функцію спинного мозку, необхідні регулярні навантаження, наприклад, лікувальна фізкультура під наглядом досвідченого інструктора. Програма розробляється індивідуально, в залежності від стану пацієнта і ступеня ураження, і може тривати до кількох місяців.</p>
+        <p>Результати багаторічних наукових досліджень (починаючи з 1960-х років Л. Хейфліка) довели, що відбувається це тому, що стовбурові клітини не отримують потрібних сигналів. «Віддати» такий сигнал можна шляхом введення власних стовбурових клітин. Вони витрачаються організмом перш за все на такі першочергові завдання, як відновлення нормальної роботи серця, печінки, нирок, легень та інших внутрішніх органів, нервової, ендокринної, імунної, сечостатевої систем. Таким чином відбувається вирішення внутрішніх проблем організму, відновлення його нормальної життєдіяльності, тієї основи, без якої неможливе справжнє омолодження.</p>
+        <p>Наша шкіра — це важливий орган, який існує суверенно від тіла. Отже, покращити стан шкіри і повернути їй «молоді» властивості можна лише шляхом вирішення внутрішніх проблем всього організму, а також покращення живлення і стимуляції обмінних процесів шкіри. Таким чином, введення стовбурових клітин пацієнтам, які бажають не лише добре виглядати, але й відмінно себе почувати, сприяє:</p>
+        <ul>
+          <li>підвищенню працездатності</li>
+          <li>покращенню пам’яті</li>
+          <li>нормалізації імунітету</li>
+          <li>швидкому виходу зі стресу</li>
+          <li>нормалізації сну</li>
+          <li>відновленню лібідо</li>
+        </ul>
+        <p>Саме ці чинники є складовою частиною поняття «якість життя».</p>
       </div>
     </div>
   </div>
@@ -332,80 +332,100 @@
             <span>5,0 · 3 відгуки</span>
           </p>
           <a class="sc-ddoctors__name sc-t-h3" href="https://virtus.ua/ceo">Цепколенко Володимир Олександрович</a>
-          <p class="sc-ddoctors__meta sc-t-small">Керівник Інституту VIRTUS і біотехнологічної компанії SmartCell</p>
-          <p class="sc-ddoctors__meta sc-t-small">Веде прийом: Одеса, Суднобудівна, 1Б · Київ, Костянтинівська, 57</p>
+          <p class="sc-ddoctors__meta sc-t-small">Керівник Інституту VIRTUS і Біотехнологічної компанії SmartCell</p>
+          <p class="sc-ddoctors__meta sc-t-small">50 років стажу · веде прийом: Одеса, Суднобудівна, 1Б · Київ, Костянтинівська, 57</p>
+        </div>
+      </li>
+      <li class="sc-ddoctors__card">
+        <img class="sc-ddoctors__photo" data-src="assets/img/direction/doctors/erofeeva-oksana-vladimirovna.jpg" data-srcset="assets/img/direction/doctors/erofeeva-oksana-vladimirovna.jpg 445w, assets/img/direction/doctors/erofeeva-oksana-vladimirovna@2x.jpg 890w" sizes="(max-width: 640px) 100vw, 33vw"
+             width="445" height="445" alt="Єрофєєва Оксана Володимирівна" loading="lazy" decoding="async">
+        <div class="sc-ddoctors__body">
+          <p class="sc-ddoctors__rating sc-t-small">
+            <svg class="sc-ddoctors__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+            <span>5,0 · 114 відгуків</span>
+          </p>
+          <a class="sc-ddoctors__name sc-t-h3" href="https://virtus.ua/doctor/erofeeva-oksana-vladimirovna">Єрофєєва Оксана Володимирівна</a>
+          <p class="sc-ddoctors__meta sc-t-small">Дерматолог, косметолог, дерматовенеролог</p>
+          <p class="sc-ddoctors__meta sc-t-small">30 років стажу · веде прийом: Одеса, Суднобудівна, 1Б</p>
+        </div>
+      </li>
+      <li class="sc-ddoctors__card">
+        <img class="sc-ddoctors__photo" data-src="assets/img/direction/doctors/cepkolenko-anna-vladimirovna.jpg" data-srcset="assets/img/direction/doctors/cepkolenko-anna-vladimirovna.jpg 445w, assets/img/direction/doctors/cepkolenko-anna-vladimirovna@2x.jpg 890w" sizes="(max-width: 640px) 100vw, 33vw"
+             width="445" height="445" alt="Цепколенко Ганна Володимирівна" loading="lazy" decoding="async">
+        <div class="sc-ddoctors__body">
+          <p class="sc-ddoctors__rating sc-t-small">
+            <svg class="sc-ddoctors__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+            <span>5,0 · 77 відгуків</span>
+          </p>
+          <a class="sc-ddoctors__name sc-t-h3" href="doctor-tsepkolenko-hanna.html">Цепколенко Ганна Володимирівна</a>
+          <p class="sc-ddoctors__meta sc-t-small">Дерматолог, косметолог, дерматовенеролог</p>
+          <p class="sc-ddoctors__meta sc-t-small">23 років стажу · веде прийом: Одеса, Суднобудівна, 1Б</p>
+        </div>
+      </li>
+      <li class="sc-ddoctors__card">
+        <img class="sc-ddoctors__photo" data-src="assets/img/direction/doctors/esaulenko-elena-vladimirovna.jpg" data-srcset="assets/img/direction/doctors/esaulenko-elena-vladimirovna.jpg 445w, assets/img/direction/doctors/esaulenko-elena-vladimirovna@2x.jpg 890w" sizes="(max-width: 640px) 100vw, 33vw"
+             width="445" height="445" alt="Єсауленко Олена Володимирівна" loading="lazy" decoding="async">
+        <div class="sc-ddoctors__body">
+          <p class="sc-ddoctors__rating sc-t-small">
+            <svg class="sc-ddoctors__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+            <span>5,0 · 7 відгуків</span>
+          </p>
+          <a class="sc-ddoctors__name sc-t-h3" href="https://virtus.ua/doctor/esaulenko-elena-vladimirovna">Єсауленко Олена Володимирівна</a>
+          <p class="sc-ddoctors__meta sc-t-small">Косметолог, дерматовенеролог</p>
+          <p class="sc-ddoctors__meta sc-t-small">17 років стажу · веде прийом: Київ, Костянтинівська, 57</p>
         </div>
       </li>
     </ul>
   </div>
 </section>
 
-<!-- Секция — копия sections/b16-faq.html (хаб: «Популярні питання» з virtus.ua, тексти як є) -->
-<section class="sc-faq" data-theme="inverse">
-  <div class="sc-faq__col">
-    <h2 class="sc-faq__title sc-t-h2">Популярні питання</h2>
-    <p class="sc-faq__note sc-t-small">Залишились питання? <br>Відповідає лікар відділення.</p>
-    <a class="sc-faq__cta" href="#direction-consult" data-modal-open="booking">
-      <span class="sc-faq__cta-label">Записатись на консультацію</span>
-      <span class="sc-faq__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
-    </a>
+<!-- «Популярні питання» (B16) — опційний блок шаблону: на цій послузі на virtus їх немає, секцію знято (2026-10-27) -->
+
+<!-- ТИМЧАСОВО ВИМКНЕНО (2026-10-27): блок «Відео-відгуки пацієнтів» закоментовано, лишається слайдер текстових відгуків нижче.
+     Повернути — зняти коментар з секції і модалки service-video-review-1 внизу сторінки.
+     ============================================================
+     SC/Service · Відео-відгуки пацієнтів (2026-10-27)
+     figma: макета немає — шапка як у дорожки журналу, картки — кадр sc-dvideo
+     На virtus.ua цей блок стоїть на кожній послузі (плазмаферез, омолодження стовбуровими
+     клітинами): ролики YouTube + посилання «Сторінка «Відгуки пацієнтів»». Зараз ролик один,
+     той самий на всіх послугах. [VERIFY] добірка роликів по послузі — у клініки.
+     ACF: video_reviews (repeater: youtube_url, poster 16:9, caption); посилання — на virtus.ua/reviews
+     ============================================================
+
+<section class="sc-dvlog">
+  <div class="sc-darticles__head">
+    <h2 class="sc-darticles__title sc-t-h2">Відео-відгуки пацієнтів</h2>
+    <a class="sc-darticles__all sc-t-small" href="https://virtus.ua/reviews">Сторінка «Відгуки пацієнтів»</a>
   </div>
-  <div class="sc-faq__list">
-      <details class="sc-faq__item" open>
-        <summary class="sc-faq__q">
-          <span class="sc-faq__question sc-t-h3">Як класифікують травми хребта?</span>
-          <span class="sc-faq__toggle" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="39" height="39" stroke="currentColor"/><path class="sc-faq__toggle-h" d="M13 20H27" stroke="currentColor"/><path class="sc-faq__toggle-v" d="M20 13V27" stroke="currentColor"/></svg></span>
-        </summary>
-        <div class="sc-faq__answer sc-t-small">
-          <p>Травми хребта класифікують за кількома категоріями. По-перше, за видом пошкодження виділяють такі травми хребта:</p>
-          <ul>
-            <li>забій спинного мозку;</li>
-            <li>вивих (повне зміщення сусідніх хребців один відносно одного);</li>
-            <li>підвивих (часткове зміщення сусідніх хребців);</li>
-            <li>перелом хребців.</li>
-          </ul>
-          <p>Також травми хребта бувають ускладнені і неускладнені. При неускладнених травмах хребта людина відчуває лише біль у спині або шиї, викликаний переломом кістки хребця, а при ускладнених відбувається здавлення нервових структур: спинного мозку або нервових корінців. Крім болю, з’являється неврологічний дефіцит, зокрема м’язова слабкість, параліч кінцівок, втрата чутливості, порушення функції тазових органів.</p>
-        </div>
-      </details>
-      <details class="sc-faq__item">
-        <summary class="sc-faq__q">
-          <span class="sc-faq__question sc-t-h3">Які є ушкодження спинного мозку?</span>
-          <span class="sc-faq__toggle" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="39" height="39" stroke="currentColor"/><path class="sc-faq__toggle-h" d="M13 20H27" stroke="currentColor"/><path class="sc-faq__toggle-v" d="M20 13V27" stroke="currentColor"/></svg></span>
-        </summary>
-        <div class="sc-faq__answer sc-t-small">
-          <p>Ушкодження спинного мозку бувають наступних видів:</p>
-          <ul>
-            <li>пухлини спинного мозку: епендимоми, астроцитоми, менінгіоми, невриноми, ліпоми та інші. Пухлини бувають злоякісні та доброякісні, а фінальний діагноз ставиться за результатом гістологічного обстеження;</li>
-            <li>травми спинного мозку (забиті місця, струс, стиснення);</li>
-            <li>судинні захворювання спинного мозку (артеріовенозні мальформації, каверноми тощо).</li>
-          </ul>
-        </div>
-      </details>
-      <details class="sc-faq__item">
-        <summary class="sc-faq__q">
-          <span class="sc-faq__question sc-t-h3">Як стати на ноги після травми спинного мозку?</span>
-          <span class="sc-faq__toggle" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="39" height="39" stroke="currentColor"/><path class="sc-faq__toggle-h" d="M13 20H27" stroke="currentColor"/><path class="sc-faq__toggle-v" d="M20 13V27" stroke="currentColor"/></svg></span>
-        </summary>
-        <div class="sc-faq__answer sc-t-small">
-          <p>Відновлення після травми спинного мозку — це індивідуальний процес. Операція не є гарантію одужання, і після неї пацієнту необхідно пройти курс реабілітації та докласти зусиль, щоб знову підвестися на ноги. У цьому може допомогти курс клітинної терапії.</p>
-        </div>
-      </details>
-  </div>
+  <ul class="sc-dvlog__row">
+    <li>
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="service-video-review-1" aria-label="Дивитись відео: Марія, пацієнтка доктора Олени Єсауленко в місті Києві">
+          <img class="sc-dvideo__poster" data-src="assets/img/direction/service/video-review-1.jpg"
+               data-srcset="assets/img/direction/service/video-review-1-640.jpg 640w, assets/img/direction/service/video-review-1.jpg 1280w"
+               sizes="(max-width: 640px) 100vw, 33vw" width="1280" height="720" alt="" loading="lazy" decoding="async">
+          <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
+        </button>
+        <figcaption class="sc-dvideo__caption sc-t-mini">Марія, пацієнтка доктора Олени Єсауленко в місті Києві</figcaption>
+      </figure>
+    </li>
+  </ul>
 </section>
+-->
 
 <!-- Секция — копия sections/sc-direction-reviews.html -->
 <!-- ============================================================
      SC/Direction · Відгуки про лікарів напрямку — вариант B09
      figma: node-id=318:2
      Разметка и скрипт — B09 (sections/b09-reviews.html, assets/js/reviews.js)
-     с модификатором sc-reviews--direction и ручным режимом data-reviews-manual:
+     с модификатором sc-reviews--direction и ручным режимом:
      листание только стрелками, полоса показывает место в ленте.
      Карточка и «Усі відгуки» включают вкладку «Відгуки» (direction-tabs.js);
      на самой вкладке «Відгуки» секция скрыта (data-direction-hide-on).
      ACF: reviews_title (text); отзывы — те же записи, что во вкладке «Відгуки»
           (запрос по напрямку, последние N): текст, автор, дата, оценка
      ============================================================ -->
-<section class="sc-reviews sc-reviews--direction" data-reviews data-reviews-manual>
+<section class="sc-reviews sc-reviews--direction" data-reviews>
   <div class="sc-reviews__inner">
     <div class="sc-reviews__head">
       <h2 class="sc-reviews__title sc-t-h2">Відгуки про лікарів напрямку</h2>
@@ -816,6 +836,34 @@
 
 <!-- Модалка видео — по образцу sections/modal-video.html (modal.js):
      iframe получает адрес из data-src только при открытии и теряет при закрытии -->
+
+<div class="sc-modal sc-modal--video" data-modal="service-video-1" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--video" role="dialog" aria-modal="true" data-theme="inverse" aria-label="Розпакування біоматеріалу, підготовленого у лабораторії SmartCell">
+    <button class="sc-modal__close sc-modal__close--outside" type="button" data-modal-close aria-label="Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg>
+    </button>
+    <div class="sc-modal__frame">
+      <iframe class="sc-modal__video" data-src="https://www.youtube-nocookie.com/embed/VeE5u2brPaM?autoplay=1&amp;rel=0" title="Розпакування біоматеріалу, підготовленого у лабораторії SmartCell"
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ТИМЧАСОВО ВИМКНЕНО разом із блоком «Відео-відгуки» (2026-10-27)
+<div class="sc-modal sc-modal--video" data-modal="service-video-review-1" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--video" role="dialog" aria-modal="true" data-theme="inverse" aria-label="Марія, пацієнтка доктора Олени Єсауленко в місті Києві">
+    <button class="sc-modal__close sc-modal__close--outside" type="button" data-modal-close aria-label="Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg>
+    </button>
+    <div class="sc-modal__frame">
+      <iframe class="sc-modal__video" data-src="https://www.youtube-nocookie.com/embed/w9fIN4AjRi8?autoplay=1&amp;rel=0" title="Марія, пацієнтка доктора Олени Єсауленко в місті Києві"
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+-->
 
 <script src="assets/js/header.js" defer></script>
 <script src="assets/js/img-lazy.js" defer></script>
