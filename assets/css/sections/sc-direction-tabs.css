@@ -388,7 +388,9 @@ div.sc-dservices__tile {
 .sc-ddoctors {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--sc-tile-gap); /* узкая щель между плитками (в Figma было 24; правка 2026-10-04) */
+  /* по горизонталі — вузька щілина плиток; між рядами — повний крок сітки (56): підпис попереднього ряду
+     впирався у фото наступного (правка 2026-10-28; було gap: tile-gap в обидва боки) */
+  gap: var(--section-gap) var(--sc-tile-gap);
   padding: 0;
   list-style: none;
 }

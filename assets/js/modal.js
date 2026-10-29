@@ -147,6 +147,15 @@
     }
   });
 
+  /* Картка-кнопка (не <button>: напр. флеш-відгук у слайдері) відкривається з клавіатури — Enter / пробіл (2026-10-28) */
+  document.addEventListener('keydown', function (e) {
+    if (openModal || (e.key !== 'Enter' && e.key !== ' ')) return;
+    var opener = e.target.closest && e.target.closest('[data-modal-open][role="button"]');
+    if (!opener || opener !== e.target) return;
+    var target = document.querySelector('[data-modal="' + opener.getAttribute('data-modal-open') + '"]');
+    if (target) { e.preventDefault(); open(target, opener); }
+  });
+
   document.addEventListener('keydown', function (e) {
     if (!openModal) return;
 

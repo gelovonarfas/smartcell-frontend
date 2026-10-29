@@ -94,6 +94,21 @@
   color: var(--muted-foreground);
 }
 
+/* Про кого відгук — лікар (або напрямок, якщо лікаря немає), рядком під автором (2026-10-28) */
+.sc-reviews__doctor {
+  margin: 0;
+  color: var(--foreground);
+}
+
+/* Тип флеш-відгуку (відео, гостьова книга) — позначка перед автором; текстовий відгук без позначки */
+.sc-reviews__type {
+  display: inline-block;
+  margin-inline-end: var(--sc-space-1_5);
+  padding: 0 var(--sc-space-1_5);
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+}
+
 
 /* ---------- Контролы ленты ----------
    Ряд из макета: Control/SliderNav 104, счётчик, полоса на остаток
@@ -207,10 +222,18 @@
   text-align: start;
 }
 
-.sc-reviews__item[data-tab-link] { cursor: pointer; }
+.sc-reviews__item[data-tab-link],
+.sc-reviews__item[data-modal-open] { cursor: pointer; }
 
 @media (hover: hover) and (pointer: fine) {
-  .sc-reviews__item[data-tab-link]:hover { background: var(--muted); }
+  .sc-reviews__item[data-tab-link]:hover,
+  .sc-reviews__item[data-modal-open]:hover { background: var(--muted); }
+}
+
+/* картка флеш-відгуку — кнопка: фокус з клавіатури видно (2026-10-28) */
+.sc-reviews__item[data-modal-open]:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: calc(-1 * var(--sc-focus-w));
 }
 
 @media (prefers-reduced-motion: reduce) {

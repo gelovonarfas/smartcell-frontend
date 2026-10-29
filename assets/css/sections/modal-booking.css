@@ -385,3 +385,88 @@ a.sc-modal__submit {
   justify-content: center;
   text-decoration: none;
 }
+
+/* ---------- Попап повного відгуку (флеш-відгук у слайдері → клік, 2026-10-28) ----------
+   Та сама модалка кита: поява з кута, кнопка закриття-«згортання» як у форми запису.
+   Одна колонка без фото, ширина — як колонка тексту */
+.sc-modal__dialog--review {
+  --modal-w: 640px;
+  --dtabs-fact-label-w: 110px; /* підписи (філія, напрямок, фахівець) — та сама сітка, що у вкладці «Відгуки» */
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.sc-modal__dialog--review .sc-modal__panel {
+  justify-content: flex-start;
+  gap: var(--sc-space-6);
+  max-block-size: calc(100dvh - 2 * var(--grid-gap));
+  overflow-y: auto;
+}
+
+.sc-review-full__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-sm);
+  padding-inline-end: calc(var(--modal-close) + var(--sc-space-4)); /* ім'я не заходить під кнопку */
+}
+
+.sc-review-full__head > * { margin: 0; }
+.sc-review-full__head .sc-dreviews__date { color: var(--sc-neutral-600); }
+.sc-review-full__stars { display: block; }
+
+.sc-review-full__text { margin: 0; max-inline-size: var(--sc-measure); }
+
+.sc-review-full__all {
+  align-self: flex-start;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-review-full__all:hover { text-decoration: none; }
+}
+
+.sc-review-full__all:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (max-width: 640px) {
+  .sc-modal__dialog--review .sc-modal__panel { padding: var(--card-padding); }
+}
+
+/* Відео-відгук у попапі — ролик 16:9 у колонці */
+.sc-review-full__video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--sc-black-alpha-80);
+}
+
+.sc-review-full__video iframe {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+}
+
+.sc-review-full__caption { margin: calc(-1 * var(--sc-space-4)) 0 0; color: var(--sc-neutral-600); }
+
+/* Запис у гостьовій книзі — скан сторінки, клік відкриває повний */
+.sc-review-full__scan {
+  display: block;
+  inline-size: 240px;
+  max-inline-size: 100%;
+  border: var(--sc-line) solid var(--border);
+}
+
+.sc-review-full__scan img { display: block; inline-size: 100%; block-size: auto; }
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-review-full__scan:hover { border-color: var(--foreground); }
+}
+
+.sc-review-full__scan:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}

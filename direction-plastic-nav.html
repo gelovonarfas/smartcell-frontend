@@ -728,6 +728,9 @@
      ACF: reviews_title (text); отзывы — те же записи, что во вкладке «Відгуки»
           (запрос по напрямку, последние N): текст, автор, дата, оценка
      ============================================================ -->
+<!-- Флеш-відгуки (2026-10-28): у картці — одна дослівна фраза з повного відгуку, клік відкриває повний відгук
+       у попапі (sc-modal--review, кнопка закриття — як у форми запису). Без переходу у вкладку й пагінації.
+       ACF: flash (text, ≤120 знаків) у відгука; заповнений флеш = пін (закріплені першими, ліміт 9 на напрямок). -->
 <section class="sc-reviews sc-reviews--direction" data-reviews data-direction-hide-on="vidguky">
   <div class="sc-reviews__inner">
     <div class="sc-reviews__head">
@@ -736,30 +739,49 @@
 
     <div class="sc-reviews__viewport">
       <ul class="sc-reviews__list" data-reviews-track>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <li class="sc-reviews__item" data-modal-open="review-andrii" tabindex="0" role="button" aria-label="Відгук: Андрій">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
-          <p class="sc-reviews__quote sc-t-body">Досвідчений та чуйний лікар. Отримав змістовну консультацію та гарне ставлення. Звертався стосовно послуги плазмаферезу — гарний сервіс у безпечних та комфортних умовах.</p>
+          <p class="sc-reviews__quote sc-t-body">Досвідчений та чуйний лікар.</p>
           <p class="sc-reviews__author sc-t-mini">Андрій · 19.08.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Лісовик С. Г.</p>
         </li>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <!-- Флеш відео-відгуку: фраза — з титру ролика; позначка «Відео» перед автором -->
+        <li class="sc-reviews__item sc-reviews__item--video" data-modal-open="review-mariia" tabindex="0" role="button" aria-label="Відео-відгук: Марія">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
-          <p class="sc-reviews__quote sc-t-body">Приїжджаємо з чоловіком у клініку на плазмаферез, не перший місяць. Дуже гарний лікар, фахівець своєї справи, завжди привітний — усе проходить швидко і без проблем.</p>
-          <p class="sc-reviews__author sc-t-mini">Христина · 12.08.2025</p>
+          <p class="sc-reviews__quote sc-t-body">Марія розповідає про свій досвід застосування продуктів SmartCell.</p>
+          <p class="sc-reviews__author sc-t-mini"><span class="sc-reviews__type">Відео</span> Марія</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Єсауленко О. В.</p>
         </li>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <li class="sc-reviews__item" data-modal-open="review-khrystyna" tabindex="0" role="button" aria-label="Відгук: Дирда Христина">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Дуже гарний лікар, фахівець своєї справи.</p>
+          <p class="sc-reviews__author sc-t-mini">Христина · 12.08.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Лісовик С. Г.</p>
+        </li>
+        <!-- Флеш запису в гостьовій книзі: фраза з рукописного відгуку; автор не підписаний — лише дата -->
+        <li class="sc-reviews__item sc-reviews__item--guestbook" data-modal-open="review-guestbook-1" tabindex="0" role="button" aria-label="Запис у гостьовій книзі, 09.04.2021">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Всюди 5 зірок! Дякую за все!</p>
+          <p class="sc-reviews__author sc-t-mini"><span class="sc-reviews__type">Гостьова книга</span> 09.04.2021</p>
+          <p class="sc-reviews__doctor sc-t-mini">Клітинні технології SmartCell</p>
+        </li>
+        <li class="sc-reviews__item" data-modal-open="review-petro" tabindex="0" role="button" aria-label="Відгук: Богатий Петро">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
           <p class="sc-reviews__quote sc-t-body">Все виконано чудово.</p>
           <p class="sc-reviews__author sc-t-mini">Петро · 12.08.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Лісовик С. Г.</p>
         </li>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <li class="sc-reviews__item" data-modal-open="review-olena" tabindex="0" role="button" aria-label="Відгук: Олена">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
-          <p class="sc-reviews__quote sc-t-body">Пояснили кожен крок і показали результат на УЗД. Це те, чого бракувало в інших клініках.</p>
+          <p class="sc-reviews__quote sc-t-body">Пояснили кожен крок і показали результат на УЗД.</p>
           <p class="sc-reviews__author sc-t-mini">Олена · 02.08.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Кадочніков С. В.</p>
         </li>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <li class="sc-reviews__item" data-modal-open="review-iryna" tabindex="0" role="button" aria-label="Відгук: Ірина">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
-          <p class="sc-reviews__quote sc-t-body">Записалась на консультацію за рекомендацією. Лікар детально розібрав мою ситуацію, без нав'язування процедур.</p>
+          <p class="sc-reviews__quote sc-t-body">Лікар детально розібрав мою ситуацію, без нав'язування процедур.</p>
           <p class="sc-reviews__author sc-t-mini">Ірина · 28.07.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Саркісян А. Г.</p>
         </li>
       </ul>
     </div>
@@ -770,7 +792,7 @@
         <button class="sc-reviews__nav-btn" type="button" data-reviews-next aria-label="Наступний відгук"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32M26 30L32 24L26 18" stroke="currentColor"/></svg></button>
       </div>
 
-      <p class="sc-reviews__counter sc-t-mini" data-reviews-counter>01 / 05</p>
+      <p class="sc-reviews__counter sc-t-mini" data-reviews-counter>01 / 07</p>
 
       <div class="sc-reviews__progress" aria-hidden="true">
         <span class="sc-reviews__progress-bar" data-reviews-progress></span>
@@ -1167,6 +1189,193 @@
     <div class="sc-modal__frame">
       <iframe class="sc-modal__video" data-src="https://www.youtube-nocookie.com/embed/w9fIN4AjRi8?autoplay=1&amp;rel=0" title="Марія, пацієнтка доктора Олени Єсауленко в місті Києві"
               allow="autoplay; fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Попапи повних відгуків до флеш-відгуків слайдера -->
+<!-- Попап відео-відгуку: ролик одразу в попапі (iframe data-src — modal.js підставляє адресу при відкритті і знімає при закритті) -->
+<div class="sc-modal sc-modal--review" data-modal="review-mariia" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-mariia-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відео-відгук</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-mariia-title">Марія</p>
+      </div>
+      <div class="sc-review-full__video">
+        <iframe data-src="https://www.youtube-nocookie.com/embed/w9fIN4AjRi8?autoplay=1&amp;rel=0" title="Марія, пацієнтка доктора Олени Єсауленко в місті Києві"
+                allow="autoplay; fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <p class="sc-review-full__caption sc-t-mini">Марія, пацієнтка доктора Олени Єсауленко в місті Києві</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Київ, Костянтинівська, 57</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Єсауленко Олена Володимирівна</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+<!-- Попап запису в гостьовій книзі: текст, переписаний з рукопису, і скан сторінки (клік — повний скан) -->
+<div class="sc-modal sc-modal--review" data-modal="review-guestbook-1" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-guestbook-1-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Запис в гостьовій книзі</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-guestbook-1-title"><time datetime="2021-04-09">09.04.2021</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Якщо коротко, то 5 зірок! Щодо сервісу, дружнього відношення персоналу, фаховості та пропонуємих послуг (медичної допомоги). Всюди 5 зірок! Дякую за все!</p>
+      <a class="sc-review-full__scan" href="assets/img/direction/reviews/guestbook-1.jpg" target="_blank" rel="noopener">
+        <img src="assets/img/direction/reviews/guestbook-1-thumb.jpg" width="400" height="283" alt="Скан запису в гостьовій книзі VIRTUS" loading="lazy" decoding="async">
+      </a>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+<div class="sc-modal sc-modal--review" data-modal="review-andrii" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-andrii-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-andrii-title">Андрій</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-19">19.08.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Досвідчений та чуйний лікар. Отримав змістовну консультацію та гарне ставлення. Звертався стосовно послуги плазмаферезу — гарний сервіс у безпечних та комфортних умовах.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
+<div class="sc-modal sc-modal--review" data-modal="review-khrystyna" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-khrystyna-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-khrystyna-title">Дирда Христина</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-12">12.08.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Приїжджаємо з чоловіком у клініку на плазмаферез, не перший місяць. Дуже гарний лікар, фахівець своєї справи, завжди привітний — усе проходить швидко і без проблем.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
+<div class="sc-modal sc-modal--review" data-modal="review-petro" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-petro-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-petro-title">Богатий Петро</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-12">12.08.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Все виконано чудово.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
+<div class="sc-modal sc-modal--review" data-modal="review-olena" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-olena-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-olena-title">Олена</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-02">02.08.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Пояснили кожен крок і показали результат на УЗД. Це те, чого бракувало в інших клініках.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Київ, Костянтинівська, 57</dd></div>
+            <div><dt>Напрямок</dt><dd>Пластична хірургія</dd></div>
+            <div><dt>Фахівець</dt><dd>Кадочніков Сергій Валерійович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
+<div class="sc-modal sc-modal--review" data-modal="review-iryna" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-iryna-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-iryna-title">Ірина</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-07-28">28.07.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Записалась на консультацію за рекомендацією. Лікар детально розібрав мою ситуацію, без нав'язування процедур.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Пластична хірургія</dd></div>
+            <div><dt>Фахівець</dt><dd>Саркісян Арман Грайрович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
     </div>
   </div>
 </div>
