@@ -484,3 +484,36 @@ a.sc-modal__submit {
   margin: 0;
   color: var(--foreground);
 }
+
+/* ---------- Форма відгуку (reviews.html, 2026-10-29): поля як у формі virtus ---------- */
+.sc-modal__stars { margin: 0; padding: 0; border: 0; }
+.sc-modal__stars > legend { padding: 0; margin-block-end: var(--sc-space-1); color: var(--foreground); }
+.sc-modal__stars-row { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: var(--sc-space-1); }
+/* row-reverse + «~»: зірки до вибраної включно підсвічуються; у DOM порядок 1→5, візуально 1 ліворуч */
+.sc-modal__stars-row { flex-direction: row; }
+.sc-modal__star-input { position: absolute; opacity: 0; pointer-events: none; }
+.sc-modal__star {
+  font-size: var(--h3-size);
+  line-height: 1;
+  color: var(--border);
+  cursor: pointer;
+  transition: color var(--sc-dur-fast) var(--sc-ease);
+}
+/* підсвітка: усі зірки до вибраної — через :has на рядку */
+.sc-modal__stars-row:has(#review-star-1:checked) .sc-modal__star:nth-of-type(-n+1),
+.sc-modal__stars-row:has(#review-star-2:checked) .sc-modal__star:nth-of-type(-n+2),
+.sc-modal__stars-row:has(#review-star-3:checked) .sc-modal__star:nth-of-type(-n+3),
+.sc-modal__stars-row:has(#review-star-4:checked) .sc-modal__star:nth-of-type(-n+4),
+.sc-modal__stars-row:has(#review-star-5:checked) .sc-modal__star:nth-of-type(-n+5) { color: var(--foreground); }
+.sc-modal__star-input:focus-visible + .sc-modal__star {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+.sc-modal__textarea {
+  block-size: auto;
+  min-block-size: calc(var(--field-height) * 2);
+  padding-block: var(--sc-space-3);
+  resize: vertical;
+  font: inherit;
+}
+select.sc-modal__input { appearance: auto; background: var(--background); }

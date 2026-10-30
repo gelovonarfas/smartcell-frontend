@@ -33,6 +33,7 @@ CRITICAL = {
     'cell-technologies': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'preparations': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'consultants': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
+    'reviews': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'bank': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'service-omolodzhennya': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'consultant-vyshnevska-hanna': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],

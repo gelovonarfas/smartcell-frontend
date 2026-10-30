@@ -931,3 +931,13 @@ a.sc-dindications__chip:active,
   }
   .sc-dba--media .sc-dba__copy { padding-block: 0; }
 }
+
+/* ---------- Фільтри сторінки «Відгуки» (reviews.html, 2026-10-29) ----------
+   Як на virtus.ua/reviews: Філія і Напрямок — посилання з параметрами; поточний — залитий чип */
+.sc-rfilters .sc-dtabs__panel { padding-block-end: 0; }
+.sc-rfilters__group .sc-dindications__title { color: var(--sc-neutral-600); }
+.sc-dindications__chip[aria-current="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
