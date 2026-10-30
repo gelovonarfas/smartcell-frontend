@@ -217,12 +217,30 @@
 
 @media (max-width: 640px) {
   /* Полоса становится колонкой: крошки, лента вкладок с прокруткой, поиск */
+  /* Залізне правило (2026-10-27): полоса крихт однакова по всьому сайту — 70 (--sc-crumbs-h).
+     Тому полоса без власних полів: рядок крихт сам тримає 70, а фільтри й пошук (лише на головній
+     журналу) ідуть під ним зі своїм нижнім полем. Було: поля 64 зверху і знизу — на рубриці,
+     автора й пошуку, де в полосі лише крихти, вона роздувалась до ~200. */
   .vm-rubrics {
     flex-direction: column;
     align-items: stretch;
-    gap: var(--stack-gap-md);
-    padding-block: var(--section-padding-y-tight);
+    gap: 0;
+    padding-block: 0;
   }
+
+  /* Полоса лише з крихтами (рубрика, автор, пошук): висоту 70 тримає сама полоса
+     (min-block-size, border-box — як .sc-dcrumbs), крихти по центру */
+  .vm-rubrics { justify-content: center; }
+
+  /* На головній журналу під крихтами ще фільтри й пошук — тоді рядок крихт сам займає висоту полоси */
+  .vm-rubrics:has(.vm-rubrics__filters) .vm-rubrics__crumbs {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--sc-crumbs-h);
+  }
+
+  .vm-rubrics__filters { padding-block-end: var(--stack-gap-md); }
+  .vm-rubrics__search { margin-block-end: var(--sc-space-6); }
 
   /* На узком экране подпись встаёт строкой над лентой чипсов */
   .vm-rubrics__filters {

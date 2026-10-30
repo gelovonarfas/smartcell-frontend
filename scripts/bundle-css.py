@@ -35,6 +35,11 @@ CRITICAL = {
     'consultants': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'bank': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
     'service-omolodzhennya': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
+    'consultant-vyshnevska-hanna': ['tokens', 'base', 'b00b-header', 'sc-direction-hero'],
+    'vm-author': ['tokens', 'base', 'b00b-header', 'vm-category', 'vm-rubrics'],
+    'vm-search': ['tokens', 'base', 'b00b-header', 'vm-category', 'vm-rubrics'],
+    'vm-search-empty': ['tokens', 'base', 'b00b-header', 'vm-category', 'vm-rubrics'],
+    '404': ['tokens', 'base', 'b00b-header', 'vm-category'],
     'vm-article': ['tokens', 'base', 'b00b-header', 'vm-article'],
     'vm-article-oblik': ['tokens', 'base', 'b00b-header', 'vm-article'],
 }

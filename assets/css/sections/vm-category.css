@@ -70,3 +70,195 @@
 
   .vm-category__lede { max-inline-size: none; }
 }
+
+/* ============================================================
+   Варіанти шапки рубрики (2026-10-27): сторінка автора, пошук, порожній стан, 404.
+   Та сама полоса warm і ритм, що в рубриці — нові лише вміст і кілька елементів.
+   ============================================================ */
+
+/* ---------- Автор: фото ліворуч, ім'я, статус, посилання, біо ---------- */
+.vm-category--author .vm-category__person {
+  --vm-author-photo: 160px;
+  display: grid;
+  grid-template-columns: var(--vm-author-photo) minmax(0, 1fr);
+  gap: var(--section-gap);
+  align-items: start;
+  margin-block-start: var(--stack-gap-md);
+}
+
+.vm-category__photo {
+  display: block;
+  inline-size: var(--vm-author-photo);
+  block-size: var(--vm-author-photo);
+  object-fit: cover;
+  background: var(--muted);
+}
+
+.vm-category__person-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+  min-inline-size: 0;
+}
+
+.vm-category__person-text .vm-category__title { margin: 0; }
+
+.vm-category__role {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.vm-category__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--stack-gap-sm) var(--sc-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vm-category__link {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* ---------- Пошук: поле з кнопкою в шапці ---------- */
+.vm-category__search {
+  --vm-search-w: 720px;
+  display: flex;
+  inline-size: 100%;
+  max-inline-size: var(--vm-search-w);
+  margin-block-start: var(--section-gap);
+}
+
+.vm-category__search-input {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  block-size: var(--field-height);
+  padding-inline: var(--field-padding-x);
+  border: var(--sc-line) solid var(--field-border);
+  border-inline-end: 0;
+  border-radius: var(--radius);
+  background: var(--field-bg);
+  color: var(--field-text);
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+}
+
+.vm-category__search-input::placeholder { color: var(--field-placeholder); }
+
+.vm-category__search-input:focus-visible {
+  outline: none;
+  border-color: var(--field-border-focus);
+  box-shadow: 0 0 0 var(--sc-field-ring-w) var(--field-focus-ring);
+}
+
+.vm-category__search-submit {
+  flex: none;
+  block-size: var(--field-height);
+  padding-inline: var(--control-padding-x);
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.vm-category__search-submit:focus-visible,
+.vm-category__link:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-category__search-submit:hover { background: var(--sc-primary-hover); }
+  .vm-category__link:hover { text-decoration: none; }
+}
+
+.vm-category__search-submit:active { background: var(--sc-primary-hover); }
+
+/* Запит у заголовку — тим самим кеглем, але приглушеним, як у «X матеріалів» */
+.vm-category__query { color: var(--muted-foreground); }
+
+/* ---------- Порожній стан і 404: підказка + рубрики чипами ---------- */
+.vm-empty {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-head-gap);
+  padding: var(--section-padding-y-tight) var(--sc-pad-x) var(--section-padding-y);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.vm-empty__title,
+.vm-empty__text { margin: 0; }
+
+.vm-empty__text {
+  max-inline-size: var(--sc-measure);
+  color: var(--muted-foreground);
+}
+
+.vm-empty__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vm-empty__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sc-space-3) var(--sc-space-3_5, 14px);
+  border: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+  text-decoration: none;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-empty__chip:hover { background: var(--muted); }
+}
+
+.vm-empty__chip:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+/* 404 — тонка векторна ілюстрація замість кікера (2026-10-27): четвірки приглушеним,
+   «0» — дуги як «C» логотипа, фірмовим синім; клітини всередині — тим самим синім, тонше */
+.vm-category__code {
+  display: block;
+  inline-size: 588px; /* viewBox 504 → лінія 1.5 ≈ 1.75 px */
+  max-inline-size: 100%;
+  block-size: auto;
+  margin: 0 0 var(--stack-gap-md);
+  color: var(--muted-foreground);
+  overflow: visible;
+}
+
+
+.vm-404__zero { color: var(--sc-blue-600); } /* фірмовий синій дуг логотипа; --accent у світлій темі блідий */
+
+.vm-404__cell { stroke-width: 1.5; }
+.vm-404__nucleus { fill: currentColor; fill-opacity: 0.12; }
+
+.vm-category--404 .vm-category__title { margin-block-start: 0; }
+
+@media (max-width: 640px) {
+  .vm-category__code { inline-size: 100%; }
+}
+
+@media (max-width: 640px) {
+  .vm-category--author .vm-category__person {
+    --vm-author-photo: 96px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--stack-gap-lg);
+  }
+}

@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/sections/b00b-header.css">
+  <link rel="stylesheet" href="assets/css/sections/b00b-header-directions.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-hero.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-tabs.css">
   <!-- Card/Article для дорожки анонсов журнала в «Опису» -->
@@ -111,7 +112,7 @@
           </span>
         </a>
         <div class="sc-header__spaces-drawer">
-        <a class="sc-header__space sc-header__space--current" href="/" aria-current="page">
+        <a class="sc-header__space sc-header__space--current" href="cell-technologies.html" aria-current="true">
           <span class="sc-header__space-title">SMARTCELL <span class="sc-header__space-title-alt">BY VIRTUS</span></span>
           <span class="sc-header__space-meta sc-t-mini">
             <span>Клітинний простір</span>
@@ -131,9 +132,166 @@
     <div class="sc-header__drawer" id="header-nav">
       <div class="sc-header__drawer-inner">
     <nav class="sc-header__nav" aria-label="Головне меню">
+      <div class="sc-hdir" data-directions>
+        <button class="sc-header__link sc-hdir__trigger sc-t-small" type="button"
+                aria-expanded="false" aria-controls="header-directions" data-directions-trigger
+                data-href="cell-technologies.html">
+          <span>Клітинні технології</span>
+          <svg class="sc-hdir__chevron" viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 3.5L5 7L8.5 3.5" stroke="currentColor"/></svg>
+        </button>
+
+        <div class="sc-hdir__panel" id="header-directions" data-directions-panel inert>
+          <div class="sc-hdir__clip">
+            <div class="sc-hdir__shelf">
+
+              <!-- Второй уровень — категории (правка 2026-10-05): Протоколи · Напрямки · Препарати.
+                   Активная подчёркнута бегунком (тот же приём, что вкладки страницы).
+                   Было (v3, 2026-10-04): четыре раздела virtus — терапія / препарати /
+                   консультанти / банк; разметка — коммит a0a8734. -->
+              <!-- Полоса меню: вкладки. Посилання «Усі клітинні технології» справа знято (2026-10-27): на хаб ведуть клік по
+                   «Клітинні технології» в шапці (data-href) і «SmartCell by Virtus» у перемикачі під логотипом -->
+              <div class="sc-hdir__bar">
+                <div class="sc-hdir__tabs" role="tablist" aria-label="Розділи SmartCell">
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-protocols" aria-selected="true" aria-controls="hdir-panel-protocols" data-hdir-tab>Протоколи</button>
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-directions" aria-selected="false" aria-controls="hdir-panel-directions" data-hdir-tab tabindex="-1">Терапія</button>
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-preparations" aria-selected="false" aria-controls="hdir-panel-preparations" data-hdir-tab tabindex="-1">Препарати</button>
+                  <span class="sc-hdir__indicator" aria-hidden="true" data-hdir-indicator></span>
+                </div>
+              </div>
+
+              <div class="sc-hdir__body">
+                <div class="sc-hdir__panels">
+
+                  <!-- Протоколи: протокол один — Face Control 365, поэтому не список, а витрина
+                       (правка 2026-10-05): во всю полку, без анонса журнала (data-hdir-full).
+                       Слева квадрат на 5 колонок сетки — кадр из B12 «На що впливаємо»,
+                       справа название, описание с лендинга (лид B03 + абзац B02), плашки B02,
+                       в нижнем углу — плита Button/Block (как на первом экране). Тексты — с лендинга как есть. ACF: menu_protocol.
+                       Было (утро 2026-10-05): кадр 320 из первого экрана, надзаголовок,
+                       слоган, три плашки, плита Button/Block — коммит d4fbd02. -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-protocols" aria-labelledby="hdir-tab-protocols" data-hdir-full>
+                    <div class="sc-hdir__protocol">
+                      <a class="sc-hdir__protocol-photo" href="index.html" tabindex="-1" aria-hidden="true">
+                        <img src="assets/img/b12-impact.jpg" srcset="assets/img/b12-impact.jpg 460w, assets/img/b12-impact@2x.jpg 920w"
+                             sizes="(max-width: 640px) 0px, 520px" width="460" height="460" alt="" loading="lazy" decoding="async">
+                      </a>
+                      <div class="sc-hdir__protocol-copy">
+                        <div class="sc-hdir__protocol-text">
+                          <a class="sc-hdir__protocol-title sc-t-h3" href="index.html">Face Control 365</a>
+                          <!-- Лид B03 и абзац B02 «Історія» — с лендинга как есть -->
+                          <p class="sc-hdir__lead sc-t-body">Цілісна програма-подорож із глибокою діагностикою шкіри та персональним протоколом на 12 місяців.</p>
+                          <p class="sc-hdir__lead sc-t-body">Ми вимірюємо регенеративний потенціал шкіри у точних цифрах. І тільки після цього розробляємо персональний протокол. Не за вашим віком. Не за модним трендом. За реальними даними вашого організму.</p>
+                          <!-- Три опори програми — плашки з B02 -->
+                          <ul class="sc-hdir__tags">
+                            <li class="sc-hdir__tag sc-t-mini">Глибока діагностика</li>
+                            <li class="sc-hdir__tag sc-t-mini">Персональний протокол</li>
+                            <li class="sc-hdir__tag sc-t-mini">Здорова і доглянута шкіра</li>
+                          </ul>
+                        </div>
+                        <!-- Button/Block, как на первом экране лендинга, — в нижнем углу витрины -->
+                        <a class="sc-hdir__block" href="index.html#journey">
+                          <span class="sc-hdir__block-label">Етапи річної подорожі</span>
+                          <span class="sc-hdir__block-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Клітинні технології (правка 2026-10-05): заголовок-ссылка на раздел
+                       virtus.ua/kletochnye-tehnologii и кнопками 16 напрямків, порядок как на virtus.ua.
+                       Банк и консультанти убраны — они уже в строке меню.
+                       Было: список «проводять» со страницы раздела и подпись-капс над кнопками — коммит 3190d0b. -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-directions" aria-labelledby="hdir-tab-directions" hidden>
+                    <a class="sc-hdir__heading sc-t-h3" href="cell-technologies.html">Клітинні технології SmartCell</a>
+                      <ul class="sc-hdir__chips">
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Ендокринологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Гастроентерологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-otolaringologii">Отоларингологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-estetichnij-medicini">Естетична медицина</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-oftalmologii">Офтальмологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Травматологія та ортопедія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Стоматологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/smartcell-ginekologiya">Гінекологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-urologii">Урологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="direction-plastic-nav.html" aria-current="page">Пластична хірургія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-nevrologii">Неврологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitynni-tekhnolohii-v-sudynnii-khirurhii">Судинна хірургія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-dermatologii">Дерматологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-pulmonologii">Пульмонологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Кардіологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii">Anti-age терапія</a></li>
+                      </ul>
+                  </div>
+
+                  <!-- Препарати: четыре верхних продукта virtus.ua/…/kletochnye-preparaty-smartcell
+                       карточками во всю полку (без анонса журнала — data-hdir-full), щель узкая (2026-10-05). Своих страниц у продуктов
+                       на virtus нет — карточки ведут в раздел. Крем для очей заменён активатором росту волосся:
+                       у крема на virtus та же картинка, что у денного (правка 2026-10-05).
+                       Тонік заменён на «Краплі для очей» (у тоніка на virtus фото банки; правка 2026-10-05).
+                       [VERIFY] фото с virtus мелкие (263/250 px) — заменить на продуктовые кадры клиники.
+                       Ниже за волосяной линией — «Усі препарати». Страницы раздела (омолодження, Cellness,
+                       плазмаферез) убраны — коммит 0188e42. ACF: menu_products (repeater: фото, назва, посилання) -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-preparations" aria-labelledby="hdir-tab-preparations" hidden data-hdir-full>
+                    <div class="sc-hdir__group">
+                      <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Усі препарати SmartCell</a>
+                      <ul class="sc-hdir__tiles sc-hdir__tiles--4">
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-day.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Денний крем CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-night.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Нічний крем CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-hair.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Активатор росту волосся CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/eye-drops.jpg" width="250" height="250" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Краплі для очей</a>
+                      </li>
+                      </ul>
+                    </div>
+                    <div class="sc-hdir__group">
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Справа — анонс статьи Smart Age Journal: карточка ленты во всю колонку (320) -->
+                <div class="sc-hdir__col--article">
+                  <p class="sc-hdir__label sc-t-caption">Smart Age Journal</p>
+                  <!-- Анонс — готовая карточка ленты Card/Article (.sc-mag__card из B17,
+                       стили b17-magazine.css), а не свой набор классов (правка 2026-10-06).
+                       Статью выбирает редакция (ACF: menu_article → запись журнала) -->
+                  <article class="sc-mag__card">
+                    <a class="sc-mag__photo" href="vm-article-oblik.html">
+                      <img src="assets/img/vm/oblik-cover-640.jpg"
+                           srcset="assets/img/vm/oblik-cover-640.jpg 640w, assets/img/vm/oblik-cover.jpg 1120w"
+                           sizes="320px" width="640" height="640"
+                           alt="Фібробласти у культуральному середовищі" loading="lazy" decoding="async">
+                    </a>
+                    <span class="sc-mag__meta">
+                      <a class="sc-mag__tag sc-t-caption" href="vm-blog.html#rubric-5">НАУКА</a>
+                      <span class="sc-mag__time sc-t-mini">9 хв</span>
+                    </span>
+                    <span class="sc-mag__body">
+                      <a class="sc-mag__title sc-t-h3" href="vm-article-oblik.html">Фібробласти шкіри: що це за клітини і чому від них залежить молодість</a>
+                      <span class="sc-mag__date sc-t-mini">07.09.2026</span>
+                    </span>
+                  </article>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
       <a class="sc-header__link sc-t-small" href="index.html#neofibrolifting">Неофіброліфтинг</a>
-      <a class="sc-header__link sc-t-small" href="index.html#cell-bank">Банк клітин</a>
-      <a class="sc-header__link sc-t-small" href="index.html#doctors">Лікарі</a>
+      <a class="sc-header__link sc-t-small" href="bank.html">Банк клітин</a>
+      <a class="sc-header__link sc-t-small" href="consultants.html">Лікарі</a>
       <a class="sc-header__link sc-t-small" href="index.html#reviews">Відгуки</a>
       <a class="sc-header__link sc-t-small" href="vm-blog.html" aria-current="page">Smart Age Journal</a>
       <a class="sc-header__link sc-header__link--portal sc-t-small" href="https://virtus.ua/">VIRTUS · Всі напрямки інституту</a>
@@ -222,6 +380,10 @@
          virtus.ua/kletochnye-tehnologii, 2026-10-12): посилання «Сторінка напрямку» ліворуч, чіпи праворуч;
          послуга зі своєю сторінкою — посилання, без — приглушений чіп. Перша плитка відкрита.
          ACF: hub_directions (relationship → напрямки; у напрямку — repeater services: label, link) -->
+    <!-- Метка «Virtus» на чипі (2026-10-27): послуга не є клітинною технологією і веде на сторінку virtus.ua
+     (рішення з Миколою; як «Virtus» на плитках «Види послуги»). ACF: service_external (bool) у послуги.
+     Розмічено за правилом «посилання поза розділом kletochnye-tehnologii і в назві немає клітин/стовбурових/фібробластів»
+     [VERIFY] список — дерматологія (вітіліго, псоріаз…) і «ускладнення діабету» підтвердити з клінікою. -->
     <div class="sc-dtabs__group sc-dsvc" data-doctor-services>
       <h2 class="sc-doc__title sc-t-h2">Напрямки клітинної терапії</h2>
       <ul class="sc-dsvc__tiles">
@@ -247,7 +409,7 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-plastichnij-hirurg" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/plasticheskaya-hirurgiya/lipodystrophy_buttocks">Корекція ліподистрофій (ямок та западин шкіри) в області сідниці</a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/plasticheskaya-hirurgiya/lipodystrophy_buttocks">Корекція ліподистрофій (ямок та западин шкіри) в області сідниці<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
             <li><span class="sc-dindications__chip sc-t-small">Контурна пластика обличчя біоімплантатами з власних жирових клітин (збільшення губ, вилиць, заповнення носогубних і міжбрівних складок)</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Клітинні технології в лікуванні посттравматичних і післяопікових рубців і деформацій тіла</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Клітинні технології в лікуванні ускладнень традиційних пластичних операцій</span></li>
@@ -265,7 +427,7 @@
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/saharnyj-diabet-1-tipa">Клітинна терапія при цукровому діабеті 1 типу</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/saharnyj-diabet-2-tipa">Клітинна терапія при цукровому діабеті 2 типу</a></li>
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/lechenie-oslozhnenij-saharnogo-diabeta">Лікування ускладнень цукрового діабету</a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/endocrinology/lechenie-oslozhnenij-saharnogo-diabeta">Лікування ускладнень цукрового діабету<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/diabetes_children">Клітинна терапія при цукровому діабеті у дітей</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/chronic_fatigue_syndrome">Клітинна терапія при синдромі хронічної втомлюваності (СХВ)</a></li>
           </ul>
@@ -295,7 +457,7 @@
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami">Омолодження власними стовбуровими клітинами</a></li>
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/Neofibrolifting">Неофіброліфтинг (фібробласти)</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування ускладнень традиційної контурної пластики та агресивних процедур</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування рубців</span></li>
@@ -308,7 +470,7 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-oftalmologii" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування синдрому сухого ока</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування захворюваннь рогівки ока</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Відновлення зору після черепно-мозкових травм, інсультів, токсичного ураження ЦНС</span></li>
@@ -326,7 +488,7 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-nevrologii" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/alzheimer_cell">Клітинна терапія при хворобі Альцгеймера</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/demyelinating_diseases">Клітинна терапія при демієлінізуючих захворюваннях</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/amyotrophic_lateral_sclerosis">Клітинна терапія при боковому аміотрофічному склерозі (БАС)</a></li>
@@ -338,7 +500,7 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-travmatologii-ta-o" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/arthritis_arthrosis">Клітинна терапія артритів та артрозів</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/spinal_cord">Клітинна терапія для відновлення після спінальної травми</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/autoimmune_rheumatological_diseases">Клітинна терапія при аутоімунних та ревматологічних захворюваннях</a></li>
@@ -349,12 +511,12 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-dermatologii" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-vitiligo">Лікування вітіліго</a></li>
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-atopicheskogo-dermatita-u-detej-i-vzroslyh">Лікування атопічного дерматиту</a></li>
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-krasnogo-ploskogo-lishaya">Лікування червоного плоского лишаю</a></li>
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-ekzemy">Лікування екземи</a></li>
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-psoriaza">Лікування псоріазу</a></li>
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/likuvannya-vognishhevogo-nejrodermitu">Лікування вогнищевого нейродерміту</a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-vitiligo">Лікування вітіліго<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-atopicheskogo-dermatita-u-detej-i-vzroslyh">Лікування атопічного дерматиту<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-krasnogo-ploskogo-lishaya">Лікування червоного плоского лишаю<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-ekzemy">Лікування екземи<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-psoriaza">Лікування псоріазу<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/likuvannya-vognishhevogo-nejrodermitu">Лікування вогнищевого нейродерміту<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування бульозного епідермоліза</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування васкулітів</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування системного червоного вовчака</span></li>
@@ -405,8 +567,8 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-stomatologii" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
-            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/stomatologiya/prp-v-stomatologii">PRP в стоматології</a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/stomatologiya/prp-v-stomatologii">PRP в стоматології<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
           </ul>
           <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Сторінка напрямку · Virtus</a>
         </div>
@@ -419,11 +581,12 @@
 
     <!-- Також у розділі: банк, препарати, консультанти — плитки-посилання -->
     <div class="sc-dtabs__group sc-dservices">
+      <!-- Банк і консультанти — сторінки SmartCell, без метки «Virtus» (2026-10-27); у темі — їхні адреси на virtus.ua -->
       <h2 class="sc-dservices__title sc-t-h2">Також у розділі</h2>
       <ul class="sc-dservices__list sc-dservices__list--cols-4">
-        <li><a class="sc-dservices__tile" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/bank-biolohichnoho-strakhuvannia"><span class="sc-dservices__label">Банк біологічного страхування</span><span class="sc-dservices__source sc-t-mini">Virtus</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
+        <li><a class="sc-dservices__tile" href="bank.html"><span class="sc-dservices__label">Банк біологічного страхування</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
         <li><a class="sc-dservices__tile" href="preparations.html"><span class="sc-dservices__label">Клітинні препарати SmartCell</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
-        <li><a class="sc-dservices__tile" href="https://virtus.ua/smartcell-consultants"><span class="sc-dservices__label">Консультанти SmartCell</span><span class="sc-dservices__source sc-t-mini">Virtus</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
+        <li><a class="sc-dservices__tile" href="consultants.html"><span class="sc-dservices__label">Консультанти SmartCell</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
       </ul>
     </div>
 
@@ -502,6 +665,31 @@
         </div>
         <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
       </li>
+      <!-- Тип «Відео-відгук» (virtus: .feedback-video): замість тексту — ролик (постер + модалка), підписи ті самі.
+           ACF: review_type = video, youtube_url, poster (16:9) -->
+      <li class="sc-dreviews__row sc-dreviews__row--video">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__author sc-t-small">Марія</p>
+        </div>
+        <div class="sc-dreviews__body">
+          <figure class="sc-dreviews__video sc-dvideo">
+            <button class="sc-dvideo__open" type="button" data-modal-open="review-video-1" aria-label="Дивитись відео-відгук: Марія, пацієнтка доктора Олени Єсауленко в місті Києві">
+              <img class="sc-dvideo__poster" data-src="assets/img/direction/service/video-review-1.jpg"
+                   data-srcset="assets/img/direction/service/video-review-1-640.jpg 640w, assets/img/direction/service/video-review-1.jpg 1280w"
+                   sizes="(max-width: 640px) 100vw, 480px" width="1280" height="720" alt="" loading="lazy" decoding="async">
+              <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
+            </button>
+            <figcaption class="sc-dvideo__caption sc-t-mini">Марія, пацієнтка доктора Олени Єсауленко в місті Києві</figcaption>
+          </figure>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Київ, Костянтинівська, 57</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Єсауленко Олена Володимирівна</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Відео-відгук</p>
+      </li>
       <li class="sc-dreviews__row">
         <div class="sc-dreviews__meta">
           <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
@@ -517,6 +705,28 @@
           </dl>
         </div>
         <p class="sc-dreviews__source sc-t-mini">Відгук на сайті</p>
+      </li>
+      <!-- Тип «Запис в гостьовій книзі» (virtus: .feedback-guestbook): текст переписано з рукописного відгуку,
+           поруч — скан сторінки книги (мініатюра, клік — повний скан). Автор не підписаний — лише дата.
+           ACF: review_type = guestbook, scans (gallery) -->
+      <li class="sc-dreviews__row sc-dreviews__row--guestbook">
+        <div class="sc-dreviews__meta">
+          <svg class="sc-dreviews__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-dreviews__date sc-t-mini"><time datetime="2021-04-09">09.04.2021</time></p>
+        </div>
+        <div class="sc-dreviews__body">
+          <p class="sc-dreviews__text sc-t-body">Якщо коротко, то 5 зірок! Щодо сервісу, дружнього відношення персоналу, фаховості та пропонуємих послуг (медичної допомоги). Всюди 5 зірок! Дякую за все!</p>
+          <a class="sc-dreviews__scan" href="assets/img/direction/reviews/guestbook-1.jpg" target="_blank" rel="noopener">
+            <img data-src="assets/img/direction/reviews/guestbook-1-thumb.jpg" width="400" height="283"
+                 alt="Скан запису в гостьовій книзі VIRTUS" loading="lazy" decoding="async">
+            <span class="sc-dreviews__scan-label sc-t-mini">Скан сторінки</span>
+          </a>
+          <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+          </dl>
+        </div>
+        <p class="sc-dreviews__source sc-t-mini">Запис в гостьовій книзі</p>
       </li>
       <li class="sc-dreviews__row">
         <div class="sc-dreviews__meta">
@@ -758,14 +968,17 @@
      SC/Direction · Відгуки про лікарів відділення — вариант B09
      figma: node-id=318:2
      Разметка и скрипт — B09 (sections/b09-reviews.html, assets/js/reviews.js)
-     с модификатором sc-reviews--direction и ручным режимом data-reviews-manual:
+     с модификатором sc-reviews--direction и ручным режимом:
      листание только стрелками, полоса показывает место в ленте.
      Карточка и «Усі відгуки» включают вкладку «Відгуки» (direction-tabs.js);
      на самой вкладке «Відгуки» секция скрыта (data-direction-hide-on).
      ACF: reviews_title (text); отзывы — те же записи, что во вкладке «Відгуки»
           (запрос по напрямку, последние N): текст, автор, дата, оценка
      ============================================================ -->
-<section class="sc-reviews sc-reviews--direction" data-reviews data-reviews-manual data-direction-hide-on="vidguky">
+<!-- Флеш-відгуки (2026-10-28): у картці — одна дослівна фраза з повного відгуку, клік відкриває повний відгук
+       у попапі (sc-modal--review, кнопка закриття — як у форми запису). Без переходу у вкладку й пагінації.
+       ACF: flash (text, ≤120 знаків) у відгука; заповнений флеш = пін (закріплені першими, ліміт 9 на напрямок). -->
+<section class="sc-reviews sc-reviews--direction" data-reviews data-direction-hide-on="vidguky">
   <div class="sc-reviews__inner">
     <div class="sc-reviews__head">
       <h2 class="sc-reviews__title sc-t-h2">Відгуки про лікарів відділення</h2>
@@ -773,30 +986,49 @@
 
     <div class="sc-reviews__viewport">
       <ul class="sc-reviews__list" data-reviews-track>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <li class="sc-reviews__item" data-modal-open="review-andrii" tabindex="0" role="button" aria-label="Відгук: Андрій">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
-          <p class="sc-reviews__quote sc-t-body">Досвідчений та чуйний лікар. Отримав змістовну консультацію та гарне ставлення. Звертався стосовно послуги плазмаферезу — гарний сервіс у безпечних та комфортних умовах.</p>
+          <p class="sc-reviews__quote sc-t-body">Досвідчений та чуйний лікар.</p>
           <p class="sc-reviews__author sc-t-mini">Андрій · 19.08.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Лісовик С. Г.</p>
         </li>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <!-- Флеш відео-відгуку: фраза — з титру ролика; позначка «Відео» перед автором -->
+        <li class="sc-reviews__item sc-reviews__item--video" data-modal-open="review-mariia" tabindex="0" role="button" aria-label="Відео-відгук: Марія">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
-          <p class="sc-reviews__quote sc-t-body">Приїжджаємо з чоловіком у клініку на плазмаферез, не перший місяць. Дуже гарний лікар, фахівець своєї справи, завжди привітний — усе проходить швидко і без проблем.</p>
-          <p class="sc-reviews__author sc-t-mini">Христина · 12.08.2025</p>
+          <p class="sc-reviews__quote sc-t-body">Марія розповідає про свій досвід застосування продуктів SmartCell.</p>
+          <p class="sc-reviews__author sc-t-mini"><span class="sc-reviews__type">Відео</span> Марія</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Єсауленко О. В.</p>
         </li>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <li class="sc-reviews__item" data-modal-open="review-khrystyna" tabindex="0" role="button" aria-label="Відгук: Дирда Христина">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Дуже гарний лікар, фахівець своєї справи.</p>
+          <p class="sc-reviews__author sc-t-mini">Христина · 12.08.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Лісовик С. Г.</p>
+        </li>
+        <!-- Флеш запису в гостьовій книзі: фраза з рукописного відгуку; автор не підписаний — лише дата -->
+        <li class="sc-reviews__item sc-reviews__item--guestbook" data-modal-open="review-guestbook-1" tabindex="0" role="button" aria-label="Запис у гостьовій книзі, 09.04.2021">
+          <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+          <p class="sc-reviews__quote sc-t-body">Всюди 5 зірок! Дякую за все!</p>
+          <p class="sc-reviews__author sc-t-mini"><span class="sc-reviews__type">Гостьова книга</span> 09.04.2021</p>
+          <p class="sc-reviews__doctor sc-t-mini">Клітинні технології SmartCell</p>
+        </li>
+        <li class="sc-reviews__item" data-modal-open="review-petro" tabindex="0" role="button" aria-label="Відгук: Богатий Петро">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
           <p class="sc-reviews__quote sc-t-body">Все виконано чудово.</p>
           <p class="sc-reviews__author sc-t-mini">Петро · 12.08.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Лісовик С. Г.</p>
         </li>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <li class="sc-reviews__item" data-modal-open="review-olena" tabindex="0" role="button" aria-label="Відгук: Олена">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
-          <p class="sc-reviews__quote sc-t-body">Пояснили кожен крок і показали результат на УЗД. Це те, чого бракувало в інших клініках.</p>
+          <p class="sc-reviews__quote sc-t-body">Пояснили кожен крок і показали результат на УЗД.</p>
           <p class="sc-reviews__author sc-t-mini">Олена · 02.08.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Кадочніков С. В.</p>
         </li>
-        <li class="sc-reviews__item" data-tab-link="vidguky">
+        <li class="sc-reviews__item" data-modal-open="review-iryna" tabindex="0" role="button" aria-label="Відгук: Ірина">
           <svg class="sc-reviews__rating" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
-          <p class="sc-reviews__quote sc-t-body">Записалась на консультацію за рекомендацією. Лікар детально розібрав мою ситуацію, без нав'язування процедур.</p>
+          <p class="sc-reviews__quote sc-t-body">Лікар детально розібрав мою ситуацію, без нав'язування процедур.</p>
           <p class="sc-reviews__author sc-t-mini">Ірина · 28.07.2025</p>
+          <p class="sc-reviews__doctor sc-t-mini">Лікар: Саркісян А. Г.</p>
         </li>
       </ul>
     </div>
@@ -807,7 +1039,7 @@
         <button class="sc-reviews__nav-btn" type="button" data-reviews-next aria-label="Наступний відгук"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32M26 30L32 24L26 18" stroke="currentColor"/></svg></button>
       </div>
 
-      <p class="sc-reviews__counter sc-t-mini" data-reviews-counter>01 / 05</p>
+      <p class="sc-reviews__counter sc-t-mini" data-reviews-counter>01 / 07</p>
 
       <div class="sc-reviews__progress" aria-hidden="true">
         <span class="sc-reviews__progress-bar" data-reviews-progress></span>
@@ -1233,7 +1465,217 @@
   </div>
 </div>
 
+<!-- Модалка відео-відгуку у вкладці «Відгуки» (YouTube w9fIN4AjRi8, як на virtus.ua/reviews) -->
+<div class="sc-modal sc-modal--video" data-modal="review-video-1" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--video" role="dialog" aria-modal="true" data-theme="inverse" aria-label="Марія, пацієнтка доктора Олени Єсауленко в місті Києві">
+    <button class="sc-modal__close sc-modal__close--outside" type="button" data-modal-close aria-label="Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg>
+    </button>
+    <div class="sc-modal__frame">
+      <iframe class="sc-modal__video" data-src="https://www.youtube-nocookie.com/embed/w9fIN4AjRi8?autoplay=1&amp;rel=0" title="Марія, пацієнтка доктора Олени Єсауленко в місті Києві"
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Попапи повних відгуків до флеш-відгуків слайдера -->
+<!-- Попап відео-відгуку: постер з Play, ролик грає на місці постера -->
+<div class="sc-modal sc-modal--review" data-modal="review-mariia" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-mariia-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відео-відгук</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-mariia-title">Марія</p>
+      </div>
+      <!-- Ролик — як у стрічці відгуків: постер кита з кнопкою Play; клік ставить плеєр на місце постера
+           (data-inline-video, modal.js), закриття попапу повертає постер -->
+      <figure class="sc-review-full__video sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/w9fIN4AjRi8?autoplay=1&amp;rel=0">
+        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео-відгук: Марія, пацієнтка доктора Олени Єсауленко в місті Києві">
+          <img class="sc-dvideo__poster" src="assets/img/direction/service/video-review-1.jpg"
+               srcset="assets/img/direction/service/video-review-1-640.jpg 640w, assets/img/direction/service/video-review-1.jpg 1280w"
+               sizes="(max-width: 640px) 100vw, 560px" width="1280" height="720" alt="" loading="lazy" decoding="async">
+          <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
+        </button>
+        <figcaption class="sc-dvideo__caption sc-t-mini">Марія, пацієнтка доктора Олени Єсауленко в місті Києві</figcaption>
+      </figure>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Київ, Костянтинівська, 57</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Єсауленко Олена Володимирівна</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+<!-- Попап запису в гостьовій книзі: текст, переписаний з рукопису, і скан сторінки (клік — повний скан) -->
+<div class="sc-modal sc-modal--review" data-modal="review-guestbook-1" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-guestbook-1-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Запис в гостьовій книзі</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-guestbook-1-title"><time datetime="2021-04-09">09.04.2021</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Якщо коротко, то 5 зірок! Щодо сервісу, дружнього відношення персоналу, фаховості та пропонуємих послуг (медичної допомоги). Всюди 5 зірок! Дякую за все!</p>
+      <a class="sc-review-full__scan" href="assets/img/direction/reviews/guestbook-1.jpg" target="_blank" rel="noopener">
+        <img src="assets/img/direction/reviews/guestbook-1-thumb.jpg" width="400" height="283" alt="Скан запису в гостьовій книзі VIRTUS" loading="lazy" decoding="async">
+      </a>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+<div class="sc-modal sc-modal--review" data-modal="review-andrii" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-andrii-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-andrii-title">Андрій</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-19">19.08.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Досвідчений та чуйний лікар. Отримав змістовну консультацію та гарне ставлення. Звертався стосовно послуги плазмаферезу — гарний сервіс у безпечних та комфортних умовах.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
+<div class="sc-modal sc-modal--review" data-modal="review-khrystyna" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-khrystyna-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-khrystyna-title">Дирда Христина</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-12">12.08.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Приїжджаємо з чоловіком у клініку на плазмаферез, не перший місяць. Дуже гарний лікар, фахівець своєї справи, завжди привітний — усе проходить швидко і без проблем.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
+<div class="sc-modal sc-modal--review" data-modal="review-petro" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-petro-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-petro-title">Богатий Петро</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-12">12.08.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Все виконано чудово.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Клітинні технології SmartCell</dd></div>
+            <div><dt>Фахівець</dt><dd>Лісовик Сергій Григорович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
+<div class="sc-modal sc-modal--review" data-modal="review-olena" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-olena-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-olena-title">Олена</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-08-02">02.08.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Пояснили кожен крок і показали результат на УЗД. Це те, чого бракувало в інших клініках.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Київ, Костянтинівська, 57</dd></div>
+            <div><dt>Напрямок</dt><dd>Пластична хірургія</dd></div>
+            <div><dt>Фахівець</dt><dd>Кадочніков Сергій Валерійович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
+<div class="sc-modal sc-modal--review" data-modal="review-iryna" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--review" role="dialog" aria-modal="true" aria-labelledby="review-iryna-title">
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+      <p class="sc-modal__kicker sc-t-caption">Відгук на сайті</p>
+      <div class="sc-review-full__head">
+        <svg class="sc-dreviews__stars sc-review-full__stars" viewBox="0 0 72 12" width="72" height="12" fill="none" role="img" aria-label="Оцінка 5 з 5" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L7.6 4.1L12 4.6L8.7 7.5L9.7 12L6 9.7L2.3 12L3.3 7.5L0 4.6L4.4 4.1L6 0Z" fill="currentColor"/><path d="M21 0L22.6 4.1L27 4.6L23.7 7.5L24.7 12L21 9.7L17.3 12L18.3 7.5L15 4.6L19.4 4.1L21 0Z" fill="currentColor"/><path d="M36 0L37.6 4.1L42 4.6L38.7 7.5L39.7 12L36 9.7L32.3 12L33.3 7.5L30 4.6L34.4 4.1L36 0Z" fill="currentColor"/><path d="M51 0L52.6 4.1L57 4.6L53.7 7.5L54.7 12L51 9.7L47.3 12L48.3 7.5L45 4.6L49.4 4.1L51 0Z" fill="currentColor"/><path d="M66 0L67.6 4.1L72 4.6L68.7 7.5L69.7 12L66 9.7L62.3 12L63.3 7.5L60 4.6L64.4 4.1L66 0Z" fill="currentColor"/></svg>
+        <p class="sc-modal__title sc-t-h3" id="review-iryna-title">Ірина</p>
+        <p class="sc-dreviews__date sc-t-mini"><time datetime="2025-07-28">28.07.2025</time></p>
+      </div>
+      <p class="sc-review-full__text sc-t-body">Записалась на консультацію за рекомендацією. Лікар детально розібрав мою ситуацію, без нав'язування процедур.</p>
+      <dl class="sc-dreviews__facts sc-t-mini">
+            <div><dt>Філія VIRTUS</dt><dd>Одеса, Суднобудівна, 1Б</dd></div>
+            <div><dt>Напрямок</dt><dd>Пластична хірургія</dd></div>
+            <div><dt>Фахівець</dt><dd>Саркісян Арман Грайрович</dd></div>
+          </dl>
+      <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
+    </div>
+  </div>
+</div>
+
 <script src="assets/js/header.js" defer></script>
+<!-- Мегаменю «Клітинні технології» — як у sections/b00b-header-directions.html (на всіх сторінках з 2026-10-29) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="assets/js/header-directions.js" defer></script>
 <script src="assets/js/img-lazy.js" defer></script>
 <script src="assets/js/footer-cols.js" defer></script>
 <script src="assets/js/forms.js" defer></script>

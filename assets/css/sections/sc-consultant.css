@@ -1,0 +1,25 @@
+/* ============================================================
+   SC/Consultant · запис консультанта з окремої бази (smartcell-doctor), 2026-10-27
+   figma: макета нет — сторінка лікаря без фактів (рейтинг, стаж) і без фото.
+   Hero без кадру: замість фото — плита з монограмою на тёплом тоне, щоб сітка
+   hero не ламалась і площа фото лишалась під реальний кадр від клініки.
+   Зависит от sc-direction-hero.css, sc-doctor.css
+   ============================================================ */
+
+.sc-dhero__media--empty {
+  display: grid;
+  place-items: center;
+  background: var(--warm);
+  color: var(--sc-neutral-600);
+}
+
+.sc-dhero__monogram {
+  font: var(--h1-weight) var(--h1-size) / var(--h1-lh) var(--font-headings);
+  letter-spacing: var(--h1-ls);
+  font-size: calc(var(--h1-size) * 2);
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .sc-dhero__media--empty { aspect-ratio: 16 / 9; }
+}

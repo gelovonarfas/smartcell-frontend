@@ -1529,13 +1529,15 @@
 
   .vm-article__hero-top { display: contents; }
 
-  .vm-article__back { grid-area: 1 / 1; }
-  .vm-article__chips { grid-area: 2 / 1; }
+  /* на телефоні «‹ Smart Age Journal» у шапці знято (2026-10-27): нижче вже є крихти
+     «‹ рубрика», два «назад» поспіль читались дивно; на десктопі лишається */
+  .vm-article__back { display: none; }
+  /* ряди зсунуті на один угору — порожній ряд «назад» інакше лишав зайвий проміжок */
+  .vm-article__chips { grid-area: 1 / 1; }
 
-
-  .vm-article__title { grid-area: 3 / 1 / auto / -1; }
-  .vm-article__dek { grid-area: 4 / 1 / auto / -1; }
-  .vm-article__byline { grid-area: 5 / 1 / auto / -1; }
+  .vm-article__title { grid-area: 2 / 1 / auto / -1; }
+  .vm-article__dek { grid-area: 3 / 1 / auto / -1; }
+  .vm-article__byline { grid-area: 4 / 1 / auto / -1; }
 
   /* Якоря на узком экране прячем (решение 2026-09-14): перечень разделов
      помогает, пока он липнет рядом с текстом, а в одну колонку он лишь

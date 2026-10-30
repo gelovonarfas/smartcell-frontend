@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/sections/b00b-header.css">
+  <link rel="stylesheet" href="assets/css/sections/b00b-header-directions.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-hero.css">
   <!-- sc-direction-tabs.css — плитки «Також у розділі» -->
   <link rel="stylesheet" href="assets/css/sections/sc-direction-tabs.css">
@@ -98,7 +99,7 @@
           </span>
         </a>
         <div class="sc-header__spaces-drawer">
-        <a class="sc-header__space sc-header__space--current" href="/" aria-current="page">
+        <a class="sc-header__space sc-header__space--current" href="cell-technologies.html" aria-current="true">
           <span class="sc-header__space-title">SMARTCELL <span class="sc-header__space-title-alt">BY VIRTUS</span></span>
           <span class="sc-header__space-meta sc-t-mini">
             <span>Клітинний простір</span>
@@ -118,9 +119,166 @@
     <div class="sc-header__drawer" id="header-nav">
       <div class="sc-header__drawer-inner">
     <nav class="sc-header__nav" aria-label="Головне меню">
+      <div class="sc-hdir" data-directions>
+        <button class="sc-header__link sc-hdir__trigger sc-t-small" type="button"
+                aria-expanded="false" aria-controls="header-directions" data-directions-trigger
+                data-href="cell-technologies.html">
+          <span>Клітинні технології</span>
+          <svg class="sc-hdir__chevron" viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 3.5L5 7L8.5 3.5" stroke="currentColor"/></svg>
+        </button>
+
+        <div class="sc-hdir__panel" id="header-directions" data-directions-panel inert>
+          <div class="sc-hdir__clip">
+            <div class="sc-hdir__shelf">
+
+              <!-- Второй уровень — категории (правка 2026-10-05): Протоколи · Напрямки · Препарати.
+                   Активная подчёркнута бегунком (тот же приём, что вкладки страницы).
+                   Было (v3, 2026-10-04): четыре раздела virtus — терапія / препарати /
+                   консультанти / банк; разметка — коммит a0a8734. -->
+              <!-- Полоса меню: вкладки. Посилання «Усі клітинні технології» справа знято (2026-10-27): на хаб ведуть клік по
+                   «Клітинні технології» в шапці (data-href) і «SmartCell by Virtus» у перемикачі під логотипом -->
+              <div class="sc-hdir__bar">
+                <div class="sc-hdir__tabs" role="tablist" aria-label="Розділи SmartCell">
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-protocols" aria-selected="true" aria-controls="hdir-panel-protocols" data-hdir-tab>Протоколи</button>
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-directions" aria-selected="false" aria-controls="hdir-panel-directions" data-hdir-tab tabindex="-1">Терапія</button>
+                  <button class="sc-hdir__tab sc-t-small" type="button" role="tab" id="hdir-tab-preparations" aria-selected="false" aria-controls="hdir-panel-preparations" data-hdir-tab tabindex="-1">Препарати</button>
+                  <span class="sc-hdir__indicator" aria-hidden="true" data-hdir-indicator></span>
+                </div>
+              </div>
+
+              <div class="sc-hdir__body">
+                <div class="sc-hdir__panels">
+
+                  <!-- Протоколи: протокол один — Face Control 365, поэтому не список, а витрина
+                       (правка 2026-10-05): во всю полку, без анонса журнала (data-hdir-full).
+                       Слева квадрат на 5 колонок сетки — кадр из B12 «На що впливаємо»,
+                       справа название, описание с лендинга (лид B03 + абзац B02), плашки B02,
+                       в нижнем углу — плита Button/Block (как на первом экране). Тексты — с лендинга как есть. ACF: menu_protocol.
+                       Было (утро 2026-10-05): кадр 320 из первого экрана, надзаголовок,
+                       слоган, три плашки, плита Button/Block — коммит d4fbd02. -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-protocols" aria-labelledby="hdir-tab-protocols" data-hdir-full>
+                    <div class="sc-hdir__protocol">
+                      <a class="sc-hdir__protocol-photo" href="index.html" tabindex="-1" aria-hidden="true">
+                        <img src="assets/img/b12-impact.jpg" srcset="assets/img/b12-impact.jpg 460w, assets/img/b12-impact@2x.jpg 920w"
+                             sizes="(max-width: 640px) 0px, 520px" width="460" height="460" alt="" loading="lazy" decoding="async">
+                      </a>
+                      <div class="sc-hdir__protocol-copy">
+                        <div class="sc-hdir__protocol-text">
+                          <a class="sc-hdir__protocol-title sc-t-h3" href="index.html">Face Control 365</a>
+                          <!-- Лид B03 и абзац B02 «Історія» — с лендинга как есть -->
+                          <p class="sc-hdir__lead sc-t-body">Цілісна програма-подорож із глибокою діагностикою шкіри та персональним протоколом на 12 місяців.</p>
+                          <p class="sc-hdir__lead sc-t-body">Ми вимірюємо регенеративний потенціал шкіри у точних цифрах. І тільки після цього розробляємо персональний протокол. Не за вашим віком. Не за модним трендом. За реальними даними вашого організму.</p>
+                          <!-- Три опори програми — плашки з B02 -->
+                          <ul class="sc-hdir__tags">
+                            <li class="sc-hdir__tag sc-t-mini">Глибока діагностика</li>
+                            <li class="sc-hdir__tag sc-t-mini">Персональний протокол</li>
+                            <li class="sc-hdir__tag sc-t-mini">Здорова і доглянута шкіра</li>
+                          </ul>
+                        </div>
+                        <!-- Button/Block, как на первом экране лендинга, — в нижнем углу витрины -->
+                        <a class="sc-hdir__block" href="index.html#journey">
+                          <span class="sc-hdir__block-label">Етапи річної подорожі</span>
+                          <span class="sc-hdir__block-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Клітинні технології (правка 2026-10-05): заголовок-ссылка на раздел
+                       virtus.ua/kletochnye-tehnologii и кнопками 16 напрямків, порядок как на virtus.ua.
+                       Банк и консультанти убраны — они уже в строке меню.
+                       Было: список «проводять» со страницы раздела и подпись-капс над кнопками — коммит 3190d0b. -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-directions" aria-labelledby="hdir-tab-directions" hidden>
+                    <a class="sc-hdir__heading sc-t-h3" href="cell-technologies.html">Клітинні технології SmartCell</a>
+                      <ul class="sc-hdir__chips">
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-endokrinologii">Ендокринологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-gastroenterologii">Гастроентерологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-otolaringologii">Отоларингологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-estetichnij-medicini">Естетична медицина</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-oftalmologii">Офтальмологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii">Травматологія та ортопедія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Стоматологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/smartcell-ginekologiya">Гінекологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-urologii">Урологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="direction-plastic-nav.html" aria-current="page">Пластична хірургія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-nevrologii">Неврологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitynni-tekhnolohii-v-sudynnii-khirurhii">Судинна хірургія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-dermatologii">Дерматологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-pulmonologii">Пульмонологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-kardiologii">Кардіологія</a></li>
+                        <li><a class="sc-hdir__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-anti-age-terapii">Anti-age терапія</a></li>
+                      </ul>
+                  </div>
+
+                  <!-- Препарати: четыре верхних продукта virtus.ua/…/kletochnye-preparaty-smartcell
+                       карточками во всю полку (без анонса журнала — data-hdir-full), щель узкая (2026-10-05). Своих страниц у продуктов
+                       на virtus нет — карточки ведут в раздел. Крем для очей заменён активатором росту волосся:
+                       у крема на virtus та же картинка, что у денного (правка 2026-10-05).
+                       Тонік заменён на «Краплі для очей» (у тоніка на virtus фото банки; правка 2026-10-05).
+                       [VERIFY] фото с virtus мелкие (263/250 px) — заменить на продуктовые кадры клиники.
+                       Ниже за волосяной линией — «Усі препарати». Страницы раздела (омолодження, Cellness,
+                       плазмаферез) убраны — коммит 0188e42. ACF: menu_products (repeater: фото, назва, посилання) -->
+                  <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-preparations" aria-labelledby="hdir-tab-preparations" hidden data-hdir-full>
+                    <div class="sc-hdir__group">
+                      <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Усі препарати SmartCell</a>
+                      <ul class="sc-hdir__tiles sc-hdir__tiles--4">
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-day.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Денний крем CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-night.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Нічний крем CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-hair.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Активатор росту волосся CELLNESS</a>
+                      </li>
+                      <li class="sc-hdir__tile">
+                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/eye-drops.jpg" width="250" height="250" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Краплі для очей</a>
+                      </li>
+                      </ul>
+                    </div>
+                    <div class="sc-hdir__group">
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Справа — анонс статьи Smart Age Journal: карточка ленты во всю колонку (320) -->
+                <div class="sc-hdir__col--article">
+                  <p class="sc-hdir__label sc-t-caption">Smart Age Journal</p>
+                  <!-- Анонс — готовая карточка ленты Card/Article (.sc-mag__card из B17,
+                       стили b17-magazine.css), а не свой набор классов (правка 2026-10-06).
+                       Статью выбирает редакция (ACF: menu_article → запись журнала) -->
+                  <article class="sc-mag__card">
+                    <a class="sc-mag__photo" href="vm-article-oblik.html">
+                      <img src="assets/img/vm/oblik-cover-640.jpg"
+                           srcset="assets/img/vm/oblik-cover-640.jpg 640w, assets/img/vm/oblik-cover.jpg 1120w"
+                           sizes="320px" width="640" height="640"
+                           alt="Фібробласти у культуральному середовищі" loading="lazy" decoding="async">
+                    </a>
+                    <span class="sc-mag__meta">
+                      <a class="sc-mag__tag sc-t-caption" href="vm-blog.html#rubric-5">НАУКА</a>
+                      <span class="sc-mag__time sc-t-mini">9 хв</span>
+                    </span>
+                    <span class="sc-mag__body">
+                      <a class="sc-mag__title sc-t-h3" href="vm-article-oblik.html">Фібробласти шкіри: що це за клітини і чому від них залежить молодість</a>
+                      <span class="sc-mag__date sc-t-mini">07.09.2026</span>
+                    </span>
+                  </article>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
       <a class="sc-header__link sc-t-small" href="index.html#neofibrolifting">Неофіброліфтинг</a>
-      <a class="sc-header__link sc-t-small" href="index.html#cell-bank">Банк клітин</a>
-      <a class="sc-header__link sc-t-small" href="index.html#doctors">Лікарі</a>
+      <a class="sc-header__link sc-t-small" href="bank.html">Банк клітин</a>
+      <a class="sc-header__link sc-t-small" href="consultants.html">Лікарі</a>
       <a class="sc-header__link sc-t-small" href="index.html#reviews">Відгуки</a>
       <a class="sc-header__link sc-t-small" href="vm-blog.html" aria-current="page">Smart Age Journal</a>
       <a class="sc-header__link sc-header__link--portal sc-t-small" href="https://virtus.ua/">VIRTUS · Всі напрямки інституту</a>
@@ -673,6 +831,9 @@
 </div>
 
 <script src="assets/js/header.js" defer></script>
+<!-- Мегаменю «Клітинні технології» — як у sections/b00b-header-directions.html (на всіх сторінках з 2026-10-29) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="assets/js/header-directions.js" defer></script>
 <script src="assets/js/img-lazy.js" defer></script>
 <script src="assets/js/footer-cols.js" defer></script>
 <script src="assets/js/forms.js" defer></script>

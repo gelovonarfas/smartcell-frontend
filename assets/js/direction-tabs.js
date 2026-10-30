@@ -106,6 +106,35 @@
     tabs.forEach(function (t) { ro.observe(t); });
   }
 
+  /* 6. Підказка (2026-10-29): коли лінія вкладок уперше з'являється на екрані,
+        бегунок трохи під'їжджає до сусідньої вкладки й повертається — натяк,
+        що тут можна перемикати. Один раз за візит сторінки; не спрацьовує,
+        якщо вкладку вже перемикали, і при «зменшити рух». */
+  var touched = false;
+  root.addEventListener('pointerdown', function () { touched = true; });
+  root.addEventListener('keydown', function () { touched = true; });
+
+  function peek() {
+    var cur = root.querySelector('[role="tab"][aria-selected="true"]');
+    if (touched || !cur || !list) return;
+    var i = tabs.indexOf(cur);
+    var next = tabs[i + 1] || tabs[i - 1];
+    if (!next) return;
+    var PEEK = 0.35; /* частка шляху до сусідньої вкладки */
+    list.style.setProperty('--tab-x', (cur.offsetLeft + (next.offsetLeft - cur.offsetLeft) * PEEK) + 'px');
+    setTimeout(function () { if (!touched) moveIndicator(cur); else remeasure(); }, 520);
+  }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && window.IntersectionObserver && list) {
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      setTimeout(peek, 400);
+    }, { threshold: 1, rootMargin: '0px 0px -20% 0px' });
+    io.observe(list);
+  }
+
   applyHash();
   /* первая установка бегунка — без анимации: переход включаем кадром позже */
   requestAnimationFrame(function () {
