@@ -619,3 +619,25 @@
 
   .sc-story__cta { inline-size: 100%; }
 }
+
+/* Контент хаба одним wysiwyg-полем (2026-10-29): теги без класів усередині .sc-story__part
+   виглядають як розмічені класами (.sc-story__p, .sc-story__h2, .sc-story__list) */
+.sc-story__part > p,
+.sc-story__part > h2,
+.sc-story__part > h3,
+.sc-story__part > ul,
+.sc-story__part > ol { margin: 0; max-inline-size: var(--sc-measure); }
+.sc-story__part > h2 { font: var(--h2-weight) var(--h2-size) / var(--h2-lh) var(--font-headings); letter-spacing: var(--h2-ls); }
+.sc-story__part > h3 { font: var(--h3-weight) var(--h3-size) / var(--h3-lh) var(--font-headings); letter-spacing: var(--h3-ls); }
+.sc-story__part > ul,
+.sc-story__part > ol {
+  padding-inline-start: var(--sc-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+}
+.sc-story__part > p strong { font-weight: var(--sc-weight-bold); }
+.sc-story__part > iframe,
+.sc-story__part > .wp-block-embed,
+.sc-story__part > figure { margin: 0; inline-size: 100%; max-inline-size: var(--sc-measure); }
+.sc-story__part iframe { display: block; inline-size: 100%; aspect-ratio: 16 / 9; block-size: auto; border: 0; background: var(--muted); }

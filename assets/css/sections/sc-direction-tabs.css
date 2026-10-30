@@ -246,14 +246,69 @@ div.sc-dservices__tile {
 }
 
 .sc-dprose__body > p,
-.sc-dprose__body > ul { margin: 0; }
+.sc-dprose__body > ul,
+.sc-dprose__body > ol { margin: 0; }
 
-.sc-dprose__body > ul {
+.sc-dprose__body > ul,
+.sc-dprose__body > ol {
   padding-inline-start: var(--sc-space-5);
   display: flex;
   flex-direction: column;
   gap: var(--sc-space-1);
 }
+
+/* Контент з virtus зберігається одним полем — текст, списки, відео впереміш (2026-10-29).
+   Не ділимо його на наші поля: wysiwyg виводиться як є, кожен тег стилізується тут.
+   Те саме правило, що в тілі статті журналу (HANDOFF «Тело статьи»).
+   Контейнери: .sc-dprose__body (послуга, хаб) і .sc-dabout__body (напрямок, банк). */
+:is(.sc-dprose__body, .sc-dabout__body) > h2,
+:is(.sc-dprose__body, .sc-dabout__body) > h3,
+:is(.sc-dprose__body, .sc-dabout__body) > h4 {
+  margin: 0;
+  margin-block-start: var(--sc-space-2); /* підзаголовок відбитий від попереднього абзацу трохи більше */
+  color: var(--foreground);
+}
+:is(.sc-dprose__body, .sc-dabout__body) > h2 { font: var(--h3-weight) var(--h3-size) / var(--h3-lh) var(--font-headings); letter-spacing: var(--h3-ls); }
+:is(.sc-dprose__body, .sc-dabout__body) > h3,
+:is(.sc-dprose__body, .sc-dabout__body) > h4 { font: var(--sc-weight-medium) var(--p-size) / var(--p-lh) var(--font-sans); }
+:is(.sc-dprose__body, .sc-dabout__body) > :is(h2, h3, h4):first-child { margin-block-start: 0; }
+
+:is(.sc-dprose__body, .sc-dabout__body) strong { color: var(--foreground); font-weight: var(--sc-weight-medium); }
+:is(.sc-dprose__body, .sc-dabout__body) a { color: var(--foreground); text-underline-position: from-font; }
+
+:is(.sc-dprose__body, .sc-dabout__body) > blockquote {
+  margin: 0;
+  padding-inline-start: var(--sc-space-5);
+  border-inline-start: var(--sc-line) solid var(--border);
+  color: var(--foreground);
+}
+:is(.sc-dprose__body, .sc-dabout__body) > blockquote > p { margin: 0; }
+
+/* Відео в тексті: YouTube-iframe або oEmbed-обгортка WordPress — на всю міру рядка, 16:9.
+   Якщо кодер обгорне у .sc-dvideo (постер + Play) — ще краще, але не обов'язково. */
+:is(.sc-dprose__body, .sc-dabout__body) > iframe,
+:is(.sc-dprose__body, .sc-dabout__body) > .wp-block-embed,
+:is(.sc-dprose__body, .sc-dabout__body) > .wp-video,
+:is(.sc-dprose__body, .sc-dabout__body) > figure {
+  margin: 0;
+  inline-size: 100%;
+  max-inline-size: 100%;
+}
+:is(.sc-dprose__body, .sc-dabout__body) iframe {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  block-size: auto;
+  border: 0;
+  background: var(--muted);
+}
+:is(.sc-dprose__body, .sc-dabout__body) > figure > img,
+:is(.sc-dprose__body, .sc-dabout__body) > p > img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+:is(.sc-dprose__body, .sc-dabout__body) figcaption { color: var(--sc-neutral-600); font: 400 var(--p-mini-size) / var(--caption-lh) var(--font-sans); }
 
 /* ---------- Цитата + описание ---------- */
 
@@ -285,7 +340,7 @@ div.sc-dservices__tile {
 }
 
 /* список в описании (банк: «спектр застосування»), как в sc-dprose (2026-10-12) */
-.sc-dabout__body > :where(ul:not([class])) {
+.sc-dabout__body > :where(ul:not([class]), ol:not([class])) {
   margin: 0;
   padding-inline-start: var(--sc-space-5);
   display: flex;
