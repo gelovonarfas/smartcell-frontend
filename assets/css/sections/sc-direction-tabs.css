@@ -257,16 +257,16 @@ div.sc-dservices__tile {
   gap: var(--sc-space-1);
 }
 
-/* Буллет списку у прозі розділу (2026-10-29): замість крапки — маленький прямокутник фірмовим
-   синім (blue/700, як «C» у логотипі), на рівні середини першого рядка. Відступ тексту — як у
+/* Буллет списку у прозі розділу (2026-10-29): замість крапки — маленький квадрат фірмовим
+   синім (blue/700, як «C» у логотипі), на рівні середини першого рядка. Квадрат — форма кита. Відступ тексту — як у
    списків статті журналу (маркер + card-gap). Нумеровані списки — без змін. */
 :is(.sc-dprose__body, .sc-dabout__body) > :where(ul:not([class])) {
   padding-inline-start: 0;
   list-style: none;
 }
 :is(.sc-dprose__body, .sc-dabout__body) > :where(ul:not([class])) > li {
-  --sc-bullet-w: var(--sc-space-3);
-  --sc-bullet-h: var(--sc-space-1_5);
+  --sc-bullet-w: var(--sc-space-2);
+  --sc-bullet-h: var(--sc-space-2);
   position: relative;
   padding-inline-start: calc(var(--sc-bullet-w) + var(--card-gap));
 }
