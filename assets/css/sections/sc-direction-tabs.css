@@ -395,6 +395,10 @@ div.sc-dservices__tile {
   color: var(--muted-foreground);
 }
 
+/* Список без посилань узагалі (напрямок: «Застосування клітинної терапії», 2026-10-29) —
+   приглушення не потрібне, усі пункти рівноправні, як на virtus */
+.sc-dtabs .sc-dindications--plain span.sc-dindications__chip { color: var(--foreground); }
+
 /* ---------- Видео: постер, play, модалка по клику ---------- */
 
 .sc-dvideo {
