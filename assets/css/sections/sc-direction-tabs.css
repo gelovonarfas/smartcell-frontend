@@ -320,6 +320,9 @@ div.sc-dservices__tile {
 }
 
 .sc-dabout--quote-only { grid-template-columns: var(--dtabs-quote-w); }
+/* Опис без цитати (напрямок, 2026-10-29): одна колонка в мірі рядка */
+.sc-dabout--body-only { grid-template-columns: minmax(0, 1fr); }
+.sc-dabout--body-only .sc-dabout__body { max-inline-size: var(--sc-measure); }
 
 .sc-dabout__quote {
   display: flex;

@@ -88,11 +88,9 @@
     </div>
 
     <!-- Цитата + описание. Описание — поле wysiwyg: обычные <p> без классов -->
-    <div class="sc-dtabs__group sc-dabout">
-      <div class="sc-dabout__quote">
-        <p class="sc-dabout__kicker sc-t-caption">Наш пріоритет</p>
-        <p class="sc-dabout__text sc-t-h3">Пластика створює форму. Клітини повертають шкірі молодість.</p>
-      </div>
+    <!-- Цитата «Наш пріоритет / Пластика створює форму…» прибрана 2026-10-29: на virtus її немає (вигадана при зборці).
+         Для відкату — повернути .sc-dabout__quote і зняти --body-only. -->
+    <div class="sc-dtabs__group sc-dabout sc-dabout--body-only">
       <div class="sc-dabout__body">
         <p>В Інституті VIRTUS уперше у світі успішно виростили жирові клітини зі стовбурових — для пацієнтів, у яких власної жирової тканини для процедур недостатньо. Клітинні технології застосовуються не лише для заповнення втрачених обʼємів, а й для контурної пластики, омолодження та відновлення шкіри після невдалих втручань.</p>
         <p>Пластична хірургія створює нові форми і видаляє надлишки шкіри, клітинна терапія повертає їй молодість. Комбінація двох технологій покращує результат операції, скорочує реабілітацію і зводить до мінімуму небажані явища.</p>
@@ -136,13 +134,7 @@
 
   <!-- ==================== Консультанти ==================== -->
   <div class="sc-dtabs__panel sc-dtabs__panel--tight" role="tabpanel" id="dpanel-konsultanty" aria-labelledby="dtab-konsultanty" hidden>
-    <div class="sc-dtabs__group sc-dabout sc-dabout--quote-only">
-      <div class="sc-dabout__quote">
-        <p class="sc-dabout__kicker sc-t-caption">Наш пріоритет</p>
-        <p class="sc-dabout__text sc-t-h3">Пластика створює форму. Клітини повертають шкірі молодість.</p>
-      </div>
-    </div>
-
+    <!-- Цитата над консультантами прибрана 2026-10-29: на virtus її немає. Для відкату: .sc-dabout--quote-only з .sc-dabout__quote -->
     <ul class="sc-dtabs__group sc-ddoctors">
       <li class="sc-ddoctors__card">
         <img class="sc-ddoctors__photo" src="assets/img/direction/doctor-tsepkolenko-volodymyr.jpg"
