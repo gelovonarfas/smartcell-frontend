@@ -106,11 +106,30 @@
     return tabs[0];
   }
 
+  /* Підказка (2026-10-29), як у вкладках напрямку (direction-tabs.js п. 6): після першого
+     відкриття полки бегунок трохи під'їжджає до сусідньої вкладки й повертається —
+     натяк, що розділи перемикаються. Раз за візит; не після ручного перемикання
+     і не при «зменшити рух». */
+  var peeked = false, tabTouched = false;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function peek() {
+    if (tabTouched || !isOpen() || !tablist) return;
+    var cur = currentTab(), i = tabs.indexOf(cur);
+    var next = tabs[i + 1] || tabs[i - 1];
+    if (!next) return;
+    var PEEK = 0.35; /* частка шляху до сусідньої вкладки */
+    tablist.style.setProperty('--tab-x', (cur.offsetLeft + (next.offsetLeft - cur.offsetLeft) * PEEK) + 'px');
+    setTimeout(function () { if (!tabTouched) moveIndicator(currentTab()); }, 520);
+  }
+
   tabs.forEach(function (tab, i) {
+    tab.addEventListener('pointerdown', function () { tabTouched = true; });
+    if (fine && fine.matches) tab.addEventListener('mouseenter', function () { tabTouched = true; });
     tab.addEventListener('click', function () { selectTab(tab); });
     /* на курсорных устройствах — как у OneSkin: наведение уже переключает */
     if (fine && fine.matches) tab.addEventListener('mouseenter', function () { selectTab(tab); });
     tab.addEventListener('keydown', function (e) {
+      tabTouched = true;
       var to = null;
       if (e.key === 'ArrowRight') to = tabs[(i + 1) % tabs.length];
       else if (e.key === 'ArrowLeft') to = tabs[(i - 1 + tabs.length) % tabs.length];
@@ -138,6 +157,8 @@
       requestAnimationFrame(function () {
         requestAnimationFrame(function () { if (tablist) tablist.classList.add('sc-is-ready'); });
       });
+      /* підказка — коли полка вже розкрилась */
+      if (!peeked && !reduce) { peeked = true; setTimeout(peek, 600); }
     }
     if (!animated()) {
       root.classList.toggle('sc-is-open', open);

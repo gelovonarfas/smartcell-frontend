@@ -39,18 +39,56 @@
 .sc-prep__lead > p { margin: 0; }
 
 /* Друга група — через повний крок секції */
+.sc-prep__intro + .sc-prep__title,
 .sc-prep__grid + .sc-prep__title { margin-block-start: calc(var(--section-padding-y) - var(--sc-head-gap)); }
 
 /* Картки продуктів: квадрат встык (щель 4), як лента журналу */
 .sc-prep__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--sc-tile-gap);
+  /* між рядами — 56, як у сітці лікарів (2026-10-29; було: gap: var(--sc-tile-gap)) */
+  gap: var(--section-gap) var(--sc-tile-gap);
   align-items: stretch;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
+/* CELLNESS строками (2026-10-29): одна картка — один рядок. Фото в першій колонці
+   з чотирьох (як у плитках), текст праворуч у мірі рядка. Розкритий «Склад і застосування»
+   подовжує лише свій рядок і відсуває нижні. Останній рядок сітки картки — 1fr:
+   надлишок висоти фото йде туди, текст лишається притиснутим догори. */
+.sc-prep__grid--rows { grid-template-columns: minmax(0, 1fr); }
+
+/* Рядок: фото (¼) · текст у мірі рядка · «Замовити» у правому верхньому куті (правка 2026-10-29).
+   Між продуктами — hairline: лінія над кожним рядком, крім першого, відступи 56 з обох боків. */
+.sc-prep__grid--rows .sc-product {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-rows: repeat(4, auto) 1fr;
+  column-gap: var(--section-gap);
+  row-gap: var(--stack-gap-md);
+  align-items: start;
+}
+
+.sc-prep__grid--rows .sc-product + .sc-product {
+  border-block-start: var(--hairline) solid var(--border);
+  padding-block-start: var(--section-gap);
+}
+
+.sc-prep__grid--rows .sc-product__photo { grid-column: 1; grid-row: 1 / -1; }
+
+.sc-prep__grid--rows .sc-product > :not(.sc-product__photo, .sc-product__actions) {
+  grid-column: 2;
+  max-inline-size: var(--sc-measure);
+  padding-inline-end: 0;
+}
+
+.sc-prep__grid--rows .sc-product__name { padding-block-start: 0; }
+.sc-prep__grid--rows .sc-product__actions { grid-column: 3; grid-row: 1; justify-self: end; margin: 0; }
+
+/* Якір продукту (#cellness-day тощо — перехід з плиток мегаменю, 2026-10-29): не під фіксованою шапкою */
+.sc-product[id] { scroll-margin-block-start: var(--sc-anchor-offset); }
 
 .sc-product {
   display: flex;
@@ -120,25 +158,90 @@
 .sc-product__more-body > p { margin: 0; }
 .sc-product__more-body > li { list-style: disc; margin-inline-start: var(--sc-space-4); }
 
-/* «Замовити» — Button/Control · outline, притиснута до низу картки */
-.sc-product__cta {
+/* «Детальніше» (2026-10-29): повний опис з virtus — назви інгредієнтів жирним і темніше,
+   підзаголовки «Спосіб застосування / зберігання / Склад» — з відступом зверху */
+.sc-product__more-body strong { color: var(--foreground); font-weight: var(--sc-weight-medium); }
+.sc-product__more-body > .sc-product__more-head { margin-block-start: var(--sc-space-2); color: var(--foreground); }
+.sc-product__more-body > ul {
+  margin: 0;
+  padding-inline-start: var(--sc-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+}
+
+/* Вступ: перший абзац — жирним, як на virtus; під вступом — ролик (постер 16:9) */
+.sc-prep__lead strong { color: var(--foreground); font-weight: var(--sc-weight-medium); }
+/* ролик — на всю ширину поля верстки (2026-10-29; було: max-inline-size: var(--sc-measure)) */
+.sc-prep__video { margin: 0; }
+.sc-prep__video .sc-dvideo__open { inline-size: 100%; aspect-ratio: 16 / 9; }
+
+/* Кнопки продукту (2026-10-29, як на virtus): «Додати в замовлення» → «Препарат доданий»
+   + кошик поруч. У картці — притиснуті до низу, у рядку — у правому верхньому куті. */
+.sc-product__actions {
   align-self: flex-start;
   margin-block-start: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-2);
+}
+
+/* Button/Control · outline; додано — заливка (aria-pressed="true") */
+.sc-product__cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   block-size: var(--control-square);
   padding-inline: var(--control-padding-x);
   border: var(--sc-line) solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
   color: var(--foreground);
   text-decoration: none;
   text-transform: uppercase;
   font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
   letter-spacing: var(--button-ls);
-  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+  transition:
+    background-color var(--sc-dur) var(--sc-ease),
+    color var(--sc-dur) var(--sc-ease);
 }
+
+.sc-product__cta { cursor: pointer; }
+.sc-product__cta-added { display: none; }
+.sc-product__cta[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+.sc-product__cta[aria-pressed="true"] .sc-product__cta-add { display: none; }
+.sc-product__cta[aria-pressed="true"] .sc-product__cta-added { display: inline; }
+
+/* Кошик — квадратний контрол 48 без рамки (Button/Control · ghost) */
+.sc-product__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--control-square);
+  block-size: var(--control-square);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+.sc-product__remove[hidden] { display: none; }
+.sc-product__remove:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+.sc-product__remove:active { background: var(--secondary); }
 
 @media (hover: hover) and (pointer: fine) {
   .sc-product__cta:hover { background: var(--muted); }
+  .sc-product__cta[aria-pressed="true"]:hover { background: var(--sc-primary-hover); }
+  .sc-product__remove:hover { background: var(--muted); }
   .sc-product__more-toggle:hover { text-decoration: none; }
 }
 
@@ -155,4 +258,26 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--section-gap) var(--sc-tile-gap);
   }
+  /* CELLNESS на телефоні — по одній картці, фото над текстом */
+  .sc-prep__grid--rows .sc-product { display: flex; }
 }
+
+/* Склад замовлення на плиті «Замовлення» (sc-neo, тема inverse) — як у попапі */
+.sc-neo__order {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+  color: var(--foreground); /* плита не задає колір сама — як у .sc-neo__text */
+}
+.sc-neo__order-title { margin: 0; font-weight: var(--sc-weight-medium); }
+.sc-neo__order-empty { margin: 0; } /* приглушений сірий на фото не читався — колір основного тексту плити */
+.sc-neo__order-list {
+  margin: 0;
+}
+.sc-neo__order-empty[hidden],
+.sc-neo__order-list[hidden] { display: none; }
+
+/* Плита «Замовлення» — остання перед футером (2026-10-29): просвіт знизу такий самий, як зверху
+   (256: низ секції продуктів + верх плити). Футер насуває свій скіс на секцію на 32 —
+   тому знизу 160 + 64 + 64 */
+.sc-neo.sc-prep__order { padding-block-end: calc(var(--section-padding-y) + 2 * var(--section-padding-y-tight)); }

@@ -35,6 +35,8 @@
   <link rel="stylesheet" href="assets/css/sections/sc-direction-tabs.css">
   <!-- Card/Article для дорожки анонсов журнала в «Опису» -->
   <link rel="stylesheet" href="assets/css/sections/sc-preparations.css">
+  <!-- плита замовлення — компонент sc-neo з Face Control -->
+  <link rel="stylesheet" href="assets/css/sections/b15a-science.css">
   <link rel="stylesheet" href="assets/css/sections/b09-reviews.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-branches.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-consult.css">
@@ -220,23 +222,23 @@
                        плазмаферез) убраны — коммит 0188e42. ACF: menu_products (repeater: фото, назва, посилання) -->
                   <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-preparations" aria-labelledby="hdir-tab-preparations" hidden data-hdir-full>
                     <div class="sc-hdir__group">
-                      <a class="sc-hdir__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Усі препарати SmartCell</a>
+                      <a class="sc-hdir__all sc-t-small" href="preparations.html">Усі препарати SmartCell</a>
                       <ul class="sc-hdir__tiles sc-hdir__tiles--4">
                       <li class="sc-hdir__tile">
-                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-day.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
-                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Денний крем CELLNESS</a>
+                        <a class="sc-hdir__tile-photo" href="preparations.html#cellness-day" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-day.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="preparations.html#cellness-day">Денний крем CELLNESS</a>
                       </li>
                       <li class="sc-hdir__tile">
-                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-night.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
-                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Нічний крем CELLNESS</a>
+                        <a class="sc-hdir__tile-photo" href="preparations.html#cellness-night" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-night.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="preparations.html#cellness-night">Нічний крем CELLNESS</a>
                       </li>
                       <li class="sc-hdir__tile">
-                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-hair.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
-                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Активатор росту волосся CELLNESS</a>
+                        <a class="sc-hdir__tile-photo" href="preparations.html#cellness-hair" tabindex="-1" aria-hidden="true"><img src="assets/img/products/cellness-hair.jpg" width="263" height="263" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="preparations.html#cellness-hair">Активатор росту волосся CELLNESS</a>
                       </li>
                       <li class="sc-hdir__tile">
-                        <a class="sc-hdir__tile-photo" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell" tabindex="-1" aria-hidden="true"><img src="assets/img/products/eye-drops.jpg" width="250" height="250" alt="" loading="lazy" decoding="async"></a>
-                        <a class="sc-hdir__tile-title sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell">Краплі для очей</a>
+                        <a class="sc-hdir__tile-photo" href="preparations.html#eye-drops" tabindex="-1" aria-hidden="true"><img src="assets/img/products/eye-drops.jpg" width="250" height="250" alt="" loading="lazy" decoding="async"></a>
+                        <a class="sc-hdir__tile-title sc-t-small" href="preparations.html#eye-drops">Краплі для очей</a>
                       </li>
                       </ul>
                     </div>
@@ -310,13 +312,15 @@
       <p class="sc-dhero__lead sc-t-lead">Інститут VIRTUS і біотехногічна компанія SmartCell представляють CELLNESS – унікальні косметичні та лікувальні продукти для вашої краси.</p>
     </div>
     <div class="sc-dhero__bottom">
+<!-- Рядок «Виготовляє лабораторія SmartCell» прибрано (2026-10-29): на сторінці virtus цього немає. Для відкату — повернути з коментаря (<!~~ ~~> = вкладені коментарі).
       <div class="sc-dhero__branches">
         <p class="sc-dhero__branches-label sc-t-caption">Виготовляє лабораторія SmartCell:</p>
         <ul class="sc-dhero__branches-list sc-t-small">
           <li>Одеса, Суднобудівна, 1Б</li>
         </ul>
       </div>
-      <a class="sc-dhero__cta" href="#direction-consult" data-modal-open="booking">
+-->
+      <a class="sc-dhero__cta" href="#order" data-modal-open="booking">
         <span class="sc-dhero__cta-label">Замовити продукт</span>
         <span class="sc-dhero__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
       </a>
@@ -328,7 +332,7 @@
       <img class="sc-dhero__image" src="assets/img/direction/preparations-hero.jpg"
            srcset="assets/img/direction/preparations-hero.jpg 720w, assets/img/direction/preparations-hero@2x.jpg 890w"
            sizes="50vw" width="720" height="720"
-           alt="Флакон клітинного препарату" fetchpriority="high" decoding="async">
+           alt="Набір косметики CELLNESS у руках лікаря" fetchpriority="high" decoding="async">
     </picture>
   </div>
 </section>
@@ -353,15 +357,29 @@
      ============================================================ -->
 <section class="sc-prep" id="products">
   <div class="sc-prep__intro">
-    <h2 class="sc-prep__title sc-t-h2">Косметика CELLNESS</h2>
     <div class="sc-prep__lead sc-t-body">
-      <p>Клітинна терапія – інноваційний метод відновлення структури та функцій ушкоджених органів і тканин за допомогою власних стовбурових клітин людини.</p>
+      <p><strong>Клітинна терапія – інноваційний метод відновлення структури та функцій ушкоджених органів і тканин за допомогою власних стовбурових клітин людини.</strong></p>
       <p>Застосування стовбурових клітин в естетичній медицині та косметології дозволяє запустити процес регенерації тканин і природного омолодження.</p>
       <p>У біотехнологічній лабораторії SmartCell на базі Інституту передової медицини VIRTUS виготовляють індивідуальні косметичні та лікувальні продукти на основі клітинного екстракту з тромбоцитів, фібробластів і стовбурових клітин пацієнта, виготовлені з урахуванням його потреб.</p>
     </div>
+    <!-- Ролик, як на virtus під вступом: постер з Play, відео — у попапі (modal.js, review-video-1).
+         Постер — кадр з самого ролика без плашок «Історія пацієнтки» (YouTube maxres3, лого прибрано), 2026-10-29 -->
+    <figure class="sc-prep__video sc-dvideo">
+      <button class="sc-dvideo__open" type="button" data-modal-open="review-video-1" aria-label="Дивитись відео-відгук: Марія, пацієнтка доктора Олени Єсауленко в місті Києві">
+        <img class="sc-dvideo__poster" data-src="assets/img/direction/service/video-maria-clean.jpg"
+             data-srcset="assets/img/direction/service/video-maria-clean-640.jpg 640w, assets/img/direction/service/video-maria-clean.jpg 1280w"
+             sizes="100vw" width="1280" height="720" alt="" loading="lazy" decoding="async">
+        <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
+      </button>
+      <figcaption class="sc-dvideo__caption sc-t-mini">Марія, пацієнтка доктора Олени Єсауленко в місті Києві</figcaption>
+    </figure>
   </div>
-  <ul class="sc-prep__grid">
-        <li class="sc-product">
+  <!-- CELLNESS — строками (2026-10-29): фото ліворуч, текст праворуч; розкритий «Склад» розсуває рядки нижче.
+       Було: плитки по 4 в ряд (без модифікатора). -->
+  <!-- заголовок групи — над самими продуктами, після вступу з роликом (2026-10-29) -->
+  <h2 class="sc-prep__title sc-t-h2">Косметика CELLNESS</h2>
+  <ul class="sc-prep__grid sc-prep__grid--rows">
+        <li class="sc-product" id="cellness-day">
           <div class="sc-product__photo"><img data-src="assets/img/products/cellness-day.jpg" width="263" height="263" alt="Денний крем CELLNESS" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Денний крем CELLNESS</h3>
           <ul class="sc-product__effects sc-t-small">
@@ -372,29 +390,46 @@
             <li>Захищає від шкідливих факторів зовнішнього середовища</li>
             <li>Має високу концентрацію натуральних інгредієнтів</li>
           </ul>
+          <!-- «Детальніше» (2026-10-29): повний опис з virtus — дія інгредієнтів, застосування, зберігання, склад.
+               Розкривається на місці й розсуває рядки нижче. ACF: details (wysiwyg) -->
           <details class="sc-product__more">
-            <summary class="sc-product__more-toggle sc-t-small">Склад і застосування</summary>
-            <div class="sc-product__more-body sc-t-mini">
+            <summary class="sc-product__more-toggle sc-t-small">Детальніше</summary>
+            <div class="sc-product__more-body sc-t-small">
+              <p><strong>Аутологічні біологічно активні фактори росту</strong> тромбоцитів забезпечують біотехнологічних підхід до збереження краси та молодості шкіри, підтримують життєві функції клітин шкіри, сприяють синтезу протеїнів дерми (природного колагену та еластину), активують біохімічні реакції та процеси клітинної взаємодії.</p>
+              <p><strong>Арганова олія </strong>– природній антиоксидант, має протизапальну дію, покращує захист та зволожує шкіру, нейтралізує дію вільних радикалів, забезпечуючи максимальний ефект факторам росту.</p>
+              <p><strong>Гіалуронова кислота з низькою молекулярною вагою</strong> та церамідами проникає до глибоких шарів епідермісу, зволожуючи шкіру зсередини та надає змогу проникнення біологічно активних факторів росту до внутрішніх шарів шкіри, де вони призводять до її розгладження, вирівнювання текстури, зволоження, живлення, підвищення тургору і еластичності та сприяють відновленню захисного бар’єру шкіри.</p>
+              <p><strong>Гіалуронова кислота з високою молекулярною вагою</strong> забезпечує миттєве зволоження шкіри та сприяє регенерації, відновлює еластичність шкіри. Високомолекулярна гіалуронова кислота відтворює на поверхні шкіри плівку, яка захищає її від втрати вологи ззовні на протязі дня.</p>
+              <p class="sc-product__more-head sc-t-small">Спосіб застосування</p>
               <p>Користуйтеся продуктом чистими руками.</p>
               <p>Наносити вранці тонким шаром на попередньо очищену тоніком Cellness шкіру обличчя і шиї легкими рухами за масажними лініями.Уникайте потрапляння в очі.</p>
+              <p class="sc-product__more-head sc-t-small">Спосіб зберігання</p>
               <p>Зберігайте крем в холодному місці за температури не вище 12°С, захищеному від прямих сонячних променів.</p>
               <p>Термін придатності крему – 30 днів з моменту виготовлення, що підкреслює його живильну дію, якість і унікальність</p>
-              <li>аутологічні фактори росту тромбоцитів</li>
-              <li>α-токоферолу ацетат</li>
-              <li>вода очищена</li>
-              <li>гіалуронова кислота низькомолекулярної маси</li>
-              <li>гіалуронова кислота з високою молекулярною вагою</li>
-              <li>цераміди</li>
-              <li>лецитин</li>
-              <li>карбамід</li>
-              <li>олія аргани</li>
+              <p class="sc-product__more-head sc-t-small">Склад</p>
+              <ul>
+                <li>аутологічні фактори росту тромбоцитів</li>
+                <li>α-токоферолу ацетат</li>
+                <li>вода очищена</li>
+                <li>гіалуронова кислота низькомолекулярної маси</li>
+                <li>гіалуронова кислота з високою молекулярною вагою</li>
+                <li>цераміди</li>
+                <li>лецитин</li>
+                <li>карбамід</li>
+                <li>олія аргани</li>
+              </ul>
               <p>Об’єм: 30 мл</p>
               <p>Для всіх типів шкіри.</p>
             </div>
           </details>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Денний крем CELLNESS" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Денний крем CELLNESS" aria-label="Прибрати з замовлення: Денний крем CELLNESS" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
-        <li class="sc-product">
+        <li class="sc-product" id="cellness-night">
           <div class="sc-product__photo"><img data-src="assets/img/products/cellness-night.jpg" width="263" height="263" alt="Нічний крем CELLNESS" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Нічний крем CELLNESS</h3>
           <ul class="sc-product__effects sc-t-small">
@@ -405,26 +440,43 @@
             <li>Корегує овал обличчя за рахунок стимуляції вироблення власних колагену та еластину</li>
             <li>Забезпечує ефективний догляд та покращує обмінні процеси</li>
           </ul>
+          <!-- «Детальніше» (2026-10-29): повний опис з virtus — дія інгредієнтів, застосування, зберігання, склад.
+               Розкривається на місці й розсуває рядки нижче. ACF: details (wysiwyg) -->
           <details class="sc-product__more">
-            <summary class="sc-product__more-toggle sc-t-small">Склад і застосування</summary>
-            <div class="sc-product__more-body sc-t-mini">
+            <summary class="sc-product__more-toggle sc-t-small">Детальніше</summary>
+            <div class="sc-product__more-body sc-t-small">
+              <p><strong>Аутологічні біологічно активні фактори росту тромбоцитів</strong> забезпечують біотехнологічний підхід до збереження краси та молодості шкіри, підтримують життєві функції клітин шкіри, сприяють синтезу протеїнів дерми (природного колагену та еластину), активують біохімічні реакції та процеси клітинної взаємодії.</p>
+              <p><strong>Гиалуроновая кислота з низькою молекулярною вагою</strong> та цераміди проникають до глибоких шарів епідермісу, зволожуючи шкіру зсередини та надають змогу проникнення біологічно активних факторів росту до внутрішніх шарів шкіри, де вони призводять до її розгладження, вирівнювання текстури, зволоження, живлення, підвищення тургору і еластичності.</p>
+              <p><strong>Арганова олія</strong> – природній антиоксидант, має протизапальну дію, покращує захист та зволожує шкіру, нейтралізує дію вільних радикалів.</p>
+              <p><strong>α-токоферолу ацетат</strong> чинить антиоксидантну дію, зміцнює капілярну сітку, підтримує васкуляризаційну дію аутологічних факторі росту.</p>
+              <p class="sc-product__more-head sc-t-small">Спосіб застосування</p>
               <p>Користуйтеся продуктом чистими руками. Наносити ввечері тонким шаром на попередньо очищену тоніком Cellness шкіру обличчя і шиї легкими рухами за масажними лініями</p>
               <p>Уникайте потрапляння в очі.</p>
+              <p><strong>Спосіб зберігання</strong></p>
               <p>Зберігайте крем в холодному місці за температури не вище 12°С, захищеному від прямих сонячних променів.Термін придатності крему 30 днів з моменту виготовлення, що підкреслює його живильну дію, якість і унікальність.</p>
-              <li>аутологічні фактори росту тромбоцитів</li>
-              <li>α-токоферолу ацетат</li>
-              <li>вода очищена</li>
-              <li>гіалуронова кислота низькомолекулярної маси</li>
-              <li>цераміди</li>
-              <li>карбамід</li>
-              <li>олія аргани</li>
+              <p class="sc-product__more-head sc-t-small">Склад</p>
+              <ul>
+                <li>аутологічні фактори росту тромбоцитів</li>
+                <li>α-токоферолу ацетат</li>
+                <li>вода очищена</li>
+                <li>гіалуронова кислота низькомолекулярної маси</li>
+                <li>цераміди</li>
+                <li>карбамід</li>
+                <li>олія аргани</li>
+              </ul>
               <p>Для всіх типів шкіри.</p>
               <p>Об’єм: 30 мл</p>
             </div>
           </details>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Нічний крем CELLNESS" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Нічний крем CELLNESS" aria-label="Прибрати з замовлення: Нічний крем CELLNESS" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
-        <li class="sc-product">
+        <li class="sc-product" id="cellness-eye">
           <div class="sc-product__photo"><img data-src="assets/img/products/cellness-eye.jpg" width="263" height="263" alt="Крем для шкіри навколо очей CELLNESS" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Крем для шкіри навколо очей CELLNESS</h3>
           <ul class="sc-product__effects sc-t-small">
@@ -434,25 +486,42 @@
             <li>Усуває зморшки та темні кола</li>
             <li>Забезпечує ефективний догляд</li>
           </ul>
+          <!-- «Детальніше» (2026-10-29): повний опис з virtus — дія інгредієнтів, застосування, зберігання, склад.
+               Розкривається на місці й розсуває рядки нижче. ACF: details (wysiwyg) -->
           <details class="sc-product__more">
-            <summary class="sc-product__more-toggle sc-t-small">Склад і застосування</summary>
-            <div class="sc-product__more-body sc-t-mini">
+            <summary class="sc-product__more-toggle sc-t-small">Детальніше</summary>
+            <div class="sc-product__more-body sc-t-small">
+              <p><strong>Аутологічні біологічно активні фактори росту тромбоцитів</strong> на деіонізованій очищеній воді забезпечують життєві функції клітин шкіри, сприяють синтезу протеїнів дерми (природного колагену та еластину), активують біохімічні реакції та процеси клітинної взаємодії.</p>
+              <p><strong>Гіалуронова кислота з високою молекулярною вагою</strong> забезпечує миттєве зволоження шкіри та сприяє регенерації, відновлює еластичність шкіри, сприяє підтримці позаклітинного матриксу дерми.Високомолекулярна гіалуронова кислота відтворює на поверхні шкіри плівку, яка захищає її від втрати вологи зовні.</p>
+              <p><strong>Гиалуроновая кислота з низькою молекулярною вагою</strong> проникає до глибоких шарів епідермісу, зволожуючи шкіру зсередини та надає змогу проникнення біологічно активних факторів росту до внутрішніх шарів шкіри, де вони призводять до її розгладження, вирівнювання текстури, зволоження, живлення, підвищення тургору і еластичності.</p>
+              <p><strong>Масла</strong> надають легку текстуру крему.</p>
+              <p class="sc-product__more-head sc-t-small">Спосіб застосування</p>
               <p>Користуйтеся продуктом чистими руками. Наносити вранці та ввечері тонким шаром на попередньо очищену шкіру навколо очей легкими рухами.</p>
+              <p class="sc-product__more-head sc-t-small">Спосіб зберігання</p>
               <p>Зберігайте крем в холодному місці за температури не вище 12°С, захищеному від прямих сонячних променів. Термін придатності крему 30 днів з моменту виготовлення, що підкреслює його живильну дію, якість і унікальність.</p>
-              <li>аутологічні фактори росту тромбоцитів на деіонізованій очищеній воді</li>
-              <li>гіалуронова кислота низькомолекулярної маси</li>
-              <li>гіалуронова кислота високомолекулярної маси</li>
-              <li>цераміди</li>
-              <li>α-токоферолу ацетат</li>
-              <li>карбамід</li>
-              <li>гідрогенізовані рослинні масла</li>
+              <p class="sc-product__more-head sc-t-small">Склад</p>
+              <ul>
+                <li>аутологічні фактори росту тромбоцитів на деіонізованій очищеній воді</li>
+                <li>гіалуронова кислота низькомолекулярної маси</li>
+                <li>гіалуронова кислота високомолекулярної маси</li>
+                <li>цераміди</li>
+                <li>α-токоферолу ацетат</li>
+                <li>карбамід</li>
+                <li>гідрогенізовані рослинні масла</li>
+              </ul>
               <p>Для Всіх типів шкіри.</p>
               <p>Об’єм: 15 мл</p>
             </div>
           </details>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Крем для шкіри навколо очей CELLNESS" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Крем для шкіри навколо очей CELLNESS" aria-label="Прибрати з замовлення: Крем для шкіри навколо очей CELLNESS" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
-        <li class="sc-product">
+        <li class="sc-product" id="cellness-tonic">
           <div class="sc-product__photo"><img data-src="assets/img/products/cellness-tonic.jpg" width="263" height="263" alt="Тонік CELLNESS" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Тонік CELLNESS</h3>
           <ul class="sc-product__effects sc-t-small">
@@ -461,25 +530,40 @@
             <li>Активно зволожує та освіжає шкіру</li>
             <li>Забезпечує підтримання мікробіому шкіри</li>
           </ul>
+          <!-- «Детальніше» (2026-10-29): повний опис з virtus — дія інгредієнтів, застосування, зберігання, склад.
+               Розкривається на місці й розсуває рядки нижче. ACF: details (wysiwyg) -->
           <details class="sc-product__more">
-            <summary class="sc-product__more-toggle sc-t-small">Склад і застосування</summary>
-            <div class="sc-product__more-body sc-t-mini">
+            <summary class="sc-product__more-toggle sc-t-small">Детальніше</summary>
+            <div class="sc-product__more-body sc-t-small">
               <p>Ідеальний косметичний засіб для щоденного застосування на основі деіонізованої води з додаванням активних факторів росту тромбоцитів, гіалуронової кислоти та антиоксидантів.</p>
+              <p><strong>Аутологічні біологічно активні фактори росту</strong> власних тромбоцитів на доіонізованій очищеній воді забезпечують життєві функції клітин шкіри, сприяють синтезу протеїнів дерми (природного колагену та еластину), активують біохімічні реакції та процеси клітинної взаємодії</p>
+              <p><strong>Гіалуроновая кислота з низькою молекулярною вагою </strong>проникає до глибоких шарів епідермісу, зволожуючи шкіру зсередини та надає змогу проникнення біологічно активних факторів росту до внутрішніх шарів шкіри та готує шкіру для нанесення персоналізованого крему Cellness.</p>
+              <p class="sc-product__more-head sc-t-small">Спосіб застосування</p>
               <p>Наносити вранці та ввечері після вмивання за допомогою ватного диску на шкіру, як перший крок перед нанесенням персоналізованих кремів CELLNESS. Уникати зони навколо очей.</p>
+              <p><strong>Спосіб зберігання</strong></p>
               <p>Зберігайте в холодному місці за температури не вище 12°С, захищеному від прямих сонячних променів.</p>
               <p>Термін придатності 30 днів з моменту виготовлення, що підкреслює його живильну дію, якість і унікальність</p>
-              <li>аутологічні фактори росту тромбоцитів на деіонізованій очищеній воді</li>
-              <li>гіалуронова кислота низької маси</li>
-              <li>гідрогенізована касторова олія</li>
-              <li>денатурований алкоголь</li>
-              <li>пропілпарабен природного походження</li>
+              <p class="sc-product__more-head sc-t-small">Склад</p>
+              <ul>
+                <li>аутологічні фактори росту тромбоцитів на деіонізованій очищеній воді</li>
+                <li>гіалуронова кислота низької маси</li>
+                <li>гідрогенізована касторова олія</li>
+                <li>денатурований алкоголь</li>
+                <li>пропілпарабен природного походження</li>
+              </ul>
               <p>Всіх типів шкіри.</p>
               <p>Об’єм: 50 мл.</p>
             </div>
           </details>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Тонік CELLNESS" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Тонік CELLNESS" aria-label="Прибрати з замовлення: Тонік CELLNESS" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
-        <li class="sc-product">
+        <li class="sc-product" id="cellness-hair">
           <div class="sc-product__photo"><img data-src="assets/img/products/cellness-hair.jpg" width="263" height="263" alt="Активатор росту волосся CELLNESS" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Активатор росту волосся CELLNESS</h3>
           <ul class="sc-product__effects sc-t-small">
@@ -489,58 +573,132 @@
             <li>Нормалізує мікробіом шкіри</li>
             <li>Покращує обмінні процеси</li>
           </ul>
+          <!-- «Детальніше» (2026-10-29): повний опис з virtus — дія інгредієнтів, застосування, зберігання, склад.
+               Розкривається на місці й розсуває рядки нижче. ACF: details (wysiwyg) -->
           <details class="sc-product__more">
-            <summary class="sc-product__more-toggle sc-t-small">Склад і застосування</summary>
-            <div class="sc-product__more-body sc-t-mini">
+            <summary class="sc-product__more-toggle sc-t-small">Детальніше</summary>
+            <div class="sc-product__more-body sc-t-small">
               <p>Комплексний засіб для стимуляції росту здорового волосся, профілактики ламкості та випадання.</p>
-              <li>екзосомально-пептидні фактори росту стовбурових клітин на деіонізованій очищеній воді</li>
-              <li>гіалуронова кислота низькомолекулярної маси</li>
-              <li>цераміди</li>
-              <li>α-токоферолу ацетат</li>
-              <li>карбамід</li>
+              <p><strong>Екзосомально-пептидні фактори росту</strong> стовбурових клітин сприяють регенерації та стимуляції оновлення клітин, цілеспрямовано впливають на фазу активного росту волосся.</p>
+              <p><strong>Токоферол</strong> нейтралізує дію вільних радикалів.</p>
+              <p><strong>Гиалуроновая кислота з низькою молекулярною вагою</strong> проникає до глибоких шарів епідермісу, зволожуючи шкіру зсередини та надає змогу проникнення біологічно активних факторів росту до внутрішніх шарів шкіри.</p>
+              <p class="sc-product__more-head sc-t-small">Склад</p>
+              <ul>
+                <li>екзосомально-пептидні фактори росту стовбурових клітин на деіонізованій очищеній воді</li>
+                <li>гіалуронова кислота низькомолекулярної маси</li>
+                <li>цераміди</li>
+                <li>α-токоферолу ацетат</li>
+                <li>карбамід</li>
+              </ul>
+              <p><strong>Спосіб застосування</strong></p>
               <p>Нанести на прикореневу зону волосся по проділах масажними рухами невелику кількість засобу, розподіляючи рівномірно по всій поверхні шкіри голови. Залишити на одну годину, потім ретельно змити великою кількість води</p>
+              <p><strong>Спосіб зберігання</strong></p>
               <p>Зберігайте в холодному місці за температури не вище 12°С, захищеному від прямих сонячних променів. Термін придатності 30 днів з моменту виготовлення, що підкреслює його живильну дію, якість і унікальність.</p>
               <p>Всіх типів волосся.</p>
               <p>Об’єм: 50 мл.</p>
             </div>
           </details>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Активатор росту волосся CELLNESS" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Активатор росту волосся CELLNESS" aria-label="Прибрати з замовлення: Активатор росту волосся CELLNESS" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
   </ul>
 
   <h2 class="sc-prep__title sc-t-h2">Лікувальні продукти</h2>
-  <ul class="sc-prep__grid">
-        <li class="sc-product">
+  <!-- Лікувальні продукти — теж строками (2026-10-29) -->
+  <ul class="sc-prep__grid sc-prep__grid--rows">
+        <li class="sc-product" id="eye-drops">
           <div class="sc-product__photo"><img data-src="assets/img/products/eye-drops.jpg" width="263" height="263" alt="Краплі для очей" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Краплі для очей</h3>
           <p class="sc-product__text sc-t-small">Застосовуються для відновлення прозорості рогівки після травм, опіків, наслідків запальних й інших захворювань очей.</p>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Краплі для очей" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Краплі для очей" aria-label="Прибрати з замовлення: Краплі для очей" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
-        <li class="sc-product">
+        <li class="sc-product" id="nose-drops">
           <div class="sc-product__photo"><img data-src="assets/img/products/nose-drops.jpg" width="263" height="263" alt="Краплі для носа" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Краплі для носа</h3>
           <p class="sc-product__text sc-t-small">Застосовуються для прискорення процесу регенерації слизової, відновлення нюху після травм носа й естетичних пластичних операцій.</p>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Краплі для носа" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Краплі для носа" aria-label="Прибрати з замовлення: Краплі для носа" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
-        <li class="sc-product">
+        <li class="sc-product" id="rectal-suppositories">
           <div class="sc-product__photo"><img data-src="assets/img/products/rectal-suppositories.jpg" width="263" height="263" alt="Ректальні свічки" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Ректальні свічки</h3>
           <p class="sc-product__text sc-t-small">Мають протизапальний, загоюючий ефект, застосовуються для лікування хронічних простатитів й інших захворювань.</p>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Ректальні свічки" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Ректальні свічки" aria-label="Прибрати з замовлення: Ректальні свічки" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
-        <li class="sc-product">
+        <li class="sc-product" id="vaginal-suppositories">
           <div class="sc-product__photo"><img data-src="assets/img/products/vaginal-suppositories.jpg" width="263" height="263" alt="Вагінальні свічки" loading="lazy" decoding="async"></div>
           <h3 class="sc-product__name sc-t-h3">Вагінальні свічки</h3>
           <p class="sc-product__text sc-t-small">Усувають вікову сухість піхви, відновлюють чутливість і нормальний рівень зволоженості слизових оболонок статевих органів.</p>
-          <a class="sc-product__cta sc-t-small" href="#direction-consult" data-modal-open="booking">Замовити</a>
+          <div class="sc-product__actions">
+            <button class="sc-product__cta" type="button" data-order-add="Вагінальні свічки" aria-pressed="false">
+              <span class="sc-product__cta-add">Додати в замовлення</span>
+              <span class="sc-product__cta-added">Препарат доданий</span>
+            </button>
+            <button class="sc-product__remove" type="button" data-order-remove="Вагінальні свічки" aria-label="Прибрати з замовлення: Вагінальні свічки" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4 6.5H20M9.5 6.5V4.5H14.5V6.5M6.5 6.5L7.5 20H16.5L17.5 6.5M10 10V16.5M14 10V16.5" stroke="currentColor"/></svg></button>
+          </div>
         </li>
   </ul>
 </section>
 
-<!-- Також у розділі — сторінки virtus.ua плитками (sc-dservices) -->
+<!-- ============================================================
+     SC/Preparations · Замовлення — плита як «Неофіброліфтинг» на Face Control (sc-neo, b15a-science.css), 2026-10-29
+     Фото форми замовлення virtus (desctop_form.jpg) — фоном плити під скримом. Тексти — з форми virtus, як є.
+     Кнопка відкриває попап запису (data-modal-open="booking").
+     ACF: order_title (text), order_text (textarea), order_cta_label (text), order_image (image)
+     ============================================================ -->
+<section class="sc-neo sc-prep__order" id="order">
+  <div class="sc-neo__frame" data-theme="inverse">
+    <div class="sc-neo__bg" aria-hidden="true">
+      <img class="sc-neo__image" data-src="assets/img/direction/prep-order-bg.jpg"
+           data-srcset="assets/img/direction/prep-order-bg-960.jpg 960w, assets/img/direction/prep-order-bg.jpg 1920w"
+           sizes="(max-width: 640px) 120vw, 100vw" alt=""
+           width="1920" height="900" loading="lazy" decoding="async">
+      <span class="sc-neo__scrim"></span>
+    </div>
+
+    <div class="sc-neo__copy">
+      <p class="sc-neo__kicker sc-t-caption">Замовлення</p>
+      <h2 class="sc-neo__title sc-t-h2">Замовлення препаратів SmartCell</h2>
+      <p class="sc-neo__text sc-t-body">Залиште заявку на індивідуальне виготовлення продукту SmartCell, після чого наші фахівці зв'яжуться з Вами</p>
+      <!-- склад замовлення — те саме, що в попапі (prep-order.js) -->
+      <div class="sc-neo__order">
+        <p class="sc-neo__order-title sc-t-small">Склад індивідуального замовлення:</p>
+        <p class="sc-neo__order-empty sc-t-small" data-order-empty>Поки ще Ви не додали в замовлення жодного продукту.</p>
+        <p class="sc-neo__order-list sc-t-small" data-order-list hidden></p>
+      </div>
+      <a class="sc-neo__cta" href="#order" data-modal-open="booking">Залишити заявку</a>
+    </div>
+  </div>
+</section>
+
+<!-- Блок «Процедури в клініці VIRTUS» прибрано (2026-10-29): на сторінці virtus цього блоку немає. Для відкату — повернути з коментаря (<!~~ ~~> = вкладені коментарі).
+<!~~ Також у розділі — сторінки virtus.ua плитками (sc-dservices) ~~>
 <section class="sc-prep sc-prep--links">
   <div class="sc-dservices">
-    <h2 class="sc-dservices__title sc-t-h2">Також у розділі</h2>
+    <!~~ 2026-10-29: було «Також у розділі» ~~>
+    <h2 class="sc-dservices__title sc-t-h2">Процедури в клініці VIRTUS</h2>
     <ul class="sc-dservices__list">
       <li><a class="sc-dservices__tile" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami"><span class="sc-dservices__label">Омолодження організму власними стовбуровими клітинами</span><span class="sc-dservices__source sc-t-mini">Virtus</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
       <li><a class="sc-dservices__tile" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/stvolovye-kletki-kostnogo-mozga"><span class="sc-dservices__label">Cellness. Лікування стовбуровими клітинами</span><span class="sc-dservices__source sc-t-mini">Virtus</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
@@ -548,9 +706,11 @@
     </ul>
   </div>
 </section>
+-->
 
-<!-- Секция — копия sections/sc-direction-consult.html -->
-<!-- ============================================================
+<!-- Полоса «Індивідуальні продукти виготовляються після консультації» прибрана (2026-10-29): на сторінці virtus цього немає. Для відкату — повернути з коментаря (<!~~ ~~> = вкладені коментарі).
+<!~~ Секция — копия sections/sc-direction-consult.html ~~>
+<!~~ ============================================================
      SC/Direction · CTA «Консультація» — полоса как B11, запись в попапе
      figma: node-id=318:51
      ACF: consult_kicker (text), consult_title (textarea), consult_text (textarea),
@@ -561,11 +721,11 @@
      Вид — как B11 на лендинге (фон-кадр с планетой под скримом), но без полей
      и с обычной кнопкой Button/Control; стоит над филиалами (правка 2026-10-04).
      Кадр фона — тот же assets/img/b11-consult*.jpg; ниже первого экрана — data-src.
-     ============================================================ -->
+     ============================================================ ~~>
 <section class="sc-dconsult" id="direction-consult" data-theme="inverse">
-  <!-- Полоса как B11 на Face Control (2026-10-06): кадр под скримом с запасом под медленный
+  <!~~ Полоса как B11 на Face Control (2026-10-06): кадр под скримом с запасом под медленный
        скролл (gsap-animations.js, --dconsult-parallax). Кадр — тот же, что в B11, но отзеркален:
-       планета у правого края (assets/img/direction/consult-bg*.jpg). -->
+       планета у правого края (assets/img/direction/consult-bg*.jpg). ~~>
   <div class="sc-dconsult__bg" aria-hidden="true">
     <img class="sc-dconsult__image"
          data-src="assets/img/direction/consult-bg.jpg"
@@ -574,25 +734,25 @@
     <span class="sc-dconsult__scrim"></span>
   </div>
 
-  <!-- Сборка текста как в B07 Welcome kit (.sc-kit__copy; правка 2026-10-06): надпись,
+  <!~~ Сборка текста как в B07 Welcome kit (.sc-kit__copy; правка 2026-10-06): надпись,
        заголовок, заметка приглушённым, под ними кнопка. Колонка текста слева — 743 из 1216,
-       справа под планетой пусто. Было (утро 2026-10-06): сетка B11 473/743, кнопка справа. -->
+       справа под планетой пусто. Было (утро 2026-10-06): сетка B11 473/743, кнопка справа. ~~>
   <div class="sc-dconsult__inner">
     <div class="sc-dconsult__copy">
       <p class="sc-dconsult__kicker sc-t-caption">Консультація</p>
-      <!-- [VERIFY] текст полоси для розділу препаратів — складено з лиду virtus -->
+      <!~~ [VERIFY] текст полоси для розділу препаратів — складено з лиду virtus ~~>
       <h2 class="sc-dconsult__title sc-t-h2">Індивідуальні продукти виготовляються після консультації</h2>
-      <!-- Заметка — минимум: одна фраза из согласованного абзаца (правка 2026-10-06). Было:
+      <!~~ Заметка — минимум: одна фраза из согласованного абзаца (правка 2026-10-06). Было:
            «…Цепколенко. За потреби до консультації долучаються профільні фахівці — спільне
-           рішення дозволяє обрати ефективну тактику лікування.» -->
+           рішення дозволяє обрати ефективну тактику лікування.» ~~>
       <p class="sc-dconsult__text sc-t-body">Прийом веде керівник клініки, доктор медичних наук, професор Володимир Цепколенко.</p>
-      <!-- Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
-           Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. -->
+      <!~~ Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
+           Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. ~~>
       <a class="sc-dconsult__cta" href="#direction-consult" data-modal-open="booking">Записатись на консультацію</a>
     </div>
   </div>
 
-  <!-- Прежняя форма на странице (до 2026-10-04) — для отката:
+  <!~~ Прежняя форма на странице (до 2026-10-04) — для отката:
   <form class="sc-dconsult__form" data-form novalidate>
     <div class="sc-dconsult__field">
       <label class="sc-dconsult__label sc-t-caption" for="dconsult-name">Прізвище, імʼя, по батькові*</label>
@@ -618,11 +778,13 @@
     <button class="sc-dconsult__submit" type="submit">Записатися</button>
     <p class="sc-dconsult__consent sc-t-mini">Надсилаючи форму, ви підтверджуєте згоду з політикою обробки персональних даних.</p>
   </form>
-  -->
+  ~~>
 </section>
+-->
 
-<!-- Секция — копия sections/sc-direction-branches.html (филиалы лікаря) -->
-<!-- ============================================================
+<!-- Блок «Напрямок представлений у філіях» прибрано (2026-10-29): на сторінці virtus цього блоку немає. Для відкату — повернути з коментаря (<!~~ ~~> = вкладені коментарі).
+<!~~ Секция — копия sections/sc-direction-branches.html (филиалы лікаря) ~~>
+<!~~ ============================================================
      SC/Direction · Напрямок представлений у філіях
      figma: node-id=318:38
      ACF: branches_title (text); branches (relationship → філії:
@@ -630,7 +792,7 @@
      Фото — с virtus.ua (филиалы), 2026-10-04: Суднобудівна — IMG_6408,
      Київ — bunina@2x (так подписан кадр на сайте клиники; ⚠ [VERIFY] что это
      Костянтинівська, а не одеська Буніна).
-     ============================================================ -->
+     ============================================================ ~~>
 <section class="sc-dbranches">
   <h2 class="sc-dbranches__title sc-t-h2">Напрямок представлений у філіях</h2>
 
@@ -661,6 +823,7 @@
     </li>
   </ul>
 </section>
+-->
 
 </main>
 
@@ -775,16 +938,18 @@
 <!-- Попап записи — копия sections/modal-booking.html (как на Face Control);
      тексты для напрямку: кикер, заголовок и примечание — из блока «Консультація»
      макета 318:51 (поля booking_kicker / booking_title / booking_note страницы) -->
+<!-- Попап — форма замовлення препаратів (2026-10-29): формулювання з форми virtus, як є; без консультації —
+     препарати замовляють напряму. Розмітка та сама, що в попапа запису (modal-booking). -->
 <div class="sc-modal" data-modal="booking" hidden>
   <div class="sc-modal__overlay" data-modal-close></div>
 
   <div class="sc-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
 
     <div class="sc-modal__photo">
-      <img src="assets/img/booking.jpg"
-           srcset="assets/img/booking.jpg 520w, assets/img/booking@2x.jpg 1040w"
+      <img src="assets/img/direction/prep-order-modal.jpg"
+           srcset="assets/img/direction/prep-order-modal.jpg 520w, assets/img/direction/prep-order-modal@2x.jpg 900w"
            sizes="(max-width: 640px) 100vw, 520px"
-           alt="Клітинна структура під мікроскопом"
+           alt="Набір косметики CELLNESS у руках лікаря"
            width="520" height="520" loading="lazy" decoding="async">
     </div>
 
@@ -795,38 +960,61 @@
         </svg>
       </button>
 
-      <p class="sc-modal__kicker sc-t-caption">КОНСУЛЬТАЦІЯ</p>
-      <h2 class="sc-modal__title sc-t-h3" id="booking-title">Лікування стовбуровими клітинами починається з консультації</h2>
-      <p class="sc-modal__note sc-t-small">Прийом веде керівник клініки, доктор медичних наук, професор Володимир Цепколенко.</p>
+      <p class="sc-modal__kicker sc-t-caption">ЗАМОВЛЕННЯ</p>
+      <h2 class="sc-modal__title sc-t-h3" id="booking-title">Замовлення препаратів SmartCell</h2>
+      <p class="sc-modal__note sc-t-small">Залиште заявку на індивідуальне виготовлення продукту SmartCell, після чого наші фахівці зв'яжуться з Вами</p>
 
       <form class="sc-modal__form" novalidate>
         <div class="sc-modal__fields">
 
           <div class="sc-modal__field">
-            <label class="sc-modal__label" for="booking-name">Ваше ім'я</label>
+            <label class="sc-modal__label" for="booking-name">Прізвище, ім'я, по батькові</label>
             <input class="sc-modal__input" id="booking-name" name="name" type="text"
-                   placeholder="Ваше ім'я" autocomplete="name" required>
+                   placeholder="Прізвище, ім'я, по батькові*" autocomplete="name" required>
             <p class="sc-modal__error" id="booking-name-error" hidden>Вкажіть імʼя</p>
           </div>
 
           <div class="sc-modal__field">
-            <label class="sc-modal__label" for="booking-phone">Номер телефону</label>
+            <label class="sc-modal__label" for="booking-phone">Вкажіть номер телефону</label>
             <input class="sc-modal__input" id="booking-phone" name="phone" type="tel"
-                   placeholder="+380" autocomplete="tel" inputmode="tel" required>
+                   placeholder="Вкажіть номер телефону*" autocomplete="tel" inputmode="tel" required>
             <p class="sc-modal__error" id="booking-phone-error" hidden>Вкажіть номер телефону</p>
           </div>
 
         </div>
 
+        <!-- Склад замовлення, як у формі virtus: «Додати в замовлення» у продуктів збирає список
+             (prep-order.js); прихований product — назви через кому, для кодера -->
+        <div class="sc-modal__order">
+          <p class="sc-modal__order-title sc-t-small">Склад індивідуального замовлення:</p>
+          <p class="sc-modal__order-items sc-t-small" data-order-empty>Поки ще Ви не додали в замовлення жодного продукту.</p>
+          <p class="sc-modal__order-list sc-t-small" data-order-list hidden></p>
+          <input type="hidden" name="product" value="" data-order-input>
+        </div>
+
         <div class="sc-modal__actions">
-          <button class="sc-modal__submit" type="submit">ЗАПИСАТИСЬ</button>
+          <button class="sc-modal__submit" type="submit">Залишити заявку</button>
           <button class="sc-modal__later" type="button" data-modal-close>ПІЗНІШЕ</button>
         </div>
 
-        <p class="sc-modal__legal">Натискаючи, ви погоджуєтесь з політикою обробки даних</p>
+        <p class="sc-modal__legal">* Обов'язкові поля. Надсилаючи цю форму, Ви підтверджуєте свою згоду з політикою передавання і використання даних на цьому сайті.</p>
       </form>
     </div>
 
+  </div>
+</div>
+
+<!-- Модалка відео-відгуку у вкладці «Відгуки» (YouTube w9fIN4AjRi8, як на virtus.ua/reviews) -->
+<div class="sc-modal sc-modal--video" data-modal="review-video-1" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--video" role="dialog" aria-modal="true" data-theme="inverse" aria-label="Марія, пацієнтка доктора Олени Єсауленко в місті Києві">
+    <button class="sc-modal__close sc-modal__close--outside" type="button" data-modal-close aria-label="Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg>
+    </button>
+    <div class="sc-modal__frame">
+      <iframe class="sc-modal__video" data-src="https://www.youtube-nocookie.com/embed/w9fIN4AjRi8?autoplay=1&amp;rel=0" title="Марія, пацієнтка доктора Олени Єсауленко в місті Києві"
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 
@@ -838,6 +1026,8 @@
 <script src="assets/js/footer-cols.js" defer></script>
 <script src="assets/js/forms.js" defer></script>
 <script src="assets/js/modal.js" defer></script>
+<!-- Кошик препаратів: «Додати в замовлення» / «Препарат доданий» + кошик, як на virtus (2026-10-29) -->
+<script src="assets/js/prep-order.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/gsap-animations.js" defer></script>

@@ -470,3 +470,17 @@ a.sc-modal__submit {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
 }
+
+/* Склад замовлення — форма препаратів (preparations.html, 2026-10-29) */
+.sc-modal__order {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-space-1);
+}
+.sc-modal__order-title { margin: 0; color: var(--foreground); font-weight: var(--sc-weight-medium); }
+.sc-modal__order-items { margin: 0; color: var(--sc-neutral-600); }
+.sc-modal__order-items[hidden], .sc-modal__order-list[hidden] { display: none; }
+.sc-modal__order-list {
+  margin: 0;
+  color: var(--foreground);
+}
