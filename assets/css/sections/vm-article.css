@@ -1263,7 +1263,7 @@
 .vm-article__quote-by {
   --vm-a-person-photo: 96px;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* текст по верху фото (2026-11-03; было center) */
   gap: var(--stack-gap-md);
 }
 
