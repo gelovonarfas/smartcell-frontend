@@ -333,6 +333,8 @@ a.sc-dsvc__link {
 
 @media (max-width: 640px) {
   .sc-dsvc { --dsvc-tile-min: 140px; } /* две плитки в ряд */
+  /* на телефоне всегда две: при трёх длинные капсом слова («ГАСТРОЕНТЕРОЛОГІЯ») вылезали за плитку (2026-11-03) */
+  .sc-dsvc__tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .sc-dsvc__group {
     grid-template-columns: minmax(0, 1fr);
