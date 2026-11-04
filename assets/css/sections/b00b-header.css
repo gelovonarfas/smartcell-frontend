@@ -310,7 +310,7 @@
    місце: при трьох мовах — посередині (RU · UA · EN), при двох — першою (UA · RU).
    Порядок задає розмітка, кількість — data-lang-count (2 або 3): від неї залежать
    ширина розкритого стану (--sc-lang-n) і зсув поточної комірки (--sc-lang-i).
-   На телефоні — завжди розкрито, у планці поруч із бургером. Без JS. */
+   На телефоні — завжди розкрито, рядком у шторці меню під пунктами. Без JS. */
 
 .sc-header__lang {
   --sc-lang-cell: var(--sc-space-8);
@@ -520,18 +520,16 @@
 
   .sc-header__nav .sc-header__link:first-child { border-block-start: 0; }
 
-  /* Перемикач мови на телефоні: у планці між логотипом і бургером, завжди розкритий,
-     комірки 40 — тап-таргет; бургер стоїть за ним */
+  /* Перемикач мови на телефоні: рядок у шторці під пунктами меню, завжди розкритий,
+     комірки 48 — тап-таргет; у потоці колонки перед CTA */
   .sc-header__lang {
-    --sc-lang-cell: var(--sc-space-10);
+    --sc-lang-cell: var(--control-square);
     order: 0;
-    margin-inline-start: auto;
+    margin-block-start: var(--stack-gap-sm);
     inline-size: calc(var(--sc-lang-cell) * var(--sc-lang-n));
   }
 
   .sc-header__lang-row { transform: none; }
-
-  .sc-header__burger { margin-inline-start: 0; }
 
   /* На светлой шапке журнала делители берут обычную кромку: белая линия
      на светлом стекле не видна вовсе (правка 2026-09-14) */

@@ -26,7 +26,7 @@
 <body>
 <div class="demo__intro">
   <h1 class="sc-t-h2" style="margin:0 0 var(--stack-gap-md)">Перемикач мови — «розкладний»</h1>
-  <p class="demo__hint sc-t-body">Наведіть на квадрат із мовою. Три мови — поточна стає посередині, дві — першою. На телефоні перемикач завжди розкритий і стоїть у планці поруч із бургером — звузьте вікно до 640.</p>
+  <p class="demo__hint sc-t-body">Наведіть на квадрат із мовою. Три мови — поточна стає посередині, дві — першою. На телефоні перемикач — розкритий рядок у меню під пунктами (звузьте вікно до 640 і відкрийте бургер).</p>
 </div>
 <section class="demo"><p class="demo__label sc-t-caption">Три мови · RU · UA · EN</p><div class="demo__strip"><header class="sc-header sc-header--light" data-header>
   <div class="sc-header__inner">
@@ -75,19 +75,6 @@
       </div>
     </div>
 
-    <!-- Перемикач мови (2026-11-03, «розкладний»). Текст, не прапори; назви мов — в aria-label, ISO-коди в lang/hreflang.
-         Поточна мова — не посилання (aria-current). Посилання ведуть на ЦЮ Ж сторінку іншою мовою.
-         У темі: виводити лише мови з галочкою «переклад є»; одна мова — блок не виводити.
-         data-lang-count = скільки мов виведено (2 або 3). Порядок: при трьох поточна — посередині,
-         при двох — перша. На десктопі згорнутий до поточної, на телефоні розкритий.
-         PLACEHOLDER: href — адреси перекладів з qTranslate -->
-    <nav class="sc-header__lang" aria-label="Мова сторінки" data-lang-count="3">
-      <span class="sc-header__lang-row">
-        <a class="sc-header__lang-item" lang="ru" hreflang="ru" href="#" aria-label="Русский">RU</a>
-        <span class="sc-header__lang-item sc-header__lang-item--current" lang="uk" aria-current="page" aria-label="Українська">UA</span>
-        <a class="sc-header__lang-item" lang="en" hreflang="en" href="#" aria-label="English">EN</a>
-      </span>
-    </nav>
     <button class="sc-header__burger" type="button" aria-label="Меню"
             aria-expanded="false" aria-controls="header-nav" data-nav-toggle>
       <span class="sc-header__burger-box" aria-hidden="true"><span></span><span></span></span>
@@ -261,6 +248,19 @@
       <a class="sc-header__link sc-header__link--portal sc-t-small" href="https://virtus.ua/">VIRTUS · Всі напрямки інституту</a>
     </nav>
 
+    <!-- Перемикач мови (2026-11-03, «розкладний»). Текст, не прапори; назви мов — в aria-label, ISO-коди в lang/hreflang.
+         Поточна мова — не посилання (aria-current). Посилання ведуть на ЦЮ Ж сторінку іншою мовою.
+         У темі: виводити лише мови з галочкою «переклад є»; одна мова — блок не виводити.
+         data-lang-count = скільки мов виведено (2 або 3). Порядок: при трьох поточна — посередині,
+         при двох — перша. На десктопі згорнутий до поточної, на телефоні — розкритий рядок у шторці меню під пунктами.
+         PLACEHOLDER: href — адреси перекладів з qTranslate -->
+    <nav class="sc-header__lang" aria-label="Мова сторінки" data-lang-count="3">
+      <span class="sc-header__lang-row">
+        <a class="sc-header__lang-item" lang="ru" hreflang="ru" href="#" aria-label="Русский">RU</a>
+        <span class="sc-header__lang-item sc-header__lang-item--current" lang="uk" aria-current="page" aria-label="Українська">UA</span>
+        <a class="sc-header__lang-item" lang="en" hreflang="en" href="#" aria-label="English">EN</a>
+      </span>
+    </nav>
     <a class="sc-header__cta" href="index.html#consultation" data-modal-open="booking">
       <span class="sc-header__cta-label">Почати з діагностики</span>
     </a>
@@ -316,18 +316,6 @@
       </div>
     </div>
 
-    <!-- Перемикач мови (2026-11-03, «розкладний»). Текст, не прапори; назви мов — в aria-label, ISO-коди в lang/hreflang.
-         Поточна мова — не посилання (aria-current). Посилання ведуть на ЦЮ Ж сторінку іншою мовою.
-         У темі: виводити лише мови з галочкою «переклад є»; одна мова — блок не виводити.
-         data-lang-count = скільки мов виведено (2 або 3). Порядок: при трьох поточна — посередині,
-         при двох — перша. На десктопі згорнутий до поточної, на телефоні розкритий.
-         PLACEHOLDER: href — адреси перекладів з qTranslate -->
-    <nav class="sc-header__lang" aria-label="Мова сторінки" data-lang-count="2">
-      <span class="sc-header__lang-row">
-        <span class="sc-header__lang-item sc-header__lang-item--current" lang="uk" aria-current="page" aria-label="Українська">UA</span>
-        <a class="sc-header__lang-item" lang="ru" hreflang="ru" href="#" aria-label="Русский">RU</a>
-      </span>
-    </nav>
     <button class="sc-header__burger" type="button" aria-label="Меню"
             aria-expanded="false" aria-controls="header-nav" data-nav-toggle>
       <span class="sc-header__burger-box" aria-hidden="true"><span></span><span></span></span>
@@ -501,6 +489,18 @@
       <a class="sc-header__link sc-header__link--portal sc-t-small" href="https://virtus.ua/">VIRTUS · Всі напрямки інституту</a>
     </nav>
 
+    <!-- Перемикач мови (2026-11-03, «розкладний»). Текст, не прапори; назви мов — в aria-label, ISO-коди в lang/hreflang.
+         Поточна мова — не посилання (aria-current). Посилання ведуть на ЦЮ Ж сторінку іншою мовою.
+         У темі: виводити лише мови з галочкою «переклад є»; одна мова — блок не виводити.
+         data-lang-count = скільки мов виведено (2 або 3). Порядок: при трьох поточна — посередині,
+         при двох — перша. На десктопі згорнутий до поточної, на телефоні — розкритий рядок у шторці меню під пунктами.
+         PLACEHOLDER: href — адреси перекладів з qTranslate -->
+    <nav class="sc-header__lang" aria-label="Мова сторінки" data-lang-count="2">
+      <span class="sc-header__lang-row">
+        <span class="sc-header__lang-item sc-header__lang-item--current" lang="uk" aria-current="page" aria-label="Українська">UA</span>
+        <a class="sc-header__lang-item" lang="ru" hreflang="ru" href="#" aria-label="Русский">RU</a>
+      </span>
+    </nav>
     <a class="sc-header__cta" href="index.html#consultation" data-modal-open="booking">
       <span class="sc-header__cta-label">Почати з діагностики</span>
     </a>
