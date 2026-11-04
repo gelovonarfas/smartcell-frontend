@@ -82,8 +82,8 @@
      ============================================================ -->
 <!-- 2026-10-29: шапка світла, як на решті сторінок (було: class="sc-header" data-theme="inverse") -->
 <!-- 2026-11-03: шапка FC365 знову прозора над хиро — білий текст на відео, скло з прокрутки (було з 2026-10-29:
-     sc-header--light sc-header--solid — світла суцільна плита; класи лишились у CSS для відкату). Полиця мегаменю — світла в обох випадках -->
-<header class="sc-header" data-header>
+     sc-header--light sc-header--solid — світла суцільна плита; класи лишились у CSS для відкату). Полиця мегаменю — світла в обох випадках (data-theme="normal" на панелі); відкрита мобільна шторка — теж світла (header.js тимчасово знімає inverse) -->
+<header class="sc-header" data-header data-theme="inverse">
   <div class="sc-header__inner">
 
     <div class="sc-header__portal">
@@ -146,7 +146,7 @@
           <svg class="sc-hdir__chevron" viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 3.5L5 7L8.5 3.5" stroke="currentColor"/></svg>
         </button>
 
-        <div class="sc-hdir__panel" id="header-directions" data-directions-panel inert>
+        <div class="sc-hdir__panel" id="header-directions" data-directions-panel data-theme="normal" inert>
           <div class="sc-hdir__clip">
             <div class="sc-hdir__shelf">
 

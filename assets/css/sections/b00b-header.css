@@ -369,17 +369,10 @@
   color: var(--background);
 }
 
-/* Тёмная (прозора над хиро) шапка FC365: рамка і неактивні коди — білі з прозорістю,
-   поточна комірка — світла плита з тёмним текстом */
-.sc-header:not(.sc-header--light) .sc-header__lang { border-color: var(--sc-white-alpha-40); }
-.sc-header:not(.sc-header--light) .sc-header__lang-item { color: var(--sc-white-alpha-80); }
-.sc-header:not(.sc-header--light) .sc-header__lang-item + .sc-header__lang-item { border-inline-start-color: var(--sc-white-alpha-40); }
-.sc-header:not(.sc-header--light) .sc-header__lang-item:hover { background: var(--sc-white-alpha-20); color: var(--primary-foreground); }
-.sc-header:not(.sc-header--light) .sc-header__lang-item--current,
-.sc-header:not(.sc-header--light) .sc-header__lang-item--current:hover {
-  background: var(--background);
-  color: var(--foreground);
-}
+/* Тёмна (прозора над хиро) шапка FC365, data-theme="inverse": рамка, приглушені коди і білий
+   текст приходять з теми; поточна комірка — напівпрозора плита, як у CTA (правка 2026-11-03) */
+.sc-header:not(.sc-header--light) .sc-header__lang-item--current { background: var(--sc-white-alpha-10); color: var(--foreground); }
+.sc-header:not(.sc-header--light) .sc-header__lang-item:hover { background: var(--sc-white-alpha-20); color: var(--foreground); }
 
 body.sc-nav-lock { overflow: hidden; } /* сторінка під відкритим мобільним меню стоїть (2026-11-03) */
 

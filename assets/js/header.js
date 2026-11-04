@@ -125,6 +125,15 @@
     var setNav = function (on) {
       header.classList.toggle('sc-header--nav-open', on); /* префикс обязателен: CSS ждёт sc- */
       document.body.classList.toggle('sc-nav-lock', on); /* меню на весь екран — сторінка під ним стоїть (2026-11-03) */
+      /* Тёмна шапка (FC365, data-theme="inverse"): відкрита шторка світла, як на решті сторінок —
+         на час відкриття тема знімається і повертається при закритті (2026-11-03) */
+      if (on && header.getAttribute('data-theme') === 'inverse') {
+        header.setAttribute('data-theme-rest', 'inverse');
+        header.setAttribute('data-theme', 'normal');
+      } else if (!on && header.getAttribute('data-theme-rest')) {
+        header.setAttribute('data-theme', header.getAttribute('data-theme-rest'));
+        header.removeAttribute('data-theme-rest');
+      }
       burger.setAttribute('aria-expanded', on ? 'true' : 'false');
     };
 
