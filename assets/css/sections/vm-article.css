@@ -618,6 +618,7 @@
 :is(.vm-article__main, .vm-article__content) > blockquote a,
 .vm-article__p a,
 .vm-article__answer a,
+.vm-article__dek a, /* ссылка в лиде — как в прозе, без синего браузера (2026-11-03) */
 .vm-article__faq-a a {
   color: inherit;
   text-decoration: none;
@@ -634,6 +635,7 @@
 :is(.vm-article__main, .vm-article__content) > blockquote a:hover,
 .vm-article__p a:hover,
 .vm-article__answer a:hover,
+.vm-article__dek a:hover,
 .vm-article__faq-a a:hover { color: var(--primary); }
 
 :is(.vm-article__main, .vm-article__content) > p a:focus-visible,
@@ -641,6 +643,7 @@
 :is(.vm-article__main, .vm-article__content) > ol a:focus-visible,
 :is(.vm-article__main, .vm-article__content) > blockquote a:focus-visible,
 .vm-article__answer a:focus-visible,
+.vm-article__dek a:focus-visible,
 .vm-article__faq-a a:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
