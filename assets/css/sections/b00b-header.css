@@ -337,6 +337,109 @@
 .sc-header--light .sc-header__lang-item:hover,
 .sc-header--light .sc-header__lang-item--current { color: var(--foreground); }
 
+/* ---------- Перемикач мови · варіанти для вибору (2026-11-03, демо: lang-demo.html) ----------
+   Модифікатор на nav.sc-header__lang. Обраний лишається, решту — прибрати. */
+
+/* 1 · «бігунок»: риска 2px під кодом, як у вкладках напрямку; на наведенні риска з'являється під сусідом */
+.sc-header__lang--bar { gap: var(--sc-space-5); }
+
+.sc-header__lang--bar .sc-header__lang-item {
+  position: relative;
+  padding-block: var(--sc-space-1_5);
+  text-decoration: none;
+}
+
+.sc-header__lang--bar .sc-header__lang-item::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: var(--sc-line);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--sc-dur) var(--sc-ease-out);
+}
+
+.sc-header__lang--bar .sc-header__lang-item--current::after,
+.sc-header__lang--bar .sc-header__lang-item:hover::after { transform: scaleX(1); }
+
+/* 2 · «квадрати»: три комірки 32 у рядок, спільна рамка-hairline; поточна — залита кольором тексту */
+.sc-header__lang--squares {
+  --sc-lang-cell: var(--sc-space-8);
+  gap: 0;
+  border: var(--hairline) solid var(--border);
+}
+
+.sc-header__lang--squares .sc-header__lang-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sc-lang-cell);
+  block-size: var(--sc-lang-cell);
+  text-decoration: none;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease), color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-header__lang--squares .sc-header__lang-item + .sc-header__lang-item { border-inline-start: var(--hairline) solid var(--border); }
+
+.sc-header__lang--squares .sc-header__lang-item:hover { background: var(--muted); }
+
+.sc-header__lang--squares .sc-header__lang-item--current,
+.sc-header__lang--squares .sc-header__lang-item--current:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* 3 · «розкладний»: видно один квадрат з поточною мовою; на наведенні / фокусі решта
+   виїжджає ліворуч (трек 0fr→1fr). На телефоні завжди розкрито. */
+.sc-header__lang--fold {
+  --sc-lang-cell: var(--sc-space-8);
+  display: grid;
+  grid-template-columns: 0fr auto;
+  gap: 0;
+  border: var(--hairline) solid var(--border);
+  transition: grid-template-columns var(--sc-dur) var(--sc-ease-out);
+}
+
+.sc-header__lang--fold:hover,
+.sc-header__lang--fold:focus-within { grid-template-columns: 1fr auto; }
+
+.sc-header__lang--fold .sc-header__lang-others {
+  display: flex;
+  overflow: hidden;
+  min-inline-size: 0;
+}
+
+.sc-header__lang--fold .sc-header__lang-item {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sc-lang-cell);
+  block-size: var(--sc-lang-cell);
+  text-decoration: none;
+  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-header__lang--fold .sc-header__lang-others .sc-header__lang-item { border-inline-end: var(--hairline) solid var(--border); }
+.sc-header__lang--fold .sc-header__lang-item:hover { background: var(--muted); }
+
+.sc-header__lang--fold .sc-header__lang-item--current {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* тёмная шапка: рамка и залитая ячейка — белым */
+.sc-header:not(.sc-header--light) :is(.sc-header__lang--squares, .sc-header__lang--fold) { border-color: var(--sc-white-alpha-40); }
+.sc-header:not(.sc-header--light) :is(.sc-header__lang--squares, .sc-header__lang--fold) .sc-header__lang-item { border-color: var(--sc-white-alpha-40); }
+.sc-header:not(.sc-header--light) :is(.sc-header__lang--squares, .sc-header__lang--fold) .sc-header__lang-item:hover { background: var(--sc-white-alpha-20); }
+.sc-header:not(.sc-header--light) :is(.sc-header__lang--squares, .sc-header__lang--fold) .sc-header__lang-item--current { background: var(--foreground); color: var(--background); }
+
+@media (max-width: 640px) {
+  .sc-header__lang--fold { grid-template-columns: 1fr auto; }
+}
+
 /* ---------- Состояния ----------
    В Figma их нет — обязательны по CLAUDE.md */
 
