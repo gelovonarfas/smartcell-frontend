@@ -124,6 +124,7 @@
   if (burger) {
     var setNav = function (on) {
       header.classList.toggle('sc-header--nav-open', on); /* префикс обязателен: CSS ждёт sc- */
+      document.body.classList.toggle('sc-nav-lock', on); /* меню на весь екран — сторінка під ним стоїть (2026-11-03) */
       burger.setAttribute('aria-expanded', on ? 'true' : 'false');
     };
 

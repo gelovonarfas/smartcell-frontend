@@ -534,8 +534,16 @@
   .sc-hdir.sc-is-open .sc-hdir__body > * { animation: none; }
 }
 
-/* ---------- Телефон: «Напрямки» — раскрывающийся пункт в меню под бургером ----------
-   Полоса вкладок листается по горизонтали, как у OneSkin; анонс не показывается */
+/* На десктопі шапки другого рівня і підписів панелей немає */
+.sc-hdir__mobhead,
+.sc-hdir__pane-label { display: none; }
+
+/* ---------- Телефон: «Клітинні технології» — другий рівень меню (2026-11-03) ----------
+   Пункт у шторці веде не в акордеон, а на другий екран: панель в'їжджає справа поверх
+   пунктів (drill-down). Зверху — «← Меню» і посилання на хаб, далі три групи простими
+   рядками: Протоколи · Терапія · Препарати. Вкладок, фото, описів і анонсу немає —
+   на телефоні це просто список посилань. Було (2026-10-05 … 11-03): акордеон
+   із вкладками й витриною протоколу всередині шторки. */
 
 @media (max-width: 640px) {
   .sc-hdir { display: block; }
@@ -549,56 +557,142 @@
     line-height: var(--p-lh);
   }
 
-  .sc-hdir__panel {
-    position: static;
-    box-shadow: none;
-    background: transparent;
+  /* шеврон дивиться праворуч — «далі», а не «розгорнути» */
+  .sc-hdir__chevron,
+  .sc-hdir__trigger[aria-expanded="true"] .sc-hdir__chevron {
+    inline-size: var(--sc-space-3);
+    transform: rotate(-90deg);
   }
 
-  .sc-hdir.sc-is-open .sc-hdir__panel { box-shadow: none; border-block-end-width: 0; }
+  .sc-hdir__panel {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    box-shadow: none;
+    background: var(--background);
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition:
+      transform var(--header-portal-dur) var(--sc-ease-out),
+      visibility 0s linear var(--header-portal-dur);
+  }
+
+  .sc-hdir.sc-is-open .sc-hdir__panel {
+    box-shadow: none;
+    border-block-end-width: 0;
+    visibility: visible;
+    transform: none;
+    transition: transform var(--header-portal-dur) var(--sc-ease-out), visibility 0s;
+  }
+
+  /* висоту на телефоні не ріжемо — панель їде цілою */
+  .sc-hdir--gsap:not(.sc-is-open) .sc-hdir__clip { block-size: auto; }
+  .sc-hdir__clip { overflow: visible; }
+
+  .sc-hdir__mobhead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sc-space-4);
+    min-block-size: var(--control-square);
+  }
+
+  .sc-hdir__back {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--foreground);
+    cursor: pointer;
+  }
+
+  .sc-hdir__hub {
+    color: var(--muted-foreground);
+    text-decoration: none;
+  }
 
   .sc-hdir__bar {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     padding-inline: 0;
+    background: transparent;
+    border-block-end: var(--hairline) solid var(--border);
   }
 
-  .sc-hdir__tabs {
-    gap: var(--sc-space-6);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .sc-hdir__tabs::-webkit-scrollbar { display: none; }
-
-  .sc-hdir__tab { padding-block: var(--sc-space-3); }
+  .sc-hdir__tabs { display: none; }
 
   .sc-hdir__body {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
-    padding: var(--stack-gap-lg) 0 var(--grid-gap);
+    padding: 0 0 var(--sc-space-6);
   }
 
-  .sc-hdir__pane { gap: var(--stack-gap-md); }
+  /* усі три групи показані одразу, одна під одною */
+  .sc-hdir__panels .sc-hdir__pane,
+  .sc-hdir__panels .sc-hdir__pane[hidden] {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
 
-  .sc-hdir__list { columns: 1; }
-  .sc-hdir__list > li { padding-block-end: var(--stack-gap-sm); }
-  .sc-hdir__link { font-size: var(--p-small-size); line-height: var(--p-small-lh); }
+  .sc-hdir__pane-label {
+    display: block;
+    margin: var(--stack-gap-lg) 0 var(--stack-gap-sm);
+    color: var(--muted-foreground);
+  }
 
-  .sc-hdir__tiles,
-  .sc-hdir__tiles--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* рядки — як пункти меню: 48, hairline зверху */
+  .sc-hdir__protocol-title,
+  .sc-hdir__chip,
+  .sc-hdir__tile-title,
+  .sc-hdir__all {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--control-square);
+    padding: var(--stack-gap-sm) 0;
+    border: 0;
+    border-block-start: var(--hairline) solid var(--border);
+    background: transparent;
+    color: var(--foreground);
+    font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+    text-decoration: none;
+  }
 
+  .sc-hdir__chip[aria-current="page"] {
+    background: transparent;
+    color: var(--foreground);
+    font-weight: var(--sc-weight-medium);
+  }
+
+  .sc-hdir__chips { display: block; }
+  .sc-hdir__chips > li { display: block; }
+
+  .sc-hdir__protocol { display: block; }
+  .sc-hdir__protocol-copy,
+  .sc-hdir__protocol-text { display: block; }
+
+  .sc-hdir__protocol-photo,
+  .sc-hdir__lead,
+  .sc-hdir__tags,
+  .sc-hdir__block,
+  .sc-hdir__heading,
+  .sc-hdir__tile-photo,
   .sc-hdir__col--article { display: none; }
 
-  .sc-header.sc-hdir-open { background: var(--glass-surface); }
+  .sc-hdir__tiles,
+  .sc-hdir__tiles--4 { display: block; }
+  .sc-hdir__tile { display: block; }
+  .sc-hdir__tile-title { padding-inline-end: 0; }
 
-  /* полка внутри ящика меню — скрим страницы не нужен */
+  /* «Усі препарати» — останнім рядком групи */
+  .sc-hdir__group { gap: 0; }
+  .sc-hdir__all { order: 1; }
+
+  .sc-header.sc-hdir-open { background: var(--background); }
+
+  /* полка всередині шторки — скрим сторінки не потрібен */
   .sc-hdir__panel::after { display: none; }
-
-  /* Список длинный: ящик меню листается сам, страница под ним стоит */
-  .sc-header--nav-open .sc-header__drawer {
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
 }
