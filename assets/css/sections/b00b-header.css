@@ -361,6 +361,12 @@
 
 .sc-header__lang-item + .sc-header__lang-item { border-inline-start: var(--hairline) solid var(--border); }
 
+/* У згорнутому стані ліва рамка поточної комірки впритул до рамки контейнера — зліва виходило
+   дві лінії (правка 2026-11-03): поки не розкрито, вона прозора; розділювач з'являється з розкриттям */
+@media (min-width: 641px) {
+  .sc-header__lang:not(:hover):not(:focus-within) .sc-header__lang-item--current { border-inline-start-color: transparent; }
+}
+
 .sc-header__lang-item:hover { background: var(--muted); color: var(--foreground); }
 
 .sc-header__lang-item--current,
