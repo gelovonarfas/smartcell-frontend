@@ -104,7 +104,7 @@
 | Рейтинг і к-ть відгуків | — | з відгуків лікаря | уже є |
 | Послуги лікаря (конфігуратор) | `services` | таксономія: категорія → підгрупа → послуга | уже є |
 | Пріоритетні напрямки роботи | — | список у біографії (перший рядок `.sc-dbio`) | уже є на virtus (вкладка поруч з «Освіта»); `doctor_smartcell` знято 2026-11-03 |
-| Vlog лікаря | `doctor_vlog` | repeater: youtube_url, poster | уже є на virtus (#vlog) |
+| Vlog лікаря | `doctor_vlog` | repeater: youtube_url, poster, title | уже є на virtus (#vlog); title — назва ролика YouTube |
 | Відеовізитка | `doctor_video`, `doctor_video_poster` | url, image | **нове** |
 | Біографія | `doctor_bio` | repeater: label, text (Освіта, Стажування, Членство, Наукова робота) | уже є на virtus — як там зберігається? |
 | Відгуки про лікаря | — | запит + «Показати ще» (пагінація) | уже є |

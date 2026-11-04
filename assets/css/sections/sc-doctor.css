@@ -359,10 +359,10 @@ a.sc-dsvc__link {
 }
 .sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__source { color: var(--sc-white-alpha-60); }
 
-/* ---------- Vlog лікаря (2026-11-03): ролики 16:9 у чотири колонки; на телефоні — стрічка вбік ---------- */
+/* ---------- Vlog лікаря (2026-11-03): ролики 16:9 по три в рядок, під кожним назва; на телефоні — стрічка вбік ---------- */
 .sc-dvlog {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--section-gap) var(--sc-tile-gap);
   margin: 0;
   padding: 0;
@@ -370,6 +370,7 @@ a.sc-dsvc__link {
 }
 
 .sc-dvlog .sc-dvideo { margin: 0; }
+.sc-dvlog .sc-dvideo__caption { padding-inline-end: var(--sc-tile-text-inset); color: var(--sc-neutral-600); }
 .sc-dvlog .sc-dvideo__open { inline-size: 100%; aspect-ratio: 16 / 9; }
 
 @media (max-width: 640px) {
