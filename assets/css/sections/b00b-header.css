@@ -553,7 +553,7 @@ body.sc-nav-lock { overflow: hidden; } /* сторінка під відкрит
   }
 
   .sc-header--nav-open .sc-header__cta { order: 0; margin-block-start: var(--sc-space-6); }
-  .sc-header--nav-open .sc-header__lang { order: 1; margin-block: auto 0; padding-block-start: var(--sc-space-6); box-sizing: content-box; }
+  .sc-header--nav-open .sc-header__lang { order: 1; margin-block: auto 0; padding-block-start: var(--sc-space-6); }
 
   .sc-header__drawer-inner {
     display: flex;
@@ -587,14 +587,25 @@ body.sc-nav-lock { overflow: hidden; } /* сторінка під відкрит
 
   /* Перемикач мови на телефоні: рядок у шторці під пунктами меню, завжди розкритий,
      комірки 48 — тап-таргет; у потоці колонки перед CTA */
+  /* Три окремі квадрати з проміжком, щоб пальцем не промахнутись (правка 2026-11-03):
+     рамка — у кожної комірки своя, у контейнера рамки немає */
   .sc-header__lang {
     --sc-lang-cell: var(--control-square);
     order: 0;
     margin-block-start: var(--stack-gap-sm);
-    inline-size: calc(var(--sc-lang-cell) * var(--sc-lang-n));
+    inline-size: auto;
+    border: 0;
+    overflow: visible;
   }
 
-  .sc-header__lang-row { transform: none; }
+  .sc-header__lang-row {
+    gap: var(--sc-space-4);
+    transform: none;
+  }
+
+  .sc-header__lang-item { border: var(--hairline) solid var(--border); }
+  .sc-header__lang-item + .sc-header__lang-item { border-inline-start-width: var(--hairline); }
+  .sc-header__lang-item--current { border-color: var(--foreground); }
 
   /* На светлой шапке журнала делители берут обычную кромку: белая линия
      на светлом стекле не видна вовсе (правка 2026-09-14) */
