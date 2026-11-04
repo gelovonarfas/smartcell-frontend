@@ -150,6 +150,7 @@
   function set(open) {
     trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
     panel.inert = !open;
+    if (!open) root.classList.remove('sc-hdir--sub');
     if (open && tabs.length) {
       /* первая установка бегунка — без анимации, затем включаем переход */
       moveIndicator(currentTab());
@@ -204,9 +205,21 @@
     cancelHover(); set(!isOpen());
   });
 
-  /* Телефон (2026-11-03): «← Меню» у шапці другого рівня повертає до пунктів меню */
+  /* Телефон (2026-11-03): два екрани вглиб. Тап по розділу (вкладці) відкриває третій екран
+     з його вмістом (root.sc-hdir--sub); «← Клітинні технології» повертає до рядків розділів,
+     «← Меню» — до пунктів меню. На десктопі (wide) клас не ставиться. */
+  function setSub(on, focusTab) {
+    root.classList.toggle('sc-hdir--sub', on);
+    if (!on && focusTab) currentTab().focus();
+  }
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () { if (wide && !wide.matches) setSub(true); });
+  });
+  all(root, '[data-directions-up]').forEach(function (b) {
+    b.addEventListener('click', function () { setSub(false, true); });
+  });
   all(root, '[data-directions-back]').forEach(function (b) {
-    b.addEventListener('click', function () { set(false); trigger.focus(); });
+    b.addEventListener('click', function () { setSub(false); set(false); trigger.focus(); });
   });
 
   /* Наведение открывает полку на курсорных устройствах (2026-10-06): раньше

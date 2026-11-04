@@ -369,6 +369,18 @@
   color: var(--background);
 }
 
+/* Тёмная (прозора над хиро) шапка FC365: рамка і неактивні коди — білі з прозорістю,
+   поточна комірка — світла плита з тёмним текстом */
+.sc-header:not(.sc-header--light) .sc-header__lang { border-color: var(--sc-white-alpha-40); }
+.sc-header:not(.sc-header--light) .sc-header__lang-item { color: var(--sc-white-alpha-80); }
+.sc-header:not(.sc-header--light) .sc-header__lang-item + .sc-header__lang-item { border-inline-start-color: var(--sc-white-alpha-40); }
+.sc-header:not(.sc-header--light) .sc-header__lang-item:hover { background: var(--sc-white-alpha-20); color: var(--primary-foreground); }
+.sc-header:not(.sc-header--light) .sc-header__lang-item--current,
+.sc-header:not(.sc-header--light) .sc-header__lang-item--current:hover {
+  background: var(--background);
+  color: var(--foreground);
+}
+
 body.sc-nav-lock { overflow: hidden; } /* сторінка під відкритим мобільним меню стоїть (2026-11-03) */
 
 .sc-header__lang-item:focus-visible {
@@ -503,6 +515,18 @@ body.sc-nav-lock { overflow: hidden; } /* сторінка під відкрит
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
+
+  /* Тёмная (прозора) шапка FC365: відкрита шторка — світла, як на решті сторінок: текст, лого,
+     шеврони й перемикач мови переходять на світлі кольори, поки меню відкрите */
+  .sc-header.sc-header--nav-open { color: var(--foreground); }
+  .sc-header.sc-header--nav-open .sc-header__link { color: var(--muted-foreground); }
+  .sc-header.sc-header--nav-open .sc-header__link:hover { color: var(--foreground); }
+  .sc-header.sc-header--nav-open .sc-header__logo-mark { fill: var(--sc-blue-700); }
+  .sc-header.sc-header--nav-open .sc-header__nav .sc-header__link { border-block-start-color: var(--border); }
+  .sc-header.sc-header--nav-open .sc-header__lang { border-color: var(--border); }
+  .sc-header.sc-header--nav-open .sc-header__lang-item { color: var(--muted-foreground); }
+  .sc-header.sc-header--nav-open .sc-header__lang-item + .sc-header__lang-item { border-inline-start-color: var(--border); }
+  .sc-header.sc-header--nav-open .sc-header__lang-item--current { background: var(--foreground); color: var(--background); }
 
   .sc-header--nav-open .sc-header__inner {
     display: grid;

@@ -534,16 +534,16 @@
   .sc-hdir.sc-is-open .sc-hdir__body > * { animation: none; }
 }
 
-/* На десктопі шапки другого рівня і підписів панелей немає */
+/* На десктопі шапок другого/третього рівня і рядка «Усі клітинні технології» немає */
 .sc-hdir__mobhead,
-.sc-hdir__pane-label { display: none; }
+.sc-hdir__hub { display: none; }
 
-/* ---------- Телефон: «Клітинні технології» — другий рівень меню (2026-11-03) ----------
-   Пункт у шторці веде не в акордеон, а на другий екран: панель в'їжджає справа поверх
-   пунктів (drill-down). Зверху — «← Меню» і посилання на хаб, далі три групи простими
-   рядками: Протоколи · Терапія · Препарати. Вкладок, фото, описів і анонсу немає —
-   на телефоні це просто список посилань. Було (2026-10-05 … 11-03): акордеон
-   із вкладками й витриною протоколу всередині шторки. */
+/* ---------- Телефон: «Клітинні технології» — два екрани вглиб (2026-11-03) ----------
+   Пункт у шторці веде на другий екран (в'їжджає справа): «← Меню», три розділи рядками —
+   Протоколи · Терапія · Препарати — і 4-й рядок «Усі клітинні технології» (хаб).
+   Тап по розділу відкриває третій екран з його вмістом — як він виглядав у старому
+   акордеоні: витрина протоколу без фото, чипи напрямків, продукти у два стовпці.
+   Зверху третього екрана — «← Клітинні технології». Клас sc-hdir--sub ставить скрипт. */
 
 @media (max-width: 640px) {
   .sc-hdir { display: block; }
@@ -564,6 +564,7 @@
     transform: rotate(-90deg);
   }
 
+  /* --- другий екран --- */
   .sc-hdir__panel {
     position: absolute;
     inset: 0;
@@ -587,16 +588,15 @@
     transition: transform var(--header-portal-dur) var(--sc-ease-out), visibility 0s;
   }
 
-  /* висоту на телефоні не ріжемо — панель їде цілою */
   .sc-hdir--gsap:not(.sc-is-open) .sc-hdir__clip { block-size: auto; }
   .sc-hdir__clip { overflow: visible; }
+  .sc-hdir__shelf { position: static; }
 
   .sc-hdir__mobhead {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--sc-space-4);
     min-block-size: var(--control-square);
+    border-block-end: var(--hairline) solid var(--border);
   }
 
   .sc-hdir__back {
@@ -607,89 +607,93 @@
     cursor: pointer;
   }
 
-  .sc-hdir__hub {
-    color: var(--muted-foreground);
-    text-decoration: none;
-  }
-
   .sc-hdir__bar {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     padding-inline: 0;
     background: transparent;
-    border-block-end: var(--hairline) solid var(--border);
+    border-block-end: 0;
   }
 
-  .sc-hdir__tabs { display: none; }
-
-  .sc-hdir__body {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    padding: 0 0 var(--sc-space-6);
-  }
-
-  /* усі три групи показані одразу, одна під одною */
-  .sc-hdir__panels .sc-hdir__pane,
-  .sc-hdir__panels .sc-hdir__pane[hidden] {
+  /* розділи — рядками, як пункти меню; бігунка немає */
+  .sc-hdir__tabs {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     gap: 0;
+    overflow: visible;
   }
 
-  .sc-hdir__pane-label {
-    display: block;
-    margin: var(--stack-gap-lg) 0 var(--stack-gap-sm);
-    color: var(--muted-foreground);
-  }
+  .sc-hdir__indicator { display: none; }
 
-  /* рядки — як пункти меню: 48, hairline зверху */
-  .sc-hdir__protocol-title,
-  .sc-hdir__chip,
-  .sc-hdir__tile-title,
-  .sc-hdir__all {
+  .sc-hdir__tab,
+  .sc-hdir__hub {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     min-block-size: var(--control-square);
     padding: var(--stack-gap-sm) 0;
     border: 0;
     border-block-start: var(--hairline) solid var(--border);
-    background: transparent;
+    background: none;
     color: var(--foreground);
     font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
     text-decoration: none;
+    cursor: pointer;
   }
 
-  .sc-hdir__chip[aria-current="page"] {
-    background: transparent;
-    color: var(--foreground);
-    font-weight: var(--sc-weight-medium);
+  .sc-hdir__tabs .sc-hdir__tab:first-child { border-block-start: 0; }
+  .sc-hdir__tab[aria-selected="true"] { color: var(--foreground); }
+
+  /* стрілка «далі» праворуч; у «Усі клітинні технології» — теж, це перехід на хаб */
+  .sc-hdir__tab::after,
+  .sc-hdir__hub::after {
+    content: "→";
+    color: var(--muted-foreground);
   }
 
-  .sc-hdir__chips { display: block; }
-  .sc-hdir__chips > li { display: block; }
+  /* --- третій екран: вміст розділу поверх другого --- */
+  .sc-hdir__body {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 0 var(--sc-space-6);
+    background: var(--background);
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition:
+      transform var(--header-portal-dur) var(--sc-ease-out),
+      visibility 0s linear var(--header-portal-dur);
+  }
 
-  .sc-hdir__protocol { display: block; }
-  .sc-hdir__protocol-copy,
-  .sc-hdir__protocol-text { display: block; }
+  .sc-hdir--sub .sc-hdir__body {
+    visibility: visible;
+    transform: none;
+    transition: transform var(--header-portal-dur) var(--sc-ease-out), visibility 0s;
+  }
 
-  .sc-hdir__protocol-photo,
-  .sc-hdir__lead,
-  .sc-hdir__tags,
-  .sc-hdir__block,
-  .sc-hdir__heading,
-  .sc-hdir__tile-photo,
-  .sc-hdir__col--article { display: none; }
+  .sc-hdir__panels { padding-block-start: var(--stack-gap-lg); }
+  .sc-hdir__pane { gap: var(--stack-gap-md); }
+
+  /* вміст — як у старому акордеоні (2026-10-05): без фото, кнопка на всю ширину, продукти у два стовпці */
+  .sc-hdir__protocol { grid-template-columns: minmax(0, 1fr); }
+  .sc-hdir__protocol-photo { display: none; }
+  .sc-hdir__protocol-copy { gap: var(--stack-gap-lg); }
+  .sc-hdir__block { align-self: stretch; inline-size: 100%; }
+
+  .sc-hdir__list { columns: 1; }
+  .sc-hdir__list > li { padding-block-end: var(--stack-gap-sm); }
+  .sc-hdir__link { font-size: var(--p-small-size); line-height: var(--p-small-lh); }
 
   .sc-hdir__tiles,
-  .sc-hdir__tiles--4 { display: block; }
-  .sc-hdir__tile { display: block; }
-  .sc-hdir__tile-title { padding-inline-end: 0; }
+  .sc-hdir__tiles--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-  /* «Усі препарати» — останнім рядком групи */
-  .sc-hdir__group { gap: 0; }
-  .sc-hdir__all { order: 1; }
+  .sc-hdir__col--article { display: none; }
 
   .sc-header.sc-hdir-open { background: var(--background); }
 
