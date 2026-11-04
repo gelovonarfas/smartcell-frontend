@@ -59,6 +59,7 @@
 }
 
 .sc-cases__tab[aria-selected="true"] { color: var(--foreground); }
+.sc-cases__tab[hidden] { display: none; } /* у пацієнтки немає цього виду контролю (2026-11-03) */
 
 /* Бегунок едет по линии под активной вкладкой; координаты ставит скрипт */
 .sc-cases__tab-ind {

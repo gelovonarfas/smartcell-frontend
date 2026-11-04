@@ -72,8 +72,18 @@
       ind.style.setProperty('--cases-ind-w', on.offsetWidth + 'px');
     }
 
+    /* Не у кожної пацієнтки є УЗД (4–6 — лише фото, 2026-11-03): вкладки без кадру
+       для поточної пацієнтки ховаються, а якщо активний тип недоступний — повертаємось до фото */
+    function hasType(type) {
+      for (var i = 0; i < frames.length; i++) {
+        if (frames[i].getAttribute('data-case-frame') === state.c && frames[i].getAttribute('data-case-type') === type) return true;
+      }
+      return false;
+    }
+
     function paint(resetPos) {
       var cur = null;
+      if (!hasType(state.type)) state.type = 'photo';
       frames.forEach(function (f) {
         var on = f.getAttribute('data-case-frame') === state.c && f.getAttribute('data-case-type') === state.type;
         if (on) { f.setAttribute('data-current', ''); cur = f; } else f.removeAttribute('data-current');
@@ -86,6 +96,7 @@
         var on = t.getAttribute('data-case-type-btn') === state.type;
         t.setAttribute('aria-selected', on ? 'true' : 'false');
         t.tabIndex = on ? 0 : -1;
+        t.hidden = !hasType(t.getAttribute('data-case-type-btn'));
       });
       placeIndicator();
 
@@ -115,8 +126,9 @@
         var fwd = e.key === 'ArrowRight', back = e.key === 'ArrowLeft';
         if (!fwd && !back) return;
         e.preventDefault();
-        var i = tabs.indexOf(t);
-        var n = tabs[(i + (fwd ? 1 : -1) + tabs.length) % tabs.length];
+        var live = tabs.filter(function (x) { return !x.hidden; });
+        var i = live.indexOf(t);
+        var n = live[(i + (fwd ? 1 : -1) + live.length) % live.length];
         state.type = n.getAttribute('data-case-type-btn');
         paint(true);
         n.focus();
