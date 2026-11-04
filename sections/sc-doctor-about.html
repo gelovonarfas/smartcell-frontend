@@ -3,12 +3,14 @@
      figma: макета нет — блоки собраны из компонентов страницы напрямку
      (чипы sc-dindications, видео sc-dvideo из sc-direction-tabs.css) и строк
      биографии sc-dbio (sc-doctor.css). Тексты — virtus.ua, как есть (2026-10-06).
-     ACF: doctor_smartcell (repeater: послуга), doctor_video (url YouTube) + doctor_video_poster,
+     ACF: doctor_priorities (wysiwyg — «Пріоритетні напрямки роботи», як на virtus; doctor_smartcell знято 2026-11-03), doctor_video (url YouTube) + doctor_video_poster,
           doctor_bio (repeater: label, text — Освіта, Стажування…, Членство…, Наукова робота).
      Видео: постер картинкой, ролик — в модалке (data-modal="doctor-video"), iframe грузится по клику.
      ============================================================ -->
 <section class="sc-doc sc-doc--about">
 
+  <!-- Знято 2026-11-03: блок «Застосовує клітинні технології SmartCell» (чипи) — на virtus такого немає,
+       там «Пріоритетні напрямки роботи» (перший рядок біографії нижче). Для відкату:
   <div class="sc-doc__group sc-dindications">
     <h2 class="sc-dindications__title sc-t-h2">Застосовує клітинні технології SmartCell</h2>
     <ul class="sc-dindications__list">
@@ -21,6 +23,7 @@
       <li><span class="sc-dindications__chip sc-t-small">клітинні технології в лікуванні ускладнень традиційної контурної пластики і агресивних процедур</span></li>
     </ul>
   </div>
+  -->
 
   <figure class="sc-doc__group sc-dvideo">
     <button class="sc-dvideo__open" type="button" data-modal-open="doctor-video"
@@ -37,6 +40,21 @@
 
   <!-- Биография — строки через волосяную линию: подпись слева, текст справа -->
   <dl class="sc-doc__group sc-dbio">
+    <!-- Пріоритетні напрямки роботи — як на virtus (вкладка поруч з «Освіта», простий список без посилань, 2026-11-03) -->
+    <div class="sc-dbio__row">
+      <dt class="sc-dbio__label sc-t-h3">Пріоритетні напрямки роботи</dt>
+      <dd class="sc-dbio__body sc-t-body">
+        <ul>
+          <li>лікування та корекція наслідків вугрової хвороби;</li>
+          <li>лікування та корекція захворювання розацеа;</li>
+          <li>лазерне шліфування обличчя (абляційне, неабляційне, фракційне);</li>
+          <li>омолодження шкіри власними фібробластами;</li>
+          <li>лікування пігментації (лазером та підбором спеціальних косметичних засобів);</li>
+          <li>біоревіталізація;</li>
+          <li>контурна пластика.</li>
+        </ul>
+      </dd>
+    </div>
     <div class="sc-dbio__row">
       <dt class="sc-dbio__label sc-t-h3">Освіта</dt>
       <dd class="sc-dbio__body sc-t-body">

@@ -358,3 +358,32 @@ a.sc-dsvc__link {
   letter-spacing: normal;
 }
 .sc-dsvc__tile[aria-expanded="true"] .sc-dsvc__source { color: var(--sc-white-alpha-60); }
+
+/* ---------- Vlog лікаря (2026-11-03): ролики 16:9 у чотири колонки; на телефоні — стрічка вбік ---------- */
+.sc-dvlog {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--section-gap) var(--sc-tile-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dvlog .sc-dvideo { margin: 0; }
+.sc-dvlog .sc-dvideo__open { inline-size: 100%; aspect-ratio: 16 / 9; }
+
+@media (max-width: 640px) {
+  .sc-dvlog {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 85%;
+    margin-inline: calc(-1 * var(--sc-pad-x));
+    padding-inline: var(--sc-pad-x);
+    scroll-padding-inline: var(--sc-pad-x);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .sc-dvlog::-webkit-scrollbar { display: none; }
+  .sc-dvlog > li { scroll-snap-align: start; }
+}

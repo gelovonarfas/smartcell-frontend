@@ -103,7 +103,8 @@
 | Hero | `doctor_name`, `doctor_position`, `doctor_experience`, `doctor_branches`, `doctor_photo` | title, textarea, number, relationship, image | уже є: картка лікаря |
 | Рейтинг і к-ть відгуків | — | з відгуків лікаря | уже є |
 | Послуги лікаря (конфігуратор) | `services` | таксономія: категорія → підгрупа → послуга | уже є |
-| Клітинні технології лікаря | `doctor_smartcell` | repeater: послуга | **нове** (або фільтр послуг по розділу) |
+| Пріоритетні напрямки роботи | — | список у біографії (перший рядок `.sc-dbio`) | уже є на virtus (вкладка поруч з «Освіта»); `doctor_smartcell` знято 2026-11-03 |
+| Vlog лікаря | `doctor_vlog` | repeater: youtube_url, poster | уже є на virtus (#vlog) |
 | Відеовізитка | `doctor_video`, `doctor_video_poster` | url, image | **нове** |
 | Біографія | `doctor_bio` | repeater: label, text (Освіта, Стажування, Членство, Наукова робота) | уже є на virtus — як там зберігається? |
 | Відгуки про лікаря | — | запит + «Показати ще» (пагінація) | уже є |
@@ -131,7 +132,7 @@
 ## Разом: чого точно не було на virtus
 
 `flash`, `review_type` (+ `youtube_url`, `poster`, `scans`), `service_external`, `ba_link`/`ba_image`,
-`bank_storage`, `indications`, `doctor_smartcell`, `doctor_video`, `consult_*`, `order_*`.
+`bank_storage`, `indications`, `doctor_video`, `consult_*`, `order_*`.
 Опційні (можна не заводити): `quote_kicker`/`quote_text`, `faq`.
 
 Усе інше — заголовок, контент, featured image, філії, лікарі, послуги, відгуки — штатні сутності.
