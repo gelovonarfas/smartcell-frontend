@@ -599,13 +599,36 @@
     border-block-end: var(--hairline) solid var(--border);
   }
 
+  /* Шеврони рядків і «назад» — той самий знак, що в рядку «Клітинні технології» (sc-hdir__chevron),
+     малюється маскою, колір — currentColor */
+  .sc-hdir__back,
+  .sc-hdir__tab,
+  .sc-hdir__hub { --sc-hdir-chev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M1.5 3.5L5 7L8.5 3.5' stroke='%23000'/%3E%3C/svg%3E"); }
+
+  .sc-hdir__back::before,
+  .sc-hdir__tab::after,
+  .sc-hdir__hub::after {
+    content: "";
+    flex: none;
+    inline-size: var(--sc-space-3);
+    block-size: var(--sc-space-3);
+    background: currentColor;
+    -webkit-mask: var(--sc-hdir-chev) center / contain no-repeat;
+    mask: var(--sc-hdir-chev) center / contain no-repeat;
+  }
+
   .sc-hdir__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sc-space-1_5);
     padding: 0;
     border: 0;
     background: none;
     color: var(--foreground);
     cursor: pointer;
   }
+
+  .sc-hdir__back::before { transform: rotate(90deg); } /* ‹ */
 
   .sc-hdir__bar {
     flex-direction: column;
@@ -645,10 +668,10 @@
   .sc-hdir__tabs .sc-hdir__tab:first-child { border-block-start: 0; }
   .sc-hdir__tab[aria-selected="true"] { color: var(--foreground); }
 
-  /* стрілка «далі» праворуч; у «Усі клітинні технології» — теж, це перехід на хаб */
+  /* шеврон «далі» праворуч, приглушений — як у рядку «Клітинні технології» в меню */
   .sc-hdir__tab::after,
   .sc-hdir__hub::after {
-    content: "→";
+    transform: rotate(-90deg); /* › */
     color: var(--muted-foreground);
   }
 
