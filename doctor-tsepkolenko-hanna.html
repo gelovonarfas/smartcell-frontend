@@ -833,7 +833,8 @@
      SC/Doctor · Vlog лікаря (2026-11-03) — як на virtus.ua/doctor/cepkolenko-anna-vladimirovna (#vlog):
      вісім роликів, у тому ж порядку; під кожним — назва ролика з YouTube (на virtus підпис закоментований,
      у alt — та сама назва; регістр капсових назв приведено до звичайного, 2026-11-03).
-     Постер — кадр YouTube; клік ставить плеєр на місце постера (data-inline-video, modal.js).
+     Постер — кадр YouTube; клік відкриває ролик у відеомодалці, як відеовізитка (одна модалка vlog-video,
+     адреса — data-modal-video на кнопці, modal.js).
      Три в рядок; на телефоні — стрічка, що листається вбік.
      ACF: doctor_vlog (repeater: youtube_url, poster, title) — на virtus уже є
      ============================================================ -->
@@ -841,8 +842,9 @@
   <h2 class="sc-doc__title sc-t-h2">Vlog лікаря</h2>
   <ul class="sc-dvlog">
     <li>
-      <figure class="sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/ZGf4MPJprwg?autoplay=1&amp;rel=0">
-        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео: Лазер vs невус Беккера">
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="vlog-video"
+                data-modal-video="https://www.youtube-nocookie.com/embed/ZGf4MPJprwg?autoplay=1&amp;rel=0" aria-label="Дивитись відео: Лазер vs невус Беккера">
           <img class="sc-dvideo__poster" data-src="assets/img/doctor/tsepkolenko-hanna/vlog-1.jpg"
                width="640" height="360" alt="" loading="lazy" decoding="async">
           <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
@@ -851,8 +853,9 @@
       </figure>
     </li>
     <li>
-      <figure class="sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/Q8hcSZd6wmY?autoplay=1&amp;rel=0">
-        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео: Лазерне омолодження обличчя в Інституті VIRTUS">
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="vlog-video"
+                data-modal-video="https://www.youtube-nocookie.com/embed/Q8hcSZd6wmY?autoplay=1&amp;rel=0" aria-label="Дивитись відео: Лазерне омолодження обличчя в Інституті VIRTUS">
           <img class="sc-dvideo__poster" data-src="assets/img/doctor/tsepkolenko-hanna/vlog-2.jpg"
                width="640" height="360" alt="" loading="lazy" decoding="async">
           <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
@@ -861,8 +864,9 @@
       </figure>
     </li>
     <li>
-      <figure class="sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/QvXxAsR4V1I?autoplay=1&amp;rel=0">
-        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео: Лікуємо вугрову хворобу">
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="vlog-video"
+                data-modal-video="https://www.youtube-nocookie.com/embed/QvXxAsR4V1I?autoplay=1&amp;rel=0" aria-label="Дивитись відео: Лікуємо вугрову хворобу">
           <img class="sc-dvideo__poster" data-src="assets/img/doctor/tsepkolenko-hanna/vlog-3.jpg"
                width="640" height="360" alt="" loading="lazy" decoding="async">
           <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
@@ -871,8 +875,9 @@
       </figure>
     </li>
     <li>
-      <figure class="sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/IGChOMFmjfY?autoplay=1&amp;rel=0">
-        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео: Клітинні технології для краси і молодості">
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="vlog-video"
+                data-modal-video="https://www.youtube-nocookie.com/embed/IGChOMFmjfY?autoplay=1&amp;rel=0" aria-label="Дивитись відео: Клітинні технології для краси і молодості">
           <img class="sc-dvideo__poster" data-src="assets/img/doctor/tsepkolenko-hanna/vlog-4.jpg"
                width="640" height="360" alt="" loading="lazy" decoding="async">
           <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
@@ -881,8 +886,9 @@
       </figure>
     </li>
     <li>
-      <figure class="sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/FMMrAqIRea0?autoplay=1&amp;rel=0">
-        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео: Зустріч з пацієнтами у Києві. Малоінвазивне омолодження.">
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="vlog-video"
+                data-modal-video="https://www.youtube-nocookie.com/embed/FMMrAqIRea0?autoplay=1&amp;rel=0" aria-label="Дивитись відео: Зустріч з пацієнтами у Києві. Малоінвазивне омолодження.">
           <img class="sc-dvideo__poster" data-src="assets/img/doctor/tsepkolenko-hanna/vlog-5.jpg"
                width="640" height="360" alt="" loading="lazy" decoding="async">
           <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
@@ -891,8 +897,9 @@
       </figure>
     </li>
     <li>
-      <figure class="sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/BIAOVWnwVv4?autoplay=1&amp;rel=0">
-        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео: Ганна Цепколенко: лазерний фракційний фототермоліз">
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="vlog-video"
+                data-modal-video="https://www.youtube-nocookie.com/embed/BIAOVWnwVv4?autoplay=1&amp;rel=0" aria-label="Дивитись відео: Ганна Цепколенко: лазерний фракційний фототермоліз">
           <img class="sc-dvideo__poster" data-src="assets/img/doctor/tsepkolenko-hanna/vlog-6.jpg"
                width="640" height="360" alt="" loading="lazy" decoding="async">
           <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
@@ -901,8 +908,9 @@
       </figure>
     </li>
     <li>
-      <figure class="sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/ptvqMr7CZPo?autoplay=1&amp;rel=0">
-        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео: Ганна Цепколенко про процедуру АМК">
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="vlog-video"
+                data-modal-video="https://www.youtube-nocookie.com/embed/ptvqMr7CZPo?autoplay=1&amp;rel=0" aria-label="Дивитись відео: Ганна Цепколенко про процедуру АМК">
           <img class="sc-dvideo__poster" data-src="assets/img/doctor/tsepkolenko-hanna/vlog-7.jpg"
                width="640" height="360" alt="" loading="lazy" decoding="async">
           <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
@@ -911,8 +919,9 @@
       </figure>
     </li>
     <li>
-      <figure class="sc-dvideo" data-inline-video="https://www.youtube-nocookie.com/embed/r9IjvUFDPks?autoplay=1&amp;rel=0">
-        <button class="sc-dvideo__open" type="button" aria-label="Дивитись відео: Можливості. Ганна Цепколенко. Естетична медицина. Лікування акне.">
+      <figure class="sc-dvideo">
+        <button class="sc-dvideo__open" type="button" data-modal-open="vlog-video"
+                data-modal-video="https://www.youtube-nocookie.com/embed/r9IjvUFDPks?autoplay=1&amp;rel=0" aria-label="Дивитись відео: Можливості. Ганна Цепколенко. Естетична медицина. Лікування акне.">
           <img class="sc-dvideo__poster" data-src="assets/img/doctor/tsepkolenko-hanna/vlog-8.jpg"
                width="640" height="360" alt="" loading="lazy" decoding="async">
           <span class="sc-dvideo__play" aria-hidden="true"><svg viewBox="0 0 56 56" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 20L36 28L22 36V20Z" fill="currentColor" stroke="currentColor"/></svg></span>
@@ -1089,6 +1098,26 @@
       </form>
     </div>
 
+  </div>
+</div>
+
+<!-- Модалка Vlog лікаря (2026-11-03) — одна на всі ролики: адресу й назву підставляє modal.js
+     з data-modal-video і aria-label кнопки, на яку натиснули -->
+<div class="sc-modal sc-modal--video" data-modal="vlog-video" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+  <div class="sc-modal__dialog sc-modal__dialog--video" role="dialog" aria-modal="true" data-theme="inverse"
+       aria-label="Vlog лікаря">
+    <button class="sc-modal__close sc-modal__close--outside" type="button" data-modal-close aria-label="Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg>
+    </button>
+    <div class="sc-modal__frame">
+      <iframe class="sc-modal__video"
+              data-src="https://www.youtube-nocookie.com/embed/ZGf4MPJprwg?autoplay=1&amp;rel=0"
+              title="Vlog лікаря"
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 

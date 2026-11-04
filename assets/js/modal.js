@@ -162,7 +162,22 @@
     if (opener) {
       var name = opener.getAttribute('data-modal-open');
       var target = document.querySelector('[data-modal="' + name + '"]');
-      if (target) { e.preventDefault(); open(target, opener); return; }
+      if (target) {
+        e.preventDefault();
+        /* Одна відеомодалка на кілька роликів (Vlog лікаря, 2026-11-03): адреса ролика —
+           у data-modal-video на кнопці, назва — у її aria-label; підставляються перед відкриттям */
+        var video = opener.getAttribute('data-modal-video');
+        if (video) {
+          var vf = target.querySelector('[data-src]');
+          if (vf) {
+            vf.setAttribute('data-src', video);
+            var label = (opener.getAttribute('aria-label') || '').replace(/^Дивитись відео:\s*/, '');
+            if (label) { vf.title = label; var dlg = target.querySelector('[role="dialog"]'); if (dlg) dlg.setAttribute('aria-label', label); }
+          }
+        }
+        open(target, opener);
+        return;
+      }
     }
 
     /* исторические CTA секций ведут на запись */
