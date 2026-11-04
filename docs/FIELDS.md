@@ -121,6 +121,24 @@
 | Плита «Замовлення» | `order_title`, `order_text`, `order_cta_label`, `order_image` | text, textarea, text, image | **нове** / константи з форми virtus |
 | Попап замовлення | — | ПІБ, телефон, склад замовлення | форма virtus (js-form12) |
 
+## Постери відео розділу
+
+На сторінках розділу на virtus стоять лише 7 різних роликів YouTube (обхід 2026-11-04, 39 сторінок).
+Постер — кадр ролика без плашок і субтитрів, 16:9; поруч завжди є `-640` для `srcset`.
+Де ролик вставлено iframe у wysiwyg — постер не потрібен; він для наших блоків з кнопкою відео.
+
+| Ролик | Назва | Сторінок | Постер |
+|---|---|---|---|
+| `w9fIN4AjRi8` | Марія, пацієнтка доктора Олени Єсауленко | 13 | `assets/img/direction/service/video-maria-clean.jpg` |
+| `ilx1Oj8s7bQ` | Регенеративні технології VIRTUS для поранених захисників. Інтервʼю на 7 каналі | 14 | `assets/img/direction/hub/video-2.jpg` |
+| `J8Ppy8G-_Lk` | Тут створюють клітинні технології | 13 | `assets/img/direction/hub/video-1.jpg` |
+| `FUVoSfJWGoM` | Клітинна терапія для прискорення лікування при важких травмах | 9 | `assets/img/video/FUVoSfJWGoM.jpg` |
+| `VeE5u2brPaM` | Розпакування біоматеріалу, підготовленого у лабораторії SmartCell | 5 | `assets/img/direction/hub/video-3.jpg` |
+| `IGChOMFmjfY` | Клітинні технології для краси і молодості | 4 | `assets/img/direction/plastic/video-poster.jpg` |
+| `I4vKlv8tGBY` | Плазмаферез у клітинній терапії | 1 | `assets/img/video/I4vKlv8tGBY.jpg` |
+
+Відеовізитки й Vlog лікарів (`/doctor/…`) — окремо, у кожного лікаря свої.
+
 ## Без власних полів
 
 - **Автор журналу** (`vm-author.html`) — автор WP + його пости.
