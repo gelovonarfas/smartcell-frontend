@@ -71,6 +71,40 @@
   .vm-category__lede { max-inline-size: none; }
 }
 
+/* ---------- Колонка професора (2026-11-03): фігура праворуч, стоїть на нижньому краї полоси ---------- */
+.vm-category--column {
+  --vm-col-figure-w: 480px; /* ширина вирізаного кадру; палець — на рівні заголовка й ліду */
+  position: relative;
+  overflow: hidden;
+}
+
+/* текст не заходить під фігуру */
+.vm-category--column > :not(.vm-category__figure) {
+  position: relative;
+  z-index: 1;
+  max-inline-size: min(var(--vm-cat-lede-w), calc(100% - var(--vm-col-figure-w)));
+}
+
+.vm-category__figure {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: var(--sc-pad-x);
+  inline-size: var(--vm-col-figure-w);
+  max-inline-size: 45%;
+  block-size: auto;
+}
+
+/* Телефон: фігура під текстом, у потоці, стоїть на нижньому краї полоси */
+@media (max-width: 640px) {
+  .vm-category--column > :not(.vm-category__figure) { max-inline-size: none; }
+  .vm-category__figure {
+    position: static;
+    align-self: flex-end;
+    max-inline-size: 100%;
+    margin-block: var(--section-gap) calc(-1 * var(--section-padding-y-tight));
+  }
+}
+
 /* ============================================================
    Варіанти шапки рубрики (2026-10-27): сторінка автора, пошук, порожній стан, 404.
    Та сама полоса warm і ритм, що в рубриці — нові лише вміст і кілька елементів.
