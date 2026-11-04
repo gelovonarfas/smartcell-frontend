@@ -1263,9 +1263,12 @@
 .vm-article__quote-by {
   --vm-a-person-photo: 96px;
   display: flex;
-  align-items: flex-start; /* текст по верху фото (2026-11-03; было center) */
+  /* как рядок автора (2026-11-03): имя и статус по верху фото, соцмережі — к низу; было center */
+  align-items: stretch;
   gap: var(--stack-gap-md);
 }
+
+.vm-article__quote-by > .vm-article__person-text { justify-content: space-between; }
 
 .vm-article__quote-who { font-weight: var(--sc-weight-medium); }
 
