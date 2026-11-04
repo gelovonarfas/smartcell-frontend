@@ -127,6 +127,19 @@
       </div>
     </div>
 
+    <!-- Перемикач мови (2026-11-03, «розкладний»). Текст, не прапори; назви мов — в aria-label, ISO-коди в lang/hreflang.
+         Поточна мова — не посилання (aria-current). Посилання ведуть на ЦЮ Ж сторінку іншою мовою.
+         У темі: виводити лише мови з галочкою «переклад є»; одна мова — блок не виводити.
+         data-lang-count = скільки мов виведено (2 або 3). Порядок: при трьох поточна — посередині,
+         при двох — перша. На десктопі згорнутий до поточної, на телефоні розкритий.
+         PLACEHOLDER: href — адреси перекладів з qTranslate -->
+    <nav class="sc-header__lang" aria-label="Мова сторінки" data-lang-count="3">
+      <span class="sc-header__lang-row">
+        <a class="sc-header__lang-item" lang="ru" hreflang="ru" href="#" aria-label="Русский">RU</a>
+        <span class="sc-header__lang-item sc-header__lang-item--current" lang="uk" aria-current="page" aria-label="Українська">UA</span>
+        <a class="sc-header__lang-item" lang="en" hreflang="en" href="#" aria-label="English">EN</a>
+      </span>
+    </nav>
     <button class="sc-header__burger" type="button" aria-label="Меню"
             aria-expanded="false" aria-controls="header-nav" data-nav-toggle>
       <span class="sc-header__burger-box" aria-hidden="true"><span></span><span></span></span>
@@ -300,16 +313,6 @@
       <a class="sc-header__link sc-header__link--portal sc-t-small" href="https://virtus.ua/">VIRTUS · Всі напрямки інституту</a>
     </nav>
 
-    <!-- Перемикач мови (2026-11-03). Правила: тексти, не прапори; кожна мова — своєю назвою в aria-label,
-         коротким кодом у рядку; поточна мова — не посилання (aria-current); посилання ведуть на ЦЮ Ж
-         сторінку іншою мовою, не на головну. У темі: виводити лише мови, у яких стоїть галочка «переклад є»;
-         якщо мова одна — не виводити блок узагалі. Коди в атрибутах — ISO: uk / ru / en.
-         PLACEHOLDER: href — адреси перекладів з qTranslate -->
-    <nav class="sc-header__lang" aria-label="Мова сторінки">
-      <span class="sc-header__lang-item sc-header__lang-item--current" lang="uk" aria-current="page" aria-label="Українська">UA</span>
-      <a class="sc-header__lang-item" lang="ru" hreflang="ru" href="#" aria-label="Русский">RU</a>
-      <a class="sc-header__lang-item" lang="en" hreflang="en" href="#" aria-label="English">EN</a>
-    </nav>
     <a class="sc-header__cta" href="index.html#consultation">
       <span class="sc-header__cta-label">Почати з діагностики</span>
     </a>

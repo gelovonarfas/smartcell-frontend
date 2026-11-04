@@ -304,140 +304,79 @@
   border-color: var(--foreground);
 }
 
-/* ---------- Перемикач мови (2026-11-03) ----------
-   Три коди в рядок між меню і CTA: поточна — кольором тексту, без посилання;
-   інші — приглушені, як пункти меню. Прапорів немає, назви мов — в aria-label. */
+/* ---------- Перемикач мови (2026-11-03, варіант «розкладний») ----------
+   Квадрат із поточною мовою стоїть перед бургером/кнопкою; на наведенні чи фокусі
+   контейнер росте ліворуч до всіх мов, а рядок зсувається так, що поточна стає на своє
+   місце: при трьох мовах — посередині (RU · UA · EN), при двох — першою (UA · RU).
+   Порядок задає розмітка, кількість — data-lang-count (2 або 3): від неї залежать
+   ширина розкритого стану (--sc-lang-n) і зсув поточної комірки (--sc-lang-i).
+   На телефоні — завжди розкрито, у планці поруч із бургером. Без JS. */
 
 .sc-header__lang {
-  display: flex;
-  align-items: center;
-  gap: var(--sc-space-4);
+  --sc-lang-cell: var(--sc-space-8);
+  --sc-lang-n: 3;
+  --sc-lang-i: 1;
+  order: 1; /* на десктопі — після меню, перед CTA (панель display: contents) */
+  flex: none;
+  box-sizing: content-box;
+  inline-size: var(--sc-lang-cell);
+  overflow: hidden;
+  border: var(--hairline) solid var(--border);
+  transition: inline-size var(--sc-dur-slow) var(--sc-ease-out);
 }
+
+.sc-header__cta { order: 2; }
+
+.sc-header__lang[data-lang-count="2"] { --sc-lang-n: 2; --sc-lang-i: 0; }
+.sc-header__lang[data-lang-count="3"] { --sc-lang-n: 3; --sc-lang-i: 1; }
+
+.sc-header__lang:hover,
+.sc-header__lang:focus-within { inline-size: calc(var(--sc-lang-cell) * var(--sc-lang-n)); }
+
+/* рядок мов: у згорнутому стані зсунутий так, що в кадрі лише поточна комірка */
+.sc-header__lang-row {
+  display: flex;
+  inline-size: max-content;
+  transform: translateX(calc(-1 * var(--sc-lang-i) * var(--sc-lang-cell)));
+  transition: transform var(--sc-dur-slow) var(--sc-ease-out);
+}
+
+.sc-header__lang:hover .sc-header__lang-row,
+.sc-header__lang:focus-within .sc-header__lang-row { transform: none; }
 
 .sc-header__lang-item {
-  color: var(--sc-white-alpha-80);
-  text-decoration: none;
-  text-transform: uppercase;
-  white-space: nowrap;
-  font: var(--caption-weight) var(--caption-size) / var(--caption-lh) var(--font-sans);
-  letter-spacing: var(--caption-ls);
-  transition: color var(--sc-dur-fast) var(--sc-ease);
-}
-
-.sc-header__lang-item:hover { color: var(--foreground); }
-
-.sc-header__lang-item--current {
-  color: var(--foreground);
-  text-decoration: underline;
-  text-underline-position: from-font;
-  text-decoration-thickness: var(--hairline);
-}
-
-.sc-header--light .sc-header__lang-item { color: var(--muted-foreground); }
-.sc-header--light .sc-header__lang-item:hover,
-.sc-header--light .sc-header__lang-item--current { color: var(--foreground); }
-
-/* ---------- Перемикач мови · варіанти для вибору (2026-11-03, демо: lang-demo.html) ----------
-   Модифікатор на nav.sc-header__lang. Обраний лишається, решту — прибрати. */
-
-/* 1 · «бігунок»: риска 2px під кодом, як у вкладках напрямку; на наведенні риска з'являється під сусідом */
-.sc-header__lang--bar { gap: var(--sc-space-5); }
-
-.sc-header__lang--bar .sc-header__lang-item {
-  position: relative;
-  padding-block: var(--sc-space-1_5);
-  text-decoration: none;
-}
-
-.sc-header__lang--bar .sc-header__lang-item::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: 0;
-  block-size: var(--sc-line);
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--sc-dur) var(--sc-ease-out);
-}
-
-.sc-header__lang--bar .sc-header__lang-item--current::after,
-.sc-header__lang--bar .sc-header__lang-item:hover::after { transform: scaleX(1); }
-
-/* 2 · «квадрати»: три комірки 32 у рядок, спільна рамка-hairline; поточна — залита кольором тексту */
-.sc-header__lang--squares {
-  --sc-lang-cell: var(--sc-space-8);
-  gap: 0;
-  border: var(--hairline) solid var(--border);
-}
-
-.sc-header__lang--squares .sc-header__lang-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--sc-lang-cell);
-  block-size: var(--sc-lang-cell);
-  text-decoration: none;
-  transition: background-color var(--sc-dur-fast) var(--sc-ease), color var(--sc-dur-fast) var(--sc-ease);
-}
-
-.sc-header__lang--squares .sc-header__lang-item + .sc-header__lang-item { border-inline-start: var(--hairline) solid var(--border); }
-
-.sc-header__lang--squares .sc-header__lang-item:hover { background: var(--muted); }
-
-.sc-header__lang--squares .sc-header__lang-item--current,
-.sc-header__lang--squares .sc-header__lang-item--current:hover {
-  background: var(--foreground);
-  color: var(--background);
-}
-
-/* 3 · «розкладний»: видно один квадрат з поточною мовою; на наведенні / фокусі решта
-   виїжджає ліворуч (трек 0fr→1fr). На телефоні завжди розкрито. */
-.sc-header__lang--fold {
-  --sc-lang-cell: var(--sc-space-8);
-  display: grid;
-  grid-template-columns: 0fr auto;
-  gap: 0;
-  border: var(--hairline) solid var(--border);
-  transition: grid-template-columns var(--sc-dur) var(--sc-ease-out);
-}
-
-.sc-header__lang--fold:hover,
-.sc-header__lang--fold:focus-within { grid-template-columns: 1fr auto; }
-
-.sc-header__lang--fold .sc-header__lang-others {
-  display: flex;
-  overflow: hidden;
-  min-inline-size: 0;
-}
-
-.sc-header__lang--fold .sc-header__lang-item {
   display: inline-flex;
   flex: none;
   align-items: center;
   justify-content: center;
   inline-size: var(--sc-lang-cell);
   block-size: var(--sc-lang-cell);
+  color: var(--muted-foreground);
   text-decoration: none;
-  transition: background-color var(--sc-dur-fast) var(--sc-ease);
+  text-transform: uppercase;
+  font: var(--caption-weight) var(--caption-size) / var(--caption-lh) var(--font-sans);
+  letter-spacing: var(--caption-ls);
+  transition: background-color var(--sc-dur-fast) var(--sc-ease), color var(--sc-dur-fast) var(--sc-ease);
 }
 
-.sc-header__lang--fold .sc-header__lang-others .sc-header__lang-item { border-inline-end: var(--hairline) solid var(--border); }
-.sc-header__lang--fold .sc-header__lang-item:hover { background: var(--muted); }
+.sc-header__lang-item + .sc-header__lang-item { border-inline-start: var(--hairline) solid var(--border); }
 
-.sc-header__lang--fold .sc-header__lang-item--current {
+.sc-header__lang-item:hover { background: var(--muted); color: var(--foreground); }
+
+.sc-header__lang-item--current,
+.sc-header__lang-item--current:hover {
   background: var(--foreground);
   color: var(--background);
 }
 
-/* тёмная шапка: рамка и залитая ячейка — белым */
-.sc-header:not(.sc-header--light) :is(.sc-header__lang--squares, .sc-header__lang--fold) { border-color: var(--sc-white-alpha-40); }
-.sc-header:not(.sc-header--light) :is(.sc-header__lang--squares, .sc-header__lang--fold) .sc-header__lang-item { border-color: var(--sc-white-alpha-40); }
-.sc-header:not(.sc-header--light) :is(.sc-header__lang--squares, .sc-header__lang--fold) .sc-header__lang-item:hover { background: var(--sc-white-alpha-20); }
-.sc-header:not(.sc-header--light) :is(.sc-header__lang--squares, .sc-header__lang--fold) .sc-header__lang-item--current { background: var(--foreground); color: var(--background); }
+.sc-header__lang-item:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: calc(-1 * var(--sc-focus-w)); /* усередині комірки: зовні її ріже overflow */
+}
 
-@media (max-width: 640px) {
-  .sc-header__lang--fold { grid-template-columns: 1fr auto; }
+@media (prefers-reduced-motion: reduce) {
+  .sc-header__lang,
+  .sc-header__lang-row { transition: none; }
 }
 
 /* ---------- Состояния ----------
@@ -445,7 +384,6 @@
 
 .sc-header__trigger:focus-visible,
 .sc-header__link:focus-visible,
-.sc-header__lang-item:focus-visible,
 .sc-header__cta:focus-visible,
 .sc-header__space:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
@@ -582,20 +520,18 @@
 
   .sc-header__nav .sc-header__link:first-child { border-block-start: 0; }
 
-  /* Перемикач мови в панелі: рядок після меню, крупніший тап-таргет */
+  /* Перемикач мови на телефоні: у планці між логотипом і бургером, завжди розкритий,
+     комірки 40 — тап-таргет; бургер стоїть за ним */
   .sc-header__lang {
-    gap: var(--sc-space-6);
-    min-block-size: var(--control-square);
-    border-block-start: var(--hairline) solid var(--sc-white-alpha-15);
+    --sc-lang-cell: var(--sc-space-10);
+    order: 0;
+    margin-inline-start: auto;
+    inline-size: calc(var(--sc-lang-cell) * var(--sc-lang-n));
   }
 
-  .sc-header__lang-item {
-    display: inline-flex;
-    align-items: center;
-    min-block-size: var(--control-square);
-  }
+  .sc-header__lang-row { transform: none; }
 
-  .sc-header--light .sc-header__lang { border-block-start-color: var(--border); }
+  .sc-header__burger { margin-inline-start: 0; }
 
   /* На светлой шапке журнала делители берут обычную кромку: белая линия
      на светлом стекле не видна вовсе (правка 2026-09-14) */
