@@ -344,6 +344,29 @@ a.sc-dsvc__link {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--stack-gap-md);
   }
+
+  /* Полочка напрямку на телефоні (2026-11-03): послуги — на всю ширину, одна під одною,
+     «Сторінка напрямку» — після них. Було: чипи в половину ширини, посилання праворуч */
+  .sc-dsvc__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--stack-gap-lg);
+  }
+
+  .sc-dsvc__row > .sc-dindications__list {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sc-dsvc__row .sc-dindications__list > li,
+  .sc-dsvc__row .sc-dindications__chip {
+    display: flex;
+    inline-size: 100%;
+  }
+
+  .sc-dsvc__row .sc-dindications__chip--virtus { justify-content: space-between; }
+
+  .sc-dsvc__all { align-self: flex-start; padding-block-start: 0; }
 }
 
 /* Метка «Virtus» на плитці категорії послуг лікаря (2026-10-27): категорія не з клітинних
