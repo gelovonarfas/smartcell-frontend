@@ -304,11 +304,45 @@
   border-color: var(--foreground);
 }
 
+/* ---------- Перемикач мови (2026-11-03) ----------
+   Три коди в рядок між меню і CTA: поточна — кольором тексту, без посилання;
+   інші — приглушені, як пункти меню. Прапорів немає, назви мов — в aria-label. */
+
+.sc-header__lang {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-4);
+}
+
+.sc-header__lang-item {
+  color: var(--sc-white-alpha-80);
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font: var(--caption-weight) var(--caption-size) / var(--caption-lh) var(--font-sans);
+  letter-spacing: var(--caption-ls);
+  transition: color var(--sc-dur-fast) var(--sc-ease);
+}
+
+.sc-header__lang-item:hover { color: var(--foreground); }
+
+.sc-header__lang-item--current {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  text-decoration-thickness: var(--hairline);
+}
+
+.sc-header--light .sc-header__lang-item { color: var(--muted-foreground); }
+.sc-header--light .sc-header__lang-item:hover,
+.sc-header--light .sc-header__lang-item--current { color: var(--foreground); }
+
 /* ---------- Состояния ----------
    В Figma их нет — обязательны по CLAUDE.md */
 
 .sc-header__trigger:focus-visible,
 .sc-header__link:focus-visible,
+.sc-header__lang-item:focus-visible,
 .sc-header__cta:focus-visible,
 .sc-header__space:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
@@ -444,6 +478,21 @@
   }
 
   .sc-header__nav .sc-header__link:first-child { border-block-start: 0; }
+
+  /* Перемикач мови в панелі: рядок після меню, крупніший тап-таргет */
+  .sc-header__lang {
+    gap: var(--sc-space-6);
+    min-block-size: var(--control-square);
+    border-block-start: var(--hairline) solid var(--sc-white-alpha-15);
+  }
+
+  .sc-header__lang-item {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--control-square);
+  }
+
+  .sc-header--light .sc-header__lang { border-block-start-color: var(--border); }
 
   /* На светлой шапке журнала делители берут обычную кромку: белая линия
      на светлом стекле не видна вовсе (правка 2026-09-14) */
