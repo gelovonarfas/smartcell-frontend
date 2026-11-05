@@ -359,11 +359,9 @@
   </ol>
 </nav>
 
-<!-- ============================================================
-     SC/Reviews · Фільтри — як на virtus.ua/reviews: Філія і Напрямок (посилання з параметрами
-     ?filial= / ?otdelenie=, поточний — «Клітинні технології SmartCell»). Чипи — як «Застосування» у напрямку.
-     ACF: не потрібен — фільтри будує запит по відгуках (таксономії філія / напрямок).
-     ============================================================ -->
+<!-- SC/Reviews · Фільтри «Філія» / «Напрямок» прибрано (2026-11-04, рішення з Миколою): відгуки розділу
+     прив'язані лише до головної категорії «Клітинні технології» (у підрубриці — один), фільтри зайві.
+     Сторінка — просто відгуки і пагінація. Для відкату — повернути секцію з коментаря:
 <section class="sc-dtabs sc-rfilters" aria-label="Фільтри відгуків">
   <div class="sc-dtabs__panel sc-dtabs__panel--tight">
     <div class="sc-dtabs__group sc-dindications sc-dindications--plain sc-rfilters__group">
@@ -384,17 +382,18 @@
     </div>
   </div>
 </section>
+-->
 
 <!-- ============================================================
      SC/Reviews · Стрічка відгуків — як вкладка «Відгуки» напрямку (sc-dreviews): три типи з virtus
      (відгук на сайті, відео-відгук — постер + попап, запис у гостьовій книзі — текст + скан).
      Відгуки — virtus.ua/reviews?otdelenie=kletochnye-tehnologii, як є. «Показати ще» — догрузка
-     наступної сторінки (кодер: запит з фільтрами; на virtus — пагінація по 10).
+     наступної сторінки (кодер: запит по відділенню «Клітинні технології», без фільтрів; на virtus — пагінація по 10).
      ACF: відгуки (оцінка, автор, дата, текст, філія, напрямок, фахівець, review_type, youtube_url, poster, scans)
      ============================================================ -->
 <section class="sc-doc sc-doc--reviews" id="reviews">
   <h2 class="sc-doc__title sc-t-h2">Відгуки про лікарів відділення клітинних технологій</h2>
-  <div class="sc-dtabs__panel sc-dtabs__panel--tight" role="tabpanel" id="dpanel-vidguky" aria-labelledby="dtab-vidguky" hidden>
+  <!-- стрічка прямо в секції, як «Відгуки про лікаря» (без обгортки панелі вкладок і hidden — вкладок тут немає), 2026-11-04 -->
     <ul class="sc-dreviews">
       <li class="sc-dreviews__row">
         <div class="sc-dreviews__meta">
@@ -525,13 +524,10 @@
       </li>
     </ul>
 
-  <!-- «Показати ще» — догрузка наступної сторінки (кодер: запит з фільтрами) -->
+  <!-- «Показати ще» — догрузка наступної сторінки (кодер: той самий запит по відділенню) -->
     <div class="sc-dreviews__more">
       <button class="sc-dreviews__more-btn" type="button" data-reviews-more>Показати ще</button>
     </div>
-  </div>
-</section>
-
 </section>
 
 <section class="sc-dconsult" id="rate" data-theme="inverse">
