@@ -637,6 +637,21 @@
   gap: var(--sc-space-1);
 }
 .sc-story__part > p strong { font-weight: var(--sc-weight-bold); }
+/* Посилання в тексті (2026-11-04): як в описі напрямку, але на темній смузі —
+   --foreground тут світлий (data-theme="inverse"), тому без системного синього/фіолетового */
+.sc-story__part a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  text-underline-offset: var(--sc-space-0_5);
+}
+@media (hover: hover) and (pointer: fine) {
+  .sc-story__part a:hover { text-decoration: none; }
+}
+.sc-story__part a:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
 .sc-story__part > iframe,
 .sc-story__part > .wp-block-embed,
 .sc-story__part > figure { margin: 0; inline-size: 100%; max-inline-size: var(--sc-measure); }
