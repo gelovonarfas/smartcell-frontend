@@ -44,13 +44,12 @@
 .sc-neo__image {
   display: block;
   position: absolute;
-  inset-block-start: 50%;
+  inset-block-start: calc(var(--neo-parallax) * -1); /* запас кадра сверху — без translate -50%: GSAP переводил его в px при старте и кадр сползал (2026-11-04) */
   inset-inline-start: 0;
   inline-size: 100%;
   block-size: calc(100% + var(--neo-parallax) * 2);
   object-fit: cover;
-  translate: 0 -50%;
-  will-change: translate;
+  will-change: transform;
 }
 
 /* Скрим из макета: синий 60%. По замеру худшего пикселя кадра
