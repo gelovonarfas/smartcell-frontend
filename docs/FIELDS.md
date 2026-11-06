@@ -124,18 +124,45 @@
 ## Постери відео розділу
 
 На сторінках розділу на virtus стоять лише 7 різних роликів YouTube (обхід 2026-11-04, 39 сторінок).
-Постер — кадр ролика без плашок і субтитрів, 16:9; поруч завжди є `-640` для `srcset`.
-Де ролик вставлено iframe у wysiwyg — постер не потрібен; він для наших блоків з кнопкою відео.
+Усі сім постерів — в одній папці `assets/img/video/`, назва файлу = ID ролика (1280×720) і поруч `-640`.
+Постер — кадр ролика без плашок і субтитрів, 16:9.
 
 | Ролик | Назва | Сторінок | Постер |
 |---|---|---|---|
-| `w9fIN4AjRi8` | Марія, пацієнтка доктора Олени Єсауленко | 13 | `assets/img/direction/service/video-maria-clean.jpg` |
-| `ilx1Oj8s7bQ` | Регенеративні технології VIRTUS для поранених захисників. Інтервʼю на 7 каналі | 14 | `assets/img/direction/hub/video-2.jpg` |
-| `J8Ppy8G-_Lk` | Тут створюють клітинні технології | 13 | `assets/img/direction/hub/video-1.jpg` |
+| `w9fIN4AjRi8` | Марія, пацієнтка доктора Олени Єсауленко | 13 | `assets/img/video/w9fIN4AjRi8.jpg` |
+| `ilx1Oj8s7bQ` | Регенеративні технології VIRTUS для поранених захисників. Інтервʼю на 7 каналі | 14 | `assets/img/video/ilx1Oj8s7bQ.jpg` |
+| `J8Ppy8G-_Lk` | Тут створюють клітинні технології | 13 | `assets/img/video/J8Ppy8G-_Lk.jpg` |
 | `FUVoSfJWGoM` | Клітинна терапія для прискорення лікування при важких травмах | 9 | `assets/img/video/FUVoSfJWGoM.jpg` |
-| `VeE5u2brPaM` | Розпакування біоматеріалу, підготовленого у лабораторії SmartCell | 5 | `assets/img/direction/hub/video-3.jpg` |
-| `IGChOMFmjfY` | Клітинні технології для краси і молодості | 4 | `assets/img/direction/plastic/video-poster.jpg` |
+| `VeE5u2brPaM` | Розпакування біоматеріалу, підготовленого у лабораторії SmartCell | 5 | `assets/img/video/VeE5u2brPaM.jpg` |
+| `IGChOMFmjfY` | Клітинні технології для краси і молодості | 4 | `assets/img/video/IGChOMFmjfY.jpg` |
 | `I4vKlv8tGBY` | Плазмаферез у клітинній терапії | 1 | `assets/img/video/I4vKlv8tGBY.jpg` |
+
+Ті самі кадри для сторінок кіта лежать і під старими назвами (`direction/hub/video-1…3`,
+`direction/service/video-maria-clean`, `direction/plastic/video-poster`) — сторінки кіта посилаються на них.
+
+### Як підставити на virtus
+
+Тема сама будує обгортку `.video169` навколо посилання YouTube у wysiwyg і бере картинку з YouTube:
+`data-src="https://img.youtube.com/vi/<ID>/maxresdefault.jpg"`. Поля для постера в адмінці немає.
+Найпростіше — підмінити цю адресу на нашу, якщо для ролика є свій файл. Папку `assets/img/video/`
+покласти в тему як `img/video/`, у `functions.php`:
+
+```php
+// Постери роликів: свій кадр з img/video/<ID>.jpg замість обкладинки YouTube; немає файлу — лишається YouTube
+add_filter( 'the_content', function ( $html ) {
+	return preg_replace_callback(
+		'#https://img\.youtube\.com/vi/([\w-]{11})/maxresdefault\.jpg#',
+		function ( $m ) {
+			$rel = '/img/video/' . $m[1] . '.jpg';
+			return file_exists( get_template_directory() . $rel ) ? get_template_directory_uri() . $rel : $m[0];
+		},
+		$html
+	);
+}, 99 );
+```
+
+Пріоритет 99 — щоб спрацювати після фільтра, який збирає `.video169`. Якщо обгортка будується
+не в `the_content` (наприклад, у шаблоні чи шорткоді) — та сама заміна там, де виводиться `<img>`.
 
 Відеовізитки й Vlog лікарів (`/doctor/…`) — окремо, у кожного лікаря свої.
 
