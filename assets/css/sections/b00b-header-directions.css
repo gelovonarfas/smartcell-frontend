@@ -182,10 +182,22 @@
   text-underline-position: from-font;
 }
 
-.sc-hdir__lead {
-  margin: 0;
+/* Опис протоколу — wysiwyg з адмінки (2026-11-05): звичайні <p> без класів, стиль за тегом.
+   Відступи теми обнуляємо, між абзацами — менший крок, ніж до заголовка й плашок;
+   порожні <p> від редактора не роблять дір. */
+.sc-hdir__protocol-desc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md); /* 14 */
   max-inline-size: var(--sc-measure);
 }
+
+.sc-hdir__protocol-desc > p {
+  margin: 0;
+  font: 400 var(--p-size) / var(--p-lh) var(--font-sans);
+}
+
+.sc-hdir__protocol-desc > p:empty { display: none; }
 
 /* Напрямки: 16 в три колонки, порядок как на virtus.ua */
 .sc-hdir__list {
