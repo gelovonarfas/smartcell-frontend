@@ -296,3 +296,11 @@
     gap: var(--stack-gap-lg);
   }
 }
+
+/* ---------- Сторінка відгуків (2026-11-05): та сама полоса, лише заголовок і кнопка ---------- */
+.vm-category--reviews {
+  --dhero-block-w: var(--sc-cta-block-w); /* кнопка Button/Block з hero напрямку */
+  --dhero-block-h: var(--sc-cta-block-h);
+}
+
+.vm-category--reviews .sc-dhero__cta { margin-block-start: var(--section-gap); }

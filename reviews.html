@@ -30,7 +30,8 @@
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/sections/b00b-header.css">
   <link rel="stylesheet" href="assets/css/sections/b00b-header-directions.css">
-  <link rel="stylesheet" href="assets/css/sections/sc-direction-hero.css">
+  <link rel="stylesheet" href="assets/css/sections/sc-direction-hero.css"> <!-- кнопка sc-dhero__cta у шапці -->
+  <link rel="stylesheet" href="assets/css/sections/vm-category.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-tabs.css">
   <link rel="stylesheet" href="assets/css/sections/sc-doctor.css">
   <!-- Card/Article для дорожки анонсов журнала в «Опису» -->
@@ -43,11 +44,7 @@
   <link rel="stylesheet" href="assets/css/sections/modal-booking.css">
   <link rel="stylesheet" href="assets/css/sections/modal-video.css">
 
-  <!-- LCP — кадр hero: запрос уходит с первых байт -->
-  <link rel="preload" as="image" fetchpriority="high" href="assets/img/direction/plastic/hero.jpg"
-        imagesrcset="assets/img/direction/plastic/hero.jpg 720w, assets/img/direction/plastic/hero@2x.jpg 1440w"
-        imagesizes="50vw" media="(min-width: 641px)">
-  <link rel="preload" as="image" fetchpriority="high" href="assets/img/direction/plastic/hero-mob.jpg" media="(max-width: 640px)">
+  <!-- preload кадру hero прибрано (2026-11-05): у шапці відгуків кадру немає -->
 
   <!-- Разметка для поиска и ИИ-ответов: страница напрямку и крихти.
        В теме — из полей страницы (см. docs/HANDOFF.md) -->
@@ -313,8 +310,24 @@
 
 <main>
 
-<!-- Секция — копия sections/sc-direction-hero.html -->
 <!-- ============================================================
+     SC/Reviews · Шапка сторінки — проста, як у рубрики журналу (vm-category), 2026-11-05:
+     лише заголовок і кнопка, без опису й без кадру. Заголовок — як на virtus.ua/reviews.
+     Кнопка «Залишити відгук» (на virtus — у блоці «Оцініть нашу роботу!») відкриває попап форми відгуку.
+     ACF: — (заголовок сторінки)
+     ============================================================ -->
+<header class="vm-category vm-category--reviews">
+  <h1 class="vm-category__title sc-t-h1">Відгуки VIRTUS</h1>
+  <a class="sc-dhero__cta" href="#rate" data-modal-open="review-form">
+    <span class="sc-dhero__cta-label">Залишити відгук</span>
+    <span class="sc-dhero__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+  </a>
+</header>
+
+<!-- Було до 2026-11-05: hero як у напрямку (заголовок, кнопка, кадр клітин). Для відкату — повернути
+     (у копії «<! --»/«-- >» замість маркерів коментаря):
+<! -- Секция — копия sections/sc-direction-hero.html -- >
+<! -- ============================================================
      SC/Direction · Hero напрямку
      figma: node-id=316:4 (страница 316:3 «SC/Direction — Пластична хірургія»)
      ACF: direction_title (textarea, перенос строки — <br>), direction_lead (textarea),
@@ -323,9 +336,9 @@
      Кнопка открывает попап записи, как на Face Control (data-modal-open="booking",
      2026-10-04); без скрипта — ссылка на затравку консультации внизу (#direction-consult).
      Фото — кадр из макета (клітини), 720 × 720, @2x 1440.
-     ============================================================ -->
-<!-- SC/Reviews: hero як у напрямку. Заголовок — як на virtus.ua/reviews («Відгуки VIRTUS»); ліда й філій на джерелі немає.
-     Кнопка — «Залишити відгук» (на virtus — у блоці «Оцініть нашу роботу!»), відкриває попап форми відгуку. -->
+     ============================================================ -- >
+<! -- SC/Reviews: hero як у напрямку. Заголовок — як на virtus.ua/reviews («Відгуки VIRTUS»); ліда й філій на джерелі немає.
+     Кнопка — «Залишити відгук» (на virtus — у блоці «Оцініть нашу роботу!»), відкриває попап форми відгуку. -- >
 <section class="sc-dhero">
   <div class="sc-dhero__copy">
     <div class="sc-dhero__top">
@@ -341,7 +354,7 @@
     </div>
   </div>
 
-  <!-- LCP-кадр первого экрана: src сразу, fetchpriority, preload в <head> страницы -->
+  <! -- LCP-кадр первого экрана: src сразу, fetchpriority, preload в <head> страницы -- >
   <div class="sc-dhero__media">
     <picture>
       <source media="(max-width: 640px)" srcset="assets/img/direction/plastic/hero-mob.jpg" width="780" height="780">
@@ -352,6 +365,7 @@
     </picture>
   </div>
 </section>
+-->
 
 <!-- Секция — копия sections/sc-direction-crumbs.html -->
 <nav class="sc-dcrumbs" aria-label="Хлібні крихти">
