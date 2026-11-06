@@ -319,7 +319,7 @@
      ============================================================ -->
 <header class="vm-category vm-category--reviews">
   <h1 class="vm-category__title sc-t-h1">Відгуки VIRTUS</h1>
-  <a class="sc-dhero__cta" href="#rate" data-modal-open="review-form">
+  <a class="sc-dhero__cta" href="#reviews" data-modal-open="review-form">
     <span class="sc-dhero__cta-label">Залишити відгук</span>
     <span class="sc-dhero__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
   </a>
@@ -348,7 +348,7 @@
 
     <div class="sc-dhero__bottom">
 
-      <a class="sc-dhero__cta" href="#rate" data-modal-open="review-form">
+      <a class="sc-dhero__cta" href="#reviews" data-modal-open="review-form">
         <span class="sc-dhero__cta-label">Залишити відгук</span>
         <span class="sc-dhero__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
       </a>
@@ -558,10 +558,13 @@
   </nav>
 </section>
 
+<!-- SC/Reviews · Смуга «Оцініть нашу роботу!» прибрана (2026-11-05): форма відгуку відкривається
+     кнопкою «Залишити відгук» у шапці сторінки. Для відкату — повернути секцію
+     (у копії «<! --»/«-- >» замість маркерів коментаря):
 <section class="sc-dconsult" id="rate" data-theme="inverse">
-  <!-- Полоса как B11 на Face Control (2026-10-06): кадр под скримом с запасом под медленный
+  <! -- Полоса как B11 на Face Control (2026-10-06): кадр под скримом с запасом под медленный
        скролл (gsap-animations.js, --dconsult-parallax). Кадр — тот же, что в B11, но отзеркален:
-       планета у правого края (assets/img/direction/consult-bg*.jpg). -->
+       планета у правого края (assets/img/direction/consult-bg*.jpg). -- >
   <div class="sc-dconsult__bg" aria-hidden="true">
     <img class="sc-dconsult__image"
          data-src="assets/img/direction/consult-bg.jpg"
@@ -570,24 +573,24 @@
     <span class="sc-dconsult__scrim"></span>
   </div>
 
-  <!-- Сборка текста как в B07 Welcome kit (.sc-kit__copy; правка 2026-10-06): надпись,
+  <! -- Сборка текста как в B07 Welcome kit (.sc-kit__copy; правка 2026-10-06): надпись,
        заголовок, заметка приглушённым, под ними кнопка. Колонка текста слева — 743 из 1216,
-       справа под планетой пусто. Было (утро 2026-10-06): сетка B11 473/743, кнопка справа. -->
+       справа под планетой пусто. Было (утро 2026-10-06): сетка B11 473/743, кнопка справа. -- >
   <div class="sc-dconsult__inner">
     <div class="sc-dconsult__copy">
       <p class="sc-dconsult__kicker sc-t-caption">Відгуки</p>
       <h2 class="sc-dconsult__title sc-t-h2">Оцініть нашу роботу!</h2>
-      <!-- Заметка — минимум: одна фраза из согласованного абзаца (правка 2026-10-06). Было:
+      <! -- Заметка — минимум: одна фраза из согласованного абзаца (правка 2026-10-06). Было:
            «…Цепколенко. За потреби до консультації долучаються профільні фахівці — спільне
-           рішення дозволяє обрати ефективну тактику лікування.» -->
+           рішення дозволяє обрати ефективну тактику лікування.» -- >
       <p class="sc-dconsult__text sc-t-body">Хочете залишити відгук про Інстітут VIRTUS або про конкретного лікаря? Тоді залиште, будь ласка, Ваш відгук, скориставшись спеціальною формою.</p>
-      <!-- Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
-           Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. -->
+      <! -- Запис — у попапі, як на Face Control (sections/modal-booking.html, modal.js), 2026-10-04.
+           Форма на сторінці знята; без скрипта ссылка просто остаётся на этой секции. -- >
       <a class="sc-dconsult__cta" href="#direction-consult" data-modal-open="review-form">Записатись на консультацію</a>
     </div>
   </div>
 
-  <!-- Прежняя форма на странице (до 2026-10-04) — для отката:
+  <! -- Прежняя форма на странице (до 2026-10-04) — для отката:
   <form class="sc-dconsult__form" data-form novalidate>
     <div class="sc-dconsult__field">
       <label class="sc-dconsult__label sc-t-caption" for="dconsult-name">Прізвище, імʼя, по батькові*</label>
@@ -613,8 +616,9 @@
     <button class="sc-dconsult__submit" type="submit">Записатися</button>
     <p class="sc-dconsult__consent sc-t-mini">Надсилаючи форму, ви підтверджуєте згоду з політикою обробки персональних даних.</p>
   </form>
-  -->
+  -- >
 </section>
+-->
 
 </main>
 
