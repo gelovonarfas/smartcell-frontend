@@ -987,7 +987,7 @@
         <p class="sc-modal__title sc-t-h3" id="review-guestbook-1-title"><time datetime="2021-04-09">09.04.2021</time></p>
       </div>
       <p class="sc-review-full__text sc-t-body">Якщо коротко, то 5 зірок! Щодо сервісу, дружнього відношення персоналу, фаховості та пропонуємих послуг (медичної допомоги). Всюди 5 зірок! Дякую за все!</p>
-      <a class="sc-review-full__scan" href="assets/img/direction/reviews/guestbook-1.jpg" target="_blank" rel="noopener">
+      <a class="sc-review-full__scan" href="assets/img/direction/reviews/guestbook-1.jpg" data-modal-open="scan" data-modal-image="assets/img/direction/reviews/guestbook-1.jpg" aria-label="Відкрити скан запису в гостьовій книзі">
         <img src="assets/img/direction/reviews/guestbook-1-thumb.jpg" width="400" height="283" alt="Скан запису в гостьовій книзі VIRTUS" loading="lazy" decoding="async">
       </a>
       <dl class="sc-dreviews__facts sc-t-mini">
@@ -996,6 +996,28 @@
           </dl>
       <a class="sc-review-full__all sc-t-small" href="https://virtus.ua/reviews">Усі відгуки</a>
     </div>
+  </div>
+</div>
+<!-- Секция — копия sections/modal-scan.html -->
+<!-- ============================================================
+     Modal/Scan — скан запису в гостьовій книзі (2026-11-05)
+     Одна на сторінку. Відкривають мініатюри скану: a[data-modal-open="scan"][data-modal-image="повний скан"]
+     — у стрічці відгуків і в попапі запису. modal.js підставляє адресу в img і alt мініатюри;
+     без JS посилання просто відкриває повний скан (href).
+     Закриття — як у відеомодалки: стрілка, Esc, клік по затемненню.
+     ACF: scans (gallery) у відгуку review_type = guestbook — повний розмір
+     ============================================================ -->
+<div class="sc-modal sc-modal--video sc-modal--scan" data-modal="scan" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+
+  <div class="sc-modal__dialog sc-modal__dialog--video sc-modal__dialog--scan" role="dialog" aria-modal="true" data-theme="inverse"
+       aria-label="Скан запису в гостьовій книзі VIRTUS">
+
+    <button class="sc-modal__close sc-modal__close--outside" type="button" data-modal-close aria-label="Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg>
+    </button>
+
+    <img class="sc-modal__scan" data-scan alt="Скан запису в гостьовій книзі VIRTUS" decoding="async">
   </div>
 </div>
 <div class="sc-modal sc-modal--review" data-modal="review-andrii" hidden>

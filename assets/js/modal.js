@@ -175,7 +175,22 @@
             if (label) { vf.title = label; var dlg = target.querySelector('[role="dialog"]'); if (dlg) dlg.setAttribute('aria-label', label); }
           }
         }
-        open(target, opener);
+        /* Одна модалка скану гостьової книги (2026-11-05): повний скан — у data-modal-image,
+           alt — з мініатюри всередині посилання */
+        var image = opener.getAttribute('data-modal-image');
+        if (image) {
+          var im = target.querySelector('[data-scan]');
+          var thumb = opener.querySelector('img');
+          if (im) { im.src = image; if (thumb && thumb.alt) im.alt = thumb.alt; }
+        }
+        /* Відкриття з іншого попапу (скан у попапі запису): попередній закриваємо без анімації,
+           фокус після закриття повернеться туди, звідки відкрили перший */
+        var back = opener;
+        if (openModal && openModal !== target) {
+          back = lastTrigger;
+          finishClose(openModal);
+        }
+        open(target, back);
         return;
       }
     }

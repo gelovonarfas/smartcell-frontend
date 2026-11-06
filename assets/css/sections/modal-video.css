@@ -56,3 +56,24 @@
   /* На узком экране окно во всю ширину, кнопка — над ним */
   .sc-modal__dialog--video { inline-size: 100%; }
 }
+
+/* ---------- Modal/Scan — скан гостьової книги (2026-11-05) ----------
+   Те саме вікно без фону, що й у ролика, але в ньому картинка: ширина — за сканом,
+   висота не більша за екран мінус місце під кнопку закриття над вікном. */
+.sc-modal__dialog--scan { inline-size: auto; }
+
+.sc-modal__scan {
+  display: block;
+  max-inline-size: min(var(--modal-video-w), 100%);
+  max-block-size: calc(100dvh - var(--control-square) * 2 - var(--grid-gap) * 4);
+  inline-size: auto;
+  block-size: auto;
+  background: var(--background);
+}
+
+@media (max-width: 640px) {
+  /* Скан по центру екрана, а не впритул до верху: над ним має лишитися місце для кнопки закриття */
+  .sc-modal--scan { place-items: center; }
+  .sc-modal__dialog--scan { inline-size: 100%; overflow: visible; }
+  .sc-modal__scan { inline-size: 100%; max-inline-size: none; }
+}
