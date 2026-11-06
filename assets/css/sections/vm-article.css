@@ -48,6 +48,10 @@
   padding-block: var(--section-padding-y) var(--sc-space-10);
   padding-inline: var(--sc-pad-x) calc(var(--sc-band) + var(--sc-space-14));
   background: var(--warm);
+
+  /* Між 641 і 1440 обкладинка 582 абсолютом наїжджала на заголовок і лід — копія не
+     звужувалась (2026-11-05). Тепер кадр і копія ділять ширину навпіл, кожен не більший
+     за свій розмір із макета; на 1440+ усе як у макеті. Формули — у кадру й у .vm-article__hero-top. */
 }
 
 .vm-article__hero-copy {
@@ -122,7 +126,10 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--stack-gap-lg);
-  max-inline-size: var(--vm-a-copy-w);
+  /* Не заходить під обкладинку. 100% тут — копія від поля зліва до зазору 56 перед полосою справа;
+     кадр займає з неї своє поле 74 і половину решти (та сама формула, що в кадру) */
+  max-inline-size: min(var(--vm-a-copy-w),
+    calc(100% - var(--vm-a-photo-right) - min(var(--vm-a-photo), (100% - var(--vm-a-photo-right)) / 2)));
 }
 
 .vm-article__chips {
@@ -249,7 +256,9 @@
   position: absolute;
   inset-block-start: var(--vm-a-photo-top);
   inset-inline-end: calc(var(--sc-band) + var(--vm-a-photo-right));
-  inline-size: var(--vm-a-photo);
+  /* 100% — уся полоса: кадр не більший за 582 і за половину місця після поля, полоси й зазору */
+  inline-size: min(var(--vm-a-photo),
+    calc((100% - var(--sc-pad-x) - var(--sc-band) - var(--vm-a-photo-right) - var(--sc-space-14)) / 2));
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--muted);
