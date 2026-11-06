@@ -487,10 +487,11 @@ a.sc-modal__submit {
 
 /* ---------- Форма відгуку (reviews.html, 2026-10-29): поля як у формі virtus ---------- */
 .sc-modal__stars { margin: 0; padding: 0; border: 0; }
-.sc-modal__stars > legend { padding: 0; margin-block-end: var(--sc-space-1); color: var(--foreground); }
+/* Підпис над зірками видимий (2026-11-05): без нього п'ять зірок у формі не читаються як питання */
+.sc-modal__stars > legend { padding: 0; margin-block-end: var(--sc-space-2); color: var(--sc-neutral-600); }
 .sc-modal__stars-row { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: var(--sc-space-1); }
 /* row-reverse + «~»: зірки до вибраної включно підсвічуються; у DOM порядок 1→5, візуально 1 ліворуч */
-.sc-modal__stars-row { flex-direction: row; }
+.sc-modal__stars-row { flex-direction: row; justify-content: flex-start; } /* зірки під підписом, від лівого краю */
 .sc-modal__star-input { position: absolute; opacity: 0; pointer-events: none; }
 .sc-modal__star {
   font-size: var(--h3-size);
@@ -516,4 +517,20 @@ a.sc-modal__submit {
   resize: vertical;
   font: inherit;
 }
-select.sc-modal__input { appearance: auto; background: var(--background); }
+/* Селект — як інші поля: без нативного скруглення й фону (2026-11-05). Стрілка — дві
+   діагоналі градієнтом кольору тексту, без картинки: колір іде від токена */
+select.sc-modal__input {
+  --select-tick: var(--sc-space-1_5); /* половина «галочки» 6 */
+  appearance: none;
+  padding-inline-end: calc(var(--grid-gap) * 2 + var(--select-tick) * 2);
+  background-color: var(--field-bg);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--field-text) 50%, var(--field-text) calc(50% + var(--sc-line)), transparent calc(50% + var(--sc-line))),
+    linear-gradient(-45deg, transparent 50%, var(--field-text) 50%, var(--field-text) calc(50% + var(--sc-line)), transparent calc(50% + var(--sc-line)));
+  background-size: var(--select-tick) var(--select-tick);
+  background-position:
+    right calc(var(--grid-gap) + var(--select-tick)) center,
+    right var(--grid-gap) center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
