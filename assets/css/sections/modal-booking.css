@@ -493,19 +493,28 @@ a.sc-modal__submit {
 /* row-reverse + «~»: зірки до вибраної включно підсвічуються; у DOM порядок 1→5, візуально 1 ліворуч */
 .sc-modal__stars-row { flex-direction: row; justify-content: flex-start; } /* зірки під підписом, від лівого краю */
 .sc-modal__star-input { position: absolute; opacity: 0; pointer-events: none; }
+/* Зірки (2026-11-05): невибрані — контуром, вибрані — заливкою, як ☆/★ у формі virtus.
+   Раніше невибрані були кольору --border, а він у системі чорний — вибір не було видно. */
 .sc-modal__star {
   font-size: var(--h3-size);
   line-height: 1;
-  color: var(--border);
+  color: transparent;
+  -webkit-text-stroke: var(--sc-line) var(--foreground);
   cursor: pointer;
   transition: color var(--sc-dur-fast) var(--sc-ease);
 }
-/* підсвітка: усі зірки до вибраної — через :has на рядку */
-.sc-modal__stars-row:has(#review-star-1:checked) .sc-modal__star:nth-of-type(-n+1),
-.sc-modal__stars-row:has(#review-star-2:checked) .sc-modal__star:nth-of-type(-n+2),
-.sc-modal__stars-row:has(#review-star-3:checked) .sc-modal__star:nth-of-type(-n+3),
-.sc-modal__stars-row:has(#review-star-4:checked) .sc-modal__star:nth-of-type(-n+4),
-.sc-modal__stars-row:has(#review-star-5:checked) .sc-modal__star:nth-of-type(-n+5) { color: var(--foreground); }
+/* заливка до вибраної включно — через :has на рядку; :where знімає вагу id, щоб ховер нижче перебивав */
+:where(.sc-modal__stars-row:has(#review-star-1:checked)) .sc-modal__star:nth-of-type(-n+1),
+:where(.sc-modal__stars-row:has(#review-star-2:checked)) .sc-modal__star:nth-of-type(-n+2),
+:where(.sc-modal__stars-row:has(#review-star-3:checked)) .sc-modal__star:nth-of-type(-n+3),
+:where(.sc-modal__stars-row:has(#review-star-4:checked)) .sc-modal__star:nth-of-type(-n+4),
+:where(.sc-modal__stars-row:has(#review-star-5:checked)) .sc-modal__star:nth-of-type(-n+5) { color: var(--foreground); }
+/* Ховер — передперегляд: заливка до зірки під курсором */
+@media (hover: hover) and (pointer: fine) {
+  .sc-modal__stars-row:hover .sc-modal__star { color: transparent; }
+  .sc-modal__stars-row .sc-modal__star:hover,
+  .sc-modal__stars-row .sc-modal__star:has(~ .sc-modal__star:hover) { color: var(--foreground); }
+}
 .sc-modal__star-input:focus-visible + .sc-modal__star {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
