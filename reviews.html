@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="assets/css/sections/b00b-header-directions.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-hero.css"> <!-- кнопка sc-dhero__cta у шапці -->
   <link rel="stylesheet" href="assets/css/sections/vm-category.css">
+  <link rel="stylesheet" href="assets/css/sections/vm-feed.css"> <!-- пагінація vm-feed__pager -->
   <link rel="stylesheet" href="assets/css/sections/sc-direction-tabs.css">
   <link rel="stylesheet" href="assets/css/sections/sc-doctor.css">
   <!-- Card/Article для дорожки анонсов журнала в «Опису» -->
@@ -541,10 +542,20 @@
       </li>
     </ul>
 
-  <!-- «Показати ще» — догрузка наступної сторінки (кодер: той самий запит по відділенню) -->
-    <div class="sc-dreviews__more">
-      <button class="sc-dreviews__more-btn" type="button" data-reviews-more>Показати ще</button>
-    </div>
+  <!-- Пагінація з номерами (2026-11-05) — замість «Показати ще»; та сама розмітка, що в журналі
+       (sections/vm-feed-paged.html, стилі vm-feed.css). Кодер: WP paginate_links по запиту відділення
+       «Клітинні технології», 10 на сторінку, як на virtus. Номери нижче — приклад розмітки, не кількість сторінок.
+       Поточна — aria-current="page"; на першій/останній стрілку «назад»/«вперед» не виводити.
+       Було: <div class="sc-dreviews__more"><button class="sc-dreviews__more-btn" type="button" data-reviews-more>Показати ще</button></div> -->
+  <nav class="vm-feed__pager sc-dreviews__pager" aria-label="Сторінки відгуків">
+    <a class="vm-feed__pager-nav" href="#prev" aria-label="Попередня сторінка"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M32 24H16M22 30L16 24L22 18" stroke="currentColor"/></svg></a>
+    <a class="vm-feed__page sc-t-small" href="#page-1" aria-current="page">1</a>
+    <a class="vm-feed__page sc-t-small" href="#page-2">2</a>
+    <a class="vm-feed__page sc-t-small" href="#page-3">3</a>
+    <span class="vm-feed__gap sc-t-small" aria-hidden="true">…</span>
+    <a class="vm-feed__page sc-t-small" href="#page-8">8</a>
+    <a class="vm-feed__pager-nav" href="#next" aria-label="Наступна сторінка"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32M26 30L32 24L26 18" stroke="currentColor"/></svg></a>
+  </nav>
 </section>
 
 <section class="sc-dconsult" id="rate" data-theme="inverse">
