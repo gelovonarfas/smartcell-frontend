@@ -1446,24 +1446,24 @@
 
 .vm-article__toc-num { color: var(--muted-foreground); }
 
-/* Зміст-абетка (2026-11-08): усі H2 статті — літери, тема ставить --letters.
+/* Зміст чипсами (2026-11-08): перемикач toc_view у статті = «Чипси» — тема ставить --chips (для абетки: усі H2 — літери).
    Пункти без номерів — квадрати по 7 у ряд: уся абетка видна разом і вміщається
    в липкий сайдбар, а не стовпчик по одній літері. */
-.vm-article__toc--letters .vm-article__toc-list {
+.vm-article__toc--chips .vm-article__toc-list {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: var(--sc-space-1);
 }
 
-.vm-article__toc--letters .vm-article__toc-list li {
+.vm-article__toc--chips .vm-article__toc-list li {
   display: block;
   padding: 0;
   border: 0;
 }
 
-.vm-article__toc--letters .vm-article__toc-num { display: none; }
+.vm-article__toc--chips .vm-article__toc-num { display: none; }
 
-.vm-article__toc--letters .vm-article__toc-list a {
+.vm-article__toc--chips .vm-article__toc-list a {
   display: grid;
   place-items: center;
   aspect-ratio: 1 / 1;
@@ -1475,20 +1475,20 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .vm-article__toc--letters .vm-article__toc-list a:hover {
+  .vm-article__toc--chips .vm-article__toc-list a:hover {
     background: var(--foreground);
     color: var(--background);
     text-decoration: none;
   }
 }
 
-.vm-article__toc--letters .vm-article__toc-list a:active {
+.vm-article__toc--chips .vm-article__toc-list a:active {
   background: var(--foreground);
   color: var(--background);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vm-article__toc--letters .vm-article__toc-list a { transition: none; }
+  .vm-article__toc--chips .vm-article__toc-list a { transition: none; }
 }
 
 .vm-article__services {
@@ -1618,12 +1618,12 @@
      отодвигает материал — читатель и так скроллит подряд. */
   .vm-article__toc { display: none; }
 
-  /* Зміст-абетка — виняток: без неї до потрібної літери гортати весь словник.
+  /* Зміст чипсами — виняток: без нього до потрібної літери гортати весь словник.
      Сайдбар стає над текстом, «Поділіться» — під абеткою. */
-  .vm-article__toc--letters { display: block; }
-  .vm-article__sidebar:has(.vm-article__toc--letters) { order: -1; }
-  .vm-article__sidebar:has(.vm-article__toc--letters) .vm-article__share { order: 1; }
-  .vm-article__toc--letters .vm-article__toc-list { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .vm-article__toc--chips { display: block; }
+  .vm-article__sidebar:has(.vm-article__toc--chips) { order: -1; }
+  .vm-article__sidebar:has(.vm-article__toc--chips) .vm-article__share { order: 1; }
+  .vm-article__toc--chips .vm-article__toc-list { grid-template-columns: repeat(8, minmax(0, 1fr)); }
 
   /* Поля карточки подписки на узком экране те же 24, что у других карточек:
      40 съедали строку (правка 2026-09-14) */
