@@ -407,14 +407,13 @@
          virtus.ua/kletochnye-tehnologii, 2026-10-12): посилання «Сторінка напрямку» ліворуч, чіпи праворуч;
          послуга зі своєю сторінкою — посилання, без — приглушений чіп. Перша плитка відкрита.
          ACF: hub_directions (relationship → напрямки; у напрямку — repeater services: label, link) -->
-    <!-- Метка «Virtus» на чипі. Правило з 2026-11-08 (Олег і Микола, Telegram): мітку ставимо лише послузі,
-     у якої серед батьків НЕМАЄ SmartCell — вона відкривається в звичайному шаблоні virtus. Послуга з хоча б одним
-     батьком SmartCell після запуску відкривається в шаблоні SmartCell (незалежно від головної категорії:
-     пластика, дерматологія…), і мітка там лише заплутує — таких випадків більшість, мітка рідкісна.
-     Визначає шаблон за батьками, не за адресою посилання і не за головною категорією
-     (приклад: virtus.ua/Neofibrolifting лежить у корені, але це SmartCell — мітки немає).
-     Мітки в цьому файлі — демонстрація вигляду; які послуги без батька SmartCell, видно лише в адмінці.
-     Було (2026-10-27): прапорець service_external і правило «посилання поза kletochnye-tehnologii». -->
+    <!-- Мітки «Virtus» у хабі немає (2026-11-08, Олег і Микола): список збирається автоматично з послуг,
+     привʼязаних до SmartCell (хоча б один батько SmartCell, на будь-якому місці), і всі вони відкриваються
+     в шаблоні SmartCell — незалежно від головної категорії (пластика, дерматологія…). -->
+    <!-- Мітку «Virtus» на чипах знято 2026-11-08 (Олег і Микола, Telegram): у список потрапляють лише послуги,
+         привʼязані до SmartCell, і всі вони відкриваються в шаблоні SmartCell — мітка лише заплутувала.
+         Для відкату: було <… class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small">Назва<span class="sc-dindications__source sc-t-mini">Virtus</span>
+         на чипах: Корекція ліподистрофій (ямок та западин шкіри) в області сідниці; Лікування ускладнень цукрового діабету; АМК-терапія; Лікування вітіліго; Лікування атопічного дерматиту; Лікування червоного плоского лишаю; Лікування екземи; Лікування псоріазу; Лікування вогнищевого нейродерміту; PRP в стоматології. -->
     <div class="sc-dtabs__group sc-dsvc" data-doctor-services>
       <h2 class="sc-doc__title sc-t-h2">Напрямки клітинної терапії</h2>
       <ul class="sc-dsvc__tiles">
@@ -441,7 +440,7 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-plastichnij-hirurg" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/plasticheskaya-hirurgiya/lipodystrophy_buttocks">Корекція ліподистрофій (ямок та западин шкіри) в області сідниці<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/plasticheskaya-hirurgiya/lipodystrophy_buttocks">Корекція ліподистрофій (ямок та западин шкіри) в області сідниці</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Контурна пластика обличчя біоімплантатами з власних жирових клітин (збільшення губ, вилиць, заповнення носогубних і міжбрівних складок)</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Клітинні технології в лікуванні посттравматичних і післяопікових рубців і деформацій тіла</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Клітинні технології в лікуванні ускладнень традиційних пластичних операцій</span></li>
@@ -459,7 +458,7 @@
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/saharnyj-diabet-1-tipa">Клітинна терапія при цукровому діабеті 1 типу</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/saharnyj-diabet-2-tipa">Клітинна терапія при цукровому діабеті 2 типу</a></li>
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/endocrinology/lechenie-oslozhnenij-saharnogo-diabeta">Лікування ускладнень цукрового діабету<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/lechenie-oslozhnenij-saharnogo-diabeta">Лікування ускладнень цукрового діабету</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/endocrinology/diabetes_children">Клітинна терапія при цукровому діабеті у дітей</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/chronic_fatigue_syndrome">Клітинна терапія при синдромі хронічної втомлюваності (СХВ)</a></li>
           </ul>
@@ -489,7 +488,7 @@
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/kletochnye-preparaty-smartcell/omolozhenie-stvolovymi-kletkami">Омолодження власними стовбуровими клітинами</a></li>
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/Neofibrolifting">Неофіброліфтинг (фібробласти)</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування ускладнень традиційної контурної пластики та агресивних процедур</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування рубців</span></li>
@@ -502,7 +501,7 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-oftalmologii" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування синдрому сухого ока</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування захворюваннь рогівки ока</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Відновлення зору після черепно-мозкових травм, інсультів, токсичного ураження ЦНС</span></li>
@@ -520,7 +519,7 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-nevrologii" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/alzheimer_cell">Клітинна терапія при хворобі Альцгеймера</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/demyelinating_diseases">Клітинна терапія при демієлінізуючих захворюваннях</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/amyotrophic_lateral_sclerosis">Клітинна терапія при боковому аміотрофічному склерозі (БАС)</a></li>
@@ -532,7 +531,7 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-travmatologii-ta-o" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/arthritis_arthrosis">Клітинна терапія артритів та артрозів</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/spinal_cord">Клітинна терапія для відновлення після спінальної травми</a></li>
             <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-travmatologii-ta-ortopedii/autoimmune_rheumatological_diseases">Клітинна терапія при аутоімунних та ревматологічних захворюваннях</a></li>
@@ -543,12 +542,12 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-dermatologii" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-vitiligo">Лікування вітіліго<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-atopicheskogo-dermatita-u-detej-i-vzroslyh">Лікування атопічного дерматиту<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-krasnogo-ploskogo-lishaya">Лікування червоного плоского лишаю<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-ekzemy">Лікування екземи<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-psoriaza">Лікування псоріазу<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/dermatologiya/likuvannya-vognishhevogo-nejrodermitu">Лікування вогнищевого нейродерміту<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-vitiligo">Лікування вітіліго</a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-atopicheskogo-dermatita-u-detej-i-vzroslyh">Лікування атопічного дерматиту</a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-krasnogo-ploskogo-lishaya">Лікування червоного плоского лишаю</a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-ekzemy">Лікування екземи</a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/lechenie-psoriaza">Лікування псоріазу</a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/dermatologiya/likuvannya-vognishhevogo-nejrodermitu">Лікування вогнищевого нейродерміту</a></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування бульозного епідермоліза</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування васкулітів</span></li>
             <li><span class="sc-dindications__chip sc-t-small">Лікування системного червоного вовчака</span></li>
@@ -599,8 +598,8 @@
       <div class="sc-dsvc__pane" data-service-panel="klitinni-tehnologii-v-stomatologii" hidden>
         <div class="sc-dsvc__row">
           <ul class="sc-dindications__list">
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
-            <li><a class="sc-dindications__chip sc-dindications__chip--virtus sc-t-small" href="https://virtus.ua/stomatologiya/prp-v-stomatologii">PRP в стоматології<span class="sc-dindications__source sc-t-mini">Virtus</span></a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/travmatologiya-ortopedia/amk">АМК-терапія</a></li>
+            <li><a class="sc-dindications__chip sc-t-small" href="https://virtus.ua/stomatologiya/prp-v-stomatologii">PRP в стоматології</a></li>
           </ul>
           <a class="sc-dsvc__all sc-t-small" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-stomatologii">Сторінка напрямку · Virtus</a>
         </div>
