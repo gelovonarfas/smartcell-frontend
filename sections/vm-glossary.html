@@ -1,0 +1,781 @@
+<!-- ============================================================
+     VM/Glossary · Клітинна абетка (словник термінів)
+     figma: макета немає — зібрано на шаблоні статті (vm-article), 2026-11-08
+     джерело тексту: Google Doc «Клітинна абетка», таблиці по літерах
+
+     Шапка — та сама .vm-article__hero, але без обкладинки: блок
+     .vm-article__hero-media просто не виводиться, і CSS (:has) сам знімає
+     висоту 800 і праве поле під кадр — шапка тягнеться за текстом.
+     Так у шаблоні статті обкладинка стає необов'язковою: немає фото — немає блоку.
+
+     ACF: glossary_intro (wysiwyg — лід під заголовком),
+          glossary_terms (repeater: term (text), term_note (text — дужки після терміна,
+          напр. «(PRP)»), definition (textarea), plain (textarea — «Простими словами»)).
+     Літеру й порядок рахує шаблон: групуємо за першою літерою терміна, кирилиця
+     за абеткою, латиниця (Cellness, PRP) — у кінці. Порожнє поле — рядок не виводиться.
+     Покажчик праворуч: усі літери абетки; є терміни — посилання #letter-…,
+     немає — <span aria-disabled="true">. Ь не виводимо: з неї слова не починаються.
+     Якорі термінів (#term-…) — транслітерація назви, на них можна посилатися зі статей.
+     ============================================================ -->
+<article class="vm-article vm-glossary">
+
+  <div class="vm-article__progress" aria-hidden="true">
+    <span class="vm-article__progress-bar" data-article-progress></span>
+  </div>
+
+  <header class="vm-article__hero">
+    <div class="vm-article__hero-copy">
+      <div class="vm-article__hero-top">
+        <a class="vm-article__back sc-t-mini" href="vm-blog.html">
+          <span class="vm-article__back-arrow" aria-hidden="true"></span>
+          <span>Smart Age Journal</span>
+        </a>
+
+        <h1 class="vm-article__title sc-t-h1">Клітинна абетка</h1>
+
+        <div class="vm-article__dek sc-t-lead"><p>Вітаємо в клітинній абетці або навіть у регенеративній Вікіпедії!</p></div>
+      </div>
+    </div>
+    <!-- обкладинки немає: .vm-article__hero-media не виводиться -->
+  </header>
+
+  <nav class="vm-article__crumbs" aria-label="Хлібні крихти">
+    <p class="sc-t-mini"><a href="https://virtus.ua">virtus.ua</a> → <a href="index.html">SmartCell</a> → <a href="vm-blog.html">Smart Age Journal</a> → <span aria-current="page">Клітинна абетка</span></p>
+  </nav>
+
+  <div class="vm-article__body">
+
+    <div class="vm-article__main vm-glossary__main">
+      <section class="vm-glossary__group" id="letter-a" aria-labelledby="letter-a-title">
+        <h2 class="vm-glossary__letter" id="letter-a-title">А</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-anhiohenez">
+            <dt class="vm-glossary__term"><dfn>Ангіогенез</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Процес утворення нових кровоносних судин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Утворення нових кровоносних судин, які забезпечують клітини киснем і поживними речовинами, необхідними для їхньої роботи та відновлення.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-apoptoz">
+            <dt class="vm-glossary__term"><dfn>Апоптоз</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Генетично запрограмований процес загибелі клітин, необхідний для нормального оновлення тканин і видалення пошкоджених або непотрібних клітин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Природний механізм, за допомогою якого організм позбавляється старих, пошкоджених або непотрібних клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-autolohichni-biolohichni-preparaty">
+            <dt class="vm-glossary__term"><dfn>Аутологічні біологічні препарати</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біологічні препарати, виготовлені з власного біологічного матеріалу пацієнта — клітин, крові, плазми або інших компонентів.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Препарати, створені з власного біологічного матеріалу пацієнта. Організм отримує не донорський, а свій власний матеріал, спеціально підготовлений для лікування або відновлення.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-autolohichni-keratynotsyty">
+            <dt class="vm-glossary__term"><dfn>Аутологічні кератиноцити</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Клітини епідермісу, отримані з власної шкіри пацієнта та культивовані для відновлення епітеліального покриву.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це власні клітини поверхневого шару шкіри. Їх можна вирощувати в лабораторії та використовувати для відновлення шкірного покриву при значних пошкодженнях.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-autolohichni-mezenkhimalni-stromalni-klityny">
+            <dt class="vm-glossary__term"><dfn>Аутологічні мезенхімальні стромальні клітини</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Мезенхімальні стромальні клітини, отримані з власних тканин пацієнта, культивовані та підготовлені для клінічного застосування.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це власні клітини пацієнта, отримані, наприклад, із жирової тканини та вирощені в лабораторії. Їх використовують для впливу на тканинне мікрооточення, міжклітинну комунікацію, запальні та відновлювальні процеси.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-autolohichni-stovburovi-klityny">
+            <dt class="vm-glossary__term"><dfn>Аутологічні стовбурові клітини</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Стовбурові клітини, отримані з власних тканин пацієнта, здатні до самооновлення та участі у процесах відновлення тканин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Власні стовбурові клітини пацієнта. Вони беруть участь у відновленні тканин, регуляції запалення та міжклітинної взаємодії.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-autolohichni-fibroblasty">
+            <dt class="vm-glossary__term"><dfn>Аутологічні фібробласти</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Фібробласти, отримані з власної тканини пацієнта, культивовані в лабораторних умовах і призначені для відновлення структури та функціональних властивостей шкіри.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>З маленького фрагмента власної шкіри пацієнта ми отримуємо фібробласти та вирощуємо їх у лабораторії до необхідної кількості. Потім власні клітини повертаються в шкіру, щоб поповнити пул функціонально активних фібробластів.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-autofahiya">
+            <dt class="vm-glossary__term"><dfn>Аутофагія</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Природний внутрішньоклітинний процес видалення та переробки пошкоджених або непотрібних компонентів клітини.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Внутрішня система «прибирання» клітини: пошкоджені та непотрібні компоненти розбираються й частково використовуються повторно.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-b" aria-labelledby="letter-b-title">
+        <h2 class="vm-glossary__letter" id="letter-b-title">Б</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-bank-klityn">
+            <dt class="vm-glossary__term"><dfn>Банк клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Спеціалізована система для підготовки, контролю якості, кріозберігання та тривалого зберігання власних клітин і тканин пацієнта для можливого використання в майбутньому.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це місце, де власні клітини або тканини пацієнта можуть бути спеціально підготовлені, заморожені та збережені на роки. За потреби їх можна використати для отримання клітинного матеріалу та проведення регенеративної терапії.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-bioimplant">
+            <dt class="vm-glossary__term"><dfn>Біоімплант</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біологічна або біоінженерна конструкція, призначена для заміщення, відновлення або підтримки пошкоджених тканин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це біологічна конструкція, яку використовують там, де тканину потрібно відновити або замістити. Вона може містити власні клітини пацієнта та матеріал, що створює для них необхідну основу.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-bioinzheneriya">
+            <dt class="vm-glossary__term"><dfn>Біоінженерія</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Галузь на стику біології, медицини та інженерних технологій, що дозволяє створювати біологічні конструкції для відновлення або заміщення тканин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Клітинам іноді недостатньо просто потрапити в пошкоджену ділянку. Для відновлення тканини їм створюють відповідне «середовище для життя» — основу, умови та біологічні сигнали, щоб сформувати функціональну тканину.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-biolohichnyj-vik">
+            <dt class="vm-glossary__term"><dfn>Біологічний вік</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Показник функціонального стану організму, який відображає ступінь вікових змін і може відрізнятися від календарного віку.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Показує не лише скільки людині років за паспортом, а наскільки «молодо» або «старо» функціонують її організм і тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-biomaterialy">
+            <dt class="vm-glossary__term"><dfn>Біоматеріали</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Природні або штучно створені матеріали, призначені для взаємодії з організмом з метою підтримки, заміщення або відновлення тканин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Матеріали, які використовують як основу або підтримку для відновлення тканини. Вони можуть допомагати клітинам закріпитися, взаємодіяти та формувати нову тканину.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-biorevitalizatsiya">
+            <dt class="vm-glossary__term"><dfn>Біоревіталізація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Ін’єкційна методика введення препаратів, переважно на основі гіалуронової кислоти, з метою покращення гідратації та стану шкіри.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Ін’єкційне введення гіалуронової кислоти для покращення зволоженості шкіри. Це може покращувати її зовнішній вигляд і якість, але не є замісною клітинною терапією.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-biostymulyatory">
+            <dt class="vm-glossary__term"><dfn>Біостимулятори</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Препарати або технології, що активують біологічні процеси в тканинах з метою їх відновлення або оновлення.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-v" aria-labelledby="letter-v-title">
+        <h2 class="vm-glossary__letter" id="letter-v-title">В</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-vaskulyaryzatsiya">
+            <dt class="vm-glossary__term"><dfn>Васкуляризація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Формування або відновлення судинної мережі в тканинах.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-vikovi-zminy">
+            <dt class="vm-glossary__term"><dfn>Вікові зміни</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність структурних і функціональних змін у клітинах, тканинах та органах, які поступово накопичуються з віком.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>З віком змінюється не лише зовнішність. Клітини стають менш активними, тканини повільніше оновлюються та відновлюються, змінюються кровопостачання і взаємодія між клітинами.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-vilni-radykaly">
+            <dt class="vm-glossary__term"><dfn>Вільні радикали</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Високоактивні молекули, здатні пошкоджувати клітини та їхні структури</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-h" aria-labelledby="letter-h-title">
+        <h2 class="vm-glossary__letter" id="letter-h-title">Г</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-henna-terapiya">
+            <dt class="vm-glossary__term"><dfn>Генна терапія</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Метод лікування, заснований на внесенні змін у генетичний матеріал клітин з метою лікування або профілактики захворювань.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Технологія, яка дозволяє впливати безпосередньо на гени клітини — наприклад, замінити, виправити або змінити роботу певного гена.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-hialuronova-kyslota">
+            <dt class="vm-glossary__term"><dfn>Гіалуронова кислота</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Природний полісахарид міжклітинного матриксу, який бере участь у підтримці зволоження, об’єму та регенерації тканин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-homeostaz">
+            <dt class="vm-glossary__term"><dfn>Гомеостаз</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Здатність організму підтримувати відносну сталість внутрішнього середовища та основних фізіологічних процесів.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Внутрішня рівновага організму. Організм постійно регулює тисячі процесів, щоб клітини й органи могли нормально працювати навіть тоді, коли змінюються зовнішні умови.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-d" aria-labelledby="letter-d-title">
+        <h2 class="vm-glossary__letter" id="letter-d-title">Д</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-deheneratsiya">
+            <dt class="vm-glossary__term"><dfn>Дегенерація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Процес поступового погіршення структури та функції клітин, тканин або органів.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Тканина поступово втрачає свою нормальну структуру і здатність повноцінно виконувати свою роботу.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-dermalnyj-ekvivalent">
+            <dt class="vm-glossary__term"><dfn>Дермальний еквівалент</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біоінженерна конструкція, що відтворює основні компоненти дерми та може містити культивовані фібробласти в біосумісному матриксі.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це створена в лабораторії модель глибокого шару шкіри. Власні фібробласти пацієнта розміщують у спеціальному каркасі, де вони можуть жити, взаємодіяти та формувати компоненти нової тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-dyferentsiatsiya-klityn">
+            <dt class="vm-glossary__term"><dfn>Диференціація клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Процес, у результаті якого клітина набуває спеціалізованої будови та функції.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це процес «вибору професії» клітиною. У результаті вона набуває певної спеціалізації та починає виконувати конкретну роботу в організмі.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-donorski-stovburovi-klityny">
+            <dt class="vm-glossary__term"><dfn>Донорські стовбурові клітини</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Це клітини, отримані не від самого пацієнта, а від іншої людини — донора. На відміну від аутологічних клітин, їх використання потребує особливо суворого контролю походження, якості, інфекційної безпеки та імунологічних ризиків. У різних напрямах медицини можливості й доказовість застосування донорських клітин суттєво відрізняються.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>«Ремонтна бригада, запрошена ззовні». Вона може мати необхідні можливості, але це вже чужий біологічний матеріал, тому вимоги до безпеки та контролю є особливо високими.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-e" aria-labelledby="letter-e-title">
+        <h2 class="vm-glossary__letter" id="letter-e-title">Е</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-ekzosomy">
+            <dt class="vm-glossary__term"><dfn>Екзосоми</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Позаклітинні везикули, які виділяються клітинами та переносять біологічно активні молекули, беручи участь у міжклітинній комунікації.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це мікроскопічні «посилки», якими клітини обмінюються між собою. Вони можуть переносити білки, ліпіди та РНК і таким чином передавати іншим клітинам біологічні сигнали.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-ekvivalent-kistky">
+            <dt class="vm-glossary__term"><dfn>Еквівалент кістки</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біоінженерна конструкція, що поєднує клітини пацієнта з біосумісним матеріалом для відновлення дефектів кісткової тканини.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це своєрідна «заготовка» для відновлення кістки: власні клітини пацієнта поєднують зі спеціальним матеріалом, який створює для них каркас і умови для формування кісткової тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-ekvivalent-shkiry">
+            <dt class="vm-glossary__term"><dfn>Еквівалент шкіри</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біоінженерна конструкція, створена з клітин і біоматеріалів для заміщення або відновлення пошкодженої шкіри.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це створена в лабораторії жива конструкція з клітинами, яка допомагає відновлювати шкіру при опіках, травмах, ранах та інших значних пошкодженнях.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-ekstratselyulyarnyj-matryks">
+            <dt class="vm-glossary__term"><dfn>Екстрацелюлярний матрикс</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Комплекс молекул, що оточує клітини, формує структурну основу тканини та бере участь у регуляції клітинних процесів.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це середовище, в якому живуть клітини, — своєрідний «каркас» тканини. Він не лише підтримує її структуру, а й впливає на те, як клітини живуть, взаємодіють і відновлюються.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-elastyn">
+            <dt class="vm-glossary__term"><dfn>Еластин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Білок міжклітинного матриксу, що забезпечує тканинам еластичність і здатність відновлювати форму після розтягування.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-epihenetyka">
+            <dt class="vm-glossary__term"><dfn>Епігенетика</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність механізмів, які регулюють активність генів без зміни самої послідовності ДНК.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Наші гени не працюють постійно однаково. Вік, спосіб життя, харчування, стрес і навколишнє середовище можуть впливати на те, які гени активні, а які — ні, не змінюючи саму ДНК.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-zh" aria-labelledby="letter-zh-title">
+        <h2 class="vm-glossary__letter" id="letter-zh-title">Ж</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-zhyttyezdatnist-klityn">
+            <dt class="vm-glossary__term"><dfn>Життєздатність клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Показник частки живих клітин у клітинному матеріалі та їхньої здатності зберігати основні біологічні функції.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Недостатньо знати, скільки клітин міститься у препараті. Важливо знати, скільки з них живі та здатні нормально працювати.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-z" aria-labelledby="letter-z-title">
+        <h2 class="vm-glossary__letter" id="letter-z-title">З</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-zmorshky">
+            <dt class="vm-glossary__term"><dfn>Зморшки</dfn></dt>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Типи зморшок: імічні (виникають через активність м’язів); статичні (пов’язані зі змінами в шкірі); гравітаційні (результат вікових змін зв’язок, жирових пакетів і м’яких тканин)</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-k" aria-labelledby="letter-k-title">
+        <h2 class="vm-glossary__letter" id="letter-k-title">К</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-kariotypuvannya">
+            <dt class="vm-glossary__term"><dfn>Каріотипування</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Лабораторне дослідження кількості та структури хромосом клітин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це перевірка хромосом клітини. Вона дозволяє оцінити, чи зберігається нормальний хромосомний набір клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-kistkovyj-ekvivalent">
+            <dt class="vm-glossary__term"><dfn>Кістковий еквівалент</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біоінженерна конструкція, що поєднує клітини з біосумісним остеокондуктивним матеріалом для відновлення дефектів кісткової тканини.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це конструкція для відновлення кістки, в якій клітини пацієнта поєднуються зі спеціальним матеріалом-каркасом. Він створює умови, необхідні для формування нової кісткової тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynna-vidpovid">
+            <dt class="vm-glossary__term"><dfn>Клітинна відповідь</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність змін у функціональній активності клітини у відповідь на біологічні, хімічні, механічні або фізичні сигнали.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Будь-яке лікування розраховує на відповідь клітин. Препарат, лазер, RF, ультразвук або інший вплив дає сигнал, але результат залежить від того, чи здатні клітини тканини на цей сигнал повноцінно відповісти.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynna-kultura">
+            <dt class="vm-glossary__term"><dfn>Клітинна культура</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Популяція клітин, що вирощується та підтримується в спеціально створених контрольованих лабораторних умовах.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це власні клітини пацієнта, які після отримання з тканини вирощують у лабораторії. Так із невеликої початкової кількості можна отримати необхідну для клінічного застосування кількість клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynna-terapiya">
+            <dt class="vm-glossary__term"><dfn>Клітинна терапія</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Метод лікування та відновлення тканин із використанням живих клітин, які вводяться пацієнту для вирішення конкретного медичного завдання.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це використання живих клітин для відновлення структури та функції тканин. Залежно від завдання можуть застосовуватися власні фібробласти, мезенхімальні стромальні клітини та інші типи клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynnyj-intelekt">
+            <dt class="vm-glossary__term"><dfn>Клітинний інтелект</dfn></dt>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Природна здатність клітин взаємодіяти між собою та координувати процеси відновлення організму за допомогою складної системи біологічних сигналів. Клітини передають сигнали, координують запалення, відновлюють пошкоджені тканини, регулюють утворення нових судин і підтримують функції органів.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynne-dovholittya">
+            <dt class="vm-glossary__term"><dfn>Клітинне довголіття</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Здатність клітин тривалий час зберігати життєздатність, функціональну активність і здатність адекватно реагувати на сигнали навколишнього середовища.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це здатність клітин якомога довше залишатися здоровими, активними, взаємодіяти між собою та виконувати свою роботу.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynna-komunikatsiya">
+            <dt class="vm-glossary__term"><dfn>Клітинна комунікація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Обмін біологічними сигналами між клітинами, який дозволяє їм координувати свою діяльність і підтримувати функціонування тканин та органів.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Клітини постійно «розмовляють» між собою. Вони передають сигнали про пошкодження, запалення, необхідність поділу або відновлення. Порушення цієї «мови клітин» може погіршувати роботу всієї тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynne-mikrootochennya">
+            <dt class="vm-glossary__term"><dfn>Клітинне мікрооточення</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність клітинних, судинних, структурних і сигнальних компонентів, які оточують клітину та впливають на її життєдіяльність.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Клітина не живе сама по собі. Їй потрібні кровопостачання, кисень, поживні речовини, міжклітинний матрикс і правильні сигнали від інших клітин. Від стану цього оточення значною мірою залежить, як вона працюватиме.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynnyj-produkt">
+            <dt class="vm-glossary__term"><dfn>Клітинний продукт</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біологічний продукт, що містить живі клітини, отримані та підготовлені в контрольованих лабораторних умовах для клінічного застосування.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynne-starinnya-senestsentsiya">
+            <dt class="vm-glossary__term"><dfn>Клітинне старіння (сенесценція)</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність вікових змін клітини, що призводять до зниження її функціональної активності, здатності до поділу, відновлення та нормальної міжклітинної взаємодії.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Клітина старіє разом із нами. Вона гірше виконує свою роботу, повільніше відновлюється, може перестати ділитися та змінює свої сигнали іншим клітинам.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynnyj-defitsyt">
+            <dt class="vm-glossary__term"><dfn>Клітинний дефіцит</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Недостатня кількість функціонально активних клітин певного типу для повноцінного підтримання структури, функції та відновлення тканини.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Іноді проблема полягає не в тому, що клітини потрібно сильніше стимулювати, а в тому, що активних клітин у тканині вже недостатньо. У такій ситуації однієї стимуляції може бути замало.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynnyj-pul">
+            <dt class="vm-glossary__term"><dfn>Клітинний пул</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність клітин певного типу в тканині, які забезпечують її нормальне функціонування, оновлення та відновлення.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це запас функціонально активних клітин у тканині. З віком, після хвороб або пошкоджень цей запас може зменшуватися, і тоді можливості тканини до відновлення також знижуються.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynnyj-sekretom">
+            <dt class="vm-glossary__term"><dfn>Клітинний секретом</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність біологічно активних речовин, які клітина виділяє у навколишнє середовище та за допомогою яких впливає на інші клітини й тканини.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це «мова клітин» — набір речовин і сигналів, за допомогою яких клітини спілкуються між собою, координують запалення, відновлення та інші процеси в тканинах.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynnyj-resurs">
+            <dt class="vm-glossary__term"><dfn>Клітинний ресурс</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність кількісних і функціональних характеристик клітин, що визначають їхню здатність підтримувати та відновлювати тканину.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це не просто кількість клітин. Важливо, скільки серед них функціонально активних, як вони діляться, працюють, спілкуються між собою та реагують на пошкодження.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klitynni-tekhnolohiyi">
+            <dt class="vm-glossary__term"><dfn>Клітинні технології</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність біотехнологічних методів отримання, виділення, культивування, дослідження, зберігання та клінічного застосування клітин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це технології, які дозволяють отримати власні клітини пацієнта, перевірити їх, за необхідності виростити до потрібної кількості, зберегти та використати для відновлення тканин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-klonohennist">
+            <dt class="vm-glossary__term"><dfn>Клоногенність</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Здатність окремої клітини до поділу та утворення колонії клітин-нащадків у лабораторних умовах.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це один із показників відновлювального ресурсу клітин. Ми дивимося, чи здатна окрема клітина активно ділитися та створювати нову колонію.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-kolahen">
+            <dt class="vm-glossary__term"><dfn>Колаген</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Основний структурний білок сполучної тканини, що забезпечує міцність і механічну підтримку тканин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-kolahenostymulyatory">
+            <dt class="vm-glossary__term"><dfn>Колагеностимулятори</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Препарати, що стимулюють утворення нового колагену в тканинах.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-koloniyeutvoryuyucha-zdatnist">
+            <dt class="vm-glossary__term"><dfn>Колонієутворююча здатність</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Лабораторний показник здатності клітин формувати нові клітинні колонії.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Показує, скільки клітин з отриманого матеріалу дійсно зберегли здатність активно розмножуватися. Це допомагає оцінити їхній функціональний ресурс.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-kriokonservatsiya-klityn">
+            <dt class="vm-glossary__term"><dfn>Кріоконсервація клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Технологія контрольованого заморожування та зберігання клітин за наднизьких температур із можливістю подальшого відновлення їхньої життєздатності та функціональних властивостей.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Клітини спеціальним чином заморожують і зберігають за наднизької температури. За потреби їх можна розморозити, перевірити та використати для подальшого культивування або клінічного застосування.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-kriokonservatsiya-tkanyn">
+            <dt class="vm-glossary__term"><dfn>Кріоконсервація тканин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Технологія контрольованого заморожування та тривалого зберігання біологічної тканини для можливого отримання з неї клітин у майбутньому.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-kriolizat-trombotsytiv-amk">
+            <dt class="vm-glossary__term"><dfn>Кріолізат тромбоцитів (АМК)</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Аутологічний біологічний препарат, отриманий із тромбоцитів крові пацієнта шляхом їх руйнування під час циклів заморожування та розморожування з вивільненням факторів росту та інших біологічно активних речовин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це концентрат біологічних сигналів із власних тромбоцитів пацієнта. Він допомагає відновити сприятливе клітинне оточення, покращити взаємодію між клітинами та створити умови для відновлення тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-kultyvuvannya-klityn">
+            <dt class="vm-glossary__term"><dfn>Культивування клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біотехнологічний процес вирощування клітин у контрольованих лабораторних умовах зі збереженням їхніх необхідних властивостей.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>З невеликої кількості власних клітин пацієнта в лабораторії можна виростити мільйони клітин, необхідних для лікування. Весь процес відбувається у спеціально створених і контрольованих умовах.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-l" aria-labelledby="letter-l-title">
+        <h2 class="vm-glossary__letter" id="letter-l-title">Л</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-lipofilinh">
+            <dt class="vm-glossary__term"><dfn>Ліпофілінг</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Метод трансплантації (не інʼєкція) власної жирової тканини пацієнта для відновлення об’єму та поліпшення якості тканин.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-m" aria-labelledby="letter-m-title">
+        <h2 class="vm-glossary__letter" id="letter-m-title">М</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-mezenkhimalni-stromalni-klityny-msc">
+            <dt class="vm-glossary__term"><dfn>Мезенхімальні стромальні клітини (MSC)</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Мультипотентні стромальні клітини, здатні до самооновлення, диференціації та регуляції процесів запалення, імунної відповіді й відновлення тканин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це власні клітини пацієнта, які допомагають координувати процеси відновлення. Вони впливають на міжклітинну комунікацію, імунну відповідь, запалення та стан тканинного мікрооточення.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-melanotsyty">
+            <dt class="vm-glossary__term"><dfn>Меланоцити</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Клітини шкіри, що синтезують меланін — пігмент, який визначає забарвлення шкіри та бере участь у її захисті від ультрафіолетового випромінювання.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це клітини, які виробляють пігмент шкіри. Порушення їхньої кількості або роботи може призводити до появи ділянок зі зниженою або підвищеною пігментацією.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-melanotsytarno-keratynotsytarna-suspenziya">
+            <dt class="vm-glossary__term"><dfn>Меланоцитарно-кератиноцитарна суспензія</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Аутологічний клітинний препарат, що містить меланоцити та кератиноцити, отримані зі шкіри пацієнта для відновлення пігментації.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-mizhklitynna-komunikatsiya">
+            <dt class="vm-glossary__term"><dfn>Міжклітинна комунікація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність механізмів, за допомогою яких клітини передають і отримують біологічні сигнали та координують свою діяльність.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Клітини постійно «розмовляють» між собою. За допомогою біологічних сигналів вони повідомляють одна одній, коли потрібно ділитися, працювати, реагувати на пошкодження або брати участь у відновленні тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-mizhklitynnyj-matryks">
+            <dt class="vm-glossary__term"><dfn>Міжклітинний матрикс</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Позаклітинна структура, що оточує клітини та забезпечує механічну підтримку й міжклітинну взаємодію.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-mikrobiota">
+            <dt class="vm-glossary__term"><dfn>Мікробіота</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність мікроорганізмів, які живуть у певному середовищі організму — кишечнику, шкірі, ротовій порожнині та інших ділянках.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це мільярди мікроорганізмів, які живуть разом із нами. Вони беруть участь у травленні, захисті від патогенів, роботі імунної системи та підтриманні нормального стану шкіри й слизових оболонок.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-mikrootochennya-klityny">
+            <dt class="vm-glossary__term"><dfn>Мікрооточення клітини</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність клітин, міжклітинного матриксу, кровоносних судин, сигнальних молекул та інших факторів, що безпосередньо оточують клітину і впливають на її функцію.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це середовище, в якому живе клітина. Навіть хороша клітина не може нормально працювати, якщо їй бракує кисню, поживних речовин або правильних сигналів від сусідніх клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-mikrotsyrkulyatsiya">
+            <dt class="vm-glossary__term"><dfn>Мікроциркуляція</dfn></dt>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Кровопостачання, яке приносить клітинам кисень, поживні речовини та біологічні сигнали, необхідні для відновлення. Коли мікроциркуляція погіршується, тканина втрачає здатність повноцінно реагувати на лікування, сповільнюється регенерація, посилюється фіброз.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-mitokhondriyi">
+            <dt class="vm-glossary__term"><dfn>Мітохондрії</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Клітинні органели, що забезпечують утворення основної частини енергії клітини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-mitokhondrialna-dysfunktsiya">
+            <dt class="vm-glossary__term"><dfn>Мітохондріальна дисфункція</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Порушення роботи мітохондрій, що призводить до зниження утворення енергії та погіршення функцій клітини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-morfolohiya-klityn">
+            <dt class="vm-glossary__term"><dfn>Морфологія клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність характеристик форми, розміру, структури та особливостей росту клітин, які оцінюються під час лабораторного дослідження.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Лабораторія оцінює, як клітини виглядають, ростуть і формують колонії. Зміни їхнього зовнішнього вигляду можуть бути додатковою ознакою зміни функціонального стану.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-n" aria-labelledby="letter-n-title">
+        <h2 class="vm-glossary__letter" id="letter-n-title">Н</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-nejrointerfejs">
+            <dt class="vm-glossary__term"><dfn>Нейроінтерфейс</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Технологія, що поєднує нервову систему людини з електронними пристроями.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-neovaskulyaryzatsiya">
+            <dt class="vm-glossary__term"><dfn>Неоваскуляризація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Утворення нових судин у тканинах, які раніше мали погане кровопостачання або були пошкоджені.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-neofibroliftynh">
+            <dt class="vm-glossary__term"><dfn>Неофіброліфтинг</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Запатентована технологія VIRTUS для лікування шкіри та омолодження.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-nisha-stovburovoyi-klityny">
+            <dt class="vm-glossary__term"><dfn>Ніша стовбурової клітини</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Мікросередовище, що забезпечує життєдіяльність, самовідновлення та функціональну активність стовбурових клітин.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-o" aria-labelledby="letter-o-title">
+        <h2 class="vm-glossary__letter" id="letter-o-title">О</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-okyslyuvalnyj-oksydatyvnyj-stres">
+            <dt class="vm-glossary__term"><dfn>Окислювальний (оксидативний) стрес</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Стан, що виникає внаслідок надлишку вільних радикалів та недостатності антиоксидантного захисту.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-omolodzhennya">
+            <dt class="vm-glossary__term"><dfn>Омолодження</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Відновлення структури, функцій та біологічних властивостей тканин, характерних для більш молодого віку.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-orhanoyid">
+            <dt class="vm-glossary__term"><dfn>Органоїд</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Тривимірна клітинна структура, вирощена в лабораторних умовах, яка відтворює окремі особливості будови та функції певного органа або тканини.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це маленька модель тканини або органа, вирощена з клітин у лабораторії. Органоїди допомагають вивчати роботу клітин, розвиток захворювань і реакцію тканин на різні впливи.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-p" aria-labelledby="letter-p-title">
+        <h2 class="vm-glossary__letter" id="letter-p-title">П</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-patohenetychna-diahnostyka-tkanyn">
+            <dt class="vm-glossary__term"><dfn>Патогенетична діагностика тканин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Оцінка структури тканин, їхнього функціонального стану та біологічної активності клітин; проводиться для оцінки ефективності механізму регенерації</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-pasport-klitynnoho-produktu">
+            <dt class="vm-glossary__term"><dfn>Паспорт клітинного продукту</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Документ, що містить результати контролю якості та основні характеристики клітинного продукту, підготовленого для клінічного застосування.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це документ про клітини конкретного пацієнта: які клітини отримані, скільки їх, які їхні характеристики та чи пройшли вони необхідний контроль якості й безпеки.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-pasazh-klityn">
+            <dt class="vm-glossary__term"><dfn>Пасаж клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Етап культивування, під час якого клітини після досягнення певної щільності переносять у нову культуральну ємність для подальшого росту.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Коли клітинам стає «тісно», частину з них переносять у нове середовище, де вони продовжують рости та ділитися. Кожен такий етап називається пасажем.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-peptydy">
+            <dt class="vm-glossary__term"><dfn>Пептиди</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Короткі ланцюжки амінокислот, які виконують регуляторні та сигнальні функції в організмі.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-personalizovana-medytsyna">
+            <dt class="vm-glossary__term"><dfn>Персоналізована медицина</dfn></dt>
+          </div>
+          <div class="vm-glossary__item" id="term-personalizovana-reheneratyvna-terapiya">
+            <dt class="vm-glossary__term"><dfn>Персоналізована регенеративна терапія</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Спрямована на відновлення біології тканин, мікроциркуляції та їхнього регенераторного потенціалу</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-plazma-zbahachena-trombotsytamy">
+            <dt class="vm-glossary__term"><dfn>Плазма, збагачена тромбоцитами</dfn> (PRP)</dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Аутологічний препарат плазми крові пацієнта з підвищеною концентрацією тромбоцитів, які є джерелом факторів росту та інших біологічно активних речовин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>З крові пацієнта отримують плазму з високою концентрацією його власних тромбоцитів. Після активації вони вивільняють фактори росту, які передають клітинам сигнали, необхідні для процесів відновлення.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-plazmoliftynh">
+            <dt class="vm-glossary__term"><dfn>Плазмоліфтинг</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Метод введення аутологічної плазми, збагаченої тромбоцитами, з метою стимуляції відновних процесів у тканинах.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-polinukleotydy">
+            <dt class="vm-glossary__term"><dfn>Полінуклеотиди</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біополімери з нуклеотидів, що застосовуються в регенеративній та естетичній медицині для сприяння відновленню тканин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-proliferatsiya-klityn">
+            <dt class="vm-glossary__term"><dfn>Проліферація клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Процес збільшення кількості клітин шляхом їх поділу.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це розмноження клітин. Одна клітина ділиться на дві, завдяки чому збільшується кількість клітин, необхідних для росту та відновлення тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-proteostaz">
+            <dt class="vm-glossary__term"><dfn>Протеостаз</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Система підтримання нормальної структури, синтезу та розпаду білків у клітині.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-r" aria-labelledby="letter-r-title">
+        <h2 class="vm-glossary__letter" id="letter-r-title">Р</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-revaskulyaryzatsiya">
+            <dt class="vm-glossary__term"><dfn>Реваскуляризація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Процес відновлення або покращення кровопостачання тканини шляхом формування та функціонування судинної мережі.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це відновлення нормального кровопостачання тканини. Разом із кров’ю клітини отримують кисень і поживні речовини, необхідні для їхньої роботи та відновлення.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-reheneratyvna-medytsyna">
+            <dt class="vm-glossary__term"><dfn>Регенеративна медицина</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Напрям медицини, спрямований на відновлення структури та функції пошкоджених, втрачених або віково змінених тканин і органів із використанням клітинних, біологічних та біоінженерних технологій.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Її завдання — не лише лікувати прояви проблеми, а допомогти відновити саму тканину та її функцію. Для цього можуть використовувати власні клітини пацієнта, їхні біологічні сигнали та біоінженерні конструкції.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-reheneratyvnyj-potentsial">
+            <dt class="vm-glossary__term"><dfn>Регенеративний потенціал</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність функціональних можливостей клітин і тканин, які визначають їхню здатність відповідати на пошкодження, оновлюватися та відновлювати структуру і функцію.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це запас можливостей організму для відновлення. Він залежить не лише від кількості клітин, а й від того, наскільки вони активні, здатні ділитися, взаємодіяти між собою та відповідати на сигнали.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-reheneratsiya">
+            <dt class="vm-glossary__term"><dfn>Регенерація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біологічний процес відновлення структури та функції клітин, тканин або органів після пошкодження чи природного зношування.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це природна здатність організму ремонтувати себе — замінювати пошкоджені клітини та відновлювати структуру і роботу тканин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-reheneratsiya-shkiry">
+            <dt class="vm-glossary__term"><dfn>Регенерація шкіри</dfn></dt>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Повернення шкірі життя. Ми допомагаємо шкірі знову працювати так, як вона працювала раніше: відновлюватися, захищати, відчувати, зберігати свою структуру і природну красу.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-reheneratyvnyj-defitsyt">
+            <dt class="vm-glossary__term"><dfn>Регенеративний дефіцит</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Стан, за якого наявного клітинного та тканинного ресурсу недостатньо для повноцінного відновлення структури й функції тканини.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Організм намагається відновити тканину, але власного ресурсу для цього вже недостатньо. Саме тоді звичайна стимуляція може давати слабший результат, оскільки стимулювати фактично вже недостатню кількість активних клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-reheneratyvnyj-rezerv">
+            <dt class="vm-glossary__term"><dfn>Регенеративний резерв</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Функціональний запас клітин і тканин, який може бути використаний організмом для підтримання гомеостазу та відновлення після пошкодження.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це запас міцності тканини. Поки він достатній, організм добре справляється з навантаженням і пошкодженнями. З віком, після хвороб або травм цей запас може зменшуватися.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-reheneratyvna-oftalmolohiya">
+            <dt class="vm-glossary__term"><dfn>Регенеративна офтальмологія</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Один з напрямків Інституту VIRTUS, де застосовуються клітинні технології. В тому числі кріолізат тромбоцитів при порушенні регенерації тканин ока, при дистрофічних і трофічних захворюваннях рогівки, наслідках бактеріальних і вірусних кератитів.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-redermalizatsiya">
+            <dt class="vm-glossary__term"><dfn>Редермалізація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Термін, який переважно використовується в естетичній медицині для опису ін&#x27;єкційних методик, спрямованих на покращення стану шкіри. Зазвичай ідеться про введення препаратів на основі гіалуронової кислоти та інших компонентів. Важливо розрізняти косметичне покращення властивостей шкіри та справжні регенеративні клітинні технології — це не одне й те саме.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>«Це скоріше догляд за шкірою, ніж її капітальний ремонт». Ін’єкційні препарати можуть впливати на рівень зволоження та деякі властивості шкіри, але це не є рівнозначним клітинній регенерації.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-rekonstruktyvno-reheneratyvna-medytsyna">
+            <dt class="vm-glossary__term"><dfn>Реконструктивно-регенеративна медицина</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Напрямок в клінічній практиці Інституту VIRTUS, який поєднує реконструктиівну хірургію із сучасними регенеративними технологіями. Включає підготовку тканин, біоімплантінг, неофіброліфітинг, лазерне моделювання рубців.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-remodelyuvannya-tkanyn">
+            <dt class="vm-glossary__term"><dfn>Ремоделювання тканин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Тривалий біологічний процес перебудови структури та міжклітинного матриксу тканини після пошкодження, лікування або інших впливів.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Відновлення тканини не закінчується одразу після процедури або операції. Протягом наступних тижнів і місяців вона перебудовується: змінюються колаген, міжклітинний матрикс, судини та взаємодія клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-reparatsiya">
+            <dt class="vm-glossary__term"><dfn>Репарація</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Процес відновлення тканин після ушкодження, який може завершуватися як повноцінною регенерацією, так і утворенням рубця.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-s" aria-labelledby="letter-s-title">
+        <h2 class="vm-glossary__letter" id="letter-s-title">С</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-sekretom">
+            <dt class="vm-glossary__term"><dfn>Секретом</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність усіх біологічно активних речовин, що виділяються клітинами у навколишнє середовище.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Система комунікації клітини. Все, що клітина виділяє для спілкування з іншими клітинами: екзосоми, фактори росту, цитокіни, протеїни, ліпіди, імунні сигнальні молекули та інші.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-senolityky">
+            <dt class="vm-glossary__term"><dfn>Сенолітики</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Речовини, що вибірково спрямовані на видалення сенесцентних клітин із тканин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це речовини, завдання яких — допомогти організму позбутися постарілих клітин, що вже не діляться та можуть негативно впливати на своє оточення. Важливо: видалення таких клітин саме по собі не збільшує кількість молодих функціонально активних клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-senomorfiky">
+            <dt class="vm-glossary__term"><dfn>Сеноморфіки</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Речовини, що впливають на активність сенесцентних клітин і зменшують виділення ними прозапальних та інших біологічно активних факторів, не обов’язково знищуючи самі клітини.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Вони не видаляють постарілі клітини, а намагаються зменшити їхній негативний вплив на сусідні клітини та тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-skaffold">
+            <dt class="vm-glossary__term"><dfn>Скаффолд</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біологічна або штучна матриця, яка слугує каркасом для прикріплення, росту та формування нових клітин і тканин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-stovburovi-klityny">
+            <dt class="vm-glossary__term"><dfn>Стовбурові клітини</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Недиференційовані клітини, здатні до самооновлення та утворення спеціалізованих клітин певних тканин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це клітини з особливим потенціалом до самооновлення та участі у відновленні тканин. Різні типи стовбурових і стромальних клітин мають різні можливості, тому їх не можна розглядати як універсальні «клітини від усіх хвороб».</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-t" aria-labelledby="letter-t-title">
+        <h2 class="vm-glossary__letter" id="letter-t-title">Т</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-tkanynnyj-homeostaz">
+            <dt class="vm-glossary__term"><dfn>Тканинний гомеостаз</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Здатність тканини підтримувати стабільний стан, баланс між утворенням, функціонуванням і видаленням клітин та зберігати свою структуру і функцію.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>У здоровій тканині постійно відбувається оновлення: одні клітини завершують свою роботу, інші приходять їм на зміну. Поки цей баланс зберігається, тканина нормально функціонує та відновлюється.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-tkanynna-inzheneriya">
+            <dt class="vm-glossary__term"><dfn>Тканинна інженерія</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Напрям регенеративної медицини, що поєднує клітини, біоматеріали та біологічні сигнали для створення або відновлення тканин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це технологія, яка дозволяє не просто вводити клітини, а створювати з них і спеціального біоматеріалу конструкцію для відновлення пошкодженої тканини. Так створюються, наприклад, еквіваленти шкіри та кістки.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-tkanynnyj-resurs">
+            <dt class="vm-glossary__term"><dfn>Тканинний ресурс</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сукупність клітинних, судинних, структурних і метаболічних можливостей тканини, що забезпечують її нормальне функціонування та здатність до відновлення.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це можливості тканини підтримувати себе та відновлюватися. Вони залежать від кількості й активності клітин, кровопостачання, міжклітинного середовища та загального стану організму.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-f" aria-labelledby="letter-f-title">
+        <h2 class="vm-glossary__letter" id="letter-f-title">Ф</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-faktory-rostu">
+            <dt class="vm-glossary__term"><dfn>Фактори росту</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Біологічно активні сигнальні білки, які регулюють поділ, міграцію, диференціацію та функціональну активність клітин.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це сигнали, за допомогою яких клітини отримують команди: активуватися, переміщуватися, ділитися або брати участь у відновленні тканини.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-fenotypuvannya-klityn">
+            <dt class="vm-glossary__term"><dfn>Фенотипування клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Лабораторне визначення характерних ознак і маркерів клітин, що дозволяє підтвердити їхній тип та оцінити окремі властивості.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це своєрідна «перевірка особистості» клітин. За спеціальними маркерами лабораторія підтверджує, з якими саме клітинами вона працює.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-fibroblasty">
+            <dt class="vm-glossary__term"><dfn>Фібробласти</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Клітини сполучної тканини, які синтезують колаген, еластин та інші компоненти міжклітинного матриксу і відіграють ключову роль у підтриманні структури та відновленні шкіри.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це клітини, які значною мірою відповідають за структуру та якість шкіри. Вони виробляють колаген, еластин та інші компоненти її каркаса. З віком кількість і активність функціональних фібробластів знижуються.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-fibroz">
+            <dt class="vm-glossary__term"><dfn>Фіброз</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Надмірне утворення та накопичення сполучної тканини внаслідок порушення нормальних процесів загоєння або хронічного пошкодження.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Це ситуація, коли замість повноцінного відновлення тканини організм утворює надлишок щільної сполучної тканини. Внаслідок цього тканина може ставати жорсткішою та гірше виконувати свою функцію.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-funktsionalna-aktyvnist-klityn">
+            <dt class="vm-glossary__term"><dfn>Функціональна активність клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Здатність клітин виконувати властиві їм біологічні функції та адекватно реагувати на сигнали навколишнього середовища.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Важливо не лише, щоб клітина була живою. Вона повинна виконувати свою роботу, реагувати на сигнали та взаємодіяти з іншими клітинами.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-kh" aria-labelledby="letter-kh-title">
+        <h2 class="vm-glossary__letter" id="letter-kh-title">Х</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-khronichne-zapalennya">
+            <dt class="vm-glossary__term"><dfn>Хронічне запалення</dfn> (inflammaging)</dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Тривале слабко виражене запалення, що супроводжує старіння організму та сприяє розвитку вікових захворювань.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-ts" aria-labelledby="letter-ts-title">
+        <h2 class="vm-glossary__letter" id="letter-ts-title">Ц</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-tsytokiny">
+            <dt class="vm-glossary__term"><dfn>Цитокіни</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Сигнальні білкові молекули, що регулюють запалення, імунну відповідь та процеси регенерації.</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-sh" aria-labelledby="letter-sh-title">
+        <h2 class="vm-glossary__letter" id="letter-sh-title">Ш</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-shvydkist-podilu-klityn">
+            <dt class="vm-glossary__term"><dfn>Швидкість поділу клітин</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Показник, що характеризує темп проліферації клітин у визначених лабораторних умовах.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Показує, наскільки активно клітини розмножуються. Якщо для подвоєння їхньої кількості потрібно більше часу, це може свідчити про зниження проліферативної активності клітин.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-shkira">
+            <dt class="vm-glossary__term"><dfn>Шкіра</dfn></dt>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Найбільш емоційний орган людини. Здорова шкіра — виражає емоції; це шкіра, яку хочеться поцілувати</p></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="vm-glossary__group" id="letter-latin" aria-labelledby="letter-latin-title">
+        <h2 class="vm-glossary__letter" id="letter-latin-title" lang="en">A–Z</h2>
+        <dl class="vm-glossary__list">
+          <div class="vm-glossary__item" id="term-cellness">
+            <dt class="vm-glossary__term"><dfn>Cellness</dfn></dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Філософія керованого біологічного ресурсу. Відновлення регенераторного потенціалу організму шляхом введення власних клітин пацієнта — стовбурових, фібробластів або тромбоцитів.</p></dd>
+            <dd class="vm-glossary__plain"><span class="vm-glossary__label">Простими словами</span><p>Новий напрямок у медицині: замісна клітинна терапія. Не стимуляція. Не синтетика. Власний ресурс. Довготривалий і передбачуваний ефект.</p></dd>
+          </div>
+          <div class="vm-glossary__item" id="term-prp">
+            <dt class="vm-glossary__term"><dfn>PRP</dfn> (Platelet-Rich Plasma)</dt>
+            <dd class="vm-glossary__def"><span class="vm-glossary__label">Визначення</span><p>Аутологічна плазма з підвищеною концентрацією тромбоцитів, що використовується як джерело факторів росту.</p></dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+
+    <aside class="vm-article__sidebar vm-glossary__aside">
+      <div class="vm-article__share">
+        <span class="sc-t-mini">Поділіться цим матеріалом:</span>
+        <a class="vm-article__share-link sc-t-caption" href="#share-fb" aria-label="FB — поділитись у Facebook">FB</a>
+        <a class="vm-article__share-link sc-t-caption" href="#share-tw" aria-label="TW — поділитись у X">TW</a>
+        <a class="vm-article__share-link sc-t-caption" href="#share-tg" aria-label="TG — поділитись у Telegram">TG</a>
+      </div>
+
+      <nav class="vm-glossary__nav" aria-label="Абетка">
+        <p class="vm-article__toc-title sc-t-caption">АБЕТКА</p>
+        <ul class="vm-glossary__keys">
+          <li><a class="vm-glossary__key" href="#letter-a">А</a></li>
+          <li><a class="vm-glossary__key" href="#letter-b">Б</a></li>
+          <li><a class="vm-glossary__key" href="#letter-v">В</a></li>
+          <li><a class="vm-glossary__key" href="#letter-h">Г</a></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">Ґ</span></li>
+          <li><a class="vm-glossary__key" href="#letter-d">Д</a></li>
+          <li><a class="vm-glossary__key" href="#letter-e">Е</a></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">Є</span></li>
+          <li><a class="vm-glossary__key" href="#letter-zh">Ж</a></li>
+          <li><a class="vm-glossary__key" href="#letter-z">З</a></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">И</span></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">І</span></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">Ї</span></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">Й</span></li>
+          <li><a class="vm-glossary__key" href="#letter-k">К</a></li>
+          <li><a class="vm-glossary__key" href="#letter-l">Л</a></li>
+          <li><a class="vm-glossary__key" href="#letter-m">М</a></li>
+          <li><a class="vm-glossary__key" href="#letter-n">Н</a></li>
+          <li><a class="vm-glossary__key" href="#letter-o">О</a></li>
+          <li><a class="vm-glossary__key" href="#letter-p">П</a></li>
+          <li><a class="vm-glossary__key" href="#letter-r">Р</a></li>
+          <li><a class="vm-glossary__key" href="#letter-s">С</a></li>
+          <li><a class="vm-glossary__key" href="#letter-t">Т</a></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">У</span></li>
+          <li><a class="vm-glossary__key" href="#letter-f">Ф</a></li>
+          <li><a class="vm-glossary__key" href="#letter-kh">Х</a></li>
+          <li><a class="vm-glossary__key" href="#letter-ts">Ц</a></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">Ч</span></li>
+          <li><a class="vm-glossary__key" href="#letter-sh">Ш</a></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">Щ</span></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">Ю</span></li>
+          <li><span class="vm-glossary__key" aria-disabled="true">Я</span></li>
+          <li><a class="vm-glossary__key" href="#letter-latin" lang="en">A–Z</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+  </div>
+</article>
