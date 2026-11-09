@@ -270,3 +270,34 @@
     visibility: visible;
   }
 }
+
+/* ---------- Планшет ----------
+   На 768 крошки, фильтры и поиск в одну строку не помещаются: вкладки обрезались.
+   Полоса с фильтрами (только главная журнала) идёт в два ряда: крошки на своих 70,
+   под ними фильтры слева и поиск справа (2026-11-09). Полоса без фильтров не меняется. */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .vm-rubrics:has(.vm-rubrics__filters) {
+    flex-wrap: wrap;
+    gap: 0 var(--grid-gap);
+    padding-block-end: var(--sc-space-4);
+  }
+
+  .vm-rubrics:has(.vm-rubrics__filters) .vm-rubrics__crumbs {
+    flex: 1 0 100%;
+    display: flex;
+    align-items: center;
+    min-block-size: var(--sc-crumbs-h);
+  }
+
+  .vm-rubrics__filters,
+  .vm-rubrics__tabs { justify-content: flex-start; }
+
+  /* у самого порога 641 вкладкам не хватает десятка пикселей — прокрутка вместо обрезки */
+  .vm-rubrics__tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .vm-rubrics__tabs::-webkit-scrollbar { display: none; }
+  .vm-rubrics__tab { flex: none; }
+}

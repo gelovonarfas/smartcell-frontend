@@ -105,6 +105,20 @@
   }
 }
 
+/* Планшет (641–1023): те саме, що на телефоні, — права колонка скидається вниз.
+   Поруч із фігурою тексту лишалось 106–380 px, лід ламався по слову в рядку
+   (правка 2026-11-09). Фігура вужча за десктопну, стоїть праворуч на нижньому краї. */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .vm-category--column { --vm-col-figure-w: 400px; }
+  .vm-category--column > :not(.vm-category__figure) { max-inline-size: var(--vm-cat-lede-w); }
+  .vm-category__figure {
+    position: static;
+    align-self: flex-end;
+    max-inline-size: 100%;
+    margin-block: var(--section-gap) calc(-1 * var(--section-padding-y-tight));
+  }
+}
+
 /* ============================================================
    Варіанти шапки рубрики (2026-10-27): сторінка автора, пошук, порожній стан, 404.
    Та сама полоса warm і ритм, що в рубриці — нові лише вміст і кілька елементів.

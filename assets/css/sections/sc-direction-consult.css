@@ -214,6 +214,16 @@
   .sc-dconsult__submit { transition: none; }
 }
 
+/* ---------- Планшет ----------
+   Колонка 473/1216 на 768 — 240: заголовок ломался в пять строк. Тексту две трети
+   полосы, планета остаётся в правой трети. Строки при этом заходят на край планеты,
+   поэтому скрим плотнее — 40 % вместо 20 % (2026-11-09). */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .sc-dconsult__inner { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+  .sc-dconsult__scrim { background: var(--sc-black-alpha-40); }
+}
+
 /* ---------- Телефон ---------- */
 
 @media (max-width: 640px) {

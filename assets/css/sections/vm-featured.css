@@ -27,6 +27,10 @@
   flex-direction: column;
   justify-content: space-between;
   block-size: 100%;
+  /* Минимальный просвет между материалом и стрелками: на узкой колонке заголовок
+     в шесть строк упирался в кнопки вплотную (2026-11-09). На десктопе не срабатывает —
+     там space-between даёт больше. */
+  gap: var(--section-gap);
   padding-block: var(--section-padding-y) var(--sc-space-10);
   padding-inline-end: var(--section-gap);
   min-inline-size: 0;
@@ -381,4 +385,18 @@
      проваливались вниз, оставляя воздух над плашками (правка 2026-09-22) */
   .vm-featured__slide { grid-row: 3; grid-column: 1; align-self: start; }
   .vm-featured__bottom { grid-row: 4; grid-column: 1; }
+}
+
+/* ---------- Планшет ----------
+   Колонка копии на 768 — 285, а слово «Регенеративний» кеглем H1 (44) — 335: заголовок
+   лез под кадр. Поле до фото сжато до шага сетки, заголовок материала набран ролью H2
+   (32 из токенов) — та же ступень, на которую H1 и так сходит на телефоне (2026-11-09). */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .vm-featured__copy { padding-inline-end: var(--grid-gap); }
+
+  .vm-featured__title {
+    font: var(--h2-weight) var(--h2-size) / var(--h2-lh) var(--font-headings);
+    letter-spacing: var(--h2-ls);
+    overflow-wrap: break-word;
+  }
 }

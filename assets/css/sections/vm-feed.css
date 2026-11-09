@@ -173,3 +173,13 @@
 
   .vm-feed__pager { justify-content: space-between; }
 }
+
+/* ---------- Планшет ----------
+   Четыре карточки в ряд на 768 — по 168: заголовки ломались по слову в строке.
+   Два столбца, между рядами карточек — шаг ленты (2026-11-09). */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .vm-feed__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--section-gap);
+  }
+}

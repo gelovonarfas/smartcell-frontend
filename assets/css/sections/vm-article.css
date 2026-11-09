@@ -1652,3 +1652,36 @@
 
   .vm-article__error[hidden] { display: none; }
 }
+
+/* ---------- Планшет ----------
+   Сайдбар 380 на 768 оставлял тексту 222. Ниже 1024 статья в одну колонку, как на
+   телефоне: сайдбар под текстом, не липнет, якоря спрятаны (зміст чипсами — исключение).
+   Шапка, промо и подписка остаются в ряд — им ширины хватает (2026-11-09). */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .vm-article__body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--section-gap);
+  }
+
+  .vm-article__sidebar { position: static; }
+
+  /* Копия шапки на 768 — 298, слово «Регенеративний» кеглем H1 — 335. Заголовок
+     набран ролью H2 (токены): на телефоне H1 сходит на ту же ступень */
+  .vm-article__title {
+    font: var(--h2-weight) var(--h2-size) / var(--h2-lh) var(--font-headings);
+    letter-spacing: var(--h2-ls);
+  }
+
+  .vm-article__toc { display: none; }
+  .vm-article__toc--chips { display: block; }
+  .vm-article__sidebar:has(.vm-article__toc--chips) { order: -1; }
+  .vm-article__sidebar:has(.vm-article__toc--chips) .vm-article__share { order: 1; }
+  /* во всю ширину колонки семь квадратов в ряд вырастали до 97 — двенадцать в ряд */
+  .vm-article__toc--chips .vm-article__toc-list { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+}
+
+/* Узкий десктоп: сайдбар уже и ближе, чтобы колонке текста хватало меры */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .vm-article { --vm-a-side-w: 320px; }
+  .vm-article__body { gap: var(--sc-space-10); }
+}

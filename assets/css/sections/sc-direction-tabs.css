@@ -777,18 +777,12 @@ a.sc-dindications__chip:active,
   .sc-dservices__preview { display: none; }
 }
 
-/* ---------- Телефон ---------- */
+/* ---------- Планшет и телефон ----------
+   Колонка заголовка 416 и колонки отзыва 220 + 140 — фиксированные: уже 1024
+   тексту оставалось 100–200. С планшета заголовок встаёт над текстом, а отзыв —
+   в одну колонку (2026-11-09). */
 
-@media (max-width: 640px) {
-  .sc-dtabs__list { gap: var(--sc-space-6); }
-
-  .sc-dtabs__panel {
-    gap: var(--section-padding-y);
-    padding-block: var(--section-padding-y);
-  }
-
-  .sc-dservices__list { grid-template-columns: minmax(0, 1fr); }
-
+@media (max-width: 1023px) {
   .sc-dprose,
   .sc-dabout,
   .sc-dabout--quote-only {
@@ -802,18 +796,9 @@ a.sc-dindications__chip:active,
   .sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > h2 { margin-block-end: 0; }
   .sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > h2:not(:first-child) + * { margin-block-start: 0; }
 
-  .sc-ddoctors { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
-
-  /* карточки журнала в колонку с разрядкой, как в ленте */
-  .sc-darticles__row { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
-  .sc-darticles__head { flex-direction: column; align-items: flex-start; gap: var(--stack-gap-sm); }
-
-  .sc-dservices__list--cols-4 { grid-template-columns: minmax(0, 1fr); }
-
   .sc-dreviews__row {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--stack-gap-md);
-    padding: var(--sc-space-6) var(--sc-space-4);
   }
 
   .sc-dreviews__meta {
@@ -824,6 +809,35 @@ a.sc-dindications__chip:active,
   }
 
   .sc-dreviews__source { text-align: start; }
+}
+
+/* Планшет: карточки журнала и плитки «по четыре» — по две в ряд */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .sc-darticles__row { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--section-gap); }
+  .sc-dservices__list--cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width: 640px) {
+  .sc-dtabs__list { gap: var(--sc-space-6); }
+
+  .sc-dtabs__panel {
+    gap: var(--section-padding-y);
+    padding-block: var(--section-padding-y);
+  }
+
+  .sc-dservices__list { grid-template-columns: minmax(0, 1fr); }
+
+  .sc-ddoctors { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
+
+  /* карточки журнала в колонку с разрядкой, как в ленте */
+  .sc-darticles__row { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
+  .sc-darticles__head { flex-direction: column; align-items: flex-start; gap: var(--stack-gap-sm); }
+
+  .sc-dservices__list--cols-4 { grid-template-columns: minmax(0, 1fr); }
+
+  .sc-dreviews__row { padding: var(--sc-space-6) var(--sc-space-4); }
 
   .sc-dreviews__more-btn { inline-size: 100%; }
 }

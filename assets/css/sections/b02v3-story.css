@@ -167,8 +167,10 @@
 }
 
 /* Во втором ряду подзаголовок стоит слева (зачіпка), поэтому справа его
-   прячем визуально — для поиска и скринридера он остаётся на месте */
-@media (min-width: 641px) {
+   прячем визуально — для поиска и скринридера он остаётся на месте.
+   Только там, где зачіпка видна: уже 1024 её нет, и подзаголовок нужен
+   в самой статье (2026-11-09) */
+@media (min-width: 1024px) {
   .sc-story__row--solution .sc-story__part > :is(.sc-story__h1, .sc-story__h2):first-child {
     position: absolute;
     inline-size: 1px;
@@ -592,11 +594,11 @@
   .sc-story__cta-arrow svg { transition: none; }
 }
 
-/* ---------- Мобильный ---------- */
+/* ---------- Планшет и телефон ----------
+   Одна колонка с 2026-11-09 и на планшете (уже 1024): в половине полосы
+   статье оставалось ~300px, карточка с полями 48 сжимала текст до 120px. */
 
-@media (max-width: 640px) {
-  .sc-story { padding-inline: var(--page-margin-x); }
-
+@media (max-width: 1023px) {
   .sc-story__row {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--section-gap);
@@ -606,6 +608,12 @@
      боковина в одну колонку ложится полосой поверх статьи и мешает читать.
      Фразы остаются приёмом широкого экрана, где у них своя колонка. */
   .sc-story__aside { display: none; }
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 640px) {
+  .sc-story { padding-inline: var(--page-margin-x); }
 
   .sc-story__part { padding-block-end: var(--section-padding-y-tight); }
   .sc-story__bridge { padding-block: var(--sc-space-16) var(--sc-space-10); margin-block-end: var(--sc-space-10); }
@@ -638,17 +646,19 @@
 }
 .sc-story__part > p strong { font-weight: var(--sc-weight-bold); }
 /* Посилання в тексті (2026-11-04): як в описі напрямку, але на темній смузі —
-   --foreground тут світлий (data-theme="inverse"), тому без системного синього/фіолетового */
-.sc-story__part a {
+   --foreground тут світлий (data-theme="inverse"), тому без системного синього/фіолетового.
+   Тільки текстові теги (2026-11-09): загальне «.sc-story__part a» перебивало колір
+   кнопки-блока .sc-story__cta — підпис зливався з фоном — і підпису під фото. */
+.sc-story__part > :is(p, ul, ol, h2, h3, h4, blockquote, table) a {
   color: var(--foreground);
   text-decoration: underline;
   text-underline-position: from-font;
   text-underline-offset: var(--sc-space-0_5);
 }
 @media (hover: hover) and (pointer: fine) {
-  .sc-story__part a:hover { text-decoration: none; }
+  .sc-story__part > :is(p, ul, ol, h2, h3, h4, blockquote, table) a:hover { text-decoration: none; }
 }
-.sc-story__part a:focus-visible {
+.sc-story__part > :is(p, ul, ol, h2, h3, h4, blockquote, table) a:focus-visible {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
 }

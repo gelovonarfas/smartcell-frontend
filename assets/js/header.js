@@ -111,6 +111,9 @@
   /* Высота самой планки: по ней страницы отодвигают контент из-под
      фиксированной шапки и к ней липнет полоса прочитанного на статье. */
   var syncHeader = function () {
+    /* Открытое меню растягивает шапку на весь экран — это не высота планки. Раньше страница
+       под меню отъезжала вниз на экран; на планшете её видно сквозь скрим (правка 2026-11-09). */
+    if (header.classList.contains('sc-header--nav-open')) return;
     document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
   };
   syncHeader();
@@ -148,9 +151,24 @@
       if (e.key === 'Escape' && navIsOpen()) { setNav(false); burger.focus(); }
     });
 
+    /* Планшет (641–1279): шторка — панель справа, остальная часть растянутой шапки — скрим
+       страницы. Скрим — это сама шапка и её сетка, поэтому клик по нему приходит внутрь шапки.
+       Ширину панели берём из CSS (фон панели — .sc-header__inner::after); на телефоне
+       псевдоэлемента нет, ширина не читается, и клик ничего не закрывает (правка 2026-11-09). */
+    var navInner = header.querySelector('.sc-header__inner');
+    var navDrawer = header.querySelector('.sc-header__drawer');
+    var onScrim = function (e) {
+      if (!navInner || !navDrawer) return false;
+      if (e.target !== header && e.target !== navInner) return false;
+      var panelW = parseFloat(getComputedStyle(navInner, '::after').width);
+      if (!panelW) return false;
+      return e.clientY > navDrawer.getBoundingClientRect().top &&
+             e.clientX < header.getBoundingClientRect().right - panelW;
+    };
+
     document.addEventListener('click', function (e) {
       if (!navIsOpen()) return;
-      if (header.contains(e.target)) return;
+      if (header.contains(e.target) && !onScrim(e)) return;
       setNav(false);
     });
 

@@ -122,11 +122,22 @@
   white-space: nowrap;
 }
 
+/* В плитах цена стоит под подписью и может переноситься: «132 500 грн ·
+   фіксована ціна» в половину колонки одной строкой не входит уже с 1280
+   и уезжала за край страницы (2026-11-09) */
+.sc-saving__prices .sc-saving__value { white-space: normal; }
+
+/* ---------- Планшет ----------
+   Копия над таблицей: в две колонки таблице оставалось меньше 400px */
+
+@media (max-width: 1023px) {
+  .sc-saving__inner { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* ---------- Мобильный ----------
    Строка складывается: подпись сверху, сумма под ней. */
 
 @media (max-width: 640px) {
-  .sc-saving__inner { grid-template-columns: minmax(0, 1fr); }
 
   .sc-saving__row,
   .sc-saving__total {

@@ -274,6 +274,29 @@
 
 }
 
+/* ---------- Планшет ----------
+   Подписи шириной 200 в ряд помещаются от 1280. Уже — колонка берёт
+   ширину своего содержимого (подпись не шире тех же 200), остаток уходит
+   в промежутки; на планшете (уже 1024) числа встают 2×2, как на телефоне
+   (2026-11-09). */
+
+@media (max-width: 1279px) {
+  .sc-science__stats { gap: var(--grid-gap); }
+  .sc-science__stat { flex: 0 1 auto; }
+  .sc-science__stat-label { inline-size: auto; max-inline-size: var(--science-label-w); }
+}
+
+@media (max-width: 1023px) {
+  .sc-science__proof { padding-block: var(--section-padding-y-tight); }
+
+  .sc-science__stats {
+    flex-wrap: wrap;
+    gap: var(--section-gap) var(--grid-gap);
+  }
+
+  .sc-science__stat { flex: 1 0 40%; }
+}
+
 /* ---------- Мобильный ---------- */
 
 @media (max-width: 640px) {

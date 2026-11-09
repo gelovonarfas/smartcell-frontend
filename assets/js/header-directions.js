@@ -47,7 +47,10 @@
   /* высоту ведём на .sc-hdir__clip (у него overflow: hidden): сама полка остаётся без
      обрезки, иначе скрим-псевдоэлемент под ней отсекался (правка 2026-10-06) */
   var clip = panel.querySelector('.sc-hdir__clip') || panel;
-  var wide = window.matchMedia ? window.matchMedia('(min-width: 641px)') : null;
+  /* 1280 — поріг шапки: вужче неї пункти живуть у шторці під бургером (планшет і телефон,
+     2026-11-09). Число має збігатися з @media у b00b-header.css і b00b-header-directions.css. */
+  var wide = window.matchMedia ? window.matchMedia('(min-width: 1280px)') : null;
+  function inDrawer() { return !!(wide && !wide.matches); }
   function animated() { return !!(gsap && (!wide || wide.matches)); }
   if (gsap) root.classList.add('sc-hdir--gsap');
 
@@ -201,7 +204,7 @@
      (e.detail === 0) — як і раніше, відкриває/закриває полку. */
   trigger.addEventListener('click', function (e) {
     var href = trigger.getAttribute('data-href');
-    if (href && fine && fine.matches && e.detail > 0) { window.location.href = href; return; }
+    if (href && fine && fine.matches && !inDrawer() && e.detail > 0) { window.location.href = href; return; }
     cancelHover(); set(!isOpen());
   });
 
@@ -213,7 +216,7 @@
     if (!on && focusTab) currentTab().focus();
   }
   tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () { if (wide && !wide.matches) setSub(true); });
+    tab.addEventListener('click', function () { if (inDrawer()) setSub(true); });
   });
   all(root, '[data-directions-up]').forEach(function (b) {
     b.addEventListener('click', function () { setSub(false, true); });
@@ -232,13 +235,13 @@
   if (fine && fine.matches) {
     trigger.addEventListener('mouseenter', function () {
       clearTimeout(hoverOut);
-      if (isOpen()) return;
+      if (isOpen() || inDrawer()) return; /* у шторці розділ відкриває клік, не наведення */
       hoverIn = setTimeout(function () { if (!isOpen()) set(true); }, 60);
     });
     trigger.addEventListener('mouseleave', function () { clearTimeout(hoverIn); });
     hoverZone.addEventListener('mouseleave', function () {
       clearTimeout(hoverIn);
-      if (!isOpen()) return;
+      if (!isOpen() || inDrawer()) return;
       hoverOut = setTimeout(function () { if (isOpen()) set(false); }, 220);
     });
     hoverZone.addEventListener('mouseenter', function () { clearTimeout(hoverOut); });

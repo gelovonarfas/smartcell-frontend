@@ -120,6 +120,22 @@
   text-align: center;
 }
 
+/* ---------- Планшет ----------
+   Четыре числа в ряд живут от 1280: уже значения налезают друг на друга
+   («96%+80%98%»). Ниже — 2×2; на планшете поля плиты равны полям страницы,
+   80 по бокам съедали колонку (2026-11-09). */
+
+@media (max-width: 1279px) {
+  .sc-cdata__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--section-gap) var(--grid-gap);
+  }
+}
+
+@media (max-width: 1023px) {
+  .sc-cdata__card { padding-inline: var(--page-margin-x); }
+}
+
 /* ---------- Мобильный ---------- */
 
 @media (max-width: 640px) {

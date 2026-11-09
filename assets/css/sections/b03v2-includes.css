@@ -96,6 +96,28 @@
   color: var(--muted-foreground);
 }
 
+/* ---------- Планшет ----------
+   Две колонки (2026-11-09): в трёх заголовок карточки не входил в свою
+   ячейку. Линии пересчитаны под пары: левая карточка без левого поля и
+   с правой кромкой, нижняя кромка — у последней пары. */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .sc-includes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .sc-includes__card:nth-child(even) {
+    padding-inline-start: var(--includes-card-px);
+    border-inline-end: 0;
+  }
+
+  .sc-includes__card:nth-child(odd) {
+    padding-inline-start: 0;
+    border-inline-end: var(--sc-line) solid var(--border);
+  }
+
+  .sc-includes__card:nth-child(n + 4) { border-block-end: 0; }
+  .sc-includes__card:nth-last-child(-n + 2) { border-block-end: var(--sc-line) solid var(--border); }
+}
+
 /* ---------- Мобильный ----------
    Одна колонка: линии только горизонтальные, полей по бокам нет. */
 

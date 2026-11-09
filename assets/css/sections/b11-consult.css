@@ -175,8 +175,13 @@
   .sc-consult__submit { transition: none; }
 }
 
-@media (max-width: 640px) {
+/* Планшет (2026-11-09): копия над формой — рядом с ней полям оставалось по 50px.
+   Сама форма остаётся строкой: два поля и кнопка. */
+@media (max-width: 1023px) {
   .sc-consult__inner { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px) {
   .sc-consult__form { grid-template-columns: minmax(0, 1fr); }
   /* Та же отбивка перед кнопкой, что и в остальных блоках: на телефоне
      кнопка встаёт под полями, значит правило работает и здесь */

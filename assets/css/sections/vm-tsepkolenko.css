@@ -139,3 +139,31 @@
     align-self: center;
   }
 }
+
+/* ---------- Планшет и узкий десктоп ----------
+   Портрет стоит абсолютом от середины полосы и на ширине уже макета накрывал
+   кнопку и конец строк. Здесь он прижат к правому краю, копия кончается до него,
+   кнопка уходит под текст (2026-11-09). */
+@media (min-width: 641px) and (max-width: 1279px) {
+  .vm-tsep__frame {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--sc-space-6);
+  }
+
+  /* 100% — полоса без полей; до кадра остаётся шаг сетки */
+  .vm-tsep__copy {
+    flex: none;
+    max-inline-size: min(var(--vm-tsep-copy-w),
+      calc(100% - var(--vm-tsep-photo-w) + var(--page-margin-x) - var(--grid-gap)));
+  }
+
+  .vm-tsep__photo {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .vm-tsep { --vm-tsep-photo-w: 300px; } /* кадр меньше: на 768 копии иначе остаётся 260 */
+}

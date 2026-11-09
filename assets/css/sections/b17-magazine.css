@@ -144,6 +144,15 @@
   .sc-mag__card:has(.sc-mag__title:hover) .sc-mag__photo img { transform: none; }
 }
 
+/* Планшет (2026-11-09): четыре карточки по 170px ломали заголовки по слогу —
+   ставим 2×2, ряды разведены разрядкой секции */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .sc-mag__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--section-gap);
+  }
+}
+
 @media (max-width: 640px) {
   /* Колонкой карточки смыкаются встык, и дата предыдущей статьи читается
      как подпись к следующему фото: разводим их разрядкой секции */

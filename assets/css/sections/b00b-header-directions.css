@@ -412,7 +412,7 @@
   .sc-hdir__block-arrow svg { transition: none; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1279px) {
   /* на телефоне кадр не нужен — как и анонс статьи */
   .sc-hdir__protocol { grid-template-columns: minmax(0, 1fr); }
   .sc-hdir__protocol-photo { display: none; }
@@ -557,7 +557,7 @@
    акордеоні: витрина протоколу без фото, чипи напрямків, продукти у два стовпці.
    Зверху третього екрана — «← Клітинні технології». Клас sc-hdir--sub ставить скрипт. */
 
-@media (max-width: 640px) {
+@media (max-width: 1279px) {
   .sc-hdir { display: block; }
 
   .sc-hdir__trigger {

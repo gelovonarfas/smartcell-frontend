@@ -98,7 +98,7 @@
    після — те саме скло, що й на решті сторінок (правило нижче перекриває). */
 .sc-header--solid { background: var(--background); }
 
-@media (max-width: 640px) {
+@media (max-width: 1279px) {
   /* Открытое меню на светлой шапке заливает всю планку, а не только панель
      в полях: раньше фон стоял на самой панели, и по краям экрана сквозь
      стекло просвечивало фото страницы полосами (правка 2026-09-14). */
@@ -363,7 +363,7 @@
 
 /* У згорнутому стані ліва рамка поточної комірки впритул до рамки контейнера — зліва виходило
    дві лінії (правка 2026-11-03): поки не розкрито, вона прозора; розділювач з'являється з розкриттям */
-@media (min-width: 641px) {
+@media (min-width: 1280px) {
   .sc-header__lang:not(:hover):not(:focus-within) .sc-header__lang-item--current { border-inline-start-color: transparent; }
 }
 
@@ -442,11 +442,15 @@ body.sc-nav-lock { overflow: hidden; } /* сторінка під відкрит
    поэтому строка в меню нужна только на телефоне */
 .sc-header__link--portal { display: none; }
 
-/* ---------- Мобильный ----------
+/* ---------- Мобильный и планшет: бургер ниже 1280 ----------
    Мобильного фрейма хедера в макете нет. Временное решение до макета:
-   пункты меню и CTA уезжают в панель под бургером. */
+   пункты меню и CTA уезжают в панель под бургером.
+   Порог 1280, а не 640 (правка 2026-11-09): полная строка меню с логотипом, языком и
+   кнопкой занимает около 1230 px — на планшете пункты наезжали на логотип и переключатель.
+   Тот же порог — в b00b-header-directions.css и в assets/js/header-directions.js.
+   Ниже по файлу блок 641–1279 превращает шторку в панель справа. */
 
-@media (max-width: 640px) {
+@media (max-width: 1279px) {
   /* Планка на телефоне чуть выше базовых 8: логотипу и бургеру тесно */
   .sc-header { padding-block: var(--sc-space-3); }
 
@@ -631,7 +635,90 @@ body.sc-nav-lock { overflow: hidden; } /* сторінка під відкрит
   }
 }
 
+/* ---------- Планшет (641–1279): шторка — панель справа ----------
+   На телефоне открытое меню занимает весь экран. На планшете тот же контент во всю ширину
+   растягивался в строки по 700–1100 px с пустотой под ними, поэтому здесь шторка — колонка
+   шириной с телефон, прижатая к правому краю под планкой; остальная страница — под скримом.
+   Разметка та же: растянутая на экран шапка становится скримом, планку и фон панели рисуют
+   псевдоэлементы сетки, а сама шторка и уровни «Клітинних технологій» остаются телефонными.
+   Клик по скриму закрывает меню (header.js). Правка 2026-11-09. */
+@media (min-width: 641px) and (max-width: 1279px) {
+  .sc-header {
+    --header-drawer-w: 360px;                 /* ширина контента панели — под неё свёрстаны уровни меню */
+    --header-drawer-pad: var(--sc-space-8);   /* левое поле панели; правое — поле страницы, под крестиком */
+    --header-drawer-box: calc(var(--header-drawer-w) + var(--header-drawer-pad) + var(--sc-pad-x));
+  }
+
+  /* [data-header] — ради специфичности: фон открытой шапки задают ещё --light, --solid,
+     .sc-is-scrolled и .sc-hdir-open */
+  .sc-header[data-header].sc-header--nav-open {
+    border-block-end-color: transparent;
+    background: var(--sc-black-alpha-40);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    transition: none; /* иначе сплошной фон планки на миг заливает весь экран */
+    animation: sc-header-scrim-in var(--header-portal-dur) var(--sc-ease-out);
+  }
+
+  /* у псевдоэлементов место в сетке явное — логотипу и бургеру тоже, иначе автораскладка
+     сдвинет их на вторую строку */
+  .sc-header--nav-open .sc-header__portal { grid-area: 1 / 1; }
+  .sc-header--nav-open .sc-header__burger { grid-area: 1 / 2; }
+
+  .sc-header--nav-open .sc-header__inner::before,
+  .sc-header--nav-open .sc-header__inner::after {
+    content: "";
+    background: var(--background);
+  }
+
+  /* планка: строка логотипа, вытянутая в поля шапки */
+  .sc-header--nav-open .sc-header__inner::before {
+    grid-area: 1 / 1 / 2 / -1;
+    align-self: stretch;
+    margin: calc(-1 * var(--sc-space-3)) calc(-1 * var(--sc-pad-x));
+    border-block-end: var(--hairline) solid var(--border);
+  }
+
+  /* фон панели: от планки до низа экрана, до правого края */
+  .sc-header--nav-open .sc-header__inner::after {
+    grid-area: 2 / 1 / 3 / -1;
+    justify-self: end;
+    align-self: stretch;
+    inline-size: var(--header-drawer-box);
+    margin-block: var(--sc-space-3) calc(-1 * var(--sc-space-3));
+    margin-inline-end: calc(-1 * var(--sc-pad-x));
+  }
+
+  .sc-header--nav-open .sc-header__drawer {
+    grid-area: 2 / 1 / 3 / -1;
+    justify-self: end;
+    align-self: stretch;
+    inline-size: var(--header-drawer-w);
+    block-size: auto;
+    margin-block-start: var(--sc-space-3); /* вплотную под кромку планки */
+  }
+
+  .sc-header--nav-open .sc-header__drawer-inner { padding-block-start: var(--sc-space-3); }
+
+  .sc-header--nav-open .sc-header__drawer,
+  .sc-header--nav-open .sc-header__inner::after {
+    animation: sc-header-drawer-in var(--header-portal-dur) var(--sc-ease-out);
+  }
+}
+
+@keyframes sc-header-scrim-in {
+  from { background-color: transparent; }
+}
+
+@keyframes sc-header-drawer-in {
+  from { transform: translateX(var(--header-drawer-box)); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sc-header__drawer,
   .sc-header__burger-box span { transition: none; }
+
+  .sc-header[data-header].sc-header--nav-open,
+  .sc-header--nav-open .sc-header__drawer,
+  .sc-header--nav-open .sc-header__inner::after { animation: none; }
 }
