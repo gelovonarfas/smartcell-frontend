@@ -52,7 +52,9 @@ print("чатов:", len(seen))'
 import json, sys, os, urllib.request
 chat, state, api, inbox = int(sys.argv[1]), sys.argv[2], sys.argv[3], sys.argv[4]
 last = None
-for u in json.load(sys.stdin).get("result", []):
+raw = sys.stdin.read().strip()
+if not raw: sys.exit(0)  # пустой ответ (сеть моргнула): молча ждём следующего опроса
+for u in json.loads(raw).get("result", []):
     last = u["update_id"]
     m = u.get("message")
     if not m or m["chat"]["id"] != chat: continue
