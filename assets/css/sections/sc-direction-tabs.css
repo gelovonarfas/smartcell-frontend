@@ -333,6 +333,54 @@ div.sc-dservices__tile {
 }
 :is(.sc-dprose__body, .sc-dabout__body) figcaption { color: var(--sc-neutral-600); font: 400 var(--p-mini-size) / var(--caption-lh) var(--font-sans); }
 
+/* ---------- «Опис» одним полем з розділами всередині (2026-11-08) ----------
+   На virtus «Опис» — одне поле редактора зі своїми H2 («Регенеративна медицина
+   омолодження», «Триетапний протокол»…), без окремого заголовка ліворуч — колонка 416
+   стояла порожньою. Якщо .sc-dprose__title немає, поле саме стає двома колонками тієї ж
+   сітки: кожен H2 — ліворуч, на одній лінії з першим абзацом свого розділу, решта — праворуч.
+   Розкладає автопоміщення grid: H2 у колонці 1 завжди починає новий рядок. Шаблон не міняється. */
+.sc-dprose:not(:has(> .sc-dprose__title)) { display: block; }
+
+.sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body {
+  display: grid;
+  grid-template-columns: var(--dtabs-quote-w) minmax(0, 1fr);
+  column-gap: var(--section-gap);
+  row-gap: var(--stack-gap-md);
+  align-items: start;
+  max-inline-size: none;
+}
+
+.sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > * {
+  grid-column: 2;
+  max-inline-size: var(--sc-measure);
+}
+
+.sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > h2 {
+  grid-column: 1;
+  margin: 0;
+  /* Заголовок у дві-три строки не задає висоту рядка: інакше другий абзац розділу
+     чекав би, поки він закінчиться, і під першим абзацом з'являлась дірка. Від'ємне
+     нижнє поле прибирає H2 з розрахунку рядка — він просто звисає в порожню колонку 416. */
+  margin-block-end: -100vh;
+}
+
+/* Розділ відбитий від попереднього, як окремі групи вкладки; H2 і перший абзац — на одній лінії */
+.sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > h2:not(:first-child),
+.sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > h2:not(:first-child) + * {
+  margin-block-start: var(--section-gap);
+}
+
+/* ---------- Сміття вставки з Google Docs ----------
+   Текст на virtus вставлено з Docs: <b> замість <strong>, порожній <b></b>, <b> усередині H3,
+   <span style="font-weight: 400"> на кожному шматку. Інлайн-стиль перебиває лише !important —
+   інакше H2 з таким span стає тонким, а сусідній — ні, і ієрархія скаче. */
+:is(.sc-dprose__body, .sc-dabout__body) b { color: var(--foreground); font-weight: var(--sc-weight-medium); }
+:is(.sc-dprose__body, .sc-dabout__body) :is(h2, h3, h4) :is(b, strong) { font-weight: inherit; }
+:is(.sc-dprose__body, .sc-dabout__body) b:empty { display: none; }
+:is(.sc-dprose__body, .sc-dabout__body) [style*="font-weight"] { font-weight: inherit !important; }
+:is(.sc-dprose__body, .sc-dabout__body) b [style*="font-weight"],
+:is(.sc-dprose__body, .sc-dabout__body) strong [style*="font-weight"] { font-weight: var(--sc-weight-medium) !important; }
+
 /* ---------- Цитата + описание ---------- */
 
 .sc-dabout {
@@ -747,6 +795,12 @@ a.sc-dindications__chip:active,
     grid-template-columns: minmax(0, 1fr);
     gap: var(--stack-gap-lg);
   }
+
+  /* «Опис» з розділами всередині — одна колонка, H2 над своїм текстом */
+  .sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body { grid-template-columns: minmax(0, 1fr); }
+  .sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > * { grid-column: 1; }
+  .sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > h2 { margin-block-end: 0; }
+  .sc-dprose:not(:has(> .sc-dprose__title)) > .sc-dprose__body > h2:not(:first-child) + * { margin-block-start: 0; }
 
   .sc-ddoctors { grid-template-columns: minmax(0, 1fr); gap: var(--section-gap); }
 
