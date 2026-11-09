@@ -7,6 +7,7 @@
 #   sh scripts/tg.sh read               — новые сообщения из группы, с номерами: [123] Имя: текст
 #   sh scripts/tg.sh react 123 👍        — реакция на сообщение (эмодзи из списка Telegram; по умолчанию 👍)
 #   sh scripts/tg.sh reply 123 файл.md  — ответить на сообщение («Ответить»); файл или - для stdin
+#   sh scripts/tg.sh edit 123 файл.md   — исправить своё отправленное сообщение (номер печатают send/reply: ok [123])
 #
 # Токен и группа — только из окружения (~/.zshrc), в репозиторий не попадают:
 #   export TELEGRAM_BOT_TOKEN="…"   — от @BotFather; утёк — /revoke там же
@@ -36,13 +37,13 @@ print("чатов:", len(seen))'
     if [ "$src" = "-" ]; then text=$(cat); else text=$(cat "$src"); fi
     curl -s "$API/sendMessage" --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" \
       --data-urlencode "text=$text" --data-urlencode "disable_web_page_preview=true" |
-      python3 -I -c 'import json,sys; r=json.load(sys.stdin); print("ok" if r.get("ok") else r)'
+      python3 -I -c 'import json,sys; r=json.load(sys.stdin); print("ok [%s]" % r["result"].get("message_id", "") if r.get("ok") and isinstance(r.get("result"), dict) else ("ok" if r.get("ok") else r))'
     ;;
   photo)
     : "${TELEGRAM_CHAT_ID:?нет TELEGRAM_CHAT_ID в окружении}"
     curl -s "$API/sendPhoto" -F "chat_id=$TELEGRAM_CHAT_ID" -F "photo=@${2:?какую картинку}" \
       -F "caption=${3:-}" |
-      python3 -I -c 'import json,sys; r=json.load(sys.stdin); print("ok" if r.get("ok") else r)'
+      python3 -I -c 'import json,sys; r=json.load(sys.stdin); print("ok [%s]" % r["result"].get("message_id", "") if r.get("ok") and isinstance(r.get("result"), dict) else ("ok" if r.get("ok") else r))'
     ;;
   read)
     : "${TELEGRAM_CHAT_ID:?нет TELEGRAM_CHAT_ID в окружении}"
@@ -65,7 +66,7 @@ if last is not None: open(state, "w").write(str(last + 1))' "$TELEGRAM_CHAT_ID" 
     reaction=$(python3 -I -c 'import json,sys; print(json.dumps([{"type":"emoji","emoji":sys.argv[1]}]))' "$emoji")
     curl -s "$API/setMessageReaction" --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" \
       --data-urlencode "message_id=$id" --data-urlencode "reaction=$reaction" |
-      python3 -I -c 'import json,sys; r=json.load(sys.stdin); print("ok" if r.get("ok") else r)'
+      python3 -I -c 'import json,sys; r=json.load(sys.stdin); print("ok [%s]" % r["result"].get("message_id", "") if r.get("ok") and isinstance(r.get("result"), dict) else ("ok" if r.get("ok") else r))'
     ;;
   reply)
     : "${TELEGRAM_CHAT_ID:?нет TELEGRAM_CHAT_ID в окружении}"
@@ -75,9 +76,19 @@ if last is not None: open(state, "w").write(str(last + 1))' "$TELEGRAM_CHAT_ID" 
     curl -s "$API/sendMessage" --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" \
       --data-urlencode "text=$text" --data-urlencode "reply_to_message_id=$id" \
       --data-urlencode "disable_web_page_preview=true" |
+      python3 -I -c 'import json,sys; r=json.load(sys.stdin); print("ok [%s]" % r["result"].get("message_id", "") if r.get("ok") and isinstance(r.get("result"), dict) else ("ok" if r.get("ok") else r))'
+    ;;
+  edit)
+    : "${TELEGRAM_CHAT_ID:?нет TELEGRAM_CHAT_ID в окружении}"
+    id="${2:?номер своего сообщения}"
+    src="${3:?какой файл отправить}"
+    if [ "$src" = "-" ]; then text=$(cat); else text=$(cat "$src"); fi
+    curl -s "$API/editMessageText" --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" \
+      --data-urlencode "message_id=$id" --data-urlencode "text=$text" \
+      --data-urlencode "disable_web_page_preview=true" |
       python3 -I -c 'import json,sys; r=json.load(sys.stdin); print("ok" if r.get("ok") else r)'
     ;;
   *)
-    sed -n '2,14p' "$0"
+    sed -n '2,15p' "$0"
     ;;
 esac
