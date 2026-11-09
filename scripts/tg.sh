@@ -49,15 +49,29 @@ print("чатов:", len(seen))'
     : "${TELEGRAM_CHAT_ID:?нет TELEGRAM_CHAT_ID в окружении}"
     off=$(cat "$STATE" 2>/dev/null || echo 0)
     curl -s "$API/getUpdates?offset=$off" | python3 -I -c '
-import json, sys, os
-chat, state = int(sys.argv[1]), sys.argv[2]
+import json, sys, os, urllib.request
+chat, state, api, inbox = int(sys.argv[1]), sys.argv[2], sys.argv[3], sys.argv[4]
 last = None
 for u in json.load(sys.stdin).get("result", []):
     last = u["update_id"]
     m = u.get("message")
-    if m and m["chat"]["id"] == chat and "text" in m:
-        print("[%d]" % m["message_id"], m["from"].get("first_name", "?") + ":", m["text"])
-if last is not None: open(state, "w").write(str(last + 1))' "$TELEGRAM_CHAT_ID" "$STATE"
+    if not m or m["chat"]["id"] != chat: continue
+    who = "[%d] %s:" % (m["message_id"], m["from"].get("first_name", "?"))
+    if "reply_to_message" in m: who += " (ответ на %d)" % m["reply_to_message"]["message_id"]
+    text = m.get("text") or m.get("caption") or ""
+    # фото и файлы скачиваем в inbox, чтобы их можно было открыть
+    fid = (m["photo"][-1]["file_id"] if m.get("photo") else (m.get("document") or {}).get("file_id"))
+    if fid:
+        try:
+            info = json.load(urllib.request.urlopen(api + "/getFile?file_id=" + fid))["result"]
+            os.makedirs(inbox, exist_ok=True)
+            dst = os.path.join(inbox, "%d-%s" % (m["message_id"], os.path.basename(info["file_path"])))
+            urllib.request.urlretrieve(api.replace("/bot", "/file/bot") + "/" + info["file_path"], dst)
+            text = (text + " " if text else "") + "[файл: %s]" % dst
+        except Exception as e:
+            text = (text + " " if text else "") + "[файл не скачался: %s]" % e
+    print(who, text or "[%s]" % ", ".join(k for k in m if k not in ("message_id", "from", "chat", "date")))
+if last is not None: open(state, "w").write(str(last + 1))' "$TELEGRAM_CHAT_ID" "$STATE" "$API" "${TG_INBOX:-${TMPDIR:-/tmp}/sc-tg-inbox}"
     ;;
   react)
     : "${TELEGRAM_CHAT_ID:?нет TELEGRAM_CHAT_ID в окружении}"
