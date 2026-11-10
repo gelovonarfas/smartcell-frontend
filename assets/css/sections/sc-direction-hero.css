@@ -183,10 +183,16 @@
       var(--sc-pad-x);
   }
 
+  /* align-self: start и block-size: auto — из-за Safari: растянутый по строке
+     элемент сетки игнорирует aspect-ratio и схлопывается (так было с журналом
+     на virtus.ua, 2026-10-14). Квадрат держит aspect-ratio, не строка */
   .sc-dhero__media {
     grid-column: 2;
     grid-row: 1;
     aspect-ratio: 1 / 1;
+    align-self: start;
+    block-size: auto;
+    min-block-size: 0;
   }
 
   /* Служебная строка — сетка: слева факты и филиалы друг под другом, справа кнопка
