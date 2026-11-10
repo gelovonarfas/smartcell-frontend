@@ -278,7 +278,7 @@ CSS його ховає. Чипси розраховані на короткі H
 
 URL-структура: `virtus.ua/kletochnye-tehnologii/blog/{category}/{slug}`
 Категории: `science`, `cells`, `cellness`, `biohacking`, `tsepkolenko`, `news`
-Сквозные теги: `#40+`, `#50+`
+Сквозные теги (фильтры в полосе рубрик, как на virtus.ua): `30+`, `40+`, `50+`, `Чоловікам`, `Жінкам`
 
 ## Страница напрямку (SC Direction — Desktop)
 

@@ -271,33 +271,55 @@
   }
 }
 
-/* ---------- Планшет ----------
-   На 768 крошки, фильтры и поиск в одну строку не помещаются: вкладки обрезались.
-   Полоса с фильтрами (только главная журнала) идёт в два ряда: крошки на своих 70,
-   под ними фильтры слева и поиск справа (2026-11-09). Полоса без фильтров не меняется. */
-@media (min-width: 641px) and (max-width: 1023px) {
+/* ---------- Планшет и десктоп до 1440 ----------
+   В одну строку крошки, шесть фильтров с сайта (автор, 30+, 40+, 50+, «Чоловікам»,
+   «Жінкам») и поиск влезают только от 1440: на 1210 и 1280 первый фильтр
+   обрезался под подписью (2026-11-09). Полоса с фильтрами (только главная журнала)
+   идёт в два ряда: крошки и поиск на своих 70, под ними фильтры во всю ширину;
+   чипсы, которым не хватает места, переносятся, а не прячутся в прокрутку.
+   Полоса без фильтров не меняется. */
+@media (min-width: 641px) and (max-width: 1439px) {
   .vm-rubrics:has(.vm-rubrics__filters) {
     flex-wrap: wrap;
     gap: 0 var(--grid-gap);
-    padding-block-end: var(--sc-space-4);
+    padding-block-end: var(--sc-space-6);
   }
 
+  /* Высота ряда — через поля, а не display: flex: во флексе пробелы вокруг «→»
+     схлопывались и крошки слипались */
   .vm-rubrics:has(.vm-rubrics__filters) .vm-rubrics__crumbs {
+    flex: 1 1 auto;
+    padding-block: calc((var(--sc-crumbs-h) - 1lh) / 2);
+  }
+
+  .vm-rubrics:has(.vm-rubrics__filters) .vm-rubrics__search { order: 1; }
+
+  .vm-rubrics__filters {
+    order: 2;
     flex: 1 0 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  /* Подпись — по центру первого ряда чипсов */
+  .vm-rubrics__filters-label {
     display: flex;
     align-items: center;
-    min-block-size: var(--sc-crumbs-h);
+    min-block-size: var(--vm-rubrics-tab-h, 38px);
   }
 
-  .vm-rubrics__filters,
-  .vm-rubrics__tabs { justify-content: flex-start; }
-
-  /* у самого порога 641 вкладкам не хватает десятка пикселей — прокрутка вместо обрезки */
   .vm-rubrics__tabs {
-    overflow-x: auto;
-    scrollbar-width: none;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 
-  .vm-rubrics__tabs::-webkit-scrollbar { display: none; }
   .vm-rubrics__tab { flex: none; }
+
+  /* Раскрытый поиск занимает ряд крошек, фильтры под ним остаются на месте */
+  .vm-rubrics.sc-is-searching .vm-rubrics__tabs,
+  .vm-rubrics.sc-is-searching .vm-rubrics__filters-label {
+    max-inline-size: none;
+    opacity: 1;
+    visibility: visible;
+  }
 }
