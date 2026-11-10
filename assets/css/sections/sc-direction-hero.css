@@ -149,15 +149,143 @@
   .sc-dhero__cta-arrow svg { transition: none; }
 }
 
-/* ---------- Планшет: тексту 3/5 ширины, кадру 2/5 ----------
-   Пополам колонка текста на 768 — 285: длинное слово заголовка («Володимирівна»,
-   «стовбуровими») выходило за неё. Поле до кадра — 24 вместо 56 (2026-11-09). */
+/* ---------- Планшет и узкий десктоп (641–1279, там же бургер) ----------
+   Первый экран 800 с десктопа здесь не держим: между текстом и филиалами
+   висела пустота, а кадр вытягивался в узкую вертикальную полосу.
 
-@media (min-width: 641px) and (max-width: 1023px) {
+   Альбомная ориентация: кадр остаётся квадратом рядом с заголовком и
+   описанием и сжимается вместе с колонкой; всё служебное (факты, филиалы,
+   кнопка) уходит строкой под них на всю ширину, без линии между ними.
+   Колонка текста перестаёт быть коробкой (display: contents), чтобы её верх
+   и низ встали в сетку секции. Если текст выше квадрата, кадр дотягивается
+   до его высоты, а не оставляет под собой пустое поле (правка 2026-11-09). */
+
+@media (min-width: 641px) and (max-width: 1279px) {
   .sc-dhero {
-    --dhero-copy-pe: var(--sc-space-6);
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    --dhero-copy-pe: var(--sc-space-10); /* поле до кадра: 24 читалось как вплотную, 56 ломало заголовок по слову (2026-11-09) */
+    min-block-size: 0;
   }
+
+  .sc-dhero__copy { display: contents; }
+
+  /* Ручной перенос из макета (<br> после «організму») рассчитан на колонку 1440:
+     в узкой колонке он рвал заголовок в пять строк по слову. Здесь строку ломает браузер */
+  .sc-dhero__title br { display: none; }
+
+  .sc-dhero__top {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    padding:
+      calc(var(--header-h, 80px) + var(--section-padding-y-tight))
+      var(--dhero-copy-pe)
+      var(--section-padding-y-tight)
+      var(--sc-pad-x);
+  }
+
+  .sc-dhero__media {
+    grid-column: 2;
+    grid-row: 1;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Служебная строка — сетка: слева факты и филиалы друг под другом, справа кнопка
+     по нижней линии. Флексом с переносом кнопка у врача уезжала одна на новую строку
+     и висела справа под пустым местом (замечание 2026-11-09). */
+  .sc-dhero__bottom {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--dhero-block-w);
+    align-items: end;
+    gap: var(--sc-space-6) var(--sc-space-10);
+    padding: var(--sc-space-8) var(--sc-pad-x);
+  }
+
+  .sc-dhero__bottom > :not(.sc-dhero__cta) { grid-column: 1; }
+
+  .sc-dhero__cta {
+    grid-column: 2;
+    grid-row: 1;
+    max-inline-size: none;
+  }
+
+  /* Врач: рейтинг и стаж — к имени и описанию, под ними; под фото остаются
+     филиалы и кнопка (решение 2026-11-09). Служебную строку распускаем
+     (display: contents), её части становятся ячейками сетки героя; кадр
+     тянется на две строки — текст и факты. Вертикаль ниже это отменяет. */
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__top {
+    align-self: end;
+    padding-block-end: 0;
+  }
+
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__media { grid-row: 1 / span 2; }
+
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__bottom { display: contents; }
+
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__facts {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    padding: var(--sc-space-10) var(--dhero-copy-pe) var(--section-padding-y-tight) var(--sc-pad-x);
+  }
+
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__branches {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: end;
+    padding: var(--sc-space-8) var(--dhero-copy-pe) var(--sc-space-8) var(--sc-pad-x);
+  }
+
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__cta {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: end;
+    justify-self: end;
+    inline-size: var(--dhero-block-w);
+    margin: var(--sc-space-8) var(--sc-pad-x) var(--sc-space-8) 0;
+  }
+}
+
+/* Ниже 1024 пополам колонка текста на 768 — 285: длинное слово заголовка
+   («Володимирівна», «стовбуровими») выходило за неё. Тексту 3/5, кадру 2/5 */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .sc-dhero { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+}
+
+/* Портретная ориентация планшета: квадратный кадр сверху во всю ширину,
+   под ним заголовок и описание, ниже служебное столбцом, кнопка под текстом */
+@media (min-width: 641px) and (max-width: 1023px) and (orientation: portrait) {
+  .sc-dhero { grid-template-columns: minmax(0, 1fr); }
+
+  .sc-dhero__media {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .sc-dhero__top {
+    grid-row: 2;
+    padding: var(--section-padding-y-tight) var(--sc-pad-x) 0;
+  }
+
+  .sc-dhero__bottom {
+    grid-row: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sc-space-6);
+    padding: var(--section-gap) var(--sc-pad-x) var(--section-padding-y-tight);
+  }
+
+  .sc-dhero__cta { max-inline-size: var(--dhero-block-w); }
+
+  /* Врач на вертикали — факты снова в служебной колонке под текстом */
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__media { grid-row: 1; }
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__top { padding-block-end: 0; }
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__bottom { display: flex; }
+  .sc-dhero:has(.sc-dhero__facts) :is(.sc-dhero__facts, .sc-dhero__branches, .sc-dhero__cta) { align-self: auto; }
+  .sc-dhero:has(.sc-dhero__facts) :is(.sc-dhero__facts, .sc-dhero__branches) { padding: 0; }
+  .sc-dhero:has(.sc-dhero__facts) .sc-dhero__cta { inline-size: 100%; margin: 0; }
 }
 
 /* ---------- Телефон: колонка, текст под шапкой, кадр под текстом ---------- */
