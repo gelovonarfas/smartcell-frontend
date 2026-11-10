@@ -387,16 +387,70 @@
   .vm-featured__bottom { grid-row: 4; grid-column: 1; }
 }
 
-/* ---------- Планшет ----------
-   Колонка копии на 768 — 285, а слово «Регенеративний» кеглем H1 (44) — 335: заголовок
-   лез под кадр. Поле до фото сжато до шага сетки, заголовок материала набран ролью H2
-   (32 из токенов) — та же ступень, на которую H1 и так сходит на телефоне (2026-11-09). */
-@media (min-width: 641px) and (max-width: 1023px) {
-  .vm-featured__copy { padding-inline-end: var(--grid-gap); }
+/* ---------- Планшет и узкий десктоп ----------
+   Та же схема, что у героя услуги (sc-direction-hero.css, решение 2026-11-09):
+   кадр держится квадратом, служебное уходит под него.
+   Горизонталь: слева шапка журнала и материал, справа квадратный кадр;
+   листалка новой строкой внизу, на всю ширину. Линии между строками нет.
+   Вертикаль: кадр квадратом на всю ширину, под ним шапка, материал, листалка.
+   Колонку копии распускаем (display: contents): её верх и ряд управления
+   становятся ячейками общей сетки. Верх остаётся своей сеткой, все слайды
+   делят в ней одну строку, поэтому высота по-прежнему по самому длинному заголовку.
+   Заголовок материала набран ролью H2 (32 из токенов): кеглем H1 длинный заголовок
+   в колонке рядом с кадром даёт пять-шесть строк и выталкивает кадр из квадрата. */
+@media (min-width: 641px) and (max-width: 1279px) {
+  .vm-featured {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    min-block-size: 0;
+    padding-inline-start: 0;
+  }
+
+  .vm-featured__copy { display: contents; }
+
+  /* Низ текста стоит по нижней кромке кадра */
+  .vm-featured__top {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    max-inline-size: none;
+    padding: calc(var(--header-h, 80px) + var(--section-padding-y-tight)) var(--section-gap) 0 var(--sc-pad-x);
+  }
+
+  /* align-self: start и block-size: auto — из-за Safari: растянутый по строке
+     элемент сетки игнорирует aspect-ratio (см. мобильный блок выше) */
+  .vm-featured__media {
+    grid-column: 2;
+    grid-row: 1;
+    aspect-ratio: 1 / 1;
+    align-self: start;
+    block-size: auto;
+    min-block-size: 0;
+  }
 
   .vm-featured__title {
     font: var(--h2-weight) var(--h2-size) / var(--h2-lh) var(--font-headings);
     letter-spacing: var(--h2-ls);
     overflow-wrap: break-word;
   }
+
+  .vm-featured__bottom {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    inline-size: auto;
+    padding: var(--section-gap) var(--sc-pad-x) var(--sc-space-10);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) and (orientation: portrait) {
+  .vm-featured { grid-template-columns: minmax(0, 1fr); }
+
+  .vm-featured__media { grid-column: 1; grid-row: 1; }
+
+  .vm-featured__top {
+    grid-row: 2;
+    padding: var(--section-padding-y-tight) var(--sc-pad-x) 0;
+  }
+
+  .vm-featured__bottom { grid-row: 3; }
 }
