@@ -1680,6 +1680,37 @@
   .vm-article__toc--chips .vm-article__toc-list { grid-template-columns: repeat(12, minmax(0, 1fr)); }
 }
 
+/* Вертикальный планшет: шапка статьи в колонку (2026-11-10). Обкладинка абсолютом справа
+   оставляла копии половину ширины, заголовок шёл в пять строк. Порядок: «‹ Smart Age Journal»,
+   обкладинка в полях страницы (не навылет), плашки, заголовок, лид, подпись. Копию и её верх
+   распускаем — части становятся пунктами колонки шапки. */
+@media (min-width: 641px) and (max-width: 1023px) and (orientation: portrait) {
+  .vm-article__hero {
+    min-block-size: 0;
+    padding-block: calc(var(--header-h, 80px) + var(--section-padding-y-tight)) var(--section-padding-y-tight);
+    padding-inline: var(--sc-pad-x);
+    gap: var(--stack-gap-lg);
+  }
+
+  .vm-article__hero-copy,
+  .vm-article__hero-top { display: contents; }
+
+  .vm-article__back { order: 1; }
+
+  .vm-article__hero-media {
+    position: relative; /* подпись к обложке считается от кадра */
+    inset: auto;
+    order: 2;
+    inline-size: auto;
+    margin-block: var(--sc-space-2) var(--sc-space-4);
+  }
+
+  .vm-article__chips { order: 3; }
+  .vm-article__title { order: 4; }
+  .vm-article__dek { order: 5; max-inline-size: var(--sc-measure); }
+  .vm-article__byline { order: 6; }
+}
+
 /* Узкий десктоп: сайдбар уже и ближе, чтобы колонке текста хватало меры */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .vm-article { --vm-a-side-w: 320px; }
