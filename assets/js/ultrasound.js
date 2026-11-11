@@ -17,9 +17,10 @@
    Исключение — «Акустична щільність», 12 міс: все ряды сведены к ≈1.06–1.07
    по просьбе професора (2026-11-03), это не слайд.
 
-   Всё, что до FB, отрублено по просьбе професора (2026-10-12): ось
-   начинается с FB (START), ряды идут сразу в рост — просадка на PRP
-   и стартовая точка AMC / «до лікування» на сайте не показываются.
+   Всё, что до FB, было отрублено по просьбе професора (2026-10-12): ось
+   начиналась с FB (START). 2026-11-11 професор попросил показывать первый шаг —
+   введение АМК — и движение кривых от него: у эпидермиса и кровотока своя точка
+   старта (state.start = 0, подпись AMC). Дерма и плотность пока с FB.
    Полные ряды со стартом — в комментарии ниже, для отката.
 
    Показатель переключают только стрелки, как в макете.
@@ -48,19 +49,22 @@
       axisUnit: 'µm',
       decimals: 0,
       axisY: [70, 80, 90, 100, 110],
-      /* старт — FB (дно у всіх груп), далі зростання до 6 і 12 міс */
-      points: [1.3, 6, 12],
+      /* Старт — введення АМК (просьба професора 2026-11-11: показувати рух кривих від першого
+         кроку): просадка до FB, далі зростання до 6 і 12 міс. Значення АМК — зі слайда (2026-10-12) */
+      start: 0,
+      points: [0, 1.3, 6, 12],
       ticks: [
+        { at: 0,   name: 'AMC' },
         { at: 1.3, name: 'FB' },
         { at: 6,   name: '6 mo' },
         { at: 12,  name: '12 mo' }
       ],
       baseline: null,
       series: [
-        { name: '25–35',       values: [82, 88.5, 90] },
-        { name: '36–45',       values: [76, 85, 85.5] },
-        { name: '45–55',       values: [89, 99, 99.5] },
-        { name: '56 і старше', values: [75, 83, 85] }
+        { name: '25–35',       values: [94, 82, 88.5, 90] },
+        { name: '36–45',       values: [90, 76, 85, 85.5] },
+        { name: '45–55',       values: [103, 89, 99, 99.5] },
+        { name: '56 і старше', values: [88, 75, 83, 85] }
       ]
     },
     {
@@ -121,19 +125,23 @@
       unit: 'мкл',
       axisUnit: 'µl',
       decimals: 0,
-      axisY: [90, 100, 110, 120, 130, 140, 150],
-      points: [1.3, 6, 12],
+      /* Старт — кріолізат (АМК), просьба професора 2026-11-11; точку «до» не показуємо.
+         На слайді кроки рівні, тут — за часом, як на інших графіках: АМК 0, FB 1.3 міс */
+      axisY: [50, 75, 100, 125, 150],
+      start: 0,
+      points: [0, 1.3, 6, 12],
       ticks: [
+        { at: 0,   name: 'AMC' },
         { at: 1.3, name: 'FB' },
         { at: 6,   name: '6 mo' },
         { at: 12,  name: '12 mo' }
       ],
       baseline: { value: 100, name: 'Група порівняння' },
       series: [
-        { name: '25–35',       values: [131, 137, 143] },
-        { name: '36–45',       values: [116, 138, 127] },
-        { name: '45–55',       values: [128, 129, 125] },
-        { name: '56 і старше', values: [124, 126, 112] }
+        { name: '25–35',       values: [105, 131, 137, 143] },
+        { name: '36–45',       values: [75, 116, 138, 127] },
+        { name: '45–55',       values: [80, 128, 129, 125] },
+        { name: '56 і старше', values: [60, 124, 126, 112] }
       ]
     }
   ];
@@ -213,12 +221,15 @@
       return plot.y + plot.h - ((v - min) / (max - min)) * plot.h;
     }
 
-    /* ось X — месяцы от START (FB) до SPAN: положение точки пропорционально времени */
+    /* ось X — месяцы от старта состояния (state.start; по умолчанию START = FB) до SPAN:
+       положение точки пропорционально времени */
+    var startX = START;
     function scaleX(month) {
-      return plot.x + plot.w * ((month - START) / (SPAN - START));
+      return plot.x + plot.w * ((month - startX) / (SPAN - startX));
     }
 
     function draw(state) {
+      startX = (typeof state.start === 'number') ? state.start : START;
       gGrid.textContent = '';
       gAxis.textContent = '';
       gSeries.textContent = '';
@@ -242,7 +253,7 @@
         }));
         var t = el('text', {
           x: x, y: plot.y + plot.h + 29, class: 'sc-usg__tick',
-          'text-anchor': tick.at <= START ? 'start' : (tick.at >= SPAN ? 'end' : 'middle')
+          'text-anchor': tick.at <= startX ? 'start' : (tick.at >= SPAN ? 'end' : 'middle')
         });
         t.textContent = tick.name;
         gAxis.appendChild(t);
@@ -309,7 +320,11 @@
 
         var value = document.createElement('span');
         value.className = 'sc-usg__legend-value sc-t-small';
-        value.textContent = fmt(s.values[0], '', state.decimals) + ' → ' +
+        /* Легенда — від FB до 12 міс, як і раніше: точка АМК на графіку показує крок
+           процедури, а не результат; 94 → 90 у легенді читалось би як погіршення */
+        var from = state.points.indexOf(START);
+        if (from < 0) from = 0;
+        value.textContent = fmt(s.values[from], '', state.decimals) + ' → ' +
                             fmt(s.values[s.values.length - 1], state.unit, state.decimals);
 
         row.appendChild(sample);
