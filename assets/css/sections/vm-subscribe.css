@@ -48,18 +48,32 @@
   background: var(--card);
 }
 
+/* Видео без собственной прозрачности: Safari на iPad её игнорировал, фон темнел
+   до синего, и текст терялся (замечание 2026-11-10, как в «Науці»). Светлоту даёт
+   вуаль подложки поверх кадра: подложка × (1 − α) + кадр × α */
 .vm-subscribe__video {
+  position: relative;
+  z-index: 0;
   display: block;
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
-  opacity: var(--vm-sub-video-opacity);
+}
+
+.vm-subscribe__bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--card);
+  opacity: calc(1 - var(--vm-sub-video-opacity));
 }
 
 .vm-subscribe__bg::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: var(--vm-sub-tone);
   mix-blend-mode: color;
 }
