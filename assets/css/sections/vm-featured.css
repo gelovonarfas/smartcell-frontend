@@ -200,12 +200,14 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Control/Progress: дорожка muted, индикатор foreground */
+/* Control/Progress: индикатор foreground. Дорожка в макете muted, но muted совпадает
+   с фоном полосы (#F2EEEA): пустая полоса — на паузе, до старта отсчёта — пропадала
+   совсем (замечание 2026-11-10). Дорожка — чернила на 20% */
 .vm-featured__progress {
   flex: 1 1 auto;
   position: relative;
   block-size: var(--sc-progress-h);
-  background: var(--muted);
+  background: var(--sc-black-alpha-20);
   overflow: hidden;
 }
 

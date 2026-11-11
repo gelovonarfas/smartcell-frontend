@@ -56,12 +56,15 @@
       }
     }
     if (counter) counter.textContent = pad(index + 1) + ' / ' + pad(total);
+    /* Без автосмены (reduced motion) полоса показывает место в ленте: 2 из 3 — две трети.
+       Раньше она оставалась пустой и сливалась с фоном (замечание 2026-11-10, iPad) */
+    if (!auto && bar && total > 1) root.style.setProperty('--vm-featured-fill', ((index + 1) / total).toFixed(3));
     if (prev) prev.disabled = total < 2;
     if (next) next.disabled = total < 2;
   }
 
   function armBar() {
-    if (!bar) return;
+    if (!bar || !auto) return;
     root.classList.remove('sc-is-running');
     root.style.setProperty('--vm-featured-fill', 0);
     if (!auto || paused || total < 2) return;
