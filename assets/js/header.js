@@ -130,12 +130,26 @@
       document.body.classList.toggle('sc-nav-lock', on); /* меню на весь екран — сторінка під ним стоїть (2026-11-03) */
       /* Тёмна шапка (FC365, data-theme="inverse"): відкрита шторка світла, як на решті сторінок —
          на час відкриття тема знімається і повертається при закритті (2026-11-03) */
+      /* На планшете (641–1279) шапка не перекрашивается: светлую тему получают только
+         шторка и крестик, логотип остаётся как был (2026-11-10). На телефоне меню
+         на весь экран — светлой становится вся шапка, как раньше. */
+      var wide = window.matchMedia && window.matchMedia('(min-width: 641px)').matches;
+      var drawer = header.querySelector('.sc-header__drawer');
       if (on && header.getAttribute('data-theme') === 'inverse') {
-        header.setAttribute('data-theme-rest', 'inverse');
-        header.setAttribute('data-theme', 'normal');
-      } else if (!on && header.getAttribute('data-theme-rest')) {
-        header.setAttribute('data-theme', header.getAttribute('data-theme-rest'));
-        header.removeAttribute('data-theme-rest');
+        if (wide) {
+          if (drawer) drawer.setAttribute('data-theme', 'normal');
+          burger.setAttribute('data-theme', 'normal');
+        } else {
+          header.setAttribute('data-theme-rest', 'inverse');
+          header.setAttribute('data-theme', 'normal');
+        }
+      } else if (!on) {
+        if (header.getAttribute('data-theme-rest')) {
+          header.setAttribute('data-theme', header.getAttribute('data-theme-rest'));
+          header.removeAttribute('data-theme-rest');
+        }
+        if (drawer) drawer.removeAttribute('data-theme');
+        burger.removeAttribute('data-theme');
       }
       burger.setAttribute('aria-expanded', on ? 'true' : 'false');
     };
