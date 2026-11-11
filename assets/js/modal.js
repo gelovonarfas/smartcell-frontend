@@ -24,6 +24,8 @@
   var FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
 
   var openModal = null;      /* сейчас открыта только одна */
+
+  var lockedY = 0;
   var lastTrigger = null;
   var hiddenByUs = [];
 
@@ -68,6 +70,9 @@
     /* компенсируем полосу прокрутки, чтобы страница не дёргалась */
     var gap = window.innerWidth - document.documentElement.clientWidth;
     if (gap > 0) document.body.style.paddingRight = gap + 'px';
+    /* body фиксируется (см. modal-booking.css) — держим его на текущей прокрутке */
+    lockedY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.top = (-lockedY) + 'px';
     document.body.classList.add('sc-has-modal');
 
     modal.hidden = false;
@@ -82,12 +87,38 @@
       });
     }
 
-    /* в форме удобнее сразу поле, а не кнопка закрытия */
+    /* в форме удобнее сразу поле, а не кнопка закрытия.
+       На сенсорном экране поле не фокусируем: клавиатура выскакивала сама, а Safari
+       на iPad ставил курсор по геометрии диалога в середине анимации (scale 0.85)
+       и не пересчитывал — курсор «сползал» (2026-11-10). Там фокус — на сам диалог,
+       клавиатура появится по касанию поля. С мышью и клавиатурой фокус уходит в поле,
+       когда диалог встал на место. */
     var dialog = modal.querySelector('.sc-modal__dialog');
     var items = focusable(dialog);
     var field = dialog.querySelector('.sc-modal__input');
     var target = (field && items.indexOf(field) !== -1) ? field : items[0];
-    if (target) target.focus();
+    var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+
+    if (coarse && target === field) {
+      if (!dialog.hasAttribute('tabindex')) dialog.setAttribute('tabindex', '-1');
+      dialog.focus({ preventScroll: true });
+      return;
+    }
+
+    if (!target) return;
+    if (reduced && reduced.matches) { target.focus(); return; }
+
+    var focused = false;
+    function focusTarget() {
+      if (focused) return;
+      focused = true;
+      dialog.removeEventListener('transitionend', onOpenEnd);
+      if (modal.classList.contains('sc-is-open')) target.focus();
+    }
+    function onOpenEnd(e) { if (e.target === dialog && e.propertyName === 'transform') focusTarget(); }
+    dialog.addEventListener('transitionend', onOpenEnd);
+    /* страховка, если transitionend не придёт */
+    setTimeout(focusTarget, 400);
   }
 
   /* Відео всередині попапу (data-inline-video): клік по постеру ставить плеєр на його місце,
@@ -128,6 +159,9 @@
     isolate(modal, false);
     document.body.classList.remove('sc-has-modal');
     document.body.style.paddingRight = '';
+    document.body.style.top = '';
+    /* мгновенно, мимо scroll-behavior: smooth — иначе страница проезжает от верха */
+    window.scrollTo({ top: lockedY, left: 0, behavior: 'instant' });
     if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
     lastTrigger = null;
     openModal = null;

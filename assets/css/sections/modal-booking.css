@@ -65,6 +65,10 @@
     transform var(--modal-dur) var(--sc-ease-out);
 }
 
+/* Фокус на сам диалог ставит modal.js на сенсорных экранах — это точка входа
+   для скринридера, а не элемент управления, рамка не нужна */
+.sc-modal__dialog:focus { outline: none; }
+
 .sc-modal.sc-is-open .sc-modal__dialog {
   opacity: 1;
   transform: none;
@@ -251,6 +255,8 @@
   font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
   letter-spacing: var(--button-ls);
   text-transform: uppercase;
+  text-align: center;      /* ссылка в две строки не уезжает влево */
+  text-decoration: none;
   cursor: pointer;
   transition:
     background-color var(--sc-dur) var(--sc-ease),
@@ -299,7 +305,14 @@
 
 /* ---------- Страница под модалкой ---------- */
 
-body.sc-has-modal { overflow: hidden; }
+/* Safari на iPad не держит overflow: hidden на body — страница под модалкой
+   прокручивалась пальцем. Поэтому body ещё и фиксируется на месте прокрутки:
+   сдвиг top ставит modal.js и снимает при закрытии (2026-11-10) */
+body.sc-has-modal {
+  overflow: hidden;
+  position: fixed;
+  inset-inline: 0;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .sc-modal__close svg { transition: none; }
