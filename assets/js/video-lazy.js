@@ -57,7 +57,29 @@
     source.removeAttribute('data-src');
     video.load();
     var p = video.play();
-    if (p && p.catch) p.catch(function () { /* автоплей запрещён — остаётся постер */ });
+    if (p && p.catch) p.catch(function () { blocked.push(video); armRetry(); });
+  }
+
+  /* Автоплей запрещён (iOS в режиме энергосбережения, 2026-11-10): ролик стоит
+     на постере. По первому касанию или клику запускаем все такие ролики —
+     play() из обработчика жеста браузер разрешает. Прокрутка жестом не считается. */
+  var blocked = [];
+  var armed = false;
+  function retry() {
+    var list = blocked.splice(0);
+    list.forEach(function (v) {
+      if (!v.paused) return;
+      var q = v.play();
+      if (q && q.catch) q.catch(function () { /* и по касанию нельзя — остаётся постер */ });
+    });
+    armed = false;
+  }
+  function armRetry() {
+    if (armed) return;
+    armed = true;
+    ['touchend', 'click', 'keydown'].forEach(function (type) {
+      document.addEventListener(type, retry, { once: true, passive: true });
+    });
   }
 
   function inFirstScreen(video) {
