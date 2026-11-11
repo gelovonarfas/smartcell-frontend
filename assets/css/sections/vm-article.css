@@ -1468,6 +1468,10 @@
   place-items: center;
   aspect-ratio: 1 / 1;
   border: var(--sc-line) solid var(--border);
+  /* Инверсно (просьба клиники 2026-11-11): квадраты залиты чернилами, буква светлая;
+     наведение — обратно в контур */
+  background: var(--foreground);
+  color: var(--background);
   font: var(--h3-weight) var(--p-size) / 1 var(--font-headings);
   transition:
     background-color var(--sc-dur-fast) var(--sc-ease),
@@ -1476,15 +1480,15 @@
 
 @media (hover: hover) and (pointer: fine) {
   .vm-article__toc--chips .vm-article__toc-list a:hover {
-    background: var(--foreground);
-    color: var(--background);
+    background: transparent;
+    color: var(--foreground);
     text-decoration: none;
   }
 }
 
 .vm-article__toc--chips .vm-article__toc-list a:active {
-  background: var(--foreground);
-  color: var(--background);
+  background: transparent;
+  color: var(--foreground);
 }
 
 @media (prefers-reduced-motion: reduce) {
