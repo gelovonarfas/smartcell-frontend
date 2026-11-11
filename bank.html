@@ -38,7 +38,6 @@
   <link rel="stylesheet" href="assets/css/sections/sc-direction-branches.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-consult.css">
   <link rel="stylesheet" href="assets/css/sections/sc-direction-crumbs.css">
-  <link rel="stylesheet" href="assets/css/sections/sc-bank.css">
   <link rel="stylesheet" href="assets/css/sections/footer.css">
   <link rel="stylesheet" href="assets/css/sections/modal-booking.css">
   <link rel="stylesheet" href="assets/css/sections/modal-video.css">
@@ -400,30 +399,16 @@
 <!-- ============================================================
      SC/Bank · Банк біологічного страхування — «Опис»
      figma: node-id=865:22 (кадр 865:2 «SC/Direction — Банк біологічного страхування»)
-     Блоки: «Що приймається на зберігання» (sc-dbank, sc-bank.css) · цитата + опис (sc-dabout)
+     Блоки: опис (sc-dabout; плитки «Що приймається на зберігання» прибрано 2026-11-10 —
+            на virtus їх немає, ця інформація є в тексті опису)
             · «Спектр застосування» (sc-dindications) · відео (sc-dvideo).
-     Тексти — virtus.ua/…/bank-biolohichnoho-strakhuvannia (2026-10-12), скорочені в макеті 865:2;
-     абзац про COVID-19 з сайту в макет не ввійшов — [VERIFY] клініка.
+     Текст опису — поле «Текст» з virtus.ua/…/bank-biolohichnoho-strakhuvannia як є (2026-11-09).
      Посилання чипів — на сторінки virtus/кіта, де вони є; решта — без посилань. [VERIFY]
-     ACF: bank_storage (repeater: title, text), quote_kicker, quote_text, description (wysiwyg),
-          indications_title, indications (repeater: label, link опційний), video_url, video_poster, video_caption
+     ACF: description (wysiwyg), indications_title, indications (repeater: label, link опційний),
+          video_url, video_poster, video_caption
      ============================================================ -->
 <section class="sc-dtabs" id="direction-tabs">
   <div class="sc-dtabs__panel">
-
-    <div class="sc-dtabs__group sc-dbank">
-      <h2 class="sc-dbank__title sc-t-h2">Що приймається на зберігання</h2>
-      <ul class="sc-dbank__cells">
-        <li class="sc-dbank__cell">
-          <h3 class="sc-dbank__cell-title sc-t-h3">Мезенхімальні стовбурові клітини</h3>
-          <p class="sc-dbank__cell-text sc-t-body">Отримані з жирової тканини або кісткового мозку пацієнта — здатні перетворюватися в будь-яку клітину і відновлювати пошкоджені тканини.</p>
-        </li>
-        <li class="sc-dbank__cell">
-          <h3 class="sc-dbank__cell-title sc-t-h3">Фібробласти</h3>
-          <p class="sc-dbank__cell-text sc-t-body">Клітини шкіри, що синтезують колаген, еластин і гіалуронову кислоту; застосовуються для омолодження шкіри, корекції рубців, наслідків опіків, стимуляції росту волосся.</p>
-        </li>
-      </ul>
-    </div>
 
     <!-- Опис — повний текст поля «Текст» з virtus як є (рішення 2026-11-09), без цитати.
          Перший абзац цілком жирний: CSS ставить його вступом у ліву колонку кеглем H3.
