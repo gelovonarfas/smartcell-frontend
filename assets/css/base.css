@@ -315,6 +315,9 @@ body {
 :root { --sc-primary-hover: var(--secondary-foreground); }
 
 [data-theme="inverse"] { --sc-primary-hover: var(--secondary-foreground); }
+/* Светлый кусок внутри тёмного (полка мегаменю и шторка на тёмной шапке): без повтора
+   наследовал светлую ступень ховера от тёмной шапки — плита белела вместе с текстом (2026-11-11) */
+[data-theme="normal"] { --sc-primary-hover: var(--secondary-foreground); }
 
 /* ============================================================
    Кнопка после текста · сквозное правило 2026-09-06

@@ -44,6 +44,7 @@
   <link rel="stylesheet" href="assets/css/sections/sc-direction-crumbs.css">
   <link rel="stylesheet" href="assets/css/sections/footer.css">
   <link rel="stylesheet" href="assets/css/sections/modal-booking.css">
+  <link rel="stylesheet" href="assets/css/sections/sc-protocol.css">
   <link rel="stylesheet" href="assets/css/sections/modal-video.css">
 
   <!-- LCP — кадр hero: запрос уходит с первых байт -->
@@ -182,13 +183,13 @@
                        слоган, три плашки, плита Button/Block — коммит d4fbd02. -->
                   <div class="sc-hdir__pane" role="tabpanel" id="hdir-panel-protocols" aria-labelledby="hdir-tab-protocols" data-hdir-full>
                     <div class="sc-hdir__protocol">
-                      <a class="sc-hdir__protocol-photo" href="index.html" tabindex="-1" aria-hidden="true">
+                      <a class="sc-hdir__protocol-photo" href="cell-technologies.html#protocol" tabindex="-1" aria-hidden="true">
                         <img src="assets/img/b12-impact.jpg" srcset="assets/img/b12-impact.jpg 460w, assets/img/b12-impact@2x.jpg 920w"
                              sizes="(max-width: 640px) 0px, 520px" width="460" height="460" alt="" loading="lazy" decoding="async">
                       </a>
                       <div class="sc-hdir__protocol-copy">
                         <div class="sc-hdir__protocol-text">
-                          <a class="sc-hdir__protocol-title sc-t-h3" href="index.html">Face Control 365</a>
+                          <a class="sc-hdir__protocol-title sc-t-h3" href="cell-technologies.html#protocol">Face Control 365</a>
                           <!-- Опис — wysiwyg з адмінки як є (menu_protocol): звичайні <p> без класів,
                                стилі — за тегом у .sc-hdir__protocol-desc. Лід B03 і абзац B02 «Історія» з лендингу -->
                           <div class="sc-hdir__protocol-desc">
@@ -202,9 +203,11 @@
                             <li class="sc-hdir__tag sc-t-mini">Здорова і доглянута шкіра</li>
                           </ul>
                         </div>
-                        <!-- Button/Block, как на первом экране лендинга, — в нижнем углу витрины -->
-                        <a class="sc-hdir__block" href="index.html#journey">
-                          <span class="sc-hdir__block-label">Етапи річної подорожі</span>
+                        <!-- Button/Block — передзапис (2026-11-11, поки лендинг не відкритий): на хабі відкриває попап
+                             data-modal="preregistration", на інших сторінках веде до острова cell-technologies.html#protocol,
+                             на лендингу — його власний попап передзапису (data-modal="booking"). Було: «Етапи річної подорожі» → index.html#journey -->
+                        <a class="sc-hdir__block" href="cell-technologies.html#protocol" data-modal-open="preregistration">
+                          <span class="sc-hdir__block-label">Зареєструватись</span>
                           <span class="sc-hdir__block-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
                         </a>
                       </div>
@@ -405,7 +408,8 @@
     <!-- Напрямки клітинної терапії — конфігуратор, як послуги лікаря (sc-dsvc, doctor-services.js):
          плитка напрямку розкриває під рядом полочку з його послугами (вкладені послуги з
          virtus.ua/kletochnye-tehnologii, 2026-10-12): посилання «Сторінка напрямку» ліворуч, чіпи праворуч;
-         послуга зі своєю сторінкою — посилання, без — приглушений чіп. Перша плитка відкрита.
+         послуга зі своєю сторінкою — посилання, без — приглушений чіп. За замовчуванням усі плитки згорнуті
+         (2026-11-11; було — перша відкрита: aria-expanded="true" на першій плитці).
          ACF: hub_directions (relationship → напрямки; у напрямку — repeater services: label, link) -->
     <!-- Мітки «Virtus» у хабі немає (2026-11-08, Олег і Микола): список збирається автоматично з послуг,
      привʼязаних до SmartCell (хоча б один батько SmartCell, на будь-якому місці), і всі вони відкриваються
@@ -418,7 +422,7 @@
       <h2 class="sc-doc__title sc-t-h2">Напрямки клітинної терапії</h2>
       <ul class="sc-dsvc__tiles">
     <li><a class="sc-dsvc__tile sc-dsvc__tile--link" href="https://virtus.ua/kletochnye-tehnologii/klitinne-omolodzhennya-i-terapiya/klitinni-tehnologii-v-urologii"><span class="sc-dsvc__label">Урологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--h" d="M14.7 19.3L22 12" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--v" d="M22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
-    <li><button class="sc-dsvc__tile" type="button" aria-expanded="true" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-plastichnij-hirurg"><span class="sc-dsvc__label">Пластична хірургія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--h" d="M14.7 19.3L22 12" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--v" d="M22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
+    <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-plastichnij-hirurg"><span class="sc-dsvc__label">Пластична хірургія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--h" d="M14.7 19.3L22 12" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--v" d="M22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
     <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-endokrinologii"><span class="sc-dsvc__label">Ендокринологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--h" d="M14.7 19.3L22 12" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--v" d="M22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
     <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-gastroenterologii"><span class="sc-dsvc__label">Гастроентерологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--h" d="M14.7 19.3L22 12" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--v" d="M22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
     <li><button class="sc-dsvc__tile" type="button" aria-expanded="false" aria-controls="dsvc-panel" data-service="klitinni-tehnologii-v-otolaringologii"><span class="sc-dsvc__label">Отоларингологія</span><span class="sc-dsvc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="sc-dsvc__arrow-shaft" d="M2 12H22" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--h" d="M14.7 19.3L22 12" stroke="currentColor" stroke-width="1"/><path class="sc-dsvc__arrow-leg sc-dsvc__arrow-leg--v" d="M22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></button></li>
@@ -610,11 +614,55 @@
       </ul>
     </div>
 
-    <!-- Блок «Також у розділі» прибрано 2026-10-29: на virtus його немає (препарати й консультанти — лише в меню сайту;
-         банк на virtus — пункт списку напрямків, тепер плитка в конфігураторі вище). Відкат — розкоментувати:
-    <!~~ Також у розділі: банк, препарати, консультанти — плитки-посилання ~~>
+<!-- Острів протоколу — копія sections/sc-protocol.html; на хабі стоїть у вкладці «Опис» перед «Також у розділі»
+     (2026-11-11): поля задає вкладка (160 між частинами), у острова своїх немає (--in-tabs) -->
+<!-- ============================================================
+     SC/Hub · Протокол Face Control 365 — острів передзапису (тимчасово, 2026-11-11)
+     figma: node-id=1322:2460
+     Поки лендинг не відкритий: пункт меню «Протоколи» веде сюди (#protocol),
+     кнопка відкриває попап попередньої реєстрації (data-modal="preregistration").
+     Тексти: інтро лендингу, лід «Що включає програма»,      абзац про лідера й «вперше в Україні» — [VERIFY].
+     Графіка — маска обличчя з точок, статичний SVG (protocol-face.svg) з CSS-«сканом».
+     ACF: protocol_kicker (text), protocol_title (text), protocol_subtitle (text), protocol_lead (textarea),
+          protocol_text (textarea), protocol_cta_label (text),
+          protocol_face (image/svg — маска з точок)
+     ============================================================ -->
+<section class="sc-dtabs__group sc-protocol sc-protocol--in-tabs" id="protocol">
+  <div class="sc-protocol__plate" data-theme="inverse">
+    <span class="sc-protocol__glow" aria-hidden="true"></span>
+    <div class="sc-protocol__media" aria-hidden="true">
+      <!-- Маска обличчя з точок — статичний SVG (assets/img/protocol-face.svg, 1908 однакових точок,
+           віддзеркалена; ~7 КБ стиснутим). Другий шар — protocol-face-sparks.svg: випадкові точки
+           спалахують яскравіше, анімація всередині SVG. Без скрипта. -->
+      <img class="sc-protocol__face" src="assets/img/protocol-face.svg" alt="" width="349" height="562" loading="lazy" decoding="async">
+      <img class="sc-protocol__face sc-protocol__face--sparks" src="assets/img/protocol-face-sparks.svg" alt="" width="349" height="562" loading="lazy" decoding="async">
+    </div>
+
+    <div class="sc-protocol__copy">
+      <div class="sc-protocol__head">
+        <p class="sc-protocol__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ</p>
+        <h2 class="sc-protocol__title sc-t-h1">Face Control 365</h2>
+        <p class="sc-protocol__subtitle sc-t-h3">Все починається з розуміння біології вашої шкіри.</p>
+      </div>
+
+      <p class="sc-protocol__lead sc-t-lead">Цілісна програма-подорож із глибокою діагностикою шкіри та персональним протоколом на 12 місяців.</p>
+
+      <button class="sc-protocol__cta" type="button" data-modal-open="preregistration" aria-haspopup="dialog">
+        <span class="sc-protocol__cta-label">Зареєструватись</span>
+        <span class="sc-protocol__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+      </button>
+
+      <!-- [VERIFY] нове твердження (2026-11-11, за проханням Олега; під кнопкою, плашок немає): «лідер клітинного омолодження»,
+           «вперше в Україні» — погодити з клінікою -->
+      <p class="sc-protocol__text sc-t-body">Ексклюзивна програма від SmartCell — лідера клітинного омолодження. Ми раді вперше в Україні представити річний протокол лікування.</p>
+    </div>
+  </div>
+</section>
+
+    <!-- «Також у розділі» повернуто 2026-11-11 (як на сайті): прибирали 2026-10-29, бо на старому virtus його немає -->
+    <!-- Також у розділі: банк, препарати, консультанти — плитки-посилання -->
     <div class="sc-dtabs__group sc-dservices">
-      <!~~ Банк і консультанти — сторінки SmartCell, без метки «Virtus» (2026-10-27); у темі — їхні адреси на virtus.ua ~~>
+      <!-- Банк і консультанти — сторінки SmartCell, без метки «Virtus» (2026-10-27); у темі — їхні адреси на virtus.ua -->
       <h2 class="sc-dservices__title sc-t-h2">Також у розділі</h2>
       <ul class="sc-dservices__list sc-dservices__list--cols-4">
         <li><a class="sc-dservices__tile" href="bank.html"><span class="sc-dservices__label">Банк біологічного страхування</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
@@ -622,7 +670,6 @@
         <li><a class="sc-dservices__tile" href="consultants.html"><span class="sc-dservices__label">Консультанти SmartCell</span><span class="sc-dservices__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span></a></li>
       </ul>
     </div>
-    -->
 
     <!-- Опис розділу, можливості, проза, FAQ — тепер тёмною статтею нижче (sc-hub-story, 2026-10-12) -->
 
@@ -1078,7 +1125,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- Секция — копия sections/sc-direction-consult.html -->
 <!-- ============================================================
@@ -1720,6 +1766,83 @@
           </dl>
       <a class="sc-review-full__all sc-t-small" href="#vidguky" data-tab-link="vidguky" data-modal-close>Усі відгуки</a>
     </div>
+  </div>
+</div>
+
+<!-- Попап попередньої реєстрації Face Control 365 — копія попапу з лендингу (index.html,
+     sections/modal-booking.html), ім'я data-modal="preregistration": на хабі вже є data-modal="booking"
+     (запис на консультацію). Відкривають острів #protocol і плита в меню «Протоколи» (2026-11-11). -->
+<div class="sc-modal" data-modal="preregistration" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+
+  <div class="sc-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="prereg-title">
+
+    <div class="sc-modal__photo">
+      <img src="assets/img/booking.jpg"
+           srcset="assets/img/booking.jpg 520w, assets/img/booking@2x.jpg 1040w"
+           sizes="(max-width: 640px) 100vw, 520px"
+           alt="Клітинна структура під мікроскопом"
+           width="520" height="520" loading="lazy" decoding="async">
+    </div>
+
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+
+      <!-- Передреєстрація (2026-10-14, figma Components «Modal/Booking · передреєстрація — стани» 1275:3298):
+           програма ще не стартувала — збираємо контакти, дат не називаємо. Було (запис на діагностику):
+           «ЗАПИС НА ДІАГНОСТИКУ» · «Дізнайтесь свій регенеративний потенціал» · «Комплексна діагностика Face Control 365» · «ЗАПИСАТИСЬ».
+           Стани: форма → надсилання (смужка під кнопкою, висота не змінюється) → success (блок нижче, форма ховається). -->
+      <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ</p>
+      <h2 class="sc-modal__title sc-t-h3" id="prereg-title">Станьте першими у програмі Face Control 365</h2>
+      <p class="sc-modal__note sc-t-small">Запис на діагностику буде відкрито незабаром. Залиште контакти — повідомимо першими і запропонуємо зручну дату.</p>
+
+      <form class="sc-modal__form" novalidate>
+        <div class="sc-modal__fields">
+
+          <div class="sc-modal__field">
+            <label class="sc-modal__label" for="prereg-name">Ваше ім'я</label>
+            <input class="sc-modal__input" id="prereg-name" name="name" type="text"
+                   placeholder="Ваше ім'я" autocomplete="name" required>
+            <p class="sc-modal__error" id="prereg-name-error" hidden>Вкажіть імʼя</p>
+          </div>
+
+          <div class="sc-modal__field">
+            <label class="sc-modal__label" for="prereg-phone">Номер телефону</label>
+            <input class="sc-modal__input" id="prereg-phone" name="phone" type="tel"
+                   placeholder="+380" autocomplete="tel" inputmode="tel" required>
+            <p class="sc-modal__error" id="prereg-phone-error" hidden>Вкажіть номер телефону</p>
+          </div>
+
+        </div>
+
+        <div class="sc-modal__actions">
+          <button class="sc-modal__submit" type="submit">ЗАРЕЄСТРУВАТИСЬ</button>
+          <button class="sc-modal__later" type="button" data-modal-close>ПІЗНІШЕ</button>
+          <!-- смужка надсилання — абсолютно під кнопками, висоту панелі не змінює -->
+          <div class="sc-modal__progress" role="progressbar" aria-label="Надсилаємо заявку" hidden>
+            <span class="sc-modal__progress-bar"></span>
+          </div>
+        </div>
+
+        <p class="sc-modal__legal">Натискаючи, ви погоджуєтесь з політикою обробки даних</p>
+      </form>
+
+      <!-- success: замість заголовка, підводки і форми (кнопка «Закрити» — та сама data-modal-close) -->
+      <div class="sc-modal__done" data-booking-done hidden>
+        <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ · ГОТОВО</p>
+        <h2 class="sc-modal__title sc-t-h3">Ви в списку</h2>
+        <p class="sc-modal__note sc-t-small">Дякуємо! Щойно відкриємо запис на діагностику, ми зателефонуємо вам і запропонуємо зручну дату. Тим часом — читайте Smart Age Journal.</p>
+        <div class="sc-modal__actions">
+          <a class="sc-modal__submit" href="vm-blog.html">ЧИТАТИ ЖУРНАЛ</a>
+          <button class="sc-modal__later" type="button" data-modal-close>ЗАКРИТИ</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 

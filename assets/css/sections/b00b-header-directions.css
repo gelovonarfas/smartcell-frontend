@@ -153,7 +153,8 @@
   display: grid;
   grid-template-columns: var(--hdir-cols);
   gap: var(--section-gap); /* 56 — колонки разведены воздухом */
-  padding: var(--sc-space-10) var(--sc-pad-x) var(--sc-space-12); /* 40 / 48 */
+  /* сверху и снизу 56, шаг колонок: 40 / 48 читались тесно, фото протокола прилипало к вкладкам (2026-11-11) */
+  padding: var(--section-gap) var(--sc-pad-x);
 }
 
 .sc-hdir__panels { min-inline-size: 0; }

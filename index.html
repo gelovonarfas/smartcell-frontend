@@ -208,9 +208,11 @@
                             <li class="sc-hdir__tag sc-t-mini">Здорова і доглянута шкіра</li>
                           </ul>
                         </div>
-                        <!-- Button/Block, как на первом экране лендинга, — в нижнем углу витрины -->
-                        <a class="sc-hdir__block" href="index.html#journey">
-                          <span class="sc-hdir__block-label">Етапи річної подорожі</span>
+                        <!-- Button/Block — передзапис (2026-11-11, поки лендинг не відкритий): на хабі відкриває попап
+                             data-modal="preregistration", на інших сторінках веде до острова cell-technologies.html#protocol,
+                             на лендингу — його власний попап передзапису (data-modal="booking"). Було: «Етапи річної подорожі» → index.html#journey -->
+                        <a class="sc-hdir__block" href="#consultation" data-modal-open="booking">
+                          <span class="sc-hdir__block-label">Зареєструватись</span>
                           <span class="sc-hdir__block-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
                         </a>
                       </div>
@@ -1994,7 +1996,7 @@
            Стани: форма → надсилання (смужка під кнопкою, висота не змінюється) → success (блок нижче, форма ховається). -->
       <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ</p>
       <h2 class="sc-modal__title sc-t-h3" id="booking-title">Станьте першими у програмі Face Control 365</h2>
-      <p class="sc-modal__note sc-t-small">Запис на діагностику відкриємо незабаром. Залиште контакти — повідомимо першими і запропонуємо зручну дату.</p>
+      <p class="sc-modal__note sc-t-small">Запис на діагностику буде відкрито незабаром. Залиште контакти — повідомимо першими і запропонуємо зручну дату.</p>
 
       <form class="sc-modal__form" novalidate>
         <div class="sc-modal__fields">

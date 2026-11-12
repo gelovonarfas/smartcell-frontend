@@ -1,0 +1,119 @@
+<!-- ============================================================
+     SC/Hub · Протокол Face Control 365 — острів передзапису (тимчасово, 2026-11-11)
+     figma: node-id=1322:2460
+     Поки лендинг не відкритий: пункт меню «Протоколи» веде сюди (#protocol),
+     кнопка відкриває попап попередньої реєстрації (data-modal="preregistration").
+     Тексти: інтро лендингу, лід «Що включає програма»,      абзац про лідера й «вперше в Україні» — [VERIFY].
+     Графіка — маска обличчя з точок, статичний SVG (protocol-face.svg) з CSS-«сканом».
+     ACF: protocol_kicker (text), protocol_title (text), protocol_subtitle (text), protocol_lead (textarea),
+          protocol_text (textarea), protocol_cta_label (text),
+          protocol_face (image/svg — маска з точок)
+     ============================================================ -->
+<section class="sc-protocol" id="protocol">
+  <div class="sc-protocol__plate" data-theme="inverse">
+    <span class="sc-protocol__glow" aria-hidden="true"></span>
+    <div class="sc-protocol__media" aria-hidden="true">
+      <!-- Маска обличчя з точок — статичний SVG (assets/img/protocol-face.svg, 1908 однакових точок,
+           віддзеркалена; ~7 КБ стиснутим). Другий шар — protocol-face-sparks.svg: випадкові точки
+           спалахують яскравіше, анімація всередині SVG. Без скрипта. -->
+      <img class="sc-protocol__face" src="assets/img/protocol-face.svg" alt="" width="349" height="562" loading="lazy" decoding="async">
+      <img class="sc-protocol__face sc-protocol__face--sparks" src="assets/img/protocol-face-sparks.svg" alt="" width="349" height="562" loading="lazy" decoding="async">
+    </div>
+
+    <div class="sc-protocol__copy">
+      <div class="sc-protocol__head">
+        <p class="sc-protocol__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ</p>
+        <h2 class="sc-protocol__title sc-t-h1">Face Control 365</h2>
+        <p class="sc-protocol__subtitle sc-t-h3">Все починається з розуміння біології вашої шкіри.</p>
+      </div>
+
+      <p class="sc-protocol__lead sc-t-lead">Цілісна програма-подорож із глибокою діагностикою шкіри та персональним протоколом на 12 місяців.</p>
+
+      <button class="sc-protocol__cta" type="button" data-modal-open="preregistration" aria-haspopup="dialog">
+        <span class="sc-protocol__cta-label">Зареєструватись</span>
+        <span class="sc-protocol__cta-arrow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/></svg></span>
+      </button>
+
+      <!-- [VERIFY] нове твердження (2026-11-11, за проханням Олега; під кнопкою, плашок немає): «лідер клітинного омолодження»,
+           «вперше в Україні» — погодити з клінікою -->
+      <p class="sc-protocol__text sc-t-body">Ексклюзивна програма від SmartCell — лідера клітинного омолодження. Ми раді вперше в Україні представити річний протокол лікування.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Попап попередньої реєстрації Face Control 365 — копія попапу з лендингу (index.html,
+     sections/modal-booking.html), ім'я data-modal="preregistration": на хабі вже є data-modal="booking"
+     (запис на консультацію). Відкривають острів #protocol і плита в меню «Протоколи» (2026-11-11). -->
+<div class="sc-modal" data-modal="preregistration" hidden>
+  <div class="sc-modal__overlay" data-modal-close></div>
+
+  <div class="sc-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="prereg-title">
+
+    <div class="sc-modal__photo">
+      <img src="assets/img/booking.jpg"
+           srcset="assets/img/booking.jpg 520w, assets/img/booking@2x.jpg 1040w"
+           sizes="(max-width: 640px) 100vw, 520px"
+           alt="Клітинна структура під мікроскопом"
+           width="520" height="520" loading="lazy" decoding="async">
+    </div>
+
+    <div class="sc-modal__panel">
+      <button class="sc-modal__close" type="button" data-modal-close aria-label="Закрити">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H22M14.7 19.3L22 12L14.7 4.7" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+
+      <!-- Передреєстрація (2026-10-14, figma Components «Modal/Booking · передреєстрація — стани» 1275:3298):
+           програма ще не стартувала — збираємо контакти, дат не називаємо. Було (запис на діагностику):
+           «ЗАПИС НА ДІАГНОСТИКУ» · «Дізнайтесь свій регенеративний потенціал» · «Комплексна діагностика Face Control 365» · «ЗАПИСАТИСЬ».
+           Стани: форма → надсилання (смужка під кнопкою, висота не змінюється) → success (блок нижче, форма ховається). -->
+      <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ</p>
+      <h2 class="sc-modal__title sc-t-h3" id="prereg-title">Станьте першими у програмі Face Control 365</h2>
+      <p class="sc-modal__note sc-t-small">Запис на діагностику буде відкрито незабаром. Залиште контакти — повідомимо першими і запропонуємо зручну дату.</p>
+
+      <form class="sc-modal__form" novalidate>
+        <div class="sc-modal__fields">
+
+          <div class="sc-modal__field">
+            <label class="sc-modal__label" for="prereg-name">Ваше ім'я</label>
+            <input class="sc-modal__input" id="prereg-name" name="name" type="text"
+                   placeholder="Ваше ім'я" autocomplete="name" required>
+            <p class="sc-modal__error" id="prereg-name-error" hidden>Вкажіть імʼя</p>
+          </div>
+
+          <div class="sc-modal__field">
+            <label class="sc-modal__label" for="prereg-phone">Номер телефону</label>
+            <input class="sc-modal__input" id="prereg-phone" name="phone" type="tel"
+                   placeholder="+380" autocomplete="tel" inputmode="tel" required>
+            <p class="sc-modal__error" id="prereg-phone-error" hidden>Вкажіть номер телефону</p>
+          </div>
+
+        </div>
+
+        <div class="sc-modal__actions">
+          <button class="sc-modal__submit" type="submit">ЗАРЕЄСТРУВАТИСЬ</button>
+          <button class="sc-modal__later" type="button" data-modal-close>ПІЗНІШЕ</button>
+          <!-- смужка надсилання — абсолютно під кнопками, висоту панелі не змінює -->
+          <div class="sc-modal__progress" role="progressbar" aria-label="Надсилаємо заявку" hidden>
+            <span class="sc-modal__progress-bar"></span>
+          </div>
+        </div>
+
+        <p class="sc-modal__legal">Натискаючи, ви погоджуєтесь з політикою обробки даних</p>
+      </form>
+
+      <!-- success: замість заголовка, підводки і форми (кнопка «Закрити» — та сама data-modal-close) -->
+      <div class="sc-modal__done" data-booking-done hidden>
+        <p class="sc-modal__kicker sc-t-caption">ПОПЕРЕДНЯ РЕЄСТРАЦІЯ · ГОТОВО</p>
+        <h2 class="sc-modal__title sc-t-h3">Ви в списку</h2>
+        <p class="sc-modal__note sc-t-small">Дякуємо! Щойно відкриємо запис на діагностику, ми зателефонуємо вам і запропонуємо зручну дату. Тим часом — читайте Smart Age Journal.</p>
+        <div class="sc-modal__actions">
+          <a class="sc-modal__submit" href="vm-blog.html">ЧИТАТИ ЖУРНАЛ</a>
+          <button class="sc-modal__later" type="button" data-modal-close>ЗАКРИТИ</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

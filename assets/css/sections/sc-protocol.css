@@ -1,0 +1,266 @@
+/* ============================================================
+   SC/Hub · Протокол Face Control 365 — острів передзапису
+   figma: node-id=1322:2460 (тимчасово, 2026-11-11)
+
+   Поки лендинг Face Control 365 не відкритий, на хабі «Клітинні технології»
+   живе острів програми: пункт меню «Протоколи» веде сюди якорем #protocol,
+   кнопка відкриває попап попередньої реєстрації (data-modal="preregistration").
+   Тексти — лише погоджені: інтро й «Що включає» з лендингу, попап передзапису.
+
+   Плита темна (data-theme="inverse") у смузі сторінки, праворуч — маска обличчя
+   з однакових точок (статичний SVG protocol-face.svg) з CSS-мерехтінням; зліва скрим під текст.
+   ============================================================ */
+
+.sc-protocol {
+  --protocol-plate-h: 640px;   /* висота плити в макеті */
+  --protocol-copy-w: 560px;    /* колонка тексту в макеті */
+  --protocol-block-w: var(--sc-cta-block-w); /* Button/Block 320 × 76 */
+  --protocol-block-h: var(--control-tall, 76px);
+
+  box-sizing: border-box;
+  /* острів: зверху й знизу повний міжсекційний крок 160 (80 на телефоні) — плита відліплена
+     і від плиток вище, і від темної статті нижче (2026-11-11) */
+  padding: var(--section-padding-y) var(--sc-pad-x);
+  background: var(--background);
+}
+
+.sc-protocol *,
+.sc-protocol *::before,
+.sc-protocol *::after { box-sizing: border-box; }
+
+/* У вкладці «Опис» (хаб): поля й фон дає вкладка — 160 між частинами, бічні поля смуги */
+.sc-protocol--in-tabs {
+  padding: 0;
+  background: none;
+}
+
+/* Якір з меню: фіксована шапка не накриває острів */
+.sc-protocol { scroll-margin-block-start: var(--sc-anchor-offset); }
+
+.sc-protocol__plate {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-block-size: var(--protocol-plate-h);
+  padding: var(--page-margin-x);
+  overflow: hidden;
+  background: var(--sc-ink-blue); /* той самий нічний синій, що в статті хаба нижче (2026-11-11) */
+  color: var(--foreground);
+}
+
+/* ---------- Відео на всю плиту ---------- */
+
+/* Кадр — у правих 70% плити: на всю ширину героїня терла обличчя під текстом (2026-11-11).
+   Ліва частина — тло плити, скрим нижче зшиває його з кадром */
+.sc-protocol {
+  --protocol-media-w: 62%;
+}
+
+.sc-protocol__media {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  inline-size: var(--protocol-media-w);
+  z-index: -2;
+}
+
+/* Маска обличчя з точок — статичний SVG на весь слот, вписаний з полем і притиснутий праворуч
+   (2026-11-11: подалі від тексту). Приглушена до 45%, щоб читались спалахи. */
+.sc-protocol__face {
+  --protocol-face-x: 85%;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  padding: 4%;
+  object-fit: contain;
+  object-position: var(--protocol-face-x) center;
+  opacity: 0.45;
+}
+
+/* Спалахи: поверх обличчя protocol-face-sparks.svg — 200 випадкових точок у 14 групах, кожна група
+   спалахує зі своїм періодом і зсувом, тож вогники виглядають випадковими. Анімація всередині SVG,
+   без скрипта; prefers-reduced-motion вимикає її там же. */
+.sc-protocol__face--sparks {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Горизонтальний ореол: той самий синій, що в дузі футера, наростає зліва направо —
+   за обличчям найсвітліше, під текстом тло плити. Під маскою обличчя. */
+.sc-protocol__glow {
+  --protocol-glow-from: 30%;
+  --protocol-glow-color: color-mix(in srgb, var(--sc-blue-500) 45%, transparent);
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background: linear-gradient(to right, transparent var(--protocol-glow-from), var(--protocol-glow-color));
+  pointer-events: none;
+}
+
+/* ---------- Текст ---------- */
+
+/* Колонка на всю висоту плити: заголовок і лід — до верхнього поля, кнопка з абзацом —
+   до нижнього (margin-block-start: auto у кнопки), між ними повітря (2026-11-11) */
+.sc-protocol__copy {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stack-gap-lg);
+  max-inline-size: var(--protocol-copy-w);
+}
+
+.sc-protocol__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+}
+
+.sc-protocol__kicker,
+.sc-protocol__title,
+.sc-protocol__subtitle,
+.sc-protocol__lead,
+.sc-protocol__text { margin: 0; }
+
+/* Весь текст острова — світлий (--foreground в inverse), без приглушеного сірого (2026-11-11) */
+.sc-protocol__kicker,
+.sc-protocol__lead,
+.sc-protocol__text { color: var(--foreground); }
+
+/* ---------- Button/Block · primary (у inverse — світла плита) ---------- */
+
+.sc-protocol__cta {
+  inline-size: 100%;
+  max-inline-size: var(--protocol-block-w);
+  block-size: var(--protocol-block-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-block-start: auto;
+  padding: var(--grid-gap);
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-align: start;
+  cursor: pointer;
+  transition: background-color var(--sc-dur) var(--sc-ease);
+}
+
+.sc-protocol__cta-label {
+  text-transform: uppercase;
+  font: var(--button-weight) var(--button-size) / var(--button-lh) var(--font-headings);
+  letter-spacing: var(--button-ls);
+}
+
+.sc-protocol__cta-arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sc-protocol__cta-arrow svg {
+  transform: rotate(45deg);
+  transition: transform var(--sc-dur-arrow) var(--sc-ease-out);
+}
+
+/* ---------- Стани (у Figma їх немає — обов'язкові за CLAUDE.md) ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .sc-protocol__cta:hover { background: var(--sc-primary-hover); }
+  .sc-protocol__cta:hover .sc-protocol__cta-arrow svg {
+    transform: translate(calc(var(--grid-gap) / 2), calc(var(--grid-gap) / 2)) rotate(45deg);
+  }
+}
+
+.sc-protocol__cta:active { opacity: 0.85; }
+
+.sc-protocol__cta:focus-visible {
+  outline: var(--sc-focus-w) solid var(--ring);
+  outline-offset: var(--sc-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-protocol__cta,
+  .sc-protocol__cta-arrow svg { transition: none; }
+}
+
+/* ---------- Планшет ----------
+   Вертикаль: плита в колонку — кадр зверху (16:9), текст під ним на темному.
+   Горизонталь: як на десктопі, колонка тексту ширша частка плити. */
+/* Горизонталь до 1280: колонка тексту вужча, кадр зсунутий правіше — обличчя не заходить під текст */
+@media (min-width: 641px) and (max-width: 1279px) {
+  .sc-protocol {
+    --protocol-copy-w: 46%;
+    --protocol-media-w: 58%;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) and (orientation: portrait) {
+  .sc-protocol__plate {
+    flex-direction: column;
+    align-items: stretch;
+    min-block-size: 0;
+    padding: 0;
+  }
+
+  .sc-protocol__media {
+    position: relative;
+    inset: auto;
+    inline-size: auto;
+    z-index: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .sc-protocol__plate::before { content: none; }
+  .sc-protocol__face { --protocol-face-x: 50%; } /* кадр зверху — обличчя по центру */
+
+  .sc-protocol__copy {
+    max-inline-size: none;
+    padding: var(--page-margin-x);
+  }
+
+  .sc-protocol__cta { margin-block-start: var(--stack-gap-sm); }
+}
+
+/* ---------- Телефон: кадр зверху, текст під ним ---------- */
+@media (max-width: 640px) {
+  .sc-protocol__plate {
+    flex-direction: column;
+    align-items: stretch;
+    min-block-size: 0;
+    padding: 0;
+  }
+
+  .sc-protocol__media {
+    position: relative;
+    inset: auto;
+    inline-size: auto;
+    z-index: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .sc-protocol__plate::before { content: none; }
+  .sc-protocol__face { --protocol-face-x: 50%; } /* кадр зверху — обличчя по центру */
+
+  .sc-protocol__copy {
+    max-inline-size: none;
+    padding: var(--page-margin-x);
+  }
+
+  /* кнопка з абзацом відсунута від ліду на --section-gap (32 на телефоні), 2026-11-11 */
+  .sc-protocol__cta {
+    max-inline-size: none;
+    margin-block-start: var(--section-gap);
+  }
+
+  /* абзац під кнопкою на телефоні прихований (2026-11-11): лід уже несе суть */
+  .sc-protocol__text { display: none; }
+
+  /* ореол вертикальний: найсвітліше за обличчям угорі, донизу — тло плити */
+  .sc-protocol__glow {
+    background: linear-gradient(to bottom, var(--protocol-glow-color), transparent 70%);
+  }
+}
