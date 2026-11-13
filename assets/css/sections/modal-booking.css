@@ -332,8 +332,10 @@ body.sc-has-modal {
   .sc-modal { padding: 0; place-items: stretch; }
 
   .sc-modal__dialog {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    /* Обычный поток, не сетка: в сетке с ограниченной высотой ряд фото
+       (overflow: hidden, высота от aspect-ratio) схлопывался в 0, форма
+       начиналась с верха диалога и в Safari ложилась текстом на снимок. */
+    display: block;
     inline-size: 100%;
     max-block-size: 100vh;
     max-block-size: 100dvh;
