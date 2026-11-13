@@ -340,9 +340,22 @@ body.sc-has-modal {
     overflow-y: auto;
   }
 
-  .sc-modal__photo { block-size: auto; min-block-size: 0; aspect-ratio: 16 / 9; }
+  /* Фото липнет к верху диалога, панель с фоном при прокрутке наползает
+     на него. Без собственного фона панели текст шапки ехал поверх снимка. */
+  .sc-modal__photo {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 0;
+    block-size: auto;
+    min-block-size: 0;
+    aspect-ratio: 16 / 9;
+  }
 
-  .sc-modal__panel { padding: var(--card-padding); }
+  .sc-modal__panel {
+    z-index: 1;
+    padding: var(--card-padding);
+    background: var(--background);
+  }
 }
 
 /* ---------- Передреєстрація: надсилання → success (2026-10-14) ----------
