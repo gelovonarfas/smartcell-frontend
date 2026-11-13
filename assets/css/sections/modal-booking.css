@@ -543,6 +543,11 @@ a.sc-modal__submit {
   .sc-modal__stars-row .sc-modal__star:hover,
   .sc-modal__stars-row .sc-modal__star:has(~ .sc-modal__star:hover) { color: var(--foreground); }
 }
+/* Телефон (2026-11-12): зірки крупніші — 19px заголовка h3 замало під палець */
+@media (max-width: 640px) {
+  .sc-modal__stars-row { gap: var(--sc-space-2); }
+  .sc-modal__star { font-size: var(--h1-size); }
+}
 .sc-modal__star-input:focus-visible + .sc-modal__star {
   outline: var(--sc-focus-w) solid var(--ring);
   outline-offset: var(--sc-focus-offset);
