@@ -9,7 +9,10 @@ for line in open(D + '/tr.txt', encoding='utf-8'):
 M = {'uk': pymorphy3.MorphAnalyzer(lang='uk'), 'ru': pymorphy3.MorphAnalyzer(lang='ru')}
 CASES = ['nomn', 'gent', 'datv', 'accs', 'ablt', 'loct']
 GENERIC = {'Сон', 'Стрес', 'Травма', 'Опік', 'Показання', 'Харчування', 'Результат лікування',
-           'Очікуваний результат', 'Ефективність лікування', 'Безпека лікування', 'Медицина майбутнього', 'Шкіра'}
+           'Очікуваний результат', 'Ефективність лікування', 'Безпека лікування', 'Медицина майбутнього', 'Шкіра',
+           'Омолодження', 'Довголіття', 'Longevity', 'Зморшки', 'Регенерація', 'Реабілітація', 'Протипоказання'}
+# направления и услуги клиники: в статьях ссылка должна вести на страницу услуги (SEO), не в абетку
+SERVICE = {'Пластична хірургія', 'Естетична медицина', 'Неофіброліфтинг®', 'Банк клітин'}
 
 def variants(term):
     """Основной вариант + синонимы из скобок."""
@@ -184,11 +187,12 @@ for n, letter, uk, med, simple in terms:
     fu, fr, fe = dedup(fu), dedup(fr), dedup(fe)
     if len(uk.split()) > 1 and not any('не знає' in x for x in notes):
         pass
+    if uk in SERVICE: notes.add('послуга клініки: в статтях посилання на сторінку послуги, не на абетку')
     for lang, fs in (('uk', fu), ('ru', fr), ('en', fe)):
         for f in fs: owner[(lang, f.lower())].add(n)
     rows.append(dict(id=n, anchor=slug(uk), letter=letter, term_uk=variants(uk)[0], term_ru=variants(ru)[0], term_en=variants(en)[0],
                      title_uk=uk, definition_uk=med, simple_uk=simple,
-                     autolink='0' if uk in GENERIC else '1',
+                     autolink='0' if uk in GENERIC | SERVICE else '1',
                      forms_uk=' | '.join(fu), forms_ru=' | '.join(fr), forms_en=' | '.join(fe), notes=notes))
 # одинаковые формы у разных терминов
 for (lang, f), ns in owner.items():
