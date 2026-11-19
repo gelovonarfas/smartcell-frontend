@@ -9,7 +9,7 @@ for line in open(D + '/tr.txt', encoding='utf-8'):
 M = {'uk': pymorphy3.MorphAnalyzer(lang='uk'), 'ru': pymorphy3.MorphAnalyzer(lang='ru')}
 CASES = ['nomn', 'gent', 'datv', 'accs', 'ablt', 'loct']
 GENERIC = {'Сон', 'Стрес', 'Травма', 'Опік', 'Показання', 'Харчування', 'Результат лікування',
-           'Очікуваний результат', 'Ефективність лікування', 'Безпека лікування', 'Медицина майбутнього'}
+           'Очікуваний результат', 'Ефективність лікування', 'Безпека лікування', 'Медицина майбутнього', 'Шкіра'}
 
 def variants(term):
     """Основной вариант + синонимы из скобок."""
@@ -52,6 +52,9 @@ OVR = {
  ('ru','нутриенты'): 'нутриенты|нутриентов|нутриентам|нутриентами|нутриентах|нутриент|нутриента|нутриентом',
  ('ru','цитокины'): 'цитокины|цитокинов|цитокинам|цитокинами|цитокинах|цитокин|цитокина|цитокином',
  ('ru','криообразец'): 'криообразец|криообразца|криообразцу|криообразцом|криообразце|криообразцы|криообразцов|криообразцам|криообразцами|криообразцах',
+ ('uk','вільні радикали'): 'вільні радикали|вільних радикалів|вільним радикалам|вільними радикалами|вільних радикалах|вільний радикал|вільного радикала|вільним радикалом',
+ ('uk','зморшки'): 'зморшки|зморшок|зморшкам|зморшками|зморшках|зморшка|зморшку|зморшкою|зморшці',
+ ('uk','скаффолд'): 'скаффолд|скаффолда|скаффолду|скаффолдом|скаффолді|скаффолди|скаффолдів|скаффолдам|скаффолдами|скаффолдах',
  ('ru','гипоэстрогения'): 'гипоэстрогения|гипоэстрогении|гипоэстрогению|гипоэстрогенией',
  ('uk','плазма збагачена тромбоцитами'): 'плазма, збагачена тромбоцитами|плазма збагачена тромбоцитами|плазми, збагаченої тромбоцитами|плазмі, збагаченій тромбоцитами|плазму, збагачену тромбоцитами|плазмою, збагаченою тромбоцитами',
  ('ru','плазма, обогащённая тромбоцитами'): 'плазма, обогащённая тромбоцитами|плазма, обогащенная тромбоцитами|плазмы, обогащённой тромбоцитами|плазмы, обогащенной тромбоцитами|плазме, обогащённой тромбоцитами|плазму, обогащённую тромбоцитами|плазмой, обогащённой тромбоцитами',
@@ -138,17 +141,17 @@ def inflect_phrase(lang, phrase, notes):
     return list(out)
 
 def en_forms(phrase):
-    out = {phrase.lower() if not re.search(r'[A-Z]{2}', phrase) else phrase}
+    out = {phrase.lower() if not re.search(r'[A-Z]{2}', phrase) else phrase: 1}  # dict, чтобы порядок был стабильным
     m = re.match(r'^(.*?)([A-Za-z]+)$', phrase)
     if not m or re.search(r'[A-Z]{2}', phrase): return out
     pre, last = m.groups(); lw = last.lower()
     if re.search(r'(ing|ness|ism|sis|tion|ity|ics|ogy|ance|ence|ment|th|ion|age|ure|ia|um)$', lw) and not lw.endswith('ance'): return out
     if lw.endswith('s') and not re.search(r'(ss|is|us)$', lw):
         sing = lw[:-3] + 'y' if lw.endswith('ies') else (lw[:-2] if re.search(r'(ches|shes|xes)$', lw) else lw[:-1])
-        out.add((pre + sing).lower())
+        out[(pre + sing).lower()] = 1
     elif not lw.endswith('s'):
         pl = lw[:-1] + 'ies' if re.search(r'[^aeiou]y$', lw) else (lw + 'es' if re.search(r'(ch|sh|x)$', lw) else lw + 's')
-        out.add((pre + pl).lower())
+        out[(pre + pl).lower()] = 1
     return out
 
 TL = dict(zip('абвгґдезиіклмнопрстуфхцчшщ', 'a b v h g d e z y i k l m n o p r s t u f kh ts ch sh shch'.split()))
@@ -170,11 +173,12 @@ for n, letter, uk, med, simple in terms:
     ru, en = tr[n]
     notes = set()
     fu, fr, fe = [], [], []
-    for v in variants(uk):
+    nr = lambda x: x.replace('®', '').strip()  # знак ® в тексте статей обычно не пишут
+    for v in variants(nr(uk)):
         fu += inflect_phrase('uk', v, notes)
-    for v in variants(ru):
+    for v in variants(nr(ru)):
         fr += inflect_phrase('ru', v, notes)
-    for v in variants(en):
+    for v in variants(nr(en)):
         fe += list(en_forms(v))
     dedup = lambda xs: list(dict.fromkeys(xs))
     fu, fr, fe = dedup(fu), dedup(fr), dedup(fe)
