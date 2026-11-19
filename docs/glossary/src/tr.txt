@@ -1,0 +1,252 @@
+1|Адаптационный резерв|Adaptive reserve
+2|Аллогенный материал|Allogeneic material
+3|Ангиогенез|Angiogenesis
+4|Антиоксидантная защита|Antioxidant defense
+5|Апоптоз|Apoptosis
+6|Армирование нитями|Thread lifting
+7|Атрофия тканей|Tissue atrophy
+8|Аутологичная клеточная терапия|Autologous cell therapy
+9|Аутологичные биологические препараты|Autologous biologics
+10|Аутологичные стволовые клетки|Autologous stem cells
+11|Аутологичность|Autologous origin
+12|Аутотрансплантация|Autotransplantation
+13|Аутофагия|Autophagy
+14|БАДы|Dietary supplements
+15|Банк клеток|Cell bank
+16|Безопасность лечения|Treatment safety
+17|Биобанкинг|Biobanking
+18|Биоимплант|Bioimplant
+19|Биоинженерия|Bioengineering
+20|Биоинженерная конструкция|Bioengineered construct
+21|Биологическая терапия|Biological therapy
+22|Биологическое старение|Biological aging
+23|Биологический возраст|Biological age
+24|Биологический материал|Biological material
+25|Биологический ресурс|Biological resource
+26|Биомаркер|Biomarker
+27|Биоматериалы|Biomaterials
+28|Биоревитализация|Biorevitalization
+29|Биоремоделирование кожи|Skin bioremodeling
+30|Биостимуляторы|Biostimulators
+31|Биостимуляция|Biostimulation
+32|Биострахование (биологическое страхование)|Bioinsurance (biological insurance)
+33|Биосовместимость|Biocompatibility
+34|Биотехнологическая лаборатория|Biotechnology laboratory
+35|Ботулинотерапия|Botulinum therapy
+36|Истощение регенеративного ресурса|Regenerative reserve depletion
+37|Восстановление клеточной коммуникации|Restoration of cell communication
+38|Восстановление структуры ткани|Restoration of tissue structure
+39|Восстановление тканевого ресурса|Tissue reserve restoration
+40|Восстановление качества жизни|Quality of life restoration
+41|Восстановительный ресурс ткани|Tissue repair capacity
+42|Восстановительная медицина|Restorative medicine
+43|Ответ на стимуляцию|Response to stimulation
+44|Процент сенесцентных клеток|Percentage of senescent cells
+45|Возрастные изменения кожи|Age-related skin changes
+46|Волюметрическая коррекция|Volumetric correction
+47|Генетическая стабильность клеток|Cell genetic stability
+48|Геропротекторы|Geroprotectors
+49|Геропротекция|Geroprotection
+50|Гидратация кожи|Skin hydration
+51|Гипоэстрогения|Hypoestrogenism
+52|Гипоксия|Hypoxia
+53|Гормональный баланс|Hormonal balance
+54|Дерматопороз|Dermatoporosis
+55|Детоксикация|Detoxification
+56|Дефект ткани|Tissue defect
+57|Дефицитные состояния|Deficiency states
+58|Дифференцировка|Differentiation
+59|Дифференцировочный потенциал|Differentiation potential
+60|Долголетие|Longevity
+61|Доза клеток|Cell dose
+62|Доказательная медицина|Evidence-based medicine
+63|Донорские стволовые клетки|Donor stem cells
+64|Экзосомы|Exosomes
+65|Эластин|Elastin
+66|Эластичность кожи|Skin elasticity
+67|Энергетические методы|Energy-based methods
+68|Эпигенетика|Epigenetics
+69|Эстетическая медицина|Aesthetic medicine
+70|Эффективность лечения|Treatment efficacy
+71|Заживление раны|Wound healing
+72|Хранение жировой ткани|Adipose tissue storage
+73|Здоровое долголетие|Healthy longevity
+74|Здоровое старение|Healthy aging
+75|Идентификация биологического материала|Biological material identification
+76|Идентичность клеток|Cell identity
+77|Иммунное старение|Immune aging
+78|Иммуносенесценция|Immunosenescence
+79|Индивидуальный план лечения|Individual treatment plan
+80|Инсулинорезистентность|Insulin resistance
+81|Инфекционная безопасность|Infection safety
+82|Информированное согласие|Informed consent
+83|Костная регенерация|Bone regeneration
+84|Клинический протокол|Clinical protocol
+85|Клеточная адаптация|Cellular adaptation
+86|Клеточная безопасность|Cellular safety
+87|Клеточное взаимодействие|Cell interaction
+88|Клеточный ответ|Cellular response
+89|Клеточная дозозависимость|Cell dose dependence
+90|Клеточная заместительная терапия|Cell replacement therapy
+91|Клеточная инженерия|Cell engineering
+92|Клеточная коммуникация|Cell communication
+93|Клеточная концентрация|Cell concentration
+94|Клеточная медицина|Cellular medicine
+95|Клеточная миграция|Cell migration
+96|Клеточная ниша|Cell niche
+97|Клеточная память|Cellular memory
+98|Клеточная пластичность|Cell plasticity
+99|Клеточная регенерация|Cellular regeneration
+100|Клеточная терапия|Cell therapy
+101|Клеточная трансплантация|Cellular transplantation
+102|Клеточное истощение|Cellular exhaustion
+103|Клеточное долголетие|Cellular longevity
+104|Клеточное замещение|Cell replacement
+105|Клеточное обновление|Cell renewal
+106|Клеточное пополнение|Cell replenishment
+107|Клеточный возраст|Cellular age
+108|Клеточный дефицит ткани|Tissue cell deficiency
+109|Клеточный метаболизм (метаболизм клетки)|Cellular metabolism (cell metabolism)
+110|Клеточный паспорт|Cell passport
+111|Клеточный препарат|Cell-based product
+112|Клеточный стресс|Cellular stress
+113|Клеточный цикл|Cell cycle
+114|Коллаген|Collagen
+115|Комплексный чекап|Comprehensive check-up
+116|Контрактура|Contracture
+117|Контроль биотехнологического процесса|Bioprocess control
+118|Контроль качества клеток|Cell quality control
+119|Контурная пластика|Contouring
+120|Кортизол|Cortisol
+121|Криобанк|Cryobank
+122|Криобиология|Cryobiology
+123|Криогенное хранение|Cryogenic storage
+124|Криохранение|Cryostorage
+125|Криообразец|Cryosample
+126|Криоконсервация тканей|Tissue cryopreservation
+127|Криолизат тромбоцитов|Platelet cryolysate
+128|Лабораторный контроль качества|Laboratory quality control
+129|Лицензированная биотехнологическая лаборатория|Licensed biotechnology laboratory
+130|Медицина будущего|Medicine of the future
+131|Медицинские показания|Medical indications
+132|Меланоцитарно-кератиноцитарная суспензия|Melanocyte-keratinocyte suspension
+133|Менопауза|Menopause
+134|Метаболическая гибкость|Metabolic flexibility
+135|Метаболическое здоровье|Metabolic health
+136|Микробиологический контроль|Microbiological control
+137|Микробиота|Microbiota
+138|Микронидлинг|Microneedling
+139|Микроциркуляция|Microcirculation
+140|Митохондриальная дисфункция|Mitochondrial dysfunction
+141|Митохондрии|Mitochondria
+142|Мышечная масса|Muscle mass
+143|Неоваскуляризация|Neovascularization
+144|Неоколлагенез|Neocollagenesis
+145|Ниша стволовой клетки (стволовая ниша)|Stem cell niche
+146|Нутрицевтики|Nutraceuticals
+147|Нутриенты|Nutrients
+148|Окислительный (оксидативный) стресс|Oxidative stress
+149|Омоложение|Rejuvenation
+150|Ожог|Burn
+151|Оценка регенеративного потенциала|Regenerative potential assessment
+152|Ожидаемый результат|Expected outcome
+153|Паракринное действие|Paracrine effect
+154|Персонализированная медицина|Personalized medicine
+155|Персонализированная регенеративная медицина|Personalized regenerative medicine
+156|Персональный биологический ресурс|Personal biological resource
+157|Послеоперационное восстановление|Postoperative recovery
+158|Пластическая хирургия|Plastic surgery
+159|Удвоение популяции клеток|Cell population doubling
+160|Внеклеточные везикулы|Extracellular vesicles
+161|Показания|Indications
+162|Превентивная диагностика|Preventive diagnostics
+163|Приживление клеток|Cell engraftment
+164|Прогениторные клетки|Progenitor cells
+165|Программируемое замораживание|Controlled-rate freezing
+166|Пролиферативный потенциал|Proliferative potential
+167|Пролиферация|Proliferation
+168|Противопоказания|Contraindications
+169|Профилактика старения|Aging prevention
+170|Профилактическая медицина|Preventive medicine
+171|Упругость кожи|Skin firmness
+172|Раневая поверхность|Wound surface
+173|Реабилитационный потенциал|Rehabilitation potential
+174|Реабилитация|Rehabilitation
+175|Регенеративный ответ|Regenerative response
+176|Регенеративная эстетическая медицина|Regenerative aesthetic medicine
+177|Регенеративная медицина|Regenerative medicine
+178|Регенеративная реабилитация|Regenerative rehabilitation
+179|Регенеративная способность|Regenerative capacity
+180|Регенеративная стратегия|Regenerative strategy
+181|Регенеративное лечение|Regenerative treatment
+182|Регенеративное микроокружение|Regenerative microenvironment
+183|Регенеративный дефицит|Regenerative deficit
+184|Регенеративный потенциал|Regenerative potential
+185|Регенеративный профиль|Regenerative profile
+186|Регенеративный резерв|Regenerative reserve
+187|Регенеративный сигнал|Regenerative signal
+188|Регенерация|Regeneration
+189|Регенерация кожи после ожогов|Skin regeneration after burns
+190|Редермализация|Redermalization
+191|Резерв органа|Organ reserve
+192|Результат лечения|Treatment outcome
+193|Реконструктивная хирургия|Reconstructive surgery
+194|Реконструкция тканей|Tissue reconstruction
+195|Репарация|Tissue repair
+196|Репликативное старение|Replicative senescence
+197|Ресурс клеток|Cell resource
+198|Жидкий азот|Liquid nitrogen
+199|Рубец|Scar
+200|Рубцевание|Scarring
+201|Саркопения|Sarcopenia
+202|Секретом|Secretome
+203|Сенолитики|Senolytics
+204|Сенотерапия|Senotherapy
+205|Сертифицированный биотехнологический процесс|Certified bioprocess
+206|Сигнальные молекулы|Signaling molecules
+207|Системное воспаление|Systemic inflammation
+208|Сон|Sleep
+209|Стандартизация биотехнологического процесса|Bioprocess standardization
+210|Стерильность клеточного продукта|Cell product sterility
+211|Стимуляция тканей|Tissue stimulation
+212|Стволовые клетки|Stem cells
+213|Стресс|Stress
+214|Теломераза|Telomerase
+215|Теломеры|Telomeres
+216|Терапевтическая доза клеток|Therapeutic cell dose
+217|Тканевая инженерия|Tissue engineering
+218|Тканевая регенерация|Tissue regeneration
+219|Тканевый гомеостаз|Tissue homeostasis
+220|Тканевый эквивалент|Tissue equivalent
+221|Тканевый ресурс|Tissue resource
+222|Травма|Injury
+223|Трансплантация клеток|Cell transplantation
+224|Трофика тканей|Tissue trophism
+225|Трофические факторы|Trophic factors
+226|Факторы роста|Growth factors
+227|Фибробласты|Fibroblasts
+228|Филлеры|Fillers
+229|Фотостарение|Photoaging
+230|Фракционный лазер|Fractional laser
+231|Функциональный возраст|Functional age
+232|Функциональный резерв|Functional reserve
+233|Функциональные тесты клеток|Functional cell tests
+234|Питание|Nutrition
+235|Хоуминг клеток|Cell homing
+236|Хроническая рана|Chronic wound
+237|Хроническое воспаление|Chronic inflammation
+238|Хроническое низкоинтенсивное воспаление|Chronic low-grade inflammation
+239|Хронический стресс|Chronic stress
+240|Циркадные ритмы|Circadian rhythms
+241|Цитокины|Cytokines
+242|Чистота клеточной культуры|Cell culture purity
+243|Плотность кожи|Skin density
+244|Качество ткани|Tissue quality
+245|Качество кожи|Skin quality
+246|Cellness|Cellness
+247|Healthspan|Healthspan
+248|HIFU|HIFU
+249|Inflammaging|Inflammaging
+250|Longevity|Longevity
+251|PRP (Platelet-Rich Plasma, плазма, обогащённая тромбоцитами)|PRP (platelet-rich plasma)
+252|RF-терапия|RF therapy
