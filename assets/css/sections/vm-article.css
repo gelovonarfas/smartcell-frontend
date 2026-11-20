@@ -240,6 +240,15 @@
   .vm-article__byline-item:nth-child(3)::before { content: none; }
 }
 
+/* «змін. 12.11.2026» (як у блозі virtus.ua) — всередині пункту дати, тому мобільний порядок
+   пунктів (nth-child нижче) не зсувається. Точка — як між пунктами (2026-11-19) */
+.vm-article__byline-updated { white-space: nowrap; }
+
+.vm-article__byline-updated::before {
+  content: "·";
+  margin-inline-end: var(--sc-space-1_5);
+}
+
 .vm-article__byline-icon {
   display: block;
   flex: none;
