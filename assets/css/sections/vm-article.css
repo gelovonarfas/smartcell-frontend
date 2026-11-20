@@ -1359,6 +1359,18 @@
 
 /* ---------- Рейтинг и источники ---------- */
 
+/* Теги в кінці статті (2026-11-19): «Теги: #…, #…» — посилання мають вигляд
+   посилань прози (правило `.vm-article__main > p a` вище), підпис приглушений */
+.vm-article__tags {
+  margin: var(--vm-a-block-gap-sm) 0 0;
+  max-inline-size: var(--sc-measure);
+}
+
+.vm-article__tags-label { color: var(--neutral-600); }
+
+/* тег не рветься між рядками */
+.vm-article__tags a { white-space: nowrap; }
+
 .vm-article__rating {
   display: flex;
   align-items: center;
