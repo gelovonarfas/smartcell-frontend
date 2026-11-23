@@ -270,3 +270,12 @@ function sc_abetka_index( $lang ) {
 function sc_abetka_cmp_len( $a, $b ) {
 	return count( $b[0] ) - count( $a[0] );
 }
+
+/* Список терминов в админке по умолчанию — в порядке таблицы клиники (menu_order = id), а не по дате */
+add_action( 'pre_get_posts', 'sc_abetka_admin_order' );
+function sc_abetka_admin_order( $q ) {
+	if ( is_admin() && $q->is_main_query() && 'sc_term' === $q->get( 'post_type' ) && ! $q->get( 'orderby' ) ) {
+		$q->set( 'orderby', 'menu_order title' );
+		$q->set( 'order', 'ASC' );
+	}
+}
