@@ -1,0 +1,126 @@
+<?php
+/**
+ * [sc_abetka] — тело страницы «Клітинна абетка» из карточек терминов.
+ *
+ * Разметка та же, что в ките (vm-glossary.html): обычный текст статьи без классов —
+ *   <h2 id="letter-a">А</h2>
+ *   <h3 id="якір">Термін</h3>
+ *   <p><strong>Визначення:</strong> …</p>
+ *   <p><strong>Простими словами:</strong> …</p>
+ * H2 с id нужны оглавлению-«чипсам» (toc_view), H3 с id — ссылкам из статей.
+ *
+ * Если оглавление темы строится по сырому post_content (и шорткод ему не виден),
+ * готовый HTML можно взять на странице настроек и вставить в редактор как есть.
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+add_shortcode( 'sc_abetka', 'sc_abetka_shortcode' );
+function sc_abetka_shortcode() {
+	return sc_abetka_page_html();
+}
+
+function sc_abetka_page_html() {
+	$posts = get_posts(
+		array(
+			'post_type'        => 'sc_term',
+			'post_status'      => 'publish',
+			'numberposts'      => -1,
+			'suppress_filters' => true,
+		)
+	);
+	$groups = array();
+	foreach ( $posts as $p ) {
+		$anchor = get_post_meta( $p->ID, '_sc_anchor', true );
+		$letter = trim( get_post_meta( $p->ID, '_sc_letter', true ) );
+		if ( ! $anchor ) {
+			continue;
+		}
+		if ( '' === $letter ) {
+			$letter = mb_strtoupper( mb_substr( $p->post_title, 0, 1, 'UTF-8' ), 'UTF-8' );
+		}
+		$groups[ $letter ][] = array(
+			'key'    => sc_abetka_sort_key( $p->post_title ),
+			'title'  => $p->post_title,
+			'anchor' => $anchor,
+			'def'    => get_post_meta( $p->ID, '_sc_definition_uk', true ),
+			'simple' => get_post_meta( $p->ID, '_sc_simple_uk', true ),
+		);
+	}
+	uksort( $groups, 'sc_abetka_cmp_letters' );
+
+	$html = '';
+	foreach ( $groups as $letter => $items ) {
+		usort( $items, 'sc_abetka_cmp_key' );
+		$html .= '<h2 id="' . esc_attr( sc_abetka_letter_id( $letter ) ) . '">' . esc_html( $letter ) . "</h2>\n";
+		foreach ( $items as $t ) {
+			$html .= '<h3 id="' . esc_attr( $t['anchor'] ) . '">' . esc_html( $t['title'] ) . "</h3>\n";
+			if ( $t['def'] ) {
+				$html .= '<p><strong>Визначення:</strong> ' . esc_html( $t['def'] ) . "</p>\n";
+			}
+			if ( $t['simple'] ) {
+				$html .= '<p><strong>Простими словами:</strong> ' . esc_html( $t['simple'] ) . "</p>\n";
+			}
+		}
+		$html .= "\n";
+	}
+	return $html;
+}
+
+/* ---------- Сортировка по украинскому алфавиту (без расширения intl) ---------- */
+
+function sc_abetka_alphabet() {
+	return 'абвгґдеєжзиіїйклмнопрстуфхцчшщьюя';
+}
+
+/** Строка → ключ сортировки: буква заменяется двузначным номером в алфавите. */
+function sc_abetka_sort_key( $s ) {
+	$abc = sc_abetka_alphabet();
+	$s   = mb_strtolower( $s, 'UTF-8' );
+	$key = '';
+	$len = mb_strlen( $s, 'UTF-8' );
+	for ( $i = 0; $i < $len; $i++ ) {
+		$ch  = mb_substr( $s, $i, 1, 'UTF-8' );
+		$pos = mb_strpos( $abc, $ch, 0, 'UTF-8' );
+		if ( false !== $pos ) {
+			$key .= sprintf( '~%02d', $pos ); // кириллица — после латиницы и цифр
+		} elseif ( preg_match( '~[a-z0-9 ]~', $ch ) ) {
+			$key .= $ch;
+		}
+	}
+	return $key;
+}
+
+function sc_abetka_cmp_key( $a, $b ) {
+	return strcmp( $a['key'], $b['key'] );
+}
+
+/** Разделы: буквы по алфавиту, всё остальное («Англійські терміни») — в конце. */
+function sc_abetka_cmp_letters( $a, $b ) {
+	$abc = sc_abetka_alphabet();
+	$pa  = 1 === mb_strlen( $a, 'UTF-8' ) ? mb_strpos( $abc, mb_strtolower( $a, 'UTF-8' ), 0, 'UTF-8' ) : false;
+	$pb  = 1 === mb_strlen( $b, 'UTF-8' ) ? mb_strpos( $abc, mb_strtolower( $b, 'UTF-8' ), 0, 'UTF-8' ) : false;
+	$pa  = false === $pa ? 100 : $pa;
+	$pb  = false === $pb ? 100 : $pb;
+	return $pa === $pb ? strcmp( $a, $b ) : $pa - $pb;
+}
+
+/** id раздела, как в ките: letter-a, letter-b, letter-v, letter-h, letter-zh … */
+function sc_abetka_letter_id( $letter ) {
+	$map = array(
+		'а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'h', 'ґ' => 'g', 'д' => 'd', 'е' => 'e', 'є' => 'ye',
+		'ж' => 'zh', 'з' => 'z', 'и' => 'y', 'і' => 'i', 'ї' => 'yi', 'й' => 'j', 'к' => 'k', 'л' => 'l',
+		'м' => 'm', 'н' => 'n', 'о' => 'o', 'п' => 'p', 'р' => 'r', 'с' => 's', 'т' => 't', 'у' => 'u',
+		'ф' => 'f', 'х' => 'kh', 'ц' => 'ts', 'ч' => 'ch', 'ш' => 'sh', 'щ' => 'shch', 'ю' => 'yu', 'я' => 'ya',
+	);
+	$l = mb_strtolower( $letter, 'UTF-8' );
+	if ( isset( $map[ $l ] ) ) {
+		return 'letter-' . $map[ $l ];
+	}
+	if ( preg_match( '~^[a-z0-9]$~', $l ) ) {
+		return 'letter-' . $l;
+	}
+	return 'letter-en'; // «Англійські терміни»
+}
