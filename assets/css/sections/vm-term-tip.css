@@ -62,14 +62,15 @@
 /* «Клітинній абетці» — посилання на картку терміна (той самий href, що в терміна).
    tabindex="-1": з клавіатури перехід уже дає сам термін, а підказка живе в кінці body */
 .sc-term-tip__more a {
-  color: var(--foreground);
+  color: inherit;
   text-decoration: underline;
   text-decoration-thickness: var(--hairline);
   text-underline-offset: 0.2em;
   white-space: nowrap;
 }
 
-.sc-term-tip__more a:hover { color: var(--primary); }
+/* без кольору: при наведенні лише товщає підкреслення */
+.sc-term-tip__more a:hover { color: inherit; text-decoration-thickness: 1px; }
 .sc-term-tip__more a:active { opacity: 0.7; }
 
 @media (prefers-reduced-motion: reduce) {
