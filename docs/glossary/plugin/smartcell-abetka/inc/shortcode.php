@@ -22,7 +22,8 @@ function sc_abetka_shortcode() {
 	return sc_abetka_page_html();
 }
 
-function sc_abetka_page_html() {
+/** Термины, сгруппированные по разделам (буквам) и отсортированные по украинскому алфавиту. */
+function sc_abetka_groups() {
 	$posts = get_posts(
 		array(
 			'post_type'        => 'sc_term',
@@ -50,10 +51,16 @@ function sc_abetka_page_html() {
 		);
 	}
 	uksort( $groups, 'sc_abetka_cmp_letters' );
-
-	$html = '';
-	foreach ( $groups as $letter => $items ) {
+	foreach ( $groups as &$items ) {
 		usort( $items, 'sc_abetka_cmp_key' );
+	}
+	unset( $items );
+	return $groups;
+}
+
+function sc_abetka_page_html() {
+	$html = '';
+	foreach ( sc_abetka_groups() as $letter => $items ) {
 		$html .= '<h2 id="' . esc_attr( sc_abetka_letter_id( $letter ) ) . '">' . esc_html( $letter ) . "</h2>\n";
 		foreach ( $items as $t ) {
 			$html .= '<h3 id="' . esc_attr( $t['anchor'] ) . '">' . esc_html( $t['title'] ) . "</h3>\n";
@@ -65,6 +72,39 @@ function sc_abetka_page_html() {
 			}
 		}
 		$html .= "\n";
+	}
+	return $html;
+}
+
+/* ---------- Оглавление-«чипсы» для сайдбара ---------- */
+
+/**
+ * Пункты оглавления страницы абетки: array( array( 'id' => 'letter-a', 'label' => 'А' ), … ).
+ * Тема строит оглавление по H2 из post_content, а на странице абетки там только шорткод,
+ * поэтому пункты берутся отсюда. Раздел английских терминов в квадрат чипса не влезает —
+ * подпись «A–Z», как в ките (vm-glossary.html).
+ */
+function sc_abetka_toc_items() {
+	$items = array();
+	foreach ( array_keys( sc_abetka_groups() ) as $letter ) {
+		$letter  = (string) $letter;
+		$items[] = array(
+			'id'    => sc_abetka_letter_id( $letter ),
+			'label' => 1 === mb_strlen( $letter, 'UTF-8' ) ? $letter : 'A–Z',
+		);
+	}
+	return apply_filters( 'sc_abetka_toc_items', $items );
+}
+
+/**
+ * Готовые <li> для <ol class="vm-article__toc-list"> — разметка как в ките:
+ *   <li><a class="sc-t-small" href="#letter-a">А</a></li>
+ */
+function sc_abetka_toc_html() {
+	$html = '';
+	foreach ( sc_abetka_toc_items() as $it ) {
+		$lang  = 'A–Z' === $it['label'] ? ' lang="en"' : '';
+		$html .= '<li><a class="sc-t-small" href="#' . esc_attr( $it['id'] ) . '"' . $lang . '>' . esc_html( $it['label'] ) . "</a></li>\n";
 	}
 	return $html;
 }
