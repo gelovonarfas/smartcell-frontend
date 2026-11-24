@@ -61,7 +61,9 @@ function sc_abetka_groups() {
 function sc_abetka_page_html() {
 	$html = '';
 	foreach ( sc_abetka_groups() as $letter => $items ) {
-		$html .= '<h2 id="' . esc_attr( sc_abetka_letter_id( $letter ) ) . '">' . esc_html( $letter ) . "</h2>\n";
+		$label = sc_abetka_letter_label( $letter );
+		$lang  = 'A–Z' === $label ? ' lang="en"' : '';
+		$html .= '<h2 id="' . esc_attr( sc_abetka_letter_id( $letter ) ) . '"' . $lang . '>' . esc_html( $label ) . "</h2>\n";
 		foreach ( $items as $t ) {
 			$html .= '<h3 id="' . esc_attr( $t['anchor'] ) . '">' . esc_html( $t['title'] ) . "</h3>\n";
 			if ( $t['def'] ) {
@@ -81,19 +83,23 @@ function sc_abetka_page_html() {
 /**
  * Пункты оглавления страницы абетки: array( array( 'id' => 'letter-a', 'label' => 'А' ), … ).
  * Тема строит оглавление по H2 из post_content, а на странице абетки там только шорткод,
- * поэтому пункты берутся отсюда. Раздел английских терминов в квадрат чипса не влезает —
- * подпись «A–Z», как в ките (vm-glossary.html).
+ * поэтому пункты берутся отсюда.
  */
 function sc_abetka_toc_items() {
 	$items = array();
 	foreach ( array_keys( sc_abetka_groups() ) as $letter ) {
-		$letter  = (string) $letter;
 		$items[] = array(
 			'id'    => sc_abetka_letter_id( $letter ),
-			'label' => 1 === mb_strlen( $letter, 'UTF-8' ) ? $letter : 'A–Z',
+			'label' => sc_abetka_letter_label( $letter ),
 		);
 	}
 	return apply_filters( 'sc_abetka_toc_items', $items );
+}
+
+/** Подпись раздела: буква как есть; раздел английских терминов — «A–Z», как в ките (vm-glossary.html). */
+function sc_abetka_letter_label( $letter ) {
+	$letter = (string) $letter;
+	return 1 === mb_strlen( $letter, 'UTF-8' ) ? $letter : 'A–Z';
 }
 
 /**
@@ -162,5 +168,5 @@ function sc_abetka_letter_id( $letter ) {
 	if ( preg_match( '~^[a-z0-9]$~', $l ) ) {
 		return 'letter-' . $l;
 	}
-	return 'letter-en'; // «Англійські терміни»
+	return 'letter-latin'; // раздел английских терминов, как в ките: <h2 id="letter-latin" lang="en">A–Z</h2>
 }
