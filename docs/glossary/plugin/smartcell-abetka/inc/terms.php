@@ -16,14 +16,10 @@ function sc_abetka_fields() {
 	return array(
 		'_sc_anchor'        => array( 'HTML-якір', 'text', 'Латиницею, без пробілів. Після запуску не змінювати: зламаються посилання зі статей.' ),
 		'_sc_letter'        => array( 'Літера (розділ абетки)', 'text', '' ),
-		'_sc_term_uk'       => array( 'Назва без дужок — UA', 'text', 'Показується в заголовку підказки.' ),
-		'_sc_term_ru'       => array( 'Назва без дужок — RU', 'text', '' ),
-		'_sc_term_en'       => array( 'Назва без дужок — EN', 'text', '' ),
-		'_sc_definition_uk' => array( 'Визначення', 'textarea', '' ),
-		'_sc_simple_uk'     => array( 'Простими словами', 'textarea', 'Цей текст іде в підказку; якщо порожньо — береться визначення.' ),
-		'_sc_forms_uk'      => array( 'Форми слова — UA', 'forms', 'По одній у рядку: відмінки, множина, синоніми. За ними термін шукається в тексті.' ),
-		'_sc_forms_ru'      => array( 'Форми слова — RU', 'forms', '' ),
-		'_sc_forms_en'      => array( 'Форми слова — EN', 'forms', '' ),
+		'_sc_term'          => array( 'Назва без дужок', 'text', 'Показується в заголовку підказки.' ),
+		'_sc_definition'    => array( 'Визначення', 'textarea', '' ),
+		'_sc_simple'        => array( 'Простими словами', 'textarea', 'Цей текст іде в підказку; якщо порожньо, береться визначення. Немає тексту мовою сторінки — підказка не показується.' ),
+		'_sc_forms'         => array( 'Форми слова', 'forms', 'По одній у рядку: відмінки, множина, синоніми. За ними термін шукається в тексті. Для кожної мови свої: перемикайте вкладки мов.' ),
 		'_sc_service_url'   => array( 'Посилання на сторінку послуги', 'url', 'Якщо заповнено — у статтях термін веде сюди, а не в абетку, і без підказки (для напрямів і послуг клініки).' ),
 	);
 }
@@ -76,13 +72,12 @@ function sc_abetka_term_metabox_html( $post ) {
 	echo '<span class="description">Зніміть для частотних і побутових слів: термін лишається в абетці, але в текстах не підсвічується.</span></p>';
 	echo '<table class="form-table" role="presentation"><tbody>';
 	foreach ( sc_abetka_fields() as $key => $f ) {
-		$val = get_post_meta( $post->ID, $key, true );
+		$val = in_array( $key, sc_abetka_ml_keys(), true ) ? sc_abetka_admin_value( $post->ID, $key ) : get_post_meta( $post->ID, $key, true );
 		echo '<tr><th scope="row"><label for="' . esc_attr( $key ) . '">' . esc_html( $f[0] ) . '</label></th><td>';
 		if ( 'textarea' === $f[1] ) {
 			echo '<textarea class="large-text" rows="3" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '">' . esc_textarea( $val ) . '</textarea>';
 		} elseif ( 'forms' === $f[1] ) {
-			$lines = implode( "\n", sc_abetka_split_forms( $val ) );
-			echo '<textarea class="large-text" rows="5" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '">' . esc_textarea( $lines ) . '</textarea>';
+			echo '<textarea class="large-text" rows="5" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '">' . esc_textarea( $val ) . '</textarea>';
 		} else {
 			echo '<input class="large-text" type="' . ( 'url' === $f[1] ? 'url' : 'text' ) . '" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" value="' . esc_attr( $val ) . '">';
 		}
@@ -111,7 +106,9 @@ function sc_abetka_term_save( $post_id, $post ) {
 		if ( 'textarea' === $f[1] ) {
 			$val = sanitize_textarea_field( $raw );
 		} elseif ( 'forms' === $f[1] ) {
-			$val = implode( ' | ', sc_abetka_split_forms( sanitize_textarea_field( $raw ) ) );
+			$val = sc_abetka_forms_store( sanitize_textarea_field( $raw ) );
+		} elseif ( '_sc_term' === $key ) {
+			$val = trim( sanitize_textarea_field( $raw ) ); // метки языков qTranslate сохраняются
 		} elseif ( 'url' === $f[1] ) {
 			$val = esc_url_raw( trim( $raw ) );
 		} else {
@@ -120,9 +117,41 @@ function sc_abetka_term_save( $post_id, $post ) {
 		if ( '_sc_anchor' === $key ) {
 			$val = sanitize_title( $val );
 		}
-		update_post_meta( $post_id, $key, $val );
+		update_post_meta( $post_id, $key, wp_slash( $val ) );
 	}
 	update_post_meta( $post_id, '_sc_autolink', isset( $_POST['_sc_autolink'] ) ? '1' : '0' );
+	// поля версий до 1.2.0 теперь в общих полях с языками — старые убираем
+	foreach ( array( 'term', 'definition', 'simple', 'forms' ) as $name ) {
+		foreach ( array( 'uk', 'ru', 'en' ) as $l ) {
+			delete_post_meta( $post_id, '_sc_' . $name . '_' . $l );
+		}
+	}
+}
+
+/**
+ * Значение переводимого поля для редактора: как в базе, с метками языков (их разберёт qTranslate
+ * по вкладкам); у карточек до 1.2.0 — собранное из старых полей; формы — по одной в строке.
+ */
+function sc_abetka_admin_value( $post_id, $key ) {
+	$parts = sc_abetka_field( sc_abetka_raw_meta( $post_id ), substr( $key, 4 ) );
+	if ( '_sc_forms' === $key ) {
+		foreach ( $parts as $l => $t ) {
+			$parts[ $l ] = implode( "\n", sc_abetka_split_forms( $t ) );
+		}
+	}
+	return isset( $parts['*'] ) ? $parts['*'] : sc_abetka_ml_join( $parts );
+}
+
+/** Формы из редактора → хранение: по языкам, внутри языка через « | ». */
+function sc_abetka_forms_store( $raw ) {
+	$parts = sc_abetka_ml_split( $raw );
+	if ( isset( $parts['*'] ) ) {
+		return implode( ' | ', sc_abetka_split_forms( $parts['*'] ) );
+	}
+	foreach ( $parts as $l => $t ) {
+		$parts[ $l ] = implode( ' | ', sc_abetka_split_forms( $t ) );
+	}
+	return sc_abetka_ml_join( $parts );
 }
 
 // Удаление и корзина тоже меняют набор терминов
@@ -213,41 +242,30 @@ function sc_abetka_index( $lang ) {
 		return $cached;
 	}
 
-	$posts = get_posts(
-		array(
-			'post_type'        => 'sc_term',
-			'post_status'      => 'publish',
-			'numberposts'      => -1,
-			'orderby'          => 'ID',
-			'order'            => 'ASC',
-			'suppress_filters' => true,
-		)
-	);
-
 	$terms = array();
 	$first = array();
-	foreach ( $posts as $p ) {
-		$anchor  = get_post_meta( $p->ID, '_sc_anchor', true );
-		$service = get_post_meta( $p->ID, '_sc_service_url', true );
-		$auto    = '0' !== get_post_meta( $p->ID, '_sc_autolink', true );
+	foreach ( sc_abetka_raw_terms() as $p ) {
+		$m       = $p['meta'];
+		$anchor  = isset( $m['_sc_anchor'] ) ? $m['_sc_anchor'] : '';
+		$service = isset( $m['_sc_service_url'] ) ? $m['_sc_service_url'] : '';
+		$auto    = ! isset( $m['_sc_autolink'] ) || '0' !== $m['_sc_autolink'];
 		if ( ! $anchor || ( ! $auto && ! $service ) ) {
 			continue;
 		}
-		$name = get_post_meta( $p->ID, '_sc_term_' . $lang, true );
-		$tip  = '';
-		if ( 'uk' === $lang ) { // определения есть только на украинском
-			$tip = get_post_meta( $p->ID, '_sc_simple_uk', true );
-			if ( ! $tip ) {
-				$tip = get_post_meta( $p->ID, '_sc_definition_uk', true );
-			}
+		// Подсказка только на языке страницы: нет перевода — нет подсказки (ссылка остаётся)
+		$tip = sc_abetka_ml( sc_abetka_field( $m, 'simple' ), $lang );
+		if ( '' === $tip ) {
+			$tip = sc_abetka_ml( sc_abetka_field( $m, 'definition' ), $lang );
 		}
+		$tip  = preg_replace( '~\*\*(.+?)\*\*~u', '$1', $tip ); // **жирный** из таблицы в подсказке не нужен
+		$name = sc_abetka_ml( sc_abetka_field( $m, 'term' ), $lang, true );
 		$terms[ $anchor ] = array(
-			'name'    => $name ? $name : $p->post_title,
+			'name'    => '' !== $name ? $name : sc_abetka_ml( $p['title'], $lang, true ),
 			'tip'     => $tip,
 			'service' => $service,
 		);
 
-		foreach ( sc_abetka_split_forms( get_post_meta( $p->ID, '_sc_forms_' . $lang, true ) ) as $form ) {
+		foreach ( sc_abetka_split_forms( sc_abetka_ml( sc_abetka_field( $m, 'forms' ), $lang ) ) as $form ) {
 			if ( ! preg_match_all( sc_abetka_word_regex(), $form, $m ) ) {
 				continue;
 			}

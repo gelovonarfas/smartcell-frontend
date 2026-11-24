@@ -14,21 +14,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/** Колонка CSV → мета-ключ карточки. */
+/** Колонки CSV, которые пишутся как есть: колонка → мета-ключ. */
 function sc_abetka_csv_map() {
 	return array(
-		'anchor'        => '_sc_anchor',
-		'letter'        => '_sc_letter',
-		'term_uk'       => '_sc_term_uk',
-		'term_ru'       => '_sc_term_ru',
-		'term_en'       => '_sc_term_en',
-		'definition_uk' => '_sc_definition_uk',
-		'simple_uk'     => '_sc_simple_uk',
-		'autolink'      => '_sc_autolink',
-		'forms_uk'      => '_sc_forms_uk',
-		'forms_ru'      => '_sc_forms_ru',
-		'forms_en'      => '_sc_forms_en',
+		'anchor'   => '_sc_anchor',
+		'letter'   => '_sc_letter',
+		'autolink' => '_sc_autolink',
 	);
+}
+
+/**
+ * Переводимые поля: имя поля → колонки CSV по языкам. Колонок definition_ru, simple_en и т. п.
+ * в таблице клиники пока нет; появятся — подхватятся.
+ */
+function sc_abetka_csv_ml_map() {
+	$map = array();
+	foreach ( array( 'term', 'definition', 'simple', 'forms' ) as $name ) {
+		foreach ( array( 'uk', 'ru', 'en' ) as $l ) {
+			$map[ $name ][ $l ] = $name . '_' . $l;
+		}
+	}
+	return $map;
+}
+
+/**
+ * Слить значения из CSV с тем, что уже на сайте.
+ * Украинский из CSV главный (таблица клиники — источник правды) и перезаписывает сайт;
+ * RU и EN из CSV попадают только в пустые языки — перевод, сделанный на сайте, импорт не затирает.
+ */
+function sc_abetka_ml_merge( $site, $csv ) {
+	if ( isset( $site['*'] ) ) {
+		$site = array( 'uk' => $site['*'] ); // общее значение без меток считаем украинским
+	}
+	foreach ( $csv as $l => $t ) {
+		if ( '' === $t ) {
+			continue;
+		}
+		if ( 'uk' === $l || ! isset( $site[ $l ] ) || '' === $site[ $l ] ) {
+			$site[ $l ] = $t;
+		}
+	}
+	return $site;
 }
 
 /**
@@ -98,9 +124,16 @@ function sc_abetka_import_csv( $file ) {
 
 		if ( isset( $existing[ $anchor ] ) ) {
 			$post_id = $existing[ $anchor ];
-			$post    = get_post( $post_id );
-			if ( $post->post_title !== $title || (int) $post->menu_order !== $order ) {
-				wp_update_post( array( 'ID' => $post_id, 'post_title' => wp_slash( $title ), 'menu_order' => $order ) );
+			$post    = get_post( $post_id, OBJECT, 'raw' );
+			// заголовок, переведённый на сайте ([:ua]…[:ru]…[:]): меняем только украинскую часть
+			$new_title = $title;
+			$parts     = sc_abetka_ml_split( $post->post_title );
+			if ( $parts && ! isset( $parts['*'] ) ) {
+				$parts['uk'] = $title;
+				$new_title   = sc_abetka_ml_join( $parts );
+			}
+			if ( $post->post_title !== $new_title || (int) $post->menu_order !== $order ) {
+				wp_update_post( array( 'ID' => $post_id, 'post_title' => wp_slash( $new_title ), 'menu_order' => $order ) );
 			}
 			$updated++;
 		} else {
@@ -131,10 +164,28 @@ function sc_abetka_import_csv( $file ) {
 				$val = $anchor;
 			} elseif ( 'autolink' === $col ) {
 				$val = '0' === $val ? '0' : '1';
-			} elseif ( 0 === strpos( $col, 'forms_' ) ) {
-				$val = implode( ' | ', sc_abetka_split_forms( $val ) );
 			}
 			update_post_meta( $post_id, $key, wp_slash( $val ) );
+		}
+
+		// переводимые поля: одна строка [:ua]…[:ru]…[:en]…[:]
+		$meta = sc_abetka_raw_meta( $post_id );
+		foreach ( sc_abetka_csv_ml_map() as $name => $cols ) {
+			$csv = array();
+			foreach ( $cols as $l => $col ) {
+				$val = isset( $r[ $col ] ) ? trim( $r[ $col ] ) : '';
+				if ( 'forms' === $name ) {
+					$val = implode( ' | ', sc_abetka_split_forms( $val ) );
+				}
+				$csv[ $l ] = $val;
+			}
+			$merged = sc_abetka_ml_merge( sc_abetka_field( $meta, $name ), $csv );
+			if ( $merged ) {
+				update_post_meta( $post_id, '_sc_' . $name, wp_slash( sc_abetka_ml_join( $merged ) ) );
+			}
+			foreach ( array( 'uk', 'ru', 'en' ) as $l ) {
+				delete_post_meta( $post_id, '_sc_' . $name . '_' . $l ); // поля до 1.2.0
+			}
 		}
 	}
 	fclose( $fh );

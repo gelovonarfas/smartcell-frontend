@@ -37,6 +37,7 @@ function sc_abetka_settings_save() {
 			'langs'      => $langs,
 			'tooltips'   => empty( $in['tooltips'] ) ? 0 : 1,
 			'assets'     => empty( $in['assets'] ) ? 0 : 1,
+			'auto'       => empty( $in['auto'] ) ? 0 : 1,
 		)
 	);
 	set_transient( 'sc_abetka_notice', 'Налаштування збережено.', 60 );
@@ -87,6 +88,13 @@ function sc_abetka_settings_html() {
 					<th scope="row"><label for="sc_abetka_url">Адреса сторінки абетки</label></th>
 					<td><input class="large-text" type="url" id="sc_abetka_url" name="sc[abetka_url]" value="<?php echo esc_attr( $o['abetka_url'] ); ?>" placeholder="https://…/klitynna_abetka">
 						<p class="description">Без #якоря. Якір терміна додається автоматично.</p></td>
+				</tr>
+				<tr>
+					<th scope="row">Де підставляти</th>
+					<td>
+						<label><input type="checkbox" name="sc[auto]" value="1" <?php checked( ! empty( $o['auto'] ) ); ?>> Автоматично в усьому, що виводиться через the_content</label>
+						<p class="description">Вимкнено (рекомендовано): посилання лише там, де тема викликає <code>sc_abetka_apply()</code> — у тексті статті, без ліду в шапці.</p>
+					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="sc_max_links">Посилань на статтю, не більше</label></th>

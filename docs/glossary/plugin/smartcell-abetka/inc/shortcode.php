@@ -23,31 +23,34 @@ function sc_abetka_shortcode() {
 }
 
 /** Термины, сгруппированные по разделам (буквам) и отсортированные по украинскому алфавиту. */
-function sc_abetka_groups() {
-	$posts = get_posts(
-		array(
-			'post_type'        => 'sc_term',
-			'post_status'      => 'publish',
-			'numberposts'      => -1,
-			'suppress_filters' => true,
-		)
-	);
+function sc_abetka_groups( $lang = null ) {
+	if ( null === $lang ) {
+		$lang = sc_abetka_lang();
+	}
 	$groups = array();
-	foreach ( $posts as $p ) {
-		$anchor = get_post_meta( $p->ID, '_sc_anchor', true );
-		$letter = trim( get_post_meta( $p->ID, '_sc_letter', true ) );
+	foreach ( sc_abetka_raw_terms() as $p ) {
+		$m      = $p['meta'];
+		$anchor = isset( $m['_sc_anchor'] ) ? $m['_sc_anchor'] : '';
+		$letter = isset( $m['_sc_letter'] ) ? trim( $m['_sc_letter'] ) : '';
 		if ( ! $anchor ) {
 			continue;
 		}
+		$title_uk = sc_abetka_ml( $p['title'], 'uk', true );
 		if ( '' === $letter ) {
-			$letter = mb_strtoupper( mb_substr( $p->post_title, 0, 1, 'UTF-8' ), 'UTF-8' );
+			$letter = mb_strtoupper( mb_substr( $title_uk, 0, 1, 'UTF-8' ), 'UTF-8' );
 		}
+		// Разделы и порядок — по украинскому алфавиту на всех языках; тексты — на языке страницы,
+		// перевода нет — украинский. Подпись «Визначення» / «Простими словами» — на языке показанного текста.
+		$def    = sc_abetka_field( $m, 'definition' );
+		$simple = sc_abetka_field( $m, 'simple' );
 		$groups[ $letter ][] = array(
-			'key'    => sc_abetka_sort_key( $p->post_title ),
-			'title'  => $p->post_title,
-			'anchor' => $anchor,
-			'def'    => get_post_meta( $p->ID, '_sc_definition_uk', true ),
-			'simple' => get_post_meta( $p->ID, '_sc_simple_uk', true ),
+			'key'         => sc_abetka_sort_key( $title_uk ),
+			'title'       => sc_abetka_ml( $p['title'], $lang, true ),
+			'anchor'      => $anchor,
+			'def'         => sc_abetka_ml( $def, $lang, true ),
+			'def_lang'    => '' !== sc_abetka_ml( $def, $lang ) ? $lang : 'uk',
+			'simple'      => sc_abetka_ml( $simple, $lang, true ),
+			'simple_lang' => '' !== sc_abetka_ml( $simple, $lang ) ? $lang : 'uk',
 		);
 	}
 	uksort( $groups, 'sc_abetka_cmp_letters' );
@@ -67,15 +70,33 @@ function sc_abetka_page_html() {
 		foreach ( $items as $t ) {
 			$html .= '<h3 id="' . esc_attr( $t['anchor'] ) . '">' . esc_html( $t['title'] ) . "</h3>\n";
 			if ( $t['def'] ) {
-				$html .= '<p><strong>Визначення:</strong> ' . esc_html( $t['def'] ) . "</p>\n";
+				$html .= '<p><strong>' . esc_html( sc_abetka_label( 'definition', $t['def_lang'] ) ) . '</strong> ' . sc_abetka_md( $t['def'] ) . "</p>\n";
 			}
 			if ( $t['simple'] ) {
-				$html .= '<p><strong>Простими словами:</strong> ' . esc_html( $t['simple'] ) . "</p>\n";
+				$html .= '<p><strong>' . esc_html( sc_abetka_label( 'simple', $t['simple_lang'] ) ) . '</strong> ' . sc_abetka_md( $t['simple'] ) . "</p>\n";
 			}
 		}
 		$html .= "\n";
 	}
 	return $html;
+}
+
+/** Текст из таблицы клиники → HTML: экранирование, **жирный** (так в таблице выделены слова) → <strong>. */
+function sc_abetka_md( $text ) {
+	return preg_replace( '~\*\*(.+?)\*\*~u', '<strong>$1</strong>', esc_html( $text ) );
+}
+
+/**
+ * Подписи абзацев. RU и EN — наш перевод, нужно вычитать (как переводы названий терминов);
+ * поменять можно фильтром sc_abetka_label.
+ */
+function sc_abetka_label( $what, $lang ) {
+	$labels = array(
+		'definition' => array( 'uk' => 'Визначення:', 'ru' => 'Определение:', 'en' => 'Definition:' ),
+		'simple'     => array( 'uk' => 'Простими словами:', 'ru' => 'Простыми словами:', 'en' => 'In simple terms:' ),
+	);
+	$label = isset( $labels[ $what ][ $lang ] ) ? $labels[ $what ][ $lang ] : $labels[ $what ]['uk'];
+	return apply_filters( 'sc_abetka_label', $label, $what, $lang );
 }
 
 /* ---------- Оглавление-«чипсы» для сайдбара ---------- */

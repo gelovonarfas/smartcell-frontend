@@ -2,12 +2,13 @@
 /**
  * Plugin Name: SmartCell — Клітинна абетка
  * Description: Картки термінів «Клітинної абетки», імпорт із CSV, шорткод [sc_abetka] для сторінки абетки та автопосилання з підказками в статтях журналу.
- * Version: 1.1.1
+ * Version: 1.2.0
  * Author: SmartCell
  * Requires PHP: 7.2
  * Text Domain: smartcell-abetka
  *
  * Как устроено (коротко, подробно — docs/glossary/plugin/README.md в ките):
+ *  - inc/i18n.php      — языки: поля карточки в формате qTranslate, вкладки языков в редакторе;
  *  - inc/terms.php     — тип записи «Термін» (sc_term), поля карточки, кеш индекса форм;
  *  - inc/import.php    — импорт CSV (кнопка в админке и WP-CLI), обновление по якорю;
  *  - inc/autolink.php  — фильтр the_content: первое упоминание термина → ссылка + подсказка;
@@ -22,11 +23,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'SC_ABETKA_VER', '1.1.1' );
+define( 'SC_ABETKA_VER', '1.2.0' );
 define( 'SC_ABETKA_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SC_ABETKA_URL', plugin_dir_url( __FILE__ ) );
 define( 'SC_ABETKA_CSV', SC_ABETKA_DIR . 'data/smartcell-abetka-terms.csv' );
 
+require_once SC_ABETKA_DIR . 'inc/i18n.php';
 require_once SC_ABETKA_DIR . 'inc/terms.php';
 require_once SC_ABETKA_DIR . 'inc/import.php';
 require_once SC_ABETKA_DIR . 'inc/autolink.php';
@@ -47,6 +49,7 @@ function sc_abetka_options() {
 		'langs'      => array( 'uk' ),
 		'tooltips'   => 1,
 		'assets'     => 1,       // подключать CSS и JS подсказок из плагина
+		'auto'       => 0,       // 1 — сам вешается на the_content; 0 — тема вызывает sc_abetka_apply()
 	);
 	$saved = get_option( 'sc_abetka', array() );
 	return array_merge( $defaults, is_array( $saved ) ? $saved : array() );

@@ -28,32 +28,72 @@ function sc_abetka_is_active() {
 	}
 	$memo = false;
 	$o    = sc_abetka_options();
-	if ( 'off' === $o['mode'] || is_admin() || is_feed() ) {
+	if ( is_admin() || is_feed() ) {
 		return false;
+	}
+	if ( 'off' === $o['mode'] ) {
+		return sc_abetka_why( 'режим «Вимкнено»' );
 	}
 	$types = array_filter( array_map( 'trim', explode( ',', $o['post_types'] ) ) );
 	if ( ! $types || ! is_singular( $types ) ) {
-		return false;
+		$obj = get_queried_object();
+		return sc_abetka_why( 'тип запису «' . ( $obj && isset( $obj->post_type ) ? $obj->post_type : 'не запис' ) . '» не в налаштуваннях (зараз: ' . $o['post_types'] . ')' );
 	}
 	$post_id = get_queried_object_id();
 	if ( 'test' === $o['mode'] ) {
 		$ids = array_map( 'intval', array_filter( array_map( 'trim', explode( ',', $o['test_ids'] ) ) ) );
 		if ( ! in_array( (int) $post_id, $ids, true ) ) {
-			return false;
+			return sc_abetka_why( 'режим «Тест», а ID ' . $post_id . ' немає в переліку (' . $o['test_ids'] . ')' );
 		}
 	}
 	if ( get_post_meta( $post_id, '_sc_abetka_off', true ) ) {
-		return false; // галочка «без автопосилань» у статьи
+		return sc_abetka_why( 'у статті стоїть галочка «Без автопосилань»' );
 	}
 	$post = get_post( $post_id );
 	if ( $post && has_shortcode( $post->post_content, 'sc_abetka' ) ) {
-		return false; // сама страница абетки
+		return sc_abetka_why( 'це сама сторінка абетки' );
 	}
 	if ( ! in_array( sc_abetka_lang(), (array) $o['langs'], true ) ) {
-		return false;
+		return sc_abetka_why( 'мова «' . sc_abetka_lang() . '» не увімкнена в налаштуваннях' );
 	}
 	$memo = (bool) apply_filters( 'sc_abetka_is_active', true, $post_id );
+	if ( $memo && ! $o['abetka_url'] ) {
+		sc_abetka_why( 'не вказано адресу сторінки абетки — посилань не буде' );
+	} elseif ( $memo ) {
+		sc_abetka_why( 'працює, ID ' . $post_id . ', мова ' . sc_abetka_lang() );
+	}
 	return $memo;
+}
+
+/**
+ * Почему фильтр работает или нет — для админа HTML-комментарием внизу страницы
+ * (<!-- sc-abetka: … -->). Посетители его не видят. Запоминает причину и возвращает false.
+ */
+function sc_abetka_why( $reason = null ) {
+	static $why = '';
+	if ( null !== $reason ) {
+		$why = $reason;
+	}
+	return null === $reason ? $why : false;
+}
+
+add_action( 'wp_footer', 'sc_abetka_debug_comment', 999 );
+function sc_abetka_debug_comment() {
+	if ( ! is_singular() || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	sc_abetka_is_active();
+	$stats = sc_abetka_stats();
+	echo "\n<!-- sc-abetka " . esc_html( SC_ABETKA_VER ) . ': ' . esc_html( sc_abetka_why() ) . ( $stats ? '; ' . esc_html( $stats ) : '' ) . " -->\n";
+}
+
+/** Сколько ссылок поставил фильтр на этой странице. */
+function sc_abetka_stats( $add = null ) {
+	static $s = '';
+	if ( null !== $add ) {
+		$s = $add;
+	}
+	return $s;
 }
 
 /** Адрес страницы абетки для текущего языка, без якоря. */
@@ -66,15 +106,42 @@ function sc_abetka_page_url() {
 	return $url;
 }
 
-// 20 — после wpautop (10), шорткодов (11) и после того, как qTranslate оставил один язык
-add_filter( 'the_content', 'sc_abetka_filter_content', 20 );
+/**
+ * Автоссылки в HTML текста статьи. Вызывается в шаблоне статьи только для тела текста —
+ * так лид в шапке, «Коротко» и прочие поля остаются без ссылок:
+ *   echo sc_abetka_apply( apply_filters( 'the_content', get_the_content() ) );
+ * Проверки режима, языка, типа записи, «Тест» по ID — внутри; не та страница — HTML как был.
+ */
+function sc_abetka_apply( $html ) {
+	if ( ! sc_abetka_is_active() ) {
+		return $html;
+	}
+	$o     = sc_abetka_options();
+	$lang  = sc_abetka_lang();
+	$index = sc_abetka_index( $lang );
+	$out   = sc_abetka_autolink( $html, $index, sc_abetka_page_url(), (int) $o['max_links'], ! empty( $o['tooltips'] ) );
+	sc_abetka_stats( 'термінів у індексі ' . count( $index['terms'] ) . ', посилань у тексті ' . substr_count( $out, 'class="sc-term"' ) );
+	return $out;
+}
+
+/**
+ * Автоматически через the_content — только если включено в настройках («Підставляти автоматично»).
+ * По умолчанию выключено: тема вызывает sc_abetka_apply() сама. Приоритет 20 — после wpautop (10),
+ * шорткодов (11) и после того, как qTranslate оставил один язык.
+ */
+add_action( 'init', 'sc_abetka_maybe_hook_content' );
+function sc_abetka_maybe_hook_content() {
+	$o = sc_abetka_options();
+	if ( ! empty( $o['auto'] ) ) {
+		add_filter( 'the_content', 'sc_abetka_filter_content', 20 );
+	}
+}
+
 function sc_abetka_filter_content( $content ) {
-	if ( ! sc_abetka_is_active() || get_the_ID() !== get_queried_object_id() ) {
+	if ( get_the_ID() !== get_queried_object_id() ) {
 		return $content; // только основной текст открытой статьи, не карточки «Читайте також»
 	}
-	$o    = sc_abetka_options();
-	$lang = sc_abetka_lang();
-	return sc_abetka_autolink( $content, sc_abetka_index( $lang ), sc_abetka_page_url(), (int) $o['max_links'], ! empty( $o['tooltips'] ) );
+	return sc_abetka_apply( $content );
 }
 
 /**
@@ -214,10 +281,14 @@ function sc_abetka_link_text( $text, $index, $page_url, $max, $tooltips, &$used,
 
 /** Подсказка: название, «простими словами», строка со ссылкой на абетку. */
 function sc_abetka_tip_html( $anchor, $term, $href ) {
-	$more = apply_filters(
-		'sc_abetka_tip_more',
-		'Натисніть на слово, щоб відкрити в <a href="%s" tabindex="-1">«Клітинній абетці»</a>'
+	// RU и EN — наш перевод, нужно вычитать; поменять — фильтр sc_abetka_tip_more
+	$texts = array(
+		'uk' => 'Натисніть на слово, щоб відкрити в <a href="%s" tabindex="-1">«Клітинній абетці»</a>',
+		'ru' => 'Нажмите на слово, чтобы открыть в <a href="%s" tabindex="-1">«Клеточной азбуке»</a>',
+		'en' => 'Click the word to open it in the <a href="%s" tabindex="-1">Cell Glossary</a>',
 	);
+	$lang = sc_abetka_lang();
+	$more = apply_filters( 'sc_abetka_tip_more', isset( $texts[ $lang ] ) ? $texts[ $lang ] : $texts['uk'], $lang );
 	return '<span class="sc-term-tip" id="sc-term-' . esc_attr( $anchor ) . '" role="tooltip" hidden>'
 		. '<span class="sc-term-tip__title">' . esc_html( $term['name'] ) . '</span>'
 		. esc_html( $term['tip'] )
