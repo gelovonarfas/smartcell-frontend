@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: SmartCell — Чернетка перекладу
+ * Plugin Name: SmartCell: Чернетка перекладу
  * Description: Для qTranslate-XT / qTranslate-X. Галочка в редакторі копіює український текст у порожні мовні версії запису (заголовок, текст, уривок, поля ACF), щоб перекладач бачив структуру й писав поверх. Поки версія позначена «не перекладено», вона закрита від індексації.
  * Version: 1.0.0
- * Author: SmartCell
+ * Author: Maximorum
  * Requires PHP: 7.2
  * Text Domain: smartcell-translate-draft
  *

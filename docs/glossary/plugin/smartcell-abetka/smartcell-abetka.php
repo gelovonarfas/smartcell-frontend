@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: SmartCell — Клітинна абетка
+ * Plugin Name: SmartCell: Клітинна абетка
  * Description: Картки термінів «Клітинної абетки», імпорт із CSV, шорткод [sc_abetka] для сторінки абетки та автопосилання з підказками в статтях журналу.
  * Version:           1.2.1
- * Author: SmartCell
+ * Author: Maximorum
  * Requires PHP: 7.2
  * Text Domain: smartcell-abetka
  *

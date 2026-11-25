@@ -258,6 +258,7 @@ function sc_abetka_index( $lang ) {
 			$tip = sc_abetka_ml( sc_abetka_field( $m, 'definition' ), $lang );
 		}
 		$tip  = preg_replace( '~\*\*(.+?)\*\*~u', '$1', $tip ); // **жирный** из таблицы в подсказке не нужен
+		$tip  = str_replace( '—', '–', $tip ); // в подсказке короткое тире вместо длинного (текст в карточке не меняется)
 		$name = sc_abetka_ml( sc_abetka_field( $m, 'term' ), $lang, true );
 		$terms[ $anchor ] = array(
 			'name'    => '' !== $name ? $name : sc_abetka_ml( $p['title'], $lang, true ),

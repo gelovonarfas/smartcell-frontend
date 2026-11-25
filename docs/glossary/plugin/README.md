@@ -1,4 +1,4 @@
-# Плагин «SmartCell — Клітинна абетка»
+# Плагин «SmartCell: Клітинна абетка»
 
 Готовый архив: `smartcell-abetka.zip` (рядом). Исходники: папка `smartcell-abetka/`.
 

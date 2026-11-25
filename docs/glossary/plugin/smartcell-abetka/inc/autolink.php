@@ -58,7 +58,7 @@ function sc_abetka_is_active() {
 	}
 	$memo = (bool) apply_filters( 'sc_abetka_is_active', true, $post_id );
 	if ( $memo && ! $o['abetka_url'] ) {
-		sc_abetka_why( 'не вказано адресу сторінки абетки — посилань не буде' );
+		sc_abetka_why( 'не вказано адресу сторінки абетки, посилань не буде' );
 	} elseif ( $memo ) {
 		sc_abetka_why( 'працює, ID ' . $post_id . ', мова ' . sc_abetka_lang() );
 	}

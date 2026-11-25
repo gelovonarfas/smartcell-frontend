@@ -1,4 +1,4 @@
-# Плагин «SmartCell — Чернетка перекладу»
+# Плагин «SmartCell: Чернетка перекладу»
 
 Готовый архив: `smartcell-translate-draft.zip` (рядом). Исходник: `smartcell-translate-draft/smartcell-translate-draft.php`, один файл.
 
