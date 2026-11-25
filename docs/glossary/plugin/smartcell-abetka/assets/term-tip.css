@@ -7,18 +7,29 @@
    Демо: preview-abetka-tooltips.html (2026-11-19)
    ============================================================ */
 
-/* Посилання-термін: пунктир замість суцільної кромки — читач відрізняє
+/* Посилання-термін: рідкий пунктир замість суцільної кромки — читач відрізняє
    «пояснення терміна» від звичайного посилання. Специфічність вища,
-   ніж у правил прози vm-article.css */
+   ніж у правил прози vm-article.css.
+   2026-11-24: border dashed у --hairline (0.5px) був надто дрібним і блідим —
+   пунктир малюється градієнтом: штрих і просвіт по --sc-term-dash, товщина --sc-term-line,
+   колір — колір тексту. У дизайн-системі таких величин немає, тому вони тут. */
 .vm-article__body a.sc-term {
+  --sc-term-dash: 0.3em;
+  --sc-term-line: 0.08em;
   color: inherit;
   text-decoration: none;
-  border-block-end: var(--hairline) dashed var(--primary);
+  background-image: linear-gradient(to right, currentColor 50%, transparent 50%);
+  background-size: calc(2 * var(--sc-term-dash)) var(--sc-term-line);
+  background-repeat: repeat-x;
+  background-position: 0 100%;
   cursor: help;
 }
 
 .vm-article__body a.sc-term:hover,
-.vm-article__body a.sc-term.sc-is-active { color: var(--primary); border-block-end-style: solid; }
+.vm-article__body a.sc-term.sc-is-active {
+  color: var(--primary);
+  background-image: linear-gradient(currentColor, currentColor); /* наведення — суцільна лінія */
+}
 
 .vm-article__body a.sc-term:focus-visible {
   outline: 2px solid var(--ring);
