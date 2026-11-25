@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SmartCell: Клітинна абетка
  * Description: Картки термінів «Клітинної абетки», імпорт із CSV, шорткод [sc_abetka] для сторінки абетки та автопосилання з підказками в статтях журналу.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Author: Maximorum
  * Requires PHP: 7.2
  * Text Domain: smartcell-abetka
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'SC_ABETKA_VER', '1.2.1' );
+define( 'SC_ABETKA_VER', '1.2.2' );
 define( 'SC_ABETKA_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SC_ABETKA_URL', plugin_dir_url( __FILE__ ) );
 define( 'SC_ABETKA_CSV', SC_ABETKA_DIR . 'data/smartcell-abetka-terms.csv' );

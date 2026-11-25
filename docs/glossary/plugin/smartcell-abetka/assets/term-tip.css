@@ -5,6 +5,9 @@
    Текст підказки — окремий <span role="tooltip" hidden> у кінці статті,
    показує його assets/js/term-tip.js. Без JS лишається звичайне посилання.
    Демо: preview-abetka-tooltips.html (2026-11-19)
+   З 1.2.2 (2026-11-25) — і поза статтею: клас sc-terms на будь-якому блоці,
+   текст якого тема пропускає через sc_abetka_apply() (лендинг Face Control 365).
+   Демо лендингу: preview-abetka-landing.html
    ============================================================ */
 
 /* Посилання-термін: рідкий пунктир замість суцільної лінії — читач відрізняє
@@ -14,8 +17,9 @@
    пунктир — грубим. Тепер товщина й відстань від тексту як у кромки
    звичайних посилань прози, а крок великий: штрих --sc-term-dash, просвіт --sc-term-gap.
    Малюється градієнтом, бо в text-decoration: dashed крок задає браузер.
-   У дизайн-системі таких величин немає. */
-.vm-article__body a.sc-term {
+   У дизайн-системі таких величин немає.
+   :is() — та сама специфічність, що була в .vm-article__body a.sc-term. */
+:is(.vm-article__body, .sc-terms) a.sc-term {
   --sc-term-line: var(--hairline); /* як кромка посилань прози: та сама товщина й відстань від тексту */
   --sc-term-dash: 0.35em;
   --sc-term-gap: 0.3em;
@@ -30,15 +34,21 @@
   cursor: help;
 }
 
-.vm-article__body a.sc-term:hover,
-.vm-article__body a.sc-term.sc-is-active {
+:is(.vm-article__body, .sc-terms) a.sc-term:hover,
+:is(.vm-article__body, .sc-terms) a.sc-term.sc-is-active {
   color: var(--sc-term-color);
   background-image: linear-gradient(var(--sc-term-color), var(--sc-term-color)); /* наведення — синій текст і суцільна лінія */
 }
 
-.vm-article__body a.sc-term:focus-visible {
+:is(.vm-article__body, .sc-terms) a.sc-term:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+
+/* Темна секція (data-theme="inverse", напр. FAQ лендингу): синій-700 на чорному
+   не видно — світлий синій тієї ж шкали, текст при наведенні теж. */
+[data-theme="inverse"] a.sc-term {
+  --sc-term-color: var(--sc-blue-300, #96BFE7);
 }
 
 /* Підказка. Позицію (top/left) задає скрипт; ширина — вузька міра,

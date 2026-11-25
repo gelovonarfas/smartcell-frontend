@@ -4,7 +4,7 @@
  *
  * Правила (согласованы с редакцией, см. docs/glossary/README.md в ките):
  *  1. ссылка только на первое упоминание термина, всего не больше N на статью (настройка, 7);
- *  2. не трогаем заголовки, готовые ссылки, цитаты, figure, aside и всё внутри class="sc-no-terms";
+ *  2. не трогаем заголовки, готовые ссылки, цитаты, figure, aside, summary и всё внутри class="sc-no-terms";
  *  3. длинные формы раньше коротких; совпадение по целым словам, без учёта регистра
  *     (аббревиатуры — с учётом); три вида апострофа считаются одним;
  *  4. формы берутся по языку текущей версии (qTranslate);
@@ -177,7 +177,7 @@ function sc_abetka_autolink( $html, $index, $page_url, $max, $tooltips = true, &
 		return $html;
 	}
 	$parts = wp_html_split( $html );
-	$skip  = array( 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'figure', 'aside', 'script', 'style', 'code', 'pre', 'button', 'textarea', 'select', 'svg', 'nav', 'iframe' );
+	$skip  = array( 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'figure', 'aside', 'script', 'style', 'code', 'pre', 'button', 'textarea', 'select', 'svg', 'nav', 'iframe', 'summary' ); // summary — вопрос FAQ: ссылка внутри ломает раскрытие
 	$void  = array( 'br', 'img', 'hr', 'input', 'source', 'wbr', 'col', 'embed', 'track', 'area', 'meta', 'link' );
 
 	$used  = is_array( $state ) ? $state['used'] : array(); // якорь => true: термин уже получил ссылку
