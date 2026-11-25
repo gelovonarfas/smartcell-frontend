@@ -1207,8 +1207,8 @@
 
 .vm-article__person-name a {
   color: var(--foreground);
-  text-decoration: underline;
-  text-underline-position: from-font;
+  text-decoration: none;
+  border-block-end: var(--hairline) solid currentColor; /* как у ссылок прозы: та же толщина и отступ (2026-11-24) */
 }
 
 .vm-article__person-role { color: var(--muted-foreground); }
@@ -1224,8 +1224,11 @@
 
 .vm-article__person-links a {
   color: var(--foreground);
-  text-decoration: underline;
-  text-underline-position: from-font;
+  text-decoration: none;
+}
+
+.vm-article__person-links a:not(.vm-article__person-social) {
+  border-block-end: var(--hairline) solid currentColor; /* как у ссылок прозы (2026-11-24) */
 }
 
 .vm-article__person-social {
@@ -1241,8 +1244,8 @@
 .vm-article__person-icon { display: block; }
 
 @media (hover: hover) and (pointer: fine) {
-  .vm-article__person-name a:hover { text-decoration: none; }
-  .vm-article__person-links a:hover { text-decoration: none; }
+  .vm-article__person-name a:hover,
+  .vm-article__person-links a:hover { border-block-end-color: transparent; }
   .vm-article__person-social:hover { color: var(--foreground); }
 }
 
@@ -1271,8 +1274,8 @@
 .vm-article__quote-lead a,
 .vm-article__quote-who a {
   color: var(--foreground);
-  text-decoration: underline;
-  text-underline-position: from-font;
+  text-decoration: none;
+  border-block-end: var(--hairline) solid currentColor; /* как у ссылок прозы: та же толщина и отступ (2026-11-24) */
 }
 
 /* Линия слева — через цитату и подпись (правка 2026-10-07; было: только у цитаты, подпись справа) */
@@ -1307,7 +1310,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .vm-article__quote-lead a:hover,
-  .vm-article__quote-who a:hover { text-decoration: none; }
+  .vm-article__quote-who a:hover { border-block-end-color: transparent; }
 }
 
 /* ---------- Автор (развёрнутый блок внизу — снят 2026-10-07, стили для отката) ---------- */
