@@ -119,9 +119,33 @@ function sc_abetka_apply( $html ) {
 	$o     = sc_abetka_options();
 	$lang  = sc_abetka_lang();
 	$index = sc_abetka_index( $lang );
-	$out   = sc_abetka_autolink( $html, $index, sc_abetka_page_url(), (int) $o['max_links'], ! empty( $o['tooltips'] ) );
-	sc_abetka_stats( 'термінів у індексі ' . count( $index['terms'] ) . ', посилань у тексті ' . substr_count( $out, 'class="sc-term"' ) );
+	$state = &sc_abetka_page_state();
+	$out   = sc_abetka_autolink( $html, $index, sc_abetka_page_url(), (int) $o['max_links'], ! empty( $o['tooltips'] ), $state );
+	$state['calls']++;
+	sc_abetka_stats( 'термінів у індексі ' . count( $index['terms'] ) . ', посилань на сторінці ' . count( $state['used'] ) . ', викликів ' . $state['calls'] );
+	if ( $state['tips'] && ! empty( $o['assets'] ) ) {
+		sc_abetka_enqueue_assets(); // на случай, если тема вызвала функцию уже после wp_head
+	}
 	return $out;
+}
+
+/**
+ * Общий учёт на всю страницу: тема может вызывать sc_abetka_apply() на каждый блок текста,
+ * а правила «только первое упоминание» и «не больше N ссылок» действуют на статью целиком.
+ * Подсказки копятся здесь и выводятся один раз внизу страницы (sc_abetka_print_tips).
+ */
+function &sc_abetka_page_state() {
+	static $state = array( 'used' => array(), 'tips' => '', 'calls' => 0, 'printed' => false );
+	return $state;
+}
+
+add_action( 'wp_footer', 'sc_abetka_print_tips', 5 );
+function sc_abetka_print_tips() {
+	$state = &sc_abetka_page_state();
+	if ( $state['tips'] && ! $state['printed'] ) {
+		echo "\n<!-- Підказки до термінів «Клітинної абетки» -->\n<div class=\"sc-term-tips\">\n" . $state['tips'] . "</div>\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- собрано из экранированных частей
+		$state['printed'] = true;
+	}
 }
 
 /**
@@ -148,7 +172,7 @@ function sc_abetka_filter_content( $content ) {
  * Чистая функция: HTML → HTML со ссылками. Вынесена отдельно, чтобы её можно было
  * вызвать и на других полях (например, если текст статьи выводится не через the_content).
  */
-function sc_abetka_autolink( $html, $index, $page_url, $max, $tooltips = true ) {
+function sc_abetka_autolink( $html, $index, $page_url, $max, $tooltips = true, &$state = null ) {
 	if ( '' === trim( $html ) || empty( $index['first'] ) || $max < 1 ) {
 		return $html;
 	}
@@ -156,7 +180,7 @@ function sc_abetka_autolink( $html, $index, $page_url, $max, $tooltips = true ) 
 	$skip  = array( 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'figure', 'aside', 'script', 'style', 'code', 'pre', 'button', 'textarea', 'select', 'svg', 'nav', 'iframe' );
 	$void  = array( 'br', 'img', 'hr', 'input', 'source', 'wbr', 'col', 'embed', 'track', 'area', 'meta', 'link' );
 
-	$used  = array(); // якорь => true: термин уже получил ссылку
+	$used  = is_array( $state ) ? $state['used'] : array(); // якорь => true: термин уже получил ссылку
 	$tips  = '';
 	$inTag = '';      // тег, внутри которого сейчас ничего не трогаем
 	$depth = 0;
@@ -193,6 +217,11 @@ function sc_abetka_autolink( $html, $index, $page_url, $max, $tooltips = true ) 
 	}
 
 	$html = implode( '', $parts );
+	if ( is_array( $state ) ) {
+		$state['used']  = $used;
+		$state['tips'] .= $tips; // выведет sc_abetka_print_tips() в wp_footer
+		return $html;
+	}
 	if ( $tips ) {
 		$html .= "\n<!-- Підказки до термінів «Клітинної абетки» -->\n" . $tips;
 	}
@@ -303,6 +332,10 @@ function sc_abetka_assets() {
 	if ( empty( $o['assets'] ) || ! sc_abetka_is_active() ) {
 		return;
 	}
+	sc_abetka_enqueue_assets();
+}
+
+function sc_abetka_enqueue_assets() {
 	wp_enqueue_style( 'sc-term-tip', SC_ABETKA_URL . 'assets/term-tip.css', array(), SC_ABETKA_VER );
 	wp_enqueue_script( 'sc-term-tip', SC_ABETKA_URL . 'assets/term-tip.js', array(), SC_ABETKA_VER, true );
 }
