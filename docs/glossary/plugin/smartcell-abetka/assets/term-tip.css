@@ -11,15 +11,16 @@
    «пояснення терміна» від звичайного посилання. Специфічність вища,
    ніж у правил прози vm-article.css.
    2026-11-24: border dashed у --hairline (0.5px) був надто дрібним і блідим —
-   пунктир малюється градієнтом: штрих і просвіт по --sc-term-dash, товщина --sc-term-line,
+   пунктир малюється градієнтом: штрих --sc-term-dash, просвіт --sc-term-gap, товщина --sc-term-line,
    колір — колір тексту. У дизайн-системі таких величин немає, тому вони тут. */
 .vm-article__body a.sc-term {
-  --sc-term-dash: 0.3em;
-  --sc-term-line: 0.08em;
+  --sc-term-dash: 0.4em;            /* штрих */
+  --sc-term-gap: 0.25em;            /* просвіт */
+  --sc-term-line: max(2px, 0.1em);  /* товщина: не тонше 2px */
   color: inherit;
   text-decoration: none;
-  background-image: linear-gradient(to right, currentColor 50%, transparent 50%);
-  background-size: calc(2 * var(--sc-term-dash)) var(--sc-term-line);
+  background-image: linear-gradient(to right, currentColor var(--sc-term-dash), transparent 0);
+  background-size: calc(var(--sc-term-dash) + var(--sc-term-gap)) var(--sc-term-line);
   background-repeat: repeat-x;
   background-position: 0 100%;
   cursor: help;
