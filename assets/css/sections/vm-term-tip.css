@@ -16,7 +16,7 @@
    2026-11-24: border dashed у --hairline (0.5px) був надто дрібним, товстий
    пунктир — грубим. Тепер товщина й відстань від тексту як у кромки
    звичайних посилань прози, а крок великий: штрих --sc-term-dash, просвіт --sc-term-gap.
-   Малюється градієнтом, бо в text-decoration: dashed крок задає браузер.
+   Малюється градієнтом, бо в text-decoration і border dashed крок задає браузер.
    У дизайн-системі таких величин немає.
    :is() — та сама специфічність, що була в .vm-article__body a.sc-term. */
 :is(.vm-article__body, .sc-terms) a.sc-term {
@@ -26,18 +26,23 @@
   --sc-term-color: var(--sc-blue-700, #00448B); /* фірмовий синій — пунктир помітний, текст лишається чорним */
   color: inherit;
   text-decoration: none;
-  border-block-end: 0; /* суцільну кромку посилань прози (vm-article.css) замінює пунктир */
-  background-image: linear-gradient(to right, var(--sc-term-color) var(--sc-term-dash), transparent 0);
-  background-size: calc(var(--sc-term-dash) + var(--sc-term-gap)) var(--sc-term-line);
-  background-repeat: repeat-x;
-  background-position: 0 100%;
+  /* 2026-11-25: пунктир — рамкою з градієнтом (border-image), а не фоном.
+     Фон заввишки 0.5px браузер губить, коли рядок стоїть на дробовому пікселі
+     (на virtus.ua — у картках «Що включає програма» після анімації появи),
+     а товщину рамки він завжди доводить до цілого пікселя екрана, як у посилань прози. */
+  border-block-end: var(--sc-term-line) solid var(--sc-term-color);
+  border-image: repeating-linear-gradient(to right,
+      var(--sc-term-color) 0 var(--sc-term-dash),
+      transparent var(--sc-term-dash) calc(var(--sc-term-dash) + var(--sc-term-gap)))
+    0 0 100% 0 / 0 0 1 0 / 0 stretch; /* ширина 1 = у товщину рамки, вже доведену до пікселя */
+  background: none;
   cursor: help;
 }
 
 :is(.vm-article__body, .sc-terms) a.sc-term:hover,
 :is(.vm-article__body, .sc-terms) a.sc-term.sc-is-active {
   color: var(--sc-term-color);
-  background-image: linear-gradient(var(--sc-term-color), var(--sc-term-color)); /* наведення — синій текст і суцільна лінія */
+  border-image: none; /* наведення — синій текст і суцільна лінія */
 }
 
 :is(.vm-article__body, .sc-terms) a.sc-term:focus-visible {
